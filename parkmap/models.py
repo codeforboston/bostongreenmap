@@ -59,3 +59,22 @@ class Facility(models.Model):
     def __unicode__(self):
         return self.name
 
+
+class Neighborhood(models.Model):
+    """
+    Neighborhood or town if no neighborhoods are available.
+    """
+    n_id = models.CharField('Neighborhood ID', max_length=20, help_text='ID derived from GIS, not necessarily unique.')
+    name = models.CharField(max_length=50)
+
+    geometry = models.MultiPolygonField(srid=26986)
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = _('Neighborhood')
+        verbose_name_plural = _('Neighborhoods')
+
+    def __unicode__(self):
+        return self.name
+    
+
