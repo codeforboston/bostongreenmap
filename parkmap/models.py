@@ -21,7 +21,7 @@ class Park(models.Model):
     alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhood = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK to Neighborhood
+    neighborhood = models.CharField(max_length=50, blank=True, null=True) #FIXME: M2M to Neighborhood
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     owner = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
@@ -59,6 +59,14 @@ class Facility(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        try:
+            # cache containing park
+            self.park = Park.objects.get(geometry__contains=self.geometry)
+        except:
+            self.park = None       
+        super(Facility, self).save(*args, **kwargs)
 
 
 class Neighborhood(models.Model):
