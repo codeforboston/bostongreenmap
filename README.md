@@ -7,9 +7,13 @@ Consultants: [Appropriate Solutions, Inc.](http://www.appropriatesolutions.com/)
 
 ## Dependencies
 
-Install dependencies with:
+A PostgreSQL/PostGIS database is required for data storage and GeoDjango functionality. To create one, execute:
 
-    $ pip install -r requiremnts.txt
+    $ createdb bostonparks -T template_postgis
+
+Python dependencies can be installed through the pip requirements file:
+
+    $ pip install -r requirements.txt
 
 ---
 
