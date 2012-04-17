@@ -11,27 +11,28 @@ except ImportError:
     pass
 
 
-class Greenspace(models.Model):
+class Park(models.Model):
     """
-    Park or similar Greenspace.
+    Park or similar Open Space.
     """
 
-    name = models.CharField(max_length=100)
-    alt_name = models.CharField('Alternative name', max_length=100)
-    address = models.CharField(max_length=50)
-    phone = models.CharField(max_length=50)
-    neighborhood = models.CharField(max_length=50) #FIXME: FK
-    type = models.CharField(max_length=50) #FIXME: FK
-    owner = models.CharField(max_length=50) #FIXME: FK
-    friendsgroup = models.CharField(max_length=100) #FIXME: FK
-    access = models.CharField(max_length=10) #FIXME: FK
+    os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
+    name = models.CharField(max_length=100, blank=True, null=True)
+    alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    neighborhood = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK to Neighborhood
+    type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
+    owner = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
+    friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
+    access = models.CharField(max_length=10, blank=True, null=True) #FIXME: FK
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
 
     class Meta:
-        verbose_name = _('Greenspace')
-        verbose_name_plural = _('Greenspaces')
+        verbose_name = _('Park')
+        verbose_name_plural = _('Parks')
 
     def __unicode__(self):
         return self.name
@@ -47,7 +48,7 @@ class Facility(models.Model):
     activity = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK?
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
-    green_space = models.IntegerField(blank=True, null=True) # FIXME: FK to Greenspace
+    park = models.ForeignKey(Park, blank=True, null=True)
 
     geometry = models.PointField(srid=26986)
     objects = models.GeoManager()
@@ -64,7 +65,7 @@ class Neighborhood(models.Model):
     """
     Neighborhood or town if no neighborhoods are available.
     """
-    n_id = models.CharField('Neighborhood ID', max_length=20, help_text='ID derived from GIS, not necessarily unique.')
+    n_id = models.CharField('Neighborhood ID', max_length=20, help_text='ID derived from GIS, not necessarily unique since we are mixing neighborhood types.')
     name = models.CharField(max_length=50)
 
     geometry = models.MultiPolygonField(srid=26986)
