@@ -6,6 +6,7 @@ urlpatterns = patterns('parkmap.views',
     # Examples:
 
     url(r'^park/(?P<park_slug>[-\w]+)/$', 'parks_page', name='parks'), # B  (Detail)
+    url(r'^event/(?P<event_name>[-\w]+)/(?P<event_id>[-\w]+)/$', 'events', name='events'), # B  (Detail)
 
     url(r'^neighborhood/(?P<n_slug>[-\w]+)/$',
         'neighborhood',

@@ -3,7 +3,7 @@
 from django.shortcuts import (render_to_response, get_object_or_404,
                               get_list_or_404, redirect)
 from datetime import datetime
-from parkmap.models import Neighborhood, Park, Facility, Activity
+from parkmap.models import Neighborhood, Park, Facility, Activity, Event
 from django.template.defaultfilters import slugify
 
 def get_list():
@@ -43,6 +43,7 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
     neighborhood = Neighborhood.objects.get(slug=n_slug)
     activity = get_object_or_404(Activity,slug=a_slug)
+
     parks = Park.objects.filter(activity=activity,neighborhood=neighborhood)
 
 
@@ -51,3 +52,8 @@ def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slu
         'parks':parks}
     return render_to_response('parkmap/play.html',response_d)
     
+
+def events(request,event_id,event_name):
+    event = get_object_or_404(Event,pk=event_id)
+    return render_to_response('parkmap/event.html',{'event':event})
+

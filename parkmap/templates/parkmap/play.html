@@ -1,4 +1,37 @@
-{{neighborhood.name}}<br>
-{% for park in parks %}
-    {{park.name}}<br>
-{% endfor %}
+{% extends 'parkmap/base.html' %} {% block title %}{% endblock %} {% block meta %}{% endblock %} {% block headscripts %}{% endblock %} {% block bodyclass %} 
+<body class="play">
+	{% endblock %} {% block content %} 
+	<div class="container-fluid">
+		<div class="span3">
+			<div class="well">
+			</div>
+		</div>
+		<div class="span6">
+			<div class="well menu-box clearfix">
+				<div class="menu-box opacity">
+					&nbsp; 
+				</div>
+				<div class="menu-box-inner">
+					<div class="menu-box-item">
+						<h2>
+							{{neighborhood.name}}
+						</h2>
+						<br>
+						{% for park in parks %} 
+						<h4>
+							{{park.name}}
+							{% for activity in park.activity.all %}
+							<br />{{activity.name}}
+							{% endfor %}
+						</h4>
+						{% endfor %} 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span3">
+			<div class="well">
+			</div>
+		</div>
+	</div>
+	{% endblock %} 

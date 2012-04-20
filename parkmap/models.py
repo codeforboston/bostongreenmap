@@ -14,26 +14,60 @@ except ImportError:
     pass
 
 
+
+class Event(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True) 
+    slug = models.SlugField(max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    def __unicode__(self):
+        return self.name
+
+    def save(self):
+        """Auto-populate an empty slug field from the MyModel name and
+        if it conflicts with an existing slug then append a number and try
+        saving again.
+        """
+        
+        if not self.slug:
+            self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
+        
+        while True:
+            try:
+                super(Event, self).save()
+            # Assuming the IntegrityError is due to a slug fight
+            except IntegrityError:
+                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
+                if match_obj:
+                    next_int = int(match_obj.group(2)) + 1
+                    self.slug = match_obj.group(1) + '-' + str(next_int)
+                else:
+                    self.slug += '-2'
+            else:
+                break
+
+
+
 class Park(models.Model):
     """
     Park or similar Open Space.
     """
 
     os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
-    name = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True) 
     slug = models.SlugField(max_length=100, blank=True, null=True)
     alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
     neighborhood = models.ManyToManyField("Neighborhood")
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     owner = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
+    events = models.ManyToManyField("Event",blank=True,null=True)
     access = models.CharField(max_length=10, blank=True, null=True) #FIXME: FK
-    activity = models.ManyToManyField("Activity")   #FIXME: FK?
-
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
+    activity = models.ManyToManyField("Activity")   #FIXME: FK?
 
     class Meta:
         verbose_name = _('Park')
@@ -44,8 +78,7 @@ class Park(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('parks', [slug])
-
+        return ('park', [slugify(self.name)])
     def save(self):
         """Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
@@ -76,6 +109,8 @@ class Activity(models.Model):
     class Meta:
         verbose_name = _('Activity')
         verbose_name_plural = _('Activities')
+    def __unicode__(self):
+        return self.name
 
 
     def save(self):
@@ -100,9 +135,6 @@ class Activity(models.Model):
                     self.slug += '-2'
             else:
                 break
-
-    def __unicode__(self):
-        return self.name
         
 class Facility(models.Model):
     """
@@ -112,7 +144,7 @@ class Facility(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK?
-    activity = models.ManyToManyField("Activity")   #FIXME: FK?
+    activity = models.ForeignKey("Activity")   #FIXME: FK?
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)

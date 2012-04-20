@@ -1,4 +1,5 @@
 {% extends 'parkmap/base.html' %}
+{% load markup %}
 
 {% block title %}{% endblock %} 
 {% block meta %}{% endblock %}
@@ -14,9 +15,8 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well">
-					<h2>Boston Common</h2>
-					<p>This famous park lorem ipsum dolor sit amet, consectetuer adipiscing elit, vsed diam nonummy nibh euismod tincidunt 
-					ut laoreet dolore magna erat.</p>
+					<h2>{{park.name}}</h2>
+					<p>{% if park.description %}{{park.description|markdown}}{% endif %}</p>
 					
 					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
 					<p><strong>Size:</strong> S0 acres</p>
@@ -26,26 +26,29 @@
 					<p><a href="#">Plan a route</a></p>
 					
 					<h5>Owner &amp; Management</h5>
-					<p>Boston Parks Department</p>
-					<p>617-123-4567</p>
+					<p>{{park.owner}}</p>
+					<p>{{park.phone}}</p>
 					<p><a href="#">Report a Problem</a></p>
 					
 					<h5>Get Involved</h5>
 					<p><a href="#">Friends of Boston Common</a></p>
+
 					<p>Upcoming events</p>
 					<ul>
-					<li>Event 1</li>
-					<li>Event 2</li>
+                                        {% for event in park.events.all %}
+                                            <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</li>
+                                        {% endfor %}
 					<li><a href="#">Upload an event</a></li>
 					</ul>
 					
-					<h5>Contains the following facilities:</h5>
-					<ul>
-					<li>Frog Pond</li>
-					<li>Shakespeare Pavillion</li>
-					<li>Jazzy Fountain</li>
-					<li>Fried Dough Stand</li>
-					</ul>
+                                        {% if park.facilities.all %}
+					    <h5>Contains the following facilities:</h5>
+					    <ul>
+                                            {% for facility in park.facilities.all %}
+                                            <li>{{facility.name}}</li>
+                                            {% endfor %}
+					    </ul>
+					{% endif %}
 				
           </div><!--/.well -->
         </div><!--/span-->
@@ -69,6 +72,7 @@
 			
         <div class="span7">
           <div class="hero-unit">
+    {{park.geometry}}
 		
 			<img src="/static/images/fpo-map-733x278.jpg" alt="" width="730" height="278">
 		
@@ -79,6 +83,4 @@
     </div><!--/.fluid-container-->
 
 {% endblock %}		
-</body>
-</html>
 
