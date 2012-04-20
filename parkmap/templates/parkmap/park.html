@@ -1,0 +1,84 @@
+{% extends 'parkmap/base.html' %}
+
+{% block title %}{% endblock %} 
+{% block meta %}{% endblock %}
+{% block headscripts %}{% endblock %}
+
+{% block bodyclass %}
+<body class="park">
+{% endblock %} 	
+
+    
+{% block content %}     
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well">
+					<h2>Boston Common</h2>
+					<p>This famous park lorem ipsum dolor sit amet, consectetuer adipiscing elit, vsed diam nonummy nibh euismod tincidunt 
+					ut laoreet dolore magna erat.</p>
+					
+					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
+					<p><strong>Size:</strong> S0 acres</p>
+					
+					<h5>Get there!</h5>
+					<p>MBTA: Park Street, Boylston Street Station</p>
+					<p><a href="#">Plan a route</a></p>
+					
+					<h5>Owner &amp; Management</h5>
+					<p>Boston Parks Department</p>
+					<p>617-123-4567</p>
+					<p><a href="#">Report a Problem</a></p>
+					
+					<h5>Get Involved</h5>
+					<p><a href="#">Friends of Boston Common</a></p>
+					<p>Upcoming events</p>
+					<ul>
+					<li>Event 1</li>
+					<li>Event 2</li>
+					<li><a href="#">Upload an event</a></li>
+					</ul>
+					
+					<h5>Contains the following facilities:</h5>
+					<ul>
+					<li>Frog Pond</li>
+					<li>Shakespeare Pavillion</li>
+					<li>Jazzy Fountain</li>
+					<li>Fried Dough Stand</li>
+					</ul>
+				
+          </div><!--/.well -->
+        </div><!--/span-->
+			
+        <div class="span2">
+          <div class="well">
+				
+					<img class="park-pic" alt="" src="/static/images/1_1.gif">
+					
+					<form action="post" id="add-to-trip">
+					
+					<input type="submit" id="add-trip" name="add-trip" value="Add to Trip" />
+					
+					</form>
+				
+				
+          </div><!--/.well -->
+        </div><!--/span-->
+			
+			
+			
+        <div class="span7">
+          <div class="hero-unit">
+		
+			<img src="/static/images/fpo-map-733x278.jpg" alt="" width="730" height="278">
+		
+          </div><!--/.well -->
+        </div><!--/span-->
+
+
+    </div><!--/.fluid-container-->
+
+{% endblock %}		
+</body>
+</html>
+

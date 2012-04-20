@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+			{% block title %}{% endblock %} 
+		</title>
+		<meta name="description" content="{% block meta_description %}{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
+
+			{% block meta %}{% endblock %}
+
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="/static/js/bootstrap.js"></script> 
+		<link rel="stylesheet" href="/static/css/bootstrap.css">
+
+{% block headscripts %}{% endblock %}
+
+    </head>
+
+{% block bodyclass %}
+<body>
+{% endblock %} 	
+	<div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>         
+<div class="nav-collapse">
+            <ul class="nav">
+		<li><a href="#">HOME</a></li>
+		<li><a href="#">PLAY</a></li>
+		<li><a href="#">EXPLORE</a></li>
+		<li><a href="#">PLAN A TRIP</a></li>
+		<li><a href="#">LOGIN</a></li>
+		<li><ul class="actions"><li><a href="#">PRINT</a></li><li><a href="#">SHARE</a></li></ul></li>
+		</ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+{% block content %}        
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well">
+					<h2>Boston Common</h2>
+					<p>This famous park lorem ipsum dolor sit amet, consectetuer adipiscing elit, vsed diam nonummy nibh euismod tincidunt 
+					ut laoreet dolore magna erat.</p>
+					
+					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
+					<p><strong>Size:</strong> S0 acres</p>
+					
+					<h5>Get there!</h5>
+					<p>MBTA: Park Street, Boylston Street Station</p>
+					<p><a href="#">Plan a route</a></p>
+					
+					<h5>Owner &amp; Management</h5>
+					<p>Boston Parks Department</p>
+					<p>617-123-4567</p>
+					<p><a href="#">Report a Problem</a></p>
+					
+					<h5>Get Involved</h5>
+					<p><a href="#">Friends of Boston Common</a></p>
+					<p>Upcoming events</p>
+					<ul>
+					<li>Event 1</li>
+					<li>Event 2</li>
+					<li><a href="#">Upload an event</a></li>
+					</ul>
+					
+					<h5>Contains the following facilities:</h5>
+					<ul>
+					<li>Frog Pond</li>
+					<li>Shakespeare Pavillion</li>
+					<li>Jazzy Fountain</li>
+					<li>Fried Dough Stand</li>
+					</ul>
+				
+          </div><!--/.well -->
+        </div><!--/span-->
+			
+        <div class="span2">
+          <div class="well">
+				
+					<img class="park-pic" alt="" src="images/1_1.gif">
+					
+					<form action="post" id="add-to-trip">
+					
+					<input type="submit" id="add-trip" name="add-trip" value="Add to Trip" />
+					
+					</form>
+				
+				
+          </div><!--/.well -->
+        </div><!--/span-->
+			
+			
+			
+        <div class="span7">
+          <div class="hero-unit">
+		
+			<img src="images/fpo-map-733x278.jpg" alt="" width="730" height="278">
+		
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div>
+    </div><!--/.fluid-container-->
+
+{% endblock %}
+		
+</body>
+</html>
+

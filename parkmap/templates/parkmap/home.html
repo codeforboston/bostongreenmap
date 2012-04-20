@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}{% endblock %} 
+		</title>
+
+		<meta name="description" content="{% block meta_description %}{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
+		{% block meta %}{% endblock %}
+        <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script> 
+		
+        <script type="text/javascript" src="http://192.168.24.209/static/css/bootstrap.css/static/js/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="http://192.168.24.209/static/css/bootstrap.css/static/js/bootstrap.js"></script> 
+		
+		<link rel="stylesheet" href="http://192.168.24.209/static/css/bootstrap.css">
+
+<script>
+$(document).ready(function () {
+
+   $('#neighborhood_only').change(function() {
+      window.location.replace("/neighborhood/"+$(this).val()+"/");
+    }); 
+
+
+   $('#neighborhood_activity').change(function() {
+       if ($(this).val() != "----"  && $('#neighborhood_neighborhood').val() != "----"){
+          window.location.replace("/neighborhood/"+$("#neighborhood_neighborhood").val()+"/"+$(this).val()+"/");
+       }
+   }); 
+   $('#neighborhood_neighborhood').change(function() {
+       if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
+          window.location.replace("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
+       }
+
+   }); 
+
+});
+
+
+
+</script>
+		
+		{% block headscripts %}{% endblock %}
+	</head>
+
+{% block bodyclass %}<body class="home">{% endblock %} 	
+<div id="map"></div>
+
+<div class="container-fluid">
+<div class="span3"><div class="well"></div></div>
+        <div class="span6">
+
+
+<div class="well menu-box clearfix">
+<div class="menu-box opacity">&nbsp;</div>
+<!--  if scroolbar is activated below, add class 'padright' -->
+	<div class="menu-box-inner">
+	<div class="menu-box-item">
+	    <h1> Find a Green Space</h1>
+	    <form method="get" action="">
+			<select id='neighborhood_only' name='town'>
+				<option SELECTED VALUE="">Boston Neighborhood/Town Name</option>
+				{% for neighborhood in neighborhoods %}
+					<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
+				{% endfor %}
+			</select>
+			<noscript><input type="submit" value="Submit"></noscript>
+			</form>
+	    
+	</div>
+	
+	
+	<div class="menu-box-item">
+		<h1>Play!</h1>
+		<h4>Browse parks and facilities by activity</h4>
+	        <form method="get" action="">
+		    <select id='neighborhood_activity' name='town'>
+		        <option SELECTED value="----">Activities</option>
+
+		        {% for activity in activities %}
+		    	<option value="{{activity.slug}}">{{activity.name}}</option>
+		        {% endfor %}
+		    </select>
+		    
+		    <select name='town' id='neighborhood_neighborhood'>
+		    	<option SELECTED VALUE="----">Boston Neighborhood/Town Name</option>
+		    	{% for neighborhood in neighborhoods %}
+		    		<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
+		    	{% endfor %}				
+		    </select>
+		    
+		    
+		    <noscript><input type="submit" value="Submit"></noscript>
+		</form>
+		
+		
+	  </div>
+	    
+	  <a href="#">
+	  <div class="menu-box-item">
+			<h1>Explore the Map</h1>
+	    </div>
+	  </a>
+	  
+	  <a href="#">	  
+	     <div class="menu-box-item">
+			<h1>Plan a Trip</h1>
+			<h4>By Bike or Preplanned Routes</h4>
+	    </div>
+	    </a>
+	
+
+	</div>
+	</div>
+</div>
+
+<div class="span3"><div class="well"></div></div>
+
+</div>
+			
+</body>
+</html>
+
