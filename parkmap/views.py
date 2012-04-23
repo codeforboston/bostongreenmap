@@ -39,22 +39,21 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     response_d = {
         'neighborhood':neighborhood,
         'parks':parks}
-    return render_to_response('parkmap/play.html',response_d)
+    return render_to_response('parkmap/neighborhood.html',response_d)
 
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
     neighborhood = Neighborhood.objects.get(slug=n_slug)
     activity = get_object_or_404(Activity,slug=a_slug)
-    facilities = Facility.objects.get(activity=activity)
+    facilities = Facility.objects.filter(activity=activity)
     park_ids = []
     for f in facilities:
-        park_ids.append(f.park__id)
-    parks = Parks.objects.filter(id__in=park_ids,neighborhood=neighborhood)
-
+        park_ids.append(f.park_id)
+    parks = Park.objects.filter(id__in=park_ids,neighborhood=neighborhood)
 
     response_d = {
         'neighborhood':neighborhood,
         'parks':parks}
-    return render_to_response('parkmap/play.html',response_d)
+    return render_to_response('parkmap/neighborhood.html',response_d)
     
 
 def events(request,event_id,event_name):

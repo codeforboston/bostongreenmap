@@ -19,6 +19,7 @@ class Event(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True) 
     slug = models.SlugField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+
     def __unicode__(self):
         return self.name
 
@@ -59,11 +60,11 @@ class Park(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhood = models.ManyToManyField("Neighborhood")
+    neighborhood = models.ManyToManyField("Neighborhood",related_name="neighborhood")
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     owner = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
-    events = models.ManyToManyField("Event",blank=True,null=True)
+    events = models.ManyToManyField("Event",related_name="events", blank=True,null=True)
     access = models.CharField(max_length=10, blank=True, null=True) #FIXME: FK
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -144,7 +145,7 @@ class Facility(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK?
-    activity = models.ManyToManyField("Activity")   #FIXME: FK?
+    activity = models.ManyToManyField("Activity",related_name="activity")   #FIXME: FK?
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
@@ -168,20 +169,6 @@ class Facility(models.Model):
  
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        
-        while True:
-            try:
-                super(Facility, self).save()
-            # Assuming the IntegrityError is due to a slug fight
-            except IntegrityError:
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
         super(Facility, self).save(*args, **kwargs)
 
         
@@ -214,7 +201,7 @@ class Neighborhood(models.Model):
     def get_absolute_url(self):
         return ('neighborhood', [slugify(self.name)])
 
-    def save(self):
+    def save(self, *args, **kwargs):
         """Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
         saving again.
@@ -222,19 +209,4 @@ class Neighborhood(models.Model):
         
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        
-        while True:
-            try:
-                super(Neighborhood, self).save()
-            # Assuming the IntegrityError is due to a slug fight
-            except IntegrityError:
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
-    
-
+        super(Neighborhood, self).save(*args, **kwargs)
