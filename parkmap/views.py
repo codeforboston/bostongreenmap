@@ -2,6 +2,7 @@
 
 from django.shortcuts import (render_to_response, get_object_or_404,
                               get_list_or_404, redirect)
+from django.http import HttpResponse
 from datetime import datetime
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event
 from django.template.defaultfilters import slugify
@@ -43,7 +44,11 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
     neighborhood = Neighborhood.objects.get(slug=n_slug)
     activity = get_object_or_404(Activity,slug=a_slug)
-    parks = Park.objects.filter(activity=activity,neighborhood=neighborhood)
+    facilities = Facility.objects.get(activity=activity)
+    park_ids = []
+    for f in facilities:
+        park_ids.append(f.park__id)
+    parks = Parks.objects.filter(id__in=park_ids,neighborhood=neighborhood)
 
 
     response_d = {
