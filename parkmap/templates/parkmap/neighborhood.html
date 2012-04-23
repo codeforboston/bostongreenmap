@@ -1,5 +1,5 @@
 {% extends 'parkmap/base.html' %} {% block title %}{% endblock %} {% block meta %}{% endblock %} {% block headscripts %}{% endblock %} {% block bodyclass %} 
-<body class="play">
+<body class="neighborhood">
 	{% endblock %} {% block content %} 
 	<div class="container-fluid">
 		<div class="span3">
@@ -20,11 +20,23 @@
 						{% for park in parks %} 
 						<h4>
 							{{park.name}}
-							{% for activity in park.activity.all %}
-							<br />{{activity.name}}
+							{% for facility in park.facility_set.all %}
+							<br />{{facility.name}}
+								{% for activity  in facility.activity.all %}
+									 <br>&nbsp;&nbsp;&nbsp;&nbsp;{{activity.name}}
+								{% endfor %}
 							{% endfor %}
 						</h4>
 						{% endfor %} 
+						
+						
+							  <a href="#">
+								  <div class="menu-box-hotdog">
+										<h1>Explore the Map</h1>
+									</div>
+								  </a>
+						
+						
 					</div>
 				</div>
 			</div>

@@ -10,6 +10,13 @@ h2 {
   color: #00DC00;
 }
 
+
+h4
+{
+    font-size: 16px;
+    color: #757575;
+}
+
 h5 {
   font-size: 14px;
   color: black;
@@ -49,7 +56,12 @@ a:active h4
 .navbar-inner {
   background-color: #00DC00;
   min-height: 65px;
-
+  background-image: none;
+  background-repeat: repeat-x;
+  filter: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .navbar .nav {
@@ -64,8 +76,44 @@ padding-top: 25px;
   font-family: font-family: 'PT Sans',sans-serif;
     font-size: 18px;
   line-height: 20px;
+padding: 10px 15px 11px;
   }
   
+ul.nav li.parent
+{
+padding-top: 10px;
+}
+
+ul.nav ul.actions {
+margin-left: 10px;
+}
+
+ul.nav ul.actions li {
+display: inline;
+font-family: 'PT Sans', sans-serif;
+font-size: 16px;
+line-height: 20px;
+}
+
+
+ul.nav ul.actions {
+display: inline;
+}
+
+ul.nav ul.actions li a:link,
+ul.nav ul.actions li a:visited {
+color: black;
+padding: 0 15px;
+text-decoration: none; 
+
+}
+
+
+ul.nav ul.actions li a:hover,
+ul.nav ul.actions li a:active {
+color: #666;
+}
+
   
 .span7 > .hero-unit {
   padding: 00px;
@@ -128,9 +176,7 @@ padding-top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-min-height: 570px;
-height: auto !important; 
-height: 570px;
+    height: auto !important; 
 }
 
 .menu-box-inner {
@@ -162,4 +208,29 @@ margin-top: 22px;
     width: 100%;
     margin-top: 10px;
 }
+
+.neighborhood .menu-box-item
+{
+    background-color: white;
+    margin-top: 22px;
+    text-align: left;
+}
+
+
+.neighborhood .menu-box.opacity
+{
+height: auto;
+}
+
+.menu-box-item .menu-box-hotdog {
+    text-align: center;
+    background-color: #00dc00; /*GREEN */
+    border-radius: 15px 15px 15px 15px;
+    box-shadow:none;
+    padding: 20px 25px;
+    margin: 22px 0 15px 0;
+    width: 400px;
+
+}
+
 
