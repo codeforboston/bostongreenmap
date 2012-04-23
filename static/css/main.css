@@ -159,10 +159,15 @@ padding-top: 0;
     margin: 10px auto;
     padding: 0;
     position: relative;
-    width: 600px;
+    width: auto;
     z-index: 20;
     height: auto;
     }
+    
+.home .menu-box
+{
+width: 600px;
+}
     
 .menu-box.opacity {
     background-color: #000000;
@@ -181,7 +186,7 @@ padding-top: 0;
 
 .menu-box-inner {
 	overflow: auto;
-	padding: 20px 50px 40px;
+	padding: 20px 50px 20px;
 	z-index: 30;
 	position: relative;
 	height: auto;
@@ -189,13 +194,25 @@ padding-top: 0;
 
 
 .menu-box-item {
-    text-align: center;
-    background-color: #00dc00; /*GREEN */
+    background-color: white;
+    margin-top: 22px;
+    text-align: left;
     border-radius: 15px 15px 15px 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     padding: 20px 25px;
     margin: 0px 0 22px 0;
-    width: 450px;
+    width: auto;
+}
+
+.home .container-fluid
+{
+    padding-top: 35px;
+}
+
+.home .menu-box-item
+{
+    text-align: center;
+    background-color: #00dc00; /*GREEN */
 
 }
 
@@ -211,9 +228,7 @@ margin-top: 22px;
 
 .neighborhood .menu-box-item
 {
-    background-color: white;
-    margin-top: 22px;
-    text-align: left;
+
 }
 
 
@@ -229,7 +244,7 @@ height: auto;
     box-shadow:none;
     padding: 20px 25px;
     margin: 22px 0 15px 0;
-    width: 400px;
+    width: auto;
 
 }
 
