@@ -1,2 +1,3 @@
 *.swp
 *.pyc
+bostonparks/local_settings.py

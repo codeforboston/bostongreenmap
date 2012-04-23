@@ -43,7 +43,6 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
     neighborhood = Neighborhood.objects.get(slug=n_slug)
     activity = get_object_or_404(Activity,slug=a_slug)
-
     parks = Park.objects.filter(activity=activity,neighborhood=neighborhood)
 
 

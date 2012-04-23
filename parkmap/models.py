@@ -67,7 +67,7 @@ class Park(models.Model):
     access = models.CharField(max_length=10, blank=True, null=True) #FIXME: FK
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
-    activity = models.ManyToManyField("Activity")   #FIXME: FK?
+    #activity = models.ManyToManyField("Activity")   #Not allowing an Activity without a Facility in a park.
 
     class Meta:
         verbose_name = _('Park')
@@ -144,7 +144,7 @@ class Facility(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK?
-    activity = models.ForeignKey("Activity")   #FIXME: FK?
+    activity = models.ManyToManyField("Activity")   #FIXME: FK?
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
@@ -165,18 +165,7 @@ class Facility(models.Model):
             self.park = Park.objects.get(geometry__contains=self.geometry)
         except:
             self.park = None       
-        super(Facility, self).save(*args, **kwargs)
-        
-    @models.permalink
-    def get_absolute_url(self):
-        return ('facility', [slugify(self.name)])
-
-    def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
-        if it conflicts with an existing slug then append a number and try
-        saving again.
-        """
-        
+ 
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         
@@ -193,7 +182,14 @@ class Facility(models.Model):
                     self.slug += '-2'
             else:
                 break
+        super(Facility, self).save(*args, **kwargs)
 
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('facility', [slugify(self.name)])
+
+       
 
 
 class Neighborhood(models.Model):
