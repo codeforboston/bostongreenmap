@@ -42,13 +42,14 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     return render_to_response('parkmap/neighborhood.html',response_d)
 
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
-    neighborhood = Neighborhood.objects.get(slug=n_slug)
+    neighborhood = get_object_or_404(Neighborhood,slug=n_slug)
     activity = get_object_or_404(Activity,slug=a_slug)
-    facilities = Facility.objects.filter(activity=activity)
-    park_ids = []
-    for f in facilities:
-        park_ids.append(f.park_id)
-    parks = Park.objects.filter(id__in=park_ids,neighborhood=neighborhood)
+    facility = Facility.objects.filter(activity=activity)
+    facility_ids = []
+    for f in facility:
+       facility_ids.append(f.id)
+    parks = Park.objects.filter(neighborhood=neighborhood,facility__id__in=facility_ids)
+
 
     response_d = {
         'neighborhood':neighborhood,
