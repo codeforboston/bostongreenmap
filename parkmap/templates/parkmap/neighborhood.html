@@ -16,12 +16,12 @@
 						<h2>
 							{{neighborhood.name}}
 						</h2>
-						<br>
+						
 						{% for park in parks %} 
 						<h4>
-							{{park.name}}
+							<a href="/park/{{park.slug}}">{{park.name}}</a>
 							{% for facility in park.facility_set.all %}
-							<br />{{facility.name}}
+							{{facility.name}}
 								{% for activity  in facility.activity.all %}
 									 <br>&nbsp;&nbsp;&nbsp;&nbsp;{{activity.name}}
 								{% endfor %}
