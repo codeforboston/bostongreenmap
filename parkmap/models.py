@@ -23,7 +23,8 @@ class Event(models.Model):
         return self.name
 
     def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
+        """
+        Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
@@ -79,6 +80,7 @@ class Park(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('park', [slugify(self.name)])
+
     def save(self):
         """Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
@@ -172,7 +174,8 @@ class Facility(models.Model):
         return ('facility', [slugify(self.name)])
 
     def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
+        """
+        Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
@@ -219,7 +222,8 @@ class Neighborhood(models.Model):
         return ('neighborhood', [slugify(self.name)])
 
     def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
+        """
+        Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
