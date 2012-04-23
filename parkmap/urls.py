@@ -5,6 +5,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('parkmap.views',
     # Examples:
 
+    url(r'^park/play/$', 'play_page', name='play'), # B  (Detail)
     url(r'^park/(?P<park_slug>[-\w]+)/$', 'parks_page', name='parks'), # B  (Detail)
     url(r'^event/(?P<event_name>[-\w]+)/(?P<event_id>[-\w]+)/$', 'events', name='events'), # B  (Detail)
 
@@ -16,6 +17,7 @@ urlpatterns = patterns('parkmap.views',
         'parks_in_neighborhood_with_activities',
          name='neighborhood_activities'), # C
 
+    url(r'^ajax/(?P<n_slug>[-\w]+)/(?P<a_slug>[-\w]+)/$', 'neighborhood_activity_ajax', name='neighborhood_actity_ajax'),  # HOME
     url(r'^$', 'home_page', name='home'),  # HOME
 
 
