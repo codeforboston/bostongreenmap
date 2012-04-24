@@ -3,36 +3,56 @@
 {% block meta %}{% endblock %}
 {% block headscripts %}
 <script>
-    function get_new_filter(){
-	var neighborhood = "{{neighborhood.slug}}";
-	var activity = $("#neighborhood_activity");
 
-        if ($('#neighborhood_activity :selected').index() > 0 ){
-            var out = "";
-	    var url = String.prototype.concat.apply("/ajax/", [neighborhood,"/",activity.val(),"/"]);
-            $.ajax({
-                url:url,
-                dataType:'json',
-                success:function(json){
-                    $.each(json, function(key, obj) {
-			//Start the header of the park
-                    	out += "<h6>"+obj.name+"</h6><ul><li>"+obj.description+"</li><li>";
-			//Loop through the activities	
-                    	$.each(obj.activity, function(k, o) {
-                    	    out += o.slug; // need to replace with images.
-			});
-                    	out += "</li></ul>";
-                    });	
-                    $("#parklist").html(out);
-                }
-	    });
-	}
+{% if neighborhoods %}
+function neighborhood_filter(){
+    var activity = $("#neighborhood_activity");
+    var ai = $('#neighborhood_activity :selected').index();
+    var neighborhood = $("#neighborhood_neighborhood");
+    var ni =  $('#neighborhood_neighborhood :selected').index();
+    if ((ai != 0) && (ni != 0)){
+        filter(neighborhood.val(),activity.val());
     }
-    $(document).ready(function(){
-   	 $('#neighborhood_activity').change(function() {
-   	     get_new_filter();
-   	 });
-    });
+}
+{% else %}
+function activity_filter(neighborhood){
+    var activity = $("#neighborhood_activity");
+    if ($('#neighborhood_activity :selected').index() >{% if not neighborhoods %}={% endif %} 0 ){
+        filter(neighborhood,activity.val());
+    }
+}
+{% endif %}
+
+function filter(neighborhood,activity){
+     var out = "";
+     var url = String.prototype.concat.apply("/ajax/", [neighborhood,"/",activity,"/"]);
+     $.ajax({
+         url:url,
+         dataType:'json',
+         success:function(json){
+             $.each(json, function(key, obj) {
+                 //Start the header of the park
+                 out += "<h6 class='loop_h6'>"+obj.name+"</h6><ul class='loop_ul'><li>"+obj.description+"</li><li>";
+                 //Loop through the activities    
+                 $.each(obj.activity, function(k, o) {
+                     out += o.slug; // need to replace with images.
+                 });
+                 out += "</li></ul>";
+             });    
+             $("#parklist").html(out);
+         }
+     });
+}
+
+$(document).ready(function(){
+    {% if neighborhoods %}
+        $('#neighborhood_activity').bind("keypress change",(function() { neighborhood_filter(); }));
+        $('#neighborhood_neighborhood').bind("keypress change",(function() { neighborhood_filter(); }));
+    {% else %}
+        $('#neighborhood_activity').bind("keypress change",(function() { activity_filter("{{neighborhood.slug}}"); }));
+        activity_filter("{{neighborhood.slug}}");      
+    {% endif %}
+});
     
 </script>
 {% endblock %}
@@ -40,41 +60,45 @@
 <body class="play">
 {% endblock %}
 {% block content %} 
-	<div class="container-fluid">
-		<div class="span3">
-			<div class="well">
-			</div>
-		</div>
-		<div class="span6">
-			<div class="well menu-box clearfix">
-				<div class="menu-box opacity">
-					&nbsp; 
-				</div>
-				<div class="menu-box-inner">
-					<div class="menu-box-item">
-						<form method="get" action="">
-		    <select id='neighborhood_activity'>
-		        <option SELECTED>Activities</option>
-		        {% for activity in activities %}
-		    	<option value="{{activity.slug}}">{{activity.name}}</option>
-		        {% endfor %}
-		    </select>
-		    <h4>Search Results</h4> <br>
-			<div id="parklist">
-			{% for park in parks %} 
-				<h6>{{park.name}}</h6>
-				{% for activity in park.activity.all %}
-					<br />{{activity.name}}
-				{% endfor %}
-			{% endfor %} 
-			</div>
-		</div>
+    <div class="container-fluid">
+        <div class="span3">
+            <div class="well">
             </div>
-	</div>
+        </div>
+        <div class="span6">
+            <div class="well menu-box clearfix">
+                <div class="menu-box opacity">
+                    &nbsp; 
+                </div>
+                <div class="menu-box-inner">
+                    <div class="menu-box-item">
+                        <form method="get" action="">
+            {% if neighborhoods %}
+            <select id='neighborhood_neighborhood'>
+                <option SELECTED>Neighborhood</option>
+                {% for neighborhood in neighborhoods %}
+                <option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
+                {% endfor %}
+            </select>
+            {% else %}
+	    <label id="label_neighborhood_activity" for="neighborhood_activity">Select an Activity</label>
+            {% endif %}
+            <select id='neighborhood_activity' name="neighborhood_activity">
+                {% if neighborhoods %} <option SELECTED>Activities</option> {% endif %}
+                {% for activity in activities %}
+                <option value="{{activity.slug}}" {% ifequal a_slug activity.slug %}SELECTED{% endifequal%}>{{activity.name}}</option>
+                {% endfor %}
+            </select>
+            <h4>Search Results</h4> <br>
+            <div id="parklist">
+            </div>
+        </div>
+            </div>
+    </div>
     </div>
     <div class="span3">
         <div class="well">
-	</div>
-	</div>
+    </div>
+    </div>
     </div>
 {% endblock %} 

@@ -51,6 +51,7 @@ def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slu
     response_d = {
         'neighborhood':neighborhood,
         'activities':activities,
+        'a_slug':a_slug,
         'parks':parks}
     return render_to_response('parkmap/play.html',response_d)
 
@@ -97,4 +98,13 @@ def events(request,event_id,event_name):
     event = get_object_or_404(Event,pk=event_id)
     return render_to_response('parkmap/event.html',{'event':event})
 
+
+def explore(request): # Activity slug, and Neighborhood slug 
+    neighborhoods = Neighborhood.objects.all()
+    activities = Activity.objects.all()
+    response_d = {
+        'neighborhoods':neighborhoods,
+        'activities':activities,
+        }
+    return render_to_response('parkmap/play.html',response_d)
 
