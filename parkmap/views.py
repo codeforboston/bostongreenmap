@@ -46,11 +46,13 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     return render_to_response('parkmap/neighborhood.html',response_d)
 
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
+    activities = Activity.objects.all()
     neighborhood,parks = get_n_p_with_a(n_slug,a_slug)
     response_d = {
         'neighborhood':neighborhood,
+        'activities':activities,
         'parks':parks}
-    return render_to_response('parkmap/neighborhood.html',response_d)
+    return render_to_response('parkmap/play.html',response_d)
 
 def get_n_p_with_a(n_slug,a_slug):
     """
@@ -86,7 +88,7 @@ def neighborhood_activity_ajax(request,n_slug,a_slug):
         p_dict['description'] = park.description
         parks_json.append(p_dict)
     
-    return HttpResponse(parks_json)
+    return HttpResponse(json.dumps(parks_json))
     
     
     
