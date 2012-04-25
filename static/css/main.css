@@ -267,4 +267,9 @@ height: auto;
 
 }
 
+body.play form
+{
+margin-bottom: 0;
+}
+
 
