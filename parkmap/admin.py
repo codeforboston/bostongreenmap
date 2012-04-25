@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 
-from parkmap.models import Facility,Neighborhood, Park, Activity, Event
+from parkmap.models import Facility, Neighborhood, Park, Activity, Event
 
 
 # default GeoAdmin overloads
