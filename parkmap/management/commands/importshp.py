@@ -16,8 +16,8 @@ class Command(BaseCommand):
             'model': Facility,
             'mapping': {
                 'name': 'Name',
-                'type': 'Type',
-                'activity': 'Activity',
+                'facilitytype_legacy': 'Type',
+                'activity_legacy': 'Activity',
                 'location': 'Location',
                 'status': 'Status',
                 'geometry': 'POINT',
@@ -32,8 +32,8 @@ class Command(BaseCommand):
                 'alt_name': 'ALT_NAME',
                 'address': 'Address',
                 'phone': 'Phone',
-                'type': 'Type',
-                'owner': 'owner',
+                'parktype_legacy': 'Type',
+                'parkowner_legacy': 'owner',
                 'access': 'Access',
                 'geometry': 'MULTIPOLYGON',
             }
@@ -51,11 +51,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for shp in args:
-            try:
-                lm = LayerMapping(self.config[shp]['model'], self.config[shp]['file'], self.config[shp]['mapping'], 
-                    encoding='iso-8859-1')
-                lm.save(strict=True, verbose=True)
+            lm = LayerMapping(self.config[shp]['model'], self.config[shp]['file'], self.config[shp]['mapping'], 
+                encoding='iso-8859-1')
+            lm.save(strict=True, verbose=True)
 
-                self.stdout.write('Successfully imported "%s"\n' % shp)
-            except:
-                 raise CommandError('%s does not exist' % shp)
+            self.stdout.write('Successfully imported "%s"\n' % shp)
