@@ -120,7 +120,7 @@ class Park(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhood = models.ManyToManyField(Neighborhood,related_name='neighborhood')
+    neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
