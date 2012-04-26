@@ -39,7 +39,7 @@ def parks_page(request,park_slug):
 
 def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug 
     neighborhood = Neighborhood.objects.get(slug=n_slug)
-    parks = Park.objects.filter(neighborhood=neighborhood)
+    parks = Park.objects.filter(neighborhoods=neighborhood)
     response_d = {
         'neighborhood':neighborhood,
         'parks':parks}
@@ -66,7 +66,7 @@ def get_n_p_with_a(n_slug,a_slug):
     facility_ids = []
     for f in fac:
        facility_ids.append(f.id)
-    p = Park.objects.filter(neighborhood=n,facility__id__in=facility_ids)
+    p = Park.objects.filter(neighborhoods=n,facility__id__in=facility_ids)
     return n,p
 
 def neighborhood_activity_ajax(request,n_slug,a_slug):
