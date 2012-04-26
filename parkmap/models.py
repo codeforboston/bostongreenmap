@@ -121,7 +121,6 @@ class Park(models.Model):
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
     neighborhood = models.ManyToManyField(Neighborhood,related_name='neighborhood')
-    parktype_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK 
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
