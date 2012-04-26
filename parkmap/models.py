@@ -14,7 +14,6 @@ except ImportError:
     pass
 
 
-
 class Event(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True) 
     slug = models.SlugField(max_length=100, blank=True, null=True)
@@ -46,6 +45,39 @@ class Event(models.Model):
                     self.slug += '-2'
             else:
                 break
+
+
+class Neighborhood(models.Model):
+    """
+    Neighborhood or town if no neighborhoods are available.
+    """
+    n_id = models.CharField('Neighborhood ID', max_length=20, help_text='ID derived from GIS, not necessarily unique since we are mixing neighborhood types.')
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=100, blank=True, null=True)
+
+    geometry = models.MultiPolygonField(srid=26986)
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = _('Neighborhood')
+        verbose_name_plural = _('Neighborhoods')
+
+    def __unicode__(self):
+        return self.name
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('neighborhood', [slugify(self.name)])
+
+    def save(self, *args, **kwargs):
+        """Auto-populate an empty slug field from the MyModel name and
+        if it conflicts with an existing slug then append a number and try
+        saving again.
+        """
+        
+        if not self.slug:
+            self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
+        super(Neighborhood, self).save(*args, **kwargs)
 
 
 class Parktype(models.Model):
@@ -88,14 +120,14 @@ class Park(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhood = models.ManyToManyField("Neighborhood",related_name="neighborhood")
+    neighborhood = models.ManyToManyField(Neighborhood,related_name='neighborhood')
     parktype_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK 
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
     events = models.ManyToManyField("Event",related_name="events", blank=True,null=True)
-    access = models.CharField(max_length=10, blank=True, null=True, choices=ACCESS_CHOICES) #FIXME: FK
+    access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES) #FIXME: FK
     
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -218,37 +250,4 @@ class Facility(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('facility', [slugify(self.name)])
-
-
-class Neighborhood(models.Model):
-    """
-    Neighborhood or town if no neighborhoods are available.
-    """
-    n_id = models.CharField('Neighborhood ID', max_length=20, help_text='ID derived from GIS, not necessarily unique since we are mixing neighborhood types.')
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=100, blank=True, null=True)
-
-    geometry = models.MultiPolygonField(srid=26986)
-    objects = models.GeoManager()
-
-    class Meta:
-        verbose_name = _('Neighborhood')
-        verbose_name_plural = _('Neighborhoods')
-
-    def __unicode__(self):
-        return self.name
-        
-    @models.permalink
-    def get_absolute_url(self):
-        return ('neighborhood', [slugify(self.name)])
-
-    def save(self, *args, **kwargs):
-        """Auto-populate an empty slug field from the MyModel name and
-        if it conflicts with an existing slug then append a number and try
-        saving again.
-        """
-        
-        if not self.slug:
-            self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        super(Neighborhood, self).save(*args, **kwargs)
 
