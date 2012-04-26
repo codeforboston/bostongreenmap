@@ -111,16 +111,12 @@ class Park(models.Model):
     def get_absolute_url(self):
         return ('park', [slugify(self.name)])
 
-    def save(self):
-        """
-        Auto-populate an empty slug field from the MyModel name and
-        if it conflicts with an existing slug then append a number and try
-        saving again.
-        """
-        
+    def save(self, *args, **kwargs):        
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        
+        super(Park, self).save(*args, **kwargs)
+
+        # FIXME: does code below require a unique slug field to work?
         # while True:
         #     try:
         #         super(Park, self).save()
