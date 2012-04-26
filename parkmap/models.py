@@ -142,6 +142,12 @@ class Park(models.Model):
         return ('park', [slugify(self.name)])
 
     def save(self, *args, **kwargs):        
+        try:
+            # cache containing park
+            self.neighborhood = Neighborhood.objects.filter(geometry__contains=self.geometry)
+        except:
+            self.neighborhood = None
+
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Park, self).save(*args, **kwargs)

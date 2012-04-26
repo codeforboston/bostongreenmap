@@ -22,18 +22,18 @@
 $(document).ready(function () {
 
    $('#neighborhood_only').change(function() {
-      window.location.replace("/neighborhood/"+$(this).val()+"/");
+      window.location = ("/neighborhood/"+$(this).val()+"/");
     }); 
 
 
    $('#neighborhood_activity').change(function() {
        if ($(this).val() != "----"  && $('#neighborhood_neighborhood').val() != "----"){
-          window.location.replace("/neighborhood/"+$("#neighborhood_neighborhood").val()+"/"+$(this).val()+"/");
+          window.location = ("/neighborhood/"+$("#neighborhood_neighborhood").val()+"/"+$(this).val()+"/");
        }
    }); 
    $('#neighborhood_neighborhood').change(function() {
        if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
-          window.location.replace("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
+          window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
        }
 
    }); 

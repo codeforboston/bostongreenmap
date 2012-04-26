@@ -17,12 +17,12 @@ def get_list():
     # Query each of the three classes.
     parks = Park.objects.all()
     facilities = Facility.objects.all()
-    neighborhoods = Neighborhood.objects.all()
+    neighborhoods = Neighborhood.objects.all().order_by('name')
     return parks,facilities,neighborhoods
 
 #Home page
 def home_page(request):
-    parks, facilities, neighborhoods = get_list()   
+    parks, facilities, neighborhoods = get_list()
     activities = Activity.objects.all()
     return render_to_response('parkmap/home.html',{
         'parks':parks,
@@ -100,8 +100,8 @@ def events(request,event_id,event_name):
 
 
 def explore(request): # Activity slug, and Neighborhood slug 
-    neighborhoods = Neighborhood.objects.all()
-    activities = Activity.objects.all()
+    neighborhoods = Neighborhood.objects.all().order_by('name')
+    activities = Activity.objects.all().order_by('name')
     response_d = {
         'neighborhoods':neighborhoods,
         'activities':activities,
