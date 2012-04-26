@@ -48,11 +48,38 @@ class Event(models.Model):
                 break
 
 
+class Parktype(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Parktype')
+        verbose_name_plural = _('Parktypes')
+
+    def __unicode__(self):
+        return self.name
+
+
+class Parkowner(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Parkowner')
+        verbose_name_plural = _('Parkowners')
+
+    def __unicode__(self):
+        return self.name
+ 
 
 class Park(models.Model):
     """
     Park or similar Open Space.
     """
+
+    ACCESS_CHOICES = (
+        ('y', 'Yes'),
+        ('n', 'No'),
+        ('u', 'Unknown'),
+    )
 
     os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
     name = models.CharField(max_length=100, blank=True, null=True) 
@@ -62,14 +89,16 @@ class Park(models.Model):
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
     neighborhood = models.ManyToManyField("Neighborhood",related_name="neighborhood")
-    type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
-    owner = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
+    parktype_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK 
+    parktype = models.ForeignKey(Parktype, blank=True, null=True)
+    parkowner_legacy = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK
+    parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
     events = models.ManyToManyField("Event",related_name="events", blank=True,null=True)
-    access = models.CharField(max_length=10, blank=True, null=True) #FIXME: FK
+    access = models.CharField(max_length=10, blank=True, null=True, choices=ACCESS_CHOICES) #FIXME: FK
+    
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
-    #activity = models.ManyToManyField("Activity")   #Not allowing an Activity without a Facility in a park.
 
     class Meta:
         verbose_name = _('Park')
@@ -83,7 +112,8 @@ class Park(models.Model):
         return ('park', [slugify(self.name)])
 
     def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
+        """
+        Auto-populate an empty slug field from the MyModel name and
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
@@ -91,19 +121,20 @@ class Park(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         
-        while True:
-            try:
-                super(Park, self).save()
-            # Assuming the IntegrityError is due to a slug fight
-            except IntegrityError:
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
+        # while True:
+        #     try:
+        #         super(Park, self).save()
+        #     # Assuming the IntegrityError is due to a slug fight
+        #     except IntegrityError:
+        #         match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
+        #         if match_obj:
+        #             next_int = int(match_obj.group(2)) + 1
+        #             self.slug = match_obj.group(1) + '-' + str(next_int)
+        #         else:
+        #             self.slug += '-2'
+        #     else:
+        #         break
+
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -125,19 +156,31 @@ class Activity(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         
-        while True:
-            try:
-                super(Activity, self).save()
-            # Assuming the IntegrityError is due to a slug fight
-            except IntegrityError:
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
+    #     while True:
+    #         try:
+    #             super(Activity, self).save()
+    #         # Assuming the IntegrityError is due to a slug fight
+    #         except IntegrityError:
+    #             match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
+    #             if match_obj:
+    #                 next_int = int(match_obj.group(2)) + 1
+    #                 self.slug = match_obj.group(1) + '-' + str(next_int)
+    #             else:
+    #                 self.slug += '-2'
+    #         else:
+    #             break
+
+
+class Facilitytype(models.Model):
+    name = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Facilitytype')
+        verbose_name_plural = _('Facilitytypes')
+
+    def __unicode__(self):
+        pass
+    
         
 class Facility(models.Model):
     """
@@ -146,8 +189,10 @@ class Facility(models.Model):
 
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=50, blank=True, null=True) #FIXME: FK?
-    activity = models.ManyToManyField("Activity",related_name="activity")   #FIXME: FK?
+    facilitytype_legacy = models.CharField(max_length=50, blank=True, null=True)
+    facilitytype = models.ForeignKey(Facilitytype, blank=True, null=True)
+    activity_legacy = models.CharField(max_length=50, blank=True, null=True)
+    activity = models.ManyToManyField(Activity, related_name='activity')
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
@@ -210,3 +255,4 @@ class Neighborhood(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Neighborhood, self).save(*args, **kwargs)
+

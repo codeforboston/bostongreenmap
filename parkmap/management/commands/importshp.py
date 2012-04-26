@@ -51,11 +51,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for shp in args:
-            try:
-                lm = LayerMapping(self.config[shp]['model'], self.config[shp]['file'], self.config[shp]['mapping'], 
-                    encoding='iso-8859-1')
-                lm.save(strict=True, verbose=True)
+        # try:
+            lm = LayerMapping(self.config[shp]['model'], self.config[shp]['file'], self.config[shp]['mapping'], 
+                encoding='iso-8859-1')
+            lm.save(strict=True, verbose=True)
 
-                self.stdout.write('Successfully imported "%s"\n' % shp)
-            except:
-                 raise CommandError('%s does not exist' % shp)
+            self.stdout.write('Successfully imported "%s"\n' % shp)
+        # except:
+        #      raise CommandError('%s does not exist' % shp)
