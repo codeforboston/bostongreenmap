@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 
-from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner
+from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype
 
 
 # default GeoAdmin overloads
@@ -9,16 +9,17 @@ admin.GeoModelAdmin.default_lat = 5210000
 admin.GeoModelAdmin.default_zoom = 12
 
 
-class ParklookupAdmin(admin.ModelAdmin):
+class LookupAdmin(admin.ModelAdmin):
     list_display = ['id', 'name',]
     list_editable = ['name',]
 
 
 #admin.site.register(Greenspace, admin.OSMGeoAdmin)
 admin.site.register(Facility, admin.OSMGeoAdmin)
+admin.site.register(Facilitytype, LookupAdmin)
 admin.site.register(Park, admin.OSMGeoAdmin)
-admin.site.register(Parktype, ParklookupAdmin)
-admin.site.register(Parkowner, ParklookupAdmin)
+admin.site.register(Parktype, LookupAdmin)
+admin.site.register(Parkowner, LookupAdmin)
 admin.site.register(Neighborhood, admin.OSMGeoAdmin)
-admin.site.register(Activity)
+admin.site.register(Activity, LookupAdmin)
 admin.site.register(Event)

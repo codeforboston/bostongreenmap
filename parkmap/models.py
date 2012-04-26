@@ -173,15 +173,12 @@ class Activity(models.Model):
         return self.name
 
 
-    def save(self):
-        """Auto-populate an empty slug field from the MyModel name and
-        if it conflicts with an existing slug then append a number and try
-        saving again.
-        """
-        
+    def save(self, *args, **kwargs):        
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        
+        super(Activity, self).save(*args, **kwargs)
+
+    # FIXME: does code below require a unique slug field to work?
     #     while True:
     #         try:
     #             super(Activity, self).save()
@@ -205,7 +202,7 @@ class Facilitytype(models.Model):
         verbose_name_plural = _('Facilitytypes')
 
     def __unicode__(self):
-        pass
+        return self.name
     
         
 class Facility(models.Model):
@@ -215,9 +212,7 @@ class Facility(models.Model):
 
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
-    facilitytype_legacy = models.CharField(max_length=50, blank=True, null=True)
     facilitytype = models.ForeignKey(Facilitytype, blank=True, null=True)
-    activity_legacy = models.CharField(max_length=50, blank=True, null=True)
     activity = models.ManyToManyField(Activity, related_name='activity')
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
