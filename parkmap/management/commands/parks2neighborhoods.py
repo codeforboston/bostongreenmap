@@ -1,7 +1,6 @@
 import os
 
-from django.core.management.base import BaseCommand, CommandError
-from django.contrib.gis.utils import LayerMapping
+from django.core.management.base import BaseCommand
 
 from parkmap.models import Park, Neighborhood
 
