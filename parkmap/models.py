@@ -143,10 +143,11 @@ class Park(models.Model):
 
     def save(self, *args, **kwargs):        
         try:
-            # cache containing park
-            self.neighborhood = Neighborhood.objects.filter(geometry__contains=self.geometry)
+            # cache containing neighorhood
+            self.neighborhoods = Neighborhood.objects.filter(geometry__intersects=park.geometry)
+            park.neighborhoods.add(*neighborhoods)
         except:
-            self.neighborhood = None
+            self.neighborhoods = None
 
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
