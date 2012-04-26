@@ -24,7 +24,7 @@ function activity_filter(neighborhood){
 {% endif %}
 
 function filter(neighborhood,activity){
-     var out = "";
+     var out = "<h4>Search Results</h4> <br>";
      var url = String.prototype.concat.apply("/ajax/", [neighborhood,"/",activity,"/"]);
      $.ajax({
          url:url,
@@ -32,7 +32,7 @@ function filter(neighborhood,activity){
          success:function(json){
              $.each(json, function(key, obj) {
                  //Start the header of the park
-                 out += "<h6 class='loop_h6'>"+obj.name+"</h6><ul class='loop_ul'><li>"+obj.description+"</li><li>";
+                 out += "<h6 class='loop_h6'><a href=\'/park/"+obj.slug+"\'>"+obj.name+"</a></h6><ul class='loop_ul'><li>"+obj.description+"</li><li>";
                  //Loop through the activities    
                  $.each(obj.activity, function(k, o) {
                      out += o.slug; // need to replace with images.
@@ -89,7 +89,7 @@ $(document).ready(function(){
                 <option value="{{activity.slug}}" {% ifequal a_slug activity.slug %}SELECTED{% endifequal%}>{{activity.name}}</option>
                 {% endfor %}
             </select>
-            <h4>Search Results</h4> <br>
+            
             <div id="parklist">
             </div>
         </div>
