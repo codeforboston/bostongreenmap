@@ -27,6 +27,10 @@ h4 a:active {
 text-decoration:underline;
 }
 
+.home h4
+{
+color: #000000;
+}
 
 .play h4 {
   color: #00DC00;
@@ -61,6 +65,10 @@ a:visited h4 {
 a:hover h4,
 a:active h4 {
     color: #666666;
+}
+
+body {    
+text-align: center;
 }
 
 .navbar-inner {
@@ -272,4 +280,191 @@ body.play form
 margin-bottom: 0;
 }
 
+#map_canvas
+{    
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.container-fluid
+{
+margin: 0 auto;
+    max-width: 1240px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.span6 {
+    margin-top: 18px;
+}
+
+.span3 {
+}
+
+.navbar {
+    margin-bottom: 1px;
+    }
+    
+.neighborhood-park
+{
+display: block;
+padding-bottom: 10px;
+}
+
+.neighborhood-park > h4
+{
+margin-bottom: 4px;
+}
+    
+.facility {
+	display: inline;
+	font-size: 28px;
+	line-height: 38px;
+	background-image: url('/static/img/activities-icons.jpg');
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.facility img
+{
+	display: inline;
+	height: 38px;
+	width: 32px;
+}
+
+
+
+.facility_amphitheater
+{
+background-position: -64px 0;
+}
+
+.facility_artwork-monument
+{
+background-position: -96px 0;
+}
+
+.facility_athletic-field
+{
+background-position: -128px 0;
+}
+
+.facility_beach
+{
+background-position: -160px 0;
+}
+
+.facility_boat-house
+{
+background-position: -192px 0;
+}
+
+.facility_boat-ramp
+{
+background-position: -224px 0;
+}
+
+.facility_canoe-access
+{
+background-position: -256px 0;
+}
+
+.facility_community-garden
+{
+background-position: -288px 0;
+}
+
+.facility_cultural
+{
+background-position: 0px -38px;
+}
+
+.facility_field
+{
+background-position: -32px -38px;
+}
+
+.facility_football
+{
+background-position: -64px -38px;
+}
+
+.facility_fountain
+{
+background-position: -96px -38px;
+}
+
+.facility_golf-course
+{
+background-position: -128px -38px;
+}
+
+.facility_greenspace
+{
+background-position: -160px -38px;
+}
+
+.facility_historic
+{
+background-position: -192px -38px;
+}
+
+.facility_park
+{
+background-position: -244px -38px;
+}
+
+.facility_park-entrance
+{
+background-position: -256px -38px;
+}
+
+.facility_parking
+{
+background-position: -288px -38px;
+}
+
+.facility_picnic-table
+{
+background-position: 0px -76px;
+}
+
+.facility_pier
+{
+background-position: -32px -76px;
+}
+
+.facility_play-area
+{
+background-position: -64px -76px;
+}
+
+.facility_playground
+{
+background-position: -96px -76px;
+}
+
+.facility_pool
+{
+background-position: -128px -76px;
+}
+
+.facility_recreation
+{
+background-position: -160px -76px;
+}
+
+/*  TEMPORARY!!!  */
+
+
+.facility_picnic-table
+{
+background-position: 0px 0;
+}
+
+.facility_playground
+{
+background-position: -32px 0;
+}
 

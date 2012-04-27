@@ -7,6 +7,7 @@ from django.http import HttpResponse,Http404
 from datetime import datetime
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 #Temporary view to see Play page
 def play_page(request):
@@ -29,7 +30,7 @@ def home_page(request):
         'facilities':facilities,
         'activities':activities,
         'neighborhoods':neighborhoods,
-    })
+        })
 
 def parks_page(request,park_slug):
     park = get_object_or_404(Park,slug=park_slug)
@@ -42,7 +43,8 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     parks = Park.objects.filter(neighborhoods=neighborhood)
     response_d = {
         'neighborhood':neighborhood,
-        'parks':parks}
+        'parks':parks,
+        }
     return render_to_response('parkmap/neighborhood.html',response_d)
 
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
