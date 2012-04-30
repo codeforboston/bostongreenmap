@@ -8,6 +8,7 @@ from datetime import datetime
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event
 from django.template.defaultfilters import slugify
 from django.conf import settings
+from django.template import RequestContext
 
 #Temporary view to see Play page
 def play_page(request):
@@ -30,7 +31,7 @@ def home_page(request):
         'facilities':facilities,
         'activities':activities,
         'neighborhoods':neighborhoods,
-        })
+        }, context_instance=RequestContext(request))
 
 def parks_page(request,park_slug):
     park = get_object_or_404(Park,slug=park_slug)
