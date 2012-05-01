@@ -60,6 +60,7 @@ $(document).ready(function(){
 <body class="play">
 {% endblock %}
 {% block content %} 
+	<div id="map_canvas"></div>
     <div class="container-fluid">
         <div class="span3">
             <div class="well">
@@ -75,7 +76,7 @@ $(document).ready(function(){
                         <form method="get" action="">
             {% if neighborhoods %}
             <select id='neighborhood_neighborhood'>
-                <option SELECTED>Neighborhood</option>
+                <option SELECTED>Select Your Neighborhood/Town</option>
                 {% for neighborhood in neighborhoods %}
                 <option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
                 {% endfor %}
@@ -84,7 +85,7 @@ $(document).ready(function(){
 	    <label id="label_neighborhood_activity" for="neighborhood_activity">Select an Activity</label>
             {% endif %}
             <select id='neighborhood_activity' name="neighborhood_activity">
-                {% if neighborhoods %} <option SELECTED>Activities</option> {% endif %}
+                {% if neighborhoods %} <option SELECTED>Select Your Activity</option> {% endif %}
                 {% for activity in activities %}
                 <option value="{{activity.slug}}" {% ifequal a_slug activity.slug %}SELECTED{% endifequal%}>{{activity.name}}</option>
                 {% endfor %}

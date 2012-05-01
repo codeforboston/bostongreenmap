@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'south',
     'parkmap',
+    'tastypie',
 )
 
 # A sample logging configuration. The only tangible logging
