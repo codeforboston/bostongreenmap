@@ -1,4 +1,7 @@
 Django==1.4
 South==0.7.4
+django-tastypie==0.9.11
+mimeparse==0.1.3
 psycopg2==2.4.5
+python-dateutil==1.5
 wsgiref==0.1.2

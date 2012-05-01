@@ -4,6 +4,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+# API
+from tastypie.api import Api
+from parkmap.api import ParkResource
+
+v1_api = Api(api_name='v1')
+v1_api.register(ParkResource())
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'bostonparks.views.home', name='home'),
@@ -17,5 +24,7 @@ urlpatterns = patterns('',
         {'document_root': '/home/django/webapps/static/'}),
 
     url(r'^', include('parkmap.urls')),  # HOME
-)
 
+    # API
+    (r'^api/', include(v1_api.urls)),
+)
