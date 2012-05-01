@@ -66,7 +66,7 @@ $(document).ready(function () {
 	    <h1> Find a Green Space</h1>
 	    <form method="get" action="">
 			<select id='neighborhood_only' name='town'>
-				<option SELECTED VALUE="">Boston Neighborhood/Town Name</option>
+				<option SELECTED VALUE="">Select Your Neighborhood/Town</option>
 				{% for neighborhood in neighborhoods %}
 					<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
 				{% endfor %}
@@ -82,7 +82,7 @@ $(document).ready(function () {
 		<h4>Browse parks and facilities by activity</h4>
 	        <form method="get" action="">
 		    <select id='neighborhood_activity' name='town'>
-		        <option SELECTED value="----">Activities</option>
+		        <option SELECTED value="----">Select Your Activity</option>
 
 		        {% for activity in activities %}
 		    	<option value="{{activity.slug}}">{{activity.name}}</option>
@@ -90,7 +90,7 @@ $(document).ready(function () {
 		    </select>
 		    
 		    <select name='town' id='neighborhood_neighborhood'>
-		    	<option SELECTED VALUE="----">Boston Neighborhood/Town Name</option>
+		    	<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>
 		    	{% for neighborhood in neighborhoods %}
 		    		<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
 		    	{% endfor %}				

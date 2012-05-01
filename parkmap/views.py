@@ -1,5 +1,6 @@
 # Views for Parkmap
 import json
+import simplejson
 
 from django.shortcuts import (render_to_response, get_object_or_404,
                               get_list_or_404, redirect)
@@ -9,6 +10,7 @@ from parkmap.models import Neighborhood, Park, Facility, Activity, Event
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.template import RequestContext
+import gpolyencode
 
 #Temporary view to see Play page
 def play_page(request):
@@ -35,8 +37,13 @@ def home_page(request):
 
 def parks_page(request,park_slug):
     park = get_object_or_404(Park,slug=park_slug)
+    encoder = gpolyencode.GPolyEncoder()
+    coordinates = simplejson.loads(park.geometry.geojson)
+    map = encoder.encode(coordinates['coordinates'][0][0])
     return render_to_response('parkmap/park.html',
-        {'park':park}
+        {'park':park,
+         'map': map},
+        context_instance=RequestContext(request)
     )
 
 def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug 
@@ -46,7 +53,10 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
         'neighborhood':neighborhood,
         'parks':parks,
         }
-    return render_to_response('parkmap/neighborhood.html',response_d)
+    return render_to_response('parkmap/neighborhood.html',
+        response_d,
+        context_instance=RequestContext(request)
+    ) 
 
 def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
     activities = Activity.objects.all()
@@ -56,7 +66,10 @@ def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slu
         'activities':activities,
         'a_slug':a_slug,
         'parks':parks}
-    return render_to_response('parkmap/play.html',response_d)
+    return render_to_response('parkmap/play.html',
+        response_d,
+        context_instance=RequestContext(request)
+)
 
 def get_n_p_with_a(n_slug,a_slug):
     """
@@ -109,5 +122,8 @@ def explore(request): # Activity slug, and Neighborhood slug
         'neighborhoods':neighborhoods,
         'activities':activities,
         }
-    return render_to_response('parkmap/play.html',response_d)
+    return render_to_response('parkmap/play.html',
+        response_d,
+        context_instance=RequestContext(request)
+        )
 

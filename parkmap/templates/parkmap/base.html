@@ -1,3 +1,4 @@
+
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
@@ -12,11 +13,11 @@
 			{% block meta %}{% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="/static/libs/jquery/jquery-1.7.2.min.js"></script> 
-        <script type="text/javascript" src="/static/libs/bootstrap/js/bootstrap.js"></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 
-		<link rel="stylesheet" href="/static/libs/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="/static/css/main.css">
+		<link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
 
 {% block headscripts %}{% endblock %}
 
@@ -117,6 +118,12 @@
     </div><!--/.fluid-container-->
 
 {% endblock %}
+	
+	{% block javascript %}
+        {% include "_map_scripts.html" %}
+		<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
+	{% endblock %}
+
 		
 </body>
 </html>
