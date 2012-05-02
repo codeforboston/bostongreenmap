@@ -60,13 +60,10 @@ $(document).ready(function(){
 <body class="play">
 {% endblock %}
 {% block content %} 
-	<div id="map_canvas"></div>
+<div id="map_canvas" class="hidden-phone"></div>
     <div class="container-fluid">
-        <div class="span3">
-            <div class="well">
-            </div>
-        </div>
-        <div class="span6">
+  <div class="row-fluid show-grid">
+        <div class="span12">
             <div class="well menu-box clearfix">
                 <div class="menu-box opacity">
                     &nbsp; 
@@ -96,9 +93,6 @@ $(document).ready(function(){
         </div>
             </div>
     </div>
-    </div>
-    <div class="span3">
-        <div class="well">
     </div>
     </div>
     </div>
