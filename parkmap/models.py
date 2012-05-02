@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
 
-# south introspection rules 
+# south introspection rules
 try:
     from south.modelsinspector import add_introspection_rules
     add_introspection_rules([], ['^django\.contrib\.gis\.db\.models\.fields\.PointField'])
@@ -15,7 +15,7 @@ except ImportError:
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True) 
+    name = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -28,10 +28,10 @@ class Event(models.Model):
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
-        
+
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        
+
         while True:
             try:
                 super(Event, self).save()
@@ -64,7 +64,7 @@ class Neighborhood(models.Model):
 
     def __unicode__(self):
         return self.name
-        
+
     @models.permalink
     def get_absolute_url(self):
         return ('neighborhood', [slugify(self.name)])
@@ -74,7 +74,7 @@ class Neighborhood(models.Model):
         if it conflicts with an existing slug then append a number and try
         saving again.
         """
-        
+
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Neighborhood, self).save(*args, **kwargs)
@@ -100,7 +100,7 @@ class Parkowner(models.Model):
 
     def __unicode__(self):
         return self.name
- 
+
 
 class Park(models.Model):
     """
@@ -114,7 +114,7 @@ class Park(models.Model):
     )
 
     os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
-    name = models.CharField(max_length=100, blank=True, null=True) 
+    name = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -126,7 +126,7 @@ class Park(models.Model):
     friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
     events = models.ManyToManyField("Event",related_name="events", blank=True,null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
-    
+
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
 
@@ -141,7 +141,7 @@ class Park(models.Model):
     def get_absolute_url(self):
         return ('park', [slugify(self.name)])
 
-    def save(self, *args, **kwargs):        
+    def save(self, *args, **kwargs):
         try:
             # cache containing neighorhood
             self.neighborhoods = Neighborhood.objects.filter(geometry__intersects=park.geometry)
@@ -180,7 +180,7 @@ class Activity(models.Model):
         return self.name
 
 
-    def save(self, *args, **kwargs):        
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Activity, self).save(*args, **kwargs)
@@ -210,8 +210,8 @@ class Facilitytype(models.Model):
 
     def __unicode__(self):
         return self.name
-    
-        
+
+
 class Facility(models.Model):
     """
     Facility in or outside a park.
@@ -240,13 +240,13 @@ class Facility(models.Model):
             # cache containing park
             self.park = Park.objects.get(geometry__contains=self.geometry)
         except:
-            self.park = None       
- 
+            self.park = None
+
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Facility, self).save(*args, **kwargs)
 
-        
+
     @models.permalink
     def get_absolute_url(self):
         return ('facility', [slugify(self.name)])
