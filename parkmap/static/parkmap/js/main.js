@@ -3,10 +3,10 @@ $(function() {
     // map
     // var parkmap = new google.maps.Map(document.getElementById("map_canvas"));
     var parkmap = new google.maps.Map(document.getElementById("map_canvas"), {
-        zoom: 12,
+        zoom: 13,
         minZoom: 10,
         maxZoom: 16,
-        center: new google.maps.LatLng(42.357778, -71.061667),
+        center: new google.maps.LatLng(42.33, -71.061667), //42.357778
         mapTypeControlOptions: {
             position: google.maps.ControlPosition.TOP_RIGHT,
             mapTypeIds: ["simple",google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
@@ -31,7 +31,7 @@ $(function() {
             featureType: "administrative",
             elementType: "labels",
             stylers: [
-                { visibility: "on" },
+                { visibility: "off" },
                 { hue: "#d70000" },
                 { lightness: 10 },
                 { saturation: -95 }
@@ -102,7 +102,7 @@ $(function() {
     ];
 
     var simple_options = {
-        name: "Simple"
+        name: "Gray Map"
     }
 
     var simple = new google.maps.StyledMapType(simple_style, simple_options);
@@ -110,4 +110,31 @@ $(function() {
     parkmap.mapTypes.set("simple", simple);
     parkmap.setMapTypeId("simple");
 
+    // encoded polylines for google maps
+    var decodeLevels = function(encodedLevelsString) {
+        var decodedLevels = [];
+        for (var i = 0; i < encodedLevelsString.length; ++i) {
+            var level = encodedLevelsString.charCodeAt(i) - 63;
+            decodedLevels.push(level);
+        }
+        return decodedLevels;
+    }
+
+    // load parks
+    // FIXME: add bbox parameter to park query
+    $.getJSON('/api/v1/park/?format=json', function(data) {
+        var parks = data.objects;
+        $.each(parks, function(key, park) {
+            var parkPoly = new google.maps.Polygon({
+                paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
+                levels: decodeLevels(park.geometry.levels),
+                fillColor: '#00DC00',
+                fillOpacity: 0.8,
+                strokeWeight: 0,
+                zoomFactor: park.geometry.zoomFactor, 
+                numLevels: park.geometry.numLevels,
+                map: parkmap
+            });
+        });
+    });
 });

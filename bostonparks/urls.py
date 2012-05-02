@@ -6,14 +6,14 @@ admin.autodiscover()
 
 from tastypie.api import Api
 from api.resources import EntryResource, NeighborhoodResource, ActivityResource#, NeighborhoodLookupResource, ActivityLookupResource
+from parkmap.api import ParkResource
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
 v1_api.register(NeighborhoodResource())
-# v1_api.register(NeighborhoodLookupResource())
-# v1_api.register(ActivityLookupResource())
 v1_api.register(ActivityResource())
 v1_api.register(EntryResource())
+v1_api.register(ParkResource())
 
 urlpatterns = patterns('',
     # Examples:
@@ -29,5 +29,7 @@ urlpatterns = patterns('',
         {'document_root': '/home/django/webapps/static/'}),
 
     url(r'^', include('parkmap.urls')),  # HOME
-)
 
+    # API
+    (r'^api/', include(v1_api.urls)),
+)
