@@ -30,6 +30,8 @@ $(document).ready(function () {
    $('#neighborhood_activity').change(function() {
        if ($(this).val() != "----"  && $('#neighborhood_neighborhood').val() != "----"){
           window.location = ("/neighborhood/"+$("#neighborhood_neighborhood").val()+"/"+$(this).val()+"/");
+       } else if ($(this).val() != "----") {
+	  update_select($(this).val()); 
        }
    }); 
    $('#neighborhood_neighborhood').change(function() {
@@ -40,6 +42,23 @@ $(document).ready(function () {
    }); 
 
 });
+
+
+function update_select(activity){
+     var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
+     $.ajax({
+         url:'/api/v1/neighborhood/?format=json&activity='+activity,
+         dataType:'json',
+         success:function(json){
+             $.each(json['objects'], function(key, obj) {
+		out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
+             });    
+             $("#neighborhood_neighborhood").html(out);
+         }
+     });
+}
+
+
 </script>
 
 <style type="text/css" title="text/css">
