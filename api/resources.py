@@ -1,8 +1,22 @@
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie import fields
 
+from bostonparks.tastyhacks import GeoResource, EncodedGeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park
 
+
+class ParkResource(EncodedGeoResource):
+    """
+    Park
+    """
+
+    class Meta:
+        queryset = Park.objects.transform(4326).all()
+        allowed_methods = ['get',]
+        filtering = {
+            'name': ALL,
+        }
+        
 
 class NeighborhoodResource(ModelResource):
 
