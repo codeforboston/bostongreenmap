@@ -1,9 +1,12 @@
 from django.contrib.gis.db.models import GeometryField
+from django.contrib.gis.geos import GEOSGeometry
 from django.utils import simplejson
 
 from tastypie.bundle import Bundle
 from tastypie.fields import ApiField, CharField
 from tastypie.resources import ModelResource
+
+import gpolyencode
 
 
 class GeometryApiField(ApiField):
@@ -48,3 +51,44 @@ class GeoResource(ModelResource):
             return GeometryApiField
     
         return super(GeoResource, cls).api_field_from_django_field(f, default)
+
+
+class EncodedGeometryApiField(ApiField):
+    """
+    Custom ApiField for dealing with data from GeometryFields (by serializing them as Encoded Geometries).
+    """
+    dehydrated_type = 'geometry'
+    help_text = 'Geometry data.'
+
+    
+    def dehydrate(self, obj):
+        return self.convert(super(EncodedGeometryApiField, self).dehydrate(obj))
+    
+    def convert(self, value):
+        if value is None:
+            return None
+
+        if isinstance(value, dict):
+            return value
+
+        encoder = gpolyencode.GPolyEncoder()
+        geom = GEOSGeometry(value)
+        return encoder.encode(geom.coords[0][0])
+
+
+class EncodedGeoResource(ModelResource):
+    """
+    ModelResource subclass that handles geometry fields as Encoded Geometries.
+    Improves performance for rendering complex geometries on Google Maps,
+    see http://facstaff.unca.edu/mcmcclur/GoogleMaps/EncodePolyline/ for more information.
+    """
+
+    @classmethod
+    def api_field_from_django_field(cls, f, default=CharField):
+        """
+        Overrides default field handling to support custom EncodedGeometryApiField.
+        """
+        if isinstance(f, GeometryField):
+            return EncodedGeometryApiField
+    
+        return super(EncodedGeoResource, cls).api_field_from_django_field(f, default)

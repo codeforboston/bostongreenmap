@@ -1,10 +1,10 @@
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from bostonparks.tastyhacks import GeoResource
+from bostonparks.tastyhacks import GeoResource, EncodedGeoResource
 from parkmap.models import Park
 
 
-class ParkResource(GeoResource):
+class ParkResource(EncodedGeoResource):
     """
     Park
     """
