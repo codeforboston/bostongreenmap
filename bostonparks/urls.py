@@ -5,8 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from tastypie.api import Api
-from api.resources import EntryResource, NeighborhoodResource, ActivityResource#, NeighborhoodLookupResource, ActivityLookupResource
-from parkmap.api import ParkResource
+from api.resources import ParkResource, EntryResource, NeighborhoodResource, ActivityResource#, NeighborhoodLookupResource, ActivityLookupResource
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
