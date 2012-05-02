@@ -50,8 +50,6 @@ class ActivityResource(ModelResource):
 class EntryResource(ModelResource):
     neighborhood = fields.ForeignKey(NeighborhoodResource, 'neighborhood')
     activity = fields.ForeignKey(ActivityResource, 'activity')
-    #neighborhoodlookup = fields.ForeignKey(NeighborhoodLookupResource, 'neighborhoodlookup')
-    #activitylookup = fields.ForeignKey(ActivityLookupResource, 'activitylookup')
     class Meta:
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
