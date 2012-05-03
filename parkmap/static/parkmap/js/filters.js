@@ -1,9 +1,10 @@
 function update_parktype(neighborhood, idname, slug_or_id){
      //Set the first item in the dropdown box
      var out = '<option SELECTED value="----">Select Your Type</option>';
+         url:'/api/v1/parktype/?format=json&limit=1000&neighborhood='+neighborhood,
      $.ajax({
-         url:'/api/v1/parktype/?format=json&neighborhood='+neighborhood,
          //probe the correct park url
+         url:url,
          dataType:'json',
          success:function(json){
              $.each(json['objects'], function(key, obj) {
@@ -17,4 +18,8 @@ function update_parktype(neighborhood, idname, slug_or_id){
              $("#"+idname).selectedIndex = 0;
          }
      });
+}
+
+function ajax_with_page(url){
+    
 }

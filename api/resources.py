@@ -16,7 +16,6 @@ class ParkResource(EncodedGeoResource):
             'name': ALL,
         }
 
-
 class NeighborhoodResource(ModelResource):
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -45,7 +44,6 @@ class ParktypeResource(ModelResource):
             queryset = Parktype.objects.filter(pk__in=parktypes)
             orm_filters = {"pk__in": [i for i in parktypes]}
         return orm_filters
-
 
 
 class ActivityResource(ModelResource):
