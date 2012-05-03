@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from tastypie.api import Api
-from api.resources import ParkResource, EntryResource, NeighborhoodResource, ActivityResource#, NeighborhoodLookupResource, ActivityLookupResource
+from api.resources import ParkResource, EntryResource, NeighborhoodResource, ActivityResource, ParktypeResource
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
@@ -13,6 +13,7 @@ v1_api.register(NeighborhoodResource())
 v1_api.register(ActivityResource())
 v1_api.register(EntryResource())
 v1_api.register(ParkResource())
+v1_api.register(ParktypeResource())
 
 urlpatterns = patterns('',
     # Examples:
