@@ -6,7 +6,7 @@ from django.shortcuts import (render_to_response, get_object_or_404,
                               get_list_or_404, redirect)
 from django.http import HttpResponse,Http404
 from datetime import datetime
-from parkmap.models import Neighborhood, Park, Facility, Activity, Event
+from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.template import RequestContext
@@ -14,7 +14,14 @@ import gpolyencode
 
 #Temporary view to see Play page
 def play_page(request):
-    return render_to_response('parkmap/play.html')  
+    neighborhoods = Neighborhood.objects.all().order_by('name')
+    activities = Activity.objects.all().order_by('name')
+    response_d = {
+        'neighborhoods':neighborhoods,
+        'activities':activities,
+        }
+
+    return render_to_response('parkmap/play.html',response_d,context_instance=RequestContext(request))
 
 
 def get_list():
@@ -46,7 +53,7 @@ def parks_page(request,park_slug):
         context_instance=RequestContext(request)
     )
 
-def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug 
+def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     neighborhood = Neighborhood.objects.get(slug=n_slug)
     parks = Park.objects.filter(neighborhoods=neighborhood)
     response_d = {
@@ -56,9 +63,9 @@ def neighborhood(request,n_slug): # Activity slug, and Neighborhood slug
     return render_to_response('parkmap/neighborhood.html',
         response_d,
         context_instance=RequestContext(request)
-    ) 
+    )
 
-def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug 
+def parks_in_neighborhood_with_activities(request,a_slug,n_slug): # Activity slug, and Neighborhood slug
     activities = Activity.objects.all()
     neighborhood,parks = get_n_p_with_a(n_slug,a_slug)
     response_d = {
@@ -104,25 +111,28 @@ def neighborhood_activity_ajax(request,n_slug,a_slug):
         p_dict['slug'] = park.slug
         p_dict['description'] = park.description
         parks_json.append(p_dict)
-    
+
     return HttpResponse(json.dumps(parks_json))
-    
-    
-    
-    
+
+
+
+
 def events(request,event_id,event_name):
     event = get_object_or_404(Event,pk=event_id)
     return render_to_response('parkmap/event.html',{'event':event})
 
 
-def explore(request): # Activity slug, and Neighborhood slug 
+def explore(request): # Activity slug, and Neighborhood slug
     neighborhoods = Neighborhood.objects.all().order_by('name')
     activities = Activity.objects.all().order_by('name')
+    parktypes = Parktype.objects.all().order_by('name')
+
     response_d = {
         'neighborhoods':neighborhoods,
+        'parktypes':parktypes,
         'activities':activities,
         }
-    return render_to_response('parkmap/play.html',
+    return render_to_response('parkmap/explore.html',
         response_d,
         context_instance=RequestContext(request)
         )

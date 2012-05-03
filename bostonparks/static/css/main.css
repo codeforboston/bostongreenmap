@@ -148,7 +148,7 @@ color: #666;
 }
 
 .well {
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1px none #eee;
   border: 1px none rgba(0, 0, 0, 0.05);
 }
@@ -246,6 +246,11 @@ max-width: 600px;
     margin-top: 20px;
     text-align: left;
 
+}
+
+.play .container-fluid.middle
+{
+margin: 20px;
 }
 
 .park .container-fluid.middle
@@ -476,3 +481,13 @@ background-position: 0px 0;
 background-position: -32px 0;
 }
 
+
+/* HIGHTLIGHT CURRENT PAGE */
+
+body.play .navbar .nav > li > a.play {
+color: yellow;
+}
+
+body.explore .navbar .nav > li > a.explore {
+color: yellow;
+}
