@@ -1,7 +1,7 @@
-from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
+from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 
-from bostonparks.tastyhacks import GeoResource, EncodedGeoResource
+from bostonparks.tastyhacks import EncodedGeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype
 
 
@@ -11,16 +11,18 @@ class ParkResource(EncodedGeoResource):
     """
     class Meta:
         queryset = Park.objects.transform(4326).all()
-        allowed_methods = ['get',]
+        allowed_methods = ['get', ]
         filtering = {
             'name': ALL,
         }
+
 
 class NeighborhoodResource(ModelResource):
     class Meta:
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
         excludes = ['geometry', 'objects']
+
     def build_filters(self, filters=None):
         if filters is None:
             filters = {}
@@ -28,13 +30,15 @@ class NeighborhoodResource(ModelResource):
         if  "activity" in filters:
             neighborhoods = get_neighborhoods(filters['activity'])
             queryset = Neighborhood.objects.filter(pk__in=neighborhoods)
-            orm_filters = {"pk__in": [i for i in neighborhoods]}
+            orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
+
 
 class ParktypeResource(ModelResource):
     class Meta:
         queryset = Parktype.objects.all()
         allowed_methods = ['get']
+
     def build_filters(self, filters=None):
         if filters is None:
             filters = {}
@@ -42,7 +46,7 @@ class ParktypeResource(ModelResource):
         if  "neighborhood" in filters:
             parktypes = get_parktypes(filters['neighborhood'])
             queryset = Parktype.objects.filter(pk__in=parktypes)
-            orm_filters = {"pk__in": [i for i in parktypes]}
+            orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
 
 
@@ -50,6 +54,7 @@ class ActivityResource(ModelResource):
     class Meta:
         queryset = Activity.objects.all()
         allowed_methods = ['get']
+
     def build_filters(self, filters=None):
         if filters is None:
             filters = {}
@@ -57,16 +62,19 @@ class ActivityResource(ModelResource):
         if  "neighborhood" in filters:
             activities = get_activities(filters['neighborhood'])
             queryset = Activity.objects.filter(pk__in=activities)
-            orm_filters = {"pk__in": [i for i in activities]}
+            orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
+
 
 class EntryResource(ModelResource):
     neighborhood = fields.ForeignKey(NeighborhoodResource, 'neighborhood')
     activity = fields.ForeignKey(ActivityResource, 'activity')
     parktype = fields.ForeignKey(ParktypeResource, 'parktype')
+
     class Meta:
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
+
 
 def get_neighborhoods(activity_slug):
     """
@@ -79,6 +87,7 @@ def get_neighborhoods(activity_slug):
         neighborhoods.extend(p.neighborhoods.all())
     return list(set([n.id for n in neighborhoods]))
 
+
 def get_parktypes(neighborhood_slug):
     """
     Get all Neighborhood ids that have an activity.
@@ -90,7 +99,6 @@ def get_parktypes(neighborhood_slug):
         parktypes.append(park.parktype.id)
 
     return list(set(parktypes))
-
 
 
 def get_activities(neighborhood_slug):

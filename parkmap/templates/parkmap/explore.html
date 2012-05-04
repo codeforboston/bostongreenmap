@@ -6,8 +6,9 @@
 <script>
 $(document).ready(function(){
         $('#neighborhood_neighborhood').bind("keypress change",(function() {
-            if ($(this).val() != ""){
-                update_parktype( $(this).val(),"neighborhood_parktype", 1);
+            if ($(this).val() != "") {
+                //update_parktype( $(this).val(),"neighborhood_parktype", 'id');
+                update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
             }
         }));
         $('#neighborhood_parktype').bind("keypress change",(function() {
