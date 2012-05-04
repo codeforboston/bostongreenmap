@@ -8,6 +8,11 @@ admin.GeoModelAdmin.default_lon = -7912100
 admin.GeoModelAdmin.default_lat = 5210000  
 admin.GeoModelAdmin.default_zoom = 12
 
+class FacilityAdmin(admin.OSMGeoAdmin):
+    list_display = ['name','activity_string','facilitytype','parktype_string']
+    list_filter = ('activity', )
+
+
 
 class LookupAdmin(admin.ModelAdmin):
     list_display = ['id', 'name',]
@@ -15,7 +20,7 @@ class LookupAdmin(admin.ModelAdmin):
 
 
 #admin.site.register(Greenspace, admin.OSMGeoAdmin)
-admin.site.register(Facility, admin.OSMGeoAdmin)
+admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Facilitytype, LookupAdmin)
 admin.site.register(Park, admin.OSMGeoAdmin)
 admin.site.register(Parktype, LookupAdmin)

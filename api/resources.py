@@ -17,6 +17,42 @@ class ParkResource(EncodedGeoResource):
         }
 
 
+class ExploreParkResource(ModelResource):
+    class Meta:
+        queryset = Facility.objects.all()
+        allowed_methods = ('get',)
+        excludes = ('status', 'location')
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(ExploreParkResource, self).build_filters(filters)
+        if "neighborhood" in filters and \
+           "parktype" in filters and \
+           "activity_ids" in filters:
+            parks = filter_explore_park(filters)
+            orm_filters = {"pk__in": [i.os_id for i in parks]}
+
+        return orm_filters
+
+
+def filter_explore_park(filters):
+    neighborhood = Neighborhood.objects.get(slug=filters['neighborhood'])
+    parktype = Parktype.objects.get(pk=filters['parktype'])
+    activity_pks = filters['activity_ids'].split(",")
+    activities = Activity.objects.filter(pk__in=activity_pks)
+    parks = Park.objects.filter(neighborhoods=neighborhood, parktype=parktype)
+    facilities = Facility.objects.filter(park__in=parks)  # , activity__in=activities)
+    parks_filtered = []
+    for facility in facilities:
+        for activity in activities:
+            if activity in facility.activity.all():
+                parks_filtered.append(facility.park)
+                break
+    return parks_filtered
+
+
 class NeighborhoodResource(ModelResource):
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -70,6 +106,7 @@ class EntryResource(ModelResource):
     neighborhood = fields.ForeignKey(NeighborhoodResource, 'neighborhood')
     activity = fields.ForeignKey(ActivityResource, 'activity')
     parktype = fields.ForeignKey(ParktypeResource, 'parktype')
+    explorepark = fields.ForeignKey(ExploreParkResource, 'explorepark')
 
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -97,7 +134,6 @@ def get_parktypes(neighborhood_slug):
     parktypes = []
     for park in parks:
         parktypes.append(park.parktype.id)
-
     return list(set(parktypes))
 
 
