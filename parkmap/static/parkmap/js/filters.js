@@ -66,9 +66,13 @@ function explore_filter_parkactivities(){
   $('#activity_checkboxes input:checked').each(function() {
     activities.push($(this).val());
   });
-  activities = activities.join(",");
+  $("#parklist").html("");
+  $("#facilitylist").html("");
+  if (activities.length == 0){
+    return;
+  }
 
-  
+  activities = activities.join(",");
   $.ajax({
      //probe the correct park url
      url:'/api/v1/explorepark/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
