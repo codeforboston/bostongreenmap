@@ -17,6 +17,24 @@ class ParkResource(EncodedGeoResource):
         }
 
 
+class ExploreActivityResource(ModelResource):
+    class Meta:
+        queryset = Activity.objects.all()
+        allowed_methods = ('get',)
+        excludes = ('status', 'location')
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(ExploreActivityResource, self).build_filters(filters)
+        if "neighborhood" in filters and \
+           "parktype" in filters:
+            activities = filter_explore_activity(filters)
+            orm_filters = {"pk__in": [i.id for i in activities]}
+        return orm_filters
+
+
 class ExploreParkResource(ModelResource):
     class Meta:
         queryset = Park.objects.all()
@@ -110,6 +128,7 @@ class EntryResource(ModelResource):
     parktype = fields.ForeignKey(ParktypeResource, 'parktype')
     explorepark = fields.ForeignKey(ExploreParkResource, 'explorepark')
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
+    exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
 
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -168,6 +187,17 @@ def filter_explore_park(filters):
             if activity in facility.activity.all():
                 parks_filtered.append(facility.park)
     return parks_filtered
+
+
+def filter_explore_activity(filters):
+    neighborhood = Neighborhood.objects.get(slug=filters['neighborhood'])
+    parktype = Parktype.objects.get(pk=filters['parktype'])
+    parks = Park.objects.filter(neighborhoods=neighborhood, parktype=parktype)
+    facilities = Facility.objects.filter(park__in=parks)
+    activities = []
+    for facility in facilities:
+        activities.extend(facility.activity.all())
+    return list(set(activities))
 
 
 def filter_explore_facility(filters):

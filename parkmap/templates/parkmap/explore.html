@@ -5,16 +5,34 @@
 <script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
 <script>
 $(document).ready(function(){
-        $('#neighborhood_neighborhood').bind("keypress change",(function() {
-            if ($(this).val() != "") {
-                //update_parktype( $(this).val(),"neighborhood_parktype", 'id');
-                update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
-            }
-        }));
-        $('#neighborhood_parktype').bind("keypress change",(function() {
-       	  /* ACTION HERE */ 
-        }));
+  $('#neighborhood_neighborhood').bind("keypress change",(function() {
+
+    if ($(this).val() == "") {
+      $("#activity_checkboxes").html("");
+    } else {
+      update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
+    }
+
+  }));
+  $('#neighborhood_parktype').bind("keypress change",(function() {
+
+    if ($("#neighborhood_neighborhood").val() != "" && $('#neighborhood_parktype').val() != "") {
+      explore_filter_activities($("#neighborhood_neighborhood").val(),$("#neighborhood_parktype").val());
+    } else {
+      $("#activity_checkboxes").html("");
+    }
+  }));
+
+    $('.activity_checkbox').live('change', function(){
+      explore_filter_parkactivities();
+      
+    });
+
 });
+
+
+
+
 </script>
 {% endblock %}
 {% block bodyclass %} 
@@ -24,28 +42,31 @@ $(document).ready(function(){
 <div id="map_canvas" class="hidden-phone"></div>
 <div class="container-fluid middle">
   <div class="row-fluid show-grid">
-    <div class="span12">
-      <div class="well menu-box clearfix">
-        <div class="menu-box opacity">&nbsp;</div>
-        <div class="menu-box-inner">
-          <div class="menu-box-item">
-            <form method="get" action="">
-              <select id='neighborhood_neighborhood'>
-                <option SELECTED value="">Select Your Neighborhood/Town</option>
-                 {% for neighborhood in neighborhoods %}<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
-                 {% endfor %}
-              </select>
-              <select id='neighborhood_parktype' name="neighborhood_parktype">
-                <option SELECTED value="">Select Your Type</option> 
-                 {% for parktype in parktypes%}<option value="{{parktype.id}}">{{parktype.name}}</option>
-                 {% endfor %}
-              </select>
-            </form>
-            <div id="parklist"></div>
-          </div>
-        </div>
+  <div class="span12">
+    <div class="well menu-box clearfix">
+    <div class="menu-box opacity">&nbsp;</div>
+    <div class="menu-box-inner">
+      <div class="menu-box-item">
+      <form method="get" action="">
+        <select id='neighborhood_neighborhood'>
+        <option SELECTED value="">Select Your Neighborhood/Town</option>
+         {% for neighborhood in neighborhoods %}<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
+         {% endfor %}
+        </select>
+        <select id='neighborhood_parktype' name="neighborhood_parktype">
+        <option SELECTED value="">Select Your Park Type</option> 
+         {% for parktype in parktypes%}<option value="{{parktype.id}}">{{parktype.name}}</option>
+         {% endfor %}
+        </select>
+        <div id="activity_checkboxes"></div>
+      </form>
+      <div id="parklist"></div>
+      <br>
+      <div id="facilitylist"></div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </div>
 {% endblock %} 
