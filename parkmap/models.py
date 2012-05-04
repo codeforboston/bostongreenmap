@@ -3,7 +3,6 @@ from django.db import IntegrityError
 import re
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from django.template.defaultfilters import slugify
 
 # south introspection rules
 try:
@@ -145,6 +144,7 @@ class Park(models.Model):
         try:
             # cache containing neighorhood
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
+            self.neighborhoods.clear()
             self.neighborhoods.add(*neighborhoods)
         except TypeError:
             self.neighborhoods = None
@@ -176,9 +176,9 @@ class Activity(models.Model):
     class Meta:
         verbose_name = _('Activity')
         verbose_name_plural = _('Activities')
+
     def __unicode__(self):
         return self.name
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -222,7 +222,7 @@ class Facility(models.Model):
     facilitytype = models.ForeignKey(Facilitytype, blank=True, null=True)
     activity = models.ManyToManyField(Activity, related_name='activity')
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
-    status = models.CharField(max_length=50, blank=True, null=True) #FIXME: choices?
+    status = models.CharField(max_length=50, blank=True, null=True)  # FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
 
     geometry = models.PointField(srid=26986)
@@ -231,14 +231,13 @@ class Facility(models.Model):
     class Meta:
         verbose_name = _('Facility')
         verbose_name_plural = _('Facilities')
-        
+
     def activity_string(self):
         out = []
         for activity in self.activity.all():
             out.append(activity.name)
         return ",".join(out)
-        
-        
+
     def parktype_string(self):
         return self.park.parktype
 
@@ -256,8 +255,6 @@ class Facility(models.Model):
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Facility, self).save(*args, **kwargs)
 
-
     @models.permalink
     def get_absolute_url(self):
         return ('facility', [slugify(self.name)])
-
