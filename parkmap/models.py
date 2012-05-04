@@ -123,8 +123,8 @@ class Park(models.Model):
     neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
-    friendsgroup = models.CharField(max_length=100, blank=True, null=True) #FIXME: FK
-    events = models.ManyToManyField("Event",related_name="events", blank=True,null=True)
+    friendsgroup = models.CharField(max_length=100, blank=True, null=True)  # FIXME: FK
+    events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
 
     geometry = models.MultiPolygonField(srid=26986)
@@ -144,9 +144,9 @@ class Park(models.Model):
     def save(self, *args, **kwargs):
         try:
             # cache containing neighorhood
-            self.neighborhoods = Neighborhood.objects.filter(geometry__intersects=park.geometry)
-            park.neighborhoods.add(*neighborhoods)
-        except:
+            neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
+            self.neighborhoods.add(*neighborhoods)
+        except TypeError:
             self.neighborhoods = None
 
         if not self.slug:
@@ -231,6 +231,16 @@ class Facility(models.Model):
     class Meta:
         verbose_name = _('Facility')
         verbose_name_plural = _('Facilities')
+        
+    def activity_string(self):
+        out = []
+        for activity in self.activity.all():
+            out.append(activity.name)
+        return ",".join(out)
+        
+        
+    def parktype_string(self):
+        return self.park.parktype
 
     def __unicode__(self):
         return self.name
