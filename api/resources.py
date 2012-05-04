@@ -46,12 +46,12 @@ class ExploreFacilityResource(ModelResource):
         if filters is None:
             filters = {}
 
-        orm_filters = super(ExploreParkResource, self).build_filters(filters)
+        orm_filters = super(ExploreFacilityResource, self).build_filters(filters)
         if "neighborhood" in filters and \
            "parktype" in filters and \
            "activity_ids" in filters:
-            parks = filter_explore_park(filters)
-            orm_filters = {"pk__in": [i.os_id for i in parks]}
+            facilities = filter_explore_facility(filters)
+            orm_filters = {"pk__in": [i.id for i in facilities]}
         return orm_filters
 
 
@@ -115,7 +115,7 @@ class EntryResource(ModelResource):
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
 
-
+## Indepth filter functions
 def get_neighborhoods(activity_slug):
     """
     Get all Neighborhood ids that have an activity.
@@ -167,7 +167,6 @@ def filter_explore_park(filters):
         for activity in activities:
             if activity in facility.activity.all():
                 parks_filtered.append(facility.park)
-                break
     return parks_filtered
 
 
@@ -177,11 +176,10 @@ def filter_explore_facility(filters):
     activity_pks = filters['activity_ids'].split(",")
     activities = Activity.objects.filter(pk__in=activity_pks)
     parks = Park.objects.filter(neighborhoods=neighborhood, parktype=parktype)
-    facilities = Facility.objects.filter(park__in=parks, activity__in=activities)
+    facilities = Facility.objects.filter(park__in=parks)
     facilities_filtered = []
     for facility in facilities:
         for activity in activities:
             if activity in facility.activity.all():
                 facilities_filtered.append(facility)
-                break
     return facilities_filtered
