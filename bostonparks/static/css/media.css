@@ -1,0 +1,49 @@
+@media (max-width: 480px) {
+  body .well {
+  background-color: transparent; 
+  padding: 0;
+  } 
+  body .menu-box-inner {
+  padding: 0px 20px;
+  } 
+  body .menu-box {
+  padding: 0;
+  }  
+  body {
+  padding: 0;
+  } 
+  body .container-fluid { 
+  padding: 10px;
+  }
+  body .container-fluid.middle { 
+  padding-top: 5px;
+  margin-top: 0px;
+  }
+  
+  body .menu-box-item
+  {
+  padding: 10px;
+  }
+  
+  body. menu-box-hotdog h1
+  {
+  font-size: 20px;
+  padding: 5px;
+  }
+}
+ @media (max-width: 767px) {
+  body {
+  padding: 0;
+  } 
+}
+@media (min-width: 768px) and (max-width: 979px) {
+	.navbar .nav > li {
+	float:left;
+	}
+	.navbar .btn, .navbar .btn-group {
+	display: none;
+	}
+	.nav-collapse {
+    height: 0;
+    overflow: visible;
+    }

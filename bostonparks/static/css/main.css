@@ -1,3 +1,12 @@
+html,
+body {
+height: 100%;
+}
+
+body {    
+text-align: center;
+}
+
 h1 {
 color: white;
 }
@@ -67,9 +76,7 @@ a:active h4 {
     color: #666666;
 }
 
-body {    
-text-align: center;
-}
+
 
 .navbar-inner {
 	background-color: #00DC00;
@@ -160,10 +167,6 @@ padding-top: 0;
 }
 
 
-/*  HOME PAGE  */
-
-/* HOME PAGE MENU BOX  */
-
 #map_canvas {
     position: absolute;
     top: 68px;
@@ -172,6 +175,7 @@ padding-top: 0;
     bottom: 0;
     z-index: 10;
 }
+
 
 body.home #map_canvas {
     position: absolute;
@@ -183,20 +187,13 @@ body.home #map_canvas {
 .menu-box {
     z-index: 30;
     border-radius: 15px 15px 15px 15px;
-    margin: 10px auto;
+    margin: 0;
     padding: 0;
     position: relative;
-/*    width: auto;
-*/    z-index: 20;
-    height: auto;
+    z-index: 20;
+    height: 100%;
     }
-    
-/*
-.home .menu-box
-{
-max-width: 600px;
-}
-*/    
+       
 .menu-box.opacity {
     background-color: #000000;
     opacity:.5; /*mozilla firefox*/
@@ -226,6 +223,12 @@ max-width: 600px;
 
 }
 
+.neighborhood .menu-box-inner {
+    padding: 0;
+	z-index: 30;
+	position: relative;
+	height: 100%;
+}
 
 .menu-box-item {
     background-color: white;
@@ -245,13 +248,19 @@ max-width: 600px;
     margin: 0 auto;
     margin-top: 20px;
     text-align: left;
-
 }
 
 .play .container-fluid.middle
 {
 margin: 20px;
 }
+
+.neighborhood .container-fluid.middle
+{
+height: 80%;
+
+}
+
 
 .park .container-fluid.middle
 {
@@ -265,6 +274,16 @@ margin: 20px;
     padding-top: 35px;
     margin-top: 0px;
     text-align: center;
+}
+
+.row-fluid {
+    height: 100%;
+    width: 100%;
+ }
+ 
+ .row-fluid > .span12 {
+    height: 100%;
+    width: 100%;
 }
 
 .home .menu-box-item
@@ -286,7 +305,13 @@ margin-top: 22px;
 
 .neighborhood .menu-box-item
 {
-
+bottom: 30px;
+left: 40px;
+margin: 0;
+padding-bottom: 0;
+position: absolute;
+right: 40px;
+top: 30px;
 }
 
 
@@ -295,16 +320,34 @@ margin-top: 22px;
 height: auto;
 }
 
+.verticalscroll
+{
+    bottom: 120px;
+    left: 20px;
+    overflow: auto;
+    position: absolute;
+    right: 20px;
+    top: 50px;
+
+}
+
 .menu-box-item .menu-box-hotdog {
     text-align: center;
     background-color: #00dc00; /*GREEN */
     border-radius: 15px 15px 15px 15px;
     box-shadow:none;
-    padding: 20px 25px;
-    margin: 22px 0 15px 0;
-/*    width: auto;
-*/
+    padding: 15px 25px;
+    margin:0;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
 }
+
+
+
+
+
 
 body.play form
 {
