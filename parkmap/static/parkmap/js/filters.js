@@ -28,27 +28,21 @@ function update_second_dropdown(search_type, filter_type, filter,value_key,djang
           //check whether the value returned is supposed to be an id or a slug.
           //Create the new item in the dropdown list.
           if ( obj['slug'] == django_neighborhood){
-            out+= '<option selected="selected" value="'+obj[value_key]+'">' + obj['name']+'</option>';
+            out+= '<option selected="selected" value="'+escape(obj[value_key])+'">' + obj['name']+'</option>';
             //coming in from neighborhood page
           } else {
-            out+= '<option value="'+obj[value_key]+'">' + obj['name']+'</option>';
+            out+= '<option value="'+escape(obj[value_key])+'">' + obj['name']+'</option>';
           }
         });
         //replace the items in the dropdown list, and select the first element
         $("#neighborhood_"+search_type).html(out);
-        $("#neighborhood_"+search_type).selectedIndex = 0;
-        if (django_neighborhood){
+        $("#neighborhood_"+search_type).val($("#neighborhood_"+search_type+" option:first").val());
+        if (typeof(django_neighborhood) != "undefined"){
           play_get_parks(0);
         }
      }
    });
 }
-
-
-
-
-
-
 
 function explore_filter_activities(neighborhood_slug,parktype_id){
   var out = "";

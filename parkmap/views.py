@@ -130,9 +130,13 @@ def explore(request):  # Activity slug, and Neighborhood slug
     neighborhoods = Neighborhood.objects.all().order_by('name')
     activities = Activity.objects.all().order_by('name')
     parktypes = Parktype.objects.all().order_by('name')
-
+    neighborhood_slug = request.GET.get('neighborhood', None)
+    neighborhood = None
+    if neighborhood_slug:
+        neighborhood = Neighborhood.objects.get(slug=neighborhood_slug)
     response_d = {
         'neighborhoods': neighborhoods,
+        'neighborhoodpassed': neighborhood,
         'parktypes': parktypes,
         'activities': activities,
         }

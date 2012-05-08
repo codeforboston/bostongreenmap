@@ -15,6 +15,7 @@ class PlayParkResource(EncodedGeoResource):
         filtering = {
             'name': ALL,
         }
+
     def build_filters(self, filters=None):
         if filters is None:
             filters = {}
@@ -26,7 +27,6 @@ class PlayParkResource(EncodedGeoResource):
             if parks:
                 orm_filters = {"pk__in": [p.os_id for p in parks]}
         return orm_filters
-
 
 
 class ParkResource(EncodedGeoResource):
@@ -159,6 +159,7 @@ class EntryResource(ModelResource):
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
 
+
 ## Indepth filter functions
 def get_neighborhoods(activity_slug):
     """
@@ -180,7 +181,8 @@ def get_parktypes(neighborhood_slug):
     parks = Park.objects.filter(neighborhoods=neighborhood)
     parktypes = []
     for park in parks:
-        parktypes.append(park.parktype.id)
+        if (filter_explore_activity({'neighborhood': neighborhood_slug, 'parktype': park.parktype.id})):
+            parktypes.append(park.parktype.id)
     return list(set(parktypes))
 
 
@@ -239,6 +241,7 @@ def filter_explore_facility(filters):
                 facilities_filtered.append(facility)
     return facilities_filtered
 
+
 def filter_play_park(filters):
     neighborhood = Neighborhood.objects.get(slug=filters['neighborhood'])
     activities = Activity.objects.filter(slug=filters['activity'])
@@ -247,5 +250,5 @@ def filter_play_park(filters):
         park_facility_ids = [f.park.os_id for f in facilities]
     except AttributeError:
         return []
-    parks = Park.objects.filter(pk__in=park_facility_ids,neighborhoods=neighborhood)
+    parks = Park.objects.filter(pk__in=park_facility_ids, neighborhoods=neighborhood)
     return parks

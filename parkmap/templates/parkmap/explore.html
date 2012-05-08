@@ -49,7 +49,9 @@ $(document).ready(function(){
       <form method="get" action="">
         <select id='neighborhood_neighborhood'>
         <option SELECTED value="">Select Your Neighborhood/Town</option>
-         {% for neighborhood in neighborhoods %}<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
+         {% for neighborhood in neighborhoods %}<option 
+         {% ifequal neighborhoodpassed neighborhood %} SELECTED=SELECTED{% endifequal %} 
+         value="{{neighborhood.slug|urlencode}}">{{neighborhood.name}}</option>
          {% endfor %}
         </select>
         <select id='neighborhood_parktype' name="neighborhood_parktype">
