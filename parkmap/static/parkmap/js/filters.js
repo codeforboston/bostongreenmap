@@ -103,3 +103,40 @@ function explore_filter_parkactivities(){
 
 }
 
+function play_get_parks(offset){
+  var neighborhood = $("#neighborhood_neighborhood").val();
+  var activity = $("#neighborhood_activity").val();
+  if (activity === ""){ return;}
+  if (neighborhood=== ""){ return;}
+  var activities = new Array();
+  $("#parklist").html("");
+  var url = '/api/v1/playpark/?format=json&limit=10&neighborhood='+neighborhood+'&activity='+activity+'&offset='+offset;
+  update_parklist(url);
+}
+
+function update_parklist(url){
+  $.ajax({
+     url:url,
+     dataType:'json',
+     success:function(json){
+        var out = "";
+        $.each(json['objects'], function(key, park) {
+	      var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3>";
+              if (park['description']) {p += "<p>"+ park['description']+"</p>";};
+              //Load on Map - MF
+              out += p;
+        });
+        var previous = false;
+        if(json['meta']['previous']){
+       	    out += '<a href="javascript:void(0)" onclick="update_parklist(\''+json['meta']['previous']+'\')">PREVIOUS</a>';
+            previous = true;
+	}
+        if(json['meta']['next']){
+            if(previous){ out += "&nbsp;&nbsp;";}
+       	    out += '<a href="javascript:void(0)" onclick="update_parklist(\''+json['meta']['next']+'\')">NEXT</a>';
+	}
+        $("#parklist").html(out);
+     }
+   });
+}
+

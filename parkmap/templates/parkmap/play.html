@@ -8,11 +8,13 @@ $(document).ready(function(){
 
         $('#neighborhood_activity').bind("keypress change",(function() {
             if ($(this).val() != ""){
-                update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+                //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+                update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
+
             }
         }));
         $('#neighborhood_neighborhood').bind("keypress change",(function() {
-       	  /* ACTION HERE */ 
+		play_get_parks(0);
         }));
 });
 </script>
@@ -31,15 +33,14 @@ $(document).ready(function(){
           <div class="menu-box-item">
             <form method="get" action="">
                     <select id='neighborhood_activity' name='town'>
-                        <option SELECTED value="----">Select Your Activity</option>
-
+                        <option SELECTED value="">Select Your Activity</option>
                         {% for activity in activities %}
                         <option value="{{activity.slug}}">{{activity.name}}</option>
                         {% endfor %}
                     </select>
 
                     <select name='town' id='neighborhood_neighborhood'>
-                        <option SELECTED VALUE="----">Select Your Neighborhood/Town</option>
+                        <option SELECTED VALUE="">Select Your Neighborhood/Town</option>
                         {% for neighborhood in neighborhoods %}
                                 <option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
                         {% endfor %}

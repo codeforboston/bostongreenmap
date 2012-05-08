@@ -5,6 +5,30 @@ from bostonparks.tastyhacks import EncodedGeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype
 
 
+class PlayParkResource(EncodedGeoResource):
+    """
+    Park
+    """
+    class Meta:
+        queryset = Park.objects.transform(4326).all()
+        allowed_methods = ['get', ]
+        filtering = {
+            'name': ALL,
+        }
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(PlayParkResource, self).build_filters(filters)
+        if "neighborhood" in filters and \
+           "activity" in filters:
+            parks = filter_play_park(filters)
+            if parks:
+                orm_filters = {"pk__in": [p.os_id for p in parks]}
+        return orm_filters
+
+
+
 class ParkResource(EncodedGeoResource):
     """
     Park
@@ -127,6 +151,7 @@ class EntryResource(ModelResource):
     activity = fields.ForeignKey(ActivityResource, 'activity')
     parktype = fields.ForeignKey(ParktypeResource, 'parktype')
     explorepark = fields.ForeignKey(ExploreParkResource, 'explorepark')
+    playpark = fields.ForeignKey(PlayParkResource, 'playpark')
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
 
@@ -213,3 +238,14 @@ def filter_explore_facility(filters):
             if activity in facility.activity.all():
                 facilities_filtered.append(facility)
     return facilities_filtered
+
+def filter_play_park(filters):
+    neighborhood = Neighborhood.objects.get(slug=filters['neighborhood'])
+    activities = Activity.objects.filter(slug=filters['activity'])
+    facilities = Facility.objects.filter(activity=activities)
+    try:
+        park_facility_ids = [f.park.os_id for f in facilities]
+    except AttributeError:
+        return []
+    parks = Park.objects.filter(pk__in=park_facility_ids,neighborhoods=neighborhood)
+    return parks
