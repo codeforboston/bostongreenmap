@@ -1,4 +1,4 @@
-function update_second_dropdown(search_type, filter_type, filter,value_key){
+function update_second_dropdown(search_type, filter_type, filter,value_key,django_neighborhood){
   /*
     Pass in:
       The type of the second box for search_type
@@ -21,22 +21,33 @@ function update_second_dropdown(search_type, filter_type, filter,value_key){
    }
    out += "</option>";
    $.ajax({
-     //probe the correct park url
      url:'/api/v1/'+search_type+'/?format=json&limit=1000&'+filter_type+'='+filter,
-     //url:url,
      dataType:'json',
      success:function(json){
        $.each(json['objects'], function(key, obj) {
-         //check whether the value returned is supposed to be an id or a slug.
-         //Create the new item in the dropdown list.
-         out+= '<option value="'+obj[value_key]+'">' + obj['name']+'</option>';
-       });
-       //replace the items in the dropdown list, and select the first element
-       $("#neighborhood_"+search_type).html(out);
-       $("#neighborhood_"+search_type).selectedIndex = 0;
+          //check whether the value returned is supposed to be an id or a slug.
+          //Create the new item in the dropdown list.
+          if ( obj['slug'] == django_neighborhood){
+            out+= '<option selected="selected" value="'+obj[value_key]+'">' + obj['name']+'</option>';
+            //coming in from neighborhood page
+          } else {
+            out+= '<option value="'+obj[value_key]+'">' + obj['name']+'</option>';
+          }
+        });
+        //replace the items in the dropdown list, and select the first element
+        $("#neighborhood_"+search_type).html(out);
+        $("#neighborhood_"+search_type).selectedIndex = 0;
+        if (django_neighborhood){
+          play_get_parks(0);
+        }
      }
    });
 }
+
+
+
+
+
 
 
 function explore_filter_activities(neighborhood_slug,parktype_id){
