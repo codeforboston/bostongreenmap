@@ -26,6 +26,9 @@ $(document).ready(function(){
     $('.activity_checkbox').live('change', function(){
       explore_filter_parkactivities();
     });
+    {% if neighborhoodpassed %}
+         update_second_dropdown('parktype', 'neighborhood', '{{neighborhoodpassed.slug}}','id');
+    {% endif %}
 
 });
 
