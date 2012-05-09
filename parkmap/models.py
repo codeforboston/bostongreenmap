@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
-from django.db import IntegrityError
+from django.db.utils import IntegrityError
+from django.db import transaction
 import re
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -113,7 +114,7 @@ class Park(models.Model):
     )
 
     os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
-    name = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True, unique=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
     alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -140,6 +141,7 @@ class Park(models.Model):
     def get_absolute_url(self):
         return ('park', [slugify(self.name)])
 
+    #@transaction.commit_manually
     def save(self, *args, **kwargs):
         try:
             # cache containing neighorhood
@@ -151,22 +153,26 @@ class Park(models.Model):
 
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
-        super(Park, self).save(*args, **kwargs)
 
+           
+        transaction.commit()
         # FIXME: does code below require a unique slug field to work?
-        # while True:
-        #     try:
-        #         super(Park, self).save()
-        #     # Assuming the IntegrityError is due to a slug fight
-        #     except IntegrityError:
-        #         match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-        #         if match_obj:
-        #             next_int = int(match_obj.group(2)) + 1
-        #             self.slug = match_obj.group(1) + '-' + str(next_int)
-        #         else:
-        #             self.slug += '-2'
-        #     else:
-        #         break
+        while True:
+            try:
+                super(Park, self).save()
+            # Assuming the IntegrityError is due to a slug fight
+            except IntegrityError:
+                transaction.rollback()
+                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
+                if match_obj:
+                    next_int = int(match_obj.group(2)) + 1
+                    self.slug = match_obj.group(1) + '-' + str(next_int)
+                else:
+                    self.slug += '-2'
+            else:
+                transaction.commit()
+                break
+        super(Park, self).save(*args, **kwargs)
 
 
 class Activity(models.Model):
