@@ -38,6 +38,7 @@ class ParkResource(EncodedGeoResource):
         allowed_methods = ['get', ]
         filtering = {
             'name': ALL,
+            'slug': ALL,
         }
 
 

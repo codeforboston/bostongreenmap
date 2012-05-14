@@ -172,7 +172,7 @@ class Park(models.Model):
                 transaction.commit()
                 break
         super(Park, self).save(*args, **kwargs)
-
+        
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)

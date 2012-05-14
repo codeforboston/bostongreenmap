@@ -1,5 +1,5 @@
-$(function() {
-    
+
+
     // map
     // var parkmap = new google.maps.Map(document.getElementById("map_canvas"));
     var parkmap = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -120,8 +120,32 @@ $(function() {
         return decodedLevels;
     }
 
+var parkp = null;
+
+function filter_parks(slug){
+    url = '/api/v1/park/?format=json&slug='+slug;
+    $.getJSON(url, function(data) {
+        var parks = data.objects;
+        $.each(parks, function(key, park) {
+            var parkPoly = new google.maps.Polygon({
+                paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
+                levels: decodeLevels(park.geometry.levels),
+                fillColor: '#00DC00',
+                fillOpacity: 0.8,
+                strokeWeight: 0,
+                zoomFactor: park.geometry.zoomFactor, 
+                numLevels: park.geometry.numLevels,
+                map: parkmap
+            });
+            parkp = parkPoly;
+        });
+    });
+}
+
+$(function() {
     // load parks
     // FIXME: add bbox parameter to park query
+    //filter_parks();
     $.getJSON('/api/v1/park/?format=json', function(data) {
         var parks = data.objects;
         $.each(parks, function(key, park) {
@@ -137,4 +161,6 @@ $(function() {
             });
         });
     });
+    
 });
+
