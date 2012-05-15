@@ -1,7 +1,7 @@
 from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 
-from bostonparks.tastyhacks import EncodedGeoResource
+from api.tastyhacks import EncodedGeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype
 
 
