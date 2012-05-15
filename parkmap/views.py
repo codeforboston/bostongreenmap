@@ -8,7 +8,6 @@ from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parkty
 from django.template import RequestContext
 import gpolyencode
 
-
 #Temporary view to see Play page
 def play_page(request):
     neighborhoods = Neighborhood.objects.all().order_by('name')
@@ -49,7 +48,8 @@ def parks_page(request, park_slug):
     map = encoder.encode(coordinates['coordinates'][0][0])
     return render_to_response('parkmap/park.html',
         {'park': park,
-         'map': map},
+         'map': map
+        },
         context_instance=RequestContext(request)
     )
 
