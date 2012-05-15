@@ -6,7 +6,6 @@ $(function() {
         zoom: 13,
         minZoom: 10,
         maxZoom: 16,
-        center: new google.maps.LatLng(42.33, -71.061667), //42.357778
         mapTypeControlOptions: {
             position: google.maps.ControlPosition.TOP_RIGHT,
             mapTypeIds: ["simple",google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
@@ -121,20 +120,36 @@ $(function() {
     }
 
     // load large parks
-    // FIXME: add bbox parameter to park query
-    $.getJSON('/api/v1/park/?format=json&area__gt=10000', function(data) {
-        var parks = data.objects;
-        $.each(parks, function(key, park) {
-            var parkPoly = new google.maps.Polygon({
-                paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
-                levels: decodeLevels(park.geometry.levels),
-                fillColor: '#00DC00',
-                fillOpacity: 0.8,
-                strokeWeight: 0,
-                zoomFactor: park.geometry.zoomFactor, 
-                numLevels: park.geometry.numLevels,
-                map: parkmap
-            });
+    var loadparks = function(options) {
+        // FIXME: add bbox parameter to park query
+        var param = options || parkfilter || {}; 
+        param["format"] = "json";
+
+        $.getJSON('/api/v1/park/', 
+            param,
+            function(data) {
+                var parks = data.objects;
+                var latlngbounds = new google.maps.LatLngBounds();
+                $.each(parks, function(key, park) {
+                    var parkPoly = new google.maps.Polygon({
+                        paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
+                        levels: decodeLevels(park.geometry.levels),
+                        fillColor: '#00DC00',
+                        fillOpacity: 0.8,
+                        strokeWeight: 0,
+                        zoomFactor: park.geometry.zoomFactor, 
+                        numLevels: park.geometry.numLevels,
+                        map: parkmap
+                    });
+                    var latlngs = parkPoly.getPath().getArray();
+                    for ( var j = 0; j < latlngs.length; j++ ) {
+                        latlngbounds.extend(latlngs[j]);
+                    }
+                });
+                // zoom map to parks extent and adjust zoom
+                parkmap.fitBounds(latlngbounds);
+                parkmap.setZoom(parkmap.getZoom()+1);
         });
-    });
+    };
+    loadparks();
 });

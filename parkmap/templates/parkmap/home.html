@@ -164,6 +164,13 @@ out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
 	{% block javascript %}
         {% include "_map_scripts.html" %}
 		<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
+        <script type="text/javascript">
+
+            var parkfilter = {
+                "area__gt": "10000"
+            };
+
+        </script>
 	{% endblock %}
 
 </body>
