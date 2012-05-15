@@ -3,8 +3,8 @@ $(function() {
     // initialize map
     var mapclayer = "basemap"
     var parkmap = new google.maps.Map(document.getElementById("map_canvas"), {
-        zoom: 10,
-        center: new google.maps.LatLng(42.3, -71.1),
+        zoom: 13,
+        center: new google.maps.LatLng(42.31, -71.032),
         minZoom: 10,
         maxZoom: 16,
         mapTypeControlOptions: {
@@ -54,14 +54,18 @@ $(function() {
                         numLevels: park.geometry.numLevels,
                         map: parkmap
                     });
-                    var latlngs = parkPoly.getPath().getArray();
-                    for ( var j = 0; j < latlngs.length; j++ ) {
-                        latlngbounds.extend(latlngs[j]);
+                    if (param["zoomtoextent"] === true) {
+                        var latlngs = parkPoly.getPath().getArray();
+                        for ( var j = 0; j < latlngs.length; j++ ) {
+                            latlngbounds.extend(latlngs[j]);
+                        }
                     }
                 });
-                // zoom map to parks extent and adjust zoom
-                parkmap.fitBounds(latlngbounds);
-                parkmap.setZoom(parkmap.getZoom()+1);
+                if (param["zoomtoextent"] === true) {
+                    // zoom map to parks extent and adjust zoom
+                    parkmap.fitBounds(latlngbounds);
+                    parkmap.setZoom(parkmap.getZoom()+1);
+                }
         });
     };
     loadparks();

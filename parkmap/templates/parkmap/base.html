@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-			{% block title %}{% endblock %} 
-		</title>
-		<meta name="description" content="{% block meta_description %}{% endblock %}" >
-		<meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
+            {% block title %}{% endblock %} 
+        </title>
+        <meta name="description" content="{% block meta_description %}{% endblock %}" >
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
 
-			{% block meta %}{% endblock %}
+            {% block meta %}{% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script> 
         <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 
-		<link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
 
 {% block headscripts %}{% endblock %}
 
@@ -26,7 +26,7 @@
 
 {% block bodyclass %}
 <body>
-{% endblock %} 	
+{% endblock %}  
  <div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -37,15 +37,15 @@
           </a>         
 <div class="nav-collapse">
             <ul class="nav">
-		<li><a class="home" href="/">HOME</a></li>
-		<li><a class="play" href="/park/play/">PLAY</a></li>
-		<li><a class="explore" href="/explore/">EXPLORE</a></li>
-		<li><a class="plan" href="/explore/">PLAN A TRIP</a></li>
-		<li><a class="login" href="#">LOGIN</a></li>
-		<li class="parent"><ul class="actions">
-		<li><a class="print" href="#">PRINT</a></li>
-		<li><a class="share" href="#">SHARE</a></li></ul></li>
-		</ul>
+        <li><a class="home" href="/">HOME</a></li>
+        <li><a class="play" href="/park/play/">PLAY</a></li>
+        <li><a class="explore" href="/explore/">EXPLORE</a></li>
+        <li><a class="plan" href="/explore/">PLAN A TRIP</a></li>
+        <li><a class="login" href="#">LOGIN</a></li>
+        <li class="parent"><ul class="actions">
+        <li><a class="print" href="#">PRINT</a></li>
+        <li><a class="share" href="#">SHARE</a></li></ul></li>
+        </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -54,13 +54,13 @@
   
 {% block content %}        
 {% endblock %}
-	
-	{% block javascript %}
-        {% include "_map_scripts.html" %}
-		<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
-	{% endblock %}
+    
+{% block javascript %}
+{% include "_map_scripts.html" %}
+<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
+{% endblock %}
 
-		
+        
 </body>
 </html>
 
