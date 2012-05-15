@@ -65,6 +65,7 @@ class ParkResource(EncodedGeoResource):
         resource_name = 'park'
         cache = SimpleCache()
         filtering = {
+            'os_id': ALL,
             'name': ALL,
             'area': ALL,
             'neighborhoods': ALL_WITH_RELATIONS,

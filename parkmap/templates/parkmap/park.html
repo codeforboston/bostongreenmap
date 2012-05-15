@@ -23,7 +23,7 @@ var map = {{map|safe}};
 					<p>{% if park.description %}{{park.description|markdown}}{% endif %}</p>
 					
 					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
-					<p><strong>Size:</strong> S0 acres</p>
+					<p><strong>Size:</strong> {{ park.area }} acres</p>
 					
 					<h5>Get there!</h5>
 					<p>MBTA: Park Street, Boylston Street Station</p>
@@ -76,9 +76,8 @@ var map = {{map|safe}};
 			
 			
         <div class="span7">
-          <div class="hero-unit">
+          <div id="map_canvas" class="detail well">
     
-		
 
 		
           </div><!--/.well -->
@@ -87,5 +86,17 @@ var map = {{map|safe}};
 
     </div><!--/.fluid-container-->
 
-{% endblock %}		
+{% endblock %}	
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        var parkfilter = {
+            "os_id": "{{ park.os_id }}",
+            "zoomtoextent": true
+        };
+
+    </script>
+{% endblock %}	
 

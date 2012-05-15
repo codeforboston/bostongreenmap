@@ -176,6 +176,12 @@ padding-top: 0;
     z-index: 10;
 }
 
+#map_canvas.detail {
+    position: relative;
+    top: 0px;
+    height: 400px;
+}
+
 
 body.home #map_canvas {
     position: absolute;

@@ -6,7 +6,7 @@ $(function() {
         zoom: 13,
         center: new google.maps.LatLng(42.31, -71.032),
         minZoom: 10,
-        maxZoom: 16,
+        maxZoom: 17,
         mapTypeControlOptions: {
             position: google.maps.ControlPosition.TOP_RIGHT,
             mapTypeIds: [mapclayer, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
@@ -64,7 +64,6 @@ $(function() {
                 if (param["zoomtoextent"] === true) {
                     // zoom map to parks extent and adjust zoom
                     parkmap.fitBounds(latlngbounds);
-                    parkmap.setZoom(parkmap.getZoom()+1);
                 }
         });
     };
