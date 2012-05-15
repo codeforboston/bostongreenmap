@@ -36,9 +36,15 @@ class ParkResource(EncodedGeoResource):
     class Meta:
         queryset = Park.objects.transform(4326).all()
         allowed_methods = ['get', ]
+        resource_name = 'park'
         filtering = {
             'name': ALL,
+            'area': ALL,
         }
+
+    # def dehydrate(self, bundle):
+    #      bundle.data['area'] = bundle.obj.geometry.area
+    #      return bundle
 
 
 class ExploreActivityResource(ModelResource):

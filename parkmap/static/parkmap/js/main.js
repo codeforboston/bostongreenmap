@@ -120,9 +120,9 @@ $(function() {
         return decodedLevels;
     }
 
-    // load parks
+    // load large parks
     // FIXME: add bbox parameter to park query
-    $.getJSON('/api/v1/park/?format=json', function(data) {
+    $.getJSON('/api/v1/park/?format=json&area__gt=10000', function(data) {
         var parks = data.objects;
         $.each(parks, function(key, park) {
             var parkPoly = new google.maps.Polygon({

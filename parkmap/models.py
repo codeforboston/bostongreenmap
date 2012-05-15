@@ -127,6 +127,7 @@ class Park(models.Model):
     friendsgroup = models.CharField(max_length=100, blank=True, null=True)  # FIXME: FK
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
+    area = models.FloatField()
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -143,6 +144,9 @@ class Park(models.Model):
         return ('park', [slugify(self.name)])
 
     def save(self, *args, **kwargs):
+
+        self.area = self.geometry.area
+
         try:
             # cache containing neighorhood
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
