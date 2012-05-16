@@ -34,11 +34,11 @@ $(function() {
 
     // load large parks
     var loadparks = function(options) {
-        // FIXME: add bbox parameter to park query
-        var options = options, parkfilter = parkfilter;
-        var param = options || parkfilter || {}; 
+        
+        // prioritizes parkfilter defined on a template page over options argument and finally defaults to empty object
+        var param = (typeof parkfilter === 'undefined') ? ((typeof options === 'undefined') ? {} : options) : parkfilter;
         param["format"] = "json";
-
+        // FIXME: add bbox parameter to park query
         $.getJSON('/api/v1/park/', 
             param,
             function(data) {
