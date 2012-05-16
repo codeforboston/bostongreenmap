@@ -35,7 +35,7 @@
 					<p>{% if park.description %}{{ park.description|markdown }}{% endif %}</p>
 					
 					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
-					<p><strong>Size:</strong> {{ park.area_acres|floatformat:"2"|intcomma }}</p>
+					<p><strong>Size:</strong> {{ park.area_acres|floatformat:"2"|intcomma }} acres</p>
 					
 					<h5>Get there!</h5>
 					<p>{{park.address}}</p>
