@@ -172,7 +172,7 @@ class Park(models.Model):
                     self.slug += '-2'
             else:
                 break
-
+        super(Park, self).save(*args, **kwargs)
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)

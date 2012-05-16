@@ -7,7 +7,7 @@ function update_second_dropdown(search_type, filter_type, filter,value_key,djang
       The value_key is whether to use 'id' or 'slug'
   */
   //Set the first item in the dropdown box
-   var out = '<option SELECTED value="">Select Your ';
+   var out = '<option value="">Select Your ';
    switch(search_type) {
     case 'neighborhood':
       out += 'Neighborhood/Town';
@@ -38,6 +38,9 @@ function update_second_dropdown(search_type, filter_type, filter,value_key,djang
         $("#neighborhood_"+search_type).html(out);
         $("#neighborhood_"+search_type).val($("#neighborhood_"+search_type+" option:first").val());
         if (typeof(django_neighborhood) != "undefined"){
+          //Select the neighborhood passed in via the page parameter and auto search
+          var neigh = $('#neighborhood_neighborhood option[value="'+django_neighborhood+'"]');
+          neigh.attr('selected','selected');
           play_get_parks(0);
         }
      }

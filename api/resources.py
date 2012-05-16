@@ -67,6 +67,7 @@ class ParkResource(EncodedGeoResource):
         filtering = {
             'os_id': ALL,
             'name': ALL,
+            'slug': ALL,
             'area': ALL,
             'neighborhoods': ALL_WITH_RELATIONS,
         }

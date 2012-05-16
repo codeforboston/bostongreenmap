@@ -1,13 +1,25 @@
 {% extends 'parkmap/base.html' %}
 {% load markup %}
-
+{% load humanize %}
 
 {% block title %}{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}
-<script>
-var map = {{map|safe}};
-</script>
+   
+<style type="text/css" title="text/css">
+#map_canvas {
+    background-color: #E5E3DF;
+    bottom: 0;
+    height: 300px;
+    left: 0;
+    overflow: hidden;
+    position: relative;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+</style>
+
 {% endblock %}
 
 {% block bodyclass %}
@@ -22,11 +34,11 @@ var map = {{map|safe}};
 					<h2>{{park.name}}</h2>
 					<p>{% if park.description %}{{park.description|markdown}}{% endif %}</p>
 					
-					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
-					<p><strong>Size:</strong> {{ park.area }} acres</p>
+					<p><strong>Access:</strong> {{park.access}}</p>
+					<p><strong>Size:</strong> {{park.geometry.area|floatformat:"2"|intcomma}}</p>
 					
 					<h5>Get there!</h5>
-					<p>MBTA: Park Street, Boylston Street Station</p>
+					<p>{{park.address}}</p>
 					<p><a href="#">Plan a route</a></p>
 					
 					<h5>Owner &amp; Management</h5>
@@ -34,9 +46,10 @@ var map = {{map|safe}};
 					<p>{{park.phone}}</p>
 					<p><a href="#">Report a Problem</a></p>
 					
+					{% if park.friendsgroup %}
 					<h5>Get Involved</h5>
-					<p><a href="#">Friends of Boston Common</a></p>
-
+					<p><a href="#">{{park.friendsgroup}}</a></p>
+                    {% endif %} 
 					<p>Upcoming events</p>
 					<ul>
                                         {% for event in park.events.all %}
@@ -76,10 +89,7 @@ var map = {{map|safe}};
 			
 			
         <div class="span7">
-          <div id="map_canvas" class="detail well">
-    
-
-		
+          <div id="map_canvas" class="detail well">		
           </div><!--/.well -->
         </div><!--/span-->
 
