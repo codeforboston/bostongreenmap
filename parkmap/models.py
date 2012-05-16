@@ -143,6 +143,9 @@ class Park(models.Model):
     def get_absolute_url(self):
         return ('park', [slugify(self.name)])
 
+    def area_acres(self):
+        return self.area / 4047
+
     def save(self, *args, **kwargs):
 
         self.area = self.geometry.area

@@ -43,7 +43,6 @@ def home_page(request):
 
 def parks_page(request, park_slug):
     park = get_object_or_404(Park, slug=park_slug)
-    park.area = round(park.area / 4047, 2) # '%.1f' % round(n, 1)
     encoder = gpolyencode.GPolyEncoder()
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
