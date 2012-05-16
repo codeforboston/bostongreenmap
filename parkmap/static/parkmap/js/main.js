@@ -32,15 +32,18 @@ $(function() {
         return decodedLevels;
     }
 
-    // load large parks
-    var loadparks = function(options) {
+    // load parks
+    var loadparks = function(filteroptions, mapoptions) {
         
         // prioritizes parkfilter defined on a template page over options argument and finally defaults to empty object
-        var param = (typeof parkfilter === 'undefined') ? ((typeof options === 'undefined') ? {} : options) : parkfilter;
-        param["format"] = "json";
-        // FIXME: add bbox parameter to park query
+        var filterparam = (typeof parkfilter === 'undefined') ? ((typeof filteroptions === 'undefined') ? {} : filteroptions) : parkfilter;
+        filterparam["format"] = "json";
+        // same spiel for map configuration, used to specify extent and additional layers
+        var mapparam = (typeof mapconf === 'undefined') ? ((typeof mapoptions === 'undefined') ? {} : mapoptions) : mapconf;
+        
+        // TODO: add bbox parameter to park query
         $.getJSON('/api/v1/park/', 
-            param,
+            filterparam,
             function(data) {
                 var parks = data.objects;
                 var latlngbounds = new google.maps.LatLngBounds();
@@ -55,19 +58,41 @@ $(function() {
                         numLevels: park.geometry.numLevels,
                         map: parkmap
                     });
-                    if (param["zoomtoextent"] === true) {
+                    if (mapparam["zoomtoextent"] === true) {
                         var latlngs = parkPoly.getPath().getArray();
                         for ( var j = 0; j < latlngs.length; j++ ) {
                             latlngbounds.extend(latlngs[j]);
                         }
                     }
                 });
-                if (param["zoomtoextent"] === true) {
+                if (mapparam["zoomtoextent"] === true) {
                     // zoom map to parks extent and adjust zoom
                     parkmap.fitBounds(latlngbounds);
                 }
+                if (mapparam["loadfacilities"]) loadfacilities(mapparam["loadfacilities"]);
         });
     };
     loadparks();
+
+    // load facitlies
+    var loadfacilities = function(options) {
+        var param = options;
+        param["format"] = "json";
+        $.getJSON('/api/v1/facility/',
+            param,
+            function(data) {
+                var facilities = data.objects; 
+                $.each(facilities, function(key, facility) {
+                    var facilityicon = facility["icon"];
+                    var facilitylatlng = new google.maps.LatLng(facility["geometry"]["coordinates"][1], facility["geometry"]["coordinates"][0]);
+                    var facilitymarker = new google.maps.Marker({
+                        position: facilitylatlng,
+                        title: facility["name"],
+                        map: parkmap,
+                        icon: facilityicon
+                    });
+                });
+        });
+    };
 });
 

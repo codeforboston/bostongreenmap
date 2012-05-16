@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.db.utils import IntegrityError
 from django.db import transaction
@@ -248,6 +249,9 @@ class Facility(models.Model):
 
     def parktype_string(self):
         return self.park.parktype
+
+    def icon_url(self):
+        return '%sparkmap/img/icons/%s.png' % (settings.STATIC_URL, slugify(self.facilitytype))
 
     def __unicode__(self):
         return self.name

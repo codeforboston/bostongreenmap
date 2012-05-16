@@ -2,8 +2,8 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.cache import SimpleCache
 from tastypie import fields
 
-from api.tastyhacks import EncodedGeoResource
-from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype
+from api.tastyhacks import EncodedGeoResource, GeoResource
+from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
 
 
 class PlayParkResource(EncodedGeoResource):
@@ -72,6 +72,23 @@ class ParkResource(EncodedGeoResource):
             'neighborhoods': ALL_WITH_RELATIONS,
         }
 
+
+class FacilityResource(GeoResource):
+    """
+    Facility as GeoJSON objects
+    """
+
+    park = fields.ToOneField(ParkResource, 'park')
+    icon = fields.CharField(attribute='icon_url')
+
+    class Meta:
+        queryset = Facility.objects.transform(4326).all()
+        allowed_methods = ['get', ]
+        resource_name = 'facility'
+        filtering = {
+            'name': ALL,
+            'park': ALL_WITH_RELATIONS,
+        }
 
 class ExploreActivityResource(ModelResource):
     class Meta:
