@@ -35,6 +35,7 @@ $(function() {
     // load large parks
     var loadparks = function(options) {
         // FIXME: add bbox parameter to park query
+        var options = options, parkfilter = parkfilter;
         var param = options || parkfilter || {}; 
         param["format"] = "json";
 
@@ -48,7 +49,7 @@ $(function() {
                         paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
                         levels: decodeLevels(park.geometry.levels),
                         fillColor: '#00DC00',
-                        fillOpacity: 0.8,
+                        fillOpacity: 0.6,
                         strokeWeight: 0,
                         zoomFactor: park.geometry.zoomFactor, 
                         numLevels: park.geometry.numLevels,
