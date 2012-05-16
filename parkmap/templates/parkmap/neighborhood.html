@@ -1,83 +1,66 @@
 {% extends 'parkmap/base.html' %} {% block title %}{% endblock %} {% block meta %}{% endblock %} 
 
-{% block headscripts %}
-        {% if google_map_api %}
-         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{google_map_api}}&sensor=true">
-      </script>
-		<script type="text/javascript">
-		  function initialize() {
-			var myOptions = {
-			  zoom: 12,
-			  center: new google.maps.LatLng(42.3583, -71.0603),
-			  mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-	
-			var map = new google.maps.Map(document.getElementById('map_canvas'),
-				myOptions);
-		  }
-	
-		  function loadScript() {
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&' +
-				'callback=initialize';
-			document.body.appendChild(script);
-		  }
-	
-//		  window.onload = loadScript;
-		</script>
-        {% endif %}
 
-{% endblock %} 
 
 {% block bodyclass %} 
 <body class="neighborhood">
-	{% endblock %} {% block content %} 
+    {% endblock %} {% block content %} 
 <div id="map_canvas" class="hidden-phone"></div>
-	<div class="container-fluid middle">
+    <div class="container-fluid middle">
  <div class="row-fluid show-grid">
 
-		<div class="span12">
-			<div class="well menu-box clearfix">
-				<div class="menu-box opacity">
-					&nbsp; 
-				</div>
-				<div class="menu-box-inner">
-					<div class="menu-box-item">
-						<h2>
-							{{neighborhood.name}}
-						</h2>
-					<div class="verticalscroll">
-						
-						{% for park in parks %} 
-						<div class="neighborhood-park">
-						<h4>
-							<a href="/park/{{park.slug}}">{{park.name}}</a></h4>
-		
+        <div class="span12">
+            <div class="well menu-box clearfix">
+                <div class="menu-box opacity">
+                    &nbsp; 
+                </div>
+                <div class="menu-box-inner">
+                    <div class="menu-box-item">
+                        <h2>
+                            {{neighborhood.name}}
+                        </h2>
+                    <div class="verticalscroll">
+                        
+                        {% for park in parks %} 
+                        <div class="neighborhood-park">
+                        <h4>
+                            <a href="/park/{{park.slug}}">{{park.name}}</a></h4>
+        
 
-							{% regroup park.facility_set.all|dictsort:"facilitytype.name" by facilitytype as facility_list %}
-							
+                            {% regroup park.facility_set.all|dictsort:"facilitytype.name" by facilitytype as facility_list %}
+                            
 
-							{% for facility in facility_list %}
-								<div class="facility facility_{{facility.grouper|slugify}}"><img src="/static/img/1_1.gif" width="32" height="38" alt="{{facility.grouper}}"></div>
-							{% endfor %}
+                            {% for facility in facility_list %}
+                                <div class="facility facility_{{facility.grouper|slugify}}"><img src="/static/img/1_1.gif" width="32" height="38" alt="{{facility.grouper}}"></div>
+                            {% endfor %}
 
                         </div>
-         				{% endfor %} 
-						
-					</div>
-							  <a href="/explore/?neighborhood={{neighborhood.slug|urlencode}}">
-								  <div class="menu-box-hotdog">
-										<h1>Explore the Map</h1>
-									</div>
-								  </a>
-						
-						
-					</div>
-				</div>
-			</div>
-		</div>
+                        {% endfor %} 
+                        
+                    </div>
+                              <a href="/explore/?neighborhood={{neighborhood.slug|urlencode}}">
+                                  <div class="menu-box-hotdog">
+                                        <h1>Explore the Map</h1>
+                                    </div>
+                                  </a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</div>
-	</div>
-	{% endblock %} 
+    </div>
+    </div>
+    {% endblock %} 
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        var parkfilter = {
+            "neighborhoods__id": "{{ neighborhood.id }}"
+        };
+
+    </script>
+{% endblock %}

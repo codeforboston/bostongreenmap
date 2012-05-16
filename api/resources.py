@@ -1,7 +1,8 @@
-from tastypie.resources import ModelResource, ALL
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
+from tastypie.cache import SimpleCache
 from tastypie import fields
 
-from bostonparks.tastyhacks import EncodedGeoResource
+from api.tastyhacks import EncodedGeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype
 
 
@@ -29,16 +30,45 @@ class PlayParkResource(EncodedGeoResource):
         return orm_filters
 
 
+class NeighborhoodResource(ModelResource):
+    class Meta:
+        queryset = Neighborhood.objects.all()
+        allowed_methods = ['get']
+        excludes = ['geometry', 'objects']
+        cache = SimpleCache()
+        filtering = {
+            'slug': ALL,
+            'id': ALL,
+        }
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+        orm_filters = super(NeighborhoodResource, self).build_filters(filters)
+        if  "activity" in filters:
+            neighborhoods = get_neighborhoods(filters['activity'])
+            queryset = Neighborhood.objects.filter(pk__in=neighborhoods)
+            orm_filters = {"pk__in": [i.id for i in queryset]}
+        return orm_filters
+
+
 class ParkResource(EncodedGeoResource):
     """
-    Park
+    Park with enocoded geometries
     """
+
+    neighborhoods = fields.ManyToManyField(NeighborhoodResource, 'neighborhoods')
+
     class Meta:
         queryset = Park.objects.transform(4326).all()
         allowed_methods = ['get', ]
+        resource_name = 'park'
+        cache = SimpleCache()
         filtering = {
             'name': ALL,
             'slug': ALL,
+            'area': ALL,
+            'neighborhoods': ALL_WITH_RELATIONS,
         }
 
 
@@ -95,23 +125,6 @@ class ExploreFacilityResource(ModelResource):
            "activity_ids" in filters:
             facilities = filter_explore_facility(filters)
             orm_filters = {"pk__in": [i.id for i in facilities]}
-        return orm_filters
-
-
-class NeighborhoodResource(ModelResource):
-    class Meta:
-        queryset = Neighborhood.objects.all()
-        allowed_methods = ['get']
-        excludes = ['geometry', 'objects']
-
-    def build_filters(self, filters=None):
-        if filters is None:
-            filters = {}
-        orm_filters = super(NeighborhoodResource, self).build_filters(filters)
-        if  "activity" in filters:
-            neighborhoods = get_neighborhoods(filters['activity'])
-            queryset = Neighborhood.objects.filter(pk__in=neighborhoods)
-            orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
 
 
