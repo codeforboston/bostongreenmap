@@ -1,5 +1,5 @@
-
-
+$(function() {
+    
     // map
     // var parkmap = new google.maps.Map(document.getElementById("map_canvas"));
     var parkmap = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -19,7 +19,7 @@
     });
 
     // simple map style
-    var simple_style =  [
+    var simple_style = [
         {
             featureType: "administrative",
             elementType: "geometry",
@@ -118,13 +118,15 @@
         }
         return decodedLevels;
     }
+
     // load large parks
     var loadparks = function(options) {
+        var options = options, parkfilter = parkfilter;
         // FIXME: add bbox parameter to park query
-        var param = options || parkfilter || {}; 
+        var param = options || parkfilter || {};
         param["format"] = "json";
 
-        $.getJSON('/api/v1/park/', 
+        $.getJSON('/api/v1/park/',
             param,
             function(data) {
                 var parks = data.objects;
@@ -136,7 +138,7 @@
                         fillColor: '#00DC00',
                         fillOpacity: 0.8,
                         strokeWeight: 0,
-                        zoomFactor: park.geometry.zoomFactor, 
+                        zoomFactor: park.geometry.zoomFactor,
                         numLevels: park.geometry.numLevels,
                         map: parkmap
                     });
