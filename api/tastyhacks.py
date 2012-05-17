@@ -73,7 +73,11 @@ class EncodedGeometryApiField(ApiField):
 
         encoder = gpolyencode.GPolyEncoder()
         geom = GEOSGeometry(value)
-        return encoder.encode(geom.coords[0][0])
+        # support multipart geometetries
+        geom_encoded = {}
+        for key, part in enumerate(geom):
+            geom_encoded[key] = encoder.encode(part[0])
+        return geom_encoded
 
 
 class EncodedGeoResource(ModelResource):

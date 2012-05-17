@@ -48,22 +48,25 @@ $(function() {
                 var parks = data.objects;
                 var latlngbounds = new google.maps.LatLngBounds();
                 $.each(parks, function(key, park) {
-                    var parkPoly = new google.maps.Polygon({
-                        paths: google.maps.geometry.encoding.decodePath(park.geometry.points),
-                        levels: decodeLevels(park.geometry.levels),
-                        fillColor: '#00DC00',
-                        fillOpacity: 0.6,
-                        strokeWeight: 0,
-                        zoomFactor: park.geometry.zoomFactor, 
-                        numLevels: park.geometry.numLevels,
-                        map: parkmap
-                    });
-                    if (mapparam["zoomtoextent"] === true) {
-                        var latlngs = parkPoly.getPath().getArray();
-                        for ( var j = 0; j < latlngs.length; j++ ) {
-                            latlngbounds.extend(latlngs[j]);
+                    // multipart geometries
+                    $.each(park.geometry, function(key, part) {
+                        var parkPoly = new google.maps.Polygon({
+                            paths: google.maps.geometry.encoding.decodePath(part["points"]),
+                            levels: decodeLevels(part["levels"]),
+                            fillColor: '#00DC00',
+                            fillOpacity: 0.6,
+                            strokeWeight: 0,
+                            zoomFactor: part["zoomFactor"], 
+                            numLevels: part["numLevels"],
+                            map: parkmap
+                        });
+                        if (mapparam["zoomtoextent"] === true) {
+                            var latlngs = parkPoly.getPath().getArray();
+                            for ( var j = 0; j < latlngs.length; j++ ) {
+                                latlngbounds.extend(latlngs[j]);
+                            }
                         }
-                    }
+                    });
                 });
                 if (mapparam["zoomtoextent"] === true) {
                     // zoom map to parks extent and adjust zoom
