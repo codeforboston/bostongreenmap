@@ -36,8 +36,7 @@
                     {% if park.description %}<p>{{ park.description|markdown }}</p>{% endif %}
 					
 					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
-					<p><strong>Size:</strong> {{ park.area_acres|floatformat:"2"|intcomma }} acres</p>
-					
+                    <p><strong>Size:</strong> {{park.geometry.area|floatformat:"2"|intcomma}}</p>					
 					<h5>Get there!</h5>
 					{% if park.address %}<p>{{park.address}}</p>{% endif %}
 					<p><a href="#">Plan a route</a></p>
@@ -49,7 +48,7 @@
 					
 					{% if park.friendsgroup %}
 					<h5>Get Involved</h5>
-					<p><a href="#">{{ park.friendsgroup }}</a></p>
+					<p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
                     {% endif %} 
 
 					<h5>Upcoming events</h5>
