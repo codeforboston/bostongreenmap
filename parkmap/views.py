@@ -144,3 +144,10 @@ def explore(request):  # Activity slug, and Neighborhood slug
         response_d,
         context_instance=RequestContext(request)
         )
+
+
+def plan_a_trip(request):  # Activity slug, and Neighborhood slug
+    return render_to_response('parkmap/trip.html',
+        {},
+        context_instance=RequestContext(request)
+        )

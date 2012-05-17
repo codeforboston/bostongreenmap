@@ -1,0 +1,60 @@
+{% extends 'parkmap/base.html' %}
+{% block title %}{% endblock %}
+{% block meta %}{% endblock %}
+{% block headscripts %}
+<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
+<script>
+$(document).ready(function(){
+    $('#neighborhood_activity').bind("keypress change",(function() {
+        if ($(this).val() != ""){
+            //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+            update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
+
+        }
+    }));
+    $('#neighborhood_neighborhood').bind("keypress change",(function() {
+        play_get_parks(0);
+    }));
+    {% if neighborhood %}
+        update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
+    {% endif %}
+});
+
+</script>
+{% endblock %}
+{% block bodyclass %} 
+<body class="plan">
+{% endblock %}
+{% block content %} 
+<div id="map_canvas" class="hidden-phone"></div>
+<div class="container-fluid middle">
+  <div class="row-fluid show-grid">
+    <div class="span12">
+      <div class="well menu-box clearfix">
+        <div class="menu-box opacity">&nbsp;</div>
+        <div class="menu-box-inner">
+          <div class="menu-box-item">
+            <form method="get" action="">
+                <select id='neighborhood_activity' name='town'>
+                    <option SELECTED value="">Select Your Activity</option>
+                    {% for activ in activities %}
+                        <option {% ifequal activ activity %} selected {% endifequal %} value="{{activ.slug}}">{{activ.name}}</option>
+                    {% endfor %}
+                </select>
+
+                <select name='town' id='neighborhood_neighborhood'>
+                    <option SELECTED VALUE="">Select Your Neighborhood/Town</option>
+                    {% for neighborh in neighborhoods %}
+                        <option value="{{neighborh.slug}}">{{neighborh.name}}</option>
+                    {% endfor %}
+                </select>
+                <noscript><input type="submit" value="Submit"></noscript>
+            </form>
+            <div id="parklist"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
