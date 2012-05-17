@@ -58,6 +58,7 @@
 {% block javascript %}
 {% include "_map_scripts.html" %}
 <script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
+{% if user.is_staff %}<script type="text/javascript"> var staff = true; </script>{% endif %}
 {% endblock %}
 
         

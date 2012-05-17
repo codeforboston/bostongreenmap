@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.gis.db import models
 from django.db.utils import IntegrityError
 from django.db import transaction
@@ -252,6 +253,9 @@ class Facility(models.Model):
 
     def icon_url(self):
         return '%sparkmap/img/icons/%s.png' % (settings.STATIC_URL, slugify(self.facilitytype))
+
+    def admin_url(self): 
+        return reverse('admin:parkmap_facility_change', args=(self.id,))
 
     def __unicode__(self):
         return self.name

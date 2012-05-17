@@ -58,11 +58,11 @@
 					<li><a href="#">Create an event</a></li>
 					</ul>
 					
-                                        {% if park.facilities.all %}
-					    <h5>Contains the following facilities:</h5>
+                                        {% if park.facility_set.all %}
+					    <h5>Facilities and Acitivities:</h5>
 					    <ul>
-                                            {% for facility in park.facilities.all %}
-                                            <li>{{facility.name}}</li>
+                                            {% for facility in park.facility_set.all %}
+                                            <li>{{facility.name}}: {{ facility.activity_string }}</li>
                                             {% endfor %}
 					    </ul>
 					{% endif %}

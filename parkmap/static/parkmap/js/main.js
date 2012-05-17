@@ -91,6 +91,17 @@ $(function() {
                         map: parkmap,
                         icon: facilityicon
                     });
+                    var facilityinfocontent = "<strong>" + facility["name"] + "</strong><br> \
+                                       Activities: " + facility["activity_string"];
+                    if (typeof staff !== 'undefined' && staff === true) {
+                        facilityinfocontent += "<br><a href='" + facility["admin_url"] + "'>Edit</a>";
+                    }
+                    var facilityinfo = new google.maps.InfoWindow({
+                        content: facilityinfocontent
+                    });
+                    google.maps.event.addListener(facilitymarker, 'click', function() {
+                        facilityinfo.open(parkmap, facilitymarker);
+                    });
                 });
         });
     };

@@ -73,6 +73,22 @@ class ParkResource(EncodedGeoResource):
         }
 
 
+class ActivityResource(ModelResource):
+    class Meta:
+        queryset = Activity.objects.all()
+        allowed_methods = ['get']
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+        orm_filters = super(ActivityResource, self).build_filters(filters)
+        if  "neighborhood" in filters:
+            activities = get_activities(filters['neighborhood'])
+            queryset = Activity.objects.filter(pk__in=activities)
+            orm_filters = {"pk__in": [i.id for i in queryset]}
+        return orm_filters 
+
+
 class FacilityResource(GeoResource):
     """
     Facility as GeoJSON objects
@@ -80,6 +96,9 @@ class FacilityResource(GeoResource):
 
     park = fields.ToOneField(ParkResource, 'park')
     icon = fields.CharField(attribute='icon_url')
+    activity = fields.ManyToManyField(ActivityResource, 'activity')
+    activity_string = fields.CharField(attribute='activity_string')
+    admin_url = fields.CharField(attribute='admin_url')
 
     class Meta:
         queryset = Facility.objects.transform(4326).all()
@@ -88,6 +107,7 @@ class FacilityResource(GeoResource):
         filtering = {
             'name': ALL,
             'park': ALL_WITH_RELATIONS,
+            'activiy': ALL_WITH_RELATIONS,
         }
 
 class ExploreActivityResource(ModelResource):
@@ -161,21 +181,6 @@ class ParktypeResource(ModelResource):
             orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
 
-
-class ActivityResource(ModelResource):
-    class Meta:
-        queryset = Activity.objects.all()
-        allowed_methods = ['get']
-
-    def build_filters(self, filters=None):
-        if filters is None:
-            filters = {}
-        orm_filters = super(ActivityResource, self).build_filters(filters)
-        if  "neighborhood" in filters:
-            activities = get_activities(filters['neighborhood'])
-            queryset = Activity.objects.filter(pk__in=activities)
-            orm_filters = {"pk__in": [i.id for i in queryset]}
-        return orm_filters
 
 
 class EntryResource(ModelResource):
