@@ -31,26 +31,28 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well">
-					<h2>{{park.name}}</h2>
-					<p>{% if park.description %}{{ park.description|markdown }}{% endif %}</p>
+					<h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small><span>{% endif %}</h2>
+
+                    {% if park.description %}<p>{{ park.description|markdown }}</p>{% endif %}
 					
 					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
 					<p><strong>Size:</strong> {{ park.area_acres|floatformat:"2"|intcomma }} acres</p>
 					
 					<h5>Get there!</h5>
-					<p>{{park.address}}</p>
+					{% if park.address %}<p>{{park.address}}</p>{% endif %}
 					<p><a href="#">Plan a route</a></p>
 					
 					<h5>Owner &amp; Management</h5>
-					<p>{{ park.parkowner }}</p>
-					<p>{{ park.phone }}</p>
+					{% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
+					{% if park.phone %}<p>{{ park.phone }}</p>{% endif %}
 					<p><a href="#">Report a Problem</a></p>
 					
 					{% if park.friendsgroup %}
 					<h5>Get Involved</h5>
-					<p><a href="#">{{park.friendsgroup}}</a></p>
+					<p><a href="#">{{ park.friendsgroup }}</a></p>
                     {% endif %} 
-					<p>Upcoming events</p>
+
+					<h5>Upcoming events</h5>
 					<ul>
                                         {% for event in park.events.all %}
                                             <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</li>
@@ -58,7 +60,7 @@
 					<li><a href="#">Create an event</a></li>
 					</ul>
 					
-                                        {% if park.facility_set.all %}
+                    {% if park.facility_set.all %}
 					    <h5>Facilities and Acitivities:</h5>
 					    <ul>
                                             {% for facility in park.facility_set.all %}
@@ -66,6 +68,10 @@
                                             {% endfor %}
 					    </ul>
 					{% endif %}
+
+
+
+                    {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.os_id %}">Edit Park information</a></p>{% endif %}
 				
           </div><!--/.well -->
         </div><!--/span-->
