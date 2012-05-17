@@ -127,7 +127,7 @@ class Park(models.Model):
     neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
-    friendsgroup = models.CharField(max_length=100, blank=True, null=True)  # FIXME: FK
+    friendsgroup = models.ForeignKey("FriendsGroup",blank=True,null=True)
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
 

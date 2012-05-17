@@ -1,11 +1,11 @@
 from django.contrib.gis import admin
 
-from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype
+from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype, FriendsGroup
 
 
 # default GeoAdmin overloads
 admin.GeoModelAdmin.default_lon = -7912100
-admin.GeoModelAdmin.default_lat = 5210000  
+admin.GeoModelAdmin.default_lat = 5210000
 admin.GeoModelAdmin.default_zoom = 12
 
 class ParkAdmin(admin.OSMGeoAdmin):
@@ -31,3 +31,4 @@ admin.site.register(Parkowner, LookupAdmin)
 admin.site.register(Neighborhood, admin.OSMGeoAdmin)
 admin.site.register(Activity, LookupAdmin)
 admin.site.register(Event)
+admin.site.register(FriendsGroup)
