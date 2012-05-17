@@ -127,9 +127,10 @@ class Park(models.Model):
     neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
-    friendsgroup = models.ForeignKey("FriendsGroup",blank=True,null=True)
+    friendsgroup = models.ForeignKey("Friendsgroup", blank=True, null=True)
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
+    area = models.FloatField()
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -276,6 +277,7 @@ class Facility(models.Model):
     def get_absolute_url(self):
         return ('facility', [slugify(self.name)])
 
-class FriendsGroup(models.Model):
+
+class Friendsgroup(models.Model):
     name = models.CharField(max_length=100)
-    url = models.URLField()
+    url = models.URLField(blank=True, null=True)
