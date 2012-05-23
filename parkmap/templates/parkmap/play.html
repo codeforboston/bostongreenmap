@@ -1,27 +1,6 @@
 {% extends 'parkmap/base.html' %}
 {% block title %}{% endblock %}
 {% block meta %}{% endblock %}
-{% block headscripts %}
-<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
-<script>
-$(document).ready(function(){
-    $('#neighborhood_activity').bind("keypress change",(function() {
-        if ($(this).val() != ""){
-            //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
-            update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
-
-        }
-    }));
-    $('#neighborhood_neighborhood').bind("keypress change",(function() {
-        play_get_parks(0);
-    }));
-    {% if neighborhood %}
-        update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
-    {% endif %}
-});
-
-</script>
-{% endblock %}
 {% block bodyclass %} 
 <body class="play">
 {% endblock %}
@@ -38,14 +17,14 @@ $(document).ready(function(){
                 <select id='neighborhood_activity' name='town'>
                     <option SELECTED value="">Select Your Activity</option>
                     {% for activ in activities %}
-                        <option {% ifequal activ activity %} selected {% endifequal %} value="{{activ.slug}}">{{activ.name}}</option>
+                        <option {% ifequal activ activity %} selected {% endifequal %} value="{{activ.id}}">{{activ.name}}</option>
                     {% endfor %}
                 </select>
 
                 <select name='town' id='neighborhood_neighborhood'>
                     <option SELECTED VALUE="">Select Your Neighborhood/Town</option>
                     {% for neighborh in neighborhoods %}
-                        <option value="{{neighborh.slug}}">{{neighborh.name}}</option>
+                        <option value="{{neighborh.id}}">{{neighborh.name}}</option>
                     {% endfor %}
                 </select>
                 <noscript><input type="submit" value="Submit"></noscript>
@@ -58,3 +37,36 @@ $(document).ready(function(){
   </div>
 </div>
 {% endblock %} 
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        bp.mapconf = {
+            "zoomtoparks": true,
+            "showfacilites": true
+        }
+
+        $(function() {
+
+            $('#neighborhood_activity').bind("keypress change",(function() {
+                if ($(this).val() != ""){
+                    //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+                    bp.update_second_dropdown('neighborhood', 'activity', $(this).val(),'id');
+                }
+            }));
+            
+            $('#neighborhood_neighborhood').bind("keypress change",(function() {
+                bp.play_get_parks(0);
+            }));
+
+            {% if neighborhood %}
+            bp.update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'id',"{{neighborhood.id}}");
+            {% endif %}
+
+        });
+
+
+    </script>
+    
+{% endblock %}

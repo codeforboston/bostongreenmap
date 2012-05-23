@@ -11,48 +11,10 @@
 		<meta name="description" content="{% block meta_description %}{% endblock %}" >
 		<meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
 		{% block meta %}{% endblock %}
-        <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-		
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+        <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'> 
 
 		<link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-
-<script>
-$(document).ready(function () {
-
-   $('#neighborhood_only').change(function() {
-      window.location = ("/neighborhood/"+$(this).val()+"/");
-    }); 
-
-
-   $('#neighborhood_activity').change(function() {
-       update_select($(this).val());
-   }); 
-   $('#neighborhood_neighborhood').change(function() {
-       if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
-          window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
-       }
-
-   }); 
-
-});
-function update_select(activity){
-     var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
-     $.ajax({
-         url:'/api/v1/neighborhood/?format=json&activity='+activity,
-         dataType:'json',
-         success:function(json){
-             $.each(json['objects'], function(key, obj) {
-out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
-             });
-             $("#neighborhood_neighborhood").html(out);
-             $("#neighborhood_neighborhood").selectedIndex = 0;
-         }
-     });
-}
-</script>
 
 <style type="text/css" title="text/css">
 @media (max-width: 480px) {
@@ -163,12 +125,47 @@ out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
 	
 	{% block javascript %}
         {% include "_map_scripts.html" %}
-		<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+        <script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
         <script type="text/javascript">
 
-            var parkfilter = {
+            bp.parkfilter = {
                 "area__gt": "10000"
-            };
+            }
+
+            $(document).ready(function () {
+
+               $('#neighborhood_only').change(function() {
+                  window.location = ("/neighborhood/"+$(this).val()+"/");
+                }); 
+
+
+               $('#neighborhood_activity').change(function() {
+                   update_select($(this).val());
+               }); 
+               $('#neighborhood_neighborhood').change(function() {
+                   if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
+                      window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
+                   }
+
+               }); 
+
+            });
+            function update_select(activity){
+                 var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
+                 $.ajax({
+                     url:'/api/v1/neighborhood/?format=json&activity='+activity,
+                     dataType:'json',
+                     success:function(json){
+                         $.each(json['objects'], function(key, obj) {
+            out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
+                         });
+                         $("#neighborhood_neighborhood").html(out);
+                         $("#neighborhood_neighborhood").selectedIndex = 0;
+                     }
+                 });
+            }
 
         </script>
 	{% endblock %}

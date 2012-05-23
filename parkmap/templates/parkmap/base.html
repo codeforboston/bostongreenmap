@@ -13,9 +13,7 @@
             {% block meta %}{% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script> 
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
-
+         
         <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
@@ -57,8 +55,10 @@
     
 {% block javascript %}
 {% include "_map_scripts.html" %}
-<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/main.js"></script>
-{% if user.is_staff %}<script type="text/javascript"> var staff = true; </script>{% endif %}
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
+{% if user.is_staff %}<script type="text/javascript"> bp.staff = true; </script>{% endif %}
 {% endblock %}
 
         

@@ -6,30 +6,6 @@ from api.tastyhacks import EncodedGeoResource, GeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
 
 
-class PlayParkResource(EncodedGeoResource):
-    """
-    Park
-    """
-    class Meta:
-        queryset = Park.objects.transform(4326).all()
-        allowed_methods = ['get', ]
-        filtering = {
-            'name': ALL,
-        }
-
-    def build_filters(self, filters=None):
-        if filters is None:
-            filters = {}
-
-        orm_filters = super(PlayParkResource, self).build_filters(filters)
-        if "neighborhood" in filters and \
-           "activity" in filters:
-            parks = filter_play_park(filters)
-            if parks:
-                orm_filters = {"pk__in": [p.os_id for p in parks]}
-        return orm_filters
-
-
 class NeighborhoodResource(ModelResource):
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -72,6 +48,18 @@ class ParkResource(EncodedGeoResource):
             'neighborhoods': ALL_WITH_RELATIONS,
         }
 
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(ParkResource, self).build_filters(filters)
+        if "neighborhood" in filters and \
+           "activity" in filters:
+            parks = filter_play_park(filters)
+            if parks:
+                orm_filters = {"pk__in": [p.os_id for p in parks]}
+        return orm_filters
+
 
 class ActivityResource(ModelResource):
     class Meta:
@@ -101,13 +89,13 @@ class FacilityResource(GeoResource):
     admin_url = fields.CharField(attribute='admin_url')
 
     class Meta:
-        queryset = Facility.objects.transform(4326).all()
+        queryset = Facility.objects.transform(4326).filter(park__isnull=False)
         allowed_methods = ['get', ]
         resource_name = 'facility'
         filtering = {
             'name': ALL,
             'park': ALL_WITH_RELATIONS,
-            'activiy': ALL_WITH_RELATIONS,
+            'activity': ALL_WITH_RELATIONS,
         }
 
 class ExploreActivityResource(ModelResource):
@@ -188,7 +176,7 @@ class EntryResource(ModelResource):
     activity = fields.ForeignKey(ActivityResource, 'activity')
     parktype = fields.ForeignKey(ParktypeResource, 'parktype')
     explorepark = fields.ForeignKey(ExploreParkResource, 'explorepark')
-    playpark = fields.ForeignKey(PlayParkResource, 'playpark')
+    playpark = fields.ForeignKey(ParkResource, 'playpark')
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
 
@@ -198,11 +186,11 @@ class EntryResource(ModelResource):
 
 
 ## Indepth filter functions
-def get_neighborhoods(activity_slug):
+def get_neighborhoods(activity_id):
     """
     Get all Neighborhood ids that have an activity.
     """
-    activity = Activity.objects.get(slug=activity_slug)
+    activity = Activity.objects.get(id=activity_id)
     parks = [fac.park for fac in Facility.objects.filter(activity=activity) if fac.park]
     neighborhoods = []
     for p in parks:
@@ -280,8 +268,8 @@ def filter_explore_facility(filters):
 
 
 def filter_play_park(filters):
-    neighborhood = Neighborhood.objects.get(slug=filters['neighborhood'])
-    activities = Activity.objects.filter(slug=filters['activity'])
+    neighborhood = Neighborhood.objects.get(id=filters['neighborhood'])
+    activities = Activity.objects.filter(id=filters['activity'])
     facilities = Facility.objects.filter(activity=activities)
     try:
         park_facility_ids = [f.park.os_id for f in facilities]

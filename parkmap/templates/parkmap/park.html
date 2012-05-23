@@ -107,15 +107,13 @@
     {{ block.super }}
     <script type="text/javascript">
 
-        var parkfilter = {
+        bp.parkfilter = {
             "os_id": "{{ park.os_id }}"
-        };
-        var mapconf = {
-            "zoomtoextent": true,
-            "loadfacilities": {
-                "park__os_id": "{{ park.os_id }}"
-            }
-        };
+        }
+        bp.mapconf = {
+            "zoomtoparks": true,
+            "showfacilites": true
+        }
 
     </script>
 {% endblock %}	
