@@ -371,7 +371,7 @@ margin-bottom: 0;
 .neighborhood-park
 {
 display: block;
-padding-bottom: 10px;
+padding: 0 10px 10px;
 }
 
 .neighborhood-park > h4

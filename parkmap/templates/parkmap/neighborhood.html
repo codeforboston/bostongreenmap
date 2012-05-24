@@ -24,10 +24,9 @@
                         <div class="neighborhood-park">
                         <h4>
                             <a href="/park/{{park.slug}}">{{park.name}}</a></h4>
-                            {% if park.description %}<span class="park_description">{{  park.description|slice:"50" }}{% if park.description|length > 50 %}...{% endif %} </span><br>{% endif %}
-                            {% regroup park.facility_set.all|dictsort:"facilitytype.name" by facilitytype as facility_list %}
-                            {% for facility in facility_list %}
-                                <div class="facility facility_{{facility.grouper|slugify}}"><img src="/static/img/1_1.gif" width="32" height="38" alt="{{facility.grouper}}"></div>
+                            {% if park.description %}<span class="park_description">{{  park.description|truncatewords:30 }}</span><br>{% endif %}
+                            {% for facility in park.facility_set.all %}
+                            <a class="facility-icon" href="/park/{{park.slug}}" rel="tooltip" data-original-title="{{ facility.name }}"><img src="{{ facility.icon_url }}" alt="{{ facility.name }}"></a>
                             {% endfor %}
 
                         </div>
