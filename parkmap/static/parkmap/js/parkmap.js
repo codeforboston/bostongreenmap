@@ -377,6 +377,7 @@ var bp = {
           $("#tripadd_"+park_id).val("Remove from Trip");
           console.log(park_id,data);
          }
+         bp.count_parks_in_queue();
      });
   },
   check_park_in_queue: function(park_id){
@@ -387,6 +388,17 @@ var bp = {
           $("#tripadd_"+park_id).val("Remove from Trip");
          }
      });
+     bp.count_parks_in_queue();
+  },
+  count_parks_in_queue: function(){
+  $.get('/plan/count/',function(data){
+    if(data > 0){
+        $("a.plan").html("PLAN A TRIP ("+data+")");
+    } else {
+        $("a.plan").html("PLAN A TRIP");
+    }
+  });
+
   }
 }
 

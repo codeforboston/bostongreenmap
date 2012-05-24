@@ -2,25 +2,7 @@
 {% block title %}{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}
-<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
-<script>
-$(document).ready(function(){
-    $('#neighborhood_activity').bind("keypress change",(function() {
-        if ($(this).val() != ""){
-            //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
-            update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
 
-        }
-    }));
-    $('#neighborhood_neighborhood').bind("keypress change",(function() {
-        play_get_parks(0);
-    }));
-    {% if neighborhood %}
-        update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
-    {% endif %}
-});
-
-</script>
 {% endblock %}
 {% block bodyclass %} 
 <body class="plan">
@@ -58,3 +40,24 @@ $(document).ready(function(){
   </div>
 </div>
 {% endblock %} 
+{% block javascript %}
+    {{ block.super }}
+<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#neighborhood_activity').bind("keypress change",(function() {
+            if ($(this).val() != ""){
+                //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+                update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
+            }
+        }));
+        $('#neighborhood_neighborhood').bind("keypress change",(function() {
+            play_get_parks(0);
+        }));
+        {% if neighborhood %}
+            update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
+        {% endif %}
+    });
+</script>   
+
+{% endblock %}

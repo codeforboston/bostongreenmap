@@ -60,7 +60,11 @@
 <script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
 {% if user.is_staff %}<script type="text/javascript"> bp.staff = true; </script>{% endif %}
 {% endblock %}
-
+<script>
+$(document).ready(function(){
+        bp.count_parks_in_queue();
+});
+</script>
         
 </body>
 </html>

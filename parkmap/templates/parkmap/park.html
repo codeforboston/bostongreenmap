@@ -77,17 +77,7 @@
 			
         <div class="span2">
           <div class="well">
-				
-					
-					
-					
-					<form action="post" id="add-to-trip">
-					
-					<input type="submit" id="add-trip" name="add-trip" value="Add to Trip" />
-					
-					</form>
-				
-				
+              <input type="button" id="tripadd_{{park.os_id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->
         </div><!--/span-->
 			
@@ -116,5 +106,11 @@
         }
 
     </script>
+<script>
+$(document).ready(function(){
+    bp.park_trip_button_bind("{{park.os_id}}");
+    bp.check_park_in_queue("{{park.os_id}}");
+});
+</script>
 {% endblock %}	
 

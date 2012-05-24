@@ -168,3 +168,7 @@ def add_remove_park_trip_planning(request, park_id):
 def check_park_in_trip(request, park_id):
     trip_queue = request.session.get('trip_queue',[])
     return HttpResponse(park_id in trip_queue)
+
+def count_trip_queue(request):
+    total_queuelen = len(request.session.get('trip_queue',[]))
+    return HttpResponse(total_queuelen)
