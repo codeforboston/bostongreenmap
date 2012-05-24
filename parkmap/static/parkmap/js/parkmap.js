@@ -22,8 +22,8 @@ var bp = {
       The value_key is whether to use 'id' or 'slug'
     */
     //Set the first item in the dropdown box
-   var out = '<option value="">Select Your ';
-   switch(search_type) {
+    var out = '<option value="">Select Your ';
+    switch(search_type) {
     case 'neighborhood':
       out += 'Neighborhood/Town';
       break;
@@ -33,13 +33,13 @@ var bp = {
     case 'activity':
       out += "Activity";
       break;
-   }
-   out += "</option>";
-   $.ajax({
-     url:'/api/v1/'+search_type+'/?format=json&limit=1000&'+filter_type+'='+filter,
-     dataType:'json',
-     success:function(json){
-       $.each(json['objects'], function(key, obj) {
+    }
+    out += "</option>";
+    $.ajax({
+      url:'/api/v1/'+search_type+'/?format=json&limit=1000&'+filter_type+'='+filter,
+      dataType:'json',
+      success:function(json){
+        $.each(json['objects'], function(key, obj) {
           //check whether the value returned is supposed to be an id or a slug.
           //Create the new item in the dropdown list.
           if ( obj['slug'] == django_neighborhood){
@@ -58,8 +58,8 @@ var bp = {
           neigh.attr('selected','selected');
           bp.play_get_parks(0);
         }
-     }
-   });
+      }
+    });
   },
 
   update_parklist: function(url, parkfilter){
@@ -129,6 +129,98 @@ var bp = {
     });
   },
 
+  explore_filter_activities: function(neighborhood_slug,parktype_id){
+    var out = "";
+     $.ajax({
+       //probe the correct park url
+       url:'/api/v1/exploreactivity/?format=json&limit=1000&neighborhood='+neighborhood_slug+'&parktype='+parktype_id,
+       //url:url,
+       dataType:'json',
+       success:function(json){
+         $.each(json['objects'], function(key, obj) {
+           //check whether the value returned is supposed to be an id or a slug.
+           //Create the new item in the dropdown list.
+           out+= '<input type="checkbox" class="activity_checkbox" name="activity_checkboxes" value="'+obj['id']+'">'+obj['name']+'<br>';
+         });
+         //replace the items in the dropdown list, and select the first element
+         $("#activity_checkboxes").html(out);
+       }
+     });
+  },
+
+  explore_filter_parkactivities: function(){
+    var neighborhood = $("#neighborhood_neighborhood").val();
+    var parktype = $("#neighborhood_parktype").val();
+    var activities = new Array();
+    $('#activity_checkboxes input:checked').each(function() {
+      activities.push($(this).val());
+    });
+    $("#parklist").html("");
+    $("#facilitylist").html("");
+    if (activities.length == 0){
+      return;
+    }
+
+    // find parks
+    // find facilities
+
+    activities = activities.join(",");
+    var latlngs = [];
+    bp.clearmap();
+    $.ajax({
+       //probe the correct park url
+       url:'/api/v1/explorepark/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
+       //url:url,
+       dataType:'json',
+       success:function(json){
+         var out = "";
+          $.each(json['objects'], function(key, park) {
+             //DO SOMETHING BETTER HERE USING THE DATA.
+          // out+= obj['name'] + " - " + obj['os_id']+'<br>';
+
+          var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3>";
+          if (park['description']) {p += "<p>"+ park['description']+"</p>";};
+          out += p;
+
+          // add park to map
+          parkLatlngs = bp.renderpark(park["geometry"], {
+            "name": park["name"],
+            "description": park["description"]
+          });
+          latlngs.push.apply(latlngs, parkLatlngs);
+          // adjust map extent
+          if (bp.mapconf["zoomtoparks"]) bp.zoomtoparks(latlngs);
+
+
+         });
+         $("#parklist").html(out);
+       }
+     });
+
+
+    $.ajax({
+     url:'/api/v1/explorefacility/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
+     dataType:'json',
+     success:function(json){
+      var out = "";
+       $.each(json['objects'], function(key, facility) {
+          //DO SOMETHING BETTER HERE USING THE DATA.
+          // out += obj['name'] + " - " + obj['id']+'<br>';
+          // add facility to map
+          bp.renderfacility(facility["geometry"], {
+            icon: facility["icon"],
+            name: facility["name"],
+            activity_string: facility["activity_string"],
+            admin_url: facility["admin_url"]
+          })
+
+       });
+       // FIXME: list should be nested with parks, not attached
+       // $("#facilitylist").html(out);
+     }
+   });
+  },
+
   // load parks and render on map
   loadparks: function(parkfilter, mapconf) {
       
@@ -159,42 +251,27 @@ var bp = {
 
         });
     });
-
-    
-
   },
 
   // loac facilities and render on map
   loadfacilities: function(facilityfilter) {
 
     facilityfilter["format"] = "json";
+
     $.getJSON('/api/v1/facility/',
       facilityfilter,
       function(data) {
         var facilities = data.objects; 
         $.each(facilities, function(key, facility) {
-          var facilityicon = facility["icon"];
-          var facilitylatlng = new google.maps.LatLng(facility["geometry"]["coordinates"][1], facility["geometry"]["coordinates"][0]);
-          var facilitymarker = new google.maps.Marker({
-            position: facilitylatlng,
-            title: facility["name"],
-            map: bp.map,
-            icon: facilityicon
-          });
 
-          bp.overlays.push(facilitymarker);
+          // add facilities to map
+          bp.renderfacility(facility["geometry"], {
+            icon: facility["icon"],
+            name: facility["name"],
+            activity_string: facility["activity_string"],
+            admin_url: facility["admin_url"]
+          })
 
-          var facilityinfocontent = "<strong>" + facility["name"] + "</strong><br> \
-                                     Activities: " + facility["activity_string"];
-          if (typeof staff !== 'undefined' && staff === true) {
-            facilityinfocontent += "<br><a href='" + facility["admin_url"] + "'>Edit</a>";
-          }
-          var facilityinfo = new google.maps.InfoWindow({
-            content: facilityinfocontent
-          });
-          google.maps.event.addListener(facilitymarker, 'click', function() {
-            facilityinfo.open(bp.map, facilitymarker);
-          });
       });
     });
   },
@@ -219,6 +296,32 @@ var bp = {
         bp.overlays.push(parkPoly);
     });
     return latlngs;
+  },
+
+  renderfacility: function(geometry, properties) {
+    // marker with custom icon
+    var facilityicon = properties["icon"];
+    var facilitylatlng = new google.maps.LatLng(geometry["coordinates"][1], geometry["coordinates"][0]);
+    var facilitymarker = new google.maps.Marker({
+      position: facilitylatlng,
+      title: properties["name"],
+      map: bp.map,
+      icon: facilityicon
+    });
+    // track overlay
+    bp.overlays.push(facilitymarker);
+    // marker infowindow
+    var facilityinfocontent = "<strong>" + properties["name"] + "</strong><br> \
+                               Activities: " + properties["activity_string"];
+    if (typeof staff !== 'undefined' && staff === true) {
+      facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
+    }
+    var facilityinfo = new google.maps.InfoWindow({
+      content: facilityinfocontent
+    });
+    google.maps.event.addListener(facilitymarker, 'click', function() {
+      facilityinfo.open(bp.map, facilitymarker);
+    });
   },
 
   zoomtoparks: function(latlngs) {
@@ -277,72 +380,8 @@ $(function() {
   // execute onload with global parameter specified in django template
   if ( bp.parkfilter ) bp.loadparks(bp.parkfilter, bp.mapconf);
 
-    function explore_filter_activities(neighborhood_slug,parktype_id){
-      var out = "";
-       $.ajax({
-         //probe the correct park url
-         url:'/api/v1/exploreactivity/?format=json&limit=1000&neighborhood='+neighborhood_slug+'&parktype='+parktype_id,
-         //url:url,
-         dataType:'json',
-         success:function(json){
-           $.each(json['objects'], function(key, obj) {
-             //check whether the value returned is supposed to be an id or a slug.
-             //Create the new item in the dropdown list.
-             out+= '<input type="checkbox" class="activity_checkbox" name="activity_checkboxes" value="'+obj['id']+'">'+obj['name']+'<br>';
-           });
-           //replace the items in the dropdown list, and select the first element
-           $("#activity_checkboxes").html(out);
-         }
-       });
-    }
-
-
-    function explore_filter_parkactivities(){
-      var neighborhood = $("#neighborhood_neighborhood").val();
-      var parktype = $("#neighborhood_parktype").val();
-      var activities = new Array();
-      $('#activity_checkboxes input:checked').each(function() {
-        activities.push($(this).val());
-      });
-      $("#parklist").html("");
-      $("#facilitylist").html("");
-      if (activities.length == 0){
-        return;
-      }
-
-      activities = activities.join(",");
-      $.ajax({
-         //probe the correct park url
-         url:'/api/v1/explorepark/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
-         //url:url,
-         dataType:'json',
-         success:function(json){
-           var out = "";
-            $.each(json['objects'], function(key, obj) {
-               //DO SOMETHING BETTER HERE USING THE DATA.
-            out+= obj['name'] + " - " + obj['os_id']+'<br>';
-           });
-           $("#parklist").html(out);
-         }
-       });
-
-        $.ajax({
-         url:'/api/v1/explorefacility/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
-         dataType:'json',
-         success:function(json){
-          var out = "";
-           $.each(json['objects'], function(key, obj) {
-              //DO SOMETHING BETTER HERE USING THE DATA.
-              out += obj['name'] + " - " + obj['id']+'<br>';
-           });
-           $("#facilitylist").html(out);
-         }
-       });
-
-    }
-
-    
-
+  // tooltip whenever a facility icon is displayed in a list
+  $(".facility-icon").tooltip();
 
 });
 

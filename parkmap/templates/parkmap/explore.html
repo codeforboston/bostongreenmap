@@ -1,41 +1,7 @@
 {% extends 'parkmap/base.html' %}
 {% block title %}{% endblock %}
 {% block meta %}{% endblock %}
-{% block headscripts %}
-<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
-<script>
-$(document).ready(function(){
-  $('#neighborhood_neighborhood').bind("keypress change",(function() {
 
-    if ($(this).val() == "") {
-      $("#activity_checkboxes").html("");
-    } else {
-      update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
-    }
-
-  }));
-  $('#neighborhood_parktype').bind("keypress change",(function() {
-
-    if ($("#neighborhood_neighborhood").val() != "" && $('#neighborhood_parktype').val() != "") {
-      explore_filter_activities($("#neighborhood_neighborhood").val(),$("#neighborhood_parktype").val());
-    } else {
-      $("#activity_checkboxes").html("");
-    }
-  }));
-
-    $('.activity_checkbox').live('change', function(){
-      explore_filter_parkactivities();
-    });
-    {% if neighborhoodpassed %}
-         update_second_dropdown('parktype', 'neighborhood', '{{neighborhoodpassed.slug}}','id');
-    {% endif %}
-
-});
-
-
-
-</script>
-{% endblock %}
 {% block bodyclass %} 
 <body class="explore">
 {% endblock %}
@@ -53,7 +19,7 @@ $(document).ready(function(){
         <option SELECTED value="">Select Your Neighborhood/Town</option>
          {% for neighborhood in neighborhoods %}<option 
          {% ifequal neighborhoodpassed neighborhood %} SELECTED=SELECTED{% endifequal %} 
-         value="{{neighborhood.slug|urlencode}}">{{neighborhood.name}}</option>
+         value="{{neighborhood.id}}">{{neighborhood.name}}</option>
          {% endfor %}
         </select>
         <select id='neighborhood_parktype' name="neighborhood_parktype">
@@ -73,3 +39,42 @@ $(document).ready(function(){
   </div>
 </div>
 {% endblock %} 
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        bp.mapconf = {
+            "zoomtoparks": true
+        }
+
+        $(document).ready(function(){
+          $('#neighborhood_neighborhood').bind("keypress change",(function() {
+
+            if ($(this).val() == "") {
+              $("#activity_checkboxes").html("");
+            } else {
+              bp.update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
+            }
+
+          }));
+          $('#neighborhood_parktype').bind("keypress change",(function() {
+
+            if ($("#neighborhood_neighborhood").val() != "" && $('#neighborhood_parktype').val() != "") {
+              bp.explore_filter_activities($("#neighborhood_neighborhood").val(),$("#neighborhood_parktype").val());
+            } else {
+              $("#activity_checkboxes").html("");
+            }
+          }));
+
+            $('.activity_checkbox').live('change', function(){
+              bp.explore_filter_parkactivities();
+            });
+            {% if neighborhoodpassed %}
+                 bp.update_second_dropdown('parktype', 'neighborhood', '{{neighborhoodpassed.slug}}','id');
+            {% endif %}
+
+        });
+    
+    </script>
+{% endblock %}
