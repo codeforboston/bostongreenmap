@@ -147,7 +147,24 @@ def explore(request):  # Activity slug, and Neighborhood slug
 
 
 def plan_a_trip(request):  # Activity slug, and Neighborhood slug
+    parks_in_queue = request.session.get("trip_queue",[])
     return render_to_response('parkmap/trip.html',
-        {},
+        {"parks_in_queue":parks_in_queue,},
         context_instance=RequestContext(request)
         )
+
+
+def add_remove_park_trip_planning(request, park_id):
+    trip_queue = request.session.get('trip_queue',[])
+    add = 1
+    if park_id in trip_queue:
+        trip_queue.remove(park_id)
+        add = 0
+    else:
+        trip_queue.append(park_id)
+    request.session['trip_queue'] = trip_queue
+    return HttpResponse(add)
+
+def check_park_in_trip(request, park_id):
+    trip_queue = request.session.get('trip_queue',[])
+    return HttpResponse(park_id in trip_queue)

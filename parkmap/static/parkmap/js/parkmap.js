@@ -79,9 +79,11 @@ var bp = {
       function(data) {
         var out = "";
         var latlngs = [];
+        var park_ids = [];
         bp.clearmap();
         $.each(data['objects'], function(key, park) {
-          var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3>";
+          var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /> ";
+          park_ids[park_ids.length] = park['os_id'];
 
           if (park['description']) {p += "<p>"+ bp.truncate(park['description']) +"</p>";};
           // add park to map
@@ -113,7 +115,16 @@ var bp = {
             out += '<a href="javascript:void(0)" onclick="bp.update_parklist(\''+data['meta']['next']+'\')">NEXT</a>';
           }
         $("#parklist").html(out);
+        for (var pid in park_ids){
+            bp.check_park_in_queue(park_ids[pid]);
+            bp.park_trip_button_bind(park_ids[pid]);
+        } 
     });
+  },
+  park_trip_button_bind: function(id){
+	$("#tripadd_"+id).bind('click',function(){
+            bp.add_remove_park_trip(id);
+        });
   },
 
   play_get_parks: function(offset) {
@@ -356,6 +367,26 @@ var bp = {
     var nrchars = nrchars || 100;
     var string = string.trim().substring(0, nrchars).split(" ").slice(0, -1).join(" ") + "...";
     return string;
+  },
+  add_remove_park_trip: function(park_id){
+     $.get('/plan/addremove/'+park_id+'/',function(data){
+         if (data == 0){ // 0 = removed
+          $("#tripadd_"+park_id).val("Add to Trip");
+          console.log(park_id,data);
+	 } else { // 1 = added
+          $("#tripadd_"+park_id).val("Remove from Trip");
+          console.log(park_id,data);
+         }
+     });
+  },
+  check_park_in_queue: function(park_id){
+     $.get('/plan/check/'+park_id+'/',function(data){
+         if (data == "False"){ // 0 = removed
+          $("#tripadd_"+park_id).val("Add to Trip");
+	 } else { // 1 = added
+          $("#tripadd_"+park_id).val("Remove from Trip");
+         }
+     });
   }
 }
 
