@@ -367,13 +367,14 @@ bp.map = new google.maps.Map(document.getElementById("map_canvas"), {
   minZoom: 10,
   maxZoom: 17,
   mapTypeControlOptions: {
-      position: google.maps.ControlPosition.TOP_RIGHT,
-      mapTypeIds: [bp.mapclayer, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
-      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+    position: google.maps.ControlPosition.TOP_RIGHT,
+    mapTypeIds: [bp.mapclayer, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
+    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
   },
   panControl: false,
   zoomControlOptions: {
-      style: google.maps.ZoomControlStyle.SMALL
+    position: google.maps.ControlPosition.RIGHT_BOTTOM,
+    style: google.maps.ZoomControlStyle.MEDIUM
   },
   streetViewControl: false
 })
