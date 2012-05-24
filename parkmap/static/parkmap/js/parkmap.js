@@ -82,7 +82,8 @@ var bp = {
         bp.clearmap();
         $.each(data['objects'], function(key, park) {
           var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3>";
-          if (park['description']) {p += "<p>"+ park['description']+"</p>";};
+
+          if (park['description']) {p += "<p>"+ bp.truncate(park['description']) +"</p>";};
           // add park to map
           parkLatlngs = bp.renderpark(park["geometry"], {
             "name": park["name"],
@@ -348,6 +349,13 @@ var bp = {
           decodedLevels.push(level);
       }
       return decodedLevels;
+  },
+
+  truncate: function(string, nrchars) {
+    // accepts a string and a number of characters the string shcould be truncated to
+    var nrchars = nrchars || 100;
+    var string = string.trim().substring(0, nrchars).split(" ").slice(0, -1).join(" ") + "...";
+    return string;
   }
 }
 
