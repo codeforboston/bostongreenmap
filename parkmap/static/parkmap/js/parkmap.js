@@ -264,6 +264,26 @@ var bp = {
         });
     });
   },
+  loadparktrip: function(ids){
+     var need_to_rebind=[];
+     for(var x in ids){
+       var parkfilter = {};
+       need_to_rebind[need_to_rebind.length] = ids[x];
+       parkfilter["format"] = "json";
+       parkfilter["os_id"] = ids[x];
+       $.getJSON('/api/v1/park/', 
+           parkfilter,
+           function(data) {
+             var park = data.objects[0];
+             $("#parklist").html($("#parklist").html() + "<h3>" + park['name']+'</h3>');
+             $("#parklist").html($("#parklist").html() + "<input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /><br>");
+             bp.check_park_in_queue(park['os_id']);
+             for(var r in need_to_rebind){
+                 bp.park_trip_button_bind(need_to_rebind[r]);
+             }
+       }); 
+    }
+  },
 
   // loac facilities and render on map
   loadfacilities: function(facilityfilter) {

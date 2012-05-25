@@ -21,10 +21,10 @@ class GeometryApiField(ApiField):
         if value is None:
             return value
         return simplejson.dumps(value)
-    
+
     def dehydrate(self, obj):
         return self.convert(super(GeometryApiField, self).dehydrate(obj))
-    
+
     def convert(self, value):
         if value is None:
             return None
@@ -49,7 +49,7 @@ class GeoResource(ModelResource):
         """
         if isinstance(f, GeometryField):
             return GeometryApiField
-    
+
         return super(GeoResource, cls).api_field_from_django_field(f, default)
 
 
@@ -60,10 +60,10 @@ class EncodedGeometryApiField(ApiField):
     dehydrated_type = 'geometry'
     help_text = 'Geometry data.'
 
-    
+
     def dehydrate(self, obj):
         return self.convert(super(EncodedGeometryApiField, self).dehydrate(obj))
-    
+
     def convert(self, value):
         if value is None:
             return None
@@ -94,5 +94,5 @@ class EncodedGeoResource(ModelResource):
         """
         if isinstance(f, GeometryField):
             return EncodedGeometryApiField
-    
+
         return super(EncodedGeoResource, cls).api_field_from_django_field(f, default)

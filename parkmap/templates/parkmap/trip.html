@@ -16,23 +16,8 @@
         <div class="menu-box opacity">&nbsp;</div>
         <div class="menu-box-inner">
           <div class="menu-box-item">
-            <form method="get" action="">
-                <select id='neighborhood_activity' name='town'>
-                    <option SELECTED value="">Select Your Activity</option>
-                    {% for activ in activities %}
-                        <option {% ifequal activ activity %} selected {% endifequal %} value="{{activ.slug}}">{{activ.name}}</option>
-                    {% endfor %}
-                </select>
-
-                <select name='town' id='neighborhood_neighborhood'>
-                    <option SELECTED VALUE="">Select Your Neighborhood/Town</option>
-                    {% for neighborh in neighborhoods %}
-                        <option value="{{neighborh.slug}}">{{neighborh.name}}</option>
-                    {% endfor %}
-                </select>
-                <noscript><input type="submit" value="Submit"></noscript>
-            </form>
-            <div id="parklist">{{parks_in_queue}}</div>
+              Saved Destinations
+              <div id="parklist"></div>
           </div>
         </div>
       </div>
@@ -42,7 +27,7 @@
 {% endblock %} 
 {% block javascript %}
     {{ block.super }}
-<script src="{{STATIC_URL}}parkmap/js/filters.js"></script>
+<script src="{{STATIC_URL}}parkmap/js/parkmap.js"></script>
 <script>
     $(document).ready(function(){
         $('#neighborhood_activity').bind("keypress change",(function() {
@@ -57,6 +42,9 @@
         {% if neighborhood %}
             update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
         {% endif %}
+        var parks_queue = {{parks_in_queue}};
+        bp.loadparktrip(parks_queue);
+
     });
 </script>   
 

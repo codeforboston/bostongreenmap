@@ -42,6 +42,7 @@ class ParktypeResource(ModelResource):
             orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
 
+
 class ParkResource(EncodedGeoResource):
     """
     Park with enocoded geometries
@@ -81,6 +82,10 @@ class ParkResource(EncodedGeoResource):
             orm_filters = {"pk__in": [i.os_id for i in parks]}
         return orm_filters
 
+    def dehydrate(self, bundle):
+        bundle.data['lat_long'] = bundle.obj.lat_long()
+        return bundle
+
 
 class ActivityResource(ModelResource):
     class Meta:
@@ -95,7 +100,7 @@ class ActivityResource(ModelResource):
             activities = get_activities(filters['neighborhood'])
             queryset = Activity.objects.filter(pk__in=activities)
             orm_filters = {"pk__in": [i.id for i in queryset]}
-        return orm_filters 
+        return orm_filters
 
 
 class FacilityResource(GeoResource):
@@ -161,7 +166,7 @@ class ExploreFacilityResource(GeoResource):
     icon = fields.CharField(attribute='icon_url')
     activity_string = fields.CharField(attribute='activity_string')
     admin_url = fields.CharField(attribute='admin_url')
-    
+
     class Meta:
         queryset = Facility.objects.transform(4326).all()
         allowed_methods = ('get',)
