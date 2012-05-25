@@ -406,7 +406,7 @@ var bp = {
 // add google map
 bp.map = new google.maps.Map(document.getElementById("map_canvas"), {
   zoom: 13,
-  center: new google.maps.LatLng(42.31, -71.032), // boston
+  center: new google.maps.LatLng (42.307733,-71.09713),  //NEW: Franklin Park OLD: (42.31, -71.032), boston
   minZoom: 10,
   maxZoom: 17,
   mapTypeControlOptions: {

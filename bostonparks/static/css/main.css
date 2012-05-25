@@ -155,6 +155,7 @@ color: #666;
 }
 
 .well {
+  box-shadow: none;
   background-color: transparent;
   border: 1px none #eee;
   border: 1px none rgba(0, 0, 0, 0.05);
@@ -163,17 +164,17 @@ color: #666;
   
 .span3 > .well
 {
-padding-top: 0;
+  padding-top: 0;
 }
 
 
 #map_canvas {
     position: absolute;
-    top: 68px;
+    top: 0px;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 10;
+    z-index: 1;
 }
 
 #map_canvas.detail {
@@ -366,6 +367,10 @@ margin-bottom: 0;
 
 .navbar {
     margin-bottom: 1px;
+    opacity:.8; /*mozilla firefox*/
+    filter:alpha(opacity:80); /*internet explorer*/
+    position: relative;
+    z-index: 10;
     }
     
 .neighborhood-park
