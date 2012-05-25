@@ -71,6 +71,36 @@
         <div class="span7">
           <div id="map_canvas" class="detail well">		
           </div><!--/.well -->
+          
+
+
+        <div id="stories">
+        <h2>Park Stories</h2>
+        
+        {% for story in stories|slice:":10" %}
+
+         <div class="rating_{{ story.rating }}">
+         {{ story.text|truncatewords:40 }}
+         </div>
+
+         {% empty %}
+       <div class="nostories"> There are no stories for this park, why don&rsquo;t you add one below.</div>
+         {% endfor %}
+        
+        
+        <div class="">
+        <form id="new_story" action="" method="POST">
+        <div>
+        {{ story_form.as_p }}
+        <input type="submit">
+        </div>
+        
+        </form> 
+        </div>
+        
+        </div>
+          
+          
         </div><!--/span-->
 
 
