@@ -149,6 +149,10 @@ class Park(models.Model):
     def area_acres(self):
         return self.area / 4047
 
+    def lat_long(self):
+        self.geometry.transform(4326)
+        return (self.geometry.centroid.y,self.geometry.centroid.x)
+
     def save(self, *args, **kwargs):
 
         self.area = self.geometry.area
@@ -281,3 +285,17 @@ class Facility(models.Model):
 class Friendsgroup(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField(blank=True, null=True)
+
+class Story(models.Model):
+    RATING_CHOICES = (
+        ('1', "Happy"),
+        ('2', "Blah"),
+        ('3', "Idea"),
+        ('4', "Sad"),
+    )
+    date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(blank=False, null=False)
+    rating = models.CharField(max_length=1, null=False, choices=RATING_CHOICES)
+    email = models.EmailField(max_length=100, blank=False, null=False)
+    park = models.ForeignKey(Park, blank=True, null=False)
+
