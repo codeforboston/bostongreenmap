@@ -4,7 +4,8 @@ from django.utils import simplejson
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
-from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype
+from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story
+from forms import StoryForm
 from django.template import RequestContext
 import gpolyencode
 
@@ -46,9 +47,22 @@ def parks_page(request, park_slug):
     encoder = gpolyencode.GPolyEncoder()
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
+    stories = Story.objects.filter(park=park)
+    if request.method == 'POST':
+        story = Story()
+        f = StoryForm(request.POST, instance=story)
+        if f.is_valid():
+            story.park = park
+            f.save()
+            f = StoryForm()
+    else:
+        f = StoryForm()
+            
     return render_to_response('parkmap/park.html',
         {'park': park,
-         'map': map
+         'map': map,
+         'story_form': f,
+         'stories': stories,
         },
         context_instance=RequestContext(request)
     )
@@ -155,6 +169,7 @@ def plan_a_trip(request):  # Activity slug, and Neighborhood slug
 
 
 def add_remove_park_trip_planning(request, park_id):
+    park_id = int(park_id)
     trip_queue = request.session.get('trip_queue',[])
     add = 1
     if park_id in trip_queue:
@@ -166,6 +181,7 @@ def add_remove_park_trip_planning(request, park_id):
     return HttpResponse(add)
 
 def check_park_in_trip(request, park_id):
+    park_id = int(park_id)
     trip_queue = request.session.get('trip_queue',[])
     return HttpResponse(park_id in trip_queue)
 
