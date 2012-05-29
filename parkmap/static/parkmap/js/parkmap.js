@@ -13,6 +13,11 @@ var bp = {
   // paginaton threshold
   listlimit: 10,
 
+  // There should be only one
+  sharedinfowindow: new google.maps.InfoWindow({
+    content: "foo"
+  }),
+
   update_second_dropdown: function(search_type, filter_type, filter,value_key,django_neighborhood) {
     /*
     Pass in:
@@ -132,12 +137,13 @@ var bp = {
         } 
     });
   },
-park_trip_button_bind: function(park_id){
+  park_trip_button_bind: function(park_id){
       if (typeOf(park_id) == 'array'){
         for (var i in park_id) (function(i) {
             $("#tripadd_"+park_id[i]).bind('click',function(){
                 bp.add_remove_park_trip(park_id[i]);
             });
+            bp.check_park_in_queue(park_id[i]);
         })(i);
       } else {
         $("#tripadd_"+park_id).bind('click',function(){
@@ -369,11 +375,17 @@ park_trip_button_bind: function(park_id){
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }
+/*
     var facilityinfo = new google.maps.InfoWindow({
       content: facilityinfocontent
     });
     google.maps.event.addListener(facilitymarker, 'click', function() {
       facilityinfo.open(bp.map, facilitymarker);
+    });
+*/
+    google.maps.event.addListener(facilitymarker, 'click', function() {
+      bp.sharedinfowindow.setContent(facilityinfocontent);
+      bp.sharedinfowindow.open(bp.map, facilitymarker);
     });
   },
 

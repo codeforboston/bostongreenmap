@@ -9,9 +9,6 @@
 {% block headscripts %}
         <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'> 
 
-		<link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-
 		<style type="text/css" title="text/css">
 		@media (max-width: 480px) {
 		  body.home .well {
@@ -57,7 +54,7 @@
 
 
 <div class="container-fluid middle">
- <div class="row-fluid show-grid">
+ <div class="row-fluid show-grid bpa-draggable">
 <div class="span12 middle">
 <div class="well menu-box clearfix">
 <div class="menu-box opacity">&nbsp;</div>
@@ -76,11 +73,13 @@
 	    
 	</div>
 	
-    <div id="play" class="menu-box-item play">
+     <a href="/park/play/">
+     <div id="play" class="menu-box-item play">
         <h1>Play!</h1>
         <h4>Browse parks and facilities by activity</h4>
-    </div>
-	    
+     </div>
+     </a>
+     
 	  <a href="/explore/">
 	  <div class="menu-box-item">
 			<h1>Explore the Map</h1>

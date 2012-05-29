@@ -57,6 +57,7 @@
 {% block javascript %}
 {% include "_map_scripts.html" %}
 <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script>
+<script src="/static/parkmap/js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 <script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
 {% if user.is_staff %}<script type="text/javascript"> bp.staff = true; </script>{% endif %}
@@ -66,6 +67,7 @@
 	<script>
 $(document).ready(function(){
         bp.count_parks_in_queue();
+        $(".bpa-draggable").draggable();
 });
 </script>
         

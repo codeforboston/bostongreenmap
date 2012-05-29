@@ -2,7 +2,11 @@
 {% block title %}{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}
-
+<style>
+	#parklist { list-style-type: none; margin: 0; padding: 0; }
+	#parklist li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
+	#parklist li span { position: absolute; margin-left: -1.3em; }
+</style>
 {% endblock %}
 {% block bodyclass %} 
 <body class="plan">
@@ -10,18 +14,22 @@
 {% block content %} 
 <div id="map_canvas" class="hidden-phone"></div>
 <div class="container-fluid middle">
-  <div class="row-fluid show-grid">
+  <div class="row-fluid show-grid bpa-draggable">
     <div class="span12">
       <div class="well menu-box clearfix">
         <div class="menu-box opacity">&nbsp;</div>
         <div class="menu-box-inner">
           <div class="menu-box-item">
               Saved Destinations
-              <div id="parklist">
+              <ul id="parklist" class="clearfix">
               {% for park in parks_in_queue %}
-                <h3>{{park.name}}</h3><input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='Add to Trip' alt='{{park.name}}' /><br>
+                <li class="ui-state-default parkitem clearfix">
+                        <h3>{{park.name}}</h3>
+                        {% if park.description %}<span> {{park.description}}</span>{%endif %}
+                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='Add to Trip' alt='{{park.name}}' />
+                </li>
               {% endfor %}
-	      </div>
+	      </ul>
           </div>
         </div>
       </div>
@@ -31,7 +39,6 @@
 {% endblock %} 
 {% block javascript %}
     {{ block.super }}
-<script src="{{STATIC_URL}}parkmap/js/parkmap.js"></script>
 <script>
     $(document).ready(function(){
         $('#neighborhood_activity').bind("keypress change",(function() {
@@ -47,6 +54,11 @@
             update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
         {% endif %}
         bp.park_trip_button_bind({{park_ids}});
+
+        $("#parklist").sortable(/*{
+            //change: function(event,ui){ console.log("k"); }
+        }*/); 
+        $("#parklist").disableSelection();
     });
 </script>   
 
