@@ -53,8 +53,7 @@ class ParkResource(EncodedGeoResource):
     parktype = fields.ToOneField(ParktypeResource, 'parktype')
 
     class Meta:
-        #queryset = Park.objects.transform(4326).filter(parktype__isnull=False)
-        queryset = Park.objects.filter(parktype__isnull=False)
+        queryset = Park.objects.transform(4326).filter(parktype__isnull=False)
         allowed_methods = ['get', ]
         resource_name = 'park'
         cache = SimpleCache()
@@ -236,11 +235,11 @@ def get_parktypes(neighborhood_id):
     return list(set(parktypes))
 
 
-def get_activities(neighborhood_slug):
+def get_activities(neighborhood_id):
     """
     Get all activitty ids that are in a neighborhood.
     """
-    neighborhood = Neighborhood.objects.get(slug=neighborhood_slug)
+    neighborhood = Neighborhood.objects.get(id=neighborhood_id)
     parks = Park.objects.filter(geometry__intersects=neighborhood.geometry)
     facilities = []
     for park in parks:

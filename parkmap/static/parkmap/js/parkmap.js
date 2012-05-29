@@ -72,7 +72,6 @@ var bp = {
       // parkfilter defaults  
       parkfilter["format"] = "json";
       parkfilter["limit"] = this.listlimit;
-      console.log(parkfilter);
     }
 
     $.getJSON(url,
@@ -394,6 +393,80 @@ park_trip_button_bind: function(park_id){
     }
   },
 
+  // FIXME: not ideal for performance. better to make one initial request for full object
+  // and parse it on client to pair dropdowns  
+  // appends or updates (if exists) a dropdown for given modelclass to conatainer element
+  build_dropdown: function(container, modelclass, filter, selected) {
+
+    var dropdown = $("select#" + modelclass);
+
+    if ( dropdown.length > 0 ) { 
+      // update existing
+      dropdown.empty();
+    } else {
+      // create new
+      dropdown = $("<select />", {
+        "id": modelclass
+      });
+      $(container).append(dropdown);
+    }
+    
+    var filter = filter || {};
+    filter["format"] = "json";
+
+    var selected = selected || "";
+    
+    $.getJSON("/api/v1/" + modelclass + "/", 
+      filter,
+      function(data) {
+        var titleoption = $("<option />", {
+          "value": ""
+        })
+        .html(bp.titlecase("Select Your " + modelclass));
+        dropdown.append(titleoption)
+        $.each(data.objects, function(key, obj) {
+          var option = $("<option />", {
+            value: obj["id"]
+          })
+          .data("slug", obj["slug"])
+          .html(obj["name"]);
+          dropdown.append(option);
+        });
+        // select
+        dropdown.val(selected);
+    });
+
+    return dropdown;
+  },
+  
+  // pairs two dropdowns to only show possible value combinations
+  // accepts list of dropdown objects
+  pair_dropdown: function(dd) {
+    
+    $.each(dd, function(key, dropdown) {
+
+      // previous list item
+      var previous = ((key - 1) < 0) ? key -1 + dd.length : key - 1;
+
+      $(dropdown).on("change", function(e) {
+
+        var selected = $(dd[previous], "option:selected").val();
+        var filter = {};
+
+        if ($(this).val() !== "") filter[$(dropdown).attr("id")] = $(this).val();
+
+        var container = $(dropdown).parent();
+
+        // update other dropdown
+        bp.build_dropdown(container, $(dd[previous]).attr("id"), filter, selected);
+      });
+    });
+  },
+
+  /*
+   * UTILITIES
+   */
+
   // encoded polylines for google maps
   decodeLevels: function(encodedLevelsString) {
       var decodedLevels = [];
@@ -410,6 +483,14 @@ park_trip_button_bind: function(park_id){
     var string = string.trim().substring(0, nrchars).split(" ").slice(0, -1).join(" ") + "...";
     return string;
   },
+
+  titlecase: function(string)
+  {
+    return string.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  },
+
   add_remove_park_trip: function(park_id){
      $.get('/plan/addremove/'+park_id+'/',function(data){
          if (data == 0){ // 0 = removed

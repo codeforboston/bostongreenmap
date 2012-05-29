@@ -76,32 +76,10 @@
 	    
 	</div>
 	
-	
-	<div class="menu-box-item">
-		<h1>Play!</h1>
-		<h4>Browse parks and facilities by activity</h4>
-	        <form method="get" action="">
-		    <select id='neighborhood_activity' name='town'>
-		        <option SELECTED value="----">Select Your Activity</option>
-
-		        {% for activity in activities %}
-		    	<option value="{{activity.slug}}">{{activity.name}}</option>
-		        {% endfor %}
-		    </select>
-		    
-		    <select name='town' id='neighborhood_neighborhood'>
-		    	<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>
-		    	{% for neighborhood in neighborhoods %}
-		    		<option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
-		    	{% endfor %}				
-		    </select>
-		    
-		    
-		    <noscript><input type="submit" value="Submit"></noscript>
-		</form>
-		
-		
-	  </div>
+    <div id="play" class="menu-box-item play">
+        <h1>Play!</h1>
+        <h4>Browse parks and facilities by activity</h4>
+    </div>
 	    
 	  <a href="/explore/">
 	  <div class="menu-box-item">
@@ -126,46 +104,39 @@
 {% endblock %}	
 {% block javascript %}
     {{ block.super }}
-    <script type="text/javascript">
+        <script type="text/javascript">
 
-        bp.parkfilter = {
-            "area__gt": "10000"
-        }
+            bp.parkfilter = {
+                "area__gt": "10000"
+            }
 
-        $(document).ready(function () {
+            $(function() {
 
-           $('#neighborhood_only').change(function() {
-              window.location = ("/neighborhood/"+$(this).val()+"/");
-            }); 
+              $('#neighborhood_only').change(function() {
+                window.location = ("/neighborhood/"+$(this).val()+"/");
+              });
+
+              // create and pair play dropdowns
+              var $a_dd = bp.build_dropdown("#play", "activity");
+              var $n_dd = bp.build_dropdown("#play", "neighborhood");
+              bp.pair_dropdown([$a_dd, $n_dd]);
+              // add play search button
+              var playbutton = $("<button />", {
+                "class": "btn",
+                "href": "javascript:void(0)"
+              })
+              .html("Search")
+              .on("click", function(e){
+                var activity = $("select#activity option:selected").data("slug");
+                var neighborhood = $("select#neighborhood option:selected").data("slug");
+                if (activity && neighborhood) window.location = ("/neighborhood/" + neighborhood + "/" + activity + "/");
+              });
+              $("#play").append(playbutton);
+
+            });
 
 
-           $('#neighborhood_activity').change(function() {
-               update_select($(this).val());
-           }); 
-           $('#neighborhood_neighborhood').change(function() {
-               if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
-                  window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
-               }
-
-           }); 
-
-        });
-        function update_select(activity){
-             var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
-             $.ajax({
-                 url:'/api/v1/neighborhood/?format=json&activity='+activity,
-                 dataType:'json',
-                 success:function(json){
-                     $.each(json['objects'], function(key, obj) {
-        out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
-                     });
-                     $("#neighborhood_neighborhood").html(out);
-                     $("#neighborhood_neighborhood").selectedIndex = 0;
-                 }
-             });
-        }
-
-    </script>
+        </script>
 	{% endblock %}
 
 </body>
