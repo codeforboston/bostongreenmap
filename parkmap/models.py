@@ -152,7 +152,7 @@ class Park(models.Model):
 
     def lat_long(self):
         self.geometry.transform(4326)
-        return (self.geometry.centroid.y,self.geometry.centroid.x)
+        return [self.geometry.centroid.y,self.geometry.centroid.x]
 
     def save(self, *args, **kwargs):
 
@@ -296,8 +296,8 @@ class Story(models.Model):
     )
     date = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, null=True)
-    text = models.TextField(blank=False, null=False)
     rating = models.CharField(max_length=1, default='0', blank=False, null=False, choices=RATING_CHOICES)
+    text = models.TextField(blank=False, null=False)
     email = models.EmailField(max_length=100, blank=False, null=False)
     park = models.ForeignKey(Park, blank=True, null=False)
 

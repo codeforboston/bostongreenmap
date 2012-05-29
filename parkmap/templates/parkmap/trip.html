@@ -23,10 +23,10 @@
               Saved Destinations
               <ul id="parklist" class="clearfix">
               {% for park in parks_in_queue %}
-                <li class="ui-state-default parkitem clearfix">
+                <li class="ui-state-default parkitem clearfix" id="tripitem_{{park.os_id}}">
                         <h3>{{park.name}}</h3>
                         {% if park.description %}<span> {{park.description}}</span>{%endif %}
-                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='Add to Trip' alt='{{park.name}}' />
+                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='X' alt='{{park.name}}' />
                 </li>
               {% endfor %}
 	      </ul>
@@ -41,6 +41,9 @@
     {{ block.super }}
 <script>
     $(document).ready(function(){
+        var trip_lat_longs = {
+        {% for park in parks_in_queue %}'tripitem_{{park.os_id}}':{{park.lat_long}}{% if not forloop.last %}, {% endif %}{% endfor %}
+        };
         $('#neighborhood_activity').bind("keypress change",(function() {
             if ($(this).val() != ""){
                 //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
@@ -50,16 +53,33 @@
         $('#neighborhood_neighborhood').bind("keypress change",(function() {
             play_get_parks(0);
         }));
-        {% if neighborhood %}
-            update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'slug',"{{neighborhood.slug}}");
-        {% endif %}
-        bp.park_trip_button_bind({{park_ids}});
+        bp.park_trip_button_bind({{park_ids}},true);
 
-        $("#parklist").sortable(/*{
-            //change: function(event,ui){ console.log("k"); }
-        }*/); 
+        $("#parklist").sortable({
+            update: function(event){
+                bp.trip_generate_url(get_coords($("#parklist")));
+           }
+        });
+
         $("#parklist").disableSelection();
-    });
-</script>   
 
+        //FIXME: I need to finish this, but I have to call it an early night
+        function get_coords(list){
+            console.log(list);
+            var new_trip_list = [];
+            list.children().each(function(){
+                if($(this).attr('id') != undefined){
+                    new_trip_list[new_trip_list.length] = $(this).attr('id');
+                }
+            });
+            var waypoint_coords = [];
+            for(var i = 0; i < new_trip_list.length;i++){
+                waypoint_coords[waypoint_coords.length] = [trip_lat_longs[new_trip_list[i]][0], trip_lat_longs[new_trip_list[i]][1]];
+            }
+            return waypoint_coords;
+        }
+        bp.trip_generate_url(get_coords($("#parklist")));
+    });
+
+</script> 
 {% endblock %}

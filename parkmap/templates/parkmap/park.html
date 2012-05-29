@@ -18,7 +18,21 @@
           <div class="well">
 					<h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small></span>{% endif %}</h2>
 
-                    {% if park.description %}<p>{{ park.description|markdown }}</p>{% endif %}
+                    {% if park.description %}<p>
+             <div>      
+            <div class="parkdesc parkdescshort">
+			 {{ park.description|markdown|truncatewords:20 }}
+			 </div>
+			 <div class="parkdesc parkdesclong hide">
+			 {{ park.description|markdown }}
+ 		{% if park.description.text|wordcount > 20 %}        
+             <a class="descmore">Read more &raquo;</a>
+             <a class="descless hide">&laquo; Read less </a>
+
+        {% endif %} 
+             </div>
+                    
+                    </p>{% endif %}
 					
 					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
                     <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>					
@@ -39,7 +53,7 @@
 					<h5>Upcoming events</h5>
 					<ul>
                                         {% for event in park.events.all %}
-                                            <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</li>
+                                            <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</a></li>
                                         {% endfor %}
 					<li><a href="#">Create an event</a></li>
 					</ul>
@@ -74,42 +88,52 @@
           
 
 
-        <div id="stories">
+    <div id="stories">
         <h2>Park Stories</h2>
         
         {% for story in stories|slice:":10" %}
          <div class="parkstory">
-         <div class="rating_{{ story.rating }}">
-         {% if story.title %}
-         <div class="storytitle">{{ story.title }}</div>
-         {% endif %}
-         <p>
-         {{ story.text|truncatewords:40 }}
-         </p>
+			 <div class="rating_{{ story.rating }}">
+			 {% if story.title %}
+			 <div class="storytitle">{{ story.title }}</div>
+			 {% endif %}
+			 <div class="storytext storyshort">
+			 {{ story.text|truncatewords:40 }}
+			 </div>
+			 <div class="storytext storylong hide">
+			 {{ story.text }}
+			 </div>
+	         
+			 
+		{% if story.text|wordcount > 40 %}        
+             <a class="read">Read more &raquo;</a>
+             <a class="readless hide">&laquo; Read less </a>
+
+    {% endif %} </div>
          </div>
-         
-         <a href="{{ story.get_absolute_url }}">Read more &raquo;</a>
-         </div>
-         
-         {% empty %}
-       <div class="nostories"> There are no stories for this park. Why don&rsquo;t you add one below.</div>
+ {% empty %}
+       <div class="nostories"> 
+           There are no stories yet for this park. 
+        </div>
          {% endfor %}
         
+        <div><a class="sharestory" href="#ns">Share Your Story</a></div>
         
-        <div class="newstory">
-        <form id="new_story" action="" method="POST">
-        {% csrf_token %}
-        <div>
-        {{ story_form.as_p }}
-        <input type="submit" value="Submit Story">
-        </div>
-        
-        </form> 
-        </div>
+			<div class="newstory hide">
+			<a id='ns'>
+				<form id="new_story" action="" method="POST">
+				{% csrf_token %}
+				<div>
+				{{ story_form.as_p }}
+				<input type="submit" value="Submit Your Story">
+				</div>
+				
+				</form> 
+			</div>
         
         </div>
           
-          
+     </div>     
         </div><!--/span-->
 
 
@@ -134,7 +158,39 @@
 $(document).ready(function(){
     bp.park_trip_button_bind("{{park.os_id}}");
     bp.check_park_in_queue("{{park.os_id}}");
+    $("label[for='id_rating_0']").closest('li').addClass('rating_0');
+    $("label[for='id_rating_1']").closest('li').addClass('rating_1');
+    $("label[for='id_rating_2']").closest('li').addClass('rating_2');
+    $("label[for='id_rating_3']").closest('li').addClass('rating_3');
+    $("a.read").click(function(){
+        $(this).siblings(".storytext").toggle(400);
+        $('a.readless').show();
+        $('a.read').hide();
+    });    
+    $("a.readless").click(function(){
+        $(this).siblings(".storytext").toggle(400);
+        $('a.readless').hide();
+        $('a.read').show();
+    });
+    $("a.sharestory").click(function(){
+        $(".newstory").slideToggle('slow', function() {
+        });
+    });
+    $("a.descmore").click(function(){
+        $(this).siblings(".parkdesc").toggle(400);
+        $('a.descless').show();
+        $('a.descmore').hide();
+    });    
+    $("a.descless").click(function(){
+        $(this).siblings(".parkdesc").toggle(400);
+        $('a.descless').hide();
+        $('a.descmore').show();
+    });
+
 });
+
+
 </script>
+
 {% endblock %}	
 
