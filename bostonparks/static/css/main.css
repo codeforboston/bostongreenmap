@@ -1,6 +1,7 @@
 html,
 body {
 height: 100%;
+background-color: pink;
 }
 
 body {    
@@ -545,3 +546,4 @@ color: yellow;
 body.explore .navbar .nav > li > a.explore {
 color: yellow;
 }
+

@@ -72,6 +72,7 @@ var bp = {
       // parkfilter defaults  
       parkfilter["format"] = "json";
       parkfilter["limit"] = this.listlimit;
+      console.log(parkfilter);
     }
 
     $.getJSON(url,
@@ -98,35 +99,53 @@ var bp = {
           out += p;
         });
 
-        // show facilities
-        if (bp.mapconf["showfacilites"] ) bp.loadfacilities({
-          "park__neighborhoods": parkfilter["neighborhood"],
-          "activity": parkfilter["activity"]
-        });
-        
+        try {
+            // show facilities
+            if (bp.mapconf["showfacilites"] ) bp.loadfacilities({
+              "park__neighborhoods": parkfilter["neighborhood"],
+              "activity": parkfilter["activity"]
+            });
+        } catch (e) {
+            console.log(e);
+        }
         var previous = false;
         // FIXME: we need some of the parkfilter options (activity and neighborhood) for facility queries
         if(data['meta']['previous']){
-            out += '<a href="javascript:void(0)" onclick="bp.update_parklist(\''+data['meta']['previous']+'\')">PREVIOUS</a>';
+            out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
+            console.log(data['meta']);
             previous = true;
           }
         if(data['meta']['next']){
             if(previous){ out += "&nbsp;&nbsp;";}
-            out += '<a href="javascript:void(0)" onclick="bp.update_parklist(\''+data['meta']['next']+'\')">NEXT</a>';
+            out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
           }
         $("#parklist").html(out);
+
+        $("#prev_link").bind("click", function(){
+            bp.update_parklist(data['meta']['prev']);
+        });
+        $("#next_link").bind("click", function(){
+            bp.update_parklist(data['meta']['next']);
+        });
         for (var pid in park_ids){
             bp.check_park_in_queue(park_ids[pid]);
             bp.park_trip_button_bind(park_ids[pid]);
         } 
     });
   },
-  park_trip_button_bind: function(id){
-	$("#tripadd_"+id).bind('click',function(){
-            bp.add_remove_park_trip(id);
+park_trip_button_bind: function(park_id){
+      if (typeOf(park_id) == 'array'){
+        for (var i in park_id) (function(i) {
+            $("#tripadd_"+park_id[i]).bind('click',function(){
+                bp.add_remove_park_trip(park_id[i]);
+            });
+        })(i);
+      } else {
+        $("#tripadd_"+park_id).bind('click',function(){
+            bp.add_remove_park_trip(park_id);
         });
+      }
   },
-
   play_get_parks: function(offset) {
     var neighborhood = $("#neighborhood_neighborhood").val();
     var activity = $("#neighborhood_activity").val();
@@ -209,7 +228,6 @@ var bp = {
        }
      });
 
-
     $.ajax({
      url:'/api/v1/explorefacility/?format=json&limit=1000&neighborhood='+neighborhood+'&parktype='+parktype+'&activity_ids='+activities,
      dataType:'json',
@@ -275,7 +293,6 @@ var bp = {
            parkfilter,
            function(data) {
              var park = data.objects[0];
-             $("#parklist").html($("#parklist").html() + "<h3>" + park['name']+'</h3>');
              $("#parklist").html($("#parklist").html() + "<input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /><br>");
              bp.check_park_in_queue(park['os_id']);
              for(var r in need_to_rebind){
@@ -284,6 +301,11 @@ var bp = {
        }); 
     }
   },
+
+  maptheparktrip: function(ids){
+      url = "http://maps.googleapis.com/maps/api/directions/json?origin=42.30055499999974,-71.06547850000001&destination=42.29352942843293,-71.05678739548821&sensor=false";
+
+ },
 
   // loac facilities and render on map
   loadfacilities: function(facilityfilter) {
@@ -457,3 +479,15 @@ $(function() {
 
 });
 
+
+function typeOf(obj) {
+  if ( typeof(obj) == 'object' ){
+    if (obj.length){
+      return 'array';
+    } else{
+      return 'object';
+    } 
+  }else {
+     return typeof(obj);
+  }
+}

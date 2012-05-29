@@ -16,12 +16,12 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well">
-					<h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small><span>{% endif %}</h2>
+					<h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small></span>{% endif %}</h2>
 
                     {% if park.description %}<p>{{ park.description|markdown }}</p>{% endif %}
 					
 					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
-                    <p><strong>Size:</strong> {{park.geometry.area|floatformat:"2"|intcomma}}</p>					
+                    <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>					
 					<h5>Get there!</h5>
 					{% if park.address %}<p>{{park.address}}</p>{% endif %}
 					<p><a href="#">Plan a route</a></p>
@@ -78,21 +78,27 @@
         <h2>Park Stories</h2>
         
         {% for story in stories|slice:":10" %}
-
+         <div class="parkstory">
          <div class="rating_{{ story.rating }}">
+         <div class="storytitle">{{ story.title }}</div>
+         
          {{ story.text|truncatewords:40 }}
          </div>
-
+         
+         <a href="{{ story.get_absolute_url }}">Read more &raquo;</a>
+         </div>
+         
          {% empty %}
-       <div class="nostories"> There are no stories for this park, why don&rsquo;t you add one below.</div>
+       <div class="nostories"> There are no stories for this park. Why don&rsquo;t you add one below.</div>
          {% endfor %}
         
         
-        <div class="">
+        <div class="newstory">
         <form id="new_story" action="" method="POST">
+        {% csrf_token %}
         <div>
         {{ story_form.as_p }}
-        <input type="submit">
+        <input type="submit" value="Submit Story">
         </div>
         
         </form> 

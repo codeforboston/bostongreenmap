@@ -294,8 +294,15 @@ class Story(models.Model):
         ('4', "Sad"),
     )
     date = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
     text = models.TextField(blank=False, null=False)
-    rating = models.CharField(max_length=1, null=False, choices=RATING_CHOICES)
+    rating = models.CharField(max_length=1, default='0', blank=False, null=False, choices=RATING_CHOICES)
     email = models.EmailField(max_length=100, blank=False, null=False)
     park = models.ForeignKey(Park, blank=True, null=False)
 
+    class Meta:
+        ordering = ('-date',)
+        
+    @models.permalink
+    def get_absolute_url(self):
+        return ('parkmap.views.story', [str(self.id)])

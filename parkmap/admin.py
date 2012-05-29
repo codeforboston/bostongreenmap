@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 
-from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype, Friendsgroup
+from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype, Friendsgroup, Story
 
 
 # default GeoAdmin overloads
@@ -35,3 +35,4 @@ admin.site.register(Neighborhood, admin.OSMGeoAdmin)
 admin.site.register(Activity, LookupAdmin)
 admin.site.register(Event)
 admin.site.register(Friendsgroup)
+admin.site.register(Story)

@@ -5,3 +5,4 @@ class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
         exclude = ('park',)
+        widgets = dict(rating=forms.RadioSelect())

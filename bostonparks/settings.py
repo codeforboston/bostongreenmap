@@ -159,7 +159,6 @@ LOGGING = {
     }
 }
 
-
 # import local settings
 try:
     from local_settings import *

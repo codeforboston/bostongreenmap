@@ -31,6 +31,7 @@ class ParktypeResource(ModelResource):
     class Meta:
         queryset = Parktype.objects.all()
         allowed_methods = ['get']
+        cache = SimpleCache()
 
     def build_filters(self, filters=None):
         if filters is None:
@@ -52,7 +53,8 @@ class ParkResource(EncodedGeoResource):
     parktype = fields.ToOneField(ParktypeResource, 'parktype')
 
     class Meta:
-        queryset = Park.objects.transform(4326).filter(parktype__isnull=False)
+        #queryset = Park.objects.transform(4326).filter(parktype__isnull=False)
+        queryset = Park.objects.filter(parktype__isnull=False)
         allowed_methods = ['get', ]
         resource_name = 'park'
         cache = SimpleCache()
@@ -83,7 +85,10 @@ class ParkResource(EncodedGeoResource):
         return orm_filters
 
     def dehydrate(self, bundle):
+        print 'hi'
+        bundle.obj.geometry.transform(4326)
         bundle.data['lat_long'] = bundle.obj.lat_long()
+        print 'dee ho'
         return bundle
 
 
@@ -91,6 +96,7 @@ class ActivityResource(ModelResource):
     class Meta:
         queryset = Activity.objects.all()
         allowed_methods = ['get']
+        cache = SimpleCache()
 
     def build_filters(self, filters=None):
         if filters is None:
@@ -118,6 +124,7 @@ class FacilityResource(GeoResource):
         queryset = Facility.objects.transform(4326).filter(park__isnull=False)
         allowed_methods = ['get', ]
         resource_name = 'facility'
+        cache = SimpleCache()
         filtering = {
             'name': ALL,
             'park': ALL_WITH_RELATIONS,
@@ -128,6 +135,7 @@ class ExploreActivityResource(ModelResource):
     class Meta:
         queryset = Activity.objects.all()
         allowed_methods = ('get',)
+        cache = SimpleCache()
         excludes = ('status', 'location')
 
     def build_filters(self, filters=None):
@@ -146,6 +154,7 @@ class ExploreParkResource(EncodedGeoResource):
     class Meta:
         queryset = Park.objects.transform(4326).all()
         allowed_methods = ('get',)
+        cache = SimpleCache()
         excludes = ('status', 'location')
 
     def build_filters(self, filters=None):
@@ -170,6 +179,7 @@ class ExploreFacilityResource(GeoResource):
     class Meta:
         queryset = Facility.objects.transform(4326).all()
         allowed_methods = ('get',)
+        cache = SimpleCache()
         excludes = ('status', 'location')
 
     def build_filters(self, filters=None):
@@ -197,6 +207,7 @@ class EntryResource(ModelResource):
     class Meta:
         queryset = Neighborhood.objects.all()
         allowed_methods = ['get']
+        cache = SimpleCache()
 
 
 ## Indepth filter functions
