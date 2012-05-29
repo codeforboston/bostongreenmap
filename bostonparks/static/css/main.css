@@ -1,11 +1,11 @@
 html,
 body {
 height: 100%;
-background-color: pink;
 }
 
 body {    
 text-align: center;
+background-color: #ffffff;
 }
 
 h1 {
@@ -75,6 +75,12 @@ a:visited h4 {
 a:hover h4,
 a:active h4 {
     color: #666666;
+}
+
+a.next_link
+{
+display: block;
+clear: both;
 }
 
 
@@ -258,9 +264,12 @@ body.home #map_canvas {
     text-align: left;
 }
 
-.play .container-fluid.middle
+.play .container-fluid.middle,
+.explore .container-fluid.middle
+
 {
 margin: 20px;
+width: 400px;
 }
 
 .neighborhood .container-fluid.middle
@@ -362,6 +371,22 @@ body.play form
 margin-bottom: 0;
 }
 
+#parklist h3
+{
+    clear: both;
+    float: left;
+    font-size: 16px;
+    line-height: 18px;
+    padding-bottom: 7px;
+    padding-left: 0;
+    padding-top: 7px;
+    width: 60%;
+}
+
+#parklist .add-trip-button
+{
+float: right;
+}
 
 
 
@@ -547,3 +572,34 @@ body.explore .navbar .nav > li > a.explore {
 color: yellow;
 }
 
+/* Park Stories */
+
+.container-fluid.middle .newstory
+{
+background-color: beige;
+}
+
+.newstory form label
+{
+float: left;
+padding-right: 10px;
+}
+
+
+.newstory form #id_text
+{
+height: 70px;
+width: 80%;
+}
+
+.newstory form ul li
+{
+float: left;
+}
+
+.parkstory
+{
+display: block;
+margin-bottom: 20px;
+}
+ 

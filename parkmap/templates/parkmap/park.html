@@ -80,9 +80,12 @@
         {% for story in stories|slice:":10" %}
          <div class="parkstory">
          <div class="rating_{{ story.rating }}">
+         {% if story.title %}
          <div class="storytitle">{{ story.title }}</div>
-         
+         {% endif %}
+         <p>
          {{ story.text|truncatewords:40 }}
+         </p>
          </div>
          
          <a href="{{ story.get_absolute_url }}">Read more &raquo;</a>
