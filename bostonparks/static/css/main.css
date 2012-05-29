@@ -315,7 +315,7 @@ height: 80%;
 margin-top: 22px;
 }
 
-.menu-box-item form select {
+.menu-box-item form select, .play select {
     width: 100%;
     margin-top: 10px;
 }
