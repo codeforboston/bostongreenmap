@@ -126,46 +126,46 @@
 {% endblock %}	
 {% block javascript %}
     {{ block.super }}
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-            bp.parkfilter = {
-                "area__gt": "10000"
-            }
+        bp.parkfilter = {
+            "area__gt": "10000"
+        }
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-               $('#neighborhood_only').change(function() {
-                  window.location = ("/neighborhood/"+$(this).val()+"/");
-                }); 
+           $('#neighborhood_only').change(function() {
+              window.location = ("/neighborhood/"+$(this).val()+"/");
+            }); 
 
 
-               $('#neighborhood_activity').change(function() {
-                   update_select($(this).val());
-               }); 
-               $('#neighborhood_neighborhood').change(function() {
-                   if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
-                      window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
-                   }
+           $('#neighborhood_activity').change(function() {
+               update_select($(this).val());
+           }); 
+           $('#neighborhood_neighborhood').change(function() {
+               if ($(this).val() != "----"  && $('#neighborhood_activity').val() != "----"){
+                  window.location = ("/neighborhood/"+$(this).val()+"/"+$("#neighborhood_activity").val()+"/");
+               }
 
-               }); 
+           }); 
 
-            });
-            function update_select(activity){
-                 var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
-                 $.ajax({
-                     url:'/api/v1/neighborhood/?format=json&activity='+activity,
-                     dataType:'json',
-                     success:function(json){
-                         $.each(json['objects'], function(key, obj) {
-            out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
-                         });
-                         $("#neighborhood_neighborhood").html(out);
-                         $("#neighborhood_neighborhood").selectedIndex = 0;
-                     }
-                 });
-            }
+        });
+        function update_select(activity){
+             var out = '<option SELECTED VALUE="----">Select Your Neighborhood/Town</option>';
+             $.ajax({
+                 url:'/api/v1/neighborhood/?format=json&activity='+activity,
+                 dataType:'json',
+                 success:function(json){
+                     $.each(json['objects'], function(key, obj) {
+        out+= '<option value="'+obj['slug']+'">' +obj['name']+'</option>';
+                     });
+                     $("#neighborhood_neighborhood").html(out);
+                     $("#neighborhood_neighborhood").selectedIndex = 0;
+                 }
+             });
+        }
 
-        </script>
+    </script>
 	{% endblock %}
 
 </body>
