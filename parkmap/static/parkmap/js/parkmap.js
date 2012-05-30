@@ -550,7 +550,6 @@ var bp = {
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
-      console.log(waypoints);
       var directionDisplay; 
       var directionsService = new google.maps.DirectionsService(); 
 
