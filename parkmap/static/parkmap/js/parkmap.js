@@ -543,32 +543,38 @@ var bp = {
       var waypoints  = [];
       if(stop == ""){
           stop = coords.pop();
-          stop = stop[0]+","+stop[1];
+          if(stop == undefined){
+              stop = start;
+          } else {
+              stop = stop[0]+","+stop[1];
+          }
+          //Get a stop somehow.
       }
-
       for(var i = 0;i< coords.length;i++){
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
-      var directionDisplay; 
-      var directionsService = new google.maps.DirectionsService(); 
-
-      if(mode == "bicycling"){
-          mode = google.maps.DirectionsTravelMode.BICYCLING;
-      } else {
-          mode = google.maps.DirectionsTravelMode.DRIVING;
+      if(waypoints.length >0){
+          // Only calculate a route if they have waypoints.
+          var directionDisplay; 
+          var directionsService = new google.maps.DirectionsService(); 
+          if(mode == "bicycling"){
+              mode = google.maps.DirectionsTravelMode.BICYCLING;
+          } else {
+              mode = google.maps.DirectionsTravelMode.DRIVING;
+          }
+          var request = { 
+              origin:start,  
+              destination:stop, 
+              waypoints:waypoints,
+              travelMode:mode
+          }; 
+          directionsService.route(request, function(response, status) { 
+            if (status == google.maps.DirectionsStatus.OK) { 
+                console.log(response); 
+            } 
+          });
       }
-      var request = { 
-          origin:start,  
-          destination:stop, 
-          waypoints:waypoints,
-          travelMode:mode
-      }; 
-      directionsService.route(request, function(response, status) { 
-        if (status == google.maps.DirectionsStatus.OK) { 
-            console.log(response); 
-        } 
-      });
   },
   count_parks_in_queue: function(){
   $.get('/plan/count/',function(data){
