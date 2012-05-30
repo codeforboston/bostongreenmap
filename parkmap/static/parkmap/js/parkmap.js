@@ -513,7 +513,6 @@ var bp = {
               } else {
                   $("#tripadd_"+park_id).parent().remove();
               }
-              console.log(park_id,data);
 	 } else { // 1 = added
               if(!trippage){
                   $("#tripadd_"+park_id).val("Remove from Trip");
@@ -554,6 +553,11 @@ var bp = {
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay.setMap(bp.map);
+
+
+
       if(waypoints.length >0){
           // Only calculate a route if they have waypoints.
           var directionDisplay; 
@@ -571,7 +575,8 @@ var bp = {
           }; 
           directionsService.route(request, function(response, status) { 
             if (status == google.maps.DirectionsStatus.OK) { 
-                console.log(response); 
+               directionsDisplay.setDirections(response);
+
             } 
           });
       }
