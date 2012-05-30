@@ -5,7 +5,6 @@ height: 100%;
 
 body {    
 text-align: center;
-background-color: #ffffff;
 }
 
 h1 {
@@ -42,9 +41,11 @@ text-decoration:underline;
 color: #000000;
 }
 
+/*
 .play h4 {
-  color: #fff;
+  color: #00DC00;
 }
+*/
 
 h5 {
   font-size: 14px;
@@ -75,12 +76,6 @@ a:visited h4 {
 a:hover h4,
 a:active h4 {
     color: #666666;
-}
-
-a.next_link
-{
-display: block;
-clear: both;
 }
 
 
@@ -250,10 +245,15 @@ body.home #map_canvas {
     text-align: left;
     border-radius: 15px 15px 15px 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    padding: 20px 25px;
+    padding: 10px 20px;
     margin: 0px 0 22px 0;
 /*    width: auto;
 */
+}
+
+.menu-box-item form
+{
+margin-bottom: 10px;
 }
 
 .container-fluid.middle
@@ -265,8 +265,8 @@ body.home #map_canvas {
 }
 
 .play .container-fluid.middle,
-.explore .container-fluid.middle
-
+.explore .container-fluid.middle,
+.plan .container-fluid.middle
 {
 margin: 20px;
 width: 400px;
@@ -315,7 +315,7 @@ height: 80%;
 margin-top: 22px;
 }
 
-.menu-box-item form select, .play select {
+.menu-box-item form select {
     width: 100%;
     margin-top: 10px;
 }
@@ -361,11 +361,6 @@ height: auto;
     right: 10px;
 }
 
-
-
-
-
-
 body.play form
 {
 margin-bottom: 0;
@@ -373,19 +368,26 @@ margin-bottom: 0;
 
 #parklist h3
 {
-    clear: both;
     float: left;
     font-size: 16px;
     line-height: 18px;
-    padding-bottom: 7px;
-    padding-left: 0;
-    padding-top: 7px;
     width: 60%;
+    padding: 14px 0;
+    clear: both;
 }
 
 #parklist .add-trip-button
 {
 float: right;
+margin: 7px 0;
+}
+
+#parklist .parkitem
+{
+    clear: both;
+    display: block;
+    padding-left: 0;
+    width: 100%;
 }
 
 
@@ -574,9 +576,20 @@ color: yellow;
 
 /* Park Stories */
 
+#stories h2
+{
+color: #f8a300;
+padding-bottom: 10px;
+}
+
 .container-fluid.middle .newstory
 {
-background-color: beige;
+background-color: white;
+   -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    padding: 20px;
 }
 
 .newstory form label
@@ -592,6 +605,12 @@ height: 70px;
 width: 80%;
 }
 
+.newstory input[type="text"]
+{
+width: 80%;
+
+}
+
 .newstory form ul li
 {
 float: left;
@@ -602,4 +621,121 @@ float: left;
 display: block;
 margin-bottom: 20px;
 }
+
+.parkstory .storytitle
+{
+font-size: 16px;
+line-height: 18px;
+padding-left: 30px;
+}
+
+.parkstory .storytext
+{
+text-indent:30px;
+}
+
+.parkstory .rating_0
+{
+background-image: url('/static/parkmap/img/ratings/rating-happy.jpg');
+background-repeat: no-repeat;
+}
+
+.parkstory .rating_1
+{
+background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
+background-repeat: no-repeat;
+}
+.parkstory .rating_2
+{
+background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
+background-repeat: no-repeat;
+}
+.parkstory .rating_3
+{
+background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
+background-repeat: no-repeat;
+}
+
+
+
+.newstory .rating_0, .newstory .rating_1, .newstory .rating_2, .newstory .rating_3
+{    
+    background-position: 16px 0;
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    height: 25px;
+    padding: 0;
+    width: 58px;
+}
+
+.newstory .rating_0
+{
+background-image: url('/static/parkmap/img/ratings/rating-good.jpg');
+}
+
+.newstory .rating_1
+{
+background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
+}
+.newstory .rating_2
+{
+background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
+}
+.newstory .rating_3
+{
+background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
+}
+
+.newstory .rating_0 label, .newstory .rating_1 label, .newstory .rating_2 label, .newstory .rating_3 label
+{font-size: 0;}
+
+
+.newstory p
+{
+display: block;
+clear: both;
+position: relative;
+}
+
+a.sharestory
+{
+   -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    color: #555555;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 9px;
+    padding: 4px;
+    background-color: #efefef;
+}
+
+ul.errorlist
+{
+display: block;
+}
  
+ ul.errorlist li
+{
+display: block;
+color: red;
+}
+
+#next_link
+{
+    clear: right;
+    padding-top: 30px;
+    text-align: right;
+    display: block;
+}
+
+#prev_link
+{
+   clear: both;
+    float: left;
+    padding-top: 20px;
+    display: block;
+}

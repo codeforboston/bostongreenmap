@@ -25,11 +25,12 @@
   padding: 10px;
   }
   
-  body. menu-box-hotdog h1
+  body .menu-box-hotdog h1
   {
   font-size: 20px;
-  padding: 5px;
+  padding: 0px;
   }
+
 }
  @media (max-width: 767px) {
   body {
