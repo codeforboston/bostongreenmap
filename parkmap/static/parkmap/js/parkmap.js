@@ -520,7 +520,6 @@ var bp = {
               } else {
                   $("#tripadd_"+park_id).val("X");
               }
-          console.log(park_id,data);
          }
          bp.count_parks_in_queue();
      });
@@ -540,27 +539,44 @@ var bp = {
      });
      bp.count_parks_in_queue();
   },
-  trip_generate_url: function(coords){
-      console.log(coords);
-      var origin = coords.shift();
-      var destination = coords.pop();
-      origin = origin[0]+","+origin[1];
-      destination = destination[0]+","+destination[1];
-      var waypoints = "";
-      for(var i = 0;i< coords.length;i++){
-          waypoints += coords[i][0]+","+coords[i][1];
-          if (i < coords.length-1){
-              waypoints += "|";
-          }
+  trip_generate_obj: function(start,stop,coords,mode){
+      var waypoints  = [];
+      if(stop == ""){
+          stop = coords.pop();
+          stop = stop[0]+","+stop[1];
       }
 
-      var url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination="+destination+"&sensor=false&waypoints="+waypoints;
-      console.log(url);
+      for(var i = 0;i< coords.length;i++){
+          var c = coords[i][0]+","+coords[i][1];
+          waypoints[waypoints.length] = {location:c, stopover:true};
+      }
+      console.log(waypoints);
+      var directionDisplay; 
+      var directionsService = new google.maps.DirectionsService(); 
+
+      if(mode == "bicycling"){
+          mode = google.maps.DirectionsTravelMode.BICYCLING;
+      } else {
+          mode = google.maps.DirectionsTravelMode.DRIVING;
+      }
+      var request = { 
+          origin:start,  
+          destination:stop, 
+          waypoints:waypoints,
+          travelMode:mode
+      }; 
+      directionsService.route(request, function(response, status) { 
+        if (status == google.maps.DirectionsStatus.OK) { 
+            console.log(response); 
+        } 
+      });
   },
   count_parks_in_queue: function(){
   $.get('/plan/count/',function(data){
-    if(data > 0){
-        $("a.plan").html("PLAN A TRIP ("+data+")");
+    if (data == 8) {
+        $("a.plan").html("PLAN A TRIP ( MAX "+data+" STOPS )");
+    } else if(data > 0){
+        $("a.plan").html("PLAN A TRIP ("+data+" STOPS )");
     } else {
         $("a.plan").html("PLAN A TRIP");
     }

@@ -1,5 +1,5 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}{% endblock %}
+{% block title %}Plan A Trip{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}
 <style>
@@ -20,16 +20,20 @@
         <div class="menu-box opacity">&nbsp;</div>
         <div class="menu-box-inner">
           <div class="menu-box-item">
-              Saved Destinations
+              <h2>Home or start address:</h2>
+              <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
+              <h2>Saved Destinations</h2>
               <ul id="parklist" class="clearfix">
               {% for park in parks_in_queue %}
                 <li class="ui-state-default parkitem clearfix" id="tripitem_{{park.os_id}}">
                         <h3>{{park.name}}</h3>
-                        {% if park.description %}<span> {{park.description}}</span>{%endif %}
                         <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='X' alt='{{park.name}}' />
                 </li>
               {% endfor %}
 	      </ul>
+              <h2>Stop address:</h2>
+              <input type="text" id="id_end_address" placeholder="1 Main St, Boston, MA 02111">
+              <input id="car_search" type="button" value="View Driving Routes"> <input id="bike_search" type="button" value="View Bicycling Routes">
           </div>
         </div>
       </div>
@@ -55,16 +59,12 @@
         }));
         bp.park_trip_button_bind({{park_ids}},true);
 
-        $("#parklist").sortable({
-            update: function(event){
-                bp.trip_generate_url(get_coords($("#parklist")));
-           }
-        });
+        $("#parklist").sortable();
 
         $("#parklist").disableSelection();
 
-        //FIXME: I need to finish this, but I have to call it an early night
         function get_coords(list){
+            if (list.length < 1) { return; }
             console.log(list);
             var new_trip_list = [];
             list.children().each(function(){
@@ -78,7 +78,33 @@
             }
             return waypoint_coords;
         }
-        bp.trip_generate_url(get_coords($("#parklist")));
+
+       $("#car_search").hide();
+       $("#bike_search").hide();
+       $("#id_home_address").bind("change keyup",function(event){
+           if ($("#id_home_address").val().length == 0) {
+              $("#car_search").hide();
+              $("#bike_search").hide();
+           } else {
+              $("#car_search").show();
+              $("#bike_search").show();
+           }
+       });
+       $("#car_search").bind("click", function(event){
+                var start = $("#id_home_address").val();
+                var stop = $("#id_end_address").val();
+                bp.trip_generate_obj(start,stop,get_coords($("#parklist")),"driving");
+       });
+       $("#bike_search").bind("click", function(event){
+                var start = $("#id_home_address").val();
+                var stop = $("#id_end_address").val();
+                bp.trip_generate_obj(start,stop,get_coords($("#parklist")),"bicycling");
+       });
+
+       $(".foldable").click(function () {
+       $(this).hide("fold", {size: 100}, 1000);
+});
+
     });
 
 </script> 
