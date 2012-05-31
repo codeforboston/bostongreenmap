@@ -143,6 +143,9 @@
 
 {% block javascript %}
     {{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery.cookie.js"></script>
+
+
     <script type="text/javascript">
 
         bp.parkfilter = {
@@ -155,6 +158,7 @@
 
     </script>
 <script>
+
 $(document).ready(function(){
     bp.park_trip_button_bind("{{park.os_id}}");
     bp.check_park_in_queue("{{park.os_id}}");
@@ -175,8 +179,16 @@ $(document).ready(function(){
     $("a.sharestory").click(function(){
         $(".newstory").slideToggle('slow', function() {
         });
-    });
-    $("a.descmore").click(function(){
+    $.cookie('form_visible_{{ park.name|slugify }}', $('.newstory').is(':visible').toString());
+        return false;   
+	});
+$(function() {
+	if($.cookie('form_visible') == 'true') {
+		$('.newstory').show();
+	} else {
+		$('.newstory').hide();
+	}
+});    $("a.descmore").click(function(){
         $(this).siblings(".parkdesc").toggle(400);
         $('a.descless').show();
         $('a.descmore').hide();
@@ -191,6 +203,7 @@ $(document).ready(function(){
 
 
 </script>
+
 
 {% endblock %}	
 

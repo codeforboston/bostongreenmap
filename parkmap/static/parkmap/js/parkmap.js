@@ -514,11 +514,7 @@ var bp = {
                   $("#tripadd_"+park_id).parent().remove();
               }
 	 } else { // 1 = added
-              if(!trippage){
-                  $("#tripadd_"+park_id).val("Remove from Trip");
-              } else {
-                  $("#tripadd_"+park_id).val("X");
-              }
+              $("#tripadd_"+park_id).val("Remove from Trip");
          }
          bp.count_parks_in_queue();
      });
@@ -529,16 +525,13 @@ var bp = {
          if (data == "False"){ // 0 = removed
           $("#tripadd_"+park_id).val("Add to Trip");
 	 } else { // 1 = added
-             if(!trippage){
-                  $("#tripadd_"+park_id).val("Remove from Trip");
-              } else {
-                  $("#tripadd_"+park_id).val("X");
-              }
+             $("#tripadd_"+park_id).val("Remove from Trip");
          }
      });
      bp.count_parks_in_queue();
   },
   trip_generate_obj: function(start,stop,coords,mode){
+
       var waypoints  = [];
       if(stop == ""){
           stop = coords.pop();
@@ -553,12 +546,11 @@ var bp = {
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
+
       directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(bp.map);
 
-
-
-      if(waypoints.length >0){
+      if(waypoints.length > 0){
           // Only calculate a route if they have waypoints.
           var directionDisplay; 
           var directionsService = new google.maps.DirectionsService(); 
