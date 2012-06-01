@@ -18,7 +18,9 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
 
-{% block headscripts %}{% endblock %}
+{% block headscripts %}
+        <script>document.documentElement.className = "js";</script>
+{% endblock %}
 
     </head>
 
@@ -64,12 +66,28 @@
 {% endblock %}
 	{% block footerscripts %}
 	{% endblock %}
-	<script>
+<script>
 $(document).ready(function(){
         bp.count_parks_in_queue();
         $(".bpa-draggable").draggable();
+        $(".bpa-hide").click(function(event){
+            $(".bpa-hideable").slideToggle('slow',function(){
+                if($(".bpa-hideable").is(':hidden')){
+                    $("#bpahideimg").hide();
+                    $("#bpashowimg").show();
+                    $("#maximizer").show();
+                } else {
+                    $("#bpahideimg").show();
+                    $("#bpashowimg").hide();
+                    $("#maximizer").hide();
+                }
+            });
+        });
+        $("#bpashowimg").hide();
+        $("#maximizer").hide();
+
 });
-</script>
+</script>        
         
 </body>
 </html>

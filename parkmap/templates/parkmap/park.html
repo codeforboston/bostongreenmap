@@ -117,10 +117,9 @@
         </div>
          {% endfor %}
         
-        <div><a class="sharestory" href="#ns">Share Your Story</a></div>
+        <div><a class="sharestory" href="#ns">Share Your Story</a> <a name='ns'></a></div>
         
 			<div class="newstory hide">
-			<a id='ns'>
 				<form id="new_story" action="" method="POST">
 				{% csrf_token %}
 				<div>
@@ -179,16 +178,19 @@ $(document).ready(function(){
     $("a.sharestory").click(function(){
         $(".newstory").slideToggle('slow', function() {
         });
-    $.cookie('form_visible_{{ park.name|slugify }}', $('.newstory').is(':visible').toString());
+     //   $.cookie('form_visible_{{ park.name|slugify }}', $('.newstory').is(':visible').toString());
         return false;   
-	});
-$(function() {
-	if($.cookie('form_visible') == 'true') {
-		$('.newstory').show();
-	} else {
-		$('.newstory').hide();
-	}
-});    $("a.descmore").click(function(){
+    });
+    /*
+    $(function() {
+    	if($.cookie('form_visible_{{park.name|slugify}}') == 'true') {
+    		$('.newstory').show();
+    	} else {
+    		$('.newstory').hide();
+    	}
+    }); 
+    */
+    $("a.descmore").click(function(){
         $(this).siblings(".parkdesc").toggle(400);
         $('a.descless').show();
         $('a.descmore').hide();
@@ -198,7 +200,9 @@ $(function() {
         $('a.descless').hide();
         $('a.descmore').show();
     });
-
+    {% if story_form.errors %}
+        $('.newstory').show();
+    {% endif %}
 });
 
 

@@ -82,6 +82,7 @@ a:active h4 {
 
 .navbar-inner {
 	background-color: #00DC00;
+
 	min-height: 65px;
 	background-image: none;
 	background-repeat: repeat-x;
@@ -371,15 +372,15 @@ margin-bottom: 0;
     float: left;
     font-size: 16px;
     line-height: 18px;
-    width: 60%;
-    padding: 14px 0;
+    width: 50%;
+    padding: 0px 0;
     clear: both;
 }
 
 #parklist .add-trip-button
 {
 float: right;
-margin: 7px 0;
+margin: 0px 0;
 }
 
 #parklist .parkitem
@@ -390,6 +391,23 @@ margin: 7px 0;
     width: 100%;
 }
 
+#parklist { list-style-type: none; margin: 0; padding: 0; }
+
+#parklist li { margin: 10px 0px; padding: 0; padding-left: 0;}
+
+/* #parklist li span { position: absolute; margin-left: -1.3em; } */
+
+ul.ui-sortable li
+{
+background-image: url('/static/parkmap/img/reorder-arrow16x18.gif');
+background-image: url('/static/parkmap/img/arrow14x20.gif');
+background-repeat: no-repeat;
+background-position: 0 30%;
+}
+
+ul#parklist.ui-sortable li h3 {
+padding-left: 25px;
+}
 
 
 
@@ -592,6 +610,10 @@ background-color: white;
     padding: 20px;
 }
 
+#new_story{
+margin-bottom: 0;
+}
+
 .newstory form label
 {
 float: left;
@@ -634,25 +656,25 @@ padding-left: 30px;
 text-indent:30px;
 }
 
-.parkstory .rating_0
+.parkstory .rating_4
 {
-background-image: url('/static/parkmap/img/ratings/rating-happy.jpg');
+background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
 background-repeat: no-repeat;
 }
 
 .parkstory .rating_1
 {
-background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
+background-image: url('/static/parkmap/img/ratings/rating-good.jpg');
 background-repeat: no-repeat;
 }
 .parkstory .rating_2
 {
-background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
+background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
 background-repeat: no-repeat;
 }
 .parkstory .rating_3
 {
-background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
+background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
 background-repeat: no-repeat;
 }
 
@@ -669,11 +691,15 @@ background-repeat: no-repeat;
     width: 58px;
 }
 
+.newstory .rating_3
+{
+background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
+}
+
 .newstory .rating_0
 {
 background-image: url('/static/parkmap/img/ratings/rating-good.jpg');
 }
-
 .newstory .rating_1
 {
 background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
@@ -681,10 +707,6 @@ background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
 .newstory .rating_2
 {
 background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
-}
-.newstory .rating_3
-{
-background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
 }
 
 .newstory .rating_0 label, .newstory .rating_1 label, .newstory .rating_2 label, .newstory .rating_3 label
@@ -713,15 +735,22 @@ a.sharestory
     background-color: #efefef;
 }
 
+.nostories
+{
+margin-bottom: 10px;
+}
+
 ul.errorlist
 {
-display: block;
+    display: block;
+    margin: 0;
 }
  
  ul.errorlist li
 {
 display: block;
 color: red;
+font-weight: bold;
 }
 
 #next_link
@@ -739,3 +768,4 @@ color: red;
     padding-top: 20px;
     display: block;
 }
+

@@ -2,11 +2,7 @@
 {% block title %}Plan A Trip{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}
-<style>
-	#parklist { list-style-type: none; margin: 0; padding: 0; }
-	#parklist li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em;}
-	#parklist li span { position: absolute; margin-left: -1.3em; }
-</style>
+
 {% endblock %}
 {% block bodyclass %} 
 <body class="plan">
@@ -17,23 +13,30 @@
   <div class="row-fluid show-grid bpa-draggable">
     <div class="span12">
       <div class="well menu-box clearfix">
-        <div class="menu-box opacity">&nbsp;</div>
-        <div class="menu-box-inner">
+        <div class="menu-box opacity">
+  <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i>&nbsp;&nbsp;Maximize&nbsp;Window</span>
+
+       </div>
+        <div class="menu-box-inner bpa-hideable">
           <div class="menu-box-item">
               <h2>Home or start address:</h2>
               <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
               <h2>Saved Destinations</h2>
               <ul id="parklist" class="clearfix">
               {% for park in parks_in_queue %}
-                <li class="ui-state-default parkitem clearfix" id="tripitem_{{park.os_id}}">
+                <li class="ui-state-default parkitem clearfix sortable_icon" id="tripitem_{{park.os_id}}">
                         <h3>{{park.name}}</h3>
-                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='X' alt='{{park.name}}' />
+                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='Remove from Trip' alt='{{park.name}}' />
                 </li>
               {% endfor %}
 	      </ul>
               <h2>Stop address:</h2>
               <input type="text" id="id_end_address" placeholder="(optional) 1 Main St, Boston, MA 02111">
-              <input id="car_search" type="button" value="View Driving Routes"> <input id="bike_search" type="button" value="View Bicycling Routes">
+              <input id="car_search" type="button" value="View Driving Routes"> 
+              <input id="bike_search" type="button" value="View Bicycling Routes">
+    <br> 
+  <span id="minimizer"><i id="bpahideimg" class="bpa-hide icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+
           </div>
         </div>
       </div>
