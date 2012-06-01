@@ -4,7 +4,7 @@ from django.utils import simplejson
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
-from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story
+from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
 from forms import StoryForm
 from django.template import RequestContext
 import gpolyencode
@@ -143,7 +143,8 @@ def events(request, event_id, event_name):
 
 def explore(request):  # Activity slug, and Neighborhood slug
     neighborhoods = Neighborhood.objects.all().order_by('name')
-    activities = Activity.objects.all().order_by('name')
+    #activities = Activity.objects.all().order_by('name')
+    #parktypes = Parktype.objects.all().order_by('name')
     parktypes = Parktype.objects.all().order_by('name')
     neighborhood_slug = request.GET.get('neighborhood', None)
     neighborhood = None
@@ -153,7 +154,6 @@ def explore(request):  # Activity slug, and Neighborhood slug
         'neighborhoods': neighborhoods,
         'neighborhoodpassed': neighborhood,
         'parktypes': parktypes,
-        'activities': activities,
         }
     return render_to_response('parkmap/explore.html',
         response_d,

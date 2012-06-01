@@ -1,5 +1,5 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}{% endblock %}
+{% block title %}Explore Boston{% endblock %}
 {% block meta %}{% endblock %}
 
 {% block bodyclass %} 
@@ -12,11 +12,10 @@
   <div class="span12">
     <div class="well menu-box clearfix">
     <div class="menu-box opacity">
-  <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i></span>
+     <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i></span>
     </div>
     <div class="menu-box-inner bpa-hideable">
       <div class="menu-box-item">
-      <form method="get" action="">
         <select id='neighborhood_neighborhood'>
         <option SELECTED value="">Select Your Neighborhood/Town</option>
          {% for neighborhood in neighborhoods %}<option 
@@ -24,16 +23,18 @@
          value="{{neighborhood.id}}">{{neighborhood.name}}</option>
          {% endfor %}
         </select>
-        <select id='neighborhood_parktype' name="neighborhood_parktype">
-        <option SELECTED value="">Select Your Park Type</option> 
-         {% for parktype in parktypes%}<option value="{{parktype.id}}">{{parktype.name}}</option>
-         {% endfor %}
-        </select>
-        <div id="activity_checkboxes"></div>
-      </form>
+        <input type="text" id="parkname" placeholder="Park Name(Optional)">
+        <input type="button" id="explore_search" value="Search" style="float:right;">
       <div id="parklist"></div>
       <br>
-      <div id="facilitylist"></div>
+      <div id="facilitylist">
+      {% for parktype in parktypes %}
+          <input type="checkbox" name="parktype_{{parktype.id}}" id="parktype_{{parktype.id}}">
+          {{parktype.name}}
+          <img src="/static/parkmap/img/icons/{{parktype.name|slugify}}.png" id="p_{{parktype.id}}" title="{{parktype.name}}" class="parktype_icon">
+          <br>
+      {% endfor %}
+      </div>
   <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
       </div>
     </div>
@@ -50,33 +51,31 @@
         bp.mapconf = {
             "zoomtoparks": true
         }
+        $(".parktype_icon").click(function(){
+            var im = $(this).prop('id').substr(2);
+            var $checkbox = $("#parktype_"+im);
+            if ($checkbox.attr('checked') != "checked"){ 
+                $checkbox.attr('checked','checked');
+            } else {
+                $checkbox.removeAttr('checked');
+            }
+
+        });
 
         $(document).ready(function(){
+          $("#explore_search").click(function(){
+              var parkname = $("#parkname").val();
+	      if(parkname){
+                  var url = "http://bpa-mobile.appropriatesolutions.com/api/v1/parkname/?format=json&name=" + parkname;
+                  bp.explore_search(url);
+              }
+          });
           $('#neighborhood_neighborhood').bind("keypress change",(function() {
-
-            if ($(this).val() == "") {
-              $("#activity_checkboxes").html("");
-            } else {
-              bp.update_second_dropdown('parktype', 'neighborhood', $(this).val(),'id');
-            }
-
-          }));
-          $('#neighborhood_parktype').bind("keypress change",(function() {
-
-            if ($("#neighborhood_neighborhood").val() != "" && $('#neighborhood_parktype').val() != "") {
-              bp.explore_filter_activities($("#neighborhood_neighborhood").val(),$("#neighborhood_parktype").val());
-            } else {
-              $("#activity_checkboxes").html("");
-            }
           }));
 
-            $('.activity_checkbox').live('change', function(){
-              bp.explore_filter_parkactivities();
-            });
-            {% if neighborhoodpassed %}
-                 bp.update_second_dropdown('parktype', 'neighborhood', '{{neighborhoodpassed.id}}','id');
-            {% endif %}
-
+          $('.activity_checkbox').live('change', function(){
+            bp.explore_filter_parkactivities();
+          });
         });
     
     </script>

@@ -116,17 +116,16 @@ var bp = {
         // FIXME: we need some of the parkfilter options (activity and neighborhood) for facility queries
         if(data['meta']['previous']){
             out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
-            console.log(data['meta']);
             previous = true;
-          }
+        }
         if(data['meta']['next']){
             if(previous){ out += "&nbsp;&nbsp;";}
             out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
-          }
+        }
         $("#parklist").html(out);
 
         $("#prev_link").bind("click", function(){
-            bp.update_parklist(data['meta']['prev']);
+            bp.update_parklist(data['meta']['previous']);
         });
         $("#next_link").bind("click", function(){
             bp.update_parklist(data['meta']['next']);
@@ -371,8 +370,8 @@ var bp = {
     // track overlay
     bp.overlays.push(facilitymarker);
     // marker infowindow
-    var facilityinfocontent = "<strong>" + properties["name"] + "</strong><br> \
-                               Activities: " + properties["activity_string"];
+    var facilityinfocontent = "<div class='iwindow'><strong><a href='/park/'>" + properties["name"] + "</a></strong><br> \
+                               Activities: " + properties["activity_string"] + "</div>";
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }
@@ -531,7 +530,6 @@ var bp = {
      bp.count_parks_in_queue();
   },
   trip_generate_obj: function(start,stop,coords,mode){
-
       var waypoints  = [];
       if(stop == ""){
           stop = coords.pop();
@@ -550,7 +548,6 @@ var bp = {
       directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(bp.map);
 
-      if(waypoints.length > 0){
           // Only calculate a route if they have waypoints.
           var directionDisplay; 
           var directionsService = new google.maps.DirectionsService(); 
@@ -559,30 +556,64 @@ var bp = {
           } else {
               mode = google.maps.DirectionsTravelMode.DRIVING;
           }
-          var request = { 
-              origin:start,  
-              destination:stop, 
-              waypoints:waypoints,
-              travelMode:mode
-          }; 
+          var request;
+          if(waypoints.length > 0){
+              request = { 
+                  origin:start,  
+                  destination:stop, 
+                  waypoints:waypoints,
+                  travelMode:mode
+              }; 
+          } else {
+              request = { 
+                  origin:start,  
+                  destination:stop, 
+                  travelMode:mode
+              }; 
+          }
           directionsService.route(request, function(response, status) { 
             if (status == google.maps.DirectionsStatus.OK) { 
                directionsDisplay.setDirections(response);
 
             } 
           });
+  },
+  explore_search: function(url){
+    $.getJSON(url,function(data){
+      var out = "";
+      for(var i=0;i< data['objects'].length;i++){
+        var park = data['objects'][i];
+        out += "<br>"+park['name'];
+        $("#parklist").html(out);
       }
+
+      if(data['meta']['previous']){
+        out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
+        $("#parklist").html(out);
+      }
+      if(data['meta']['next']){
+        //if (data['meta']['previous']){ out += "&nbsp;&nbsp;";}
+        out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
+        $("#parklist").html(out);
+      }
+      $("#prev_link").bind("click", function(){
+        bp.explore_search(data['meta']['previous']);
+      });
+      $("#next_link").bind("click", function(){
+        bp.explore_search(data['meta']['next']);
+      });
+   });
   },
   count_parks_in_queue: function(){
-  $.get('/plan/count/',function(data){
-    if (data == 8) {
-        $("a.plan").html("PLAN A TRIP ( MAX "+data+" STOPS )");
-    } else if(data > 0){
-        $("a.plan").html("PLAN A TRIP ("+data+" STOPS )");
-    } else {
-        $("a.plan").html("PLAN A TRIP");
-    }
-  });
+    $.get('/plan/count/',function(data){
+      if (data == 8) {
+          $("a.plan").html("PLAN A TRIP ( MAX "+data+" STOPS )");
+      } else if(data > 0){
+          $("a.plan").html("PLAN A TRIP ("+data+" STOPS )");
+      } else {
+          $("a.plan").html("PLAN A TRIP");
+      }
+    });
 
   }
 }

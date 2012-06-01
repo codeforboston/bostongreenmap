@@ -84,10 +84,8 @@ class ParkResource(EncodedGeoResource):
         return orm_filters
 
     def dehydrate(self, bundle):
-        print 'hi'
         bundle.obj.geometry.transform(4326)
         bundle.data['lat_long'] = bundle.obj.lat_long()
-        print 'dee ho'
         return bundle
 
 
@@ -95,6 +93,7 @@ class ActivityResource(ModelResource):
     class Meta:
         queryset = Activity.objects.all()
         allowed_methods = ['get']
+        limit = queryset.count()
         cache = SimpleCache()
 
     def build_filters(self, filters=None):
