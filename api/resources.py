@@ -142,8 +142,7 @@ class ExploreActivityResource(ModelResource):
             filters = {}
 
         orm_filters = super(ExploreActivityResource, self).build_filters(filters)
-        if "neighborhood" in filters and \
-           "parktype" in filters:
+        if "neighborhood" in filters and "parktype" in filters:
             activities = filter_explore_activity(filters)
             orm_filters = {"pk__in": [i.id for i in activities]}
         return orm_filters
@@ -165,6 +164,26 @@ class ExploreParkResource(EncodedGeoResource):
            "parktype" in filters and \
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
+            orm_filters = {"pk__in": [i.os_id for i in parks]}
+        return orm_filters
+
+class ParkNameResource(EncodedGeoResource):
+    class Meta:
+        queryset = Park.objects.transform(4326).all()
+        allowed_methods = ('get',)
+        cache = SimpleCache()
+        excludes = ('status', 'location')
+        filtering = {
+            'name': ALL,
+        }
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(ParkNameResource, self).build_filters(filters)
+        if "name" in filters:
+            parks = Park.objects.filter(name__icontains=filters['name'])
             orm_filters = {"pk__in": [i.os_id for i in parks]}
         return orm_filters
 
@@ -202,6 +221,7 @@ class EntryResource(ModelResource):
     playpark = fields.ForeignKey(ParkResource, 'playpark')
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
+    parkname = fields.ForeignKey(ParkNameResource, 'parkname')
 
     class Meta:
         queryset = Neighborhood.objects.all()

@@ -13,6 +13,7 @@ from api.resources import ParkResource, \
     ParktypeResource, \
     ExploreParkResource, \
     ExploreFacilityResource, \
+    ParkNameResource, \
     ExploreActivityResource
 
 admin.autodiscover()
@@ -27,6 +28,7 @@ v1_api.register(ParktypeResource())
 v1_api.register(ExploreParkResource())
 v1_api.register(ExploreFacilityResource())
 v1_api.register(ExploreActivityResource())
+v1_api.register(ParkNameResource())
 
 urlpatterns = patterns('',
     # Examples:
