@@ -7,6 +7,7 @@ urlpatterns = patterns('parkmap.views',
 
     url(r'^park/play/$', 'play_page', name='play'),  # B  (Detail)
     url(r'^explore/$', 'explore', name='explore'),  # Explore
+    url(r'^story/flag/(?P<story_id>\d+)/$', 'story_flag', name='story_flag'),
     url(r'^story/(?P<story_id>\d+)/$', 'story', name='story'),
 
     url(r'^park/(?P<park_slug>[-\w]+)/$', 'parks_page', name='park'),  # B  (Detail)

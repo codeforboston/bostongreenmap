@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': '/home/django/webapps/static/'}),
 
+    url(r'^policy/$', 'parkmap.views.policy'),  # HOME
     url(r'^', include('parkmap.urls')),  # HOME
 
     # API

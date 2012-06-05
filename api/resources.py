@@ -139,6 +139,8 @@ class FacilityResource(GeoResource):
         desc = bundle.obj.park.description
         if desc and  len(desc.split()) > 10:
             desc = " ".join(desc.split()[:10]) + "..."
+        else: 
+            desc=""
         bundle.data['description'] = desc
         bundle.data['park_slug'] = bundle.obj.park.slug
         return bundle

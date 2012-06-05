@@ -2,7 +2,7 @@
 {% load markup %}
 {% load humanize %}
 
-{% block title %}{% endblock %}
+{% block title %}{{park.name}}{% endblock %}
 {% block meta %}{% endblock %}
 {% block headscripts %}  
 {% endblock %}
@@ -16,135 +16,120 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well">
-					<h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small></span>{% endif %}</h2>
+            <h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small></span>{% endif %}</h2>
+             {% if park.description %}
+             <p>
+              <div class="parkdesc parkdescshort">
+                  {{ park.description|markdown|truncatewords:20 }}
+              </div>
+              <div class="parkdesc parkdesclong hide">
+                 {{ park.description|markdown }}
+                 {% if park.description.text|wordcount > 20 %}        
+                    <a class="descmore">Read more &raquo;</a>
+                    <a class="descless hide">&laquo; Read less </a>
+                 {% endif %} 
+              </div>
+             </p>
+             {% endif %}
+             <p><strong>Public access:</strong> {{ park.get_access_display }}</p>
+             <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>                    
+             <h5>Get there!</h5>
+             {% if park.address %}<p>{{park.address}}</p>{% endif %}
+             <p><a href="#">Plan a route</a></p>
+             
+             <h5>Owner &amp; Management</h5>
+             {% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
+             {% if park.phone %}<p>{{ park.phone }}</p>{% endif %}
+             <p><a href="#">Report a Problem</a></p>
+             
+             {% if park.friendsgroup %}
+             <h5>Get Involved</h5>
+             <p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
+             {% endif %} 
 
-                    {% if park.description %}<p>
-             <div>      
-            <div class="parkdesc parkdescshort">
-			 {{ park.description|markdown|truncatewords:20 }}
-			 </div>
-			 <div class="parkdesc parkdesclong hide">
-			 {{ park.description|markdown }}
- 		{% if park.description.text|wordcount > 20 %}        
-             <a class="descmore">Read more &raquo;</a>
-             <a class="descless hide">&laquo; Read less </a>
-
-        {% endif %} 
-             </div>
-                    
-                    </p>{% endif %}
-					
-					<p><strong>Public access:</strong> {{ park.get_access_display }}</p>
-                    <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>					
-					<h5>Get there!</h5>
-					{% if park.address %}<p>{{park.address}}</p>{% endif %}
-					<p><a href="#">Plan a route</a></p>
-					
-					<h5>Owner &amp; Management</h5>
-					{% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
-					{% if park.phone %}<p>{{ park.phone }}</p>{% endif %}
-					<p><a href="#">Report a Problem</a></p>
-					
-					{% if park.friendsgroup %}
-					<h5>Get Involved</h5>
-					<p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
-                    {% endif %} 
-
-					<h5>Upcoming events</h5>
-					<ul>
-                                        {% for event in park.events.all %}
-                                            <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</a></li>
-                                        {% endfor %}
-					<li><a href="#">Create an event</a></li>
-					</ul>
-					
-                    {% if park.facility_set.all %}
-					    <h5>Facilities and Acitivities:</h5>
-					    <ul>
-                                            {% for facility in park.facility_set.all %}
-                                            <li>{{facility.name}}: {{ facility.activity_string }}</li>
-                                            {% endfor %}
-					    </ul>
-					{% endif %}
+             <h5>Upcoming events</h5>
+             <ul>
+                                 {% for event in park.events.all %}
+                                     <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</a></li>
+                                 {% endfor %}
+             <li><a href="#">Create an event</a></li>
+             </ul>
+             
+             {% if park.facility_set.all %}
+                 <h5>Facilities and Acitivities:</h5>
+                 <ul>
+                                     {% for facility in park.facility_set.all %}
+                                     <li>{{facility.name}}: {{ facility.activity_string }}</li>
+                                     {% endfor %}
+                 </ul>
+             {% endif %}
 
 
 
-                    {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.os_id %}">Edit Park information</a></p>{% endif %}
-				
+             {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.os_id %}">Edit Park information</a></p>{% endif %}
+                
           </div><!--/.well -->
         </div><!--/span-->
-			
+            
         <div class="span2">
           <div class="well">
               <input type="button" id="tripadd_{{park.os_id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->
         </div><!--/span-->
-			
-			
-			
+            
+            
+            
         <div class="span7">
-          <div id="map_canvas" class="detail well">		
+          <div id="map_canvas" class="detail well">        
           </div><!--/.well -->
           
 
 
     <div id="stories">
         <h2>Park Stories</h2>
-        
         {% for story in stories|slice:":10" %}
-         <div class="parkstory">
-			 <div class="rating_{{ story.rating }}">
-			 {% if story.title %}
-			 <div class="storytitle">{{ story.title }}</div>
-			 {% endif %}
-			 <div class="storytext storyshort">
-			 {{ story.text|truncatewords:40 }}
-			 </div>
-			 <div class="storytext storylong hide">
-			 {{ story.text }}
-			 </div>
-	         
-			 
-		{% if story.text|wordcount > 40 %}        
-             <a class="read">Read more &raquo;</a>
-             <a class="readless hide">&laquo; Read less </a>
-
-    {% endif %} </div>
-         </div>
- {% empty %}
-       <div class="nostories"> 
-           There are no stories yet for this park. 
+          <div class="parkstory" id="story_{{story.id}}">
+            <div class="rating_{{ story.rating }}">
+              {% if story.title %}
+              <div class="storytitle">{{ story.title }}</div>
+              {% endif %}
+              <div class="storytext storyshort">
+                {{ story.text|truncatewords:40 }}
+              </div>
+              <div class="storytext storylong hide">
+                {{ story.text }}
+              </div>
+              {% if story.text|wordcount > 40 %}        
+                 <a class="read">Read more &raquo;</a>
+                 <a class="readless hide">&laquo; Read less </a>
+              {% endif %}
+              <img src="{{STATIC_URL}}parkmap/img/flag.png" class="flag" alt="{{story.id}}">
+            </div>
+          </div>
+        {% empty %}
+             <div class="nostories"> There are no stories yet for this park.  </div>
+        {% endfor %}
+        <div>
+            <a class="sharestory" href="#ns">Share Your Story</a> <a href="/policy/" name='ns'>Data Disclaimer | Terms of Service</a></div>
+            <div class="newstory hide">
+                <form id="new_story" action="" method="POST">
+                    {% csrf_token %}
+                    <div>
+                    {{ story_form.as_p }}
+                    <input type="submit" value="Submit Your Story">
+                    </div>
+                </form> 
+            </div>
         </div>
-         {% endfor %}
-        
-        <div><a class="sharestory" href="#ns">Share Your Story</a> <a name='ns'></a></div>
-        
-			<div class="newstory hide">
-				<form id="new_story" action="" method="POST">
-				{% csrf_token %}
-				<div>
-				{{ story_form.as_p }}
-				<input type="submit" value="Submit Your Story">
-				</div>
-				
-				</form> 
-			</div>
-        
-        </div>
-          
      </div>     
-        </div><!--/span-->
+   </div><!--/span-->
 
+</div><!--/.fluid-container-->
 
-    </div><!--/.fluid-container-->
-
-{% endblock %}	
+{% endblock %}    
 
 {% block javascript %}
     {{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery.cookie.js"></script>
-
-
     <script type="text/javascript">
 
         bp.parkfilter = {
@@ -178,18 +163,8 @@ $(document).ready(function(){
     $("a.sharestory").click(function(){
         $(".newstory").slideToggle('slow', function() {
         });
-     //   $.cookie('form_visible_{{ park.name|slugify }}', $('.newstory').is(':visible').toString());
         return false;   
     });
-    /*
-    $(function() {
-    	if($.cookie('form_visible_{{park.name|slugify}}') == 'true') {
-    		$('.newstory').show();
-    	} else {
-    		$('.newstory').hide();
-    	}
-    }); 
-    */
     $("a.descmore").click(function(){
         $(this).siblings(".parkdesc").toggle(400);
         $('a.descless').show();
@@ -203,11 +178,16 @@ $(document).ready(function(){
     {% if story_form.errors %}
         $('.newstory').show();
     {% endif %}
+    {% for story in stories %}
+        $("#story_{{story.id}} .flag").bind("click",function(){
+            $.get('/story/flag/{{story.id}}/');
+        });
+    {% endfor %}
 });
 
 
 </script>
 
 
-{% endblock %}	
+{% endblock %}    
 

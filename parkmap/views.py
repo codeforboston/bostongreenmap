@@ -47,7 +47,7 @@ def parks_page(request, park_slug):
     encoder = gpolyencode.GPolyEncoder()
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
-    stories = Story.objects.filter(park=park)
+    stories = Story.objects.filter(park=park).order_by("date")
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -168,11 +168,26 @@ def plan_a_trip(request):  # Activity slug, and Neighborhood slug
         context_instance=RequestContext(request)
         )
 
-
-
     
 def story(request, story_id):
     story = get_object_or_404(Story, id=story_id)
     return render_to_response('parkmap/story.html',
         dict(story=story), context_instance=RequestContext(request))
+
+
+def story_flag(request,story_id):
+    try:
+        story = Story.objects.get(pk=story_id)
+        if not story.objectionable_content:
+            story.objectionable_content = True
+            story.save()
+            # need to send mail that it was flagged.
+            # Doing tomorrow
+    except:
+        pass
+    return HttpResponse("")
+   
+def policy(request):
+    return render_to_response('parkmap/policy.html',
+        {}, context_instance=RequestContext(request))
     

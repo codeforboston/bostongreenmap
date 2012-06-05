@@ -549,7 +549,7 @@ var bp = {
       if (count == 8) {
           $("a.plan").html("PLAN A TRIP ( MAX "+count+" STOPS )");
       } else if(count > 0){
-          $("a.plan").html("PLAN A TRIP ("+count+" STOPS )");
+          $("a.plan").html("PLAN A TRIP ("+count+" STOP(S) )");
       } else {
           $("a.plan").html("PLAN A TRIP");
       }
@@ -568,6 +568,7 @@ var bp = {
         function(data) {
             var park_ids = [];
             park_trip_list = data['objects'];
+            $("#parklist").html("");
             for(var i = 0;i<data['objects'].length;i++){
               var park=data['objects'][i];
               var litem = '<li class="ui-state-default parkitem clearfix sortable_icon" id="tripitem_'+

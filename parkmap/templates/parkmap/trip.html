@@ -21,9 +21,9 @@
           <div class="menu-box-item">
               <h2>Home or start address:</h2>
               <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
-              <h2>Saved Destinations</h2>
+              <h2>Saved Destinations:</h2>
               <ul id="parklist" class="clearfix">
-	      </ul>
+	      </ul><input type="button" value="Clear All" id="clear_all">
               <h2>Stop address:</h2>
               <input type="text" id="id_end_address" placeholder="(optional) 1 Main St, Boston, MA 02111">
               <input id="car_search" type="button" value="View Driving Routes"> 
@@ -59,6 +59,12 @@
         });
         $("#parklist").disableSelection();
 
+       $("#clear_all").bind("click",function(event){
+           $.jStorage.flush();
+           bp.check_park_in_queue();
+           $("#parklist").html("");
+
+       });
         
        $("#car_search").hide();
        $("#bike_search").hide();
