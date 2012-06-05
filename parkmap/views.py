@@ -162,41 +162,14 @@ def explore(request):  # Activity slug, and Neighborhood slug
 
 
 def plan_a_trip(request):  # Activity slug, and Neighborhood slug
-    park_ids = request.session.get("trip_queue",[])
-    parks_in_queue = Park.objects.filter(os_id__in=park_ids)
     
     return render_to_response('parkmap/trip.html',
-        {
-            "parks_in_queue":parks_in_queue,
-            "park_ids":park_ids,
-        },
+        { },
         context_instance=RequestContext(request)
         )
 
 
-def add_remove_park_trip_planning(request, park_id):
-    park_id = int(park_id)
-    trip_queue = request.session.get('trip_queue',[])
-    add = 1
-    if park_id in trip_queue:
-        trip_queue.remove(park_id)
-        add = 0
-    else:
-        trip_queue.append(park_id)
-    if len(trip_queue) > 8:
-        add = 2 # https://developers.google.com/maps/documentation/directions/#Limits
-    else:
-        request.session['trip_queue'] = trip_queue
-    return HttpResponse(add)
 
-def check_park_in_trip(request, park_id):
-    park_id = int(park_id)
-    trip_queue = request.session.get('trip_queue',[])
-    return HttpResponse(park_id in trip_queue)
-
-def count_trip_queue(request):
-    total_queuelen = len(request.session.get('trip_queue',[]))
-    return HttpResponse(total_queuelen)
     
 def story(request, story_id):
     story = get_object_or_404(Story, id=story_id)

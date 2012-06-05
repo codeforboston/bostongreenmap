@@ -23,12 +23,6 @@
               <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
               <h2>Saved Destinations</h2>
               <ul id="parklist" class="clearfix">
-              {% for park in parks_in_queue %}
-                <li class="ui-state-default parkitem clearfix sortable_icon" id="tripitem_{{park.os_id}}">
-                        <h3>{{park.name}}</h3>
-                        <input type='button' id='tripadd_{{park.os_id}}' class='add-trip-button' name='add-trip' value='Remove from Trip' alt='{{park.name}}' />
-                </li>
-              {% endfor %}
 	      </ul>
               <h2>Stop address:</h2>
               <input type="text" id="id_end_address" placeholder="(optional) 1 Main St, Boston, MA 02111">
@@ -47,10 +41,9 @@
 {% block javascript %}
     {{ block.super }}
 <script>
+    var park_trip_list;
     $(document).ready(function(){
-        var trip_lat_longs = {
-        {% for park in parks_in_queue %}'tripitem_{{park.os_id}}':{{park.lat_long}}{% if not forloop.last %}, {% endif %}{% endfor %}
-        };
+        bp.trip_generate_list();
         $('#neighborhood_activity').bind("keypress change",(function() {
             if ($(this).val() != ""){
                 //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
@@ -60,28 +53,13 @@
         $('#neighborhood_neighborhood').bind("keypress change",(function() {
             play_get_parks(0);
         }));
-        bp.park_trip_button_bind({{park_ids}},true);
 
-        $("#parklist").sortable();
-
+        $("#parklist").sortable({
+            'update':function(event,ui){bp.reorder_trip_list();}
+        });
         $("#parklist").disableSelection();
 
-        function get_coords(list){
-            if (list.length < 1) { return; }
-            console.log(list);
-            var new_trip_list = [];
-            list.children().each(function(){
-                if($(this).attr('id') != undefined){
-                    new_trip_list[new_trip_list.length] = $(this).attr('id');
-                }
-            });
-            var waypoint_coords = [];
-            for(var i = 0; i < new_trip_list.length;i++){
-                waypoint_coords[waypoint_coords.length] = [trip_lat_longs[new_trip_list[i]][0], trip_lat_longs[new_trip_list[i]][1]];
-            }
-            return waypoint_coords;
-        }
-
+        
        $("#car_search").hide();
        $("#bike_search").hide();
        $("#id_home_address").bind("change keyup",function(event){
@@ -96,17 +74,17 @@
        $("#car_search").bind("click", function(event){
                 var start = $("#id_home_address").val();
                 var stop = $("#id_end_address").val();
-                bp.trip_generate_obj(start,stop,get_coords($("#parklist")),"driving");
+                bp.trip_generate_obj(start,stop,"driving");
        });
        $("#bike_search").bind("click", function(event){
                 var start = $("#id_home_address").val();
                 var stop = $("#id_end_address").val();
-                bp.trip_generate_obj(start,stop,get_coords($("#parklist")),"bicycling");
+                bp.trip_generate_obj(start,stop,"bicycling");
        });
 
        $(".foldable").click(function () {
-       $(this).hide("fold", {size: 100}, 1000);
-});
+           $(this).hide("fold", {size: 100}, 1000);
+       });
 
     });
 

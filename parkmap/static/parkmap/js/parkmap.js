@@ -510,33 +510,104 @@ var bp = {
     });
   },
 
+  //TripSection
   add_remove_park_trip: function(park_id, trippage){
      if (trippage == undefined) { trippage = false; }
-     $.get('/plan/addremove/'+park_id+'/',function(data){
-         if (data == 0){ // 0 = removed
-              if(!trippage){
-                  $("#tripadd_"+park_id).val("Add to Trip");
-              } else {
-                  $("#tripadd_"+park_id).parent().remove();
-              }
-	 } else { // 1 = added
-              $("#tripadd_"+park_id).val("Remove from Trip");
+     var trip_array = $.jStorage.get("trip",[]);
+     if ($.inArray(park_id,trip_array) >= 0){
+         for(var i=0; i<trip_array.length;i++){
+             if(trip_array[i] ==park_id){
+                 trip_array.splice(i,1);
+             }
          }
-         bp.count_parks_in_queue();
-     });
-  },
-  check_park_in_queue: function(park_id,trippage){
-     if (trippage == undefined) { trippage = false; }
-     $.get('/plan/check/'+park_id+'/',function(data){
-         if (data == "False"){ // 0 = removed
-          $("#tripadd_"+park_id).val("Add to Trip");
-	 } else { // 1 = added
+         if(!trippage){
+             $("#tripadd_"+park_id).val("Add to Trip");
+         } else {
+             $("#tripadd_"+park_id).parent().remove();
+         }
+     } else {
+         if(trip_array.length < 8){
+             trip_array[trip_array.length] = park_id;
              $("#tripadd_"+park_id).val("Remove from Trip");
          }
-     });
+     }
+     $.jStorage.set("trip",trip_array);
      bp.count_parks_in_queue();
   },
-  trip_generate_obj: function(start,stop,coords,mode){
+  check_park_in_queue: function(park_id){
+     var trip_array = $.jStorage.get("trip",[]);
+     if ($.inArray(park_id,trip_array) >= 0){
+         $("#tripadd_"+park_id).val("Remove from Trip");
+     } else {
+         $("#tripadd_"+park_id).val("Add to Trip");
+     }
+     bp.count_parks_in_queue();
+  },
+  count_parks_in_queue: function(){
+      var trip_array = $.jStorage.get("trip",[]);
+      var count = trip_array.length;
+      if (count == 8) {
+          $("a.plan").html("PLAN A TRIP ( MAX "+count+" STOPS )");
+      } else if(count > 0){
+          $("a.plan").html("PLAN A TRIP ("+count+" STOPS )");
+      } else {
+          $("a.plan").html("PLAN A TRIP");
+      }
+  },
+  trip_generate_list: function(){
+    var trip_array = $.jStorage.get("trip",[]);
+    if(trip_array.length == 0){
+        return;
+    }
+    var trip_array_string = trip_array.join(",");
+    var url = "/api/v1/park/";
+    var parkfilter = {};
+    parkfilter["format"] = "json";
+    parkfilter["os_id_list"] = trip_array_string;
+    $.getJSON(url, parkfilter,
+        function(data) {
+            var park_ids = [];
+            park_trip_list = data['objects'];
+            for(var i = 0;i<data['objects'].length;i++){
+              var park=data['objects'][i];
+              var litem = '<li class="ui-state-default parkitem clearfix sortable_icon" id="tripitem_'+
+                          park['os_id']+
+                          '"><h3>'+
+                          park['name']+
+                          '</h3><input type="button" id="tripadd_'+
+                          park['os_id']+
+                          '" class="add-trip-button" name="add-trip" value="Remove from Trip" alt="'+
+                          park['name']+
+                          '" /> </li>';
+              park_ids[park_ids.length] = park['os_id'];
+              $("#parklist").append(litem);
+            }
+            bp.park_trip_button_bind(park_ids,true);
+        });
+  },
+  reorder_trip_list: function(){
+      var trips = [];
+      var list = $("#parklist");
+      if (list.length < 1) { return; }
+          list.children().each(function(){
+          if($(this).attr('id') != undefined){
+              var id = $(this).attr('id')
+              id = id.substring(9);
+              trips[trips.length] = parseInt(id);
+          }
+      });
+      $.jStorage.set("trip",trips);
+  },
+  get_coords: function(){
+      var coords = [];
+      for(var i in park_trip_list){
+          coords[coords.length] = park_trip_list[i]['lat_long'];
+      }
+      return coords;
+  },
+
+  trip_generate_obj: function(start,stop,mode){
+      var coords = bp.get_coords();
       var waypoints  = [];
       if(stop == ""){
           stop = coords.pop();
@@ -547,7 +618,7 @@ var bp = {
           }
           //Get a stop somehow.
       }
-      for(var i = 0;i< coords.length;i++){
+      for(var i = 0;i < coords.length;i++){
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
@@ -610,18 +681,6 @@ var bp = {
         bp.explore_search(data['meta']['next']);
       });
    });
-  },
-  count_parks_in_queue: function(){
-    $.get('/plan/count/',function(data){
-      if (data == 8) {
-          $("a.plan").html("PLAN A TRIP ( MAX "+data+" STOPS )");
-      } else if(data > 0){
-          $("a.plan").html("PLAN A TRIP ("+data+" STOPS )");
-      } else {
-          $("a.plan").html("PLAN A TRIP");
-      }
-    });
-
   }
 }
 

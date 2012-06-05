@@ -71,6 +71,12 @@ class ParkResource(EncodedGeoResource):
             filters = {}
 
         orm_filters = super(ParkResource, self).build_filters(filters)
+
+        if "os_id_list" in filters:
+            id_list  = filters['os_id_list'].split(",")
+            orm_filters = {"pk__in": [i for i in id_list]}
+            return orm_filters
+
         if "neighborhood" in filters and \
            "activity" in filters:
             parks = filter_play_park(filters)

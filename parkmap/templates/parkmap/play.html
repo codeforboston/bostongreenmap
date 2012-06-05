@@ -68,6 +68,7 @@
             {% if neighborhood %}
             bp.update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'id',"{{neighborhood.id}}");
             {% endif %}
+            bp.play_get_parks(0);
 
         });
 
