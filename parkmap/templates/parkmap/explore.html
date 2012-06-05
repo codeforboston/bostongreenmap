@@ -16,6 +16,7 @@
     </div>
     <div class="menu-box-inner bpa-hideable">
       <div class="menu-box-item">
+        <h2>Zoom To Neighborhood</h2>
         <select id='neighborhood_neighborhood'>
         <option SELECTED value="">Select Your Neighborhood/Town</option>
          {% for neighborhood in neighborhoods %}<option 
@@ -23,10 +24,8 @@
          value="{{neighborhood.id}}">{{neighborhood.name}}</option>
          {% endfor %}
         </select>
-        <input type="text" id="parkname" placeholder="Park Name(Optional)">
-        <input type="button" id="explore_search" value="Search" style="float:right;">
-      <div id="parklist"></div>
       <br>
+      <h2> Search by Facility Type</h2>
       <div id="facilitylist">
       {% for parktype in parktypes %}
           <input type="checkbox" name="parktype_{{parktype.id}}" id="parktype_{{parktype.id}}">
@@ -34,6 +33,10 @@
           <img src="/static/parkmap/img/icons/{{parktype.name|slugify}}.png" id="p_{{parktype.id}}" title="{{parktype.name}}" class="parktype_icon">
           <br>
       {% endfor %}
+        <h2> Search by Park Name</h2>
+        <input type="text" id="parkname" placeholder="Park Name(Optional)">
+        <input type="button" id="explore_search" value="Search" style="float:right;">
+      <div id="parklist"></div>
       </div>
   <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
       </div>
@@ -61,15 +64,23 @@
             }
 
         });
-
-        $(document).ready(function(){
-          $("#explore_search").click(function(){
+        function park_search_name(){
               var parkname = $("#parkname").val();
 	      if(parkname){
                   var url = "http://bpa-mobile.appropriatesolutions.com/api/v1/parkname/?format=json&name=" + parkname;
                   bp.explore_search(url);
               }
+        }
+
+        $(document).ready(function(){
+          $("#parkname").keypress(function(e) {
+              if(e.which == 13) {
+                  $(this).blur();
+                  $("#explore_search").focus().click();
+              }
           });
+
+          $("#explore_search").click(function(){ park_search_name(); });
           $('#neighborhood_neighborhood').bind("keypress change",(function() {
           }));
 

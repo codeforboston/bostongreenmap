@@ -42,10 +42,16 @@
         <li><a class="play" href="/park/play/">PLAY</a></li>
         <li><a class="explore" href="/explore/">EXPLORE</a></li>
         <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
-        <li><a class="login" href="#">LOGIN</a></li>
-        <li class="parent"><ul class="actions">
-        <li><a class="print" href="#">PRINT</a></li>
-        <li><a class="share" href="#">SHARE</a></li></ul></li>
+       <!--  <li><a class="login" href="#">LOGIN</a></li> -->
+        <li class="parent">
+        <ul class="actions">
+        
+        <li><a class="facebook" href="http://www.facebook.com/MAPCMetroBoston"><img src="/static/parkmap/img/facebook-logo-square.png"></a></li>
+        <li><a class="twitter" href="http://twitter.com/#!/mapcmetroboston"><img src="/static/parkmap/img/twitter-logo-square.png"></a></li>
+        <li><a class="email" href=""><img src="/static/parkmap/img/mail-square.png"></a></li>
+        <li><a class="print" href="JavaScript:window.print();"><img src="/static/parkmap/img/print.png"></a></li>
+        </ul>
+        </li>
         </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -60,6 +66,7 @@
 {% include "_map_scripts.html" %}
 <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script>
 <script src="/static/parkmap/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script src="/static/parkmap/js/jquery.ui.touch-punch.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
 <script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
 {% if user.is_staff %}<script type="text/javascript"> bp.staff = true; </script>{% endif %}
@@ -69,7 +76,6 @@
 <script>
 $(document).ready(function(){
         bp.count_parks_in_queue();
-        $(".bpa-draggable").draggable();
         $(".bpa-hide").click(function(event){
             $(".bpa-hideable").slideToggle('slow',function(){
                 if($(".bpa-hideable").is(':hidden')){
@@ -85,6 +91,18 @@ $(document).ready(function(){
         });
         $("#bpashowimg").hide();
         $("#maximizer").hide();
+
+        // Don't set draggable on as many mobile devices as possible.
+        if(!(navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i))
+       ){
+           $(".bpa-draggable").draggable();
+       }
+
 });
 </script>        
         

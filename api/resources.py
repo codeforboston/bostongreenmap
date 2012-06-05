@@ -129,6 +129,14 @@ class FacilityResource(GeoResource):
             'activity': ALL_WITH_RELATIONS,
         }
 
+    def dehydrate(self, bundle):
+        desc = bundle.obj.park.description
+        if desc and  len(desc.split()) > 10:
+            desc = " ".join(desc.split()[:10]) + "..."
+        bundle.data['description'] = desc
+        bundle.data['park_slug'] = bundle.obj.park.slug
+        return bundle
+
 class ExploreActivityResource(ModelResource):
     class Meta:
         queryset = Activity.objects.all()

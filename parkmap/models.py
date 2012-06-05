@@ -295,11 +295,12 @@ class Story(models.Model):
         ('4', "Sad"),
     )
     date = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=False, null=False)
     rating = models.CharField(max_length=1, default='0', blank=False, null=False, choices=RATING_CHOICES)
     text = models.TextField(blank=False, null=False)
     email = models.EmailField(max_length=100, blank=False, null=False)
     park = models.ForeignKey(Park, blank=True, null=False)
+    objectionable_content = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-date',)

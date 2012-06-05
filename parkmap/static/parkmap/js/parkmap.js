@@ -87,7 +87,7 @@ var bp = {
         var park_ids = [];
         bp.clearmap();
         $.each(data['objects'], function(key, park) {
-          var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /> ";
+          var p = "<div class='parkitem'><h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /></div>";
           park_ids[park_ids.length] = park['os_id'];
 
           if (park['description']) {p += "<p>"+ bp.truncate(park['description']) +"</p>";};
@@ -113,6 +113,7 @@ var bp = {
             console.log(e);
         }
         var previous = false;
+        out += '<div id="prev_next_buttons">';
         // FIXME: we need some of the parkfilter options (activity and neighborhood) for facility queries
         if(data['meta']['previous']){
             out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
@@ -122,6 +123,7 @@ var bp = {
             if(previous){ out += "&nbsp;&nbsp;";}
             out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
         }
+        out += "</div>";
         $("#parklist").html(out);
 
         $("#prev_link").bind("click", function(){
@@ -246,7 +248,9 @@ var bp = {
             icon: facility["icon"],
             name: facility["name"],
             activity_string: facility["activity_string"],
-            admin_url: facility["admin_url"]
+            description: facility['description'],
+            admin_url: facility["admin_url"],
+            park_slug: facility['park_slug']
           })
 
        });
@@ -328,7 +332,9 @@ var bp = {
             icon: facility["icon"],
             name: facility["name"],
             activity_string: facility["activity_string"],
-            admin_url: facility["admin_url"]
+            admin_url: facility["admin_url"],
+            description: facility['description'],
+            park_slug: facility['park_slug']
           })
 
       });
@@ -370,8 +376,9 @@ var bp = {
     // track overlay
     bp.overlays.push(facilitymarker);
     // marker infowindow
-    var facilityinfocontent = "<div class='iwindow'><strong><a href='/park/'>" + properties["name"] + "</a></strong><br> \
-                               Activities: " + properties["activity_string"] + "</div>";
+    var facilityinfocontent = "<div class='iwindow'><strong><a href='/park/" + properties['park_slug']+"/'>" + properties["name"] + "</a></strong>"+
+                              "<br> Activities: " + properties["activity_string"] + "</div>" + 
+                              "<div>"+properties['description']+"</div>";
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }
