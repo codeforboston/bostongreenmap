@@ -1,13 +1,20 @@
 # Views for Parkmap
+from django.contrib.sites.models import Site
+
 import json
 from django.utils import simplejson
+from django.core.mail import send_mail
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
 from forms import StoryForm
 from django.template import RequestContext
+from django.conf import settings
+
+
 import gpolyencode
+current_site = Site.objects.get_current()
 
 #Temporary view to see Play page
 def play_page(request):
@@ -178,15 +185,23 @@ def story(request, story_id):
 
 
 def story_flag(request,story_id):
-    try:
-        story = Story.objects.get(pk=story_id)
-        if not story.objectionable_content:
-            story.objectionable_content = True
-            story.save()
-            # need to send mail that it was flagged.
-            # Doing tomorrow
-    except:
-        pass
+    story = Story.objects.get(pk=story_id)
+    if not story.objectionable_content:
+        MESSAGE = """
+A user of the Boston Parks website has flagged this story as objectionable.
+
+Here is the story:
+{story}
+
+Link to Admin: http://{domain}/admin/parkmap/story/{id}
+""".format(story=story.text,domain=current_site.domain,id=story.id)
+        emails = []
+        for admin in settings.ADMINS:
+            emails.append(admin[1])
+        send_mail('Flagged Story on the BostonParks website', MESSAGE, 'support@bostonparks.org',
+                emails, fail_silently=False)
+        story.objectionable_content = True
+        story.save()
     return HttpResponse("")
    
 def policy(request):
