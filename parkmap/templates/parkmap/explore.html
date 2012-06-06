@@ -6,7 +6,7 @@
 <body class="explore">
 {% endblock %}
 {% block content %} 
-<div id="map_canvas" class="hidden-phone"></div>
+<div id="map_canvas"></div>
 <div class="container-fluid middle">
   <div class="row-fluid show-grid bpa-draggable">
   <div class="span12">
@@ -36,7 +36,7 @@
         <h2> Search by Park Name</h2>
         <input type="text" id="parkname" placeholder="Park Name(Optional)">
         <input type="button" id="explore_search" value="Search" style="float:right;">
-      <div id="parklist"></div>
+      <div id="parklist" class="clearfix"></div>
       </div>
   <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
       </div>

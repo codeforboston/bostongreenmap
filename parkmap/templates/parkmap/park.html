@@ -35,7 +35,7 @@
              <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>                    
              <h5>Get there!</h5>
              {% if park.address %}<p>{{park.address}}</p>{% endif %}
-             <p><a href="#">Plan a route</a></p>
+             <p><a href="/plan/" id="plan_trip">Plan a route</a></p>
              
              <h5>Owner &amp; Management</h5>
              {% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
@@ -107,7 +107,7 @@
             </div>
           </div>
         {% empty %}
-             <div class="nostories"> There are no stories yet for this park.  </div>
+             <div class="nostories"> There are no stories yet for this park. Add your story below! </div>
         {% endfor %}
         <div>
             <a class="sharestory" href="#ns">Share Your Story</a> <a href="/policy/" name='ns'>Data Disclaimer | Terms of Service</a></div>
@@ -183,6 +183,9 @@ $(document).ready(function(){
             $.get('/story/flag/{{story.id}}/');
         });
     {% endfor %}
+    $("#plan_trip").click(function(){
+        bp.add_remove_park_trip({{park.os_id}},false);
+    });
 });
 
 

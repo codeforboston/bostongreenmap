@@ -56,19 +56,34 @@
 
             $('#neighborhood_activity').bind("keypress change",(function() {
                 if ($(this).val() != ""){
-                    //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
                     bp.update_second_dropdown('neighborhood', 'activity', $(this).val(),'id');
+                    //set the new hash
+                    window.location.hash = $("#neighborhood_activity").val()+","+$("#neighborhood_neighborhood").val();
                 }
             }));
             
             $('#neighborhood_neighborhood').bind("keypress change",(function() {
                 bp.play_get_parks(0);
+                    //set the new hash
+                window.location.hash = $("#neighborhood_activity").val()+","+$("#neighborhood_neighborhood").val();
             }));
 
-            {% if neighborhood %}
-            bp.update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'id',"{{neighborhood.id}}");
-            {% endif %}
-            bp.play_get_parks(0);
+            if(location.hash.length > 0){
+                var hashtag = location.hash.substring(1).split(',');
+                var activity = hashtag[0];
+                var neighborhood = "";
+                if(hashtag.length > 1){
+                    neighborhood = hashtag[1];
+                }
+                $('#neighborhood_activity option[value="'+activity+'"]').prop('selected', true);
+                $('#neighborhood_neighborhood option[value="'+neighborhood+'"]').prop('selected', true);
+                bp.play_get_parks(0);
+            } else {
+                {% if neighborhood %}
+                bp.update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'id',"{{neighborhood.id}}");
+                {% endif %}
+                bp.play_get_parks(0);
+            }
 
         });
 

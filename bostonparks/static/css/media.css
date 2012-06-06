@@ -35,6 +35,12 @@
     height: 300px;
   }
   
+  
+    .play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
+    margin: 0;
+    }
+    
+    
   .neighborhood .container-fluid.middle
 	{
 	height: auto;
@@ -56,6 +62,7 @@
     display: none;
     }
     
+    
     .verticalscroll {
     bottom: 0;
     left: 0;
@@ -73,6 +80,19 @@
     position: relative;
     right: 0;
     }
+    
+#parkname
+{
+width: 60%;
+}
+
+#neighborhood_neighborhood
+{
+width: 90%;
+}
+
+#facilitylist
+    white-space: nowrap;
 
 }
 

@@ -376,9 +376,10 @@ var bp = {
     // track overlay
     bp.overlays.push(facilitymarker);
     // marker infowindow
-    var facilityinfocontent = "<div class='iwindow'><strong><a href='/park/" + properties['park_slug']+"/'>" + properties["name"] + "</a></strong>"+
-                              "<br> Activities: " + properties["activity_string"] + "</div>" + 
-                              "<div>"+properties['description']+"</div>";
+    var facilityinfocontent = "<div class='iwindow'><h2>" + properties["name"] + "</h2>" +
+                              "Activities: " + properties["activity_string"] + "</div>" + 
+                              "<div>"+properties['description']+"</div>" +
+                              "<strong><a href='/park/" + properties['park_slug']+"/'>" + "Learn more about this park" + "</a></strong>" ;
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }

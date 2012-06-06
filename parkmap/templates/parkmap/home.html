@@ -91,8 +91,37 @@
 	    </a>
 	
 
-	</div>
-	</div>
+	
+
+
+
+<!--Stories-->
+
+    <div id="stories">
+        {% for story in stories|slice:":10" %}
+        <h2>Recent Park Story About {{story.park}}</h2>
+          <div class="parkstory" id="story_{{story.id}}">
+            <div class="rating_{{ story.rating }}">
+              {% if story.title %}
+              <div class="storytitle">{{ story.title }}</div>
+              {% endif %}
+              <div class="storytext storyshort">
+                {{ story.text|truncatewords:40 }}
+              </div>
+              <div class="storytext storylong hide">
+                {{ story.text }}
+              </div>
+              {% if story.text|wordcount > 40 %}        
+                 <a class="read">Read more &raquo;</a>
+                 <a class="readless hide">&laquo; Read less </a>
+              {% endif %}
+              <img src="{{STATIC_URL}}parkmap/img/flag.png" class="flag" alt="{{story.id}}">
+            </div>
+          </div>
+          {% endfor %}
+<!-- end stories -->
+</div>
+</div>
 </div>
 
 </div>
@@ -130,9 +159,25 @@
               $("#play").append(playbutton);
 
             });
-
-
-        </script>
+            
+			$("a.read").click(function(){
+				$(this).siblings(".storytext").toggle(400);
+				$('a.readless').show();
+				$('a.read').hide();
+			});    
+			$("a.readless").click(function(){
+				$(this).siblings(".storytext").toggle(400);
+				$('a.readless').hide();
+				$('a.read').show();
+			});
+			{% for story in stories %}
+				$("#story_{{story.id}} .flag").bind("click",function(){
+					$.get('/story/flag/{{story.id}}/');
+				});
+			{% endfor %}
+        
+        </script>      
+        
 	{% endblock %}
 
 </body>
