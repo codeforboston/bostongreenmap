@@ -76,6 +76,8 @@
         <h2>Recent Park Story About {{story.park}}</h2>
           <div class="parkstory" id="story_{{story.id}}">
             <div class="rating_{{ story.rating }}">
+              <div class="flag-inapp flag"><i class="icon-flag icon-white hidden-phone"></i><i class="icon-flag visible-phone"></i>&nbsp;Flag as inppropriate</div>
+              
               {% if story.title %}
               <div class="storytitle">{{ story.title }}</div>
               {% endif %}
@@ -89,7 +91,7 @@
                  <a class="read">Read more &raquo;</a>
                  <a class="readless hide">&laquo; Read less </a>
               {% endif %}
-              <img src="{{STATIC_URL}}parkmap/img/flag.png" class="flag" alt="{{story.id}}">
+             
             </div>
           </div>
       

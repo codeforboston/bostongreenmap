@@ -41,7 +41,7 @@ def get_list():
 def home_page(request):
     parks, facilities, neighborhoods = get_list()
     activities = Activity.objects.all()
-    stories = Story.objects.all().order_by('date')[:3]
+    stories = Story.objects.all().order_by('date')[:6]
     return render_to_response('parkmap/home.html', {
         'parks': parks,
         'facilities': facilities,

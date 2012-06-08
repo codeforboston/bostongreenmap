@@ -1,6 +1,9 @@
 {% extends 'parkmap/base.html' %} 
-{% block title %}{% endblock %} 
-{% block meta %}{% endblock %} 
+{% block title %}Parks and Greenspaces in Boston Metro Area Neighborhoods and Towns{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Explore Boston parks and greenspaces with interactive maps and trip planner. Search by location or activity and discover the best of Boston parks.{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}explore boston, explore boston parks, find parks in boston metro area, parks in boston, boston sports fields, boston area greenspaces, {% endblock %} " >
+{% endblock %}
 {% block headscripts %}
 
 {% endblock %}
@@ -27,7 +30,7 @@
                         <div class="neighborhood-park">
                         <h4>
                             <a href="/park/{{park.slug}}">{{park.name}}</a></h4>
-                            {% if park.description %}<span class="park_description">{{  park.description|truncatewords:30 }}</span><br>{% endif %}
+                            {% comment %}{% if park.description %}<span class="park_description">{{  park.description|truncatewords:30 }}</span><br>{% endif %}{% endcomment %}
                             {% for facility in park.facility_set.all %}
                             <a class="facility-icon" href="/park/{{park.slug}}" rel="tooltip" data-original-title="{{ facility.name }}"><img src="{{ facility.icon_url }}" alt="{{ facility.name }}"></a>
                             {% endfor %}

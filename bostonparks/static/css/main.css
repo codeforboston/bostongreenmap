@@ -5,20 +5,18 @@ h1 { color: white; }
 
 h2
 {
-    color: #00DC00;
-    font-size: 22px;
-    line-height: 26px;
-
+	color: #00DC00;
+	font-size: 22px;
+	line-height: 26px;
 }
-
 
 .explore h2
 {
-    color: #00DC00;
-    font-size: 22px;
-    line-height: 24px;
-    padding-bottom: 8px;
-    padding-top: 10px;
+	color: #00DC00;
+	font-size: 22px;
+	line-height: 24px;
+	padding-bottom: 8px;
+	padding-top: 10px;
 }
 
 h4
@@ -39,7 +37,12 @@ h4 a:visited
 
 h4 a:hover,
 h4 a:active { text-decoration: underline; }
-.home h4 { color: #000000; padding-bottom: 4px; }
+
+.home h4
+{
+	color: #000000;
+	padding-bottom: 4px;
+}
 
 h5
 {
@@ -136,7 +139,7 @@ ul.nav ul.actions li a:active { color: #666; }
 {
 	box-shadow: none;
 	background-color: transparent;
-	border: 1px none rgba(0, 0, 0, 0.05);
+	border: none;
 }
 
 .span3 > .well { padding-top: 0; }
@@ -157,7 +160,6 @@ ul.nav ul.actions li a:active { color: #666; }
 	top: 0px;
 	height: 400px;
 }
-
 
 .menu-box
 {
@@ -196,14 +198,11 @@ ul.nav ul.actions li a:active { color: #666; }
 	height: auto;
 }
 
-.home .menu-box-inner { 
-padding: 20px 50px 20px;
-padding: 0;
-height: 100%;
-
+.home .menu-box-inner
+{
+	padding: 0;
+	height: 100%;
 }
-
-
 
 .neighborhood .menu-box-inner
 {
@@ -241,7 +240,6 @@ height: 100%;
 	margin: 20px;
 	width: auto;
 	max-width: 400px;
-
 }
 
 .neighborhood .container-fluid.middle { height: 80%; }
@@ -255,9 +253,8 @@ height: 100%;
 .home .container-fluid.middle
 {
 	padding-top: 0px;
-	margin-top: 0px;
 	text-align: center;
-    height: 95%; 
+	height: 95%;
 }
 
 .row-fluid
@@ -278,8 +275,6 @@ height: 100%;
 	background-color: #00dc00;
 	/*GREEN */
 }
-
-.menu-box-item:first-child { margin-top: 22px; }
 
 .menu-box-item form select
 {
@@ -302,13 +297,13 @@ height: 100%;
 
 .scrollable-wrapper
 {
-position: absolute;
-bottom: 30px;
-left: 40px;
-right: 40px;
-top: 30px;
-overflow: auto;
-padding-right: 20px;
+	position: absolute;
+	bottom: 30px;
+	left: 40px;
+	right: 40px;
+	top: 30px;
+	overflow: auto;
+	padding-right: 20px;
 }
 
 .verticalscroll
@@ -348,10 +343,7 @@ body.play form { margin-bottom: 0; }
 	clear: both;
 }
 
-#parklist p
-{
-display: none;
-}
+#parklist p { display: none; }
 
 #parklist .add-trip-button
 {
@@ -427,7 +419,6 @@ ul#parklist.ui-sortable li h3 { padding-left: 25px; }
 	width: 32px;
 }
 
-
 /* HIGHTLIGHT CURRENT PAGE */
 body.play .navbar .nav > li > a.play { color: yellow; }
 body.explore .navbar .nav > li > a.explore { color: yellow; }
@@ -441,8 +432,8 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 
 .home #stories h2
 {
-    font-size: 20px;
-    padding-bottom: 4px;
+	font-size: 20px;
+	padding-bottom: 4px;
 }
 
 .container-fluid.middle .newstory
@@ -483,6 +474,7 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 	font-size: 16px;
 	line-height: 18px;
 	padding-left: 30px;
+	width: 70%;
 }
 
 .parkstory .storytext { text-indent: 30px; }
@@ -510,8 +502,6 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 	background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
 	background-repeat: no-repeat;
 }
-
-
 
 .home .parkstory .rating_4
 {
@@ -578,17 +568,8 @@ a.sharestory
 }
 
 .nostories { margin-bottom: 10px; }
-
-
-.home #stories
-{
-text-align: left;
-}
-
-.home .storytitle, .home .storytext
-{
-color: white;
-}
+.home #stories { text-align: left; }
+.home .storytitle, .home .storytext { color: white; }
 
 ul.errorlist
 {
@@ -605,37 +586,21 @@ ul.errorlist li
 
 .error
 {
-color: red;
-font-weight: bold;
+	color: red;
+	font-weight: bold;
 }
 
 #prev_next_buttons
 {
-    clear: both;
-    display: block;
-    padding: 16px 4px;
+	clear: both;
+	display: block;
+	padding: 16px 4px;
 }
 
-#next_link
-{
-float: right;
-}
-
-
-#next_link:after
-{
-content: " »";
-}
-
-#prev_link
-{
-	float: left;
-}
-
-#prev_link:before
-{
-content: "« ";
-}
+#next_link { float: right; }
+#next_link:after { content: " »"; }
+#prev_link { float: left; }
+#prev_link:before { content: "« "; }
 
 ul.actions li img
 {
@@ -643,31 +608,31 @@ ul.actions li img
 	height: 30px;
 }
 
-
-#minimizer, .read
-{
-cursor: pointer;
-}
+#minimizer, .read { cursor: pointer; }
 
 #maximizer
 {
-    cursor: pointer;
-    display: block !important;
-    line-height: 0;
-    padding: 3px 10px;
+	cursor: pointer;
+	display: block !important;
+	line-height: 0;
+	padding: 3px 10px;
 }
 
-.iwindow
+.iwindow { text-align: left; }
+
+.home button.btn, input.btn[type="submit"]
 {
-text-align: left;
+	margin: 0 auto;
 }
 
-.home button.btn, input.btn[type="submit"] {
-    display: block;
-    margin: 0 auto;
-}
+input#car_search, input#bike_search { background-color: #00DC00; }
 
-input#car_search, input#bike_search
+.flag-inapp
 {
-    background-color: #00DC00;
+	float: right;
+	font-size: 9px;
 }
+
+.home .flag-inapp { color: white; }
+
+.icon-flag {float: left;}

@@ -132,6 +132,7 @@
 	font-size: 24px;
 	line-height: 26px;
   }
+  .home .flag-inapp { color: #666666; }
 }
 
  @media (max-width: 767px) {

@@ -56,7 +56,7 @@
                                  {% for event in park.events.all %}
                                      <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</a></li>
                                  {% endfor %}
-             <li><a href="#">Create an event</a></li>
+             <li>Coming soon</li>
              </ul>
              
              {% if park.facility_set.all %}
@@ -94,6 +94,7 @@
         {% for story in stories|slice:":10" %}
           <div class="parkstory" id="story_{{story.id}}">
             <div class="rating_{{ story.rating }}">
+            <div class="flag-inapp flag"></i><i class="icon-flag"></i>&nbsp;Flag as inppropriate</div>
               {% if story.title %}
               <div class="storytitle">{{ story.title }}</div>
               {% endif %}
@@ -107,7 +108,6 @@
                  <a class="read">Read more &raquo;</a>
                  <a class="readless hide">&laquo; Read less </a>
               {% endif %}
-              <img src="{{STATIC_URL}}parkmap/img/flag.png" class="flag" alt="{{story.id}}">
             </div>
           </div>
         {% empty %}
