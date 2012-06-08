@@ -624,6 +624,7 @@ var bp = {
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
+      bp.clearmap();
 
       directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(bp.map);

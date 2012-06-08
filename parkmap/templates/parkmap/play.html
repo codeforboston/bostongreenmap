@@ -1,6 +1,9 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}Play{% endblock %}
-{% block meta %}{% endblock %}
+{% block title %}Find Activities and Things to Do in Boston Parks{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Browse Boston Metro Area parks and facilities by activity and discover new places to visit and play!{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}parks in boston, boston sports fields, parking in boston, boston area greenspaces, boston playgrounds, biketrails in boston, boston biketrails, boston art, boston monuments, {% endblock %} " >
+{% endblock %}
 {% block bodyclass %} 
 <body class="play">
 {% endblock %}

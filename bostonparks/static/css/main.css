@@ -39,13 +39,7 @@ h4 a:visited
 
 h4 a:hover,
 h4 a:active { text-decoration: underline; }
-.home h4 { color: #000000; }
-
-/*
-.play h4 {
-  color: #00DC00;
-}
-*/
+.home h4 { color: #000000; padding-bottom: 4px; }
 
 h5
 {
@@ -164,11 +158,6 @@ ul.nav ul.actions li a:active { color: #666; }
 	height: 400px;
 }
 
-body.home #map_canvas
-{
-	position: absolute;
-	top: 0px;
-}
 
 .menu-box
 {
@@ -207,13 +196,18 @@ body.home #map_canvas
 	height: auto;
 }
 
-.home .menu-box-inner { padding: 20px 50px 20px; }
+.home .menu-box-inner { 
+padding: 20px 50px 20px;
+padding: 0;
+height: 100%;
+
+}
+
+
 
 .neighborhood .menu-box-inner
 {
 	padding: 0;
-	z-index: 30;
-	position: relative;
 	height: 100%;
 }
 
@@ -260,9 +254,10 @@ body.home #map_canvas
 
 .home .container-fluid.middle
 {
-	padding-top: 35px;
+	padding-top: 0px;
 	margin-top: 0px;
 	text-align: center;
+    height: 95%; 
 }
 
 .row-fluid
@@ -304,6 +299,17 @@ body.home #map_canvas
 }
 
 .neighborhood .menu-box.opacity { height: auto; }
+
+.scrollable-wrapper
+{
+position: absolute;
+bottom: 30px;
+left: 40px;
+right: 40px;
+top: 30px;
+overflow: auto;
+padding-right: 20px;
+}
 
 .verticalscroll
 {
@@ -421,34 +427,6 @@ ul#parklist.ui-sortable li h3 { padding-left: 25px; }
 	width: 32px;
 }
 
-.facility_amphitheater { background-position: -64px 0; }
-.facility_artwork-monument { background-position: -96px 0; }
-.facility_athletic-field { background-position: -128px 0; }
-.facility_beach { background-position: -160px 0; }
-.facility_boat-house { background-position: -192px 0; }
-.facility_boat-ramp { background-position: -224px 0; }
-.facility_canoe-access { background-position: -256px 0; }
-.facility_community-garden { background-position: -288px 0; }
-.facility_cultural { background-position: 0px -38px; }
-.facility_field { background-position: -32px -38px; }
-.facility_football { background-position: -64px -38px; }
-.facility_fountain { background-position: -96px -38px; }
-.facility_golf-course { background-position: -128px -38px; }
-.facility_greenspace { background-position: -160px -38px; }
-.facility_historic { background-position: -192px -38px; }
-.facility_park { background-position: -224px -38px; }
-.facility_park-entrance { background-position: -256px -38px; }
-.facility_parking { background-position: -288px -38px; }
-.facility_picnic-table { background-position: 0px -76px; }
-.facility_pier { background-position: -32px -76px; }
-.facility_play-area { background-position: -64px -76px; }
-.facility_playground { background-position: -96px -76px; }
-.facility_pool { background-position: -128px -76px; }
-.facility_recreation { background-position: -160px -76px; }
-
-/*  TEMPORARY!!!  */
-.facility_picnic-table { background-position: 0px 0; }
-.facility_playground { background-position: -32px 0; }
 
 /* HIGHTLIGHT CURRENT PAGE */
 body.play .navbar .nav > li > a.play { color: yellow; }
@@ -682,4 +660,14 @@ cursor: pointer;
 .iwindow
 {
 text-align: left;
+}
+
+.home button.btn, input.btn[type="submit"] {
+    display: block;
+    margin: 0 auto;
+}
+
+input#car_search, input#bike_search
+{
+    background-color: #00DC00;
 }

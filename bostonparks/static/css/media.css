@@ -1,99 +1,137 @@
 @media (max-width: 480px) {
-  body .well {
-  background-color: transparent; 
-  padding: 0;
-  } 
-  body .menu-box-inner {
-  padding: 0px 20px;
-  } 
-  body .menu-box {
-  padding: 0;
-  }  
-  body {
-  padding: 0;
-  } 
-  body .container-fluid { 
-  padding: 10px;
-  }
-  body .container-fluid.middle { 
-  padding-top: 5px;
-  margin-top: 0px;
-  }
-  
-  body .menu-box-item
-  {
-  padding: 10px;
-  }
-  
-  body .menu-box-hotdog h1
-  {
-  font-size: 20px;
-  padding: 0px;
-  }
-  
-  #map_canvas.detail {
-    height: 300px;
-  }
-  
-  
-    .play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
-    margin: 0;
-    }
-    
-    
-  .neighborhood .container-fluid.middle
+	body .well {
+	background-color: transparent; 
+	padding: 0;
+	} 
+	body .menu-box-inner {
+	padding: 0px 20px;
+	} 
+	body .menu-box {
+	padding: 0;
+	}  
+	body {
+	padding: 0;
+	} 
+	body .container-fluid { 
+	padding: 10px;
+	}
+	body .container-fluid.middle { 
+	padding-top: 5px;
+	margin-top: 0px;
+	}
+	
+	body .menu-box-item
+	{
+	padding: 10px;
+	}
+	
+	body .menu-box-hotdog h1
+	{
+	font-size: 20px;
+	padding: 0px;
+	}
+	
+	#map_canvas.detail {
+	height: 300px;
+	}
+	
+	
+	.play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
+	margin: 0;
+	}
+	
+	
+	.neighborhood .container-fluid.middle,
+	.home .container-fluid.middle
 	{
 	height: auto;
 	}
-
-
-.neighborhood .menu-box-item {
-    border-radius: 0 0 0 0;
-    bottom: 0;
-    height: 100%;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    right: 0;
-    top: 0;
-    }
-    .neighborhood .menu-box.opacity {
-    display: none;
-    }
-    
-    
-    .verticalscroll {
-    bottom: 0;
-    left: 0;
-    overflow: visible;
-    position: relative;
-    right: 0;
-    top: 0;
-    }
-
-.menu-box-item .menu-box-hotdog {
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    padding: 15px 0;
-    position: relative;
-    right: 0;
-    }
-    
-#parkname
-{
-width: 60%;
-}
-
-#neighborhood_neighborhood
-{
-width: 90%;
-}
-
-#facilitylist
-    white-space: nowrap;
-
+	
+	
+	.home .scrollable-wrapper,
+	.neighborhood .menu-box-item
+	{
+	border-radius: 0 0 0 0;
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	right: 0;
+	top: 0;
+	}
+	
+	
+	.neighborhood .menu-box.opacity,
+	.home .menu-box.opacity
+	{
+	display: none;
+	}
+	
+	
+	.verticalscroll {
+	bottom: 0;
+	left: 0;
+	overflow: visible;
+	position: relative;
+	right: 0;
+	top: 0;
+	}
+	
+	
+	.menu-box-item .menu-box-hotdog {
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 15px 0;
+	position: relative;
+	right: 0;
+	}
+	
+	#parkname
+	{
+	width: 60%;
+	}
+	
+	#neighborhood_neighborhood
+	{
+	width: 90%;
+	}
+	
+	.home .storytitle, .home .storytext {
+	color: #666;
+	}
+  
+  body.home .well {
+  background-color: transparent; 
+  padding: 0;
+  } 
+  body.home .menu-box-inner {
+  padding: 0px 0px;
+  } 
+  body.home .menu-box {
+  padding: 0;
+  }  
+  body.home {
+  padding: 0;
+  } 
+  body.home .container-fluid { 
+  padding: 10px;
+  }
+  body.home .menu-box-item
+  {
+  padding: 10px;
+  margin: 12px 0;
+  }
+  body.home .menu-box-item form
+  {
+  margin-bottom: 4px;
+  }
+  body.home h1 {
+	font-size: 24px;
+	line-height: 26px;
+  }
 }
 
  @media (max-width: 767px) {
@@ -112,3 +150,4 @@ width: 90%;
     height: 0;
     overflow: visible;
     }
+}

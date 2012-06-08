@@ -3,7 +3,11 @@
 {% load humanize %}
 
 {% block title %}{{park.name}}{% endblock %}
-{% block meta %}{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Information and directions for {{ park.name }} {% if park.parktype %}{{ park.parktype }}{% endif %} presented by Boston Park Advocates. {% if park.parktype %} {{ park.description }}{% endif %}{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}{% for facility in park.facility_set.all %} {{facility.name}}: {{ facility.activity_string }}, {% endfor %}  {% endblock %} " >
+{% endblock %}
+
 {% block headscripts %}  
 {% endblock %}
 

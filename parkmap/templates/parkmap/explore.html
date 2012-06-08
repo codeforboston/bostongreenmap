@@ -1,6 +1,10 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}Explore Boston{% endblock %}
-{% block meta %}{% endblock %}
+{% block title %}Explore Boston Metro Area Parks and Greenspaces{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Explore Boston parks and greenspaces with interactive maps and trip planner. Search by location or activity and discover the best of Boston parks.{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}explore boston, explore boston parks, find parks in boston metro area, parks in boston, boston sports fields, boston area greenspaces, {% endblock %} " >
+{% endblock %}
+
 
 {% block bodyclass %} 
 <body class="explore">

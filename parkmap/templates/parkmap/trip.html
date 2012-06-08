@@ -1,6 +1,10 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}Plan A Trip{% endblock %}
-{% block meta %}{% endblock %}
+{% block title %}Plan A Biking Trip or Driving Trip through Boston Metro Area Parks{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Get directions to parks in Boston, and plan a trip to visit your favorite parks and greenspaces by bike or by car!{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}planning a trip to boston, visiting boston parks, parks in boston, directions to boston common, directions to parks in boston, boston biking directions, biking in boston, hiking in boston, biketrails in boston, boston biketrails,{% endblock %} " >
+{% endblock %}
+
 {% block headscripts %}
 
 {% endblock %}
@@ -8,7 +12,7 @@
 <body class="plan">
 {% endblock %}
 {% block content %} 
-<div id="map_canvas" class="hidden-phone"></div>
+<div id="map_canvas"></div>
 <div class="container-fluid middle">
   <div class="row-fluid show-grid bpa-draggable">
     <div class="span12">
