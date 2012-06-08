@@ -631,6 +631,7 @@ input#car_search, input#bike_search { background-color: #00DC00; }
 {
 	float: right;
 	font-size: 9px;
+	cursor: pointer;
 }
 
 .home .flag-inapp { color: white; }
