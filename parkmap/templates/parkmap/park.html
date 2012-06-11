@@ -148,8 +148,8 @@
 <script>
 
 $(document).ready(function(){
-    bp.park_trip_button_bind("{{park.os_id}}");
-    bp.check_park_in_queue("{{park.os_id}}");
+    bp.park_trip_button_bind({{park.os_id|add:"0"}});
+    bp.check_park_in_queue({{park.os_id|add:"0"}});
     $("label[for='id_rating_0']").closest('li').addClass('rating_0');
     $("label[for='id_rating_1']").closest('li').addClass('rating_1');
     $("label[for='id_rating_2']").closest('li').addClass('rating_2');
@@ -188,7 +188,7 @@ $(document).ready(function(){
         });
     {% endfor %}
     $("#plan_trip").click(function(){
-        bp.add_remove_park_trip({{park.os_id}},false);
+        bp.add_remove_park_trip({{park.os_id|add:"0"}},false);
     });
 });
 
