@@ -262,6 +262,7 @@ var bp = {
   },
 
   // load parks and render on map
+  // FIXME: is mapconf set globally on page load?
   loadparks: function(parkfilter, mapconf) {
       
     parkfilter["format"] = "json";
@@ -669,32 +670,6 @@ var bp = {
 
             } 
           });
-  },
-  explore_search: function(url){
-    $.getJSON(url,function(data){
-      var out = "";
-      for(var i=0;i< data['objects'].length;i++){
-        var park = data['objects'][i];
-        out += "<br>"+park['name'];
-        $("#parklist").html(out);
-      }
-
-      if(data['meta']['previous']){
-        out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
-        $("#parklist").html(out);
-      }
-      if(data['meta']['next']){
-        //if (data['meta']['previous']){ out += "&nbsp;&nbsp;";}
-        out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
-        $("#parklist").html(out);
-      }
-      $("#prev_link").bind("click", function(){
-        bp.explore_search(data['meta']['previous']);
-      });
-      $("#next_link").bind("click", function(){
-        bp.explore_search(data['meta']['next']);
-      });
-   });
   }
 }
 

@@ -69,11 +69,12 @@
 
         });
         function park_search_name(){
-              var parkname = $("#parkname").val();
-	      if(parkname){
-                  var url = "http://bpa-mobile.appropriatesolutions.com/api/v1/parkname/?format=json&name=" + parkname;
-                  bp.explore_search(url);
-              }
+          var parkname = $("#parkname").val();
+          if(parkname){
+            bp.loadparks({
+              "name__icontains": parkname
+            });
+          }
         }
 
         $(document).ready(function(){
