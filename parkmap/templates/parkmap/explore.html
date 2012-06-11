@@ -55,10 +55,12 @@
     {{ block.super }}
     <script type="text/javascript">
 
+        // global map parameters
         bp.mapconf = {
             "zoomtoparks": true,
             "parkinfowindow": true
         }
+
         $(".parktype_icon").click(function(){
             var im = $(this).prop('id').substr(2);
             var $checkbox = $("#parktype_"+im);
@@ -69,31 +71,38 @@
             }
 
         });
-        function park_search_name(){
-          var parkname = $("#parkname").val();
-          if(parkname){
-            bp.loadparks({
-              "name__icontains": parkname
-            });
-          }
-        }
 
-        $(document).ready(function(){
+        $(function() {
+
+          // neighborhood dropdown
+          $('#neighborhood_neighborhood').on("change", function(event) {
+            bp.loadparks({
+              "neighborhoods": $(this).val()
+            });
+          });
+
+          // park name search
           $("#parkname").keypress(function(e) {
               if(e.which == 13) {
                   $(this).blur();
                   $("#explore_search").focus().click();
               }
           });
+          $("#explore_search").on("click", function(){ 
+            var parkname = $("#parkname").val();
+            if(parkname){
+              bp.loadparks({
+                "name__icontains": parkname
+              });
+            }
+          });
 
-          $("#explore_search").click(function(){ park_search_name(); });
-          $('#neighborhood_neighborhood').bind("keypress change",(function() {
-          }));
-
+          // FIXME: what is this for?
           $('.activity_checkbox').live('change', function(){
             bp.explore_filter_parkactivities();
           });
 
+          // top margin
           bp.adjust_layerswitcher();
 
         });
