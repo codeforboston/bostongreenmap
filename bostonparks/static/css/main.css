@@ -192,7 +192,7 @@ ul.nav ul.actions li a:active { color: #666; }
 .menu-box-inner
 {
 	overflow: auto;
-	padding: 10px 30px;
+	padding: 30px 30px;
 	z-index: 30;
 	position: relative;
 	height: auto;
@@ -218,10 +218,15 @@ ul.nav ul.actions li a:active { color: #666; }
 	border-radius: 15px 15px 15px 15px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 	padding: 10px 20px;
-	margin: 0px 0 22px 0;
+	margin: 0;
 	/*    width: auto;
 */
 }
+
+.home .menu-box-item {
+	margin: 0px 0 22px 0;
+}
+
 
 .menu-box-item form { margin-bottom: 10px; }
 
@@ -229,7 +234,6 @@ ul.nav ul.actions li a:active { color: #666; }
 {
 	max-width: 600px;
 	margin: 0 auto;
-	margin-top: 20px;
 	text-align: left;
 }
 
@@ -255,6 +259,14 @@ ul.nav ul.actions li a:active { color: #666; }
 	padding-top: 0px;
 	text-align: center;
 	height: 95%;
+}
+
+.home .container-fluid.middle:before,
+.neighborhood .container-fluid.middle:before
+{
+content: "";
+display: table;
+height: 20px;
 }
 
 .row-fluid
