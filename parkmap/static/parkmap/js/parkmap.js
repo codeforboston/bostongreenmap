@@ -667,19 +667,20 @@ var bp = {
                   origin:start,  
                   destination:stop, 
                   waypoints:waypoints,
-                  travelMode:mode
+                  travelMode:mode,
+                  provideRouteAlternatives: false
               }; 
           } else {
               request = { 
                   origin:start,  
                   destination:stop, 
-                  travelMode:mode
+                  travelMode:mode, 
+                  provideRouteAlternatives: false
               }; 
           }
           directionsService.route(request, function(response, status) { 
             if (status == google.maps.DirectionsStatus.OK) { 
                directionsDisplay.setDirections(response);
-
             } 
           });
   }
