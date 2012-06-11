@@ -8,6 +8,7 @@ var bp = {
   overlays: [],
 
   // map configurations
+  // TODO: document options
   mapconf: {},
 
   // paginaton threshold
@@ -15,7 +16,7 @@ var bp = {
 
   // There should be only one
   sharedinfowindow: new google.maps.InfoWindow({
-    content: "foo"
+    maxWidth: 260
   }),
 
   update_second_dropdown: function(search_type, filter_type, filter,value_key,django_neighborhood) {
@@ -262,7 +263,8 @@ var bp = {
   },
 
   // load parks and render on map
-  loadparks: function(parkfilter, mapconf) {
+  // FIXME: is mapconf set globally on page load?
+  loadparks: function(parkfilter) {
       
     parkfilter["format"] = "json";
     bp.clearmap();
@@ -277,7 +279,8 @@ var bp = {
 
           parkLatlngs = bp.renderpark(park["geometry"], {
             "name": park["name"],
-            "description": park["description"]
+            "description": park["description"],
+            "slug": park["slug"]
           });
           latlngs.push.apply(latlngs, parkLatlngs);
           // adjust map extent
@@ -356,6 +359,24 @@ var bp = {
           numLevels: part["numLevels"],
           map: bp.map
         });
+
+        if (bp.mapconf["parkinfowindow"]) {
+          google.maps.event.addListener(parkPoly, "click", function(evt) {
+            // invisble park marker to anchor info window
+            var parkMarker = new google.maps.Marker({
+              map: bp.map,
+              position: new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng()),
+              visible: false
+            });
+
+            var parkinfocontent = "<div class='iwindow'><h2>" + properties["name"] + "</h2>" +
+                                "<div>"+properties['description']+"</div>" +
+                                "<strong><a href='/park/" + properties['slug']+"/'>" + "Learn more about this park" + "</a></strong>" ;
+            bp.sharedinfowindow.setContent(parkinfocontent);
+            bp.sharedinfowindow.open(bp.map, parkMarker)
+          });
+        }
+
         // extend latlngs
         latlngs.push.apply(latlngs, parkPoly.getPath().getArray());
         // track overlay
@@ -384,14 +405,6 @@ var bp = {
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }
-/*
-    var facilityinfo = new google.maps.InfoWindow({
-      content: facilityinfocontent
-    });
-    google.maps.event.addListener(facilitymarker, 'click', function() {
-      facilityinfo.open(bp.map, facilitymarker);
-    });
-*/
     google.maps.event.addListener(facilitymarker, 'click', function() {
       bp.sharedinfowindow.setContent(facilityinfocontent);
       bp.sharedinfowindow.open(bp.map, facilitymarker);
@@ -511,6 +524,16 @@ var bp = {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   },
+
+  adjust_layerswitcher: function() {
+    // adjust top margin for layer switcher
+    google.maps.event.addDomListener(bp.map, 'tilesloaded', function(){  
+      if($('#layerswitcher').length==0){
+        $("div.gmnoprint").last().wrap('<div id="layerswitcher" />').css("margin-top", "76px");
+      }
+    });
+  },
+
 
   //TripSection
   add_remove_park_trip: function(park_id, trippage){
@@ -659,32 +682,6 @@ var bp = {
 
             } 
           });
-  },
-  explore_search: function(url){
-    $.getJSON(url,function(data){
-      var out = "";
-      for(var i=0;i< data['objects'].length;i++){
-        var park = data['objects'][i];
-        out += "<br>"+park['name'];
-        $("#parklist").html(out);
-      }
-
-      if(data['meta']['previous']){
-        out += '<a href="javascript:void(0)" id="prev_link">PREVIOUS</a>';
-        $("#parklist").html(out);
-      }
-      if(data['meta']['next']){
-        //if (data['meta']['previous']){ out += "&nbsp;&nbsp;";}
-        out += '<a href="javascript:void(0)" id="next_link">NEXT</a>';
-        $("#parklist").html(out);
-      }
-      $("#prev_link").bind("click", function(){
-        bp.explore_search(data['meta']['previous']);
-      });
-      $("#next_link").bind("click", function(){
-        bp.explore_search(data['meta']['next']);
-      });
-   });
   }
 }
 
@@ -711,7 +708,6 @@ bp.map = new google.maps.Map(document.getElementById("map_canvas"), {
 // add custom mapclayer
 bp.map.mapTypes.set(bp.mapclayer, new google.maps.MAPCMapType(bp.mapclayer));
 bp.map.setMapTypeId(bp.mapclayer);
-
 
 $(function() {   
 

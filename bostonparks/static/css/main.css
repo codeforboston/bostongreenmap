@@ -144,6 +144,11 @@ ul.nav ul.actions li a:active { color: #666; }
 
 .span3 > .well { padding-top: 0; }
 
+
+/* Map
+-------------------------------------------------- */
+
+
 #map_canvas
 {
 	position: absolute;
@@ -160,6 +165,7 @@ ul.nav ul.actions li a:active { color: #666; }
 	top: 0px;
 	height: 400px;
 }
+
 
 .menu-box
 {
