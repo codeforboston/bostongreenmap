@@ -512,6 +512,16 @@ var bp = {
     });
   },
 
+  adjust_layerswitcher: function() {
+    // adjust top margin for layer switcher
+    google.maps.event.addDomListener(bp.map, 'tilesloaded', function(){  
+      if($('#layerswitcher').length==0){
+        $("div.gmnoprint").last().wrap('<div id="layerswitcher" />').css("margin-top", "76px");
+      }
+    });
+  },
+
+
   //TripSection
   add_remove_park_trip: function(park_id, trippage){
      if (trippage == undefined) { trippage = false; }
@@ -711,7 +721,6 @@ bp.map = new google.maps.Map(document.getElementById("map_canvas"), {
 // add custom mapclayer
 bp.map.mapTypes.set(bp.mapclayer, new google.maps.MAPCMapType(bp.mapclayer));
 bp.map.setMapTypeId(bp.mapclayer);
-
 
 $(function() {   
 
