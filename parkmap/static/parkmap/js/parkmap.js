@@ -648,7 +648,15 @@ var bp = {
           var c = coords[i][0]+","+coords[i][1];
           waypoints[waypoints.length] = {location:c, stopover:true};
       }
-      bp.clearmap();
+      
+      // clear previous results
+      try {  
+        directionsDisplay.setMap(null);  
+      }  
+      catch (e) {  
+         // statements to handle any exceptions  
+         // console.log(e); // pass exception object to error handler  
+      }  
 
       directionsDisplay = new google.maps.DirectionsRenderer();
       directionsDisplay.setMap(bp.map);

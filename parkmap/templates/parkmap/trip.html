@@ -70,6 +70,15 @@
            bp.check_park_in_queue();
            $("#parklist").html("");
 
+           // clearmap
+          try {  
+            directionsDisplay.setMap(null);  
+          }  
+          catch (e) {  
+             // statements to handle any exceptions  
+             // console.log(e); // pass exception object to error handler  
+          }  
+
        });
         
 
@@ -84,6 +93,7 @@
                $("#origin_error").show();
            }
        });
+
        $("#bike_search").bind("click", function(event){
            var start = $("#id_home_address").val();
            var stop = $("#id_end_address").val();
@@ -108,9 +118,7 @@
        $("#id_home_address").val($.jStorage.get("origin_address",""));
        $("#id_end_address").val($.jStorage.get("destination_address",""));
 
-
        bp.adjust_layerswitcher();
-
 
     });
 
