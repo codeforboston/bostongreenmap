@@ -8,6 +8,7 @@ var bp = {
   overlays: [],
 
   // map configurations
+  // TODO: document options
   mapconf: {},
 
   // paginaton threshold
@@ -15,7 +16,7 @@ var bp = {
 
   // There should be only one
   sharedinfowindow: new google.maps.InfoWindow({
-    content: "foo"
+    maxWidth: 260
   }),
 
   update_second_dropdown: function(search_type, filter_type, filter,value_key,django_neighborhood) {
@@ -263,7 +264,7 @@ var bp = {
 
   // load parks and render on map
   // FIXME: is mapconf set globally on page load?
-  loadparks: function(parkfilter, mapconf) {
+  loadparks: function(parkfilter) {
       
     parkfilter["format"] = "json";
     bp.clearmap();
@@ -278,7 +279,8 @@ var bp = {
 
           parkLatlngs = bp.renderpark(park["geometry"], {
             "name": park["name"],
-            "description": park["description"]
+            "description": park["description"],
+            "slug": park["slug"]
           });
           latlngs.push.apply(latlngs, parkLatlngs);
           // adjust map extent
@@ -357,6 +359,24 @@ var bp = {
           numLevels: part["numLevels"],
           map: bp.map
         });
+
+        if (bp.mapconf["parkinfowindow"]) {
+          google.maps.event.addListener(parkPoly, "click", function(evt) {
+            // invisble park marker to anchor info window
+            var parkMarker = new google.maps.Marker({
+              map: bp.map,
+              position: new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng()),
+              visible: false
+            });
+
+            var parkinfocontent = "<div class='iwindow'><h2>" + properties["name"] + "</h2>" +
+                                "<div>"+properties['description']+"</div>" +
+                                "<strong><a href='/park/" + properties['slug']+"/'>" + "Learn more about this park" + "</a></strong>" ;
+            bp.sharedinfowindow.setContent(parkinfocontent);
+            bp.sharedinfowindow.open(bp.map, parkMarker)
+          });
+        }
+
         // extend latlngs
         latlngs.push.apply(latlngs, parkPoly.getPath().getArray());
         // track overlay
@@ -385,14 +405,6 @@ var bp = {
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
     }
-/*
-    var facilityinfo = new google.maps.InfoWindow({
-      content: facilityinfocontent
-    });
-    google.maps.event.addListener(facilitymarker, 'click', function() {
-      facilityinfo.open(bp.map, facilitymarker);
-    });
-*/
     google.maps.event.addListener(facilitymarker, 'click', function() {
       bp.sharedinfowindow.setContent(facilityinfocontent);
       bp.sharedinfowindow.open(bp.map, facilitymarker);
