@@ -331,8 +331,8 @@ def filter_play_park(filters):
     activities = Activity.objects.filter(id=filters['activity'])
     facilities = Facility.objects.filter(activity=activities)
     try:
-        park_facility_ids = [f.park.os_id for f in facilities]
-    except AttributeError:
+        park_facility_ids = [f.park.os_id for f in facilities if f.park]
+    except AttributeError:  ## should we return a 404 here?
         return []
     parks = Park.objects.filter(pk__in=park_facility_ids, neighborhoods=neighborhood)
     return parks
