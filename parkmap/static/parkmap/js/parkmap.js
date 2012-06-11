@@ -667,7 +667,7 @@ var bp = {
           if(mode == "bicycling"){
               mode = google.maps.DirectionsTravelMode.BICYCLING;
           } else {
-              mode = google.maps.DirectionsTravelMode.DRIVING;
+              mode = google.maps.DirectionsTravelMode.WALKING;
           }
           var request;
           if(waypoints.length > 0){
