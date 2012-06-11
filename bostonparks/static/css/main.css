@@ -391,6 +391,14 @@ body.play form { margin-bottom: 0; }
 	padding-left: 0;
 }
 
+#parklist li h3
+{
+	cursor: hand;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grabbing;
+}
+
 /* #parklist li span { position: absolute; margin-left: -1.3em; } */
 ul.ui-sortable li
 {
