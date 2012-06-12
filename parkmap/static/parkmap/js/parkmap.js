@@ -1,8 +1,5 @@
 // bostonparks object
 var bp = {
-  
-  // custom basemap layer
-  mapclayer: "basemap",
 
   // array with currently visible map features (parks, facilites)
   overlays: [],
@@ -18,6 +15,37 @@ var bp = {
   sharedinfowindow: new google.maps.InfoWindow({
     maxWidth: 260
   }),
+
+
+  // initializes Google Map with given basemap argument [string]
+  init_map: function(basemap) {
+
+    var basemap = basemap || "basemap";
+
+    // add google map
+    this.map = new google.maps.Map(document.getElementById("map_canvas"), {
+      zoom: 13,
+      center: new google.maps.LatLng (42.307733,-71.09713),  //NEW: Franklin Park OLD: (42.31, -71.032), boston
+      minZoom: 10,
+      maxZoom: 17,
+      mapTypeControlOptions: {
+        position: google.maps.ControlPosition.TOP_RIGHT,
+        mapTypeIds: [basemap, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
+        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+      },
+      panControl: false,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.RIGHT_BOTTOM,
+        style: google.maps.ZoomControlStyle.MEDIUM
+      },
+      streetViewControl: false
+    })
+
+    // add custom basemap layer
+    this.map.mapTypes.set(basemap, new google.maps.MAPCMapType(basemap));
+    this.map.setMapTypeId(basemap);
+
+  },
 
   update_second_dropdown: function(search_type, filter_type, filter,value_key,django_neighborhood) {
     /*
@@ -695,28 +723,7 @@ var bp = {
 }
 
 
-// add google map
-bp.map = new google.maps.Map(document.getElementById("map_canvas"), {
-  zoom: 13,
-  center: new google.maps.LatLng (42.307733,-71.09713),  //NEW: Franklin Park OLD: (42.31, -71.032), boston
-  minZoom: 10,
-  maxZoom: 17,
-  mapTypeControlOptions: {
-    position: google.maps.ControlPosition.TOP_RIGHT,
-    mapTypeIds: [bp.mapclayer, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
-    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-  },
-  panControl: false,
-  zoomControlOptions: {
-    position: google.maps.ControlPosition.RIGHT_BOTTOM,
-    style: google.maps.ZoomControlStyle.MEDIUM
-  },
-  streetViewControl: false
-})
 
-// add custom mapclayer
-bp.map.mapTypes.set(bp.mapclayer, new google.maps.MAPCMapType(bp.mapclayer));
-bp.map.setMapTypeId(bp.mapclayer);
 
 $(function() {   
 
