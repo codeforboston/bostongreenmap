@@ -553,6 +553,12 @@ var bp = {
     });
   },
 
+  // check for valid email
+  validate_email: function(email) {
+    var emailReg = /^([a-zA-Z0-9_\.\-\+\'])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return emailReg.test(email);
+  },
+
   adjust_layerswitcher: function() {
     // adjust top margin for layer switcher
     google.maps.event.addDomListener(bp.map, 'tilesloaded', function(){  

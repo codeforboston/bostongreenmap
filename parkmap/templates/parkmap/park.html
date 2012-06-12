@@ -45,7 +45,18 @@
              <h5>Owner &amp; Management</h5>
              {% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
              {% if park.phone %}<p>{{ park.phone }}</p>{% endif %}
-             <p><a href="#">Report a Problem</a></p>
+             <p><a href="javascript:void(0)" data-toggle="collapse" data-target="form.problem">Report a Problem</a>
+
+                <form class="problem collapse">
+                    <textarea name="text" id="summary"></textarea>
+                    <label>Your Email (required):</label>
+                    <input type="text" id="user_email">
+                    <input type="hidden" id="park_coord" value="{{ park.lat_long }}" >
+                    <input type="hidden" id="park_address" value="{{ park.name }}, {{ park.neighborhoods.all.0 }}, MA" >
+                    <input type="submit" value="Report">
+                </form>
+            
+            </p>
              
              {% if park.friendsgroup %}
              <h5>Get Involved</h5>
@@ -150,7 +161,8 @@
     </script>
 <script>
 
-$(document).ready(function(){
+$(function() {
+
     bp.park_trip_button_bind({{park.os_id|add:"0"}});
     bp.check_park_in_queue({{park.os_id|add:"0"}});
     $("label[for='id_rating_0']").closest('li').addClass('rating_0');
@@ -193,6 +205,60 @@ $(document).ready(function(){
     $("#plan_trip").click(function(){
         bp.add_remove_park_trip({{park.os_id|add:"0"}},false);
     });
+
+
+    // report a problem to seeclickfix.com
+    // TODO: show link to seeclickfix issue when we have a response object (http://help.seeclickfix.com/discussions/api-questions/18-no-response-object-when-creating-an-issue)
+    $("form.problem").on("submit", function(event) {
+        event.preventDefault();
+
+        var email = $(this).find("#user_email").val();
+        var summary = $(this).find("#summary").val();
+
+        // some client-side validation
+        $(this).find("ul.errorlist").hide();
+        if (bp.validate_email(email) === false) {
+            $("<ul class='errorlist'><li>Please enter a valid email address.</li></ul>").insertBefore($(this).find("#user_email"));
+            return false;
+        };
+        if (summary === "") {
+            $("<ul class='errorlist'><li>Please provide a short summary.</li></ul>").insertBefore($(this).find("#summary"));
+            return false;
+        };
+
+        // lat lng string to array
+        var lat_lng = $(this).find("#park_coord").val().slice(1, $(this).find("#park_coord").val().length-1).split(",");
+
+        // report issue
+        $.post(
+            "http://seeclickfix.com/api/issues.json", 
+            { 
+                api_key: "45f638459899bd9df218da82bc08db3c171627d2",
+                issue: {
+                    "lat": parseFloat(lat_lng[0]),
+                    "lng": parseFloat(lat_lng[1]),
+                    "summary": summary,
+                    "reporter_email": email,
+                    "address": $(this).find("#park_address").val()
+                }
+            },
+            function() {
+                console.log("success");
+                $("form.problem")
+                .empty()
+                .append("<p>Thank you! You successfully reported a problem for {{ park.name }}.</p>");
+
+        })
+        .success(function() { console.log("second success"); })
+        .error(function() { 
+            console.log("error"); 
+            $("form.problem")
+            .append("<p>An error occurred, please try again.</p>");
+        })
+        .complete(function() { console.log("complete"); });
+
+    });
+
 });
 
 
