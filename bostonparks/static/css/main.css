@@ -391,6 +391,14 @@ body.play form { margin-bottom: 0; }
 	padding-left: 0;
 }
 
+#parklist li h3
+{
+	cursor: hand;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grabbing;
+}
+
 /* #parklist li span { position: absolute; margin-left: -1.3em; } */
 ul.ui-sortable li
 {
@@ -643,7 +651,7 @@ ul.actions li img
 	margin: 0 auto;
 }
 
-input#car_search, input#bike_search { background-color: #00DC00; }
+input#walking_search, input#bike_search { background-color: #00DC00; }
 
 .flag-inapp
 {
