@@ -28,11 +28,12 @@
               </div>
               <div class="parkdesc parkdesclong hide">
                  {{ park.description|markdown }}
-                 {% if park.description.text|wordcount > 20 %}        
+                            </div>  
+                {% if park.description|wordcount > 20 %}        
                     <a class="descmore">Read more &raquo;</a>
                     <a class="descless hide">&laquo; Read less </a>
                  {% endif %} 
-              </div>
+
              </p>
              {% endif %}
              <p><strong>Public access:</strong> {{ park.get_access_display }}</p>
@@ -99,10 +100,10 @@
               <div class="storytitle">{{ story.title }}</div>
               {% endif %}
               <div class="storytext storyshort">
-                {{ story.text|truncatewords:40 }}
+                {{ story.text|markdown|truncatewords:40 }}
               </div>
               <div class="storytext storylong hide">
-                {{ story.text }}
+                {{ story.text|markdown }}
               </div>
               {% if story.text|wordcount > 40 %}        
                  <a class="read">Read more &raquo;</a>

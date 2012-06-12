@@ -144,10 +144,8 @@ ul.nav ul.actions li a:active { color: #666; }
 
 .span3 > .well { padding-top: 0; }
 
-
 /* Map
 -------------------------------------------------- */
-
 
 #map_canvas
 {
@@ -165,7 +163,6 @@ ul.nav ul.actions li a:active { color: #666; }
 	top: 0px;
 	height: 400px;
 }
-
 
 .menu-box
 {
@@ -229,11 +226,7 @@ ul.nav ul.actions li a:active { color: #666; }
 */
 }
 
-.home .menu-box-item {
-	margin: 0px 0 22px 0;
-}
-
-
+.home .menu-box-item { margin: 0px 0 22px 0; }
 .menu-box-item form { margin-bottom: 10px; }
 
 .container-fluid.middle
@@ -270,9 +263,9 @@ ul.nav ul.actions li a:active { color: #666; }
 .home .container-fluid.middle:before,
 .neighborhood .container-fluid.middle:before
 {
-content: "";
-display: table;
-height: 20px;
+	content: "";
+	display: table;
+	height: 20px;
 }
 
 .row-fluid
@@ -391,13 +384,7 @@ body.play form { margin-bottom: 0; }
 	padding-left: 0;
 }
 
-#parklist li h3
-{
-	cursor: hand;
-	cursor: grab;
-	cursor: -moz-grab;
-	cursor: -webkit-grabbing;
-}
+#parklist li h3 { cursor: -webkit-grabbing; }
 
 /* #parklist li span { position: absolute; margin-left: -1.3em; } */
 ul.ui-sortable li
@@ -444,6 +431,10 @@ ul#parklist.ui-sortable li h3 { padding-left: 25px; }
 	height: 38px;
 	width: 32px;
 }
+
+.park .parkdesc p { margin: 9px 0 0; }
+.park .parkdesc p:first-child { margin: 0; }
+.policy .span12 { padding: 20px 0 0; }
 
 /* HIGHTLIGHT CURRENT PAGE */
 body.play .navbar .nav > li > a.play { color: yellow; }
@@ -504,6 +495,8 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 }
 
 .parkstory .storytext { text-indent: 30px; }
+.parkstory .storytext p { margin: 9px 0 0; }
+.parkstory .storytext p:first-child { margin: 0; }
 
 .parkstory .rating_4
 {
@@ -645,12 +638,7 @@ ul.actions li img
 }
 
 .iwindow { text-align: left; }
-
-.home button.btn, input.btn[type="submit"]
-{
-	margin: 0 auto;
-}
-
+.home button.btn, input.btn[type="submit"] { margin: 0 auto; }
 input#walking_search, input#bike_search { background-color: #00DC00; }
 
 .flag-inapp
@@ -661,5 +649,4 @@ input#walking_search, input#bike_search { background-color: #00DC00; }
 }
 
 .home .flag-inapp { color: white; }
-
-.icon-flag {float: left;}
+.icon-flag { float: left; }
