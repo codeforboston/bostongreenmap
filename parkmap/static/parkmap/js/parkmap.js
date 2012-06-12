@@ -692,7 +692,13 @@ var bp = {
          // console.log(e); // pass exception object to error handler  
       }  
 
-      directionsDisplay = new google.maps.DirectionsRenderer();
+      directionsDisplay = new google.maps.DirectionsRenderer({
+        polylineOptions: {
+          strokeColor: "#00DC00",
+          strokeWeight: 8,
+          strokeOpacity: 0.4
+        }
+      });
       directionsDisplay.setMap(bp.map);
 
           // Only calculate a route if they have waypoints.
