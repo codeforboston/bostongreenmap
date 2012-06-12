@@ -41,7 +41,7 @@ def get_list():
 def home_page(request):
     parks, facilities, neighborhoods = get_list()
     activities = Activity.objects.all()
-    stories = Story.objects.all().order_by('date')[:6]
+    stories = Story.objects.all().order_by('-date')[:6]
     return render_to_response('parkmap/home.html', {
         'parks': parks,
         'facilities': facilities,
@@ -56,7 +56,7 @@ def parks_page(request, park_slug):
     encoder = gpolyencode.GPolyEncoder()
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
-    stories = Story.objects.filter(park=park).order_by("date")
+    stories = Story.objects.filter(park=park).order_by("-date")
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
