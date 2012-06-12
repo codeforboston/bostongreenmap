@@ -69,7 +69,7 @@ var bp = {
       break;
     }
     out += "</option>";
-  	out += "<option value='all'>All</option>"; // Need to hook onto this with javascript to load the whole list
+  	//out += "<option value='all'>All</option>"; // Need to hook onto this with javascript to load the whole list
     $.ajax({
       url:'/api/v1/'+search_type+'/?format=json&limit=1000&'+filter_type+'='+filter,
       dataType:'json',
