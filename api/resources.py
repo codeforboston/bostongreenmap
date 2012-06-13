@@ -1,5 +1,6 @@
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.cache import SimpleCache
+import datetime
 from tastypie import fields
 
 from api.tastyhacks import EncodedGeoResource, GeoResource
@@ -153,6 +154,7 @@ class ExploreActivityResource(ModelResource):
         excludes = ('status', 'location')
 
     def build_filters(self, filters=None):
+        print "HERE"
         if filters is None:
             filters = {}
 
@@ -227,6 +229,34 @@ class ExploreFacilityResource(GeoResource):
             orm_filters = {"pk__in": [i.id for i in facilities]}
         return orm_filters
 
+class ExploreSearchResource(EncodedGeoResource):
+    class Meta:
+        queryset = Park.objects.all()
+        allowed_methods = ['get', ]
+        limit = 20
+        excludes = ['access','address','alt_name','area','phone']
+        #cache = SimpleCache()
+        include_resource_uri = False
+
+   # def build_filters(self, filters=None):
+   #     print "filters", datetime.datetime.now()
+   #     if filters is None:
+   #         filters = {}
+   #     orm_filters = super(ExploreSearchResource, self).build_filters(filters)
+
+   #     if "facility_type_list" in filters:
+   #         id_list  = filters['facility_type_list'].split(",")
+   #         orm_filters = {"pk__in": [i for i in id_list]}
+   #     print "filters done", datetime.datetime.now()
+   #     return orm_filters
+
+   # def dehydrate(self, bundle):
+   #     #print "dehydrate", datetime.datetime.now()
+   #     return bundle
+
+
+
+
 
 class EntryResource(ModelResource):
     neighborhood = fields.ForeignKey(NeighborhoodResource, 'neighborhood')
@@ -237,6 +267,7 @@ class EntryResource(ModelResource):
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
     parkname = fields.ForeignKey(ParkNameResource, 'parkname')
+    exploresearch = fields.ForeignKey(ExploreSearchResource, 'exploresearch')
 
     class Meta:
         queryset = Neighborhood.objects.all()

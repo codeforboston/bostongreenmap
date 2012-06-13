@@ -213,6 +213,15 @@ ul.nav ul.actions li a:active { color: #666; }
 	height: 100%;
 }
 
+.explore .menu-box-inner {
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;    
+}
+
 .menu-box-item
 {
 	background-color: white;
@@ -228,6 +237,8 @@ ul.nav ul.actions li a:active { color: #666; }
 
 .home .menu-box-item { margin: 0px 0 22px 0; }
 .menu-box-item form { margin-bottom: 10px; }
+
+.home .menu-box-item { position: relative; }
 
 .container-fluid.middle
 {
@@ -245,6 +256,7 @@ ul.nav ul.actions li a:active { color: #666; }
 	max-width: 400px;
 }
 
+.explore .container-fluid.middle,
 .neighborhood .container-fluid.middle { height: 80%; }
 
 .park .container-fluid.middle
@@ -261,7 +273,8 @@ ul.nav ul.actions li a:active { color: #666; }
 }
 
 .home .container-fluid.middle:before,
-.neighborhood .container-fluid.middle:before
+.neighborhood .container-fluid.middle:before,
+.explore .container-fluid.middle:before
 {
 	content: "";
 	display: table;
@@ -285,6 +298,16 @@ ul.nav ul.actions li a:active { color: #666; }
 	text-align: center;
 	background-color: #00dc00;
 	/*GREEN */
+}
+
+.explore .menu-box-item
+{
+position: absolute;
+top: 30px;
+left:20px;
+right: 30px;
+bottom: 30px;
+
 }
 
 .menu-box-item form select
@@ -317,6 +340,7 @@ ul.nav ul.actions li a:active { color: #666; }
 	padding-right: 20px;
 }
 
+#verticalscroll,
 .verticalscroll
 {
 	bottom: 120px;
@@ -325,6 +349,11 @@ ul.nav ul.actions li a:active { color: #666; }
 	position: absolute;
 	right: 20px;
 	top: 50px;
+}
+
+#verticalscroll
+{
+top: 130px;
 }
 
 .menu-box-item .menu-box-hotdog

@@ -12,6 +12,7 @@ from api.resources import ParkResource, \
     ActivityResource, \
     ParktypeResource, \
     ExploreParkResource, \
+    ExploreSearchResource, \
     ExploreFacilityResource, \
     ParkNameResource, \
     ExploreActivityResource
@@ -26,6 +27,7 @@ v1_api.register(ParkResource())
 v1_api.register(FacilityResource())
 v1_api.register(ParktypeResource())
 v1_api.register(ExploreParkResource())
+v1_api.register(ExploreSearchResource())
 v1_api.register(ExploreFacilityResource())
 v1_api.register(ExploreActivityResource())
 v1_api.register(ParkNameResource())

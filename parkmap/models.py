@@ -234,7 +234,7 @@ class Facility(models.Model):
     """
 
     name = models.CharField(max_length=50, blank=True, null=True)
-    slug = models.SlugField(max_length=100, blank=True, null=True)
+    #slug = models.SlugField(max_length=100, blank=True, null=True, unique=True)
     facilitytype = models.ForeignKey(Facilitytype, blank=True, null=True)
     activity = models.ManyToManyField(Activity, related_name='activity')
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')

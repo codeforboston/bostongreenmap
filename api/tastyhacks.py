@@ -7,6 +7,7 @@ from tastypie.fields import ApiField, CharField
 from tastypie.resources import ModelResource
 
 import gpolyencode
+#import cgpolyencode as gpolyencode
 
 
 class GeometryApiField(ApiField):
