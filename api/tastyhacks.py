@@ -6,8 +6,8 @@ from tastypie.bundle import Bundle
 from tastypie.fields import ApiField, CharField
 from tastypie.resources import ModelResource
 
-import gpolyencode
-#import cgpolyencode as gpolyencode
+
+import cgpolyencode
 
 
 class GeometryApiField(ApiField):
@@ -72,7 +72,7 @@ class EncodedGeometryApiField(ApiField):
         if isinstance(value, dict):
             return value
 
-        encoder = gpolyencode.GPolyEncoder()
+        encoder = cgpolyencode.GPolyEncoder()
         geom = GEOSGeometry(value)
         # support multipart geometetries
         geom_encoded = {}
