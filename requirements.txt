@@ -1,7 +1,7 @@
 Django==1.4
-GPolyEncode==0.1.1
 Markdown==2.1.1
 South==0.7.4
+cGPolyEncode==0.1.1
 django-tastypie==0.9.11
 mimeparse==0.1.3
 psycopg2==2.4.5

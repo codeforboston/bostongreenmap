@@ -13,7 +13,7 @@ from django.template import RequestContext
 from django.conf import settings
 
 
-import gpolyencode
+import cgpolyencode
 current_site = Site.objects.get_current()
 
 #Temporary view to see Play page
@@ -53,7 +53,7 @@ def home_page(request):
 
 def parks_page(request, park_slug):
     park = get_object_or_404(Park, slug=park_slug)
-    encoder = gpolyencode.GPolyEncoder()
+    encoder = cgpolyencode.GPolyEncoder()
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
     stories = Story.objects.filter(park=park).order_by("-date")
