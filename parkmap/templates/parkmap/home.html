@@ -109,12 +109,8 @@
     {{ block.super }}
         <script type="text/javascript">
 
-            bp.parkfilter = {
-                "area__gt": "10000"
-            }
-
             // load default map
-            bp.init_map();
+            bp.init_map("parkmap");
 
             $(function() {
 

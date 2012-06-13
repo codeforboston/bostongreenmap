@@ -33,6 +33,12 @@ var SUBDOMAINS = [""],
             "name": "Walking Paths",
             "minZoom": 9,
             "maxZoom": 17
+        },
+        "parkmap": {
+            "url": "http://{S}tiles.mapc.org/parkmap/{Z}/{X}/{Y}.png",
+            "name": "Parkmap",
+            "minZoom": 9,
+            "maxZoom": 17
         }
     },
     ATTRIBUTION = 'Map tiles by <a href="http://mapc.org">MAPC</a>, ' +
@@ -126,6 +132,28 @@ if (typeof google === "object" && typeof google.maps === "object") {
     };
     // FIXME: is there a better way to extend classes in Google land?
     google.maps.MAPCMapType.prototype = new google.maps.ImageMapType("_");
+}
+
+if (typeof $ === "function" && typeof $.geo === "object") {
+   $.geo.MAPC = function( name ) {
+     if ( $.isArray( name ) ) {
+       return $.map( name, $.geo.MAPC );
+     } else {
+       var provider = getProvider(name);
+
+       return {
+         type: "tiled",
+         src: function( view ) {
+           var index = view.index % SUBDOMAINS.length;
+           return provider.url
+                           .replace("{S}", SUBDOMAINS[index])
+                           .replace("{Z}", view.zoom)
+                           .replace("{X}", view.tile.column)
+                           .replace("{Y}", view.tile.row);
+         }
+       };
+     }
+   }
 }
 
 })();
