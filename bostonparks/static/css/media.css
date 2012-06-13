@@ -35,10 +35,20 @@
 	height: 300px;
 	}
 	
-	
+	ul.nav ul.actions li a:link, ul.nav ul.actions li a:visited
+    { 
+	padding: 0 30px 0 0;
+    }
+
 	.play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
 	margin: 0;
 	}
+	
+	.home .container-fluid.middle:before, .neighborhood .container-fluid.middle:before, .explore .container-fluid.middle:before {
+    content: "";
+    display: none;
+    height: 0px;
+    }
 	
 	
 	.neighborhood .container-fluid.middle,
@@ -63,6 +73,7 @@
 	}
 	
 	
+	.explore .menu-box.opacity,
 	.neighborhood .menu-box.opacity,
 	.home .menu-box.opacity
 	{

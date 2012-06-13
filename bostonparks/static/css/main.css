@@ -117,14 +117,6 @@ ul.nav ul.actions li a:visited
 	text-decoration: none;
 }
 
-ul.nav ul.actions li a:link,
-ul.nav ul.actions li a:visited
-{
-	color: black;
-	padding: 0 5px;
-	text-decoration: none;
-}
-
 ul.nav ul.actions li a:hover,
 ul.nav ul.actions li a:active { color: #666; }
 
