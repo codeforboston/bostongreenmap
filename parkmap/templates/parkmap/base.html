@@ -111,12 +111,14 @@ $(document).ready(function(){
 
 <!-- UserVoice Widget -->
 <script type="text/javascript">
+if ($(window).width() > 480) {
   var uvOptions = {};
   (function() {
     var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
     uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/c4EsGot1BjCp0N0vaR9EOg.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
   })();
+  }
 </script>
 
 </body>

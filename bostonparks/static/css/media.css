@@ -1,11 +1,19 @@
 @media (max-width: 480px) {
-	body .well {
+	.explore h2 {
+    font-size: 18px;
+    }
+    
+    body .well {
 	background-color: transparent; 
 	padding: 0;
 	} 
 	body .menu-box-inner {
 	padding: 0px 20px;
 	} 
+	body.play .menu-box-inner {
+	padding: 0px 0px;
+	} 
+
 	body .menu-box {
 	padding: 0;
 	}  
@@ -25,6 +33,13 @@
 	padding: 10px;
 	}
 	
+	body.play .menu-box-item
+	{
+	padding: 10px 20px 10px 0;
+	border-style: none;
+	box-shadow: 0 0 0 0;
+	}
+
 	body .menu-box-hotdog h1
 	{
 	font-size: 20px;
@@ -37,7 +52,7 @@
 	
 	ul.nav ul.actions li a:link, ul.nav ul.actions li a:visited
     { 
-	padding: 0 30px 0 0;
+	padding: 0 20px 0 0;
     }
 
 	.play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
@@ -50,6 +65,10 @@
     height: 0px;
     }
 	
+	.home #play .btn {display: block;}
+	
+	.home #play #activity {width: 90%; float: left; }
+	.home #play #neighborhood {width: 90%; float: left; clear: both; }
 	
 	.neighborhood .container-fluid.middle,
 	.home .container-fluid.middle
@@ -72,7 +91,7 @@
 	top: 0;
 	}
 	
-	
+	.play .menu-box.opacity,
 	.explore .menu-box.opacity,
 	.neighborhood .menu-box.opacity,
 	.home .menu-box.opacity
@@ -90,7 +109,19 @@
 	top: 0;
 	}
 	
+	#facilitylist #verticalscroll
+	{
+	height: auto;
+	}
 	
+	.explore .menu-box-item {
+    bottom: 10px;
+    left: 10px;
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    }
+
 	.menu-box-item .menu-box-hotdog {
 	bottom: 0;
 	left: 0;
@@ -105,7 +136,8 @@
 	width: 60%;
 	}
 	
-	#neighborhood_neighborhood
+	#neighborhood_neighborhood,
+	#neighborhood_activity
 	{
 	width: 90%;
 	}

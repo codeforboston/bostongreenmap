@@ -31,7 +31,7 @@ h4 a:visited
 	font-size: 16px;
 	color: #757575;
 	font-weight: bold;
-	margin-top: 10px;
+	padding-top: 10px;
 	display: block;
 }
 
@@ -296,7 +296,7 @@ ul.nav ul.actions li a:active { color: #666; }
 {
 position: absolute;
 top: 30px;
-left:20px;
+left:30px;
 right: 30px;
 bottom: 30px;
 

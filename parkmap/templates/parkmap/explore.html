@@ -34,10 +34,10 @@
       <div id="facilitylist">
  <div id="verticalscroll">
       {% for facilitytype in facilitytypes %}
-         <div class="cbgrp"> <input type="checkbox" class="facilitytype_checkbox" name="facilitytype_{{facilitytype.id}}" id="facilitytype_{{facilitytype.id}}">
+         <input type="checkbox" class="facilitytype_checkbox" name="facilitytype_{{facilitytype.id}}" id="facilitytype_{{facilitytype.id}}">
           {{facilitytype.name}}
           <img src="/static/parkmap/img/icons/{{facilitytype.name|slugify}}.png" id="p_{{facilitytype.id}}" title="{{facilitytype.name}}" class="facilitytype_icon">
-         </div>
+        <br>
       {% endfor %}
 </div>
         <h2 class="searchhd"> Search by Park Name</h2>
