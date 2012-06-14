@@ -1,86 +1,269 @@
 {% extends 'parkmap/base.html' %}
 {% load markup %}
+{% load humanize %}
 
-{% block title %}{% endblock %} 
-{% block meta %}{% endblock %}
-{% block headscripts %}{% endblock %}
+{% block title %}{{park.name}}{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Information and directions for {{ park.name }} {% if park.parktype %}{{ park.parktype }}{% endif %} presented by Boston Park Advocates. {% if park.parktype %} {{ park.description }}{% endif %}{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}{% for facility in park.facility_set.all %} {{facility.name}}: {{ facility.activity_string }}, {% endfor %}  {% endblock %} " >
+{% endblock %}
+
+{% block headscripts %}  
+{% endblock %}
 
 {% block bodyclass %}
 <body class="park">
-{% endblock %} 	
-
+{% endblock %} 
     
 {% block content %}     
-    <div class="container-fluid">
+    <div class="container-fluid middle">
       <div class="row-fluid">
         <div class="span3">
           <div class="well">
-					<h2>{{park.name}}</h2>
-					<p>{% if park.description %}{{park.description|markdown}}{% endif %}</p>
-					
-					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
-					<p><strong>Size:</strong> S0 acres</p>
-					
-					<h5>Get there!</h5>
-					<p>MBTA: Park Street, Boylston Street Station</p>
-					<p><a href="#">Plan a route</a></p>
-					
-					<h5>Owner &amp; Management</h5>
-					<p>{{park.owner}}</p>
-					<p>{{park.phone}}</p>
-					<p><a href="#">Report a Problem</a></p>
-					
-					<h5>Get Involved</h5>
-					<p><a href="#">Friends of Boston Common</a></p>
+            <h2>{{park.name}} {% if park.alt_name %}(<em>{{ park.alt_name }}</em>){% endif %}{% if park.parktype %}<br><span><small>{{ park.parktype }}</small></span>{% endif %}</h2>
+             {% if park.description %}
+             <p>
+              <div class="parkdesc parkdescshort">
+                  {{ park.description|markdown|truncatewords:20 }}
+              </div>
+              <div class="parkdesc parkdesclong hide">
+                 {{ park.description|markdown }}
+                            </div>  
+                {% if park.description|wordcount > 20 %}        
+                    <a class="descmore">Read more &raquo;</a>
+                    <a class="descless hide">&laquo; Read less </a>
+                 {% endif %} 
 
-					<p>Upcoming events</p>
-					<ul>
-                                        {% for event in park.events.all %}
-                                            <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</li>
-                                        {% endfor %}
-					<li><a href="#">Upload an event</a></li>
-					</ul>
-					
-                                        {% if park.facilities.all %}
-					    <h5>Contains the following facilities:</h5>
-					    <ul>
-                                            {% for facility in park.facilities.all %}
-                                            <li>{{facility.name}}</li>
-                                            {% endfor %}
-					    </ul>
-					{% endif %}
-				
+             </p>
+             {% endif %}
+             <p><strong>Public access:</strong> {{ park.get_access_display }}</p>
+             <p><strong>Size:</strong> {{acres|floatformat:"2"|intcomma}} acres</p>                    
+             <h5>Get there!</h5>
+             {% if park.address %}<p>{{park.address}}</p>{% endif %}
+             <p><a href="/plan/" id="plan_trip">Plan a route</a></p>
+             
+             <h5>Owner &amp; Management</h5>
+             {% if park.parkowner %}<p>{{ park.parkowner }}</p>{% endif %}
+             {% if park.phone %}<p>{{ park.phone }}</p>{% endif %}
+             <p><a href="javascript:void(0)" data-toggle="collapse" data-target="form.problem">Report a Problem</a>
+
+                <form class="problem collapse">
+                    <textarea name="text" id="summary"></textarea>
+                    <label>Your Email (required):</label>
+                    <input type="text" id="user_email">
+                    <input type="hidden" id="park_coord" value="{{ park.lat_long }}" >
+                    <input type="hidden" id="park_address" value="{{ park.name }}, {{ park.neighborhoods.all.0 }}, MA" >
+                    <input type="submit" value="Report">
+                </form>
+            
+            </p>
+             
+             {% if park.friendsgroup %}
+             <h5>Get Involved</h5>
+             <p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
+             {% endif %} 
+
+             <h5>Upcoming events</h5>
+             <ul>
+                                 {% for event in park.events.all %}
+                                     <li><a href="/event/{{event.slug}}/{{event.id}}/">{{event.name}}</a></li>
+                                 {% endfor %}
+             <li>Coming soon</li>
+             </ul>
+             
+             {% if park.facility_set.all %}
+                 <h5>Facilities and Acitivities:</h5>
+                 <ul>
+                                     {% for facility in park.facility_set.all %}
+                                     <li>{{facility.name}}: {{ facility.activity_string }}</li>
+                                     {% endfor %}
+                 </ul>
+             {% endif %}
+
+
+
+             {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.os_id %}">Edit Park information</a></p>{% endif %}
+                
           </div><!--/.well -->
         </div><!--/span-->
-			
+            
         <div class="span2">
           <div class="well">
-				
-					<img class="park-pic" alt="" src="/static/images/1_1.gif">
-					
-					<form action="post" id="add-to-trip">
-					
-					<input type="submit" id="add-trip" name="add-trip" value="Add to Trip" />
-					
-					</form>
-				
-				
+              <input type="button" id="tripadd_{{park.os_id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->
         </div><!--/span-->
-			
-			
-			
+            
+            
+            
         <div class="span7">
-          <div class="hero-unit">
-    {{park.geometry}}
-		
-			<img src="/static/images/fpo-map-733x278.jpg" alt="" width="730" height="278">
-		
+          <div id="map_canvas" class="detail well">        
           </div><!--/.well -->
-        </div><!--/span-->
+          
 
 
-    </div><!--/.fluid-container-->
+    <div id="stories">
+        <h2>Park Stories</h2>
+        {% for story in stories|slice:":10" %}
+          <div class="parkstory" id="story_{{story.id}}">
+            <div class="rating_{{ story.rating }}">
+            <div class="flag-inapp flag"></i><i class="icon-flag"></i>&nbsp;Flag as inppropriate</div>
+              {% if story.title %}
+              <div class="storytitle">{{ story.title }}</div>
+              {% endif %}
+              <div class="storytext storyshort">
+                {{ story.text|markdown|truncatewords:40 }}
+              </div>
+              <div class="storytext storylong hide">
+                {{ story.text|markdown }}
+              </div>
+              {% if story.text|wordcount > 40 %}        
+                 <a class="read">Read more &raquo;</a>
+                 <a class="readless hide">&laquo; Read less </a>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+             <div class="nostories"> There are no stories yet for this park. Add your story below! </div>
+        {% endfor %}
+        <div>
+            <a class="sharestory" href="#ns">Share Your Story</a> <a href="/policy/" name='ns'>Data Disclaimer | Terms of Service</a></div>
+            <div class="newstory hide">
+                <form id="new_story" action="" method="POST">
+                    {% csrf_token %}
+                    <div>
+                    {{ story_form.as_p }}
+                    <input type="submit" value="Submit Your Story">
+                    </div>
+                </form> 
+            </div>
+        </div>
+     </div>     
+   </div><!--/span-->
 
-{% endblock %}		
+</div><!--/.fluid-container-->
+
+{% endblock %}    
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        bp.parkfilter = {
+            "os_id": "{{ park.os_id }}"
+        }
+        bp.mapconf = {
+            "zoomtoparks": true,
+            "showfacilities": true
+        }
+        // load default map
+        bp.init_map();
+
+    </script>
+<script>
+
+$(function() {
+
+    bp.park_trip_button_bind({{park.os_id|add:"0"}});
+    bp.check_park_in_queue({{park.os_id|add:"0"}});
+    $("label[for='id_rating_0']").closest('li').addClass('rating_0');
+    $("label[for='id_rating_1']").closest('li').addClass('rating_1');
+    $("label[for='id_rating_2']").closest('li').addClass('rating_2');
+    $("label[for='id_rating_3']").closest('li').addClass('rating_3');
+    $("a.read").click(function(){
+        $(this).siblings(".storytext").toggle(400);
+        $('a.readless').show();
+        $('a.read').hide();
+    });    
+    $("a.readless").click(function(){
+        $(this).siblings(".storytext").toggle(400);
+        $('a.readless').hide();
+        $('a.read').show();
+    });
+    $("a.sharestory").click(function(){
+        $(".newstory").slideToggle('slow', function() {
+        });
+        return false;   
+    });
+    $("a.descmore").click(function(){
+        $(this).siblings(".parkdesc").toggle(400);
+        $('a.descless').show();
+        $('a.descmore').hide();
+    });    
+    $("a.descless").click(function(){
+        $(this).siblings(".parkdesc").toggle(400);
+        $('a.descless').hide();
+        $('a.descmore').show();
+    });
+    {% if story_form.errors %}
+        $('.newstory').show();
+    {% endif %}
+    {% for story in stories %}
+        $("#story_{{story.id}} .flag").bind("click",function(){
+            $.get('/story/flag/{{story.id}}/');
+        });
+    {% endfor %}
+    $("#plan_trip").click(function(){
+        bp.add_remove_park_trip({{park.os_id|add:"0"}},false);
+    });
+
+
+    // report a problem to seeclickfix.com
+    // TODO: show link to seeclickfix issue when we have a response object (http://help.seeclickfix.com/discussions/api-questions/18-no-response-object-when-creating-an-issue)
+    $("form.problem").on("submit", function(event) {
+        event.preventDefault();
+
+        var email = $(this).find("#user_email").val();
+        var summary = $(this).find("#summary").val();
+
+        // some client-side validation
+        $(this).find("ul.errorlist").hide();
+        if (bp.validate_email(email) === false) {
+            $("<ul class='errorlist'><li>Please enter a valid email address.</li></ul>").insertBefore($(this).find("#user_email"));
+            return false;
+        };
+        if (summary === "") {
+            $("<ul class='errorlist'><li>Please provide a short summary.</li></ul>").insertBefore($(this).find("#summary"));
+            return false;
+        };
+
+        // lat lng string to array
+        var lat_lng = $(this).find("#park_coord").val().slice(1, $(this).find("#park_coord").val().length-1).split(",");
+
+        // report issue
+        $.post(
+            "http://seeclickfix.com/api/issues.json", 
+            { 
+                api_key: "45f638459899bd9df218da82bc08db3c171627d2",
+                issue: {
+                    "lat": parseFloat(lat_lng[0]),
+                    "lng": parseFloat(lat_lng[1]),
+                    "summary": summary,
+                    "reporter_email": email,
+                    "address": $(this).find("#park_address").val()
+                }
+            },
+            function() {
+                console.log("success");
+                $("form.problem")
+                .empty()
+                .append("<p>Thank you! You successfully reported a problem for {{ park.name }}.</p>");
+
+        })
+        .success(function() { console.log("second success"); })
+        .error(function() { 
+            console.log("error"); 
+            $("form.problem")
+            .append("<p>An error occurred, please try again.</p>");
+        })
+        .complete(function() { console.log("complete"); });
+
+    });
+
+});
+
+
+</script>
+
+
+{% endblock %}    
 
