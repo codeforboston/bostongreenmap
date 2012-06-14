@@ -211,13 +211,20 @@ var bp = {
       $(".facilitytype_checkbox:checked").each(function(){
          checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
       });
+
       if (checked_facilities.length > 0){
-          var facility_string = checked_facilities.join(",");
-          var parkfilter = {};
-          parkfilter['limit'] = 1000;
-          parkfilter['facilitytypes'] = facility_string;
-          bp.loadparks(parkfilter, bp.mapconf);
+        var facility_string = checked_facilities.join(",");
+        var parkfilter = {};
+        parkfilter['limit'] = 1000;
+        parkfilter['facilitytypes'] = facility_string;
+
+        // add neighborhood
+        // var neighborhood = $('#neighborhood_neighborhood').val();
+        parkfilter["neighborhoods"] = $('#neighborhood_neighborhood').val();
+
+        bp.loadparks(parkfilter);
       }
+
       //FIXME
   }, 
   explore_filter_activities: function(neighborhood_slug,parktype_id){
@@ -316,7 +323,7 @@ var bp = {
   // load parks and render on map
   // FIXME: is mapconf set globally on page load?
   loadparks: function(parkfilter) {
-      
+    
     parkfilter["format"] = "json";
     bp.clearmap();
     var latlngs = [];
@@ -325,7 +332,11 @@ var bp = {
       parkfilter,
       function(data) {
         var parks = data.objects;
-        
+        var facilityfilter = {};
+        if (parkfilter["facilitytypes"]) {
+          facilityfilter["facilitytypes"] = parkfilter["facilitytypes"];
+        }
+
         $.each(parks, function(key, park) {
 
           parkLatlngs = bp.renderpark(park["geometry"], {
@@ -339,9 +350,9 @@ var bp = {
 
           // show facilities
           // FIXME: track parks in array and filter with '__in' parameter in one request
-          if (bp.mapconf["showfacilites"] ) bp.loadfacilities({
-            "park": park["os_id"]
-          });
+          //        we're now making one API call per park, not ideal for many parks...
+          facilityfilter["park"] = park["os_id"];
+          if (bp.mapconf["showfacilities"] ) bp.loadfacilities(facilityfilter);
 
         });
     });

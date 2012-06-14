@@ -22,7 +22,7 @@
       <div class="menu-box-item">
         <h2>Zoom To Neighborhood</h2>
         <select id='neighborhood_neighborhood'>
-        <option SELECTED value="">Select Your Neighborhood/Town</option>
+        <option SELECTED value="all">Select Your Neighborhood/Town</option>
          {% for neighborhood in neighborhoods %}<option 
          {% ifequal neighborhoodpassed neighborhood %} SELECTED=SELECTED{% endifequal %} 
          value="{{neighborhood.id}}">{{neighborhood.name}}</option>
@@ -84,9 +84,26 @@
 
           // neighborhood dropdown
           $('#neighborhood_neighborhood').on("change", function(event) {
-            bp.loadparks({
-              "neighborhoods": $(this).val()
+              // check for facilities
+              // TODO: copy of explore_page_make_call, cleanup!
+            var checked_facilities = [];
+            $(".facilitytype_checkbox:checked").each(function(){
+               checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
             });
+            var parkfilter = {};
+            if (checked_facilities.length > 0){
+              var facility_string = checked_facilities.join(",");
+              parkfilter['limit'] = 1000;
+              parkfilter['facilitytypes'] = facility_string;
+            }
+            // add neighborhoods
+            parkfilter["neighborhoods"] = $(this).val();
+
+            bp.loadparks(parkfilter);
+
+            // bp.loadparks({
+            //   "neighborhoods": $(this).val()
+            // });
           });
 
           // park name search

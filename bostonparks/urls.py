@@ -14,7 +14,8 @@ from api.resources import ParkResource, \
     ExploreParkResource, \
     ExploreFacilityResource, \
     ParkNameResource, \
-    ExploreActivityResource
+    ExploreActivityResource, \
+    FacilitytypeResource
 
 admin.autodiscover()
 
@@ -24,6 +25,7 @@ v1_api.register(ActivityResource())
 v1_api.register(EntryResource())
 v1_api.register(ParkResource())
 v1_api.register(FacilityResource())
+v1_api.register(FacilitytypeResource())
 v1_api.register(ParktypeResource())
 v1_api.register(ExploreParkResource())
 v1_api.register(ExploreFacilityResource())
