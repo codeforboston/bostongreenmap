@@ -100,11 +100,12 @@ var bp = {
     });
   },
 
+  // TODO: this needs to be cleaned up, as it is very confusing
+  //       modify and leverage this.loadparks
   update_parklist: function(url, parkfilter){
-      
     // don't use parkfilter if we have url
     if (url) {
-      parkfilter = null;
+      parkfilter = $.url(url).param();
     } else {
       url = "/api/v1/park/";
       // parkfilter defaults  
@@ -119,7 +120,6 @@ var bp = {
         var latlngs = [];
         var park_ids = [];
         bp.clearmap();
-        var parkfilter = {}
         parkfilter['os_id_list'] = [];
         $.each(data['objects'], function(key, park) {
           parkfilter['os_id_list'].push(park['os_id']);
@@ -142,13 +142,15 @@ var bp = {
 
         try {
             // show facilities
-            if (bp.mapconf["showfacilites"] ) bp.loadfacilities({
-              "park__neighborhoods": parkfilter["neighborhood"],
-              "activity": parkfilter["activity"]
-            });
-            //bp.loadparks(parkfilter, bp.mapconf);
+            if (bp.mapconf["showfacilites"] ) {
+              var facilityfilter = {
+                "activity": parkfilter["activity"]
+              };
+              if (parkfilter["neighborhood"] !== "all") facilityfilter["park__neighborhoods"] = parkfilter["neighborhood"];
+              bp.loadfacilities(facilityfilter);
+            }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
         var previous = false;
         out += '<div id="prev_next_buttons">';
