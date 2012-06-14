@@ -72,7 +72,7 @@ var bp = {
       break;
     }
     out += "</option>";
-  	//out += "<option value='all'>All</option>"; // Need to hook onto this with javascript to load the whole list
+    out += "<option value='all'>All</option>"; // Need to hook onto this with javascript to load the whole list
     $.ajax({
       url:'/api/v1/'+search_type+'/?format=json&limit=1000&'+filter_type+'='+filter,
       dataType:'json',
@@ -119,7 +119,11 @@ var bp = {
         var latlngs = [];
         var park_ids = [];
         bp.clearmap();
+        var parkfilter = {}
+        parkfilter['os_id_list'] = [];
         $.each(data['objects'], function(key, park) {
+          parkfilter['os_id_list'].push(park['os_id']);
+          
           var p = "<div class='parkitem'><h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /></div>";
           park_ids[park_ids.length] = park['os_id'];
 
@@ -142,6 +146,7 @@ var bp = {
               "park__neighborhoods": parkfilter["neighborhood"],
               "activity": parkfilter["activity"]
             });
+            //bp.loadparks(parkfilter, bp.mapconf);
         } catch (e) {
             console.log(e);
         }

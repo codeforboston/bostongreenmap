@@ -345,12 +345,18 @@ def filter_explore_facility(filters):
 
 
 def filter_play_park(filters):
-    neighborhood = Neighborhood.objects.get(id=filters['neighborhood'])
+    if filters['neighborhood'] == 'all':
+        neighborhood = Neighborhood.objects.all()
+    else:
+        neighborhood = Neighborhood.objects.get(id=filters['neighborhood'])
     activities = Activity.objects.filter(id=filters['activity'])
     facilities = Facility.objects.filter(activity=activities)
     try:
         park_facility_ids = [f.park.os_id for f in facilities if f.park]
     except AttributeError:  ## should we return a 404 here?
         return []
-    parks = Park.objects.filter(pk__in=park_facility_ids, neighborhoods=neighborhood)
+    if filters['neighborhood'] == 'all':
+        parks = Park.objects.filter(pk__in=park_facility_ids)
+    else:
+        parks = Park.objects.filter(pk__in=park_facility_ids, neighborhoods=neighborhood)
     return parks
