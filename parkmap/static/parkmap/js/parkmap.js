@@ -1,4 +1,7 @@
 // bostonparks object
+
+
+
 var bp = {
 
   // array with currently visible map features (parks, facilites)
@@ -198,11 +201,19 @@ var bp = {
   },
   explore_page_make_calls: function(){
       var checked_facilities = [];
-      $(".facility_checkbox:checked").each(function(){
+      $(".facilitytype_checkbox:checked").each(function(){
          checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
       });
       var facility_string = checked_facilities.join(",");
-      //FINISH ME
+ 
+	$.ajax({
+           url:'/api/v1/exploresearch/?format=json&limit=1000&facilitytypes='+facility_string,
+           dataType:'json',
+           success:function(json){
+               var parks = json['objects'];
+           }
+        });
+  }, 
   /*
   	On change on the neighborhood, and checkboxes.
   	loadpark function
@@ -211,9 +222,6 @@ var bp = {
   	loadparks
   	
   */
-  
-
-  }, 
   explore_filter_activities: function(neighborhood_slug,parktype_id){
     var out = "";
      $.ajax({

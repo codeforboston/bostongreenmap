@@ -75,10 +75,8 @@ class EncodedGeometryApiField(ApiField):
         geom = GEOSGeometry(value)
         # support multipart geometetries
         geom_encoded = {}
-        start = datetime.datetime.now()
         for key, part in enumerate(geom):
             geom_encoded[key] = encoder.encode(part[0])
-        print start,datetime.datetime.now()
         return geom_encoded
 
 

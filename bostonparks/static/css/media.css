@@ -7,13 +7,6 @@
 	background-color: transparent; 
 	padding: 0;
 	} 
-	body .menu-box-inner {
-	padding: 0px 20px;
-	} 
-	body.play .menu-box-inner {
-	padding: 0px 0px;
-	} 
-
 	body .menu-box {
 	padding: 0;
 	}  
@@ -33,13 +26,10 @@
 	padding: 10px;
 	}
 	
-	body.play .menu-box-item
-	{
-	padding: 10px 20px 10px 0;
-	border-style: none;
-	box-shadow: 0 0 0 0;
-	}
-
+    body .menu-box-inner {
+    padding: 20px;
+    }
+    
 	body .menu-box-hotdog h1
 	{
 	font-size: 20px;
@@ -67,8 +57,8 @@
 	
 	.home #play .btn {display: block;}
 	
-	.home #play #activity {width: 90%; float: left; }
-	.home #play #neighborhood {width: 90%; float: left; clear: both; }
+	.home #play #activity {width: 100%; float: left; }
+	.home #play #neighborhood {width: 70%; float: left; clear: both; }
 	
 	.neighborhood .container-fluid.middle,
 	.home .container-fluid.middle
@@ -91,7 +81,6 @@
 	top: 0;
 	}
 	
-	.play .menu-box.opacity,
 	.explore .menu-box.opacity,
 	.neighborhood .menu-box.opacity,
 	.home .menu-box.opacity
@@ -136,11 +125,6 @@
 	width: 60%;
 	}
 	
-	#neighborhood_neighborhood,
-	#neighborhood_activity
-	{
-	width: 90%;
-	}
 	
 	.home .storytitle, .home .storytext {
 	color: #666;
