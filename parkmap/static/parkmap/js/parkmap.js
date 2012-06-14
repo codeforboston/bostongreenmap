@@ -211,11 +211,13 @@ var bp = {
       $(".facilitytype_checkbox:checked").each(function(){
          checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
       });
-      var facility_string = checked_facilities.join(",");
-      var parkfilter = {};
-      parkfilter['limit'] = 1000;
-      parkfilter['facilitytypes'] = facility_string;
-      bp.loadparks(parkfilter, bp.mapconf);
+      if (checked_facilities.length > 0){
+          var facility_string = checked_facilities.join(",");
+          var parkfilter = {};
+          parkfilter['limit'] = 1000;
+          parkfilter['facilitytypes'] = facility_string;
+          bp.loadparks(parkfilter, bp.mapconf);
+      }
       //FIXME
   }, 
   explore_filter_activities: function(neighborhood_slug,parktype_id){
