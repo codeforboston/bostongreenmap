@@ -78,11 +78,22 @@ class ParkResource(EncodedGeoResource):
             orm_filters = {"pk__in": [i for i in id_list]}
             return orm_filters
 
+        if "facilitytypes" in filters:
+            fts = filters['facilitytypes'].split(",")
+            facilities = Facility.objects.filter(facilitytype__in=fts).select_related()
+            park_facility_ids = [f.park.os_id for f in facilities if f.park]
+            parks = Park.objects.filter(pk__in=park_facility_ids)
+            if parks:
+                orm_filters = {"pk__in": [p.os_id for p in parks]}
+            return orm_filters
+
         if "neighborhood" in filters and \
            "activity" in filters:
             parks = filter_play_park(filters)
             if parks:
                 orm_filters = {"pk__in": [p.os_id for p in parks]}
+            return orm_filters
+
         if "neighborhood" in filters and \
            "parktype" in filters and \
            "activity_ids" in filters:
@@ -229,30 +240,7 @@ class ExploreFacilityResource(GeoResource):
             orm_filters = {"pk__in": [i.id for i in facilities]}
         return orm_filters
 
-class ExploreSearchResource(EncodedGeoResource):
-    class Meta:
-        queryset = Park.objects.all()
-        allowed_methods = ['get', ]
-        limit = 20
-        excludes = ['access','address','alt_name','area','phone']
-        #cache = SimpleCache()
-        include_resource_uri = False
 
-   # def build_filters(self, filters=None):
-   #     print "filters", datetime.datetime.now()
-   #     if filters is None:
-   #         filters = {}
-   #     orm_filters = super(ExploreSearchResource, self).build_filters(filters)
-
-   #     if "facility_type_list" in filters:
-   #         id_list  = filters['facility_type_list'].split(",")
-   #         orm_filters = {"pk__in": [i for i in id_list]}
-   #     print "filters done", datetime.datetime.now()
-   #     return orm_filters
-
-   # def dehydrate(self, bundle):
-   #     #print "dehydrate", datetime.datetime.now()
-   #     return bundle
 
 
 
@@ -267,7 +255,6 @@ class EntryResource(ModelResource):
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
     parkname = fields.ForeignKey(ParkNameResource, 'parkname')
-    exploresearch = fields.ForeignKey(ExploreSearchResource, 'exploresearch')
 
     class Meta:
         queryset = Neighborhood.objects.all()
