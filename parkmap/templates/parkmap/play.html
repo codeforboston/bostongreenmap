@@ -1,104 +1,101 @@
 {% extends 'parkmap/base.html' %}
-{% block title %}{% endblock %}
-{% block meta %}{% endblock %}
-{% block headscripts %}
-<script>
-
-{% if neighborhoods %}
-function neighborhood_filter(){
-    var activity = $("#neighborhood_activity");
-    var ai = $('#neighborhood_activity :selected').index();
-    var neighborhood = $("#neighborhood_neighborhood");
-    var ni =  $('#neighborhood_neighborhood :selected').index();
-    if ((ai != 0) && (ni != 0)){
-        filter(neighborhood.val(),activity.val());
-    }
-}
-{% else %}
-function activity_filter(neighborhood){
-    var activity = $("#neighborhood_activity");
-    if ($('#neighborhood_activity :selected').index() >{% if not neighborhoods %}={% endif %} 0 ){
-        filter(neighborhood,activity.val());
-    }
-}
-{% endif %}
-
-function filter(neighborhood,activity){
-     var out = "<h4>Search Results</h4> <br>";
-     var url = String.prototype.concat.apply("/ajax/", [neighborhood,"/",activity,"/"]);
-     $.ajax({
-         url:url,
-         dataType:'json',
-         success:function(json){
-             $.each(json, function(key, obj) {
-                 //Start the header of the park
-                 out += "<h6 class='loop_h6'><a href=\'/park/"+obj.slug+"\'>"+obj.name+"</a></h6><ul class='loop_ul'><li>"+obj.description+"</li><li>";
-                 //Loop through the activities    
-                 $.each(obj.activity, function(k, o) {
-                     out += o.slug; // need to replace with images.
-                 });
-                 out += "</li></ul>";
-             });    
-             $("#parklist").html(out);
-         }
-     });
-}
-
-$(document).ready(function(){
-    {% if neighborhoods %}
-        $('#neighborhood_activity').bind("keypress change",(function() { neighborhood_filter(); }));
-        $('#neighborhood_neighborhood').bind("keypress change",(function() { neighborhood_filter(); }));
-    {% else %}
-        $('#neighborhood_activity').bind("keypress change",(function() { activity_filter("{{neighborhood.slug}}"); }));
-        activity_filter("{{neighborhood.slug}}");      
-    {% endif %}
-});
-    
-</script>
+{% block title %}Find Activities and Things to Do in Boston Parks{% endblock %}
+{% block meta %}
+	<meta name="description" content="{% block meta_description %}Browse Boston Metro Area parks and facilities by activity and discover new places to visit and play!{% endblock %}" >
+	<meta name="keywords" content="{% block meta_keywords %}parks in boston, boston sports fields, parking in boston, boston area greenspaces, boston playgrounds, biketrails in boston, boston biketrails, boston art, boston monuments, {% endblock %} " >
 {% endblock %}
 {% block bodyclass %} 
 <body class="play">
 {% endblock %}
 {% block content %} 
-    <div class="container-fluid">
-        <div class="span3">
-            <div class="well">
+<div id="map_canvas" class="hidden-phone"></div>
+<div class="container-fluid middle">
+  <div class="row-fluid show-grid bpa-draggable">
+    <div class="span12">
+      <div class="well menu-box clearfix">
+        <div class="menu-box opacity">
+  <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i></span>
+</div>
+        <div class="menu-box-inner bpa-hideable">
+          <div class="menu-box-item">
+            <form method="get" action="">
+                <select id='neighborhood_activity' name='town'>
+                    <option SELECTED value="">Select Your Activity</option>
+                    {% for activ in activities %}
+                        <option {% ifequal activ activity %} selected {% endifequal %} value="{{activ.id}}">{{activ.name}}</option>
+                    {% endfor %}
+                </select>
+
+                <select name='town' id='neighborhood_neighborhood'>
+                    <option SELECTED VALUE="">Select Your Neighborhood/Town</option>
+                    <option value='all'>All</option>
+                    {% for neighborh in neighborhoods %}
+                        <option value="{{neighborh.id}}">{{neighborh.name}}</option>
+                    {% endfor %}
+                </select>
+                <noscript><input type="submit" value="Submit"></noscript>
+            </form>
+            <div id="parklist" class="clearfix">
             </div>
+  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+
+          </div>
         </div>
-        <div class="span6">
-            <div class="well menu-box clearfix">
-                <div class="menu-box opacity">
-                    &nbsp; 
-                </div>
-                <div class="menu-box-inner">
-                    <div class="menu-box-item">
-                        <form method="get" action="">
-            {% if neighborhoods %}
-            <select id='neighborhood_neighborhood'>
-                <option SELECTED>Neighborhood</option>
-                {% for neighborhood in neighborhoods %}
-                <option value="{{neighborhood.slug}}">{{neighborhood.name}}</option>
-                {% endfor %}
-            </select>
-            {% else %}
-	    <label id="label_neighborhood_activity" for="neighborhood_activity">Select an Activity</label>
-            {% endif %}
-            <select id='neighborhood_activity' name="neighborhood_activity">
-                {% if neighborhoods %} <option SELECTED>Activities</option> {% endif %}
-                {% for activity in activities %}
-                <option value="{{activity.slug}}" {% ifequal a_slug activity.slug %}SELECTED{% endifequal%}>{{activity.name}}</option>
-                {% endfor %}
-            </select>
-            
-            <div id="parklist">
-            </div>
-        </div>
-            </div>
+      </div>
     </div>
-    </div>
-    <div class="span3">
-        <div class="well">
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
 {% endblock %} 
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        bp.mapconf = {
+            "zoomtoparks": true,
+            "showfacilites": true
+        }
+        // load default map
+        bp.init_map();
+
+        $(function() {
+
+            $('#neighborhood_activity').bind("keypress change",(function() {
+                if ($(this).val() != ""){
+                    bp.update_second_dropdown('neighborhood', 'activity', $(this).val(),'id');
+                    //set the new hash
+                    window.location.hash = $("#neighborhood_activity").val()+","+$("#neighborhood_neighborhood").val();
+                }
+            }));
+            
+            $('#neighborhood_neighborhood').bind("keypress change",(function() {
+                bp.play_get_parks(0);
+                    //set the new hash
+                window.location.hash = $("#neighborhood_activity").val()+","+$("#neighborhood_neighborhood").val();
+            }));
+
+            if(location.hash.length > 0){
+                var hashtag = location.hash.substring(1).split(',');
+                var activity = hashtag[0];
+                var neighborhood = "";
+                if(hashtag.length > 1){
+                    neighborhood = hashtag[1];
+                }
+                $('#neighborhood_activity option[value="'+activity+'"]').prop('selected', true);
+                $('#neighborhood_neighborhood option[value="'+neighborhood+'"]').prop('selected', true);
+                bp.play_get_parks(0);
+            } else {
+                {% if neighborhood %}
+                bp.update_second_dropdown('neighborhood','activity',$("#neighborhood_activity").val(),'id',"{{neighborhood.id}}");
+                {% endif %}
+                bp.play_get_parks(0);
+            }
+
+            bp.adjust_layerswitcher();
+
+        });
+
+
+    </script>
+    
+{% endblock %}

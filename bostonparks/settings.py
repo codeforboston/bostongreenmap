@@ -94,6 +94,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,9 +125,11 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.markup',
+    'django.contrib.humanize',
     'django.contrib.gis',
     'south',
     'parkmap',
+    'tastypie',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -157,7 +160,6 @@ LOGGING = {
         },
     }
 }
-
 
 # import local settings
 try:

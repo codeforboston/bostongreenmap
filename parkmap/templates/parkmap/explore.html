@@ -1,0 +1,148 @@
+{% extends 'parkmap/base.html' %}
+{% block title %}Explore Boston Metro Area Parks and Greenspaces{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Explore Boston parks and greenspaces with interactive maps and trip planner. Search by location or activity and discover the best of Boston parks.{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}explore boston, explore boston parks, find parks in boston metro area, parks in boston, boston sports fields, boston area greenspaces, {% endblock %} " >
+{% endblock %}
+
+
+{% block bodyclass %} 
+<body class="explore">
+{% endblock %}
+{% block content %} 
+<div id="map_canvas"></div>
+<div class="container-fluid middle">
+  <div class="row-fluid show-grid">
+  <div class="span12">
+    <div class="well menu-box clearfix">
+    <div class="menu-box opacity">
+     <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i></span>
+    </div>
+    <div class="menu-box-inner bpa-hideable">
+      <div class="menu-box-item">
+        <h2>Zoom To Neighborhood</h2>
+        <select id='neighborhood_neighborhood'>
+        <option SELECTED value="all">Select Your Neighborhood/Town</option>
+         {% for neighborhood in neighborhoods %}<option 
+         {% ifequal neighborhoodpassed neighborhood %} SELECTED=SELECTED{% endifequal %} 
+         value="{{neighborhood.id}}">{{neighborhood.name}}</option>
+         {% endfor %}
+        </select>
+      <br>
+      <h2> Search by Facility Type</h2>
+
+      <div id="facilitylist">
+ <div id="verticalscroll">
+      {% for facilitytype in facilitytypes %}
+         <input type="checkbox" class="facilitytype_checkbox" name="facilitytype_{{facilitytype.id}}" id="facilitytype_{{facilitytype.id}}">
+          {{facilitytype.name}}
+          <img src="/static/parkmap/img/icons/{{facilitytype.name|slugify}}.png" id="p_{{facilitytype.id}}" title="{{facilitytype.name}}" class="facilitytype_icon">
+        <br>
+      {% endfor %}
+</div>
+<div class="park_search" style="display: none;">
+        <h2 class="searchhd"> Search by Park Name</h2>
+        <input type="text" id="parkname" placeholder="Park Name(Optional)">
+        <input type="button" id="explore_search" value="Search" style="float:right;">
+</div>
+      <div id="parklist" class="clearfix"></div>
+      </div>
+  <span id="minimizer" class="bpa-hide" style="display: none;"><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %} 
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+
+        // global map parameters
+        bp.mapconf = {
+            "zoomtoparks": true,
+            "showfacilities": true
+        }
+        // load default map
+        bp.init_map();
+
+        $(".parktype_icon").click(function(){
+            var im = $(this).prop('id').substr(2);
+            var $checkbox = $("#parktype_"+im);
+            if ($checkbox.attr('checked') != "checked"){ 
+                $checkbox.attr('checked','checked');
+            } else {
+                $checkbox.removeAttr('checked');
+            }
+
+        });
+
+        $(function() {
+
+          // neighborhood dropdown
+          $('#neighborhood_neighborhood').on("change", function(event) {
+              // check for facilities
+              // TODO: copy of explore_page_make_call, cleanup!
+            var checked_facilities = [];
+            $(".facilitytype_checkbox:checked").each(function(){
+               checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
+            });
+            var parkfilter = {};
+            if (checked_facilities.length > 0){
+              var facility_string = checked_facilities.join(",");
+              parkfilter['limit'] = 1000;
+              parkfilter['facilitytypes'] = facility_string;
+            }
+            // add neighborhoods
+            parkfilter["neighborhoods"] = $(this).val();
+
+            bp.loadparks(parkfilter);
+
+            // bp.loadparks({
+            //   "neighborhoods": $(this).val()
+            // });
+          });
+
+          // park name search
+          $("#parkname").keypress(function(e) {
+              if(e.which == 13) {
+                  $(this).blur();
+                  $("#explore_search").focus().click();
+              }
+          });
+          $("#explore_search").on("click", function(){ 
+            var parkname = $("#parkname").val();
+            if(parkname){
+              bp.loadparks({
+                "name__icontains": parkname
+              });
+            }
+          });
+          $(".facilitytype_checkbox").bind("change", function(){
+              bp.explore_page_make_calls();
+          });
+
+
+          // top margin
+          bp.adjust_layerswitcher();
+          
+
+	      // set space for scrollable div
+	      $.setscrollspace = function() {
+     	      var h = $('#verticalscroll').height();
+		      $('.searchhd').css('margin-top', h + 'px');
+		      $('.park_search, .bpa-hide').css('display', 'block');
+		  };
+          $.setscrollspace();
+          
+          $(window).resize(function(){
+              $.setscrollspace();
+          });
+    });
+            
+        
+    
+    </script>
+{% endblock %}

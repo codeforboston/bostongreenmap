@@ -32,8 +32,6 @@ class Command(BaseCommand):
                 'alt_name': 'ALT_NAME',
                 'address': 'Address',
                 'phone': 'Phone',
-                'parktype_legacy': 'Type',
-                'parkowner_legacy': 'owner',
                 'access': 'Access',
                 'geometry': 'MULTIPOLYGON',
             }

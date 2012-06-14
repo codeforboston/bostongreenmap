@@ -1,31 +1,34 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-			{% block title %}{% endblock %} 
-		</title>
-		<meta name="description" content="{% block meta_description %}{% endblock %}" >
-		<meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
+            {% block title %}Interactive Maps of Boston Metro Area Parks and Greenspaces Presented by Boston Park Advocates {% endblock %} 
+        </title>
+        <meta name="description" content="{% block meta_description %}{% endblock %}" >
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
 
-			{% block meta %}{% endblock %}
+            {% block meta %}{% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="/static/libs/jquery/jquery-1.7.2.min.js"></script> 
-        <script type="text/javascript" src="/static/libs/bootstrap/js/bootstrap.js"></script> 
+         
+        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
 
-		<link rel="stylesheet" href="/static/libs/bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" href="/static/css/main.css">
-
-{% block headscripts %}{% endblock %}
+{% block headscripts %}
+        <script>document.documentElement.className = "js";</script>
+{% endblock %}
 
     </head>
 
 {% block bodyclass %}
 <body>
-{% endblock %} 	
-	<div class="navbar">
+{% endblock %}  
+{% block topnav %}
+<div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -35,89 +38,92 @@
           </a>         
 <div class="nav-collapse">
             <ul class="nav">
-		<li><a href="/">HOME</a></li>
-		<li><a href="/explore/">PLAY</a></li>
-		<li><a href="/explore/">EXPLORE</a></li>
-		<li><a href="/explore/">PLAN A TRIP</a></li>
-		<li><a href="#">LOGIN</a></li>
-		<li class="parent"><ul class="actions"><li><a href="#">PRINT</a></li><li><a href="#">SHARE</a></li></ul></li>
-		</ul>
+        <li><a class="home" href="/">HOME</a></li>
+        <li><a class="play" href="/park/play/">PLAY</a></li>
+        <li><a class="explore" href="/explore/">EXPLORE</a></li>
+        <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
+       <!--  <li><a class="login" href="#">LOGIN</a></li> -->
+        <li class="parent">
+        <ul class="actions">
+        
+        <li><a class="facebook" href="http://www.facebook.com/MAPCMetroBoston"><img src="/static/parkmap/img/facebook-logo-square.png"></a></li>
+        <li><a class="twitter" href="http://twitter.com/#!/mapcmetroboston"><img src="/static/parkmap/img/twitter-logo-square.png"></a></li>
+        <li><a class="email" href="#" onclick="javascript:window.location='mailto:?subject=Information from Boston Parks&body=Shared link from Boston Parks: ' + escape(window.location);"><img src="/static/parkmap/img/mail-square.png"></a></li>
+        <li><a class="print" href="JavaScript:window.print();"><img src="/static/parkmap/img/print.png"></a></li>
+        </ul>
+        </li>
+        </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    
-{% block content %}        
-    <div class="container-fluid">
-    <div id="map_canvas"></div>
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well">
-					<h2>Boston Common</h2>
-					<p>This famous park lorem ipsum dolor sit amet, consectetuer adipiscing elit, vsed diam nonummy nibh euismod tincidunt 
-					ut laoreet dolore magna erat.</p>
-					
-					<p><strong>Access:</strong> Lorem ipsum dolor sit amet</p>
-					<p><strong>Size:</strong> S0 acres</p>
-					
-					<h5>Get there!</h5>
-					<p>MBTA: Park Street, Boylston Street Station</p>
-					<p><a href="#">Plan a route</a></p>
-					
-					<h5>Owner &amp; Management</h5>
-					<p>Boston Parks Department</p>
-					<p>617-123-4567</p>
-					<p><a href="#">Report a Problem</a></p>
-					
-					<h5>Get Involved</h5>
-					<p><a href="#">Friends of Boston Common</a></p>
-					<p>Upcoming events</p>
-					<ul>
-					<li>Event 1</li>
-					<li>Event 2</li>
-					<li><a href="#">Upload an event</a></li>
-					</ul>
-					
-					<h5>Contains the following facilities:</h5>
-					<ul>
-					<li>Frog Pond</li>
-					<li>Shakespeare Pavillion</li>
-					<li>Jazzy Fountain</li>
-					<li>Fried Dough Stand</li>
-					</ul>
-				
-          </div><!--/.well -->
-        </div><!--/span-->
-			
-        <div class="span2">
-          <div class="well">
-				
-					<img class="park-pic" alt="" src="images/1_1.gif">
-					
-					<form action="post" id="add-to-trip">
-					
-					<input type="submit" id="add-trip" name="add-trip" value="Add to Trip" />
-					
-					</form>
-				
-				
-          </div><!--/.well -->
-        </div><!--/span-->
-			
-			
-			
-        <div class="span7">
-          <div class="hero-unit">
-		
-			<img src="images/fpo-map-733x278.jpg" alt="" width="730" height="278">
-		
-          </div><!--/.well -->
-        </div><!--/span-->
-      </div>
-    </div><!--/.fluid-container-->
-
 {% endblock %}
-		
+  
+{% block content %}        
+{% endblock %}
+    
+{% block javascript %}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/mapc/layers.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.7.2.min.js"></script>
+<script src="/static/parkmap/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script src="/static/parkmap/js/jquery.ui.touch-punch.js"></script>
+<script src="/static/parkmap/js/jstorage.js"></script>
+<script src="/static/parkmap/js/jquery.ba-hashchange.min.js"></script>
+<script src="{{ STATIC_URL }}libs/jquery/jquery.url.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+<script type="text/javascript" src="{{ STATIC_URL }}parkmap/js/parkmap.js"></script>
+{% if user.is_staff %}<script type="text/javascript"> bp.staff = true; </script>{% endif %}
+{% endblock %}
+	{% block footerscripts %}
+	{% endblock %}
+<script>
+$(document).ready(function(){
+        bp.count_parks_in_queue();
+        $(".bpa-hide").click(function(event){
+            $(".bpa-hideable").slideToggle('slow',function(){
+                if($(".bpa-hideable").is(':hidden')){
+                    $("#bpahideimg").hide();
+                    $("#bpashowimg").show();
+                    $("#maximizer").show();
+                    $(".menu-box.opacity").css("height","20px");
+                } else {
+                    $("#bpahideimg").show();
+                    $("#bpashowimg").hide();
+                    $("#maximizer").hide();
+                    $(".menu-box.opacity").css("height","auto");
+                }
+            });
+        });
+        $("#bpashowimg").hide();
+        $("#maximizer").hide();
+
+        // Don't set draggable on as many mobile devices as possible.
+        if(!(navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i))
+       ){
+           $(".bpa-draggable").draggable();
+       }
+
+});
+</script>        
+
+<!-- UserVoice Widget -->
+<script type="text/javascript">
+if ($(window).width() > 480) {
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/c4EsGot1BjCp0N0vaR9EOg.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+  }
+</script>
+
 </body>
 </html>
 

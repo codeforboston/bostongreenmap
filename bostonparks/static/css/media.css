@@ -1,0 +1,181 @@
+@media (max-width: 480px) {
+	.explore h2 {
+    font-size: 18px;
+    }
+    
+    body .well {
+	background-color: transparent; 
+	padding: 0;
+	} 
+	body .menu-box {
+	padding: 0;
+	}  
+	body {
+	padding: 0;
+	} 
+	body .container-fluid { 
+	padding: 10px;
+	}
+	body .container-fluid.middle { 
+	padding-top: 5px;
+	margin-top: 0px;
+	}
+	
+	body .menu-box-item
+	{
+	padding: 10px;
+	}
+	
+    body .menu-box-inner {
+    padding: 20px;
+    }
+    
+	body .menu-box-hotdog h1
+	{
+	font-size: 20px;
+	padding: 0px;
+	}
+	
+	#map_canvas.detail {
+	height: 300px;
+	}
+	
+	ul.nav ul.actions li a:link, ul.nav ul.actions li a:visited
+    { 
+	padding: 0 20px 0 0;
+    }
+
+	.play .container-fluid.middle, .explore .container-fluid.middle, .plan .container-fluid.middle {
+	margin: 0;
+	}
+	
+	.home .container-fluid.middle:before, .neighborhood .container-fluid.middle:before, .explore .container-fluid.middle:before {
+    content: "";
+    display: none;
+    height: 0px;
+    }
+	
+	.home #play .btn {display: block;}
+	
+	.home #play #activity {width: 100%; float: left; }
+	.home #play #neighborhood {width: 70%; float: left; clear: both; }
+	
+	.neighborhood .container-fluid.middle,
+	.home .container-fluid.middle
+	{
+	height: auto;
+	}
+	
+	
+	.home .scrollable-wrapper,
+	.neighborhood .menu-box-item
+	{
+	border-radius: 0 0 0 0;
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	right: 0;
+	top: 0;
+	}
+	
+	.explore .menu-box.opacity,
+	.neighborhood .menu-box.opacity,
+	.home .menu-box.opacity
+	{
+	display: none;
+	}
+	
+	
+	.verticalscroll {
+	bottom: 0;
+	left: 0;
+	overflow: visible;
+	position: relative;
+	right: 0;
+	top: 0;
+	}
+	
+	#facilitylist #verticalscroll
+	{
+	height: auto;
+	}
+	
+	.explore .menu-box-item {
+    bottom: 10px;
+    left: 10px;
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    }
+
+	.menu-box-item .menu-box-hotdog {
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 15px 0;
+	position: relative;
+	right: 0;
+	}
+	
+	#parkname
+	{
+	width: 60%;
+	}
+	
+	
+	.home .storytitle, .home .storytext {
+	color: #666;
+	}
+  
+  body.home .well {
+  background-color: transparent; 
+  padding: 0;
+  } 
+  body.home .menu-box-inner {
+  padding: 0px 0px;
+  } 
+  body.home .menu-box {
+  padding: 0;
+  }  
+  body.home {
+  padding: 0;
+  } 
+  body.home .container-fluid { 
+  padding: 10px;
+  }
+  body.home .menu-box-item
+  {
+  padding: 10px;
+  margin: 12px 0;
+  }
+  body.home .menu-box-item form
+  {
+  margin-bottom: 4px;
+  }
+  body.home h1 {
+	font-size: 24px;
+	line-height: 26px;
+  }
+  .home .flag-inapp { color: #666666; }
+}
+
+ @media (max-width: 767px) {
+  body {
+  padding: 0;
+  } 
+}
+@media (min-width: 768px) and (max-width: 979px) {
+	.navbar .nav > li {
+	float:left;
+	}
+	.navbar .btn, .navbar .btn-group {
+	display: none;
+	}
+	.nav-collapse {
+    height: 0;
+    overflow: visible;
+    }
+}

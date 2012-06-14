@@ -1,0 +1,129 @@
+{% extends 'parkmap/base.html' %}
+{% block title %}Plan A Biking Trip or Driving Trip through Boston Metro Area Parks{% endblock %}
+{% block meta %}
+		<meta name="description" content="{% block meta_description %}Get directions to parks in Boston, and plan a trip to visit your favorite parks and greenspaces by bike or by car!{% endblock %}" >
+		<meta name="keywords" content="{% block meta_keywords %}planning a trip to boston, visiting boston parks, parks in boston, directions to boston common, directions to parks in boston, boston biking directions, biking in boston, hiking in boston, biketrails in boston, boston biketrails,{% endblock %} " >
+{% endblock %}
+
+{% block headscripts %}
+
+{% endblock %}
+{% block bodyclass %} 
+<body class="plan">
+{% endblock %}
+{% block content %} 
+<div id="map_canvas"></div>
+<div class="container-fluid middle">
+  <div class="row-fluid show-grid bpa-draggable">
+    <div class="span12">
+      <div class="well menu-box clearfix">
+        <div class="menu-box opacity">
+  <span id="maximizer"><i id="bpashowimg" class="bpa-hide icon-resize-full icon-white"></i></span>
+
+       </div>
+        <div class="menu-box-inner bpa-hideable">
+          <div class="menu-box-item">
+              <h2>Home or Start Address</h2>
+              <span id="origin_error" class="error">Please supply a starting address.</span>
+              <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
+              <h2>Saved Destinations</h2>
+              <ul id="parklist" class="clearfix">
+	      </ul><input type="button" value="Clear All" id="clear_all">
+              <h2>Stop Address</h2>
+              <input type="text" id="id_end_address" placeholder="(optional) 1 Main St, Boston, MA 02111">
+              <input id="walking_search" type="button" value="View Walking Routes"> 
+              <input id="bike_search" type="button" value="View Bicycling Routes">
+    <br> 
+  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
+{% block javascript %}
+    {{ block.super }}
+<script>
+    var park_trip_list;
+    $(document).ready(function(){
+        $("#origin_error").hide();
+        bp.trip_generate_list();
+        $('#neighborhood_activity').bind("keypress change",(function() {
+            if ($(this).val() != ""){
+                //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+                update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
+            }
+        }));
+        $('#neighborhood_neighborhood').bind("keypress change",(function() {
+            play_get_parks(0);
+        }));
+
+        $("#parklist").sortable({
+            'update':function(event,ui){bp.reorder_trip_list();}
+        });
+        $("#parklist").disableSelection();
+
+       $("#clear_all").bind("click",function(event){
+           $.jStorage.flush();
+           bp.check_park_in_queue();
+           $("#parklist").html("");
+
+           // clearmap
+          try {  
+            directionsDisplay.setMap(null);  
+          }  
+          catch (e) {  
+             // statements to handle any exceptions  
+             // console.log(e); // pass exception object to error handler  
+          }  
+
+       });
+        
+
+
+       $("#walking_search").bind("click", function(event){
+           var start = $("#id_home_address").val();
+           var stop = $("#id_end_address").val();
+           if (start.length > 0){
+               $("#origin_error").hide();
+               bp.trip_generate_obj(start,stop,"walking");
+           } else {
+               $("#origin_error").show();
+           }
+       });
+
+       $("#bike_search").bind("click", function(event){
+           var start = $("#id_home_address").val();
+           var stop = $("#id_end_address").val();
+           if (start.length > 0){
+               $("#origin_error").hide();
+               bp.trip_generate_obj(start,stop,"bicycling");
+           } else {
+               $("#origin_error").show();
+           }
+       });
+
+       $(".foldable").click(function () {
+           $(this).hide("fold", {size: 100}, 1000);
+       });
+
+       $("#id_home_address").bind("change keyup",function(event){
+           $.jStorage.set("origin_address",$(this).val());
+       });
+       $("#id_end_address").bind("change keyup",function(event){
+           $.jStorage.set("destination_address",$(this).val());
+       });
+       $("#id_home_address").val($.jStorage.get("origin_address",""));
+       $("#id_end_address").val($.jStorage.get("destination_address",""));
+
+       bp.adjust_layerswitcher();
+
+    });
+  
+  // load map with trailmap
+  bp.init_map("trailmap");
+
+</script> 
+{% endblock %}
