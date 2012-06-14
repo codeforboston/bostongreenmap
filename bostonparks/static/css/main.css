@@ -181,7 +181,7 @@ ul.nav ul.actions li a:active { color: #666; }
 	left: 0;
 	right: 0;
 	bottom: 0;
-	height: auto !important;
+	height: auto;
 }
 
 .menu-box-inner

@@ -85,10 +85,12 @@ $(document).ready(function(){
                     $("#bpahideimg").hide();
                     $("#bpashowimg").show();
                     $("#maximizer").show();
+                    $(".menu-box.opacity").css("height","20px");
                 } else {
                     $("#bpahideimg").show();
                     $("#bpashowimg").hide();
                     $("#maximizer").hide();
+                    $(".menu-box.opacity").css("height","auto");
                 }
             });
         });
