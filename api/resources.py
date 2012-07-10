@@ -70,6 +70,7 @@ class ParkResource(EncodedGeoResource):
         resource_name = 'park'
         cache = SimpleCache()
         filtering = {
+            'id': ALL,
             'os_id': ALL,
             'name': ALL,
             'slug': ALL,
@@ -84,15 +85,15 @@ class ParkResource(EncodedGeoResource):
 
         orm_filters = super(ParkResource, self).build_filters(filters)
 
-        if "os_id_list" in filters:
-            id_list  = filters['os_id_list'].split(",")
+        if "id_list" in filters:
+            id_list  = filters['id_list'].split(",")
             orm_filters = {"pk__in": [i for i in id_list]}
             return orm_filters
 
         if "facilitytypes" in filters and "neighborhoods" in filters:
             fts = filters['facilitytypes'].split(",")
             facilities = Facility.objects.filter(facilitytype__in=fts).select_related()
-            park_facility_ids = [f.park.os_id for f in facilities if f.park]
+            park_facility_ids = [f.park.id for f in facilities if f.park]
 
             if filters['neighborhoods'] == "all":
                 parks = Park.objects.filter(pk__in=park_facility_ids)
@@ -101,20 +102,20 @@ class ParkResource(EncodedGeoResource):
                 parks = Park.objects.filter(pk__in=park_facility_ids, neighborhoods=neighborhoods)
 
             if parks:
-                orm_filters = {"pk__in": [p.os_id for p in parks]}
+                orm_filters = {"pk__in": [p.id for p in parks]}
 
         if "neighborhood" in filters and \
            "activity" in filters:
             parks = filter_play_park(filters)
             if parks:
-                orm_filters = {"pk__in": [p.os_id for p in parks]}
+                orm_filters = {"pk__in": [p.id for p in parks]}
             return orm_filters
 
         if "neighborhood" in filters and \
            "parktype" in filters and \
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
-            orm_filters = {"pk__in": [i.os_id for i in parks]}
+            orm_filters = {"pk__in": [i.id for i in parks]}
 
 
 
@@ -228,7 +229,7 @@ class ExploreParkResource(EncodedGeoResource):
            "parktype" in filters and \
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
-            orm_filters = {"pk__in": [i.os_id for i in parks]}
+            orm_filters = {"pk__in": [i.id for i in parks]}
         return orm_filters
 
 class ParkNameResource(EncodedGeoResource):
@@ -248,7 +249,7 @@ class ParkNameResource(EncodedGeoResource):
         orm_filters = super(ParkNameResource, self).build_filters(filters)
         if "name" in filters:
             parks = Park.objects.filter(name__icontains=filters['name'])
-            orm_filters = {"pk__in": [i.os_id for i in parks]}
+            orm_filters = {"pk__in": [i.id for i in parks]}
         return orm_filters
 
 
@@ -388,7 +389,7 @@ def filter_play_park(filters):
     activities = Activity.objects.filter(id=filters['activity'])
     facilities = Facility.objects.filter(activity=activities)
     try:
-        park_facility_ids = [f.park.os_id for f in facilities if f.park]
+        park_facility_ids = [f.park.id for f in facilities if f.park]
     except AttributeError:  ## should we return a 404 here?
         return []
     if filters['neighborhood'] == 'all':
