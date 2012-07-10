@@ -82,14 +82,14 @@
 
 
 
-             {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.os_id %}">Edit Park information</a></p>{% endif %}
+             {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.id %}">Edit Park information</a></p>{% endif %}
                 
           </div><!--/.well -->
         </div><!--/span-->
             
         <div class="span2">
           <div class="well">
-              <input type="button" id="tripadd_{{park.os_id}}" name="add-trip" value="Add to Trip" />
+              <input type="button" id="tripadd_{{park.id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->
         </div><!--/span-->
             
@@ -149,7 +149,7 @@
     <script type="text/javascript">
 
         bp.parkfilter = {
-            "os_id": "{{ park.os_id }}"
+            "id": "{{ park.id }}"
         }
         bp.mapconf = {
             "zoomtoparks": true,
@@ -163,8 +163,8 @@
 
 $(function() {
 
-    bp.park_trip_button_bind({{park.os_id|add:"0"}});
-    bp.check_park_in_queue({{park.os_id|add:"0"}});
+    bp.park_trip_button_bind({{park.id|add:"0"}});
+    bp.check_park_in_queue({{park.id|add:"0"}});
     $("label[for='id_rating_0']").closest('li').addClass('rating_0');
     $("label[for='id_rating_1']").closest('li').addClass('rating_1');
     $("label[for='id_rating_2']").closest('li').addClass('rating_2');
@@ -203,7 +203,7 @@ $(function() {
         });
     {% endfor %}
     $("#plan_trip").click(function(){
-        bp.add_remove_park_trip({{park.os_id|add:"0"}},false);
+        bp.add_remove_park_trip({{park.id|add:"0"}},false);
     });
 
 

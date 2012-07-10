@@ -120,12 +120,12 @@ var bp = {
         var latlngs = [];
         var park_ids = [];
         bp.clearmap();
-        parkfilter['os_id_list'] = [];
+        parkfilter['id_list'] = [];
         $.each(data['objects'], function(key, park) {
-          parkfilter['os_id_list'].push(park['os_id']);
+          parkfilter['id_list'].push(park['id']);
           
-          var p = "<div class='parkitem'><h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /></div>";
-          park_ids[park_ids.length] = park['os_id'];
+          var p = "<div class='parkitem'><h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3><input type='button' id='tripadd_"+park['id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /></div>";
+          park_ids[park_ids.length] = park['id'];
 
           if (park['description']) {p += "<p>"+ bp.truncate(park['description']) +"</p>";};
           // add park to map
@@ -274,7 +274,7 @@ var bp = {
          var out = "";
           $.each(json['objects'], function(key, park) {
              //DO SOMETHING BETTER HERE USING THE DATA.
-          // out+= obj['name'] + " - " + obj['os_id']+'<br>';
+          // out+= obj['name'] + " - " + obj['id']+'<br>';
 
           var p = "<h3><a href='/park/"+park['slug']+"'>"+park['name'] + "</a></h3>";
           if (park['description']) {p += "<p>"+ park['description']+"</p>";};
@@ -351,7 +351,7 @@ var bp = {
           // show facilities
           // FIXME: track parks in array and filter with '__in' parameter in one request
           //        we're now making one API call per park, not ideal for many parks...
-          facilityfilter["park"] = park["os_id"];
+          facilityfilter["park"] = park["id"];
           if (bp.mapconf["showfacilities"] ) bp.loadfacilities(facilityfilter);
 
         });
@@ -363,13 +363,13 @@ var bp = {
        var parkfilter = {};
        need_to_rebind[need_to_rebind.length] = ids[x];
        parkfilter["format"] = "json";
-       parkfilter["os_id"] = ids[x];
+       parkfilter["id"] = ids[x];
        $.getJSON('/api/v1/park/', 
            parkfilter,
            function(data) {
              var park = data.objects[0];
-             $("#parklist").html($("#parklist").html() + "<input type='button' id='tripadd_"+park['os_id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /><br>");
-             bp.check_park_in_queue(park['os_id']);
+             $("#parklist").html($("#parklist").html() + "<input type='button' id='tripadd_"+park['id']+"' class='add-trip-button' name='add-trip' value='Add to Trip' alt='"+park['name']+"' /><br>");
+             bp.check_park_in_queue(park['id']);
              for(var r in need_to_rebind){
                  bp.park_trip_button_bind(need_to_rebind[r]);
              }
@@ -656,7 +656,7 @@ var bp = {
     var url = "/api/v1/park/";
     var parkfilter = {};
     parkfilter["format"] = "json";
-    parkfilter["os_id_list"] = trip_array_string;
+    parkfilter["id_list"] = trip_array_string;
     $.getJSON(url, parkfilter,
         function(data) {
             var park_ids = [];
@@ -665,15 +665,15 @@ var bp = {
             for(var i = 0;i<data['objects'].length;i++){
               var park=data['objects'][i];
               var litem = '<li class="ui-state-default parkitem clearfix sortable_icon" id="tripitem_'+
-                          park['os_id']+
+                          park['id']+
                           '"><h3>'+
                           park['name']+
                           '</h3><input type="button" id="tripadd_'+
-                          park['os_id']+
+                          park['id']+
                           '" class="add-trip-button" name="add-trip" value="Remove from Trip" alt="'+
                           park['name']+
                           '" /> </li>';
-              park_ids[park_ids.length] = park['os_id'];
+              park_ids[park_ids.length] = park['id'];
               $("#parklist").append(litem);
             }
             bp.park_trip_button_bind(park_ids,true);
