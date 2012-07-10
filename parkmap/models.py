@@ -106,6 +106,11 @@ class Parkowner(models.Model):
         return self.name
 
 
+class Friendsgroup(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.URLField(blank=True, null=True)
+
+
 class Park(models.Model):
     """
     Park or similar Open Space.
@@ -117,7 +122,7 @@ class Park(models.Model):
         ('u', 'Unknown'),
     )
 
-    os_id = models.IntegerField('Park ID', primary_key=True, help_text='Refers to GIS OS_ID')
+    os_id = models.CharField('OS ID', max_length=9, null=True, blank=True, help_text='Refers to MassGIS OS_ID')
     name = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True, unique=True)
     alt_name = models.CharField('Alternative name', max_length=100, blank=True, null=True)
@@ -278,11 +283,6 @@ class Facility(models.Model):
     #@models.permalink
     #def get_absolute_url(self):
     #    return ('facility', [slugify(self.name)])
-
-
-class Friendsgroup(models.Model):
-    name = models.CharField(max_length=100)
-    url = models.URLField(blank=True, null=True)
 
 class Story(models.Model):
     RATING_CHOICES = (
