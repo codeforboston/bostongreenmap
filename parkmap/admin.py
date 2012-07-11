@@ -16,6 +16,7 @@ class ParkAdmin(admin.OSMGeoAdmin):
 
 
 class FacilityAdmin(admin.OSMGeoAdmin):
+    search_fields = ['name', 'park__name']
     exclude = ('park',)
     list_display = ['name', 'activity_string', 'facilitytype', 'parktype_string']
     list_filter = ('activity', )
