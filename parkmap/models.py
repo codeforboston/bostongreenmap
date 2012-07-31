@@ -129,7 +129,7 @@ class Park(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
+    neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods', blank=True)
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
     friendsgroup = models.ForeignKey("Friendsgroup", blank=True, null=True)
@@ -171,24 +171,8 @@ class Park(models.Model):
         except TypeError:
             self.neighborhoods = None
 
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        while True:
-            try:
-                super(Park, self).save(*args, **kwargs)
-            # slug fight
-            except IntegrityError:
-                transaction.rollback()
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
         super(Park, self).save(*args, **kwargs)
+
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -305,3 +289,4 @@ class Story(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('parkmap.views.story', [str(self.id)])
+
