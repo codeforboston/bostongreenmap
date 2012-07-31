@@ -163,15 +163,16 @@ class Park(models.Model):
 
         self.area = self.geometry.area
 
+        super(Park, self).save(*args, **kwargs)
+
         try:
             # cache containing neighorhood
+            # doesn't work with admin forms, m2m get cleared during admin save
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
             self.neighborhoods.clear()
             self.neighborhoods.add(*neighborhoods)
         except TypeError:
             self.neighborhoods = None
-
-        super(Park, self).save(*args, **kwargs)
 
 
 class Activity(models.Model):
