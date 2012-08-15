@@ -5,6 +5,8 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from sorl.thumbnail import get_thumbnail
+
 
 import re
 
@@ -136,6 +138,7 @@ class Park(models.Model):
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField()
+    image = models.ImageField(blank=True, upload_to="parkimages")
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -189,6 +192,15 @@ class Park(models.Model):
             else:
                 break
         super(Park, self).save(*args, **kwargs)
+
+    def park_thumb(self, obj):
+         if obj.image:
+             thumb = default.backend.get_thumbnail(obj.image.file, ADMIN_THUMBS_SIZE)
+             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+         else:
+             return "No Image" 
+    park_thumb.short_description = 'Park Image'
+    park_thumb.allow_tags = True
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)

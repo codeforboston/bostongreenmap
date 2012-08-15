@@ -1,5 +1,6 @@
 {% extends 'parkmap/base.html' %}
 {% load markup %}
+{% load thumbnail %}
 {% load humanize %}
 
 {% block title %}{{park.name}}{% endblock %}
@@ -88,6 +89,11 @@
         </div><!--/span-->
             
         <div class="span2">
+              {% if park.image %}
+              {% thumbnail park.image "150" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}<br>
+              {% endif %}
           <div class="well">
               <input type="button" id="tripadd_{{park.id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->

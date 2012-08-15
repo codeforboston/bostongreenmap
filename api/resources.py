@@ -2,6 +2,8 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.cache import SimpleCache
 import datetime
 from tastypie import fields
+from sorl.thumbnail import get_thumbnail
+
 
 
 from api.tastyhacks import EncodedGeoResource, GeoResource
