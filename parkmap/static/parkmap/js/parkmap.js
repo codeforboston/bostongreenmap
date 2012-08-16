@@ -30,7 +30,7 @@ var bp = {
       zoom: 13,
       center: new google.maps.LatLng (42.307733,-71.09713),  //NEW: Franklin Park OLD: (42.31, -71.032), boston
       minZoom: 10,
-      maxZoom: 17,
+      maxZoom: 40,
       mapTypeControlOptions: {
         position: google.maps.ControlPosition.TOP_RIGHT,
         mapTypeIds: [basemap, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
