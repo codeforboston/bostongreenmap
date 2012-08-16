@@ -160,6 +160,9 @@ LOGGING = {
     }
 }
 
+ADMIN_THUMBS_SIZE = 150
+
+
 # import local settings
 try:
     from local_settings import *

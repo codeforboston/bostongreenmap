@@ -118,15 +118,12 @@ class ParkResource(EncodedGeoResource):
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
             orm_filters = {"pk__in": [i.id for i in parks]}
-
-
-
-
         return orm_filters
 
     def dehydrate(self, bundle):
         bundle.obj.geometry.transform(4326)
         bundle.data['lat_long'] = bundle.obj.lat_long()
+        bundle.data['thumb'] = bundle.obj.parkimage_thumb()
         return bundle
 
 

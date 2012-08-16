@@ -2,7 +2,7 @@ from django.contrib.gis import admin
 
 from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype, Friendsgroup, Story
 from sorl.thumbnail import default
-ADMIN_THUMBS_SIZE = '150'
+from django.conf import settings
 
 
 # default GeoAdmin overloads
@@ -18,7 +18,7 @@ class ParkAdmin(admin.OSMGeoAdmin):
 
     def park_image_thumb(self, obj):
          if obj.image:
-             thumb = default.backend.get_thumbnail(obj.image.file, ADMIN_THUMBS_SIZE)
+             thumb = default.backend.get_thumbnail(obj.image.file, settings.ADMIN_THUMBS_SIZE)
              return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
          else:
              return "No Image" 

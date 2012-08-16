@@ -5,7 +5,8 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from sorl.thumbnail import get_thumbnail
+from sorl.thumbnail import get_thumbnail, default
+
 
 
 import re
@@ -140,6 +141,14 @@ class Park(models.Model):
     area = models.FloatField()
     image = models.ImageField(blank=True, upload_to="parkimages")
 
+    def parkimage_thumb(self):
+         if self.image:
+             thumb = default.backend.get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE)
+             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+         else:
+             return None
+
+
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
 
@@ -193,14 +202,6 @@ class Park(models.Model):
                 break
         super(Park, self).save(*args, **kwargs)
 
-    def park_thumb(self, obj):
-         if obj.image:
-             thumb = default.backend.get_thumbnail(obj.image.file, ADMIN_THUMBS_SIZE)
-             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
-         else:
-             return "No Image" 
-    park_thumb.short_description = 'Park Image'
-    park_thumb.allow_tags = True
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -263,6 +264,13 @@ class Facility(models.Model):
     class Meta:
         verbose_name = _('Facility')
         verbose_name_plural = _('Facilities')
+
+    def parkimage_thumb(self):
+         if self.park.image:
+             thumb = default.backend.get_thumbnail(self.park.image.file, settings.ADMIN_THUMBS_SIZE)
+             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+         else:
+             return None
 
     def activity_string(self):
         out = []
