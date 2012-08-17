@@ -26,7 +26,10 @@ class NeighborhoodResource(ModelResource):
             filters = {}
         orm_filters = super(NeighborhoodResource, self).build_filters(filters)
         if  "activity" in filters:
-            neighborhoods = get_neighborhoods(filters['activity'])
+            if filters['activity'] == 'all':
+                neighborhoods = Neighborhood.objects.all()
+            else:
+                neighborhoods = get_neighborhoods(filters['activity'])
             queryset = Neighborhood.objects.filter(pk__in=neighborhoods)
             orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
@@ -336,14 +339,18 @@ def get_activities(neighborhood_id):
     """
     Get all activitty ids that are in a neighborhood.
     """
-    neighborhood = Neighborhood.objects.get(id=neighborhood_id)
-    parks = Park.objects.filter(geometry__intersects=neighborhood.geometry)
-    facilities = []
-    for park in parks:
-        facilities.extend(park.facility_set.all())
-    activities = []
-    for fac in facilities:
-        activities.extend(fac.activity.all())
+    if neighborhood_id == 'all':
+        activities = Activity.objects.all()
+    else:
+        neighborhood = Neighborhood.objects.get(id=neighborhood_id)
+        parks = Park.objects.filter(geometry__intersects=neighborhood.geometry)
+        facilities = []
+        for park in parks:
+            facilities.extend(park.facility_set.all())
+        activities = []
+        for fac in facilities:
+            activities.extend(fac.activity.all())
+
     return list(set([a.id for a in activities]))
 
 

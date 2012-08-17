@@ -533,6 +533,13 @@ var bp = {
         })
         .html(bp.titlecase("Select Your " + modelclass));
         dropdown.append(titleoption)
+
+        var alloption = $("<option />", {
+          "value": "all"
+        })
+        .html(bp.titlecase("All"));
+        dropdown.append(alloption)
+
         $.each(data.objects, function(key, obj) {
           var option = $("<option />", {
             value: obj["id"]
@@ -562,7 +569,10 @@ var bp = {
         var selected = $(dd[previous], "option:selected").val();
         var filter = {};
 
-        if ($(this).val() !== "") filter[$(dropdown).attr("id")] = $(this).val();
+        if ($(this).val() !== ""){
+            // It's the "select" option.
+            filter[$(dropdown).attr("id")] = $(this).val();
+        }
 
         var container = $(dropdown).parent();
 
