@@ -545,6 +545,7 @@ var bp = {
             value: obj["id"]
           })
           .data("slug", obj["slug"])
+          .data("id", obj["id"])
           .html(obj["name"]);
           dropdown.append(option);
         });

@@ -94,7 +94,6 @@
              
             </div>
           </div>
-      
           {% endfor %}    </div>
 <!-- end stories -->
 </div>
@@ -131,7 +130,15 @@
               .on("click", function(e){
                 var activity = $("select#activity option:selected").data("slug");
                 var neighborhood = $("select#neighborhood option:selected").data("slug");
-                if (activity && neighborhood) window.location = ("/neighborhood/" + neighborhood + "/" + activity + "/");
+
+                console.log(neighborhood, activity);
+                if (neighborhood && activity){
+                    window.location = ("/neighborhood/" + neighborhood + "/" + activity + "/");
+                } else {
+                    var activity_id = $("select#activity option:selected").data("id");
+                    window.location = ("/neighborhood/all/" + activity + "/#"+activity_id+",all");
+                }
+
               });
               $("#play").append(playbutton);
 

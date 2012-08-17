@@ -112,9 +112,12 @@ def get_n_p_with_a(n_slug, a_slug):
     Get parks in a neighborhood that have the specific activity for any of its facilities
     if no request is passed, returns neighborhood and the parks
     """
-    n = get_object_or_404(Neighborhood, slug=n_slug)
     a = get_object_or_404(Activity, slug=a_slug)
     fac = Facility.objects.filter(activity=a)
+    if n_slug == 'all':
+        n = Neighborhood.objects.all()
+    else:
+        n = get_object_or_404(Neighborhood, slug=n_slug)
     facility_ids = []
     for f in fac:
         facility_ids.append(f.id)
