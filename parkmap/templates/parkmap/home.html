@@ -73,7 +73,7 @@
 
     <div id="stories">
         {% for story in stories|slice:":10" %}
-        <h2>Recent Park Story About {{story.park}}</h2>
+        <h2>Recent Park Story About <a href="/park/{{story.park.slug}}/">{{story.park}}</a></h2>
           <div class="parkstory" id="story_{{story.id}}">
             <div class="rating_{{ story.rating }}">
               <div class="flag-inapp flag"><i class="icon-flag icon-white hidden-phone"></i><i class="icon-flag visible-phone"></i>&nbsp;Flag as inppropriate</div>
