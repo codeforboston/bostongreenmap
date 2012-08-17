@@ -153,7 +153,7 @@ def events(request, event_id, event_name):
 def explore(request):  # Activity slug, and Neighborhood slug
     neighborhoods = Neighborhood.objects.all().order_by('name')
     #activities = Activity.objects.all().order_by('name')
-    #parktypes = Parktype.objects.all().order_by('name')
+    parks = Park.objects.all().order_by('name')
     facilitytypes = Facilitytype.objects.all().order_by('name')
     neighborhood_slug = request.GET.get('neighborhood', None)
     neighborhood = None
@@ -163,6 +163,7 @@ def explore(request):  # Activity slug, and Neighborhood slug
         'neighborhoods': neighborhoods,
         'neighborhoodpassed': neighborhood,
         'facilitytypes':facilitytypes,
+        'parks':parks,
         }
     return render_to_response('parkmap/explore.html',
         response_d,
