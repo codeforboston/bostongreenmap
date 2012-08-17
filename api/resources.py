@@ -158,7 +158,7 @@ class FacilityResource(GeoResource):
     facilitytype = fields.ToOneField(FacilitytypeResource, 'facilitytype')
 
     class Meta:
-        queryset = Facility.objects.transform(4326).filter(park__isnull=False)
+        queryset = Facility.objects.transform(4326).filter(park__isnull=False).order_by('id')
         allowed_methods = ['get', ]
         resource_name = 'facility'
         cache = SimpleCache()
@@ -176,6 +176,8 @@ class FacilityResource(GeoResource):
         else: 
             desc=""
         bundle.data['description'] = desc
+        bundle.data['notes'] = bundle.obj.notes
+        bundle.data['access'] = bundle.obj.access
         bundle.data['park_slug'] = bundle.obj.park.slug
         return bundle
 

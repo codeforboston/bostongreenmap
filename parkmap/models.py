@@ -257,6 +257,8 @@ class Facility(models.Model):
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True)  # FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
+    notes = models.TextField(blank=True,)
+    access = models.TextField(blank=True,)
 
     geometry = models.PointField(srid=26986)
     objects = models.GeoManager()

@@ -310,7 +310,9 @@ var bp = {
             activity_string: facility["activity_string"],
             description: facility['description'],
             admin_url: facility["admin_url"],
-            park_slug: facility['park_slug']
+            park_slug: facility['park_slug'],
+            notes: facility["notes"],
+            access: facility["access"]
           })
 
        });
@@ -386,6 +388,7 @@ var bp = {
   loadfacilities: function(facilityfilter) {
 
     facilityfilter["format"] = "json";
+    facilityfilter["limit"] = "1000";
 
     $.getJSON('/api/v1/facility/',
       facilityfilter,
@@ -396,6 +399,8 @@ var bp = {
           // add facilities to map
           bp.renderfacility(facility["geometry"], {
             icon: facility["icon"],
+            notes: facility["notes"],
+            access: facility["access"],
             name: facility["name"],
             activity_string: facility["activity_string"],
             admin_url: facility["admin_url"],
@@ -460,9 +465,17 @@ var bp = {
     // track overlay
     bp.overlays.push(facilitymarker);
     // marker infowindow
+    var extra = "";
+    if (properties['notes']){
+        extra += "<div>"+properties['notes']+"</div>";
+    }
+    if (properties['access']){
+        extra += "<div>"+properties['access']+"</div>";
+    }
     var facilityinfocontent = "<div class='iwindow'><h2>" + properties["name"] + "</h2>" +
                               "Activities: " + properties["activity_string"] + "</div>" + 
                               "<div>"+properties['description']+"</div>" +
+                              extra + 
                               "<strong><a href='/park/" + properties['park_slug']+"/'>" + "Learn more about this park" + "</a></strong>" ;
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
