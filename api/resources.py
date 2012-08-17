@@ -97,6 +97,9 @@ class ParkResource(EncodedGeoResource):
             facilities = Facility.objects.filter(facilitytype__in=fts).select_related()
             park_facility_ids = [f.park.id for f in facilities if f.park]
 
+            if not facilities:
+                return {'pk__in':[]}
+
             if filters['neighborhoods'] == "all":
                 parks = Park.objects.filter(pk__in=park_facility_ids)
             else:
@@ -105,6 +108,8 @@ class ParkResource(EncodedGeoResource):
 
             if parks:
                 orm_filters = {"pk__in": [p.id for p in parks]}
+                return orm_filters
+            return {'pk__in':[]}
 
         if "neighborhood" in filters and \
            "activity" in filters:
@@ -118,7 +123,8 @@ class ParkResource(EncodedGeoResource):
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
             orm_filters = {"pk__in": [i.id for i in parks]}
-        return orm_filters
+            return orm_filters
+        return {'pk__in':[]}
 
     def dehydrate(self, bundle):
         bundle.obj.geometry.transform(4326)
