@@ -120,11 +120,11 @@
             // load default map
             bp.init_map("parkmap");
 
-            //var parknames = [{% for park in parks%}"{{park.name|safe}}"{% if not forloop.last%},{%endif%}{%endfor%}];
-            //$(".parknamesearch").typeahead({
-            //    source:parknames,
-            //    items:12
-            //});       
+            var parknames = [{% for park in parks%}"{{park.name|safe}}"{% if not forloop.last%},{%endif%}{%endfor%}];
+            $(".parknamesearch").typeahead({
+                source:parknames,
+                items:12
+            });       
 
             $(function() {
 

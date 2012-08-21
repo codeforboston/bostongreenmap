@@ -127,7 +127,7 @@ class ParkResource(EncodedGeoResource):
             parks = filter_explore_park(filters)
             orm_filters = {"pk__in": [i.id for i in parks]}
             return orm_filters
-        return {'pk__in':[]}
+        return orm_filters
 
     def dehydrate(self, bundle):
         bundle.obj.geometry.transform(4326)

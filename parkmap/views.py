@@ -5,6 +5,7 @@ import json
 from django.utils import simplejson
 from django.core.mail import send_mail
 
+from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
@@ -219,6 +220,10 @@ def park_search(request):
     if request.method == "POST":
         parkname = request.POST.get('parkname', None)
         if parkname:
-            park = Park.objects.get(name=parkname)
+            parkslug = slugify(parkname) #  To remove things like apostrophes.
+            try:
+                park = Park.objects.get(slug=parkslug)
+            except:
+                return redirect('home')
             return redirect('park',park_slug=park.slug)
     return redirect('home')
