@@ -37,7 +37,18 @@ class FacilityAdmin(admin.OSMGeoAdmin):
 
 
 class LookupAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', ]
+
+    def ic(self, obj):
+        if obj.icon:
+            thumb = default.backend.get_thumbnail(obj.icon.file,"24")
+            return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+        else:
+            return ""
+
+    ic.short_description = 'Park Image'
+    ic.allow_tags = True
+
+    list_display = ['id', 'name','ic' ]
     list_editable = ['name', ]
 
 

@@ -237,6 +237,7 @@ class Activity(models.Model):
 
 class Facilitytype(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
+    icon = models.ImageField(blank=True, upload_to="icons", null=True)
 
     class Meta:
         verbose_name = _('Facilitytype')
