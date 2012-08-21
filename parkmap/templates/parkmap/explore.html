@@ -42,7 +42,7 @@
 </div>
 <div class="park_search" style="display: none;">
         <h2 class="searchhd"> Search by Park Name</h2>
-        <input type="text" id="parkname" class="parknamesearch" placeholder="Park Name(Optional)">
+        <input type="text" id="parkname" class="parknamesearch" placeholder="Park Name(Optional)" {% if parkname %} value="{{parkname|safe}}"{%endif%}>
         <input type="button" id="explore_search" value="Search" style="float:right;">
 </div>
       <div id="parklist" class="clearfix"></div>
@@ -129,6 +129,13 @@
           $(".facilitytype_checkbox").bind("change", function(){
               bp.explore_page_make_calls();
           });
+
+          {% if parkname %}
+          // If this shows up, data was searched for from the previous page
+              bp.loadparks({
+                "name__icontains": "{{parkname|safe}}"
+              });
+          {% endif %}
 
 
           // top margin

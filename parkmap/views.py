@@ -157,6 +157,7 @@ def events(request, event_id, event_name):
 
 
 def explore(request):  # Activity slug, and Neighborhood slug
+    parkname = request.POST.get('parkname',None)
     neighborhoods = Neighborhood.objects.all().order_by('name')
     #activities = Activity.objects.all().order_by('name')
     parks = Park.objects.all().order_by('name')
@@ -170,6 +171,7 @@ def explore(request):  # Activity slug, and Neighborhood slug
         'neighborhoodpassed': neighborhood,
         'facilitytypes':facilitytypes,
         'parks':parks,
+        'parkname':parkname,
         }
     return render_to_response('parkmap/explore.html',
         response_d,
@@ -214,16 +216,3 @@ Link to Admin: http://{domain}/admin/parkmap/story/{id}
 def policy(request):
     return render_to_response('parkmap/policy.html',
         {}, context_instance=RequestContext(request))
-    
-
-def park_search(request):
-    if request.method == "POST":
-        parkname = request.POST.get('parkname', None)
-        if parkname:
-            parkslug = slugify(parkname) #  To remove things like apostrophes.
-            try:
-                park = Park.objects.get(slug=parkslug)
-            except:
-                return redirect('home')
-            return redirect('park',park_slug=park.slug)
-    return redirect('home')

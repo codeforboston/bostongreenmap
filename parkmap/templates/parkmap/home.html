@@ -67,7 +67,7 @@
         <div class="menu-box-item">
             <h1> Search by Park Name</h1>
             <h4>Type in a park name to find it.</h4>
-            <form method="POST" action="/park_search/">
+            <form method="POST" action="/explore/">
                 {% csrf_token %}
                 <input type="text" name="parkname" id="parkname" class="parknamesearch" placeholder="Park Name">
                 <input type="submit" value="Search">
