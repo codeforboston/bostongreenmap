@@ -5,7 +5,7 @@ import json
 from django.utils import simplejson
 from django.core.mail import send_mail
 
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
 from forms import StoryForm
@@ -40,10 +40,12 @@ def get_list():
 #Home page
 def home_page(request):
     parks, facilities, neighborhoods = get_list()
+    all_parks = Park.objects.all().order_by('name')
     activities = Activity.objects.all()
     stories = Story.objects.all().order_by('-date')[:6]
     return render_to_response('parkmap/home.html', {
         'parks': parks,
+        'all_parks': all_parks,
         'facilities': facilities,
         'activities': activities,
         'neighborhoods': neighborhoods,
@@ -212,3 +214,11 @@ def policy(request):
     return render_to_response('parkmap/policy.html',
         {}, context_instance=RequestContext(request))
     
+
+def park_search(request):
+    if request.method == "POST":
+        parkname = request.POST.get('parkname', None)
+        if parkname:
+            park = Park.objects.get(name=parkname)
+            return redirect('park',park_slug=park.slug)
+    return redirect('home')

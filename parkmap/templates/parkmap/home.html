@@ -64,7 +64,15 @@
 	    </div>
 	    </a>
 	
-
+        <div class="menu-box-item">
+            <h1> Search by Park Name</h1>
+            <h4>Type in a park name to find it.</h4>
+            <form method="POST" action="/park_search/">
+                {% csrf_token %}
+                <input type="text" name="parkname" id="parkname" class="parknamesearch" placeholder="Park Name">
+                <input type="submit" value="Search">
+            </form>
+        </div>
 	
 
 
@@ -106,10 +114,17 @@
 {% endblock %}	
 {% block javascript %}
     {{ block.super }}
+    <script type="text/javascript" src="/static/parkmap/js/bootstrap-typeahead.js"></script>
         <script type="text/javascript">
 
             // load default map
             bp.init_map("parkmap");
+
+            //var parknames = [{% for park in parks%}"{{park.name|safe}}"{% if not forloop.last%},{%endif%}{%endfor%}];
+            //$(".parknamesearch").typeahead({
+            //    source:parknames,
+            //    items:12
+            //});       
 
             $(function() {
 

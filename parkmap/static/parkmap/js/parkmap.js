@@ -22,7 +22,7 @@ var bp = {
 
   // initializes Google Map with given basemap argument [string]
   init_map: function(basemap) {
-    console.log("init");
+
     var basemap = basemap || "basemap";
 
     // add google map
