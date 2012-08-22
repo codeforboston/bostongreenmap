@@ -784,9 +784,20 @@ var bp = {
                   provideRouteAlternatives: false
               }; 
           }
+
+
+
+
           directionsService.route(request, function(response, status) { 
             if (status == google.maps.DirectionsStatus.OK) { 
                directionsDisplay.setDirections(response);
+               var dirs = directionsDisplay.getDirections();
+               var instructions = [];
+               $.each(dirs['routes']['0']['legs'][0]['steps'], function(key, obj) {
+                   instructions[instructions.length] = "<li>" + obj['instructions'] + "</li>";
+               });
+               instructions = instructions.join("<br>");
+               $("#trip_instructions").html("<ol>"+ instructions + "</ol>");
             } 
           });
   }
