@@ -146,12 +146,13 @@
                 var activity = $("select#activity option:selected").data("slug");
                 var neighborhood = $("select#neighborhood option:selected").data("slug");
 
-                console.log(neighborhood, activity);
                 if (neighborhood && activity){
                     window.location = ("/neighborhood/" + neighborhood + "/" + activity + "/");
-                } else {
+                } else if(activity) {
                     var activity_id = $("select#activity option:selected").data("id");
                     window.location = ("/neighborhood/all/" + activity + "/#"+activity_id+",all");
+                } else {
+                    return; // Can't search neighborhoods with no neighborhood.
                 }
 
               });

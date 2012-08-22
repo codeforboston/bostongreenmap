@@ -237,7 +237,7 @@ class Activity(models.Model):
 
 class Facilitytype(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
-    icon = models.ImageField(blank=False, upload_to="icons", null=False)
+    icon = models.ImageField(blank=False, upload_to="icons", null=False, help_text="Must be 32x37px to function properly")
 
     class Meta:
         verbose_name = _('Facilitytype')
@@ -286,7 +286,7 @@ class Facility(models.Model):
 
     def icon_url(self):
         if self.facilitytype.icon:
-            return '/media/%s' % (self.facilitytype.icon.url,)
+            return '%s' % (self.facilitytype.icon.url,)
         return '%sparkmap/img/icons/%s.png' % (settings.STATIC_URL, slugify(self.facilitytype))
 
 
