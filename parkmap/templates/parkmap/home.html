@@ -152,6 +152,8 @@
                     var activity_id = $("select#activity option:selected").data("id");
                     window.location = ("/neighborhood/all/" + activity + "/#"+activity_id+",all");
                 } else {
+                    $("select#activity").prop("selectedIndex",0);
+                    $("select#neighborhood").prop("selectedIndex",0);
                     return; // Can't search neighborhoods with no neighborhood.
                 }
 
