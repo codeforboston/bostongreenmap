@@ -36,7 +36,7 @@
       {% for facilitytype in facilitytypes %}
          <input type="checkbox" class="facilitytype_checkbox" name="facilitytype_{{facilitytype.id}}" id="facilitytype_{{facilitytype.id}}">
           {{facilitytype.name}}
-          <img src="/static/parkmap/img/icons/{{facilitytype.name|slugify}}.png" id="p_{{facilitytype.id}}" title="{{facilitytype.name}}" class="facilitytype_icon">
+          <img src="/media/{{facilitytype.icon}}" id="p_{{facilitytype.id}}" title="{{facilitytype.name}}" class="facilitytype_icon">
         <br>
       {% endfor %}
 </div>
@@ -68,7 +68,7 @@
             "showfacilities": true
         }
         // load default map
-        bp.init_map();
+        bp.init_map("parkmap");
 
         $(".parktype_icon").click(function(){
             var im = $(this).prop('id').substr(2);
