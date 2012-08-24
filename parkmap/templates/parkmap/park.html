@@ -64,6 +64,12 @@
              <p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
              {% endif %} 
 
+             <h5>MBTA Stops</h5>
+             <ul>
+                 {% for stop in stops %}
+                 <li>{{stop.stop_name}}</li>
+                 {% endfor %}
+             </ul>
              <h5>Upcoming events</h5>
              <ul>
                                  {% for event in park.events.all %}

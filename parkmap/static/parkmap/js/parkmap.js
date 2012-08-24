@@ -796,7 +796,7 @@ var bp = {
                $.each(dirs['routes']['0']['legs'][0]['steps'], function(key, obj) {
                    instructions[instructions.length] = "<li>" + obj['instructions'] + "</li>";
                });
-               instructions = instructions.join("<br>");
+               instructions = instructions.join("");
                $("#trip_instructions").html("<ol>"+ instructions + "</ol>");
             } 
           });

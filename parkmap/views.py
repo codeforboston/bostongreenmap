@@ -1,6 +1,7 @@
 # Views for Parkmap
 from django.contrib.sites.models import Site
 
+from django.contrib.gis.measure import D
 import json
 from django.utils import simplejson
 from django.core.mail import send_mail
@@ -12,6 +13,7 @@ from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parkty
 from forms import StoryForm
 from django.template import RequestContext
 from django.conf import settings
+from mbta.models import MBTAStop
 
 
 import cgpolyencode
@@ -60,6 +62,7 @@ def parks_page(request, park_slug):
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
     stories = Story.objects.filter(park=park).order_by("-date")
+    stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=0.2))) # this distance doesn't overload the page with a million stops.
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -69,10 +72,10 @@ def parks_page(request, park_slug):
             f = StoryForm()
     else:
         f = StoryForm()
-            
     return render_to_response('parkmap/park.html',
         {'park': park,
          'map': map,
+         'stops': stops,
          'story_form': f,
          'stories': stories,
          'acres': park.geometry.area * 0.000247,
