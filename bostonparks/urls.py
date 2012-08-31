@@ -46,6 +46,10 @@ urlpatterns = patterns('',
         {'document_root': '/home/django/webapps/static/'}),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': '/home/django/webapps/bostonparks/media/'}),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^my_profile/$', 'profiles.views.edit_profile',
+        name='my_profile'),
+    url(r'^profiles/', include('profiles.urls')),
 
     url(r'^policy/$', 'parkmap.views.policy'),  # HOME
     url(r'^', include('parkmap.urls')),  # HOME

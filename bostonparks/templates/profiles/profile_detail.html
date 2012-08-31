@@ -1,0 +1,6 @@
+{% extends "parkmap/base.html" %}
+{% block content %}
+<div>Profile of user "{{ profile.display_name }}"</div>
+{% if profile.favorite_park %}<div>My
+favorite park is {{ profile.favorite_park.name }}</div>{% endif %}
+{% endblock %}

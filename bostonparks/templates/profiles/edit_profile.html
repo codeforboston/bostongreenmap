@@ -1,0 +1,10 @@
+{% extends "parkmap/base.html" %}
+{% block content %}
+<div>Edit your profile information.</div>
+<form method="POST" action="">{% csrf_token %}
+    <ul>
+        {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="Save" />
+<form>
+{% endblock %}

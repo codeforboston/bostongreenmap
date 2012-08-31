@@ -1,0 +1,11 @@
+{% extends "parkmap/base.html" %}
+{% block content %}
+<h4>User {{ user.username }}</h4>
+<div>Enter your profile information as desired.</div>
+<form method="POST" action="">{% csrf_token %}
+    <ul>
+        {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="Save" />
+<form>
+{% endblock %}

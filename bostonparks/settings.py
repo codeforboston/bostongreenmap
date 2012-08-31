@@ -3,6 +3,8 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+LOGIN_REDIRECT_URL = '/my_profile'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -125,11 +127,31 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.humanize',
     'django.contrib.gis',
+    'registration',
     'south',
     'parkmap',
+    'mbta',
     'tastypie',
     'sorl.thumbnail',
+    'accounts',
+    'profiles',
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+# Django registration requires this.  It is the number of
+# days after a new user has registered by which he must
+# activate his account.  There is no default.
+ACCOUNT_ACTIVATION_DAYS = 5
+# DEFAULT_FROM_EMAIL must also be set, and such other EMAIL
+# configuration as to enable successful operation of
+#   django.contrib.auth.models.User().email_user
+# Using the default smtp email backend, this requires
+# EMAIL_HOST, the default is 'localhost', which may or may
+# not cut it.  The default EMAIL_PORT is probably correct.
+# EMAIL_HOST_USER adn EMAIL_HOST_PASSWORD each default to
+# an empty string, which may be ok with the default
+# EMAIL_HOST.  EMAIL_USE_TLS defaults to false.
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

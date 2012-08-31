@@ -1,0 +1,10 @@
+{% extends "parkmap/base.html" %}
+{% block content %}
+<div> Please fill out and submit the form below to register with MASSHealth.</div>
+<form method="POST" action="">{% csrf_token %}
+    <ul>
+        {{ form.as_ul }}
+    </ul>
+    <input type="submit" value="Register" />
+<form>
+{% endblock %}
