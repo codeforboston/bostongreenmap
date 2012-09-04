@@ -190,3 +190,5 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+MBTA_DISTANCE = 0.2 # Distance to search for MBTA stops on Park Page and Trips.

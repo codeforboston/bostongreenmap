@@ -14,23 +14,25 @@ from api.resources import ParkResource, \
     ExploreParkResource, \
     ExploreFacilityResource, \
     ParkNameResource, \
+    MBTAResource, \
     ExploreActivityResource, \
     FacilitytypeResource
 
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
-v1_api.register(NeighborhoodResource())
 v1_api.register(ActivityResource())
 v1_api.register(EntryResource())
-v1_api.register(ParkResource())
+v1_api.register(ExploreActivityResource())
+v1_api.register(ExploreFacilityResource())
+v1_api.register(ExploreParkResource())
 v1_api.register(FacilityResource())
 v1_api.register(FacilitytypeResource())
-v1_api.register(ParktypeResource())
-v1_api.register(ExploreParkResource())
-v1_api.register(ExploreFacilityResource())
-v1_api.register(ExploreActivityResource())
+v1_api.register(MBTAResource())
+v1_api.register(NeighborhoodResource())
 v1_api.register(ParkNameResource())
+v1_api.register(ParkResource())
+v1_api.register(ParktypeResource())
 
 urlpatterns = patterns('',
     # Examples:

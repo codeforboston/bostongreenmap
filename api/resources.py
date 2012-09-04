@@ -3,9 +3,12 @@ from tastypie.cache import SimpleCache
 import datetime
 from tastypie import fields
 from sorl.thumbnail import get_thumbnail
+from django.shortcuts import get_object_or_404
 
 
 
+from django.contrib.gis.measure import D
+from mbta.models import MBTAStop
 from api.tastyhacks import EncodedGeoResource, GeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
 
@@ -288,6 +291,25 @@ class ExploreFacilityResource(GeoResource):
         return orm_filters
 
 
+class MBTAResource(GeoResource):
+
+    class Meta:
+        queryset = MBTAStop.objects.transform(4326).all()
+        allowed_methods = ('get',)
+        cache = SimpleCache()
+        excludes = ('icon_url',)
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(MBTAResource, self).build_filters(filters)
+        if "park_slug" in filters:
+            park = get_object_or_404(Park,slug=filters['park_slug'])
+            stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=0.2)))
+            orm_filters = {"pk__in": [i.id for i in stops]}
+        return orm_filters
+
 
 
 
@@ -302,6 +324,7 @@ class EntryResource(ModelResource):
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
     parkname = fields.ForeignKey(ParkNameResource, 'parkname')
+    mbta = fields.ForeignKey(MBTAResource, 'mbta')
 
     class Meta:
         queryset = Neighborhood.objects.all()
