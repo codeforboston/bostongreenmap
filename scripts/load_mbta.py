@@ -2,6 +2,9 @@
     Run this in the shell to import the Stop CSV files.
 """
 
+LAT_LONG = 4326 # Magic Geographical numbers  This one is Latitude and Longitude
+BOSTON = 26986 # Magic Geographical numbers  This one is Boston Area coordinates
+
 
 def load_stops():
     import csv
@@ -16,10 +19,9 @@ def load_stops():
             for i,val in enumerate(row):
                d_row[headers[i]] = val
             stop = MBTAStop()
-            x = 'SRID=%s;POINT(%s %s)' % (4326, d_row['stop_lon'], d_row['stop_lat'])
+            x = 'SRID=%s;POINT(%s %s)' % (LAT_LONG, d_row['stop_lon'], d_row['stop_lat'])
             p = GEOSGeometry(x)
-            p.transform(26986) # Transform to this so that we can use in the boston area.
-    
+            p.transform(BOSTON) # Transform to this so that we can use in the boston area.
             stop.lat_long = p
             stop.stop_id = d_row['stop_id']
             stop.stop_code = d_row['stop_code']

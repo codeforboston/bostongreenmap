@@ -62,7 +62,7 @@ def parks_page(request, park_slug):
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
     stories = Story.objects.filter(park=park).order_by("-date")
-    stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
+    #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -75,7 +75,7 @@ def parks_page(request, park_slug):
     return render_to_response('parkmap/park.html',
         {'park': park,
          'map': map,
-         'stops': stops,
+         #'stops': stops,
          'story_form': f,
          'stories': stories,
          'acres': park.geometry.area * 0.000247,

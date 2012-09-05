@@ -474,22 +474,6 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 	padding-bottom: 4px;
 }
 
-.home #stories h2 a:link,
-.home #stories h2 a:visited,
-.home #stories a.read:link,
-.home #stories a.read:visited
-{
-	text-decoration: underline;
-	color: #F8A300
-}
-
-.home #stories h2 a:hover,
-.home #stories h2 a:active,
-.home #stories a.read:hover,
-.home #stories a.read:active
-{
-	text-decoration: none;
-}
 
 
 
@@ -691,9 +675,43 @@ input#walking_search, input#bike_search { background-color: #00DC00; }
 .home .flag-inapp { color: white; }
 .icon-flag { float: left; }
 
+
+
+.home #stories h2 a:link,
+.home #stories h2 a:visited
+{
+	text-decoration: underline;
+	color: #F8A300;
+}
+
+.home #stories h2 a:hover,
+.home #stories h2 a:active
+{
+	text-decoration: none;
+	color: #F8A300;
+}
+
+
+
+html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:link,
+html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:visited
+{
+	text-decoration: underline;
+	color: #F8A300;
+}
+
+html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:hover,
+html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:active
+{
+	text-decoration: none;
+	color: #F8A300;
+}
+
+
+
 /*  Overwrite color on feedback tab */
 
-html body.home div#uvTab
+html body div#uvTab
 {
 background-color: #0066B1 !important;
 }

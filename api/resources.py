@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 
 
 
+from django.conf import settings
 from django.contrib.gis.measure import D
 from mbta.models import MBTAStop
 from api.tastyhacks import EncodedGeoResource, GeoResource
@@ -297,7 +298,7 @@ class MBTAResource(GeoResource):
         queryset = MBTAStop.objects.transform(4326).all()
         allowed_methods = ('get',)
         cache = SimpleCache()
-        excludes = ('icon_url',)
+        excludes = ('stop_url','parent_station','stop_desc','zone_id','stop_code','location_type')
 
     def build_filters(self, filters=None):
         if filters is None:
@@ -305,8 +306,14 @@ class MBTAResource(GeoResource):
 
         orm_filters = super(MBTAResource, self).build_filters(filters)
         if "park_slug" in filters:
-            park = get_object_or_404(Park,slug=filters['park_slug'])
-            stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=0.2)))
+            try:
+                park = Park.objects.get(slug=filters['park_slug'])
+            except Park.DoesNotExist:
+                # If the slug is incorrect, return no results.
+                return {"pk__in":[]}
+
+            # return all Stops within X Miles
+            stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE)))
             orm_filters = {"pk__in": [i.id for i in stops]}
         return orm_filters
 

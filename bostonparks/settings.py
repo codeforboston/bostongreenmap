@@ -191,4 +191,4 @@ try:
 except ImportError:
     pass
 
-MBTA_DISTANCE = 0.2 # Distance to search for MBTA stops on Park Page and Trips.
+MBTA_DISTANCE = 0.5 # Distance to search for MBTA stops on Park Page and Trips.
