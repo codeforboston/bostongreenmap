@@ -123,7 +123,7 @@
             <div class="rating_{{ story.rating }}">
             <div class="flag-inapp flag"></i><i class="icon-flag"></i>&nbsp;Flag as inppropriate</div>
               {% if story.title %}
-              <div class="storytitle">{{ story.title }}</div>
+              <div class="storytitle"><a name="{{story.id}}"></a>{{ story.title }}</div>
               {% endif %}
               <div class="storytext storyshort">
                 {{ story.text|markdown|truncatewords:40 }}
@@ -143,6 +143,7 @@
         <div>
             <a class="sharestory" href="#ns">Share Your Story</a> <a href="/policy/" name='ns'>Data Disclaimer | Terms of Service</a></div>
             <div class="newstory hide">
+            {% if request.user.is_authenticated %}
                 <form id="new_story" action="" method="POST">
                     {% csrf_token %}
                     <div>
@@ -150,6 +151,9 @@
                     <input type="submit" value="Submit Your Story">
                     </div>
                 </form> 
+            {% else %}
+             Please <a href="/accounts/login/">login</a> to submit a story.
+            {% endif %}
             </div>
         </div>
      </div>     
@@ -185,15 +189,18 @@ $(function() {
     $("label[for='id_rating_1']").closest('li').addClass('rating_1');
     $("label[for='id_rating_2']").closest('li').addClass('rating_2');
     $("label[for='id_rating_3']").closest('li').addClass('rating_3');
+
     $("a.read").click(function(){
         $(this).siblings(".storytext").toggle(400);
-        $('a.readless').show();
-        $('a.read').hide();
+        $(this).siblings(".storytext").css('background-color','');
+        $(this).siblings('.readless').show();
+        $(this).hide();
     });    
     $("a.readless").click(function(){
         $(this).siblings(".storytext").toggle(400);
-        $('a.readless').hide();
-        $('a.read').show();
+        $(this).siblings(".storytext").css('background-color','');
+        $(this).hide();
+        $(this).siblings('.read').show();
     });
     $("a.sharestory").click(function(){
         $(".newstory").slideToggle('slow', function() {
@@ -274,6 +281,17 @@ $(function() {
         .complete(function() { console.log("complete"); });
 
     });
+
+
+    //When coming in from the main story page, hilight the story
+    if (location.hash.length > 0){
+        var story_id = location.hash.substring(1);
+        $('#story_'+story_id+' .storytext').toggle()
+        $('#story_'+story_id+' a.readless').show();
+        $('#story_'+story_id+' a.read').hide();
+        $('#story_'+story_id+' .storytext').css('background-color','#fafafa');
+    }
+
 
 });
 

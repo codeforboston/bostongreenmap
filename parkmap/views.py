@@ -78,6 +78,7 @@ def parks_page(request, park_slug):
          #'stops': stops,
          'story_form': f,
          'stories': stories,
+         'request': request,
          'acres': park.geometry.area * 0.000247,
         },
         context_instance=RequestContext(request)

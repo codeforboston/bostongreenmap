@@ -583,8 +583,8 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 
 .newstory .rating_3 { background-image: url('/static/parkmap/img/ratings/rating-idea.jpg'); }
 .newstory .rating_0 { background-image: url('/static/parkmap/img/ratings/rating-good.jpg'); }
-.newstory .rating_1 { background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg'); }
-.newstory .rating_2 { background-image: url('/static/parkmap/img/ratings/rating-poor.jpg'); }
+.newstory .rating_1 { background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');  }
+.newstory .rating_2 { background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');  }
 .newstory .rating_0 label, .newstory .rating_1 label, .newstory .rating_2 label, .newstory .rating_3 label { font-size: 0; }
 
 .newstory p

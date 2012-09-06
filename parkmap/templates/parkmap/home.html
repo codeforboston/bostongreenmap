@@ -90,15 +90,8 @@
               <div class="storytitle">{{ story.title }}</div>
               {% endif %}
               <div class="storytext storyshort">
-                {{ story.text|truncatewords:40 }}
+                <a href="/park/{{story.park.slug}}/#{{story.id}}">{{ story.text|truncatewords:40 }}</a>
               </div>
-              <div class="storytext storylong hide">
-                {{ story.text }}
-              </div>
-              {% if story.text|wordcount > 40 %}        
-                 <a class="read">Read more &raquo;</a>
-                 <a class="readless hide">&laquo; Read less </a>
-              {% endif %}
              
             </div>
           </div>
