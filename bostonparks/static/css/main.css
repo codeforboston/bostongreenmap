@@ -205,6 +205,11 @@ ul.nav ul.actions li a:active { color: #666; }
 	height: 100%;
 }
 
+.home select#neighborhood
+{
+margin-left: 3px;
+}
+
 .explore .menu-box-inner {
     bottom: 0;
     left: 0;
@@ -306,6 +311,18 @@ bottom: 30px;
 {
 	width: 100%;
 	margin-top: 10px;
+}
+
+.home .menu-box-item form select
+{
+   float: left;
+    margin-top: 10px;
+    width: 220px;
+}
+
+.home form input#parkname.parknamesearch
+{
+width: 155px;
 }
 
 .neighborhood .menu-box-item
@@ -715,3 +732,27 @@ html body div#uvTab
 {
 background-color: #0066B1 !important;
 }
+
+
+
+
+      .legend .grouphead {
+        font-weight: bold;
+      }
+      .legend .layername {
+        padding-left: 16px;
+      }
+      .legend .layersymbol {
+        font-weight: bold;
+        text-align: center;
+      }
+      .legend .layersymbol.rw, .legend .layername.rw { color: #cade6f; }
+      .legend .layersymbol.rb, .legend .layername.rb { color: #ffdb48; }
+      .legend .layersymbol.ct, .legend .layername.ct { color: #7f3193; }
+      .legend .layersymbol.bl, .legend .layername.bl { color: #0874b9; }
+      .legend .layersymbol.sl, .legend .layername.sl { color: #82c5ec; }
+      .legend .layersymbol.or, .legend .layername.or { color: #9dce6b; }
+      .legend .layersymbol.ip, .legend .layername.ip { color: #229848; }
+      .legend .layersymbol.up, .legend .layername.up { color: #845723; }
+      .legend .layersymbol.p, .legend .layername.p { color: #db813f; }
+      .legend .layersymbol.wt, .legend .layername.wt { color: #49c9f5; }

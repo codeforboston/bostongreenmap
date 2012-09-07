@@ -23,7 +23,7 @@
        </div>
         <div class="menu-box-inner bpa-hideable">
           <div class="menu-box-item">
-              <h2>Home or Start Address</h2>
+              <h2>Home or Start Address</h2> 
               <span id="origin_error" class="error">Please supply a starting address.</span>
               <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
               <h2>Saved Destinations</h2>
@@ -36,7 +36,7 @@
               <input id="transit_search" type="button" value="Transit Routes"> 
     <div id="trip_instructions"></div>
     <br> 
-  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="legend">Map Legend</a>
 
           </div>
         </div>
@@ -44,6 +44,93 @@
     </div>
   </div>
 </div>
+
+<div id="legendModal" style="display:none;background-color:#fff;">
+      <div class="modal-header">
+        <a class="button bClose close" data-dismiss="modal">×</a>
+        <h3>Map Legend</h3>
+      </div>
+      <div class="modal-body">
+        <table class="table legend">
+        <thead>
+          <tr>
+            <th>Map features</th>
+            <th class="layersymbol">Proposed</th>
+            <th class="layersymbol">Existing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="grouphead" colspan="3">Bicycle Facilities</td>
+          </tr>
+          <tr>
+            <td class="layername ct">Cycle Track</td>
+            <td class="layersymbol ct">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol ct">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="layername bl">Bike Lane</td>
+            <td class="layersymbol bl">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol bl">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="layername sl">Shared Lane</td>
+            <td class="layersymbol sl">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol sl">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="layername or">On-Road Route</td>
+            <td class="layersymbol or">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol or">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="grouphead" colspan="3">Shared-use paths (multi-use)</td>
+          </tr>
+          <tr>
+            <td class="layername ip">Improved Path</td>
+            <td class="layersymbol ip">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol ip">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="layername up">Unimproved Path</td>
+            <td class="layersymbol up">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol up">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="grouphead" colspan="3">Walking Facilities</td>
+          </tr>
+          <tr>
+            <td class="layername p">Walking path or trail</td>
+            <td class="layersymbol p">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol p">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="grouphead" colspan="3">Water Facilities</td>
+          </tr>
+          <tr>
+            <td class="layername wt">Water trail</td>
+            <td class="layersymbol wt">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol wt">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="grouphead" colspan="3">Regional networks</td>
+          </tr>
+          <tr>
+            <td class="layername rw">Regional or local walking trail</td>
+            <td class="layersymbol rw">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol rw">&ndash;&ndash;&ndash;</td>
+          </tr>
+          <tr>
+            <td class="layername rb">Regional bicycle route</td>
+            <td class="layersymbol rb">&ndash;&nbsp;&ndash;</td>
+            <td class="layersymbol rb">&ndash;&ndash;&ndash;</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+
 {% endblock %} 
 {% block javascript %}
     {{ block.super }}
@@ -139,6 +226,10 @@
        $("#id_end_address").val($.jStorage.get("destination_address",""));
 
        bp.adjust_layerswitcher();
+
+       $("#legend").click(function(){
+          $("#legendModal").bPopup();
+       });
 
     });
   

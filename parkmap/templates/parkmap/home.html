@@ -34,7 +34,8 @@
 	<div class="scrollable-wrapper">
 	<div class="menu-box-item">
 	    <h1> Find a Green Space</h1>
-	    <form method="get" action="">
+ <h4>By neighborhood or by name</h4>
+            <form method="get" action="">
 			<select id='neighborhood_only' name='town'>
 				<option SELECTED VALUE="">Select Your Neighborhood/Town</option>
 				{% for neighborhood in neighborhoods %}
@@ -43,6 +44,12 @@
 			</select>
 			<noscript><input type="submit" value="Submit"></noscript>
 			</form>
+			
+            <form method="POST" action="/explore/">
+                {% csrf_token %}
+                <input type="text" name="parkname" id="parkname" class="parknamesearch" placeholder="Park Name">
+                <input type="submit" value="Search">
+            </form>
 	    
 	</div>
 	
@@ -57,24 +64,6 @@
 	    </div>
 	  </a>
 	  
-	  <a href="/plan/">	  
-	     <div class="menu-box-item">
-			<h1>Plan a Trip</h1>
-			<h4>By Bike or Preplanned Routes</h4>
-	    </div>
-	    </a>
-	
-        <div class="menu-box-item">
-            <h1> Search by Park Name</h1>
-            <h4>Type in a park name to find it.</h4>
-            <form method="POST" action="/explore/">
-                {% csrf_token %}
-                <input type="text" name="parkname" id="parkname" class="parknamesearch" placeholder="Park Name">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-	
-
 
 
 <!--Stories-->
