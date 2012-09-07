@@ -45,7 +45,7 @@
 			<noscript><input type="submit" value="Submit"></noscript>
 			</form>
 			
-            <form method="POST" action="/explore/">
+            <form method="POST" action="/home-search/">
                 {% csrf_token %}
                 <input type="text" name="parkname" id="parkname" class="parknamesearch" placeholder="Park Name">
                 <input type="submit" value="Search">
@@ -144,21 +144,21 @@
 
             });
             
-			$("a.read").click(function(){
-				$(this).siblings(".storytext").toggle(400);
-				$('a.readless').show();
-				$('a.read').hide();
-			});    
-			$("a.readless").click(function(){
-				$(this).siblings(".storytext").toggle(400);
-				$('a.readless').hide();
-				$('a.read').show();
-			});
-			{% for story in stories %}
-				$("#story_{{story.id}} .flag").bind("click",function(){
-					$.get('/story/flag/{{story.id}}/');
-				});
-			{% endfor %}
+	    $("a.read").click(function(){
+	    	$(this).siblings(".storytext").toggle(400);
+	    	$('a.readless').show();
+	    	$('a.read').hide();
+	    });    
+	    $("a.readless").click(function(){
+	    	$(this).siblings(".storytext").toggle(400);
+	    	$('a.readless').hide();
+	    	$('a.read').show();
+	    });
+	    {% for story in stories %}
+	    	$("#story_{{story.id}} .flag").bind("click",function(){
+	    		$.get('/story/flag/{{story.id}}/');
+	    	});
+	    {% endfor %}
 			
 
         </script>      

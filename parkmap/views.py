@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 
 from django.template.defaultfilters import slugify
 from django.shortcuts import render_to_response, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
 from forms import StoryForm
 from django.template import RequestContext
@@ -220,3 +220,17 @@ Link to Admin: http://{domain}/admin/parkmap/story/{id}
 def policy(request):
     return render_to_response('parkmap/policy.html',
         {}, context_instance=RequestContext(request))
+
+
+def home_search(request):
+    if request.method == "POST":
+        parkname = request.POST.get("parkname",None)
+        if parkname:
+            parkname = slugify(parkname)
+            try:
+                park = Park.objects.get(slug=parkname)
+                if park:
+                    return HttpResponseRedirect("/park/%s/" % parkname)
+            except Park.DoesNotExist:
+                pass
+    return HttpResponseRedirect("/")
