@@ -734,25 +734,44 @@ background-color: #0066B1 !important;
 }
 
 
-
-
-      .legend .grouphead {
-        font-weight: bold;
-      }
-      .legend .layername {
-        padding-left: 16px;
-      }
-      .legend .layersymbol {
-        font-weight: bold;
-        text-align: center;
-      }
-      .legend .layersymbol.rw, .legend .layername.rw { color: #cade6f; }
-      .legend .layersymbol.rb, .legend .layername.rb { color: #ffdb48; }
-      .legend .layersymbol.ct, .legend .layername.ct { color: #7f3193; }
-      .legend .layersymbol.bl, .legend .layername.bl { color: #0874b9; }
-      .legend .layersymbol.sl, .legend .layername.sl { color: #82c5ec; }
-      .legend .layersymbol.or, .legend .layername.or { color: #9dce6b; }
-      .legend .layersymbol.ip, .legend .layername.ip { color: #229848; }
-      .legend .layersymbol.up, .legend .layername.up { color: #845723; }
-      .legend .layersymbol.p, .legend .layername.p { color: #db813f; }
-      .legend .layersymbol.wt, .legend .layername.wt { color: #49c9f5; }
+#header, #legend, #attribution {
+            font-family: Arial, "MS Trebuchet", sans-serif;
+            background: rgba(255, 255, 255, 0.7);
+            -moz-box-shadow: 0 0 7px #ccc;
+            -webkit-box-shadow: 0 0 7px #ccc;
+            box-shadow: 0 0 7px #ccc;
+        }
+        #header {
+            color: #07478e;
+            font-weight: bold;
+            text-align: right;
+            padding: 4px;
+            font-size: 16px;
+            position: fixed; 
+            top: 10px; 
+            right: 10px; 
+            z-index: 2;
+        }
+        #legend {
+            padding: 4px;
+        }
+        #legend, #attribution {
+            font-size: 11px;
+            position: fixed; 
+            bottom: 30px; 
+            left: 5px; 
+            z-index: 2;
+        }
+        #legend ul {
+            color: #333;
+            list-style-type: none;
+            padding: 4px 0;
+            margin: 0px;
+        }
+        .ct { color: #7f3193; } 
+        .bl { color: #0874b9; }
+        .sl { color: #82c5ec; }
+        .or { color: #9dce6b; }
+        .ip { color: #229848; }
+        .up { color: #845723; }
+        .wp { color: #db813f; }
