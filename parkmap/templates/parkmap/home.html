@@ -76,7 +76,11 @@
               <div class="flag-inapp flag"><i class="icon-flag icon-white hidden-phone"></i><i class="icon-flag visible-phone"></i>&nbsp;Flag as inppropriate</div>
               
               {% if story.title %}
-              <div class="storytitle">{{ story.title }}</div>
+              <div class="storytitle">
+               <a href="/park/{{story.park.slug}}/#{{story.id}}">
+                   {{ story.title }}
+                </a>
+              </div>
               {% endif %}
               <div class="storytext storyshort">
                 <a href="/park/{{story.park.slug}}/#{{story.id}}">{{ story.text|truncatewords:40 }}</a>

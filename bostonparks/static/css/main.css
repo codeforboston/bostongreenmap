@@ -491,9 +491,6 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 	padding-bottom: 4px;
 }
 
-
-
-
 .container-fluid.middle .newstory
 {
 	background-color: white;
@@ -630,11 +627,24 @@ a.sharestory
 .nostories { margin-bottom: 10px; }
 .home #stories { text-align: left; }
 .home .storytitle, .home .storytext { color: white; }
+
 .home .storytext a:link,
-.home .storytext a:visited
+.home .storytext a:visited,
+.home .storytitle a:link,
+.home .storytitle a:visited
 {
 color: white;
 }
+
+.home .storytext a:hover,
+.home .storytext a:active,
+.home .storytitle a:hover,
+.home .storytitle a:active
+{
+text-decoration: underline;
+}
+
+
 
 ul.errorlist
 {
