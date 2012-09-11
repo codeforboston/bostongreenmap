@@ -630,6 +630,11 @@ a.sharestory
 .nostories { margin-bottom: 10px; }
 .home #stories { text-align: left; }
 .home .storytitle, .home .storytext { color: white; }
+.home .storytext a:link,
+.home .storytext a:visited
+{
+color: white;
+}
 
 ul.errorlist
 {

@@ -42,7 +42,13 @@
         <li><a class="play" href="/park/play/">PLAY</a></li>
         <li><a class="explore" href="/explore/">EXPLORE</a></li>
         <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
-       <!--  <li><a class="login" href="#">LOGIN</a></li> -->
+        <li>
+        {% if request.user.is_authenticated %}
+        <a class="login" href="/accounts/logout/">LOGOUT</a>
+        {% else %}
+         <a class="login" href="/accounts/login/">LOGIN</a>
+       {% endif %}
+        </li>
         <li class="parent">
         <ul class="actions">
         
