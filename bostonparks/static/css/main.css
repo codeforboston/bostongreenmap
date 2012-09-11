@@ -774,7 +774,8 @@ background-color: #0066B1 !important;
             font-size: 11px;
             position: fixed; 
             bottom: 30px; 
-            left: 5px; 
+            right: 50px; 
+            text-align: left;
             z-index: 2;
         }
         #legend ul {
@@ -783,6 +784,15 @@ background-color: #0066B1 !important;
             padding: 4px 0;
             margin: 0px;
         }
+
+       #legend li hr
+       {
+        border-width: 2px 0;
+        float: left;
+        margin: 7px 4px 0 0;
+        width: 14px;
+       }    
+
         .ct { color: #7f3193; } 
         .bl { color: #0874b9; }
         .sl { color: #82c5ec; }
@@ -790,3 +800,11 @@ background-color: #0066B1 !important;
         .ip { color: #229848; }
         .up { color: #845723; }
         .wp { color: #db813f; }
+
+       .ct hr { border-color: #7f3193; } 
+        .bl hr { border-color: #0874b9; }
+        .sl hr { border-color: #82c5ec; }
+        .or hr { border-color: #9dce6b; }
+        .ip hr { border-color: #229848; }
+        .up hr { border-color: #845723; }
+        .wp hr { border-color: #db813f; }
