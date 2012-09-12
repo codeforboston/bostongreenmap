@@ -782,7 +782,7 @@ margin: 10px auto 0;
 }
 
 
-#header, #legend, #attribution {
+#header, /* #legend, */ #attribution {
             font-family: Arial, "MS Trebuchet", sans-serif;
             background: rgba(255, 255, 255, 0.7);
             -moz-box-shadow: 0 0 7px #ccc;
@@ -800,6 +800,7 @@ margin: 10px auto 0;
             right: 10px; 
             z-index: 2;
         }
+/*
         #legend {
             padding: 4px;
         }
@@ -811,12 +812,36 @@ margin: 10px auto 0;
             text-align: left;
             z-index: 2;
         }
+*/ 
         #legend ul {
             color: #333;
             list-style-type: none;
             padding: 4px 0;
             margin: 0px;
+             font-size: 11px;
+             text-align: left;
         }
+        
+
+
+.legwrap {
+    bottom: 20px;
+    position: fixed;
+    right: 40px;
+}
+
+
+.legwrap .menu-box-inner
+{
+padding: 10px;
+}
+
+.legwrap .menu-box-item
+{
+padding: 6px 10px;
+}
+
+
 
        #legend li hr
        {

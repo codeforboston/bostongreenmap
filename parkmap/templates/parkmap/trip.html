@@ -45,7 +45,14 @@
   </div>
 </div>
 
-<div id="legend">
+
+<!-- styled map legend -->
+<div class="legwrap">
+<div class="well menu-box clearfix">
+<div class="menu-box opacity">
+</div>
+<div class="menu-box-inner">
+<div id="legend" class="menu-box-item">
         <ul>
             <li class="ct"><hr> Cycle Track</li>
             <li class="bl"><hr> Bike Lane</li>
@@ -56,6 +63,15 @@
             <li class="wp"><hr> Walking path</li>
         </ul>
 </div>
+</div>
+</div>
+</div>
+<!-- end legend -->
+
+
+
+
+
 {% endblock %} 
 {% block javascript %}
     {{ block.super }}
