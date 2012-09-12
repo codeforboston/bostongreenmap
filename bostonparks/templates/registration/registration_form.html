@@ -1,6 +1,14 @@
 {% extends "parkmap/base.html" %}
+
+{% block title %}Password change successful{% endblock %}
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
+
 {% block content %}
-<div> Please fill out and submit the form below to register with MASSHealth.</div>
+<p> Please fill out and submit the form below to register for an account.</p>
 <form method="POST" action="">{% csrf_token %}
     <ul>
         {{ form.as_ul }}

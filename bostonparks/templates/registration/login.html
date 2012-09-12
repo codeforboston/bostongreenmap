@@ -1,4 +1,12 @@
 {% extends "parkmap/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
 {% block content %}
 <form method="POST" action="">{% csrf_token %}
     <ul>
@@ -6,4 +14,11 @@
     </ul>
     <input type="submit" value="Login" />
 <form>
+
+<div class="account_options">
+<a href="/accounts/password/reset/">Forgot Your Password?</a>
+
+<a href="/accounts/register/">Create A New Account</a>
+</div>
+
 {% endblock %}

@@ -749,6 +749,39 @@ background-color: #0066B1 !important;
 }
 
 
+/*  Account-related styles */
+.account .navbar
+{
+margin-bottom: 20px;
+}
+
+.account ul
+{
+list-style: none outside none;
+}
+
+.account_options
+{
+margin: 10px auto;
+}
+
+.account_options a
+{
+
+padding: 10px;
+}
+
+.account h1
+{
+color: #0066B1;
+}
+.account p
+{
+width: 400px;
+margin: 10px auto 0;
+}
+
+
 #header, #legend, #attribution {
             font-family: Arial, "MS Trebuchet", sans-serif;
             background: rgba(255, 255, 255, 0.7);

@@ -1,4 +1,9 @@
 {% extends "parkmap/base.html" %}
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
 {% block content %}
 {% if object_list.count %}
 {% if is_paginated %}

@@ -1,4 +1,9 @@
 {% extends "parkmap/base.html" %}
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
 {% block content %}
 <div>Edit your profile information.</div>
 <form method="POST" action="">{% csrf_token %}
