@@ -43,8 +43,12 @@
         <li><a class="explore" href="/explore/">EXPLORE</a></li>
         <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
         <li>
-        {% if request.user.is_authenticated %}
+        {% if user.is_authenticated %}
         <a class="login" href="/accounts/logout/">LOGOUT</a>
+           <ul class="hidden">
+              <li> Account Management </li>
+              <li> Change Password </li>
+           </ul>
         {% else %}
          <a class="login" href="/accounts/login/">LOGIN</a>
        {% endif %}

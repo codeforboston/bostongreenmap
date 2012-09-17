@@ -11,16 +11,16 @@ def load_stops():
     from mbta.models import MBTAStop
     from django.contrib.gis.geos import *
     headers = ["stop_id","stop_code","stop_name","stop_desc","stop_lat","stop_lon","zone_id","stop_url","location_type","parent_station"]
-    with open('/home/django/stops.csv', 'rb') as f:
+    with open('/home/django/MBTA_DATA/stops.csv', 'rb') as f:
         junk = f.next()
         reader = csv.reader(f)
         for row in reader:
             d_row = {}
             for i,val in enumerate(row):
                d_row[headers[i]] = val
-            stop = MBTAStop()
             x = 'SRID=%s;POINT(%s %s)' % (LAT_LONG, d_row['stop_lon'], d_row['stop_lat'])
             p = GEOSGeometry(x)
+            stop = MBTAStop.objects.get_or_create(lat_long=p, stop_id=d_row['stop_id'])
             p.transform(BOSTON) # Transform to this so that we can use in the boston area.
             stop.lat_long = p
             stop.stop_id = d_row['stop_id']
