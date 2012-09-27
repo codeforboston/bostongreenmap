@@ -52,6 +52,8 @@ urlpatterns = patterns('',
     url(r'^my_profile/$', 'profiles.views.edit_profile',
         name='my_profile'),
     url(r'^profiles/', include('profiles.urls')),
+    url(r'^login_redirect/$', 'accounts.views.login_redirect',
+        name='login_redirect'),
 
     url(r'^policy/$', 'parkmap.views.policy'),  # HOME
     url(r'^', include('parkmap.urls')),  # HOME

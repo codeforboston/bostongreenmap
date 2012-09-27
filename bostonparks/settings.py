@@ -3,7 +3,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-LOGIN_REDIRECT_URL = '/my_profile'
+LOGIN_REDIRECT_URL = '/login_redirect'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
