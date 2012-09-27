@@ -235,7 +235,38 @@ margin-left: 3px;
 .home .menu-box-item { margin: 0px 0 22px 0; }
 .menu-box-item form { margin-bottom: 10px; }
 
+.dropdown-menu a
+{
+text-align: left;
+}
+
 .home .menu-box-item { position: relative; }
+
+
+.home .footer 
+{
+    border-top: 1px solid #999999;
+    bottom: 10px;
+    left: 40px;
+    padding-top: 4px;
+    position: absolute;
+    right: 40px;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #cdcdcd;
+}
+
+.home .footer a:link,
+.home .footer a:visited {
+color: #ffffff;
+padding: 0 10px;
+
+}
+
+.home .footer a:hover,
+.home .footer a:active {
+color: #F8A300;
+}
 
 .container-fluid.middle
 {
@@ -341,7 +372,7 @@ width: 155px;
 .scrollable-wrapper
 {
 	position: absolute;
-	bottom: 30px;
+	bottom: 40px;
 	left: 40px;
 	right: 40px;
 	top: 30px;
@@ -474,11 +505,15 @@ ul#parklist.ui-sortable li h3 { padding-left: 25px; }
 .park .parkdesc p:first-child { margin: 0; }
 .policy .span12 { padding: 20px 0 0; }
 
+
 /* HIGHTLIGHT CURRENT PAGE */
+
 body.play .navbar .nav > li > a.play { color: yellow; }
 body.explore .navbar .nav > li > a.explore { color: yellow; }
 
+
 /* Park Stories */
+
 #stories h2
 {
 	color: #f8a300;
@@ -745,7 +780,7 @@ html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-bo
 
 html body div#uvTab
 {
-background-color: #0066B1 !important;
+background-color: #F8A300 !important;
 }
 
 
@@ -782,7 +817,7 @@ margin: 10px auto 0;
 }
 
 
-#header, /* #legend, */ #attribution {
+#header, #attribution {
             font-family: Arial, "MS Trebuchet", sans-serif;
             background: rgba(255, 255, 255, 0.7);
             -moz-box-shadow: 0 0 7px #ccc;
@@ -800,19 +835,8 @@ margin: 10px auto 0;
             right: 10px; 
             z-index: 2;
         }
-/*
-        #legend {
-            padding: 4px;
-        }
-        #legend, #attribution {
-            font-size: 11px;
-            position: fixed; 
-            bottom: 30px; 
-            right: 50px; 
-            text-align: left;
-            z-index: 2;
-        }
-*/ 
+
+ 
         #legend ul {
             color: #333;
             list-style-type: none;
