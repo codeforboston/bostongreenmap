@@ -1,9 +1,14 @@
 {% extends "parkmap/base.html" %}
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
 {% block content %}
-<h2>We're Sorry</h2>
+<h1>We're Sorry</h1>
 <div>The activation of your registration failed.  This could
 be because you have waited too long to activate.  Or if your
-account has already been activated, we can't aactivate it
+account has already been activated, we can't activate it
 again.  Or perhaps there was an error copying the activation
 key from the E-mail we sent (try again if you believe this
 is the problem).</div>.

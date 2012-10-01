@@ -89,7 +89,7 @@ a:active h4 { color: #666666; }
 
 .navbar .nav > li > a
 {
-	font-family: font-family: 'PT Sans',sans-serif;
+	font-family: 'PT Sans',sans-serif;
 	font-size: 18px;
 	line-height: 20px;
 	padding: 10px 15px 11px;
@@ -205,18 +205,16 @@ ul.nav ul.actions li a:active { color: #666; }
 	height: 100%;
 }
 
-.home select#neighborhood
-{
-margin-left: 3px;
-}
+.home select#neighborhood { margin-left: 3px; }
 
-.explore .menu-box-inner {
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    position: absolute;
-    right: 0;
-    top: 0;    
+.explore .menu-box-inner
+{
+	bottom: 0;
+	left: 0;
+	overflow: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .menu-box-item
@@ -234,39 +232,31 @@ margin-left: 3px;
 
 .home .menu-box-item { margin: 0px 0 22px 0; }
 .menu-box-item form { margin-bottom: 10px; }
-
-.dropdown-menu a
-{
-text-align: left;
-}
-
+.dropdown-menu a { text-align: left; }
 .home .menu-box-item { position: relative; }
 
-
-.home .footer 
+.home .footer
 {
-    border-top: 1px solid #999999;
-    bottom: 10px;
-    left: 40px;
-    padding-top: 4px;
-    position: absolute;
-    right: 40px;
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #cdcdcd;
+	border-top: 1px solid #999999;
+	bottom: 10px;
+	left: 40px;
+	padding-top: 4px;
+	position: absolute;
+	right: 40px;
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #cdcdcd;
 }
 
 .home .footer a:link,
-.home .footer a:visited {
-color: #ffffff;
-padding: 0 10px;
-
+.home .footer a:visited
+{
+	color: #ffffff;
+	padding: 0 10px;
 }
 
 .home .footer a:hover,
-.home .footer a:active {
-color: #F8A300;
-}
+.home .footer a:active { color: #F8A300; }
 
 .container-fluid.middle
 {
@@ -330,12 +320,11 @@ color: #F8A300;
 
 .explore .menu-box-item
 {
-position: absolute;
-top: 30px;
-left:30px;
-right: 30px;
-bottom: 30px;
-
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	right: 30px;
+	bottom: 30px;
 }
 
 .menu-box-item form select
@@ -346,15 +335,12 @@ bottom: 30px;
 
 .home .menu-box-item form select
 {
-   float: left;
-    margin-top: 10px;
-    width: 220px;
+	float: left;
+	margin-top: 10px;
+	width: 220px;
 }
 
-.home form input#parkname.parknamesearch
-{
-width: 155px;
-}
+.home form input#parkname.parknamesearch { width: 155px; }
 
 .neighborhood .menu-box-item
 {
@@ -391,10 +377,7 @@ width: 155px;
 	top: 50px;
 }
 
-#verticalscroll
-{
-top: 130px;
-}
+#verticalscroll { top: 130px; }
 
 .menu-box-item .menu-box-hotdog
 {
@@ -505,15 +488,11 @@ ul#parklist.ui-sortable li h3 { padding-left: 25px; }
 .park .parkdesc p:first-child { margin: 0; }
 .policy .span12 { padding: 20px 0 0; }
 
-
 /* HIGHTLIGHT CURRENT PAGE */
-
 body.play .navbar .nav > li > a.play { color: yellow; }
 body.explore .navbar .nav > li > a.explore { color: yellow; }
 
-
 /* Park Stories */
-
 #stories h2
 {
 	color: #f8a300;
@@ -632,8 +611,8 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 
 .newstory .rating_3 { background-image: url('/static/parkmap/img/ratings/rating-idea.jpg'); }
 .newstory .rating_0 { background-image: url('/static/parkmap/img/ratings/rating-good.jpg'); }
-.newstory .rating_1 { background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');  }
-.newstory .rating_2 { background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');  }
+.newstory .rating_1 { background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg'); }
+.newstory .rating_2 { background-image: url('/static/parkmap/img/ratings/rating-poor.jpg'); }
 .newstory .rating_0 label, .newstory .rating_1 label, .newstory .rating_2 label, .newstory .rating_3 label { font-size: 0; }
 
 .newstory p
@@ -662,24 +641,14 @@ a.sharestory
 .nostories { margin-bottom: 10px; }
 .home #stories { text-align: left; }
 .home .storytitle, .home .storytext { color: white; }
-
 .home .storytext a:link,
 .home .storytext a:visited,
 .home .storytitle a:link,
-.home .storytitle a:visited
-{
-color: white;
-}
-
+.home .storytitle a:visited { color: white; }
 .home .storytext a:hover,
 .home .storytext a:active,
 .home .storytitle a:hover,
-.home .storytitle a:active
-{
-text-decoration: underline;
-}
-
-
+.home .storytitle a:active { text-decoration: underline; }
 
 ul.errorlist
 {
@@ -742,8 +711,6 @@ input#walking_search, input#bike_search { background-color: #00DC00; }
 .home .flag-inapp { color: white; }
 .icon-flag { float: left; }
 
-
-
 .home #stories h2 a:link,
 .home #stories h2 a:visited
 {
@@ -757,8 +724,6 @@ input#walking_search, input#bike_search { background-color: #00DC00; }
 	text-decoration: none;
 	color: #F8A300;
 }
-
-
 
 html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:link,
 html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-box-inner div.scrollable-wrapper div#stories div div a.read:visited
@@ -774,119 +739,86 @@ html body.home div.container-fluid div.row-fluid div.span12 div.well div.menu-bo
 	color: #F8A300;
 }
 
-
-
 /*  Overwrite color on feedback tab */
-
-html body div#uvTab
-{
-background-color: #F8A300 !important;
-}
-
+html body div#uvTab { background-color: #F8A300 !important; }
 
 /*  Account-related styles */
-.account .navbar
-{
-margin-bottom: 20px;
-}
-
-.account ul
-{
-list-style: none outside none;
-}
-
-.account_options
-{
-margin: 10px auto;
-}
-
-.account_options a
-{
-
-padding: 10px;
-}
-
-.account h1
-{
-color: #0066B1;
-}
+.account .navbar { margin-bottom: 20px; }
+.account ul { list-style: none outside none; }
+.account_options { margin: 10px auto; }
+.account_options a { padding: 10px; }
+.account h1 { color: #0066B1; }
+.account a.btn { margin-top: 10px; }
 .account p
 {
-width: 400px;
-margin: 10px auto 0;
+	width: 400px;
+	margin: 10px auto 0;
 }
 
-
-#header, #attribution {
-            font-family: Arial, "MS Trebuchet", sans-serif;
-            background: rgba(255, 255, 255, 0.7);
-            -moz-box-shadow: 0 0 7px #ccc;
-            -webkit-box-shadow: 0 0 7px #ccc;
-            box-shadow: 0 0 7px #ccc;
-        }
-        #header {
-            color: #07478e;
-            font-weight: bold;
-            text-align: right;
-            padding: 4px;
-            font-size: 16px;
-            position: fixed; 
-            top: 10px; 
-            right: 10px; 
-            z-index: 2;
-        }
-
- 
-        #legend ul {
-            color: #333;
-            list-style-type: none;
-            padding: 4px 0;
-            margin: 0px;
-             font-size: 11px;
-             text-align: left;
-        }
-        
-
-
-.legwrap {
-    bottom: 20px;
-    position: fixed;
-    right: 40px;
-}
-
-
-.legwrap .menu-box-inner
+#header, #attribution
 {
-padding: 10px;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	background: rgba(255, 255, 255, 0.7);
+	-moz-box-shadow: 0 0 7px #ccc;
+	-webkit-box-shadow: 0 0 7px #ccc;
+	box-shadow: 0 0 7px #ccc;
 }
 
-.legwrap .menu-box-item
+#header
 {
-padding: 6px 10px;
+	color: #07478e;
+	font-weight: bold;
+	text-align: right;
+	padding: 4px;
+	font-size: 16px;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	z-index: 2;
 }
 
+#legend ul
+{
+	color: #333;
+	list-style-type: none;
+	padding: 4px 0;
+	margin: 0px;
+	font-size: 11px;
+	text-align: left;
+}
 
+.legwrap
+{
+	bottom: 20px;
+	position: fixed;
+	right: 40px;
+}
 
-       #legend li hr
-       {
-        border-width: 2px 0;
-        float: left;
-        margin: 7px 4px 0 0;
-        width: 14px;
-       }    
+.legwrap .menu-box-inner { padding: 10px; }
+.legwrap .menu-box-item { padding: 6px 10px; }
 
-        .ct { color: #7f3193; } 
-        .bl { color: #0874b9; }
-        .sl { color: #82c5ec; }
-        .or { color: #9dce6b; }
-        .ip { color: #229848; }
-        .up { color: #845723; }
-        .wp { color: #db813f; }
+#legend li hr
+{
+	border-width: 2px 0;
+	float: left;
+	margin: 7px 4px 0 0;
+	width: 14px;
+}
 
-       .ct hr { border-color: #7f3193; } 
-        .bl hr { border-color: #0874b9; }
-        .sl hr { border-color: #82c5ec; }
-        .or hr { border-color: #9dce6b; }
-        .ip hr { border-color: #229848; }
-        .up hr { border-color: #845723; }
-        .wp hr { border-color: #db813f; }
+.ct { color: #7f3193; }
+.bl { color: #0874b9; }
+.sl { color: #82c5ec; }
+.or { color: #9dce6b; }
+.ip { color: #229848; }
+.up { color: #845723; }
+.wp { color: #db813f; }
+.ct hr { border-color: #7f3193; }
+.bl hr { border-color: #0874b9; }
+.sl hr { border-color: #82c5ec; }
+.or hr { border-color: #9dce6b; }
+.ip hr { border-color: #229848; }
+.up hr { border-color: #845723; }
+.wp hr { border-color: #db813f; }
+li.dropdown-submenu { position: relative; }
+a.dropdown-toggle { cursor: pointer; }
+
