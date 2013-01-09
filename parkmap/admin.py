@@ -6,7 +6,7 @@ from parkmap.models import Facility, Neighborhood, Park, Activity, Event, Parkty
 # default GeoAdmin overloads
 admin.GeoModelAdmin.default_lon = -7912100
 admin.GeoModelAdmin.default_lat = 5210000
-admin.GeoModelAdmin.default_zoom = 12
+admin.GeoModelAdmin.default_zoom = 11
 
 
 class ParkAdmin(admin.OSMGeoAdmin):
@@ -18,6 +18,8 @@ class ParkAdmin(admin.OSMGeoAdmin):
 
 
 class FacilityAdmin(admin.OSMGeoAdmin):
+    search_fields = ['name', 'park__name']
+    exclude = ('park',)
     list_display = ['name', 'activity_string', 'facilitytype', 'parktype_string']
     list_filter = ('activity', )
 
