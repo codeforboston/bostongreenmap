@@ -792,6 +792,7 @@ html body div#uvTab { background-color: #F8A300 !important; }
 	bottom: 20px;
 	position: fixed;
 	right: 40px;
+	z-index: 50;
 }
 
 .legwrap .menu-box-inner { padding: 10px; }
