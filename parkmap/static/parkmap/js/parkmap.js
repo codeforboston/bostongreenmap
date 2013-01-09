@@ -30,7 +30,7 @@ var bp = {
       zoom: 13,
       center: new google.maps.LatLng (42.307733,-71.09713),  //NEW: Franklin Park OLD: (42.31, -71.032), boston
       minZoom: 10,
-      maxZoom: 17,
+      maxZoom: 40,
       mapTypeControlOptions: {
         position: google.maps.ControlPosition.TOP_RIGHT,
         mapTypeIds: [basemap, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE], //,
@@ -310,7 +310,9 @@ var bp = {
             activity_string: facility["activity_string"],
             description: facility['description'],
             admin_url: facility["admin_url"],
-            park_slug: facility['park_slug']
+            park_slug: facility['park_slug'],
+            notes: facility["notes"],
+            access: facility["access"]
           })
 
        });
@@ -353,7 +355,18 @@ var bp = {
           //        we're now making one API call per park, not ideal for many parks...
           facilityfilter["park"] = park["id"];
           if (bp.mapconf["showfacilities"] ) bp.loadfacilities(facilityfilter);
-
+           
+          // 
+          if (bp.render_mbta_stops){
+              $.getJSON('/api/v1/mbta/',
+                {'format':'json','park_slug':park['slug']},
+                function(data){
+                    var stops = data['objects'];
+                    $.each(stops, function(x,stop){
+                        bp.rendermbta(stop['lat_long'], {'name':stop['stop_name']});
+                    });
+              });
+          }
         });
     });
   },
@@ -386,6 +399,7 @@ var bp = {
   loadfacilities: function(facilityfilter) {
 
     facilityfilter["format"] = "json";
+    facilityfilter["limit"] = "1000";
 
     $.getJSON('/api/v1/facility/',
       facilityfilter,
@@ -396,6 +410,8 @@ var bp = {
           // add facilities to map
           bp.renderfacility(facility["geometry"], {
             icon: facility["icon"],
+            notes: facility["notes"],
+            access: facility["access"],
             name: facility["name"],
             activity_string: facility["activity_string"],
             admin_url: facility["admin_url"],
@@ -460,9 +476,17 @@ var bp = {
     // track overlay
     bp.overlays.push(facilitymarker);
     // marker infowindow
+    var extra = "";
+    if (properties['notes']){
+        extra += "<div>"+properties['notes']+"</div>";
+    }
+    if (properties['access']){
+        extra += "<div>"+properties['access']+"</div>";
+    }
     var facilityinfocontent = "<div class='iwindow'><h2>" + properties["name"] + "</h2>" +
                               "Activities: " + properties["activity_string"] + "</div>" + 
                               "<div>"+properties['description']+"</div>" +
+                              extra + 
                               "<strong><a href='/park/" + properties['park_slug']+"/'>" + "Learn more about this park" + "</a></strong>" ;
     if (typeof staff !== 'undefined' && staff === true) {
       facilityinfocontent += "<br><a href='" + properties["admin_url"] + "'>Edit</a>";
@@ -470,6 +494,26 @@ var bp = {
     google.maps.event.addListener(facilitymarker, 'click', function() {
       bp.sharedinfowindow.setContent(facilityinfocontent);
       bp.sharedinfowindow.open(bp.map, facilitymarker);
+    });
+  },
+  rendermbta: function(geometry, properties) {
+    // marker with custom icon
+    var mbta_icon = '/static/img/tx16.png';
+    var mbta_latlng = new google.maps.LatLng(geometry["coordinates"][1], geometry["coordinates"][0]);
+    var mbta_marker = new google.maps.Marker({
+      position: mbta_latlng,
+      title: properties["name"],
+      map: bp.map,
+      icon: mbta_icon
+    });
+    // track overlay
+    bp.overlays.push(mbta_marker);
+    // marker infowindow
+    var mbta_infocontent = properties["name"];
+
+    google.maps.event.addListener(mbta_marker, 'click', function() {
+      bp.sharedinfowindow.setContent(mbta_infocontent);
+      bp.sharedinfowindow.open(bp.map, mbta_marker);
     });
   },
 
@@ -520,11 +564,19 @@ var bp = {
         })
         .html(bp.titlecase("Select Your " + modelclass));
         dropdown.append(titleoption)
+
+        var alloption = $("<option />", {
+          "value": "all"
+        })
+        .html(bp.titlecase("All"));
+        dropdown.append(alloption)
+
         $.each(data.objects, function(key, obj) {
           var option = $("<option />", {
             value: obj["id"]
           })
           .data("slug", obj["slug"])
+          .data("id", obj["id"])
           .html(obj["name"]);
           dropdown.append(option);
         });
@@ -549,7 +601,10 @@ var bp = {
         var selected = $(dd[previous], "option:selected").val();
         var filter = {};
 
-        if ($(this).val() !== "") filter[$(dropdown).attr("id")] = $(this).val();
+        if ($(this).val() !== ""){
+            // It's the "select" option.
+            filter[$(dropdown).attr("id")] = $(this).val();
+        }
 
         var container = $(dropdown).parent();
 
@@ -700,7 +755,10 @@ var bp = {
       return coords;
   },
 
-  trip_generate_obj: function(start,stop,mode){
+  trip_generate_obj: function(start, stop, mode, offset){
+      offset = offset || 0; // if no offset, set to 0;
+      if (offset < 0) offset = 0;
+
       var coords = bp.get_coords();
       var waypoints  = [];
       if(stop == ""){
@@ -735,37 +793,94 @@ var bp = {
       });
       directionsDisplay.setMap(bp.map);
 
-          // Only calculate a route if they have waypoints.
-          var directionDisplay; 
-          var directionsService = new google.maps.DirectionsService(); 
-          if(mode == "bicycling"){
-              mode = google.maps.DirectionsTravelMode.BICYCLING;
-          } else {
-              mode = google.maps.DirectionsTravelMode.WALKING;
-          }
-          var request;
+      // Only calculate a route if they have waypoints.
+      var directionDisplay; 
+      var directionsService = new google.maps.DirectionsService(); 
+
+      if(mode == "bicycling"){
+          mode = google.maps.DirectionsTravelMode.BICYCLING;
+      } else if (mode == "transit"){
+          mode = google.maps.DirectionsTravelMode.TRANSIT;
           if(waypoints.length > 0){
-              request = { 
-                  origin:start,  
-                  destination:stop, 
-                  waypoints:waypoints,
-                  travelMode:mode,
-                  provideRouteAlternatives: false
-              }; 
-          } else {
-              request = { 
-                  origin:start,  
-                  destination:stop, 
-                  travelMode:mode, 
-                  provideRouteAlternatives: false
-              }; 
+              var start_stop = bp.get_transit_start_stop(start, stop, waypoints, offset);
+              start = start_stop[0];
+              if (typeof(start) == "object"){
+                  start = start.location;
+              }
+              stop = start_stop[1];
+              if (typeof(stop) == "object"){
+                  stop = stop.location;
+              }
+              waypoints = [];
+              offset = start_stop[2];
           }
-          directionsService.route(request, function(response, status) { 
-            if (status == google.maps.DirectionsStatus.OK) { 
-               directionsDisplay.setDirections(response);
-            } 
-          });
-  }
+      } else {
+          mode = google.maps.DirectionsTravelMode.WALKING;
+      }
+      var request;
+      if(waypoints.length > 0){
+          request = { 
+              origin:start,  
+              destination:stop, 
+              waypoints:waypoints,
+              travelMode:mode,
+              provideRouteAlternatives: false
+          }; 
+      } else {
+          request = { 
+              origin:start,  
+              destination:stop, 
+              travelMode:mode, 
+              provideRouteAlternatives: false
+          }; 
+      }
+
+
+
+
+      directionsService.route(request, function(response, status) { 
+        if (status == google.maps.DirectionsStatus.OK) { 
+           directionsDisplay.setDirections(response);
+           var dirs = directionsDisplay.getDirections();
+           var instructions = [];
+           $.each(dirs['routes']['0']['legs'][0]['steps'], function(key, obj) {
+               instructions[instructions.length] = "<li>" + obj['instructions'] + "</li>";
+           });
+           instructions = instructions.join("");
+           $("#trip_instructions").html("<ol>"+ instructions + "</ol>");
+        } else {  
+            console.log(request);
+            console.log(status);
+        }
+      });
+      return offset;
+  },
+  get_transit_start_stop: function(start,stop,waypoints,offset){
+    if (offset < 0) {
+        offset = 0;
+    }
+    if (offset < waypoints.length -2) {
+        offset = waypoints.length;
+    }
+    if (waypoints.length > 0){
+        waypoints.unshift(start);
+        if(stop != null){
+            waypoints[waypoints.length] = stop;
+        }
+        start = waypoints[offset];
+        if (offset+1 > waypoints.length){
+            stop = waypoints[waypoints.length - 1];
+        } else {
+            stop = waypoints[offset +1];
+        }
+    }
+    offset += 1;
+    if (offset == waypoints.length -1){
+        offset = 0;
+    }
+    return [start, stop, offset];
+  },
+  render_mbta_stops:false // This needs to be true on every page where you want MBTA stops to show up.
 }
 
 

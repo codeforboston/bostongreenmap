@@ -1,5 +1,6 @@
 {% extends 'parkmap/base.html' %}
 {% load markup %}
+{% load thumbnail %}
 {% load humanize %}
 
 {% block title %}{{park.name}}{% endblock %}
@@ -63,6 +64,15 @@
              <p><a href="{{ park.friendsgroup.url }}">{{park.friendsgroup.name}}</a></p>
              {% endif %} 
 
+             {% comment %}
+                 <!-- Hiding any MBTA stops because they are on the map now. -->
+             <h5>MBTA Stops</h5>
+             <ul>
+                 {% for stop in stops %}
+                 <li>{{stop.stop_name}}</li>
+                 {% endfor %}
+             </ul>
+             {% endcomment %}
              <h5>Upcoming events</h5>
              <ul>
                                  {% for event in park.events.all %}
@@ -88,6 +98,11 @@
         </div><!--/span-->
             
         <div class="span2">
+              {% if park.image %}
+              {% thumbnail park.image "150" crop="center" as im %}
+                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}<br>
+              {% endif %}
           <div class="well">
               <input type="button" id="tripadd_{{park.id}}" name="add-trip" value="Add to Trip" />
           </div><!--/.well -->
@@ -108,7 +123,7 @@
             <div class="rating_{{ story.rating }}">
             <div class="flag-inapp flag"></i><i class="icon-flag"></i>&nbsp;Flag as inppropriate</div>
               {% if story.title %}
-              <div class="storytitle">{{ story.title }}</div>
+              <div class="storytitle"><a name="{{story.id}}"></a>{{ story.title }}</div>
               {% endif %}
               <div class="storytext storyshort">
                 {{ story.text|markdown|truncatewords:40 }}
@@ -128,6 +143,7 @@
         <div>
             <a class="sharestory" href="#ns">Share Your Story</a> <a href="/policy/" name='ns'>Data Disclaimer | Terms of Service</a></div>
             <div class="newstory hide">
+            {% if request.user.is_authenticated %}
                 <form id="new_story" action="" method="POST">
                     {% csrf_token %}
                     <div>
@@ -135,6 +151,9 @@
                     <input type="submit" value="Submit Your Story">
                     </div>
                 </form> 
+            {% else %}
+             Please <a href="/accounts/login/?next=/park/{{park.slug}}/">login</a> to submit a story.
+            {% endif %}
             </div>
         </div>
      </div>     
@@ -147,6 +166,7 @@
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript">
+    bp.render_mbta_stops = true;
 
         bp.parkfilter = {
             "id": "{{ park.id }}"
@@ -169,15 +189,18 @@ $(function() {
     $("label[for='id_rating_1']").closest('li').addClass('rating_1');
     $("label[for='id_rating_2']").closest('li').addClass('rating_2');
     $("label[for='id_rating_3']").closest('li').addClass('rating_3');
+
     $("a.read").click(function(){
         $(this).siblings(".storytext").toggle(400);
-        $('a.readless').show();
-        $('a.read').hide();
+        $(this).siblings(".storytext").css('background-color','');
+        $(this).siblings('.readless').show();
+        $(this).hide();
     });    
     $("a.readless").click(function(){
         $(this).siblings(".storytext").toggle(400);
-        $('a.readless').hide();
-        $('a.read').show();
+        $(this).siblings(".storytext").css('background-color','');
+        $(this).hide();
+        $(this).siblings('.read').show();
     });
     $("a.sharestory").click(function(){
         $(".newstory").slideToggle('slow', function() {
@@ -258,6 +281,18 @@ $(function() {
         .complete(function() { console.log("complete"); });
 
     });
+
+
+    //When coming in from the main story page, hilight the story
+    if (location.hash.length > 0){
+        var story_id = location.hash.substring(1);
+        $('#story_'+story_id+' .storytext').toggle()
+        $('#story_'+story_id+' a.readless').show();
+        $('#story_'+story_id+' a.read').hide();
+        $('#story_'+story_id).css('background-color','oldLace');
+        $('#story_'+story_id).css('padding','6px 6px');
+    }
+
 
 });
 

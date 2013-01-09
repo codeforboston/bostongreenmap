@@ -2,8 +2,14 @@ from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 from tastypie.cache import SimpleCache
 import datetime
 from tastypie import fields
+from sorl.thumbnail import get_thumbnail
+from django.shortcuts import get_object_or_404
 
 
+
+from django.conf import settings
+from django.contrib.gis.measure import D
+from mbta.models import MBTAStop
 from api.tastyhacks import EncodedGeoResource, GeoResource
 from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
 
@@ -24,7 +30,10 @@ class NeighborhoodResource(ModelResource):
             filters = {}
         orm_filters = super(NeighborhoodResource, self).build_filters(filters)
         if  "activity" in filters:
-            neighborhoods = get_neighborhoods(filters['activity'])
+            if filters['activity'] == 'all':
+                neighborhoods = Neighborhood.objects.all()
+            else:
+                neighborhoods = get_neighborhoods(filters['activity'])
             queryset = Neighborhood.objects.filter(pk__in=neighborhoods)
             orm_filters = {"pk__in": [i.id for i in queryset]}
         return orm_filters
@@ -95,6 +104,9 @@ class ParkResource(EncodedGeoResource):
             facilities = Facility.objects.filter(facilitytype__in=fts).select_related()
             park_facility_ids = [f.park.id for f in facilities if f.park]
 
+            if not facilities:
+                return {'pk__in':[]}
+
             if filters['neighborhoods'] == "all":
                 parks = Park.objects.filter(pk__in=park_facility_ids)
             else:
@@ -103,6 +115,8 @@ class ParkResource(EncodedGeoResource):
 
             if parks:
                 orm_filters = {"pk__in": [p.id for p in parks]}
+                return orm_filters
+            return {'pk__in':[]}
 
         if "neighborhood" in filters and \
            "activity" in filters:
@@ -116,15 +130,13 @@ class ParkResource(EncodedGeoResource):
            "activity_ids" in filters:
             parks = filter_explore_park(filters)
             orm_filters = {"pk__in": [i.id for i in parks]}
-
-
-
-
+            return orm_filters
         return orm_filters
 
     def dehydrate(self, bundle):
         bundle.obj.geometry.transform(4326)
         bundle.data['lat_long'] = bundle.obj.lat_long()
+        bundle.data['thumb'] = bundle.obj.parkimage_thumb()
         return bundle
 
 
@@ -159,7 +171,7 @@ class FacilityResource(GeoResource):
     facilitytype = fields.ToOneField(FacilitytypeResource, 'facilitytype')
 
     class Meta:
-        queryset = Facility.objects.transform(4326).filter(park__isnull=False)
+        queryset = Facility.objects.transform(4326).filter(park__isnull=False).order_by('id')
         allowed_methods = ['get', ]
         resource_name = 'facility'
         cache = SimpleCache()
@@ -177,6 +189,8 @@ class FacilityResource(GeoResource):
         else: 
             desc=""
         bundle.data['description'] = desc
+        bundle.data['notes'] = bundle.obj.notes
+        bundle.data['access'] = bundle.obj.access
         bundle.data['park_slug'] = bundle.obj.park.slug
         return bundle
 
@@ -278,6 +292,31 @@ class ExploreFacilityResource(GeoResource):
         return orm_filters
 
 
+class MBTAResource(GeoResource):
+
+    class Meta:
+        queryset = MBTAStop.objects.transform(4326).all()
+        allowed_methods = ('get',)
+        cache = SimpleCache()
+        excludes = ('stop_url','parent_station','stop_desc','zone_id','stop_code','location_type')
+
+    def build_filters(self, filters=None):
+        if filters is None:
+            filters = {}
+
+        orm_filters = super(MBTAResource, self).build_filters(filters)
+        if "park_slug" in filters:
+            try:
+                park = Park.objects.get(slug=filters['park_slug'])
+            except Park.DoesNotExist:
+                # If the slug is incorrect, return no results.
+                return {"pk__in":[]}
+
+            # return all Stops within X Miles
+            stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE)))
+            orm_filters = {"pk__in": [i.id for i in stops]}
+        return orm_filters
+
 
 
 
@@ -292,6 +331,7 @@ class EntryResource(ModelResource):
     explorefacility = fields.ForeignKey(ExploreFacilityResource, 'explorefacility')
     exploreactivity = fields.ForeignKey(ExploreActivityResource, 'exploreactivity')
     parkname = fields.ForeignKey(ParkNameResource, 'parkname')
+    mbta = fields.ForeignKey(MBTAResource, 'mbta')
 
     class Meta:
         queryset = Neighborhood.objects.all()
@@ -329,14 +369,18 @@ def get_activities(neighborhood_id):
     """
     Get all activitty ids that are in a neighborhood.
     """
-    neighborhood = Neighborhood.objects.get(id=neighborhood_id)
-    parks = Park.objects.filter(geometry__intersects=neighborhood.geometry)
-    facilities = []
-    for park in parks:
-        facilities.extend(park.facility_set.all())
-    activities = []
-    for fac in facilities:
-        activities.extend(fac.activity.all())
+    if neighborhood_id == 'all':
+        activities = Activity.objects.all()
+    else:
+        neighborhood = Neighborhood.objects.get(id=neighborhood_id)
+        parks = Park.objects.filter(geometry__intersects=neighborhood.geometry)
+        facilities = []
+        for park in parks:
+            facilities.extend(park.facility_set.all())
+        activities = []
+        for fac in facilities:
+            activities.extend(fac.activity.all())
+
     return list(set([a.id for a in activities]))
 
 

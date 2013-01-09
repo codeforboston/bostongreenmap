@@ -16,6 +16,7 @@ urlpatterns = patterns('parkmap.views',
     url(r'^neighborhood/(?P<n_slug>[-\w]+)/$', 'neighborhood', name='neighborhood'),  # A
 
     url(r'^plan/$', 'plan_a_trip', name='plan_a_trip'),  # A
+    url(r'^home-search/$', 'home_search', name='home_search'),  # A
     #url(r'^plan/count/$', 'count_trip_queue', name='count_trip_queue'),  # A
     #url(r'^plan/addremove/(?P<park_id>\d+)/$', 'add_remove_park_trip_planning', name='add_remove_park_trip_planning'),  # A
     #url(r'^plan/check/(?P<park_id>\d+)/$', 'check_park_in_trip', name='check_park_in_trip'),  # A

@@ -1,16 +1,19 @@
 # Views for Parkmap
 from django.contrib.sites.models import Site
 
+from django.contrib.gis.measure import D
 import json
 from django.utils import simplejson
 from django.core.mail import send_mail
 
-from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.template.defaultfilters import slugify
+from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from parkmap.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Story, Facilitytype
 from forms import StoryForm
 from django.template import RequestContext
 from django.conf import settings
+from mbta.models import MBTAStop
 
 
 import cgpolyencode
@@ -40,10 +43,12 @@ def get_list():
 #Home page
 def home_page(request):
     parks, facilities, neighborhoods = get_list()
+    all_parks = Park.objects.all().order_by('name')
     activities = Activity.objects.all()
     stories = Story.objects.all().order_by('-date')[:6]
     return render_to_response('parkmap/home.html', {
         'parks': parks,
+        'all_parks': all_parks,
         'facilities': facilities,
         'activities': activities,
         'neighborhoods': neighborhoods,
@@ -57,6 +62,7 @@ def parks_page(request, park_slug):
     coordinates = simplejson.loads(park.geometry.geojson)
     map = encoder.encode(coordinates['coordinates'][0][0])
     stories = Story.objects.filter(park=park).order_by("-date")
+    #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -66,12 +72,13 @@ def parks_page(request, park_slug):
             f = StoryForm()
     else:
         f = StoryForm()
-            
     return render_to_response('parkmap/park.html',
         {'park': park,
          'map': map,
+         #'stops': stops,
          'story_form': f,
          'stories': stories,
+         'request': request,
          'acres': park.geometry.area * 0.000247,
         },
         context_instance=RequestContext(request)
@@ -112,9 +119,12 @@ def get_n_p_with_a(n_slug, a_slug):
     Get parks in a neighborhood that have the specific activity for any of its facilities
     if no request is passed, returns neighborhood and the parks
     """
-    n = get_object_or_404(Neighborhood, slug=n_slug)
     a = get_object_or_404(Activity, slug=a_slug)
     fac = Facility.objects.filter(activity=a)
+    if n_slug == 'all':
+        n = Neighborhood.objects.all()
+    else:
+        n = get_object_or_404(Neighborhood, slug=n_slug)
     facility_ids = []
     for f in fac:
         facility_ids.append(f.id)
@@ -151,9 +161,10 @@ def events(request, event_id, event_name):
 
 
 def explore(request):  # Activity slug, and Neighborhood slug
+    parkname = request.POST.get('parkname',None)
     neighborhoods = Neighborhood.objects.all().order_by('name')
     #activities = Activity.objects.all().order_by('name')
-    #parktypes = Parktype.objects.all().order_by('name')
+    parks = Park.objects.all().order_by('name')
     facilitytypes = Facilitytype.objects.all().order_by('name')
     neighborhood_slug = request.GET.get('neighborhood', None)
     neighborhood = None
@@ -163,6 +174,8 @@ def explore(request):  # Activity slug, and Neighborhood slug
         'neighborhoods': neighborhoods,
         'neighborhoodpassed': neighborhood,
         'facilitytypes':facilitytypes,
+        'parks':parks,
+        'parkname':parkname,
         }
     return render_to_response('parkmap/explore.html',
         response_d,
@@ -207,4 +220,17 @@ Link to Admin: http://{domain}/admin/parkmap/story/{id}
 def policy(request):
     return render_to_response('parkmap/policy.html',
         {}, context_instance=RequestContext(request))
-    
+
+
+def home_search(request):
+    if request.method == "POST":
+        parkname = request.POST.get("parkname",None)
+        if parkname:
+            parkname = slugify(parkname)
+            try:
+                park = Park.objects.get(slug=parkname)
+                if park:
+                    return HttpResponseRedirect("/park/%s/" % parkname)
+            except Park.DoesNotExist:
+                pass
+    return HttpResponseRedirect("/")

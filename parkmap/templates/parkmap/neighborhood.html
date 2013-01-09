@@ -29,7 +29,7 @@
                         {% for park in parks %} 
                         <div class="neighborhood-park">
                         <h4>
-                            <a href="/park/{{park.slug}}">{{park.name}}</a></h4>
+                            <input type='button' id='tripadd_{{park.id}}' class='add-trip-button' name='add-trip' value='Add to Trip' alt='{{park.name}}' style="float:right;"/><a href="/park/{{park.slug}}">{{park.name}}</a></h4>
                             {% comment %}{% if park.description %}<span class="park_description">{{  park.description|truncatewords:30 }}</span><br>{% endif %}{% endcomment %}
                             {% for facility in park.facility_set.all %}
                             <a class="facility-icon" href="/park/{{park.slug}}" rel="tooltip" data-original-title="{{ facility.name }}"><img src="{{ facility.icon_url }}" alt="{{ facility.name }}"></a>
@@ -70,6 +70,10 @@
 
         $(function() {
             bp.adjust_layerswitcher();
+ 
+            {% for park in parks %}
+            bp.park_trip_button_bind({{park.id}},false); bp.check_park_in_queue({{park.id}}); // Display the trip functionality. adding/removing
+            {% endfor %}
         });
     
     </script>

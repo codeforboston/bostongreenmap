@@ -23,7 +23,7 @@
        </div>
         <div class="menu-box-inner bpa-hideable">
           <div class="menu-box-item">
-              <h2>Home or Start Address</h2>
+              <h2>Home or Start Address</h2> 
               <span id="origin_error" class="error">Please supply a starting address.</span>
               <input type="text" id="id_home_address" placeholder="1 Main St, Boston, MA 02111">
               <h2>Saved Destinations</h2>
@@ -31,10 +31,12 @@
 	      </ul><input type="button" value="Clear All" id="clear_all">
               <h2>Stop Address</h2>
               <input type="text" id="id_end_address" placeholder="(optional) 1 Main St, Boston, MA 02111">
-              <input id="walking_search" type="button" value="View Walking Routes"> 
-              <input id="bike_search" type="button" value="View Bicycling Routes">
+              <input id="walking_search" type="button" value="Walking Routes"> 
+              <input id="bike_search" type="button" value="Bicycling Routes">
+            {% comment %}  <input id="transit_search" type="button" value="Transit Routes"> {% endcomment %}
+    <div id="trip_instructions"></div>
     <br> 
-  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span>
+  <span id="minimizer" class="bpa-hide" ><i id="bpahideimg" class="icon-resize-small"></i>&nbsp;&nbsp;Minimize&nbsp;Window</span> 
 
           </div>
         </div>
@@ -42,26 +44,55 @@
     </div>
   </div>
 </div>
+
+
+<!-- styled map legend -->
+<div class="legwrap">
+<div class="well menu-box clearfix">
+<div class="menu-box opacity">
+</div>
+<div class="menu-box-inner">
+<div id="legend" class="menu-box-item">
+        <ul>
+            <li class="ct"><hr> Cycle Track</li>
+            <li class="bl"><hr> Bike Lane</li>
+            <li class="sl"><hr> Shared Lane</li>
+            <li class="or"><hr> On-road route</li>
+            <li class="ip"><hr> Improved path</li>
+            <li class="up"><hr> Unmproved path</li>
+            <li class="wp"><hr> Walking path</li>
+        </ul>
+</div>
+</div>
+</div>
+</div>
+<!-- end legend -->
+
+
+
+
+
 {% endblock %} 
 {% block javascript %}
     {{ block.super }}
 <script>
     var park_trip_list;
+    var offset = 0;
     $(document).ready(function(){
         $("#origin_error").hide();
         bp.trip_generate_list();
-        $('#neighborhood_activity').bind("keypress change",(function() {
-            if ($(this).val() != ""){
-                //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
-                update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
-            }
-        }));
-        $('#neighborhood_neighborhood').bind("keypress change",(function() {
-            play_get_parks(0);
-        }));
+        //$('#neighborhood_activity').bind("keypress change",(function() {
+        //    if ($(this).val() != ""){
+        //        //update_neighborhood( $(this).val(),"neighborhood_activity", 1);
+        //        update_second_dropdown('neighborhood', 'activity', $(this).val(),'slug');
+        //    }
+        //}));
+        //$('#neighborhood_neighborhood').bind("keypress change",(function() {
+        //    play_get_parks(0);
+        //}));
 
         $("#parklist").sortable({
-            'update':function(event,ui){bp.reorder_trip_list();}
+            'update':function(event,ui){bp.reorder_trip_list(); offset = 0;}
         });
         $("#parklist").disableSelection();
 
@@ -83,7 +114,21 @@
         
 
 
+       $("#transit_search").bind("click", function(event){
+           var start = $("#id_home_address").val();
+           var stop = $("#id_end_address").val();
+           if (start.length > 0){
+               $("#origin_error").hide();
+               var coords = bp.get_coords();
+               offset = bp.trip_generate_obj(start,stop,"transit", offset);
+           } else {
+               $("#origin_error").show();
+           }
+       });
+
+
        $("#walking_search").bind("click", function(event){
+           offset = 0;
            var start = $("#id_home_address").val();
            var stop = $("#id_end_address").val();
            if (start.length > 0){
@@ -95,6 +140,7 @@
        });
 
        $("#bike_search").bind("click", function(event){
+           offset = 0;
            var start = $("#id_home_address").val();
            var stop = $("#id_end_address").val();
            if (start.length > 0){
@@ -110,15 +156,18 @@
        });
 
        $("#id_home_address").bind("change keyup",function(event){
+           offset = 0;
            $.jStorage.set("origin_address",$(this).val());
        });
        $("#id_end_address").bind("change keyup",function(event){
+           offset = 0;
            $.jStorage.set("destination_address",$(this).val());
        });
        $("#id_home_address").val($.jStorage.get("origin_address",""));
        $("#id_end_address").val($.jStorage.get("destination_address",""));
 
        bp.adjust_layerswitcher();
+
 
     });
   
