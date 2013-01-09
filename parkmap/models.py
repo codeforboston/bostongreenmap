@@ -5,6 +5,9 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from sorl.thumbnail import get_thumbnail, default
+
+
 
 import re
 
@@ -129,13 +132,21 @@ class Park(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
-    neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods')
+    neighborhoods = models.ManyToManyField(Neighborhood, related_name='neighborhoods', blank=True)
     parktype = models.ForeignKey(Parktype, blank=True, null=True)
     parkowner = models.ForeignKey(Parkowner, blank=True, null=True)
     friendsgroup = models.ForeignKey("Friendsgroup", blank=True, null=True)
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
-    area = models.FloatField()
+    area = models.FloatField(blank=True, null=True)
+    image = models.ImageField(blank=True, upload_to="parkimages")
+
+    def parkimage_thumb(self):
+         if self.image:
+             thumb = default.backend.get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE)
+             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+         else:
+             return None
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -163,32 +174,18 @@ class Park(models.Model):
 
         self.area = self.geometry.area
 
+        super(Park, self).save(*args, **kwargs)
+
         try:
             # cache containing neighorhood
+            # doesn't work with admin forms, m2m get cleared during admin save
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
             self.neighborhoods.clear()
             self.neighborhoods.add(*neighborhoods)
         except TypeError:
             self.neighborhoods = None
 
-        if not self.slug:
-            self.slug = slugify(self.name)
 
-        while True:
-            try:
-                super(Park, self).save(*args, **kwargs)
-            # slug fight
-            except IntegrityError:
-                transaction.rollback()
-                match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-                if match_obj:
-                    next_int = int(match_obj.group(2)) + 1
-                    self.slug = match_obj.group(1) + '-' + str(next_int)
-                else:
-                    self.slug += '-2'
-            else:
-                break
-        super(Park, self).save(*args, **kwargs)
 
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -224,6 +221,7 @@ class Activity(models.Model):
 
 class Facilitytype(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
+    icon = models.ImageField(blank=False, upload_to="icons", null=False, help_text="Must be 32x37px to function properly")
 
     class Meta:
         verbose_name = _('Facilitytype')
@@ -244,6 +242,8 @@ class Facility(models.Model):
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True)  # FIXME: choices?
     park = models.ForeignKey(Park, blank=True, null=True)
+    notes = models.TextField(blank=True,)
+    access = models.TextField(blank=True,)
 
     geometry = models.PointField(srid=26986)
     objects = models.GeoManager()
@@ -251,6 +251,13 @@ class Facility(models.Model):
     class Meta:
         verbose_name = _('Facility')
         verbose_name_plural = _('Facilities')
+
+    def parkimage_thumb(self):
+         if self.park.image:
+             thumb = default.backend.get_thumbnail(self.park.image.file, settings.ADMIN_THUMBS_SIZE)
+             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+         else:
+             return None
 
     def activity_string(self):
         out = []
@@ -262,7 +269,10 @@ class Facility(models.Model):
         return self.park.parktype
 
     def icon_url(self):
+        if self.facilitytype.icon:
+            return '%s' % (self.facilitytype.icon.url,)
         return '%sparkmap/img/icons/%s.png' % (settings.STATIC_URL, slugify(self.facilitytype))
+
 
     def admin_url(self):
         return reverse('admin:parkmap_facility_change', args=(self.id,))
@@ -305,3 +315,4 @@ class Story(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('parkmap.views.story', [str(self.id)])
+

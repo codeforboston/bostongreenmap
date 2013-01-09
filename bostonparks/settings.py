@@ -3,6 +3,8 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+LOGIN_REDIRECT_URL = '/login_redirect'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -54,7 +56,7 @@ MEDIA_ROOT = ''
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/static/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -127,10 +129,31 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.humanize',
     'django.contrib.gis',
+    'registration',
     'south',
     'parkmap',
+    'mbta',
     'tastypie',
+    'sorl.thumbnail',
+    'accounts',
+    'profiles',
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+# Django registration requires this.  It is the number of
+# days after a new user has registered by which he must
+# activate his account.  There is no default.
+ACCOUNT_ACTIVATION_DAYS = 5
+# DEFAULT_FROM_EMAIL must also be set, and such other EMAIL
+# configuration as to enable successful operation of
+#   django.contrib.auth.models.User().email_user
+# Using the default smtp email backend, this requires
+# EMAIL_HOST, the default is 'localhost', which may or may
+# not cut it.  The default EMAIL_PORT is probably correct.
+# EMAIL_HOST_USER adn EMAIL_HOST_PASSWORD each default to
+# an empty string, which may be ok with the default
+# EMAIL_HOST.  EMAIL_USE_TLS defaults to false.
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -161,8 +184,13 @@ LOGGING = {
     }
 }
 
+ADMIN_THUMBS_SIZE = 150
+
+
 # import local settings
 try:
     from local_settings import *
 except ImportError:
     pass
+
+MBTA_DISTANCE = 0.5 # Distance to search for MBTA stops on Park Page and Trips.

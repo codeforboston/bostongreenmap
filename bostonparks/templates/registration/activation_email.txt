@@ -1,0 +1,17 @@
+Someone has requested a new account at the {{ site.name }}
+website, using this E-mail address.
+
+If that's not correct, please ignore this message, and the account
+will not be allowed.  PLEASE, in this case, DO NOT CLICK on the
+link below, since that will allow the account, but you won't know
+the username and password.
+
+But if you DID register for this account, please click on the link
+below (if you E-mail program allows it), or copy it into your
+browser's URL bar, in order to activate your account.
+
+   http://{{ site.domain }}/accounts/activate/{{ activation_key }}/
+
+This key is valid for {{ expiration_days }} days from the time at which the
+new account was requested.
+

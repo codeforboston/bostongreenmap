@@ -1,0 +1,30 @@
+{% extends "parkmap/base.html" %}
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
+{% block content %}
+{% if object_list.count %}
+{% if is_paginated %}
+(# vars are paginator and page_obj #}
+<div>Profiles, page {{ page_obj.number }} of {{ paginator.num_pages }}:<ul>
+{% for object in page_obj.object_list %}
+<li><a href="{{ object.get_absolute_url }}">{{ object.display_name }}</a></li>
+{% endfor %}
+</ul>{% if page_obj.has_other_pages %}{% if page_obj.has_previous %}
+<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">Next</a>
+{% endif %}{% endif %}</div>
+{% else %}
+<div>Profiles:<ul>
+{% for object in object_list %}
+<li><a href="{{ object.get_absolute_url }}">{{ object.display_name }}</a></li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% else %}
+<div>There are currently no users with (viewable) profiles.</div>
+{% endif %}
+{% endblock %}
