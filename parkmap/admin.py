@@ -12,7 +12,7 @@ admin.GeoModelAdmin.default_zoom = 11
 
 class ParkAdmin(admin.OSMGeoAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ['name', 'parkowner','park_image_thumb' ]
+    list_display = ['name', 'parkowner' ]
     list_filter = ('neighborhoods', )
     search_fields = ['name']
 
