@@ -173,6 +173,7 @@ class Park(models.Model):
     def save(self, *args, **kwargs):
 
         self.area = self.geometry.area
+        self.slug = slugify(self.name)
 
         super(Park, self).save(*args, **kwargs)
 
