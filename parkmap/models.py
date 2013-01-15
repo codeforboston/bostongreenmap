@@ -143,8 +143,8 @@ class Park(models.Model):
 
     def parkimage_thumb(self):
          if self.image:
-             thumb = default.backend.get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE)
-             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
+             thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
+             return u'<img width="%s" height="%s" src="%s" />' % (thumb.width, thumb.height, thumb.url)
          else:
              return None
 
