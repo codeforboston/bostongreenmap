@@ -237,7 +237,7 @@ class Facility(models.Model):
     """
 
     name = models.CharField(max_length=50, blank=True, null=True)
-    facilitytype = models.ForeignKey(Facilitytype, blank=True, null=True)
+    facilitytype = models.ForeignKey(Facilitytype)
     activity = models.ManyToManyField(Activity, related_name='activity')
     location = models.CharField(max_length=50, blank=True, null=True, help_text='Address, nearby Landmark or similar location information.')
     status = models.CharField(max_length=50, blank=True, null=True)  # FIXME: choices?
