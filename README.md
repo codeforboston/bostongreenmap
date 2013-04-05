@@ -8,6 +8,18 @@ A map promoting green spaces in Metro Boston.
 * Find green spaces for an activity
 * See how to get to green spaces by foot, bike or transit
 
+## Data Schema Basics
+
+There are 3 core elements that build the backbone of the application: Park, Facility and Activity.
+
+A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*. This means, that the 3 core elements are using the following relations to each other:
+
+    Park [OneToMany] Facility [ManyToMany] Activity
+
+A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
+
+There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the data schema, but those 3 ones are essential to understand the philosophy of the application.
+
 ## Installation
 
 The Boston Green Map is a [Django](https://www.djangoproject.com/) project that relies on a data storage with spatial capabilities, such as [PostGIS](http://postgis.net/).
