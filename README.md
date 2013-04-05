@@ -106,7 +106,7 @@ The Boston Green Map is a [Django](https://www.djangoproject.com/) project that 
 
 ## Project History
 
-The first iteration of this project was created during Boston's Hack Day Challenge in 2011. A group of 7 volunteers prototyped the application in 48 hours, which was among the [winners of the challenge](http://www.boston.com/business/technology/innoeco/2011/02/winners_of_the_first-ever_bost.html). The original code repository is still available and can be found here: [https://github.com/bostongreen/bostongreen](https://github.com/bostongreen/bostongreen).
+The first iteration of this project was created during Boston's Hack Day Challenge in 2011. A team of 7 volunteers (Christian Spanring, David Norcott, David Rafkind, Holly St. Clair, Patrick Robertson, Peter Gett, Tom Morris) prototyped the application in 48 hours, which was among the [winners of the challenge](http://www.boston.com/business/technology/innoeco/2011/02/winners_of_the_first-ever_bost.html). The original code repository is still available and can be found here: [https://github.com/bostongreen/bostongreen](https://github.com/bostongreen/bostongreen).
 
 After the challenge, the Metropolitan Area Planning Council (MAPC), the employer of 2 of the volunteers, worked with Boston Parks Advocates and a group of Boston Parks Trustees to turn the application into a service for people who live and work in the Metro Boston Area. 
 
