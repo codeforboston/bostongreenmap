@@ -1,0 +1,17 @@
+{% extends "parkmap/base.html" %}
+
+
+{% block bodyclass %}
+<body class="account">
+{% endblock %} 
+
+{% block content %}
+<h2>Profile of user "{{ profile.display_name }}"</h2><br>
+{% if profile.favorite_park %}<h4>My
+favorite park is {{ profile.favorite_park.name }}</h4>{% endif %}
+
+
+<div class="account_options">
+<a href="/my_profile/">Edit your profile</a>
+</div>
+{% endblock %}
