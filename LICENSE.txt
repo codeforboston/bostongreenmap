@@ -1,4 +1,4 @@
-Copyright © 2012, Metropolitan Area Planning Council 
+Copyright © 2013, Boston Green Map contributors
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
