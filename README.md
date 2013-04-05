@@ -1,6 +1,6 @@
 # Boston Green Map
 
-A map promoting green spaces in Metro Boston.
+A map promoting green spaces in the Metro Boston Area.
 
 ## Features
 
@@ -10,9 +10,13 @@ A map promoting green spaces in Metro Boston.
 
 ## Data Schema Basics
 
-There are 3 core elements that build the backbone of the application: Park, Facility and Activity.
+The map is based entirely on open space data in the public domain.
 
-A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*. This means, that the 3 core elements are using the following relations to each other:
+The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
+
+> A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*. 
+
+This means, the 3 basic elements relate to each according to the following schema:
 
     Park [OneToMany] Facility [ManyToMany] Activity
 
