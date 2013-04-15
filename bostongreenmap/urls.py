@@ -45,10 +45,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
-    url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^my_profile/$', 'profiles.views.edit_profile',
-        name='my_profile'),
-    url(r'^profiles/', include('profiles.urls')),
+    # url(r'^accounts/', include('registration.backends.default.urls')),
+    # url(r'^my_profile/$', 'profiles.views.edit_profile', name='my_profile'),
+    # url(r'^profiles/', include('profiles.urls')),
     url(r'^login_redirect/$', 'accounts.views.login_redirect',
         name='login_redirect'),
 

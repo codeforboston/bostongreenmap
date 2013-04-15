@@ -92,7 +92,7 @@
 
 
 
-             {% if user.is_staff %}<p><a href="{% url admin:parkmap_park_change park.id %}">Edit Park information</a></p>{% endif %}
+             {% if user.is_staff %}<p><a href="{% url "admin:parkmap_park_change" park.id %}">Edit Park information</a></p>{% endif %}
                 
           </div><!--/.well -->
         </div><!--/span-->
