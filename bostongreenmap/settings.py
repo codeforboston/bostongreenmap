@@ -1,4 +1,4 @@
-# Django settings for bostonparks project.
+# Django settings for bostongreenmap project.
 import os
 
 # Defines the directory that contains the settings file as the PROJECT_ROOT
@@ -112,10 +112,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
-ROOT_URLCONF = 'bostonparks.urls'
+ROOT_URLCONF = 'bostongreenmap.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'bostonparks.wsgi.application'
+WSGI_APPLICATION = 'bostongreenmap.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
