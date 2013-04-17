@@ -142,7 +142,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     # 'registration',
     'south',
-    'parkmap',
+    'parks',
     'mbta',
     'tastypie',
     'sorl.thumbnail',

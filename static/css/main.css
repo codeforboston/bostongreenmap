@@ -441,7 +441,7 @@ body.play form { margin-bottom: 0; }
 /* #parklist li span { position: absolute; margin-left: -1.3em; } */
 ul.ui-sortable li
 {
-	background-image: url('/static/parkmap/img/arrow14x20.gif');
+	background-image: url('/static/parks/img/arrow14x20.gif');
 	background-repeat: no-repeat;
 	background-position: 0 30%;
 }
@@ -552,49 +552,49 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 
 .parkstory .rating_4
 {
-	background-image: url('/static/parkmap/img/ratings/rating-idea.jpg');
+	background-image: url('/static/parks/img/ratings/rating-idea.jpg');
 	background-repeat: no-repeat;
 }
 
 .parkstory .rating_1
 {
-	background-image: url('/static/parkmap/img/ratings/rating-good.jpg');
+	background-image: url('/static/parks/img/ratings/rating-good.jpg');
 	background-repeat: no-repeat;
 }
 
 .parkstory .rating_2
 {
-	background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg');
+	background-image: url('/static/parks/img/ratings/rating-neutral.jpg');
 	background-repeat: no-repeat;
 }
 
 .parkstory .rating_3
 {
-	background-image: url('/static/parkmap/img/ratings/rating-poor.jpg');
+	background-image: url('/static/parks/img/ratings/rating-poor.jpg');
 	background-repeat: no-repeat;
 }
 
 .home .parkstory .rating_4
 {
-	background-image: url('/static/parkmap/img/ratings/rating-idea.png');
+	background-image: url('/static/parks/img/ratings/rating-idea.png');
 	background-repeat: no-repeat;
 }
 
 .home .parkstory .rating_1
 {
-	background-image: url('/static/parkmap/img/ratings/rating-good.png');
+	background-image: url('/static/parks/img/ratings/rating-good.png');
 	background-repeat: no-repeat;
 }
 
 .home .parkstory .rating_2
 {
-	background-image: url('/static/parkmap/img/ratings/rating-neutral.png');
+	background-image: url('/static/parks/img/ratings/rating-neutral.png');
 	background-repeat: no-repeat;
 }
 
 .home .parkstory .rating_3
 {
-	background-image: url('/static/parkmap/img/ratings/rating-poor.png');
+	background-image: url('/static/parks/img/ratings/rating-poor.png');
 	background-repeat: no-repeat;
 }
 
@@ -609,10 +609,10 @@ body.explore .navbar .nav > li > a.explore { color: yellow; }
 	width: 58px;
 }
 
-.newstory .rating_3 { background-image: url('/static/parkmap/img/ratings/rating-idea.jpg'); }
-.newstory .rating_0 { background-image: url('/static/parkmap/img/ratings/rating-good.jpg'); }
-.newstory .rating_1 { background-image: url('/static/parkmap/img/ratings/rating-neutral.jpg'); }
-.newstory .rating_2 { background-image: url('/static/parkmap/img/ratings/rating-poor.jpg'); }
+.newstory .rating_3 { background-image: url('/static/parks/img/ratings/rating-idea.jpg'); }
+.newstory .rating_0 { background-image: url('/static/parks/img/ratings/rating-good.jpg'); }
+.newstory .rating_1 { background-image: url('/static/parks/img/ratings/rating-neutral.jpg'); }
+.newstory .rating_2 { background-image: url('/static/parks/img/ratings/rating-poor.jpg'); }
 .newstory .rating_0 label, .newstory .rating_1 label, .newstory .rating_2 label, .newstory .rating_3 label { font-size: 0; }
 
 .newstory p

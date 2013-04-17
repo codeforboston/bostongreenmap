@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.gis.measure import D
 from mbta.models import MBTAStop
 from api.tastyhacks import EncodedGeoResource, GeoResource
-from parkmap.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
+from parks.models import Neighborhood, Activity, Facility, Park, Parktype, Facilitytype
 
 
 class NeighborhoodResource(ModelResource):

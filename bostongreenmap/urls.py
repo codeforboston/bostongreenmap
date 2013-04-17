@@ -51,8 +51,8 @@ urlpatterns = patterns('',
     url(r'^login_redirect/$', 'accounts.views.login_redirect',
         name='login_redirect'),
 
-    url(r'^policy/$', 'parkmap.views.policy'),  # HOME
-    url(r'^', include('parkmap.urls')),  # HOME
+    url(r'^policy/$', 'parks.views.policy'),  # HOME
+    url(r'^', include('parks.urls')),  # HOME
 
     # API
     (r'^api/', include(v1_api.urls)),

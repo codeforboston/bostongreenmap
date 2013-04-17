@@ -10,7 +10,7 @@ class UserProfile(models.Model):
                                   default='')
     last_name = models.CharField(max_length=100, blank=True, null=False,
                                  default='')
-    favorite_park = models.ForeignKey('parkmap.Park', null=True)
+    favorite_park = models.ForeignKey('parks.Park', null=True)
 
     @models.permalink
     def get_absolute_url(self):
