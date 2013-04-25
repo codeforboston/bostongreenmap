@@ -5,6 +5,8 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
+from parks.views import HomePageView
+
 from tastypie.api import Api
 from api.resources import ParkResource, \
     FacilityResource, \
@@ -36,8 +38,12 @@ v1_api.register(ParkResource())
 v1_api.register(ParktypeResource())
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'bostonparks.views.home', name='home'),
+
+    # Home
+    url(r'^$', HomePageView.as_view(), name='home'),
+
+    # Parks
+    url(r'^', include('parks.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -52,7 +58,6 @@ urlpatterns = patterns('',
         name='login_redirect'),
 
     url(r'^policy/$', 'parks.views.policy'),  # HOME
-    url(r'^', include('parks.urls')),  # HOME
 
     # API
     (r'^api/', include(v1_api.urls)),

@@ -1,9 +1,14 @@
 from django.conf.urls import patterns, url
 
+from .views import NeighborhoodParkListView
+
 # Uncomment the next two lines to enable the admin:
 
 urlpatterns = patterns('parks.views',
     # Examples:
+
+    # Neighborhood park list
+    url(r'^neighborhood/(?P<slug>[-_\w]+)/$', NeighborhoodParkListView.as_view(), name='neighborhood-park-list'),
 
     url(r'^park/play/$', 'play_page', name='play'),  # B  (Detail)
     url(r'^explore/$', 'explore', name='explore'),  # Explore
@@ -12,8 +17,6 @@ urlpatterns = patterns('parks.views',
 
     url(r'^park/(?P<park_slug>[-\w]+)/$', 'parks_page', name='park'),  # B  (Detail)
     url(r'^event/(?P<event_name>[-\w]+)/(?P<event_id>[-\w]+)/$', 'events', name='events'),  # B  (Detail)
-
-    url(r'^neighborhood/(?P<n_slug>[-\w]+)/$', 'neighborhood', name='neighborhood'),  # A
 
     url(r'^plan/$', 'plan_a_trip', name='plan_a_trip'),  # A
     url(r'^home-search/$', 'home_search', name='home_search'),  # A
@@ -26,6 +29,6 @@ urlpatterns = patterns('parks.views',
          name='neighborhood_activities'),  # C
 
     url(r'^ajax/(?P<n_slug>[-\w]+)/(?P<a_slug>[-\w]+)/$', 'neighborhood_activity_ajax', name='neighborhood_actity_ajax'),  # HOME
-    url(r'^$', 'home_page', name='home'),  # HOME
+    
 
 )

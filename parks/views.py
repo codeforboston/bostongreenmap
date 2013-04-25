@@ -1,4 +1,7 @@
 # Views for Parks
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
 from django.contrib.sites.models import Site
 
 from django.contrib.gis.measure import D
@@ -19,6 +22,38 @@ from mbta.models import MBTAStop
 import cgpolyencode
 current_site = Site.objects.get_current()
 
+
+class HomePageView(TemplateView):
+
+    template_name = 'parks/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+
+        context['parks'] = Park.objects.all()
+        context['neighborhoods'] = Neighborhood.objects.all().order_by('name')
+        context['activities'] = Activity.objects.all()
+        context['stories'] = Story.objects.all().order_by('-date')[:6]
+
+        return context
+
+
+class NeighborhoodParkListView(ListView):
+
+    context_object_name = 'park_list'
+    template_name = 'parks/neighborhood.html'
+
+    def get_queryset(self):
+        print self.kwargs
+        self.neighborhood = get_object_or_404(Neighborhood, slug=self.kwargs['slug'])
+        return Park.objects.filter(neighborhoods=self.neighborhood)
+
+    def get_context_data(self, **kwargs):
+        context = super(NeighborhoodParkListView, self).get_context_data(**kwargs)
+        context['neighborhood'] = self.neighborhood
+        return context
+
+
 #Temporary view to see Play page
 def play_page(request):
     neighborhoods = Neighborhood.objects.all().order_by('name')
@@ -30,30 +65,6 @@ def play_page(request):
 
     return render_to_response('parks/play.html', response_d,
         context_instance=RequestContext(request))
-
-
-def get_list():
-    # Query each of the three classes.
-    parks = Park.objects.all()
-    facilities = Facility.objects.all()
-    neighborhoods = Neighborhood.objects.all().order_by('name')
-    return parks, facilities, neighborhoods
-
-
-#Home page
-def home_page(request):
-    parks, facilities, neighborhoods = get_list()
-    all_parks = Park.objects.all().order_by('name')
-    activities = Activity.objects.all()
-    stories = Story.objects.all().order_by('-date')[:6]
-    return render_to_response('parks/home.html', {
-        'parks': parks,
-        'all_parks': all_parks,
-        'facilities': facilities,
-        'activities': activities,
-        'neighborhoods': neighborhoods,
-        'stories':stories,
-        }, context_instance=RequestContext(request))
 
 
 def parks_page(request, park_slug):
@@ -81,19 +92,6 @@ def parks_page(request, park_slug):
          'request': request,
          'acres': park.geometry.area * 0.000247,
         },
-        context_instance=RequestContext(request)
-    )
-
-
-def neighborhood(request, n_slug):  # Activity slug, and Neighborhood slug
-    neighborhood = Neighborhood.objects.get(slug=n_slug)
-    parks = Park.objects.filter(neighborhoods=neighborhood)
-    response_d = {
-        'neighborhood': neighborhood,
-        'parks': parks,
-        }
-    return render_to_response('parks/neighborhood.html',
-        response_d,
         context_instance=RequestContext(request)
     )
 
@@ -161,6 +159,7 @@ def events(request, event_id, event_name):
 
 
 def explore(request):  # Activity slug, and Neighborhood slug
+    # will be the new home page
     parkname = request.POST.get('parkname',None)
     neighborhoods = Neighborhood.objects.all().order_by('name')
     #activities = Activity.objects.all().order_by('name')

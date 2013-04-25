@@ -26,7 +26,7 @@
                             {{neighborhood.name}}
                         </h2>
                     <div class="verticalscroll">
-                        {% for park in parks %} 
+                        {% for park in park_list %} 
                         <div class="neighborhood-park">
                         <h4>
                             <input type='button' id='tripadd_{{park.id}}' class='add-trip-button' name='add-trip' value='Add to Trip' alt='{{park.name}}' style="float:right;"/><a href="/park/{{park.slug}}">{{park.name}}</a></h4>
