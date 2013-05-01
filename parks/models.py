@@ -5,10 +5,9 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import strip_tags
+
 from sorl.thumbnail import get_thumbnail, default
-
-
-
 import re
 
 # south introspection rules
@@ -114,6 +113,31 @@ class Friendsgroup(models.Model):
     url = models.URLField(blank=True, null=True)
 
 
+class Parkimage(models.Model):
+    """ Image taken in a park.
+    """
+
+    image = models.ImageField(upload_to='parkimages')
+    caption = models.TextField(default='', blank=True)
+
+    class Meta:
+        verbose_name = _('Parkimage')
+        verbose_name_plural = _('Parkimages')
+
+    def __unicode__(self):
+        if self.caption:
+            return '%i: %s...' % (self.pk, strip_tags(self.caption)[:30])
+        else:
+            return str(self.pk)
+
+    def thumbnail(self):
+         if self.image:
+             thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
+             return u'<img width="%s" height="%s" src="%s" alt="%s" />' % (thumb.width, thumb.height, thumb.url, self.caption)
+         else:
+             return None
+    
+
 class Park(models.Model):
     """
     Park or similar Open Space.
@@ -140,13 +164,7 @@ class Park(models.Model):
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField(blank=True, null=True)
     image = models.ImageField(blank=True, upload_to="parkimages")
-
-    def parkimage_thumb(self):
-         if self.image:
-             thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
-             return u'<img width="%s" height="%s" src="%s" />' % (thumb.width, thumb.height, thumb.url)
-         else:
-             return None
+    images = models.ManyToManyField(Parkimage, blank=True, null=True)
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()

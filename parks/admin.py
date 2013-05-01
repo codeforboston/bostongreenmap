@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 
-from parks.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Facilitytype, Friendsgroup, Story
+from parks.models import Facility, Neighborhood, Park, Activity, Event, Parktype, Parkowner, Parkimage, Facilitytype, Friendsgroup, Story
 from sorl.thumbnail import default
 from django.conf import settings
 
@@ -58,6 +58,7 @@ admin.site.register(Facilitytype, LookupAdmin)
 admin.site.register(Park, ParkAdmin)
 admin.site.register(Parktype, LookupAdmin)
 admin.site.register(Parkowner, LookupAdmin)
+admin.site.register(Parkimage, admin.ModelAdmin)
 admin.site.register(Neighborhood, admin.OSMGeoAdmin)
 admin.site.register(Activity, LookupAdmin)
 admin.site.register(Event)
