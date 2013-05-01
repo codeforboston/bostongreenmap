@@ -136,7 +136,6 @@ class ParkResource(EncodedGeoResource):
     def dehydrate(self, bundle):
         bundle.obj.geometry.transform(4326)
         bundle.data['lat_long'] = bundle.obj.lat_long()
-        bundle.data['thumb'] = bundle.obj.parkimage_thumb()
         return bundle
 
 
