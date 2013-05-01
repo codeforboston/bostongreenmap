@@ -163,7 +163,6 @@ class Park(models.Model):
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField(blank=True, null=True)
-    image = models.ImageField(blank=True, upload_to="parkimages")
     images = models.ManyToManyField(Parkimage, blank=True, null=True)
 
     geometry = models.MultiPolygonField(srid=26986)
