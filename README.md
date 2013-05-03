@@ -175,7 +175,13 @@ Some requirements are managed by a third party data migration module. Apply all 
 
     python manage.py migrate
 
-### Run a local develpment server
+### Import sample data
+
+This command will import the Boston Common Park and a related facility and activity.
+
+    python manage.py loaddata fixtures/sample.json
+
+### Run a local development server
 
     python manage.py runserver
 
