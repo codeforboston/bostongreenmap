@@ -1,11 +1,11 @@
 # Views for Parks
+from django.core import serializers
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from django.contrib.sites.models import Site
 
 from django.contrib.gis.measure import D
-import json
 from django.utils import simplejson
 from django.core.mail import send_mail
 
@@ -18,24 +18,32 @@ from django.template import RequestContext
 from django.conf import settings
 from mbta.models import MBTAStop
 
+import json
+
 
 import cgpolyencode
 current_site = Site.objects.get_current()
 
 
 def get_topnav_data():
-    """ Returns lists of, all Neighborhoods, Activities and Parks
+    """ Returns lists of all Neighborhoods, Activities and 
+        Parks serialized as JSON.
     """
-    neighborhoods = Neighborhood.objects.all()
-    activities = Activity.objects.all()
-    parks = Park.objects.all()
+    neighborhoods = Neighborhood.objects.all().only('name')
+    activities = Activity.objects.all().only('name')
+    parks = Park.objects.all().only('name')
 
-    return neighborhoods, activities, parks
+    parks_json = dict()
+    for p in parks:
+        parks_json[p.name] = p.get_absolute_url()
+    parks_json = json.dumps(parks_json)
+
+    return neighborhoods, activities, parks_json
 
 
 class HomePageView(TemplateView):
 
-    template_name = 'parks/explore.html'
+    template_name = 'parks/home.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
@@ -80,6 +88,9 @@ def parks_page(request, park_slug):
     map = encoder.encode(coordinates['coordinates'][0][0])
     stories = Story.objects.filter(park=park).order_by("-date")
     #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
+    
+    neighborhoods, activities, parks = get_topnav_data()
+
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -97,6 +108,9 @@ def parks_page(request, park_slug):
          'stories': stories,
          'request': request,
          'acres': park.geometry.area * 0.000247,
+         'neighborhoods': neighborhoods,
+         'activities': activities,
+         'parks': parks
         },
         context_instance=RequestContext(request)
     )

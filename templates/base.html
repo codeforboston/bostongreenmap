@@ -33,7 +33,6 @@
         <div class="container-fluid">
 
           <div class="nav-collapse">
-            <form method="GET">
             <ul class="nav">
               <li>
                 <select>
@@ -58,7 +57,6 @@
                 <button>Search</button>
               </li>
             </ul>
-            </form>
             <ul class="nav pull-right">
               <li><a class="home" href="/">HOME</a></li>
               <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
@@ -90,6 +88,36 @@
 	{% endblock %}
 <script>
 $(document).ready(function(){
+
+
+        // Parkname typeahead
+        var parks = {{ parks|safe }};
+
+        var parkNames = [];
+        for(var p in parks) parkNames.push(p);
+
+        $("#parkname").typeahead({
+          source: parkNames,
+          updater: function(item) {
+            // do something...
+            return item;
+          }
+        });  
+
+        $("#parkname").on( "keypress", function(event) {
+          if(event.which == 13) {
+            var parkUrl = parks[ $(this).val() ];
+            if ( parkUrl !== undefined ) {
+              window.location.assign( window.location.origin + parkUrl );
+            }
+          }
+        });
+
+        // FIXME: 
+        // limit Parknames typehead based on dropdown values
+        // => AJAX call
+
+        // what is this?
         bp.count_parks_in_queue();
         $(".bpa-hide").click(function(event){
             $(".bpa-hideable").slideToggle('slow',function(){
@@ -110,6 +138,7 @@ $(document).ready(function(){
         $("#maximizer").hide();
 
         // Don't set draggable on as many mobile devices as possible.
+        // FIXME: this should probably be handled by CSS
         if(!(navigator.userAgent.match(/Android/i)
             || navigator.userAgent.match(/webOS/i)
             || navigator.userAgent.match(/iPhone/i)
