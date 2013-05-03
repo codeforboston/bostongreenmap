@@ -171,7 +171,6 @@ class Park(models.Model):
     class Meta:
         verbose_name = _('Park')
         verbose_name_plural = _('Parks')
-        ordering = ['name']
 
     def __unicode__(self):
         return self.name
