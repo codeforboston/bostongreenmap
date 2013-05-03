@@ -72,7 +72,6 @@ a:active h4 { color: #666666; }
 	font-size: 18px;
 	line-height: 20px;
 	background-color: #00DC00;
-/*	min-height: 65px;*/
 	background-image: none;
 	background-repeat: repeat-x;
 	filter: none;
@@ -80,12 +79,6 @@ a:active h4 { color: #666666; }
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 }
-
-/*.navbar .nav
-{
-	float: right;
-	padding-top: 25px;
-}*/
 
 .navbar .nav-collapse.in .nav { float: left; }
 .navbar .nav-collapse { text-align: left; }
