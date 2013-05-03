@@ -23,17 +23,23 @@ import cgpolyencode
 current_site = Site.objects.get_current()
 
 
+def get_topnav_data():
+    """ Returns lists of, all Neighborhoods, Activities and Parks
+    """
+    neighborhoods = Neighborhood.objects.all()
+    activities = Activity.objects.all()
+    parks = Park.objects.all()
+
+    return neighborhoods, activities, parks
+
+
 class HomePageView(TemplateView):
 
-    template_name = 'parks/home.html'
+    template_name = 'parks/explore.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-
-        context['parks'] = Park.objects.all()
-        context['neighborhoods'] = Neighborhood.objects.all().order_by('name')
-        context['activities'] = Activity.objects.all()
-        context['stories'] = Story.objects.all().order_by('-date')[:6]
+        context['neighborhoods'], context['activities'], context['parks'] = get_topnav_data()
 
         return context
 

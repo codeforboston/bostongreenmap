@@ -68,8 +68,11 @@ a:active h4 { color: #666666; }
 
 .navbar-inner
 {
+	font-family: 'PT Sans',sans-serif;
+	font-size: 18px;
+	line-height: 20px;
 	background-color: #00DC00;
-	min-height: 65px;
+/*	min-height: 65px;*/
 	background-image: none;
 	background-repeat: repeat-x;
 	filter: none;
@@ -78,20 +81,17 @@ a:active h4 { color: #666666; }
 	border-radius: 0px;
 }
 
-.navbar .nav
+/*.navbar .nav
 {
 	float: right;
 	padding-top: 25px;
-}
+}*/
 
 .navbar .nav-collapse.in .nav { float: left; }
 .navbar .nav-collapse { text-align: left; }
 
-.navbar .nav > li > a
+.navbar .nav > li
 {
-	font-family: 'PT Sans',sans-serif;
-	font-size: 18px;
-	line-height: 20px;
 	padding: 10px 15px 11px;
 }
 

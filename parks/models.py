@@ -212,6 +212,7 @@ class Activity(models.Model):
     class Meta:
         verbose_name = _('Activity')
         verbose_name_plural = _('Activities')
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
