@@ -17,7 +17,6 @@
     {{ block.super }}
     <script type="text/javascript">
 
-        var parknames = [{% for park in parks%}"{{park.name|safe}}"{% if not forloop.last%},{%endif%}{%endfor%}];
         // global map parameters
         bp.mapconf = {
             "zoomtoparks": true,
@@ -26,82 +25,8 @@
         // load default map
         bp.init_map("basemap");
 
-        $(function() {
-           $(".parknamesearch").typeahead({
-               source:parknames,
-               items:8
-           });       
-
-          // neighborhood dropdown
-          $('#neighborhood_neighborhood').on("change", function(event) {
-              // check for facilities
-              // TODO: copy of explore_page_make_call, cleanup!
-            var checked_facilities = [];
-            $(".facilitytype_checkbox:checked").each(function(){
-               checked_facilities[checked_facilities.length] = parseInt($(this).attr("id").split("_")[1]);
-            });
-            var parkfilter = {};
-            if (checked_facilities.length > 0){
-              var facility_string = checked_facilities.join(",");
-              parkfilter['limit'] = 1000;
-              parkfilter['facilitytypes'] = facility_string;
-            }
-            // add neighborhoods
-            parkfilter["neighborhoods"] = $(this).val();
-
-            bp.loadparks(parkfilter);
-
-            // bp.loadparks({
-            //   "neighborhoods": $(this).val()
-            // });
-          });
-
-          // park name search
-          $("#parkname").keypress(function(e) {
-              if(e.which == 13) {
-                  $(this).blur();
-                  $("#explore_search").focus().click();
-              }
-          });
-          $("#explore_search").on("click", function(){ 
-            var parkname = $("#parkname").val();
-            if(parkname){
-              bp.loadparks({
-                "name__icontains": parkname
-              });
-            }
-          });
-          $(".facilitytype_checkbox").bind("change", function(){
-              bp.explore_page_make_calls();
-          });
-
-          {% if parkname %}
-          // If this shows up, data was searched for from the previous page
-          // FIXME: generate park url with slug /parks/park-slug or so
-              bp.loadparks({
-                "name__icontains": "{{parkname|safe}}"
-              });
-          {% endif %}
-
-
-          // top margin
-          bp.adjust_layerswitcher();
-          
-
-	      // set space for scrollable div
-	      $.setscrollspace = function() {
-     	      var h = $('#verticalscroll').height();
-		      $('.searchhd').css('margin-top', h + 'px');
-		      $('.park_search, .bpa-hide').css('display', 'block');
-		  };
-          $.setscrollspace();
-          
-          $(window).resize(function(){
-              $.setscrollspace();
-          });
-    });
+        // top margin
+        bp.adjust_layerswitcher();
             
-        
-    
     </script>
 {% endblock %}
