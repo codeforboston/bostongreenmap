@@ -1,6 +1,15 @@
-html,
-body { height: 100%; }
-body { text-align: center; }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow:hidden;
+}
+
+
 h1 { color: white; }
 
 h2
@@ -85,7 +94,7 @@ a:active h4 { color: #666666; }
 
 .navbar .nav > li
 {
-	padding: 10px 15px 11px;
+	padding: 10px;
 }
 
 .navbar .nav > li > a:hover { color: yellow; }
@@ -132,14 +141,12 @@ ul.nav ul.actions li a:active { color: #666; }
 /* Map
 -------------------------------------------------- */
 
-#map_canvas
-{
+#map_canvas {
 	position: absolute;
-	top: 0px;
+	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 1;
 }
 
 #map_canvas.detail
