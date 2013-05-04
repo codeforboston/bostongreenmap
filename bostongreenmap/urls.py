@@ -43,7 +43,7 @@ urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
 
     # Parks
-    url(r'^', include('parks.urls')),
+    url(r'^parks/', include('parks.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

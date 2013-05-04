@@ -31,14 +31,26 @@ def get_topnav_data():
     """
     neighborhoods = Neighborhood.objects.all().only('name')
     activities = Activity.objects.all().only('name')
-    parks = Park.objects.all().only('name')
 
-    parks_json = dict()
-    for p in parks:
-        parks_json[p.name] = p.get_absolute_url()
-    parks_json = json.dumps(parks_json)
+    return neighborhoods, activities
 
-    return neighborhoods, activities, parks_json
+def get_parks(request):
+    """ Returns parks as JSON based search parameters
+    """
+
+    querydict = request.GET
+    kwargs = querydict.dict()
+
+    try:
+        parks = Park.objects.filter(**kwargs)
+        parks_json = dict()
+        for p in parks:
+            parks_json[p.name] = p.get_absolute_url()
+        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
+
+    except:
+        # no content
+        return HttpResponse(status=204)
 
 
 class HomePageView(TemplateView):
@@ -47,7 +59,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['neighborhoods'], context['activities'], context['parks'] = get_topnav_data()
+        context['neighborhoods'], context['activities'] = get_topnav_data()
 
         return context
 
@@ -58,7 +70,6 @@ class NeighborhoodParkListView(ListView):
     template_name = 'parks/neighborhood.html'
 
     def get_queryset(self):
-        print self.kwargs
         self.neighborhood = get_object_or_404(Neighborhood, slug=self.kwargs['slug'])
         return Park.objects.filter(neighborhoods=self.neighborhood)
 
@@ -66,19 +77,6 @@ class NeighborhoodParkListView(ListView):
         context = super(NeighborhoodParkListView, self).get_context_data(**kwargs)
         context['neighborhood'] = self.neighborhood
         return context
-
-
-#Temporary view to see Play page
-def play_page(request):
-    neighborhoods = Neighborhood.objects.all().order_by('name')
-    activities = Activity.objects.all().order_by('name')
-    response_d = {
-        'neighborhoods': neighborhoods,
-        'activities': activities,
-        }
-
-    return render_to_response('parks/play.html', response_d,
-        context_instance=RequestContext(request))
 
 
 def parks_page(request, park_slug):
@@ -89,7 +87,7 @@ def parks_page(request, park_slug):
     stories = Story.objects.filter(park=park).order_by("-date")
     #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
     
-    neighborhoods, activities, parks = get_topnav_data()
+    neighborhoods, activities = get_topnav_data()
 
     if request.method == 'POST':
         story = Story()
@@ -110,10 +108,22 @@ def parks_page(request, park_slug):
          'acres': park.geometry.area * 0.000247,
          'neighborhoods': neighborhoods,
          'activities': activities,
-         'parks': parks
         },
         context_instance=RequestContext(request)
     )
+
+
+#Temporary view to see Play page
+def play_page(request):
+    neighborhoods = Neighborhood.objects.all().order_by('name')
+    activities = Activity.objects.all().order_by('name')
+    response_d = {
+        'neighborhoods': neighborhoods,
+        'activities': activities,
+        }
+
+    return render_to_response('parks/play.html', response_d,
+        context_instance=RequestContext(request))
 
 
 def parks_in_neighborhood_with_activities(request, a_slug, n_slug):  # Activity slug, and Neighborhood slug

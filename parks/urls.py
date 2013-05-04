@@ -7,6 +7,13 @@ from .views import NeighborhoodParkListView
 urlpatterns = patterns('parks.views',
     # Examples:
 
+    # returns park list
+    url(r'^search/$', 'get_parks', name='get_parks'),
+
+    # park detail page
+    url(r'^(?P<park_slug>[-\w]+)/$', 'parks_page', name='park'),
+
+
     # Neighborhood park list
     url(r'^neighborhood/(?P<slug>[-_\w]+)/$', NeighborhoodParkListView.as_view(), name='neighborhood-park-list'),
 
@@ -15,7 +22,7 @@ urlpatterns = patterns('parks.views',
     url(r'^story/flag/(?P<story_id>\d+)/$', 'story_flag', name='story_flag'),
     url(r'^story/(?P<story_id>\d+)/$', 'story', name='story'),
 
-    url(r'^park/(?P<park_slug>[-\w]+)/$', 'parks_page', name='park'),  # B  (Detail)
+    
     url(r'^event/(?P<event_name>[-\w]+)/(?P<event_id>[-\w]+)/$', 'events', name='events'),  # B  (Detail)
 
     url(r'^plan/$', 'plan_a_trip', name='plan_a_trip'),  # A

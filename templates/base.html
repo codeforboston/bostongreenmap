@@ -35,16 +35,16 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <select>
-                  <option selected>Select Your Neighborhood</option>
+                <select id="neighborhoods">
+                  <option value="" selected>Select Your Neighborhood</option>
                   {% for n in neighborhoods %}
                     <option value="{{ n.pk }}">{{ n.name }}</option>
                   {% endfor %}
                 </select>
               </li>
               <li>
-                <select>
-                  <option>Select Your Activity</option>
+                <select id="facility__activity">
+                  <option value="" selected>Select Your Activity</option>
                   {% for a in activities %}
                     <option value="{{ a.pk }}">{{ a.name }}</option>
                   {% endfor %}
@@ -89,20 +89,35 @@
 <script>
 $(document).ready(function(){
 
+        var searchUrl = '/parks/search/?',
+            parkParams = {}
+            parks = {};
 
-        // Parkname typeahead
-        var parks = {{ parks|safe }};
+        // load new parks
+        $("#neighborhoods, #facility__activity").on("change", function() {
 
-        var parkNames = [];
-        for(var p in parks) parkNames.push(p);
-
-        $("#parkname").typeahead({
-          source: parkNames,
-          updater: function(item) {
-            // do something...
-            return item;
+          if ( $(this).val() !== "" ) {
+            parkParams[ $(this).attr("id") ] = $(this).val();
+          } else {
+            delete parkParams[ $(this).attr("id") ];
           }
-        });  
+
+          get_parks( searchUrl + $.param(parkParams) );
+
+        });
+
+        // load park list from url
+        // and add park typeahead in callback
+        function get_parks( url ) {
+          $.getJSON( url, function(data) {
+            parks = data;
+            var parkNames = [];
+            for(var p in parks) parkNames.push(p);
+            var autocomplete = $('#parkname').typeahead();
+            autocomplete.data('typeahead').source = parkNames;
+          });
+        };
+        get_parks(searchUrl);
 
         $("#parkname").on( "keypress", function(event) {
           if(event.which == 13) {
@@ -116,6 +131,8 @@ $(document).ready(function(){
         // FIXME: 
         // limit Parknames typehead based on dropdown values
         // => AJAX call
+        // facility__activity=
+        // neighborhoods=
 
         // what is this?
         bp.count_parks_in_queue();
