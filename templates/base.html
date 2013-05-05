@@ -78,8 +78,6 @@
 <script type="text/javascript" src="{{ STATIC_URL }}libs/topojson.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/mapc-layers.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.9.1.min.js"></script>
-<script src="{{ STATIC_URL }}parks/js/jquery-ui-1.8.20.custom.min.js"></script>
-<script src="{{ STATIC_URL }}parks/js/jquery.ui.touch-punch.js"></script>
 <script src="{{ STATIC_URL }}parks/js/jstorage.js"></script>
 <script src="{{ STATIC_URL }}libs/jquery/jquery.url.js" type="text/javascript"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
@@ -91,119 +89,126 @@
 <script>
 $(document).ready(function(){
 
-        var searchUrl = '/parks/search/?',
-            parkParams = {};
 
-        // load new parks
-        $("#neighborhoods, #facility__activity").on("change", function() {
+  var searchUrl = '/parks/search/?',
+      parkParams = {},
+      parkGeoms;
 
-          if ( $(this).val() !== "" ) {
-            parkParams[ $(this).attr("id") ] = $(this).val();
-          } else {
-            delete parkParams[ $(this).attr("id") ];
-          }
 
-          get_parklist( searchUrl + $.param(parkParams) );
+  // resize map_canvas
+  var topmargin = $(".navbar").height();
+  $("#map_canvas").css("margin-top", topmargin);
+  $("#map_canvas").css("height", ($(window).height() - topmargin));
+  $(window).on("resize", function(e){
+    $("#map_canvas").css("height", ($(window).height() - topmargin));
+  });
 
-        });
 
-        // load park list from url
-        // and add park typeahead in callback
-        function get_parklist( url ) {
+  // load new parks on dropdown change
+  $("#neighborhoods, #facility__activity").on("change", function() {
 
-          $.getJSON( url, function(data) {
-            var parks = data;
-            var parkNames = [];
-            for(var p in parks) parkNames.push(p);
-            var autocomplete = $('#parkname').typeahead({
-              updater: function (item) {
-                var parkUrl = parks[ item ];
-                window.location.assign( window.location.origin + parkUrl );
-                return item;
-              }
-            });
-            autocomplete.data('typeahead').source = parkNames;
-          });
+    if ( $(this).val() !== "" ) {
+      parkParams[ $(this).attr("id") ] = $(this).val();
+    } else {
+      delete parkParams[ $(this).attr("id") ];
+    }
 
-        };
-        get_parklist(searchUrl);
+    filter_parks( searchUrl + $.param(parkParams) );
 
-        // resize map_canvas
-        var topmargin = $(".navbar").height();
-        $("#map_canvas").css("margin-top", topmargin);
-        $("#map_canvas").css("height", ($(window).height() - topmargin));
-        $(window).on("resize", function(e){
-          $("#map_canvas").css("height", ($(window).height() - topmargin));
-        });
+  });
 
-        var basemap = new L.MAPCTileLayer("basemap");
-        var boston = new L.LatLng(42.357778, -71.061667); // geographical point (longitude and latitude)
 
-        // map
-        var map = new L.Map("map_canvas",{
-          minZoom: 9,
-          maxZoom: 17,
-          zoom: 12,
-          center: boston,
-          layers: [basemap]
-        });
+  // initialize map
+  var basemap = new L.MAPCTileLayer("basemap"),
+      boston = new L.LatLng(42.357778, -71.061667);
+  var map = new L.Map( "map_canvas", {
+    minZoom: 9,
+    maxZoom: 17,
+    zoom: 12,
+    center: boston,
+    layers: [basemap]
+  });
 
-        // topoJSON
-        var parkLayer = L.geoJson(null, {
-          style: {
-            color: "#fff",
-            weight: 1,
-            opacity: 1,
-            fillColor: "#00DC00",
-            fillOpacity: 0.6
-          },
-          onEachFeature: function (feature, layer) {
-            layer.bindPopup( feature.id.toString() );
-          },
-          filter: function (feature, layer) {
-            return true;
-          }
-        }).addTo(map);
 
-        var parkGeoms;
+  // initialize parkLayer
+  var parkLayer = L.geoJson(null, {
+    style: {
+      color: "#fff",
+      weight: 1,
+      opacity: 1,
+      fillColor: "#00DC00",
+      fillOpacity: 0.6
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup( feature.id.toString() );
+    },
+    filter: function (feature, layer) {
+      return true;
+    }
+  }).addTo(map);
 
-        // add parks to map
-        function map_parks( filter, zoom ) {
 
-          var filter = filter || [];
+  // map search result
+  function filter_parks( url, zoom ) {
 
-          // remove exisiting parks from map
-          parkLayer.clearLayers();
+    $.getJSON( url, function(data) {
+      
+      var parks = data,
+          parkNames = [],
+          parkFilter = [];
 
-          // re-define GeoJSON filter
-          if ( filter.length > 0 ) {
-            parkLayer.options.filter = function(feature, layer) {
-              if ( $.inArray( feature.id, filter ) == -1 ) return false;
-              return true;
-            };
-          }
+      for(var p in parks) {
+        parkNames.push(p);
+        parkFilter.push(parks[p].id);
+      }
 
-          // add parkgeometries to layer
-          var len = parkGeoms.length;
-          while (len--) {
-            parkLayer.addData(parkGeoms[len]);        
-          }
+      console.log("filter: ", parkFilter);
 
-          // zoom to park bounds or default zoomlevel
-          if (zoom === undefined) {
-            map.fitBounds(parkLayer.getBounds());
-          } else {
-            map.setZoom( zoom );
-          }
-          
-        };
+      // update typeahead
+      var autocomplete = $('#parkname').typeahead({
+        updater: function (item) {
+          var parkUrl = parks[ item ].url;
+          window.location.assign( window.location.origin + parkUrl );
+          return item;
+        }
+      });
+      autocomplete.data('typeahead').source = parkNames;
+      
+      // remove existing parks from map
+      parkLayer.clearLayers();
 
-        // load initial park data
-        $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
-          var parksGeojson = topojson.object(data, data.objects.parks);
-          parkGeoms = parksGeojson.geometries;
-          map_parks([],12);
-        });
+      // re-define GeoJSON filter
+      parkLayer.options.filter = function(feature, layer) {
+        if ( $.inArray( feature.id, parkFilter ) == -1 ) return false;
+        return true;
+      };
+
+      // add parkgeometries to layer
+      if ( parkFilter.length > 0 ) {
+        var len = parkGeoms.length;
+        while (len--) {
+          parkLayer.addData(parkGeoms[len]);        
+        }
+        // zoom to park bounds or default zoomlevel
+        if (zoom === undefined) {
+          map.fitBounds(parkLayer.getBounds());
+        } else {
+          map.setZoom( zoom );
+        }
+      }
+
+    });
+
+  };
+  
+
+  // load initial park data
+  $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
+    var parksGeojson = topojson.object(data, data.objects.parks);
+    parkGeoms = parksGeojson.geometries;
+    filter_parks( searchUrl, 12 );
+  });
+
 
 });
 </script>        

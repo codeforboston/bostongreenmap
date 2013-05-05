@@ -45,7 +45,10 @@ def get_parks(request):
         parks = Park.objects.filter(**kwargs)
         parks_json = dict()
         for p in parks:
-            parks_json[p.name] = p.get_absolute_url()
+            parks_json[p.name] = dict(
+                url=p.get_absolute_url(),
+                id=p.pk,
+            )
         return HttpResponse(json.dumps(parks_json), mimetype='application/json')
 
     except:
