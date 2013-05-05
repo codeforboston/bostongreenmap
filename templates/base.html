@@ -90,7 +90,7 @@
 $(document).ready(function(){
 
 
-  var searchUrl = '/parks/search/?',
+  var searchUrl = '/parks/search/',
       parkParams = {},
       parkGeoms;
 
@@ -113,9 +113,19 @@ $(document).ready(function(){
       delete parkParams[ $(this).attr("id") ];
     }
 
-    filter_parks( searchUrl + $.param(parkParams) );
+    filter_parks( searchUrl + "?" + $.param(parkParams) );
+    history.pushState(parkParams, "BostonGreenMap - Find Your Space!", "?" + $.param(parkParams));
 
   });
+
+
+  // load parks from browser history state or initial url
+  window.onpopstate = function(event) {
+    if ( 'state' in window.history && window.history.state !== null ) {
+      filter_parks( searchUrl + "?" + $.param( event.state ) );
+    } 
+    // TODO: parse url on initial page load
+  };
 
 
   // initialize map
@@ -151,7 +161,7 @@ $(document).ready(function(){
   // map search result
   function filter_parks( url, zoom ) {
 
-    $.getJSON( url, function(data) {
+    $.getJSON( url , function(data) {
       
       var parks = data,
           parkNames = [],
@@ -161,8 +171,6 @@ $(document).ready(function(){
         parkNames.push(p);
         parkFilter.push(parks[p].id);
       }
-
-      console.log("filter: ", parkFilter);
 
       // update typeahead
       var autocomplete = $('#parkname').typeahead({
