@@ -124,6 +124,8 @@ a.dropdown-toggle { cursor: pointer; }
 
 .leaflet-control-geoloc {
   background-image: url("../img/location.png");
+  background-color: #fff;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }

@@ -159,6 +159,27 @@ $(document).ready(function(){
   });
 
 
+  // LocateMe map control
+  var locateMeControl = new L.control({
+    position: "topleft"
+  });
+  locateMeControl.onAdd = function (map) {
+    // Leaflet control container DOM element
+    var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
+    var $link = $( "<a/>", {
+      class: "leaflet-control-geoloc",
+      title: "Locate Me"
+    }).appendTo( $(div) );
+    $link.on( "click", function( event ) {
+      event.preventDefault();
+      // geolocate
+      map.locate({setView: true, maxZoom: 17});
+    });
+    return div;
+  }; 
+  map.addControl(locateMeControl);
+
+
   // initialize parkLayer
   var parkLayer = L.geoJson(null, {
     style: {
@@ -194,7 +215,8 @@ $(document).ready(function(){
       var autocomplete = $('#parkname').typeahead({
         updater: function (item) {
           var parkUrl = parks[ item ].url;
-          window.location.assign( window.location.origin + parkUrl );
+          // window.location.assign( window.location.origin + parkUrl );
+          show_parkDetail( parks[ item ].id );
           return item;
         }
       });
@@ -234,7 +256,6 @@ $(document).ready(function(){
       filter_parks( url, zoom );
     });
   }
-
 
   // park detail slider
   function show_parkDetail( park ) {
