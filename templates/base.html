@@ -46,7 +46,7 @@
                 <li>
                   <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
                     <option value=""></option>
-                    <option value="">All</option>
+                    <option value="">All Neighborhoods</option>
                     {% for n in neighborhoods %}
                       <option value="{{ n.pk }}">{{ n.name }}</option>
                     {% endfor %}
@@ -55,7 +55,7 @@
                 <li>
                   <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
                     <option value=""></option>
-                    <option value="">All</option>
+                    <option value="">All Activities</option>
                     {% for a in activities %}
                       <option value="{{ a.pk }}">{{ a.name }}</option>
                     {% endfor %}
