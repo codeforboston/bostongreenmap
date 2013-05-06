@@ -76,6 +76,7 @@
     
 {% block javascript %}
 <script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/leaflet.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/Bing.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/topojson.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/mapc-layers.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.9.1.min.js"></script>
@@ -149,6 +150,7 @@ $(document).ready(function(){
 
   // initialize map
   var basemap = new L.MAPCTileLayer("basemap"),
+      bing = new L.BingLayer("An8pfp-PjegjSInpD2JyXw5gMufAZBvZ_q3cbJb-kWiZ1H55gpJbxndbFHPsO_HN", "Aerial"),
       boston = new L.LatLng(42.357778, -71.061667);
   var map = new L.Map( "map_canvas", {
     minZoom: 9,
@@ -157,7 +159,7 @@ $(document).ready(function(){
     center: boston,
     layers: [basemap]
   });
-
+  
 
   // LocateMe map control
   var locateMeControl = new L.control({
@@ -196,6 +198,16 @@ $(document).ready(function(){
       return true;
     }
   }).addTo(map);
+
+
+  // Layer control
+  map.addControl(new L.Control.Layers( {
+      "MAPC Basemap": basemap, 
+      "Bing Aerial": bing 
+    }, {
+      "Parks": parkLayer
+    } )
+  );
 
 
   // map search result
@@ -261,7 +273,6 @@ $(document).ready(function(){
   function show_parkDetail( park ) {
     console.log( park );
   }
-  
 
 });
 </script>        
