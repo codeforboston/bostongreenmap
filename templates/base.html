@@ -160,6 +160,7 @@ $(document).ready(function(){
 
   // initialize map
   var basemap = new L.MAPCTileLayer("basemap"),
+      trailmap = new L.MAPCTileLayer("trailmap"),
       bing = new L.BingLayer("An8pfp-PjegjSInpD2JyXw5gMufAZBvZ_q3cbJb-kWiZ1H55gpJbxndbFHPsO_HN", "Aerial"),
       boston = new L.LatLng(42.357778, -71.061667);
   var map = new L.Map( "map_canvas", {
@@ -213,6 +214,7 @@ $(document).ready(function(){
   // Layer control
   map.addControl(new L.Control.Layers( {
       "MAPC Basemap": basemap, 
+      "MAPC Trailmap": trailmap,
       "Bing Aerial": bing 
     }, {
       "Parks": parkLayer
