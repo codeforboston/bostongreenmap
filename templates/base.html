@@ -14,12 +14,13 @@
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
 
+        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+
         <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.css" />
         <!--[if lte IE 8]>
           <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.ie.css" />
         <![endif]-->
          
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
 
@@ -40,16 +41,16 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li>
-                <select id="neighborhoods">
-                  <option value="" selected>Select Your Neighborhood</option>
+                <select class="parkfilter" id="neighborhoods">
+                  <option value="">Select Your Neighborhood</option>
                   {% for n in neighborhoods %}
                     <option value="{{ n.pk }}">{{ n.name }}</option>
                   {% endfor %}
                 </select>
               </li>
               <li>
-                <select id="facility__activity">
-                  <option value="" selected>Select Your Activity</option>
+                <select class="parkfilter" id="facility__activity">
+                  <option value="">Select Your Activity</option>
                   {% for a in activities %}
                     <option value="{{ a.pk }}">{{ a.name }}</option>
                   {% endfor %}
@@ -91,7 +92,6 @@ $(document).ready(function(){
 
 
   var searchUrl = '/parks/search/',
-      parkParams = {},
       parkGeoms;
 
 
@@ -104,28 +104,47 @@ $(document).ready(function(){
   });
 
 
-  // load new parks on dropdown change
-  $("#neighborhoods, #facility__activity").on("change", function() {
-
-    if ( $(this).val() !== "" ) {
-      parkParams[ $(this).attr("id") ] = $(this).val();
-    } else {
-      delete parkParams[ $(this).attr("id") ];
+  // get or set parkfilter dropdown values
+  function set_dropdowns( config ) {
+    // set dropdown values
+    for ( var k in config ) {
+      $( "#" + k ).val( config[k] );
     }
-
-    filter_parks( searchUrl + "?" + $.param(parkParams) );
-    history.pushState(parkParams, "BostonGreenMap - Find Your Space!", "?" + $.param(parkParams));
-
-  });
+  }
+  function get_dropdowns() {
+    var params = {};
+    $(".parkfilter").each( function( index ) {
+      if ( $(this).val() ) params[ $(this).attr("id") ] = $(this).val();
+    });
+    return params;
+  }
 
 
   // load parks from browser history state or initial url
   window.onpopstate = function(event) {
-    if ( 'state' in window.history && window.history.state !== null ) {
-      filter_parks( searchUrl + "?" + $.param( event.state ) );
-    } 
-    // TODO: parse url on initial page load
+    if ( 'state' in window.history && event.state !== null) {
+      set_dropdowns( event.state );
+      filter_parks( searchUrl + "?" + $.param( event.state ) );    
+    } else {
+      var params = $.url().attr('query'),
+          url = searchUrl;
+      if ( params !== "" ) {
+        set_dropdowns( $.url().param() );
+        load_parkGeoms( searchUrl + '?' + params );
+      } else {
+        // load with default zoom level
+        load_parkGeoms( url, 12 );
+      }
+    }
   };
+
+
+  // load new parks on dropdown change
+  $("#neighborhoods, #facility__activity").on("change", function() {
+    var params = get_dropdowns();
+    filter_parks( searchUrl + "?" + $.param(params) );
+    history.pushState(params, "BostonGreenMap - Find Your Space!", "?" + $.param(params));
+  });
 
 
   // initialize map
@@ -166,7 +185,6 @@ $(document).ready(function(){
       var parks = data,
           parkNames = [],
           parkFilter = [];
-
       for(var p in parks) {
         parkNames.push(p);
         parkFilter.push(parks[p].id);
@@ -204,19 +222,25 @@ $(document).ready(function(){
           map.setZoom( zoom );
         }
       }
-
     });
-
   };
+
+
+  // loads all park geometries
+  function load_parkGeoms( url, zoom ) {
+    $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
+      var parksGeojson = topojson.object(data, data.objects.parks);
+      parkGeoms = parksGeojson.geometries;
+      filter_parks( url, zoom );
+    });
+  }
+
+
+  // park detail slider
+  function show_parkDetail( park ) {
+    console.log( park );
+  }
   
-
-  // load initial park data
-  $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
-    var parksGeojson = topojson.object(data, data.objects.parks);
-    parkGeoms = parksGeojson.geometries;
-    filter_parks( searchUrl, 12 );
-  });
-
 
 });
 </script>        
