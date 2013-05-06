@@ -9,118 +9,39 @@ html, body {
   overflow:hidden;
 }
 
+/* Navbar
+-------------------------------------------------- */
 
 .navbar-inner
 {
-	font-family: 'PT Sans',sans-serif;
-	font-size: 18px;
-	line-height: 20px;
-	background-color: #00DC00;
-	background-image: none;
-	background-repeat: repeat-x;
-	filter: none;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
+  background-color: #00DC00;
+  background-image: none;
 }
 
-.navbar .nav-collapse.in .nav { float: left; }
-.navbar .nav-collapse { text-align: left; }
-
-.navbar .nav > li
-{
-	padding: 10px;
+.navbar-search {
+  margin-top: 8px;
 }
 
-.navbar .nav > li > a:hover { color: yellow; }
-ul.nav li.parent { padding-top: 5px; }
-ul.nav ul.actions { margin-left: 10px; }
-
-ul.nav ul.actions li
-{
-	display: inline;
-	font-family: 'PT Sans', sans-serif;
-	font-size: 16px;
-	line-height: 20px;
+.navbar-search .search-query {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
-ul.nav ul.actions { display: inline; }
-
-ul.nav ul.actions li a:link,
-ul.nav ul.actions li a:visited
-{
-	color: black;
-	padding: 0 15px;
-	text-decoration: none;
+.navbar-search li {
+  margin-right: 10px;
 }
-
-ul.nav ul.actions li a:hover,
-ul.nav ul.actions li a:active { color: #666; }
 
 
 /* Map
 -------------------------------------------------- */
 
 #map_canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-
-
-
-#legend ul
-{
-	color: #333;
-	list-style-type: none;
-	padding: 4px 0;
-	margin: 0px;
-	font-size: 11px;
-	text-align: left;
-}
-
-.legwrap
-{
-	bottom: 20px;
-	position: fixed;
-	right: 40px;
-	z-index: 50;
-}
-
-.legwrap .menu-box-inner { padding: 10px; }
-.legwrap .menu-box-item { padding: 6px 10px; }
-
-#legend li hr
-{
-	border-width: 2px 0;
-	float: left;
-	margin: 7px 4px 0 0;
-	width: 14px;
-}
-
-.ct { color: #7f3193; }
-.bl { color: #0874b9; }
-.sl { color: #82c5ec; }
-.or { color: #9dce6b; }
-.ip { color: #229848; }
-.up { color: #845723; }
-.wp { color: #db813f; }
-.ct hr { border-color: #7f3193; }
-.bl hr { border-color: #0874b9; }
-.sl hr { border-color: #82c5ec; }
-.or hr { border-color: #9dce6b; }
-.ip hr { border-color: #229848; }
-.up hr { border-color: #845723; }
-.wp hr { border-color: #db813f; }
-li.dropdown-submenu { position: relative; }
-a.dropdown-toggle { cursor: pointer; }
-
-
-
-
-/* Leaflet */
 
 .leaflet-control-geoloc {
   background-image: url("../img/location.png");
