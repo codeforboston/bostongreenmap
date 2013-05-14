@@ -74,6 +74,34 @@ def get_parks(request):
         # no content
         return HttpResponse(status=204)
 
+def get_facilities(request, park_id):
+    """ Returns facilities as JSON for park id
+    """
+
+    try:
+        park = Park.objects.get(pk=park_id)
+        facilities = Facility.objects.transform(4326).filter(park=park).select_related('facilitytype').prefetch_related('activity') 
+        features = []
+        for f in facilities:
+            activities = [ a.name for a in f.activity.all() ]
+            geojson_prop = dict(
+                name=f.name,
+                icon=f.facilitytype.icon.url,
+                activities = activities,
+                status=f.status,
+                access=f.access,
+                notes=f.notes,
+            )
+            geojson_geom = json.loads(f.geometry.geojson)
+            geojson_feat = dict(type='Feature', geometry=geojson_geom, properties=geojson_prop)
+            features.append(geojson_feat)
+        response = dict(type='FeatureCollection', features=features)
+        return HttpResponse(json.dumps(response), mimetype='application/json')
+
+    except:
+        # no content
+        return HttpResponse(status=204)
+
 
 class HomePageView(TemplateView):
 

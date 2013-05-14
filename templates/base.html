@@ -108,8 +108,8 @@
           <img src="{{src}}" alt="{{caption}}">
         {{/each}}
         
-          <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
-          <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+          <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-2"></i></a>
+          <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-2"></i></a>
         </div>
         {{/if}}
 
@@ -117,29 +117,51 @@
           {{description}}
         </div>
 
+        <div id="activities"></div>
+
         {{#if access}}
-        <div><em>Public Access:</em><br> <span class="park-attr">{{access}}</span></div>
+        <div><em>Public access:</em><br> <span class="park-attr">{{access}}</span></div>
         {{/if}}
 
         {{#if address}}
-        <div>
-          <em>Street addess:</em><br> <span class="park-attr">{{address}}</span></div>
-        </div>
+        <div><em>Street addess:</em><br> <span class="park-attr"><a href="https://maps.google.com/maps?f=q&q={{address}}" target="_blank">{{address}}</a></span></div>
         {{/if}}
 
         {{#if owner}}
-        <div>
-          <em>Owned by:</em><br> <span class="park-attr">{{owner}}</span>
-        </div>
+        <div><em>Owned by:</em><br> <span class="park-attr">{{owner}}</span></div>
         {{/if}}
-
       </div>
     </script>
 
-    <script id="popup-template" type="text/x-handlebars-template">
+    <script id="activities-template" type="text/x-handlebars-template">
+      {{#if activities}}
+      <em>You can do here:</em>
+      <ul class="park-attr">
+      {{#each activities}}
+        <li>{{this}}</li>
+      {{/each}}
+      </ul>
+      {{/if}}
+    </script>
+
+    <script id="parkPopup-template" type="text/x-handlebars-template">
       <h4>{{name}}</h4>
       <a href="#" class="btn btn-small info" title="Show Park Information"><i class="icon-info-sign"></i> Details</a>
       <a href="#" class="btn btn-small zoom" title="Zoom To Park"><i class="icon-zoom-in icon-2"></i> Zoom</a>
+    </script>
+
+    <script id="facilityPopup-template" type="text/x-handlebars-template">
+      <h5>{{name}}</h5>
+      {{#if activities}}
+        <ul>
+        {{#each activities}}
+          <li>{{this}}</li>
+        {{/each}}
+        </ul>
+      {{/if}}
+      {{#if access}}<em>Access:</em> {{access}}<br>{{/if}}
+      {{#if status}}<em>Status:</em> {{status}}<br>{{/if}}
+      {{#if notes}}<em>Notes:</em> {{notes}}{{/if}}
     </script>
 
     {% endverbatim %}
@@ -159,8 +181,12 @@
             parkGeoms, // park geometries
             parkDetailTemplateSource = $("#detail-template").html(),
             parkDetailTemplate = Handlebars.compile(parkDetailTemplateSource),
-            popupTemplateSource = $("#popup-template").html(),
-            popupTemplate = Handlebars.compile(popupTemplateSource);
+            parkPopupTemplateSource = $("#parkPopup-template").html(),
+            parkPopupTemplate = Handlebars.compile(parkPopupTemplateSource),
+            facilityPopupTemplateSource = $("#facilityPopup-template").html(),
+            facilityPopupTemplate = Handlebars.compile(facilityPopupTemplateSource),
+            activitiesTemplateSource = $("#activities-template").html(),
+            activitiesTemplate = Handlebars.compile( activitiesTemplateSource );
 
 
         // resize map_canvas
@@ -277,7 +303,7 @@
           onEachFeature: function (feature, layer) {
 
             var park = $.extend( parks[feature.id], { id: feature.id });
-            var html = popupTemplate(park);
+            var html = parkPopupTemplate(park);
             var div = L.DomUtil.create( "div" );
 
             $(div)
@@ -299,7 +325,10 @@
           filter: function (feature, layer) {
             return true;
           }
-        }).addTo(map);
+        }).addTo( map );
+
+        // initialize facility layer
+        var facilityLayer = L.geoJson(null).addTo( map );
 
 
         // Layer control
@@ -308,6 +337,7 @@
             "MAPC Trailmap": trailmap,
             "Bing Aerial": bing 
           }, {
+            "Park Facilities": facilityLayer,
             "Parks": parkLayer
           } )
         );
@@ -380,6 +410,56 @@
           });
         }
 
+        // load park facilities
+        function load_parkFacilities( parkId ) {
+          var url = "/parks/" + parkId + "/facilities/",
+              activities = [];
+
+          $.getJSON(url, function (data) {
+
+            facilityLayer.options = {
+              pointToLayer: function( feature, latlng ) {
+                var icon = new L.Icon({
+                  iconUrl: feature.properties.icon,
+                  shadowUrl: null,
+                  iconSize: new L.Point(32, 37),
+                  shadowSize: null,
+                  iconAnchor: new L.Point(16, 37),
+                  popupAnchor: new L.Point(2, -32)
+                });
+                return new L.Marker( latlng, {
+                    icon: icon
+                })
+              },
+              onEachFeature: function ( feature, layer ) {
+                $.merge(activities, feature.properties.activities);
+
+                var html = facilityPopupTemplate( feature.properties );
+                var div = L.DomUtil.create( "div" );
+
+                $(div)
+                  .addClass( "popup" )
+                  .append( html );
+
+                layer.bindPopup( div );
+              }
+            }
+
+            facilityLayer.addData( data );
+
+            // render activity list
+            var uniqueActivities = [];
+            $.each(activities, function(i, activity){
+              if($.inArray( activity, uniqueActivities) === -1 ) uniqueActivities.push( activity );
+            });
+
+            // update activity listing
+            var html = activitiesTemplate( { activities: uniqueActivities.sort() } );
+            $("#content .park-detail #activities").append( html );
+
+          });
+        }
+
 
         // park detail slider
         function show_parkDetail( park ) {
@@ -399,6 +479,9 @@
           } else {
             $(".slidesjs-navigation").hide()
           }
+
+          // load park facilities
+          load_parkFacilities( park.id );
 
           // show details
           $("#slider").collapse("show");
