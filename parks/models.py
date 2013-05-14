@@ -203,7 +203,6 @@ class Park(models.Model):
             self.neighborhoods = None
 
 
-
 class Activity(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True)
@@ -220,21 +219,6 @@ class Activity(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)  # Where self.name is the field used for 'pre-populate from'
         super(Activity, self).save(*args, **kwargs)
-
-    # FIXME: does code below require a unique slug field to work?
-    #     while True:
-    #         try:
-    #             super(Activity, self).save()
-    #         # Assuming the IntegrityError is due to a slug fight
-    #         except IntegrityError:
-    #             match_obj = re.match(r'^(.*)-(\d+)$', self.slug)
-    #             if match_obj:
-    #                 next_int = int(match_obj.group(2)) + 1
-    #                 self.slug = match_obj.group(1) + '-' + str(next_int)
-    #             else:
-    #                 self.slug += '-2'
-    #         else:
-    #             break
 
 
 class Facilitytype(models.Model):
@@ -307,10 +291,6 @@ class Facility(models.Model):
 
         super(Facility, self).save(*args, **kwargs)
 
-    # No page for facility exists yet. removing this
-    #@models.permalink
-    #def get_absolute_url(self):
-    #    return ('facility', [slugify(self.name)])
 
 class Story(models.Model):
     RATING_CHOICES = (

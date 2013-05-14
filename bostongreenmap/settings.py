@@ -143,11 +143,7 @@ INSTALLED_APPS = (
     # 'registration',
     'south',
     'parks',
-    'mbta',
-    'tastypie',
     'sorl.thumbnail',
-    'accounts',
-    'profiles',
 )
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
