@@ -5,6 +5,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 body .viewport {
@@ -32,8 +33,13 @@ body .viewport .frame .navbar {
 body .viewport .frame .navbar .navbar-inner {
   border-radius: 0;
   padding-left: 15px; 
-  background-color: #00DC00;
-  background-image: none;
+/*  background-color: #00DC00;
+  background-image: none;*/
+}
+
+body .viewport .frame .navbar .navbar-inner .brand {
+  font-family: "Permanent Marker", cursive;
+  color: #00DC00;
 }
 
 body .viewport .frame .navbar .navbar-inner .navbar-search {
@@ -115,6 +121,11 @@ body .viewport .frame .view .navbar .navbar-inner .btn-navbar {
 
 body .viewport .frame #content {
   margin: auto 15px;
+}
+
+body .viewport .frame #content h1 {
+  font-family: "Permanent Marker", cursive;
+  font-size: 28px;
 }
 
 body .viewport .frame #content h1, body .viewport .frame #content .description, body .viewport .frame #content #parkimages {
