@@ -165,9 +165,11 @@
         $("#slider")
           .on( "shown", function () {
             $("#map_canvas").width( $(window).width() - $("#slider").width() );
+            map.invalidateSize( false );
           })
           .on( "hidden", function() {
             $("#map_canvas").width( $(window).width() );
+            map.invalidateSize( false );
           });
 
 
@@ -256,8 +258,8 @@
         // initialize parkLayer
         var parkLayer = L.geoJson(null, {
           style: {
-            color: "#fff",
-            weight: 1,
+            color: "#00c800",
+            weight: 1.2,
             opacity: 1,
             fillColor: "#00DC00",
             fillOpacity: 0.6
