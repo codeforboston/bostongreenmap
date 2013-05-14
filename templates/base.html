@@ -146,7 +146,8 @@
       $(document).ready(function(){
 
 
-        var searchUrl = '/parks/search/',
+        var defaultZoom = 14,
+            searchUrl = '/parks/search/',
             parks, // park properties
             parkGeoms, // park geometries
             parkDetailTemplateSource = $("#detail-template").html(),
@@ -206,7 +207,7 @@
               load_parkGeoms( searchUrl + '?' + params );
             } else {
               // load with default zoom level
-              load_parkGeoms( url, 12 );
+              load_parkGeoms( url, defaultZoom );
             }
           }
         };
@@ -228,7 +229,7 @@
         var map = new L.Map( "map_canvas", {
           minZoom: 9,
           maxZoom: 17,
-          zoom: 12,
+          zoom: defaultZoom,
           center: boston,
           layers: [basemap]
         });
