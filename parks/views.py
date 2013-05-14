@@ -44,35 +44,35 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
 
-    # try:
-    parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
-    parks_json = dict()
-    for p in parks:
-        # embed all images
-        # width: 270px
-        images = []
-        for i in p.images.all():
-            tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
-            image = dict(
-                src=tn.url,
-                caption=strip_tags(i.caption),
+    try:
+        parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
+        parks_json = dict()
+        for p in parks:
+            # embed all images
+            # width: 270px
+            images = []
+            for i in p.images.all():
+                tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+                image = dict(
+                    src=tn.url,
+                    caption=strip_tags(i.caption),
+                )
+                images.append(image)
+
+            parks_json[p.pk] = dict(
+                url=p.get_absolute_url(),
+                name=p.name,
+                description=p.description,
+                images=images,
+                access=p.get_access_display(),
+                address=p.address,
+                owner=p.parkowner.name,
             )
-            images.append(image)
+        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
 
-        parks_json[p.pk] = dict(
-            url=p.get_absolute_url(),
-            name=p.name,
-            description=p.description,
-            images=images,
-            access=p.get_access_display(),
-            address=p.address,
-            owner=p.parkowner.name,
-        )
-    return HttpResponse(json.dumps(parks_json), mimetype='application/json')
-
-    # except:
-    #     # no content
-    #     return HttpResponse(status=204)
+    except:
+        # no content
+        return HttpResponse(status=204)
 
 
 class HomePageView(TemplateView):
