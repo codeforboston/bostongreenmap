@@ -38,7 +38,7 @@ body .viewport .frame .navbar .navbar-inner {
 }
 
 body .viewport .frame .navbar .navbar-inner .brand {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Carter One', cursive;
   color: #00DC00;
 }
 
@@ -124,7 +124,7 @@ body .viewport .frame #content {
 }
 
 body .viewport .frame #content h1 {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Carter One', cursive;
   font-size: 28px;
 }
 
@@ -171,5 +171,5 @@ body .viewport .frame #content .park-attr {
 }
 
 .popup h4 {
-  font-family: "Permanent Marker", cursive;
+  font-family: 'Carter One', cursive;
 }

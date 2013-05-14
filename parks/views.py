@@ -105,7 +105,7 @@ def get_facilities(request, park_id):
 
 class HomePageView(TemplateView):
 
-    template_name = 'parks/home.html'
+    template_name = 'base.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
