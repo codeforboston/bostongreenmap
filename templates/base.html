@@ -135,6 +135,13 @@
 
       </div>
     </script>
+
+    <script id="popup-template" type="text/x-handlebars-template">
+      <h4>{{name}}</h4>
+      <a href="#" class="btn btn-small info" title="Show Park Information"><i class="icon-info-sign"></i> Details</a>
+      <a href="#" class="btn btn-small zoom" title="Zoom To Park"><i class="icon-zoom-in icon-2"></i> Zoom</a>
+    </script>
+
     {% endverbatim %}
 
 
@@ -146,12 +153,14 @@
       $(document).ready(function(){
 
 
-        var defaultZoom = 14,
+        var defaultZoom = 13,
             searchUrl = '/parks/search/',
             parks, // park properties
             parkGeoms, // park geometries
             parkDetailTemplateSource = $("#detail-template").html(),
-            parkDetailTemplate = Handlebars.compile(parkDetailTemplateSource);
+            parkDetailTemplate = Handlebars.compile(parkDetailTemplateSource),
+            popupTemplateSource = $("#popup-template").html(),
+            popupTemplate = Handlebars.compile(popupTemplateSource);
 
 
         // resize map_canvas
@@ -266,21 +275,25 @@
             fillOpacity: 0.6
           },
           onEachFeature: function (feature, layer) {
-            var div = L.DomUtil.create('div');
-            var html = parks[feature.id].name;
-            var $link = $( "<a/>", {
-              class: "mapPopup",
-              title: "View Park Detail",
-              text: html,
-              href: "javascript:void(0);"
-            })
-            .on( "click", function( event ) {
+
+            var park = $.extend( parks[feature.id], { id: feature.id });
+            var html = popupTemplate(park);
+            var div = L.DomUtil.create( "div" );
+
+            $(div)
+              .addClass( "popup" )
+              .append( html );
+
+            $(div).find(".info").first().on("click", function( event ) {
+              event.preventDefault();
+              show_parkDetail( park );
+            });
+            $(div).find(".zoom").first().on("click", function( event ) {
               event.preventDefault();
               var park = $.extend( parks[feature.id], { id: feature.id });
-              show_parkDetail( park );
-            })
-            .appendTo( $(div) )
-            // feature.id.toString()
+              zoomto_park( park );
+            });
+
             layer.bindPopup( div );
           },
           filter: function (feature, layer) {
@@ -368,24 +381,13 @@
         }
 
 
-        // return LatLngBounds based on parkid
-        function getParkBounds( parkid ) {
-          var len = parkGeoms.length;
-          while (len--) {
-            if ( parkGeoms[len].id == parkid ) {     
-              var parkGeom = new L.GeoJSON( parkGeoms[len] );
-              return parkGeom.getBounds();
-            }     
-          }
-          return false;
-        }
-
-
         // park detail slider
         function show_parkDetail( park ) {
+          // content
           var html = parkDetailTemplate(park);
           $("#content").html( html );
 
+          // image slideshow
           if ( park.images.length > 1 ) {
             $("#parkimages").slidesjs({
               width: 250,
@@ -398,13 +400,29 @@
             $(".slidesjs-navigation").hide()
           }
 
-          // zoom map to park
-          var parkBounds = getParkBounds( park.id );
-          map.fitBounds( parkBounds );
-          
           // show details
           $("#slider").collapse("show");
+        }
 
+
+        // return LatLngBounds based on parkid
+        function get_parkBounds( parkid ) {
+          var len = parkGeoms.length;
+          while (len--) {
+            if ( parkGeoms[len].id == parkid ) {     
+              var parkGeom = new L.GeoJSON( parkGeoms[len] );
+              return parkGeom.getBounds();
+            }     
+          }
+          return false;
+        }
+
+
+        // zoom to park
+        function zoomto_park( park ) {
+          // zoom map to park
+          var parkBounds = get_parkBounds( park.id );
+          map.fitBounds( parkBounds );
         }
 
       });

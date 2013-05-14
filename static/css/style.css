@@ -169,3 +169,7 @@ body .viewport .frame #content .park-attr {
   border-radius: 5px 5px 5px 5px;
   cursor: pointer;
 }
+
+.popup h4 {
+  font-family: "Permanent Marker", cursive;
+}
