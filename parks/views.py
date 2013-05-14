@@ -2,6 +2,7 @@
 from django.core import serializers
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.utils.html import strip_tags
 
 from django.contrib.sites.models import Site
 
@@ -18,10 +19,12 @@ from django.template import RequestContext
 from django.conf import settings
 from mbta.models import MBTAStop
 
+from sorl.thumbnail import get_thumbnail
+
 import json
-
-
 import cgpolyencode
+
+
 current_site = Site.objects.get_current()
 
 
@@ -41,19 +44,35 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
 
-    try:
-        parks = Park.objects.filter(**kwargs)
-        parks_json = dict()
-        for p in parks:
-            parks_json[p.name] = dict(
-                url=p.get_absolute_url(),
-                id=p.pk,
+    # try:
+    parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
+    parks_json = dict()
+    for p in parks:
+        # embed all images
+        # width: 270px
+        images = []
+        for i in p.images.all():
+            tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+            image = dict(
+                src=tn.url,
+                caption=strip_tags(i.caption),
             )
-        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
+            images.append(image)
 
-    except:
-        # no content
-        return HttpResponse(status=204)
+        parks_json[p.pk] = dict(
+            url=p.get_absolute_url(),
+            name=p.name,
+            description=p.description,
+            images=images,
+            access=p.get_access_display(),
+            address=p.address,
+            owner=p.parkowner.name,
+        )
+    return HttpResponse(json.dumps(parks_json), mimetype='application/json')
+
+    # except:
+    #     # no content
+    #     return HttpResponse(status=204)
 
 
 class HomePageView(TemplateView):

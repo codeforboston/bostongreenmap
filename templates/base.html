@@ -1,306 +1,420 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" >
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block title %}Interactive Maps of Boston Metro Area Parks and Greenspaces Presented by Boston Park Advocates {% endblock %} 
-        </title>
-        <meta name="description" content="{% block meta_description %}{% endblock %}" >
-        <meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
+  <head>
 
-            {% block meta %}{% endblock %}
+    <title>{% block title %}Boston Green Map - Find Your Space!{% endblock %}</title>
 
-        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Cabin:400,500' rel='stylesheet' type='text/css'>
+    <meta content="width=device-width,minimum-scale=1,maximum-scale=1" name="viewport">
+    <meta name="description" content="{% block meta_description %}{% endblock %}" >
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %} " >
 
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/chosen/chosen.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/chosen/chosen.css" />
 
-        <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.css" />
-        <!--[if lte IE 8]>
-          <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.ie.css" />
-        <![endif]-->
-         
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/media.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.css" />
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="{{ STATIC_URL }}libs/leaflet/leaflet.ie.css" />
+    <![endif]-->
+    
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
-{% block headscripts %}
-        <script>document.documentElement.className = "js";</script>
-{% endblock %}
+    
+  </head>
+  
+  <body>
 
-    </head>
+    <div class="viewport">
+      <div class="frame">
+        <div id="slider" class="slider nav-collapse collapse width">
+          <div class="collapse-inner">
 
-{% block bodyclass %}
-<body>
-{% endblock %}  
-{% block topnav %}
-<div id="topbar" class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="/">Boston Green Map</a>
-
-          <div class="nav-collapse">
-            <div class="navbar-search">
-              <ul class="nav">
-                <li>
-                  <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
-                    <option value=""></option>
-                    <option value="">All Neighborhoods</option>
-                    {% for n in neighborhoods %}
-                      <option value="{{ n.pk }}">{{ n.name }}</option>
-                    {% endfor %}
-                  </select>
-                </li>
-                <li>
-                  <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
-                    <option value=""></option>
-                    <option value="">All Activities</option>
-                    {% for a in activities %}
-                      <option value="{{ a.pk }}">{{ a.name }}</option>
-                    {% endfor %}
-                  </select>
-                </li>
-                <li>
-                  <input type="text" class="search-query" name="parkname" id="parkname" placeholder="Type a Park Name">    
-                </li>
-              </ul>
-            </div>
-            <ul class="nav pull-right">
-              <li><a class="plan" href="/plan/">PLAN A TRIP</a></li>
-            </ul>
+            <div id="content"></div>
+          
           </div>
+        </div>
+
+        <div class="view">
+          <div class="navbar">
+            <div class="navbar-inner">
+              
+              <a class="brand" href="/">Boston Green Map</a>
+
+              <div class="navbar-search">
+                <ul class="nav">
+                  <li>
+                    <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
+                      <option value=""></option>
+                      <option value="">All Neighborhoods</option>
+                      {% for n in neighborhoods %}
+                        <option value="{{ n.pk }}">{{ n.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </li>
+                  <li>
+                    <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
+                      <option value=""></option>
+                      <option value="">All Activities</option>
+                      {% for a in activities %}
+                        <option value="{{ a.pk }}">{{ a.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </li>
+                  <li>
+                    <input type="text" class="search-query" name="parkname" id="parkname" placeholder="Type a Park Name">    
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <div id="map_canvas"></div>
+
         </div>
       </div>
     </div>
-{% endblock %}
-  
-{% block content %}   
-<div id="map_canvas"></div>     
-{% endblock %}
-    
-{% block javascript %}
-<script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/Bing.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/topojson.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/mapc-layers.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/chosen/chosen.jquery.min.js"></script>
-<script src="{{ STATIC_URL }}parks/js/jstorage.js"></script>
-<script src="{{ STATIC_URL }}libs/jquery/jquery.url.js" type="text/javascript"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
-<!-- script type="text/javascript" src="{{ STATIC_URL }}parks/js/parks.js"></script -->
-{% if user.is_staff %}<script type="text/javascript"> // bp.staff = true; </script>{% endif %}
-{% endblock %}
-	{% block footerscripts %}
-	{% endblock %}
-<script>
-$(document).ready(function(){
+
+    {% block javascript %}
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/leaflet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/leaflet/Bing.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/topojson.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/mapc-layers.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/chosen/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/handlebars.js"></script>
+    <script src="{{ STATIC_URL }}parks/js/jstorage.js"></script>
+    <script src="{{ STATIC_URL }}libs/jquery/jquery.url.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}libs/jquery/jquery.slides.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.js"></script> 
+    <!-- script type="text/javascript" src="{{ STATIC_URL }}parks/js/parks.js"></script -->
+    {% if user.is_staff %}<script type="text/javascript"> // bp.staff = true; </script>{% endif %}
 
 
-  var searchUrl = '/parks/search/',
-      parkGeoms;
+    {% verbatim %}
+    <script id="detail-template" type="text/x-handlebars-template">
+
+      <button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true" data-toggle="collapse" data-target="#slider">×</button>
+
+      <div class="park-detail">
+
+        <h1>{{name}}</h1>
+
+        {{#if images}}
+        <div id="parkimages">
+
+        {{#each images}}
+          <img src="{{src}}" alt="{{caption}}">
+        {{/each}}
+        
+          <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a>
+          <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a>
+        </div>
+        {{/if}}
+
+        <div class="description">
+          {{description}}
+        </div>
+
+        {{#if access}}
+        <div><em>Public Access:</em><br> <span class="park-attr">{{access}}</span></div>
+        {{/if}}
+
+        {{#if address}}
+        <div>
+          <em>Street addess:</em><br> <span class="park-attr">{{address}}</span></div>
+        </div>
+        {{/if}}
+
+        {{#if owner}}
+        <div>
+          <em>Owned by:</em><br> <span class="park-attr">{{owner}}</span>
+        </div>
+        {{/if}}
+
+      </div>
+    </script>
+    {% endverbatim %}
 
 
-  // resize map_canvas
-  var topmargin = $(".navbar").height();
-  $("#map_canvas").css("margin-top", topmargin);
-  $("#map_canvas").css("height", ($(window).height() - topmargin));
-  $(window).on("resize", function(e){
-    $("#map_canvas").css("height", ($(window).height() - topmargin));
-  });
+    {% endblock %}
+
+    {% block footerscripts %}{% endblock %}
+
+    <script type="text/javascript">
+      $(document).ready(function(){
 
 
-  // comboboxes instead of dropdowns
-  $(".chzn-select").chosen();
+        var searchUrl = '/parks/search/',
+            parks, // park properties
+            parkGeoms, // park geometries
+            parkDetailTemplateSource = $("#detail-template").html(),
+            parkDetailTemplate = Handlebars.compile(parkDetailTemplateSource);
 
 
-  // get or set parkfilter dropdown values
-  function set_dropdowns( config ) {
-    // set dropdown values
-    for ( var k in config ) {
-      $( "#" + k ).val( config[k] ).trigger( "liszt:updated" );
-    }
-  }
-  function get_dropdowns() {
-    var params = {};
-    $(".parkfilter").each( function( index ) {
-      if ( $(this).val() ) params[ $(this).attr("id") ] = $(this).val();
-    });
-    return params;
-  }
+        // resize map_canvas
+        var topmargin = $(".navbar").height();
+        $("#map_canvas").css("height", ($(window).height() - topmargin));
+        $(window).on("resize", function(e){
+          $("#map_canvas").css("height", ($(window).height() - topmargin));
+        });
 
 
-  // load parks from browser history state or initial url
-  window.onpopstate = function(event) {
-    if ( 'state' in window.history && event.state !== null) {
-      set_dropdowns( event.state );
-      filter_parks( searchUrl + "?" + $.param( event.state ) );    
-    } else {
-      var params = $.url().attr('query'),
-          url = searchUrl;
-      if ( params !== "" ) {
-        set_dropdowns( $.url().param() );
-        load_parkGeoms( searchUrl + '?' + params );
-      } else {
-        // load with default zoom level
-        load_parkGeoms( url, 12 );
-      }
-    }
-  };
+        // adjust map width based on slider
+        $("#slider")
+          .on( "shown", function () {
+            $("#map_canvas").width( $(window).width() - $("#slider").width() );
+          })
+          .on( "hidden", function() {
+            $("#map_canvas").width( $(window).width() );
+          });
 
 
-  // load new parks on dropdown change
-  $("#neighborhoods, #facility__activity").on("change", function() {
-    var params = get_dropdowns();
-    filter_parks( searchUrl + "?" + $.param(params) );
-    history.pushState(params, "BostonGreenMap - Find Your Space!", "?" + $.param(params));
-  });
+        // comboboxes instead of dropdowns
+        $(".chzn-select").chosen();
 
 
-  // initialize map
-  var basemap = new L.MAPCTileLayer("basemap"),
-      trailmap = new L.MAPCTileLayer("trailmap"),
-      bing = new L.BingLayer("An8pfp-PjegjSInpD2JyXw5gMufAZBvZ_q3cbJb-kWiZ1H55gpJbxndbFHPsO_HN", "Aerial"),
-      boston = new L.LatLng(42.357778, -71.061667);
-  var map = new L.Map( "map_canvas", {
-    minZoom: 9,
-    maxZoom: 17,
-    zoom: 12,
-    center: boston,
-    layers: [basemap]
-  });
-  
-
-  // LocateMe map control
-  var locateMeControl = new L.control({
-    position: "topleft"
-  });
-  locateMeControl.onAdd = function (map) {
-    // Leaflet control container DOM element
-    var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
-    var $link = $( "<a/>", {
-      class: "leaflet-control-geoloc",
-      title: "Locate Me"
-    }).appendTo( $(div) );
-    $link.on( "click", function( event ) {
-      event.preventDefault();
-      // geolocate
-      map.locate({setView: true, maxZoom: 17});
-    });
-    return div;
-  }; 
-  map.addControl(locateMeControl);
-
-
-  // initialize parkLayer
-  var parkLayer = L.geoJson(null, {
-    style: {
-      color: "#fff",
-      weight: 1,
-      opacity: 1,
-      fillColor: "#00DC00",
-      fillOpacity: 0.6
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup( feature.id.toString() );
-    },
-    filter: function (feature, layer) {
-      return true;
-    }
-  }).addTo(map);
-
-
-  // Layer control
-  map.addControl(new L.Control.Layers( {
-      "MAPC Basemap": basemap, 
-      "MAPC Trailmap": trailmap,
-      "Bing Aerial": bing 
-    }, {
-      "Parks": parkLayer
-    } )
-  );
-
-
-  // map search result
-  function filter_parks( url, zoom ) {
-
-    $.getJSON( url , function(data) {
-      
-      var parks = data,
-          parkNames = [],
-          parkFilter = [];
-      for(var p in parks) {
-        parkNames.push(p);
-        parkFilter.push(parks[p].id);
-      }
-
-      // update typeahead
-      var autocomplete = $('#parkname').typeahead({
-        updater: function (item) {
-          var parkUrl = parks[ item ].url;
-          // window.location.assign( window.location.origin + parkUrl );
-          show_parkDetail( parks[ item ].id );
-          return item;
+        // get or set parkfilter dropdown values
+        function set_dropdowns( config ) {
+          // set dropdown values
+          for ( var k in config ) {
+            $( "#" + k ).val( config[k] ).trigger( "liszt:updated" );
+          }
         }
+        function get_dropdowns() {
+          var params = {};
+          $(".parkfilter").each( function( index ) {
+            if ( $(this).val() ) params[ $(this).attr("id") ] = $(this).val();
+          });
+          return params;
+        }
+
+
+        // load parks from browser history state or initial url
+        window.onpopstate = function(event) {
+          if ( 'state' in window.history && event.state !== null) {
+            set_dropdowns( event.state );
+            filter_parks( searchUrl + "?" + $.param( event.state ) );    
+          } else {
+            var params = $.url().attr('query'),
+                url = searchUrl;
+            if ( params !== "" ) {
+              set_dropdowns( $.url().param() );
+              load_parkGeoms( searchUrl + '?' + params );
+            } else {
+              // load with default zoom level
+              load_parkGeoms( url, 12 );
+            }
+          }
+        };
+
+
+        // load new parks on dropdown change
+        $("#neighborhoods, #facility__activity").on("change", function() {
+          var params = get_dropdowns();
+          filter_parks( searchUrl + "?" + $.param(params) );
+          history.pushState(params, "BostonGreenMap - Find Your Space!", "?" + $.param(params));
+        });
+
+
+        // initialize map
+        var basemap = new L.MAPCTileLayer("basemap"),
+            trailmap = new L.MAPCTileLayer("trailmap"),
+            bing = new L.BingLayer("An8pfp-PjegjSInpD2JyXw5gMufAZBvZ_q3cbJb-kWiZ1H55gpJbxndbFHPsO_HN", "Aerial"),
+            boston = new L.LatLng(42.357778, -71.061667);
+        var map = new L.Map( "map_canvas", {
+          minZoom: 9,
+          maxZoom: 17,
+          zoom: 12,
+          center: boston,
+          layers: [basemap]
+        });
+        
+
+        // LocateMe map control
+        var locateMeControl = new L.control({
+          position: "topleft"
+        });
+        locateMeControl.onAdd = function (map) {
+          // Leaflet control container DOM element
+          var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
+          var $link = $( "<a/>", {
+            class: "leaflet-control-geoloc",
+            title: "Locate Me"
+          }).appendTo( $(div) );
+          $link.on( "click", function( event ) {
+            event.preventDefault();
+            // geolocate
+            map.locate({setView: true, maxZoom: 17});
+          });
+          return div;
+        }; 
+        map.addControl(locateMeControl);
+
+
+        // initialize parkLayer
+        var parkLayer = L.geoJson(null, {
+          style: {
+            color: "#fff",
+            weight: 1,
+            opacity: 1,
+            fillColor: "#00DC00",
+            fillOpacity: 0.6
+          },
+          onEachFeature: function (feature, layer) {
+            var div = L.DomUtil.create('div');
+            var html = parks[feature.id].name;
+            var $link = $( "<a/>", {
+              class: "mapPopup",
+              title: "View Park Detail",
+              text: html,
+              href: "javascript:void(0);"
+            })
+            .on( "click", function( event ) {
+              event.preventDefault();
+              var park = $.extend( parks[feature.id], { id: feature.id });
+              show_parkDetail( park );
+            })
+            .appendTo( $(div) )
+            // feature.id.toString()
+            layer.bindPopup( div );
+          },
+          filter: function (feature, layer) {
+            return true;
+          }
+        }).addTo(map);
+
+
+        // Layer control
+        map.addControl(new L.Control.Layers( {
+            "MAPC Basemap": basemap, 
+            "MAPC Trailmap": trailmap,
+            "Bing Aerial": bing 
+          }, {
+            "Parks": parkLayer
+          } )
+        );
+
+
+        // map search result
+        // update typeahead with filtered parks
+        function filter_parks( url, zoom ) {
+
+          $.getJSON( url , function(data) {
+            
+            var parkNames = [],   // park name list for typeahead
+                parkFilter = [],  // park id list for map
+                parkIds = {};     // park name->id mapping for typeahead
+                                  // parkDetail lookup
+
+            parks = data;
+
+            for(var id in parks) { // iterate of park ids
+              parkNames.push( parks[id].name );
+              parkFilter.push( parseInt(id) );
+              parkIds[ parks[id].name ] = id;
+            }
+
+            // update typeahead
+            var autocomplete = $('#parkname').typeahead({
+              updater: function (item) {
+                // var parkUrl = parks[ item ].url;
+                // window.location.assign( window.location.origin + parkUrl );
+                var parkId = parseInt( parkIds[ item ] );
+                var park = $.extend( parks[ parkId ], { id: parkId });
+                show_parkDetail( park );
+                return item;
+              }
+            });
+            autocomplete.data('typeahead').source = parkNames;
+            
+            // remove existing parks from map
+            parkLayer.clearLayers();
+
+            // re-define GeoJSON filter
+            parkLayer.options.filter = function(feature, layer) {
+              if ( $.inArray( feature.id, parkFilter ) == -1 ) return false;
+              return true;
+            };
+
+            // add parkgeometries to layer
+            if ( parkFilter.length > 0 ) {
+              var len = parkGeoms.length;
+              while (len--) {
+                parkLayer.addData(parkGeoms[len]);        
+              }
+              // zoom to park bounds or default zoomlevel
+              if (zoom === undefined) {
+                map.fitBounds(parkLayer.getBounds());
+              } else {
+                map.setZoom( zoom );
+              }
+            }
+          });
+        };
+
+
+        // loads all park geometries
+        function load_parkGeoms( url, zoom ) {
+          $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
+            var parksGeojson = topojson.object(data, data.objects.parks);
+            parkGeoms = parksGeojson.geometries;
+            filter_parks( url, zoom );
+          });
+        }
+
+
+        // return LatLngBounds based on parkid
+        function getParkBounds( parkid ) {
+          var len = parkGeoms.length;
+          while (len--) {
+            if ( parkGeoms[len].id == parkid ) {     
+              var parkGeom = new L.GeoJSON( parkGeoms[len] );
+              return parkGeom.getBounds();
+            }     
+          }
+          return false;
+        }
+
+
+        // park detail slider
+        function show_parkDetail( park ) {
+          var html = parkDetailTemplate(park);
+          $("#content").html( html );
+
+          if ( park.images.length > 1 ) {
+            $("#parkimages").slidesjs({
+              width: 250,
+              height: 250,
+              navigation: false,
+              pagination: false
+            });
+            $(".slidesjs-navigation").show()
+          } else {
+            $(".slidesjs-navigation").hide()
+          }
+
+          // zoom map to park
+          var parkBounds = getParkBounds( park.id );
+          map.fitBounds( parkBounds );
+          
+          // show details
+          $("#slider").collapse("show");
+
+        }
+
       });
-      autocomplete.data('typeahead').source = parkNames;
-      
-      // remove existing parks from map
-      parkLayer.clearLayers();
+    </script>
 
-      // re-define GeoJSON filter
-      parkLayer.options.filter = function(feature, layer) {
-        if ( $.inArray( feature.id, parkFilter ) == -1 ) return false;
-        return true;
-      };
-
-      // add parkgeometries to layer
-      if ( parkFilter.length > 0 ) {
-        var len = parkGeoms.length;
-        while (len--) {
-          parkLayer.addData(parkGeoms[len]);        
-        }
-        // zoom to park bounds or default zoomlevel
-        if (zoom === undefined) {
-          map.fitBounds(parkLayer.getBounds());
-        } else {
-          map.setZoom( zoom );
-        }
+    <!-- UserVoice Widget -->
+    <script type="text/javascript">
+    if ($(window).width() > 480) {
+      var uvOptions = {};
+      (function() {
+        var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+        uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/c4EsGot1BjCp0N0vaR9EOg.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+      })();
       }
-    });
-  };
+    </script>
 
-
-  // loads all park geometries
-  function load_parkGeoms( url, zoom ) {
-    $.getJSON("{{ STATIC_URL }}data/parks.topo.json", function (data) {
-      var parksGeojson = topojson.object(data, data.objects.parks);
-      parkGeoms = parksGeojson.geometries;
-      filter_parks( url, zoom );
-    });
-  }
-
-  // park detail slider
-  function show_parkDetail( park ) {
-    console.log( park );
-  }
-
-});
-</script>        
-
-<!-- UserVoice Widget -->
-<script type="text/javascript">
-if ($(window).width() > 480) {
-  var uvOptions = {};
-  (function() {
-    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/c4EsGot1BjCp0N0vaR9EOg.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
-  }
-</script>
-
-</body>
+  </body>
 </html>
-
