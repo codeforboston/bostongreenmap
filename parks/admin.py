@@ -56,6 +56,7 @@ class LookupAdmin(admin.ModelAdmin):
 class ParkimageAdmin(admin.ModelAdmin):
     list_display = ['pk', 'thumbnail', 'caption', ]
     list_editable = ['caption', ]
+    search_fields = ['caption', ]
     readonly_fields = ('thumbnail',)
 
 
