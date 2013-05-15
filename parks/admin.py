@@ -52,13 +52,19 @@ class LookupAdmin(admin.ModelAdmin):
     list_editable = ['name', ]
 
 
+class ParkimageAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'thumbnail', 'caption', ]
+    list_editable = ['caption', ]
+    readonly_fields = ('thumbnail',)
+
+
 #admin.site.register(Greenspace, admin.OSMGeoAdmin)
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Facilitytype, LookupAdmin)
 admin.site.register(Park, ParkAdmin)
 admin.site.register(Parktype, LookupAdmin)
 admin.site.register(Parkowner, LookupAdmin)
-admin.site.register(Parkimage, admin.ModelAdmin)
+admin.site.register(Parkimage, ParkimageAdmin)
 admin.site.register(Neighborhood, admin.OSMGeoAdmin)
 admin.site.register(Activity, LookupAdmin)
 admin.site.register(Event)

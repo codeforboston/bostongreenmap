@@ -136,6 +136,8 @@ class Parkimage(models.Model):
              return u'<img width="%s" height="%s" src="%s" alt="%s" />' % (thumb.width, thumb.height, thumb.url, self.caption)
          else:
              return None
+    thumbnail.short_description = 'Image'
+    thumbnail.allow_tags = True
     
 
 class Park(models.Model):

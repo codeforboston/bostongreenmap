@@ -213,7 +213,7 @@ LOGGING = {
     }
 }
 
-ADMIN_THUMBS_SIZE = '150'
+ADMIN_THUMBS_SIZE = '160x120'
 
 
 # import local settings
