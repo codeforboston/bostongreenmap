@@ -90,8 +90,12 @@
         <div id="parkimages">
 
         {{#each images}}
-          <img src="{{src}}" alt="{{caption}}">
+          <div>
+            <img src="{{src}}" alt="{{caption}}"><br>
+            <span class="caption">{{caption}}</span>
+          </div>
         {{/each}}
+        
         
           <a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-2"></i></a>
           <a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-2"></i></a>

@@ -139,20 +139,24 @@ body .viewport .frame #content .park-attr {
 /* Parkimages
 -------------------------------------------------- */
 
-#slides {
+#parkimages {
   display: none
 }
 
-#slides .slidesjs-navigation {
+#parkimages .caption {
+  font-style: italic;
+}
+
+#parkimages .slidesjs-navigation {
   margin-top:3px;
 }
 
-#slides .slidesjs-previous {
+#parkimages .slidesjs-previous {
   margin-right: 5px;
   float: left;
 }
 
-#slides .slidesjs-next {
+#parkimages .slidesjs-next {
   margin-right: 5px;
   float: left;
 }
