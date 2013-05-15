@@ -139,8 +139,8 @@ body .viewport .frame #content .park-attr {
 /* Parkimages
 -------------------------------------------------- */
 
-#parkimages {
-  display: none
+#parkimages img {
+  border: 1px solid #ccc;
 }
 
 #parkimages .caption {
