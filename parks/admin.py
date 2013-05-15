@@ -40,7 +40,7 @@ class FacilityAdmin(admin.OSMGeoAdmin):
 class LookupAdmin(admin.ModelAdmin):
 
     def ic(self, obj):
-        if obj.icon:
+        if hasattr(obj, 'icon'):
             thumb = default.backend.get_thumbnail(obj.icon.file,"24")
             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
         else:
