@@ -138,6 +138,11 @@ class Parkimage(models.Model):
              return None
     thumbnail.short_description = 'Image'
     thumbnail.allow_tags = True
+
+    def get_parks_string(self):
+        parks = [p.name for p in self.parks.all()]
+        return ", ".join(parks)
+    get_parks_string.short_description = 'Parks'
     
 
 class Park(models.Model):
@@ -165,7 +170,7 @@ class Park(models.Model):
     events = models.ManyToManyField("Event", related_name="events", blank=True, null=True)
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField(blank=True, null=True)
-    images = models.ManyToManyField(Parkimage, blank=True, null=True)
+    images = models.ManyToManyField(Parkimage, blank=True, null=True, related_name='parks')
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
