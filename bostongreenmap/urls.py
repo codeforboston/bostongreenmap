@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
+    # grappelli
+    url(r'^grappelli/', include('grappelli.urls')),
+
 )
 
 if settings.DEBUG:
