@@ -18,15 +18,8 @@ window.bgm = window.bgm || {};
 
   //-- Urls and hashes --//
 
-  window.onpopstate = function(event) {
-    if ( 'state' in window.history && event.state !== null) {
-      // back button for exploring filters
-      // FIXME: back to park detail doesn't work
-      set_dropdowns( event.state );
-      filter_parks( searchUrl + "?" + $.param( event.state ) ); 
-    } else {
-      
-      var params = $.url().attr('query'),
+  window.onload = function(event) {
+    var params = $.url().attr('query'),
           hash = window.location.hash,
           url = searchUrl;
 
@@ -39,6 +32,16 @@ window.bgm = window.bgm || {};
       } else {
         load_parkGeoms( url, defaultZoom );
       }
+  }
+
+  window.onpopstate = function(event) {
+    if (!event.state) return;
+
+    if ( 'state' in window.history && event.state !== null) {
+      // back button for exploring filters
+      // FIXME: back to park detail doesn't work
+      set_dropdowns( event.state );
+      filter_parks( searchUrl + "?" + $.param( event.state ) ); 
     }
   };
 
@@ -354,3 +357,8 @@ window.bgm = window.bgm || {};
   }
 
 })();
+
+
+$(function(){
+  
+});
