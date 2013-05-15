@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
 from sorl.thumbnail import get_thumbnail, default
+
 import re
 
 # south introspection rules
@@ -255,13 +256,6 @@ class Facility(models.Model):
     class Meta:
         verbose_name = _('Facility')
         verbose_name_plural = _('Facilities')
-
-    def parkimage_thumb(self):
-         if self.park.image:
-             thumb = default.backend.get_thumbnail(self.park.image.file, settings.ADMIN_THUMBS_SIZE)
-             return u'<img width="%s" src="%s" />' % (thumb.width, thumb.url)
-         else:
-             return None
 
     def activity_string(self):
         out = []
