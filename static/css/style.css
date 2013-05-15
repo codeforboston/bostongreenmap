@@ -181,3 +181,17 @@ body .viewport .frame #content .park-attr {
 .popup h4 {
   font-family: 'Carter One', cursive;
 }
+
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 480px) { 
+
+  body .viewport .frame .slider .collapse-inner {
+    width: 320px;
+  }
+
+  .navbar-search .nav li {
+    margin-bottom: 6px;
+  }
+
+}
