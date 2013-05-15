@@ -243,7 +243,7 @@ window.bgm = window.bgm || {};
   // map search result and update typeahead with filtered parks
   function filter_parks( url, zoom ) {
     $.getJSON( url , function(data) {
-      
+
       var parkNames = [],   // park name list for typeahead
           parkFilter = [],  // park id list for map
           parkIds = {};     // park name->id mapping for typeahead
@@ -264,6 +264,7 @@ window.bgm = window.bgm || {};
           var parkId = parseInt( parkIds[ item ] );
           var park = $.extend( parks[ parkId ], { id: parkId });
           show_parkDetail( park );
+          zoomto_park( park );
           return item;
         }
       });
@@ -326,6 +327,7 @@ window.bgm = window.bgm || {};
     $("#slider").collapse("show");
 
     // push url
+    // FIXME: replace root
     history.pushState(park, park.name + " | Boston Green Map", "#" + park.url );
   }
 
