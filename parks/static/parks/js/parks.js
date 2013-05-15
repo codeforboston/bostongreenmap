@@ -266,7 +266,6 @@ window.bgm = window.bgm || {};
           // window.location.assign( window.location.origin + parkUrl );
           var parkId = parseInt( parkIds[ item ] );
           var park = $.extend( parks[ parkId ], { id: parkId });
-          show_parkDetail( park );
           zoomto_park( park );
           return item;
         }
