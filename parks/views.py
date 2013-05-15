@@ -10,9 +10,12 @@ from django.template import RequestContext
 from sorl.thumbnail import get_thumbnail
 
 import json
+import logging
 
 from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype
 
+
+logger = logging.getLogger(__name__)
 
 def get_topnav_data():
     """ Returns lists of all Neighborhoods, Activities and 
@@ -38,12 +41,16 @@ def get_parks(request):
             # width: 270px
             images = []
             for i in p.images.all():
-                tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
-                image = dict(
-                    src=tn.url,
-                    caption=strip_tags(i.caption),
-                )
-                images.append(image)
+                try: 
+                    tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+                    image = dict(
+                        src=tn.url,
+                        caption=strip_tags(i.caption),
+                    )
+                    images.append(image)
+                except IOError, e:
+                    logger.error(e)
+
 
             parks_json[p.pk] = dict(
                 url=p.get_absolute_url(),
