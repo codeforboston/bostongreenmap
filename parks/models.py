@@ -124,12 +124,11 @@ class Parkimage(models.Model):
     class Meta:
         verbose_name = _('Parkimage')
         verbose_name_plural = _('Parkimages')
+        ordering = ['pk']
 
     def __unicode__(self):
-        if self.caption:
-            return '%i: %s...' % (self.pk, strip_tags(self.caption)[:30])
-        else:
-            return str(self.pk)
+        caption = getattr(self, 'caption', '')
+        return '%i: %s' % (self.pk, strip_tags(caption))
 
     def thumbnail(self):
          if self.image:

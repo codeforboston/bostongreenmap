@@ -58,6 +58,7 @@ class ParkimageAdmin(admin.ModelAdmin):
     list_editable = ['caption', ]
     search_fields = ['caption', ]
     readonly_fields = ('thumbnail',)
+    list_per_page = 20
 
 
 #admin.site.register(Greenspace, admin.OSMGeoAdmin)
