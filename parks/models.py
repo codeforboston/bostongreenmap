@@ -267,7 +267,8 @@ class Facility(models.Model):
         out = []
         for activity in self.activity.all():
             out.append(activity.name)
-        return ",".join(out)
+        return ", ".join(out)
+    activity_string.short_description = 'Activities'
 
     def parktype_string(self):
         return self.park.parktype
