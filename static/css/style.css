@@ -194,4 +194,8 @@ body .viewport .frame #content .park-attr {
     margin-bottom: 6px;
   }
 
+  .navbar-search .nav select, .navbar-search .nav input {
+    width: 280px;
+  }
+
 }
