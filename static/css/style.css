@@ -32,9 +32,6 @@ body .viewport .frame .navbar {
 
 body .viewport .frame .navbar .navbar-inner {
   border-radius: 0;
-  padding-left: 15px; 
-/*  background-color: #00DC00;
-  background-image: none;*/
 }
 
 body .viewport .frame .navbar .navbar-inner .brand {
@@ -43,7 +40,11 @@ body .viewport .frame .navbar .navbar-inner .brand {
 }
 
 body .viewport .frame .navbar .navbar-inner .navbar-search {
-  margin-top: 8px;
+  margin-top: 7px;
+}
+
+body .viewport .frame .navbar .navbar-inner .navbar-search .search-query {
+  min-height: 25px;
 }
 
 body .viewport .frame .navbar .navbar-inner .navbar-search li {
@@ -116,6 +117,8 @@ body .viewport .frame .view .navbar .navbar-inner .btn-navbar {
   float: left; 
 }
 
+
+
 /* Slider Content
 -------------------------------------------------- */
 
@@ -175,19 +178,21 @@ body .viewport .frame #content .park-attr {
 }
 
 .leaflet-popup-content {
-  min-width: 140px;
+  min-width: 160px;
+  max-width: 200px;
 }
 
 .popup h4 {
   font-family: 'Carter One', cursive;
 }
 
-.leaflet-popup-content {
-  max-width: 200px;
+.navbar-inner {
+  min-height: 40px;
 }
 
+/* Smartphones (portrait)
+-------------------------------------------------- */
 
-/* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) { 
 
   body .viewport .frame .slider .collapse-inner {

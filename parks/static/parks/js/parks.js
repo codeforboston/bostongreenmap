@@ -1,6 +1,6 @@
 window.bgm = window.bgm || {};
 
-(function(){
+$(function(){  
 
   var defaultZoom = 13,
       searchUrl = '/parks/search/',
@@ -18,20 +18,18 @@ window.bgm = window.bgm || {};
 
   //-- Urls and hashes --//
 
-  window.onload = function(event) {
-    var params = $.url().attr('query'),
-          hash = window.location.hash,
-          url = searchUrl;
+  var params = $.url().attr('query'),
+        hash = window.location.hash,
+        url = searchUrl;
 
-      if ( params !== "" ) {
-        set_dropdowns( $.url().param() );
-        load_parkGeoms( searchUrl + '?' + params );
-      } else if ( hash ) {
-        var slug = hash.split("/")[2];
-        load_parkGeoms( searchUrl + '?slug=' + slug );
-      } else {
-        load_parkGeoms( url, defaultZoom );
-      }
+  if ( params !== "" ) {
+    set_dropdowns( $.url().param() );
+    load_parkGeoms( searchUrl + '?' + params );
+  } else if ( hash ) {
+    var slug = hash.split("/")[2];
+    load_parkGeoms( searchUrl + '?slug=' + slug );
+  } else {
+    load_parkGeoms( url, defaultZoom );
   }
 
   window.onpopstate = function(event) {
@@ -46,17 +44,17 @@ window.bgm = window.bgm || {};
   };
 
 
-  //-- Layout adjustments --//
+  //-- Layout --//
+
+  // comboboxes instead of dropdowns
+  $(".chzn-select").chosen();
 
   // resize map_canvas
-  var topmargin = $(".navbar").height();
+  var topmargin =  $(".view .navbar-inner").outerHeight();
   $("#map_canvas").css("height", ($(window).height() - topmargin));
   $(window).on("resize", function(e){
     $("#map_canvas").css("height", ($(window).height() - topmargin));
   });
-
-  // comboboxes instead of dropdowns
-  $(".chzn-select").chosen();
 
   // adjust map width based on slider
   $("#slider")
@@ -355,9 +353,4 @@ window.bgm = window.bgm || {};
     map.fitBounds( parkBounds );
   }
 
-})();
-
-
-$(function(){
-  
 });
