@@ -216,6 +216,11 @@ LOGGING = {
 ADMIN_THUMBS_SIZE = '160x120'
 
 
+# 3rd party services
+GA_TRACKING_ID = ''
+USERVOICE_FORUM_ID = ''
+
+
 # import local settings
 try:
     from local_settings import *

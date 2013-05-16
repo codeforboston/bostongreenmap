@@ -6,6 +6,7 @@ from django.utils.html import strip_tags
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.conf import settings
 
 from sorl.thumbnail import get_thumbnail
 
@@ -103,6 +104,8 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['neighborhoods'], context['activities'] = get_topnav_data()
+        context['ga_tracking_id'] = getattr(settings, 'GA_TRACKING_ID', '')
+        context['uservoice_forum_id'] = getattr(settings, 'USERVOICE_FORUM_ID', '')
 
         return context
 
