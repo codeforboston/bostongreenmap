@@ -207,4 +207,8 @@ body .viewport .frame #content .park-attr {
     width: 280px;
   }
 
+  #uvTab {
+    display: none;
+  }
+
 }
