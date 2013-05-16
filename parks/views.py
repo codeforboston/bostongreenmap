@@ -39,7 +39,6 @@ def get_parks(request):
         parks_json = dict()
         for p in parks:
             # embed all images
-            # width: 270px
             images = []
             for i in p.images.all():
                 try: 
