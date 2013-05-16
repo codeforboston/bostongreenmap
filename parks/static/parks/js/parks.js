@@ -104,7 +104,7 @@ window.bgm = window.bgm || {};
       boston = new L.LatLng(42.357778, -71.061667),
       map = new L.Map( "map_canvas", {
         minZoom: 9,
-        maxZoom: 17,
+        maxZoom: 18,
         zoom: defaultZoom,
         center: boston,
         layers: [basemap]
