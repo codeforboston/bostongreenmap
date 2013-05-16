@@ -13,7 +13,8 @@ $(function(){
       facilityPopupTemplateSource = $("#facilityPopup-template").html(),
       facilityPopupTemplate = Handlebars.compile(facilityPopupTemplateSource),
       activitiesTemplateSource = $("#activities-template").html(),
-      activitiesTemplate = Handlebars.compile( activitiesTemplateSource );
+      activitiesTemplate = Handlebars.compile( activitiesTemplateSource ),
+      mappedParkFacilities = [] // list of parks with rendered facilities;
 
 
   //-- Urls and hashes --//
@@ -190,6 +191,11 @@ $(function(){
 
   // load park facilities
   function load_parkFacilities( parkId ) {
+
+    // facilities already on map?
+    if($.inArray( parkId, mappedParkFacilities) !== -1 ) return;
+    mappedParkFacilities.push( parkId );
+
     var url = "/parks/" + parkId + "/facilities/",
         activities = [];
 
