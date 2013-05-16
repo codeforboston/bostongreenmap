@@ -182,6 +182,10 @@ body .viewport .frame #content .park-attr {
   font-family: 'Carter One', cursive;
 }
 
+.leaflet-popup-content {
+  max-width: 200px;
+}
+
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) { 
