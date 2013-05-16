@@ -12,8 +12,6 @@ $(function(){
       parkPopupTemplate = Handlebars.compile(parkPopupTemplateSource),
       facilityPopupTemplateSource = $("#facilityPopup-template").html(),
       facilityPopupTemplate = Handlebars.compile(facilityPopupTemplateSource),
-      activitiesTemplateSource = $("#activities-template").html(),
-      activitiesTemplate = Handlebars.compile( activitiesTemplateSource ),
       mappedParkFacilities = [] // list of parks with rendered facilities;
 
 
@@ -193,7 +191,10 @@ $(function(){
   function load_parkFacilities( parkId ) {
 
     // facilities already on map?
-    if($.inArray( parkId, mappedParkFacilities) !== -1 ) return;
+    if($.inArray( parkId, mappedParkFacilities) !== -1 ) {
+      render_parkActivityList( parks[parkId].activities );
+      return;
+    }
     mappedParkFacilities.push( parkId );
 
     var url = "/parks/" + parkId + "/facilities/",
@@ -218,8 +219,8 @@ $(function(){
         onEachFeature: function ( feature, layer ) {
           $.merge(activities, feature.properties.activities);
 
-          var html = facilityPopupTemplate( feature.properties );
-          var div = L.DomUtil.create( "div" );
+          var html = facilityPopupTemplate( feature.properties ),
+              div = L.DomUtil.create( "div" );
 
           $(div)
             .addClass( "popup" )
@@ -238,9 +239,9 @@ $(function(){
       });
 
       // update activity listing
-      var html = activitiesTemplate( { activities: uniqueActivities.sort() } );
-      $("#content .park-detail #activities").append( html );
-
+      parks[parkId].activities = uniqueActivities.sort();
+      render_parkActivityList( parks[parkId].activities );
+    
     });
   }
 
@@ -337,6 +338,14 @@ $(function(){
     history.pushState(park, park.name + " | Boston Green Map", "#" + park.url );
   }
 
+  // render activites list
+  function render_parkActivityList( activities ) {
+    var activitiesTemplateSource = $("#activities-template").html(),
+        activitiesTemplate = Handlebars.compile( activitiesTemplateSource ),
+        html = activitiesTemplate( { activities: activities } );
+    $("#content .park-detail #activities").append( html );
+  }
+  
 
   //-- Utilities --//
 
