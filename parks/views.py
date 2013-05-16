@@ -1,5 +1,5 @@
 # Views for Parks
-from django.core import serializers
+from django.core import urlresolvers
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.utils.html import strip_tags
@@ -33,6 +33,7 @@ def get_parks(request):
 
     querydict = request.GET
     kwargs = querydict.dict()
+    user = request.user
 
     try:
         parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
@@ -51,7 +52,6 @@ def get_parks(request):
                 except IOError, e:
                     logger.error(e)
 
-
             parks_json[p.pk] = dict(
                 url=p.get_absolute_url(),
                 name=p.name,
@@ -61,6 +61,9 @@ def get_parks(request):
                 address=p.address,
                 owner=p.parkowner.name,
             )
+
+            if user.has_perm('parks.change_park'):
+                parks_json[p.pk]['change_url'] = urlresolvers.reverse('admin:parks_park_change', args=(p.id,))
         return HttpResponse(json.dumps(parks_json), mimetype='application/json')
 
     except:
@@ -70,6 +73,8 @@ def get_parks(request):
 def get_facilities(request, park_id):
     """ Returns facilities as JSON for park id
     """
+
+    user = request.user
 
     try:
         park = Park.objects.get(pk=park_id)
@@ -85,6 +90,8 @@ def get_facilities(request, park_id):
                 access=f.access,
                 notes=f.notes,
             )
+            if user.has_perm('parks.change_facility'):
+                geojson_prop['change_url'] = urlresolvers.reverse('admin:parks_facility_change', args=(f.id,))
             geojson_geom = json.loads(f.geometry.geojson)
             geojson_feat = dict(type='Feature', geometry=geojson_geom, properties=geojson_prop)
             features.append(geojson_feat)

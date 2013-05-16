@@ -91,6 +91,10 @@
 
       <div class="park-detail">
 
+        {{#if change_url}}
+        <span class="change-link"><a href="{{change_url}}" target="_blank">Edit Park</a></span>
+        {{/if}}
+
         <h1>{{name}}</h1>
 
         {{#if images}}
@@ -147,6 +151,9 @@
     </script>
 
     <script id="facilityPopup-template" type="text/x-handlebars-template">
+      {{#if change_url}}
+      <span class="change-link"><a href="{{change_url}}" target="_blank">Edit Facility</a></span>
+      {{/if}}
       <h5>{{name}}</h5>
       {{#if activities}}
         <ul>
