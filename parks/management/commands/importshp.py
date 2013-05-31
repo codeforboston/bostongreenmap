@@ -24,24 +24,21 @@ class Command(BaseCommand):
             }
         },
         'parks': {
-            'file': 'data/parks.shp',
+            'file': 'fixtures/shp/quincy_parks.shp',
             'model': Park,
             'mapping': {
-                'os_id': 'OS_ID',
-                'name': 'NAME',
-                'alt_name': 'ALT_NAME',
-                'address': 'Address',
-                'phone': 'Phone',
-                'access': 'Access',
+                'os_id': 'os_id',
+                'name': 'Quinc_Name',
                 'geometry': 'MULTIPOLYGON',
             }
         },
         'neighborhoods': {
-            'file': 'data/neighborhoods.shp',
+            'file': 'fixtures/shp/quincy.shp',
             'model': Neighborhood,
             'mapping': {
                 'n_id': 'n_id',
                 'name': 'name',
+                'slug': 'slug',
                 'geometry': 'MULTIPOLYGON',
             }
         }
