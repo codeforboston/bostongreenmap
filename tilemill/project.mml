@@ -1,0 +1,90 @@
+{
+  "bounds": [
+    -71.24290000000002,
+    42.2194,
+    -70.8598,
+    42.4452
+  ],
+  "center": [
+    -71.08460000000002,
+    42.3382,
+    12
+  ],
+  "format": "png",
+  "interactivity": false,
+  "minzoom": 0,
+  "maxzoom": 18,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        -71.21854858136366,
+        42.22813863980746,
+        -70.87392128413008,
+        42.4378152731995
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "( SELECT * FROM parks_park ) AS parks",
+        "key_field": "id",
+        "geometry_field": "geometry",
+        "extent_cache": "auto",
+        "extent": "223234.124200002,886447.376027365,251512.167105625,909888.173499986",
+        "host": "localhost",
+        "port": "5432",
+        "user": "USER",
+        "password": "PASSWORD",
+        "dbname": "bostongreenmap",
+        "id": "parks",
+        "project": "greenboston",
+        "srs": "+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+      },
+      "id": "park-geometry",
+      "class": "",
+      "srs-name": "custom",
+      "srs": "+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
+      "advanced": {},
+      "name": "park-geometry"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -71.21854858136366,
+        42.22813863980746,
+        -70.87392128413008,
+        42.4378152731995
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(SELECT * FROM parks_park ORDER BY area DESC) AS park",
+        "key_field": "id",
+        "geometry_field": "geometry",
+        "extent_cache": "auto",
+        "extent": "223234.124200002,886447.376027365,251512.167105625,909888.173499986",
+        "dbname": "bostongreenmap",
+        "host": "localhost",
+        "port": "5432",
+        "user": "USER",
+        "password": "PASSWORD",
+        "id": "park-labels",
+        "project": "greenboston",
+        "srs": "+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs"
+      },
+      "id": "park-labels",
+      "class": "",
+      "srs-name": "custom",
+      "srs": "+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs",
+      "advanced": {},
+      "name": "park-labels"
+    }
+  ],
+  "scale": 1,
+  "metatile": 4,
+  "name": "Boston Green",
+  "description": "Green spaces for the Boston Green Project",
+  "attribution": ""
+}

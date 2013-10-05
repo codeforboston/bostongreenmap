@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-71.24290000000002,42.2194,-70.8598,42.4452</Parameter>
+  <Parameter name="center">-71.08460000000002,42.3382,12</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">18</Parameter>
+  <Parameter name="name"><![CDATA[Boston Green]]></Parameter>
+  <Parameter name="description"><![CDATA[Green spaces for the Boston Green Project]]></Parameter>
+</Parameters>
+
+
+<Style name="park-geometry" filter-mode="first" >
+  <Rule>
+    <LineSymbolizer stroke="#007600" stroke-width="0.5" />
+    <PolygonSymbolizer fill-opacity="0.8" fill="#00dc00" />
+  </Rule>
+</Style>
+<Layer name="park-geometry"
+  srs="+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs">
+    <StyleName>park-geometry</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[( SELECT * FROM parks_park ) AS parks]]></Parameter>
+       <Parameter name="key_field"><![CDATA[id]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geometry]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[223234.124200002,886447.376027365,251512.167105625,909888.173499986]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="port"><![CDATA[5432]]></Parameter>
+       <Parameter name="user"><![CDATA[django]]></Parameter>
+       <Parameter name="password"><![CDATA[django]]></Parameter>
+       <Parameter name="dbname"><![CDATA[bostongreenmap]]></Parameter>
+       <Parameter name="id"><![CDATA[parks]]></Parameter>
+       <Parameter name="project"><![CDATA[greenboston]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs]]></Parameter>
+    </Datasource>
+  </Layer>
+
+<Style name="park-labels" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>12500</MaxScaleDenominator>
+    <TextSymbolizer size="14" character-spacing="3" face-name="Open Sans Italic" fill="#007600" halo-fill="#ffffff" minimum-distance="70" wrap-width="50" ><![CDATA[[name]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>50000</MaxScaleDenominator>
+    <MinScaleDenominator>12500</MinScaleDenominator>
+    <TextSymbolizer size="12" character-spacing="3" face-name="Open Sans Italic" fill="#007600" halo-fill="#ffffff" minimum-distance="70" wrap-width="50" ><![CDATA[[name]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>100000</MaxScaleDenominator>
+    <MinScaleDenominator>50000</MinScaleDenominator>
+    <TextSymbolizer size="10" face-name="Open Sans Italic" fill="#007600" halo-fill="#ffffff" minimum-distance="70" wrap-width="50" character-spacing="2" ><![CDATA[[name]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>200000</MaxScaleDenominator>
+    <MinScaleDenominator>100000</MinScaleDenominator>
+    <TextSymbolizer size="9" face-name="Open Sans Italic" fill="#007600" halo-fill="#ffffff" minimum-distance="70" wrap-width="50" character-spacing="2" ><![CDATA[[name]]]></TextSymbolizer>
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>200000</MinScaleDenominator>
+    <TextSymbolizer face-name="Open Sans Italic" fill="#007600" halo-fill="#ffffff" minimum-distance="70" wrap-width="50" character-spacing="2" ><![CDATA[[name]]]></TextSymbolizer>
+  </Rule>
+</Style>
+<Layer name="park-labels"
+  srs="+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs">
+    <StyleName>park-labels</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[(SELECT * FROM parks_park ORDER BY area DESC) AS park]]></Parameter>
+       <Parameter name="key_field"><![CDATA[id]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[geometry]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[223234.124200002,886447.376027365,251512.167105625,909888.173499986]]></Parameter>
+       <Parameter name="dbname"><![CDATA[bostongreenmap]]></Parameter>
+       <Parameter name="host"><![CDATA[localhost]]></Parameter>
+       <Parameter name="port"><![CDATA[5432]]></Parameter>
+       <Parameter name="user"><![CDATA[django]]></Parameter>
+       <Parameter name="password"><![CDATA[django]]></Parameter>
+       <Parameter name="id"><![CDATA[park-labels]]></Parameter>
+       <Parameter name="project"><![CDATA[greenboston]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=lcc +lat_1=42.68333333333333 +lat_2=41.71666666666667 +lat_0=41 +lon_0=-71.5 +x_0=200000 +y_0=750000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>
