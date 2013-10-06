@@ -196,13 +196,15 @@ class Park(models.Model):
     def save(self, *args, **kwargs):
 
         self.area = self.geometry.area
-        self.slug = slugify(self.name)
+        # FIXME: we need a better slugify routine
+        self.slug = '%s-%d' % (slugify(self.name), self.id)
 
         super(Park, self).save(*args, **kwargs)
 
         try:
             # cache containing neighorhood
             # doesn't work with admin forms, m2m get cleared during admin save
+            # FIXME: improve routine - compare neighborhoods we intersect with against already stored neighborhoods
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=self.geometry)
             self.neighborhoods.clear()
             self.neighborhoods.add(*neighborhoods)
