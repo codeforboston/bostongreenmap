@@ -1,0 +1,25 @@
+{
+  "name": "bostongreenmap-client",
+  "version": "0.0.1",
+  "homepage": "https://github.com/codeforboston/bostongreenmap",
+  "authors": [
+    "Christian Spanring <cspanring@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.0.0",
+    "chosen": "~1.0.0",
+    "font-awesome": "~3.2.1",
+    "leaflet": "~0.6.4",
+    "slidesjs3-bower": "*",
+    "purl": "~2.3.1",
+    "handlebars": "~1.0.0"
+  }
+}

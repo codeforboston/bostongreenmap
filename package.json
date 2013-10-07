@@ -1,0 +1,23 @@
+{
+  "name": "bostongreenmap-client",
+  "version": "0.0.1",
+  "description": "A map promoting green spaces in the Metro Boston Area.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeforboston/bostongreenmap.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/codeforboston/bostongreenmap/issues"
+  }
+}
