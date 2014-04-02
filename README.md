@@ -1,4 +1,4 @@
-# Boston Green Map
+# Boston Green
 
 A map promoting green spaces in the Metro Boston Area.
 
@@ -26,7 +26,7 @@ There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the 
 
 ## Installation
 
-The Boston Green Map is a [Django](https://www.djangoproject.com/) project with spatial functionality, also called GeoDjango. Data storage and enabler for most spatial functionality is the [PostgreSQL](http://www.postgresql.org/) extension [PostGIS](http://postgis.net/). Minimum requirements for running this project are therefore Python and PostgreSQL/PostGIS. 
+The Boston Green is a [Django](https://www.djangoproject.com/) project with spatial functionality, also called GeoDjango. Data storage and enabler for most spatial functionality is the [PostgreSQL](http://www.postgresql.org/) extension [PostGIS](http://postgis.net/). Minimum requirements for running this project are therefore Python and PostgreSQL/PostGIS. 
 
 ### PostgreSQL/PostGIS setup
 
@@ -175,11 +175,13 @@ Some requirements are managed by a third party data migration module. Apply all 
 
     python manage.py migrate
 
-### Import sample data
+### Import sample data or database
 
 This command will import the Boston Common Park and a related facility and activity.
 
     python manage.py loaddata fixtures/sample.json
+
+A backup of parks and MBTA resources as of 1 April 2014 is available in /fixtures/green.sql. You can load this in using psql (or possibly pg_restore).
 
 ### Run a local development server
 
@@ -197,4 +199,4 @@ The code repository was moved to Code for Boston's GitHub account in Spring 2013
 
 ---
 
-© Boston Green Map contributors
+© Boston Green contributors
