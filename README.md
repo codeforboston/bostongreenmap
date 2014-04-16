@@ -14,7 +14,7 @@ The map is based entirely on open space data in the public domain.
 
 The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
 
-> A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*. 
+> A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
 
 This means, the 3 basic elements relate to each according to the following schema:
 
@@ -26,20 +26,27 @@ There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the 
 
 ## Installation
 
-The Boston Green is a [Django](https://www.djangoproject.com/) project with spatial functionality, also called GeoDjango. Data storage and enabler for most spatial functionality is the [PostgreSQL](http://www.postgresql.org/) extension [PostGIS](http://postgis.net/). Minimum requirements for running this project are therefore Python and PostgreSQL/PostGIS. 
+The Boston Green is a [Django](https://www.djangoproject.com/) project with spatial functionality, also called GeoDjango. Data storage and enabler for most spatial functionality is the [PostgreSQL](http://www.postgresql.org/) extension [PostGIS](http://postgis.net/). Minimum requirements for running this project are therefore Python and PostgreSQL/PostGIS.
+
+### Vagrant setup
+
+The easiest way to run Boston Green locally is with [Vagrant](vagrantup.com).  Once you have that installed, running Boston Green is as easy as:
+
+    vagrant up
+    vagrant ssh -c bostongreenmap/vagrant_server.sh
 
 ### PostgreSQL/PostGIS setup
 
-The following steps ouline basic steps to install and configure the databasse requirements on Mac OS or Ubuntu Linux. For installation under Windows, please see the [installer packages for PostgreSQL/](http://www.enterprisedb.com/products-services-training/pgdownload), it includes PostGIS. Configuration should be similar, however, it will most likely by via GUI tools. 
+The following steps ouline basic steps to install and configure the databasse requirements on Mac OS or Ubuntu Linux. For installation under Windows, please see the [installer packages for PostgreSQL/](http://www.enterprisedb.com/products-services-training/pgdownload), it includes PostGIS. Configuration should be similar, however, it will most likely by via GUI tools.
 
 #### PostGIS setup on Mac OS X (with [homebrew](http://mxcl.github.com/homebrew/))
 
 1. Install PostGIS
-        
+
     Install PostGIS and all its dependencies:
 
         brew install postgis
-    
+
     Initialize PostgreSQL data directory:
 
         initdb /usr/local/var/postgres
@@ -47,30 +54,21 @@ The following steps ouline basic steps to install and configure the databasse re
     Start PostgreSQL database server:
 
         pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
- 
+
 2. Create PostGIS database template
- 
-        createdb postgis_template
-        createlang plpgsql postgis_template
-        psql -d postgis_template -f /usr/local/Cellar/postgis/2.0.3/share/postgis/postgis.sql
-        psql -d postgis_template -f /usr/local/Cellar/postgis/2.0.3/share/postgis/spatial_ref_sys.sql
-        psql -d postgis_template -f /usr/local/Cellar/postgis/2.0.3/share/postgis/rtpostgis.sql
-        psql -d postgis_template -f /usr/local/Cellar/postgis/2.0.3/share/postgis/topology.sql
-        psql -d postgis_template -c "GRANT ALL ON geometry_columns TO PUBLIC;"
-        psql -d postgis_template -c "GRANT ALL ON geography_columns TO PUBLIC;"
-        psql -d postgis_template -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+
 
 #### PostGIS setup on Ubuntu
 
 1. Install PostGIS
 
     Add UbuntuGIS packages
-    
+
         sudo add-apt-repository ppa:ppa:ubuntugis/ppa
         sudo apt-get update
 
     Install PostGIS and all dependencies
-    
+
         sudo apt-get install postgresql-9.1-postgis
 
     To build PostgreSQL adapter for Python you'll probably make sure to have `python-dev` and `postgresql-9.1-dev` installed too.
@@ -97,7 +95,7 @@ The following steps ouline basic steps to install and configure the databasse re
     psql
         # ALTER ROLE django WITH PASSWORD 'django';
         ALTER ROLE
-        # \q 
+        # \q
 
 #### Create a database owned by the django user
 
@@ -105,7 +103,7 @@ The following steps ouline basic steps to install and configure the databasse re
 
 ### Python
 
-Django 1.5 is a [Python](http://www.python.org/) module and requires Python 2.6.5 or higher.  
+Django 1.5 is a [Python](http://www.python.org/) module and requires Python 2.6.5 or higher.
 
 Python 2.7 comes pre-installed with most modern operating systems (Mac OS, Linux, etc.) and there are installers available for Windows. Please see  installation instructions for your platform for more details.
 
@@ -126,7 +124,7 @@ It is good practice to sandbox and isolate Python projects from each other. The 
         pip install virtualenvwrapper
 
     Initialize virtualenvwrapper in your shell startup file (`~/.bashrc`, `~/.profile`, etc.):
-        
+
         export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
         export WORKON_HOME=~/.venvs
         source /usr/local/bin/virtualenvwrapper.sh
@@ -158,12 +156,12 @@ Create a private config file in `bostongreenmap/bostongreenmap/local_settings.py
     from settings import *
     DATABASES = {
         'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis', 
-            'NAME': 'bostongreenmap', 
-            'USER': 'django', 
-            'PASSWORD': 'django', 
-            'HOST': 'localhost', 
-            'PORT': '5432', 
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'bostongreenmap',
+            'USER': 'django',
+            'PASSWORD': 'django',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
 
@@ -188,12 +186,12 @@ A backup of parks and MBTA resources as of 1 April 2014 is available in /fixture
     python manage.py runserver
 
 Access the site at [http://localhost:8000](http://localhost:8000).
-    
+
 ## Project History
 
 The first iteration of this project was created during Boston's Hack Day Challenge in 2011. A team of 7 volunteers (Christian Spanring, David Norcott, David Rafkind, Holly St. Clair, Patrick Robertson, Peter Gett, Tom Morris) prototyped the application in 48 hours, which was among the [winners of the challenge](http://www.boston.com/business/technology/innoeco/2011/02/winners_of_the_first-ever_bost.html). The original code repository is still available and can be found here: [https://github.com/bostongreen/bostongreen](https://github.com/bostongreen/bostongreen).
 
-After the challenge, the Metropolitan Area Planning Council (MAPC), the employer of 2 of the volunteers, worked with Boston Parks Advocates and a group of Boston Parks Trustees to turn the application into a service for people who live and work in the Metro Boston Area. 
+After the challenge, the Metropolitan Area Planning Council (MAPC), the employer of 2 of the volunteers, worked with Boston Parks Advocates and a group of Boston Parks Trustees to turn the application into a service for people who live and work in the Metro Boston Area.
 
 The code repository was moved to Code for Boston's GitHub account in Spring 2013. Code for Boston seems to be an excellent home for the project: it started as volunteer effort and should be owned by volunteers, it is a public service application built on top of open data and it is an open source project than can be replicated with local green space data in any other community.
 
