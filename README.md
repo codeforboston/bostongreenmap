@@ -35,6 +35,8 @@ The easiest way to run Boston Green locally is with [Vagrant](vagrantup.com).  O
     vagrant up
     vagrant ssh -c bostongreenmap/vagrant_server.sh
 
+If you're having issues, make sure you're using recent versions of Vagrant (we've tested with 1.5 and 1.6) and VirtualBox (~4.3).
+
 ### PostgreSQL/PostGIS setup
 
 The following steps ouline basic steps to install and configure the databasse requirements on Mac OS or Ubuntu Linux. For installation under Windows, please see the [installer packages for PostgreSQL/](http://www.enterprisedb.com/products-services-training/pgdownload), it includes PostGIS. Configuration should be similar, however, it will most likely by via GUI tools.
