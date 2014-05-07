@@ -1,4 +1,5 @@
 #!/bin/bash
+apt-get update -qq
 apt-get install -y python-software-properties
 apt-add-repository -y ppa:ubuntugis/ppa
 apt-get update -qq
@@ -39,7 +40,7 @@ createdb -O django -T postgis_template bostongreenmap
 psql -f bostongreenmap/fixtures/green.sql bostongreenmap
 EOF
 
-if [ -d virtualenv ]; then
+if [ ! -d virtualenv ]; then
     virtualenv virtualenv
 fi
 cd virtualenv
