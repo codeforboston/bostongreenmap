@@ -14,11 +14,11 @@ The map is based entirely on open space data in the public domain.
 
 The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
 
-> A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
+A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
 
 This means, the 3 basic elements relate to each according to the following schema:
 
-    Park [OneToMany] Facility [ManyToMany] Activity
+    Park [1:m] Facility [m:n] Activity
 
 A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
 
@@ -39,69 +39,61 @@ If you're having issues, make sure you're using recent versions of Vagrant (we'v
 
 ### PostgreSQL/PostGIS setup
 
-The following steps ouline basic steps to install and configure the databasse requirements on Mac OS or Ubuntu Linux. For installation under Windows, please see the [installer packages for PostgreSQL/](http://www.enterprisedb.com/products-services-training/pgdownload), it includes PostGIS. Configuration should be similar, however, it will most likely by via GUI tools.
+The following steps outline basic steps to install and configure the databasse requirements on Mac OS or Ubuntu Linux. For installation under Windows, please see the [installer packages for PostgreSQL/](http://www.enterprisedb.com/products-services-training/pgdownload), it includes PostGIS. Configuration should be similar, however, it will most likely by via GUI tools.
 
-#### PostGIS setup on Mac OS X (with [homebrew](http://mxcl.github.com/homebrew/))
+#### PostGIS installation on Mac OS X (using the [homebrew](http://mxcl.github.com/homebrew/) package manager)
 
-1. Install PostGIS
-
-    Install PostGIS and all its dependencies:
+1. Install PostGIS and all its dependencies:
 
         brew install postgis
 
-    Initialize PostgreSQL data directory:
+2. Initialize PostgreSQL data directory:
 
         initdb /usr/local/var/postgres
 
-    Start PostgreSQL database server:
+3. Start PostgreSQL database server:
 
         pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 
-2. Create PostGIS database template
+#### PostGIS installation on Ubuntu Linux
 
-
-#### PostGIS setup on Ubuntu
-
-1. Install PostGIS
-
-    Add UbuntuGIS packages
+1. Add UbuntuGIS packages
 
         sudo add-apt-repository ppa:ppa:ubuntugis/ppa
         sudo apt-get update
 
-    Install PostGIS and all dependencies
+2. Install PostGIS and all dependencies
 
-        sudo apt-get install postgresql-9.1-postgis
+        sudo apt-get install postgresql-9.3-postgis-2.1
 
-    To build PostgreSQL adapter for Python you'll probably make sure to have `python-dev` and `postgresql-9.1-dev` installed too.
+To install the Python PostgreSQL driver you'll probably make sure to have `python-dev` and `postgresql-9.3-dev` installed too.
 
-2. Create PostGIS database template
+#### Setup a database user
 
-        createdb -E UTF8 postgis_template
-        createlang -d postgis_template plpgsql
-        psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='postgis_template'"
-        psql -d postgis_template -f /usr/share/postgresql/9.1/contrib/postgis-2.0/postgis.sql
-        psql -d postgis_template -f /usr/share/postgresql/9.1/contrib/postgis-2.0/spatial_ref_sys.sql
-        psql -d postgis_template -f /usr/share/postgresql/9.1/contrib/postgis-2.0/rtpostgis.sql
-        psql -d postgis_template -f /usr/share/postgresql/9.1/contrib/postgis-2.0/topology.sql
-        psql -d postgis_template -c "GRANT ALL ON geometry_columns TO PUBLIC;"
-        psql -d postgis_template -c "GRANT ALL ON geography_columns TO PUBLIC;"
-        psql -d postgis_template -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;"
+1. Create role that will be set as owner for our project database.
 
-#### Create a django database user
-
-    createuser django
+        createuser django
         Shall the new role be a superuser? (y/n) n
         Shall the new role be allowed to create databases? (y/n) y
         Shall the new role be allowed to create more new roles? (y/n) n
-    psql
+
+2. Set the user password
+
+        psql
         # ALTER ROLE django WITH PASSWORD 'django';
         ALTER ROLE
         # \q
 
-#### Create a database owned by the django user
+#### Setup the project database
 
-        createdb -O django -T postgis_template bostongreenmap
+1. Create the project database, owned by our database role
+
+        createdb -O django bostongreenmap
+
+2. Install the PostGIS spatial database extension
+
+        psql -c "CREATE EXTENSION postgis;" -d bostongreenmap
+
 
 ### Python
 
