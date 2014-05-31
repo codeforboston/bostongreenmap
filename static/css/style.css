@@ -23,7 +23,7 @@ body .viewport .frame {
   height: 100%;
   top: 0;
   bottom: 0;
-  left: 0; 
+  left: 0;
 }
 
 body .viewport .frame .navbar {
@@ -58,7 +58,7 @@ body .viewport .frame .slider {
 body .viewport .frame .slider.collapse {
   float: left;
   height: 100% !important;
-  width: auto; 
+  width: auto;
 }
 
 body .viewport .frame .slider.collapse.height {
@@ -68,7 +68,7 @@ body .viewport .frame .slider.collapse.height {
   -webkit-transition: height 0.35s ease;
   -moz-transition: height 0.35s ease;
   -o-transition: height 0.35s ease;
-  transition: height 0.35s ease; 
+  transition: height 0.35s ease;
 }
 
 body .viewport .frame .slider.collapse.width {
@@ -78,43 +78,43 @@ body .viewport .frame .slider.collapse.width {
   -webkit-transition: width 0.35s ease;
   -moz-transition: width 0.35s ease;
   -o-transition: width 0.35s ease;
-  transition: width 0.35s ease; 
+  transition: width 0.35s ease;
 }
 
 body .viewport .frame .slider.collapse.in.width {
-  width: auto; 
+  width: auto;
 }
 
 body .viewport .frame .slider.collapse.in.height {
-  height: auto; 
+  height: auto;
 }
 
 body .viewport .frame .slider .collapse-inner {
   position: relative;
   width: 300px;
-  height: 100%; 
+  height: 100%;
 }
 
 body .viewport .frame .slider .navbar .navbar-inner {
   text-align: center;
   color: grey;
   font-size: 1.2em;
-  line-height: 38px; 
+  line-height: 38px;
 }
 
 body .viewport .frame .slider .nav-stacked {
-  padding: 0 10px; 
+  padding: 0 10px;
 }
 
 body .viewport .frame .view {
   width: 50%;
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 body .viewport .frame .view .navbar .navbar-inner .btn-navbar {
   display: block;
-  float: left; 
+  float: left;
 }
 
 
@@ -122,8 +122,16 @@ body .viewport .frame .view .navbar .navbar-inner .btn-navbar {
 /* Slider Content
 -------------------------------------------------- */
 
+#slider.collapse {
+  position: absolute;
+  left: 0;
+  background-color: white;
+  margin-top: 42px;
+  z-index: 2000; /* leaflet controls are at 1000 */
+}
+
 body .viewport .frame #content {
-  margin: auto 15px;
+  margin: auto 15px 42px;
 }
 
 body .viewport .frame #content h1 {
@@ -193,7 +201,7 @@ body .viewport .frame #content .park-attr {
 /* Smartphones (portrait)
 -------------------------------------------------- */
 
-@media only screen and (max-width: 480px) { 
+@media only screen and (max-width: 480px) {
 
   body .viewport .frame .slider .collapse-inner {
     width: 320px;

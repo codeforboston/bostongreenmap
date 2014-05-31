@@ -1,6 +1,6 @@
 window.bgm = window.bgm || {};
 
-$(function(){  
+$(function(){
 
   var defaultZoom = 13,
       searchUrl = '/parks/search/',
@@ -38,7 +38,7 @@ $(function(){
       // back button for exploring filters
       // FIXME: back to park detail doesn't work
       set_dropdowns( event.state );
-      filter_parks( searchUrl + "?" + $.param( event.state ) ); 
+      filter_parks( searchUrl + "?" + $.param( event.state ) );
     }
   };
 
@@ -54,17 +54,6 @@ $(function(){
   $(window).on("resize", function(e){
     $("#map_canvas").css("height", ($(window).height() - topmargin));
   });
-
-  // adjust map width based on slider
-  $("#slider")
-    .on( "shown", function () {
-      $("#map_canvas").width( $(window).width() - $("#slider").width() );
-      map.invalidateSize( false );
-    })
-    .on( "hidden", function() {
-      $("#map_canvas").width( $(window).width() );
-      map.invalidateSize( false );
-    });
 
 
   //-- Navbar dropdowns --//
@@ -147,9 +136,9 @@ $(function(){
 
   // initialize Controls
   map.addControl(new L.Control.Layers( {
-      "MAPC Basemap": basemap, 
+      "MAPC Basemap": basemap,
       "MAPC Trailmap": trailmap,
-      "Bing Aerial": bing 
+      "Bing Aerial": bing
     }, {
       "Park Facilities": facilityLayer,
       "Parks": parkLayer
@@ -172,7 +161,7 @@ $(function(){
       map.locate({setView: true, maxZoom: 17});
     });
     return div;
-  }; 
+  };
   map.addControl(locateMeControl);
 
 
@@ -241,7 +230,7 @@ $(function(){
       // update activity listing
       parks[parkId].activities = uniqueActivities.sort();
       render_parkActivityList( parks[parkId].activities );
-    
+
     });
   }
 
@@ -276,7 +265,7 @@ $(function(){
         }
       });
       autocomplete.data('typeahead').source = parkNames;
-      
+
       // remove existing parks from map
       parkLayer.clearLayers();
 
@@ -290,7 +279,7 @@ $(function(){
       if ( parkFilter.length > 0 ) {
         var len = parkGeoms.length;
         while (len--) {
-          parkLayer.addData(parkGeoms[len]);        
+          parkLayer.addData(parkGeoms[len]);
         }
         // zoom to park bounds or default zoomlevel
         if (zoom === undefined) {
@@ -345,7 +334,7 @@ $(function(){
         html = activitiesTemplate( { activities: activities } );
     $("#content .park-detail #activities").append( html );
   }
-  
+
 
   //-- Utilities --//
 
@@ -353,10 +342,10 @@ $(function(){
   function get_parkBounds( parkid ) {
     var len = parkGeoms.length;
     while (len--) {
-      if ( parkGeoms[len].id == parkid ) {     
+      if ( parkGeoms[len].id == parkid ) {
         var parkGeom = new L.GeoJSON( parkGeoms[len] );
         return parkGeom.getBounds();
-      }     
+      }
     }
     return false;
   }
