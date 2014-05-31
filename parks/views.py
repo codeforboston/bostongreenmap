@@ -33,42 +33,22 @@ def get_parks(request):
 
     querydict = request.GET
     kwargs = querydict.dict()
+    no_map = kwargs.pop('no_map', False)
     user = request.user
 
     try:
         parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
-        parks_json = dict()
-        for p in parks:
-            # embed all images
-            images = []
-            for i in p.images.all():
-                try: 
-                    tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
-                    image = dict(
-                        src=tn.url,
-                        caption=strip_tags(i.caption),
-                    )
-                    images.append(image)
-                except IOError, e:
-                    logger.error(e)
+        if no_map:
+            parks_json = [ p.to_external_document(user) for p in parks ]
+        else:
+            parks_json = { p.pk: p.to_external_document(user) for p in parks }
 
-            parks_json[p.pk] = dict(
-                url=p.get_absolute_url(),
-                name=p.name,
-                description=p.description,
-                images=images,
-                access=p.get_access_display(),
-                address=p.address,
-                owner=p.parkowner.name,
-            )
-
-            if user.has_perm('parks.change_park'):
-                parks_json[p.pk]['change_url'] = urlresolvers.reverse('admin:parks_park_change', args=(p.id,))
         return HttpResponse(json.dumps(parks_json), mimetype='application/json')
 
-    except:
+    except Exception as e:
         # no content
-        return HttpResponse(status=204)
+        print e
+        return HttpResponse(str(e), status=204)
 
 def get_facilities(request, park_id):
     """ Returns facilities as JSON for park id

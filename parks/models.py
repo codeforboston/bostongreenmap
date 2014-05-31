@@ -10,6 +10,9 @@ from django.utils.html import strip_tags
 from sorl.thumbnail import get_thumbnail, default
 
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 # south introspection rules
 try:
@@ -193,6 +196,38 @@ class Park(models.Model):
     def lat_long(self):
         self.geometry.transform(4326)
         return [self.geometry.centroid.y,self.geometry.centroid.x]
+
+    def get_image_thumbnails(self):
+        # embed all images
+        images = []
+        for i in self.images.all():
+            try: 
+                tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+                image = dict(
+                    src=tn.url,
+                    caption=strip_tags(i.caption),
+                )
+                images.append(image)
+            except IOError, e:
+                logger.error(e)
+        return images
+
+
+    def to_external_document(self, user):
+        change_url = None
+        if user.has_perm('parks.change_park'):
+            change_url = reverse('admin:parks_park_change', args=(self.id,))
+
+        return {
+            'url': self.get_absolute_url(),
+            'name': self.name,
+            'description': self.description,
+            'images': self.get_image_thumbnails(),
+            'access': self.get_access_display(),
+            'address': self.address,
+            'owner': self.parkowner.name,
+            'change_url': change_url
+        }
 
     def save(self, *args, **kwargs):
 
