@@ -197,12 +197,13 @@ class Park(models.Model):
         self.geometry.transform(4326)
         return [self.geometry.centroid.y,self.geometry.centroid.x]
 
-    def get_image_thumbnails(self):
+    def get_image_thumbnails(self, width=250, height=250):
         # embed all images
         images = []
+        image_size = ''.join([str(width), 'x', str(height)])
         for i in self.images.all():
             try: 
-                tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+                tn = get_thumbnail(i.image, image_size, crop='center', quality=80)
                 image = dict(
                     src=tn.url,
                     caption=strip_tags(i.caption),
@@ -223,6 +224,7 @@ class Park(models.Model):
             'name': self.name,
             'description': self.description,
             'images': self.get_image_thumbnails(),
+            'large_images': self.get_image_thumbnails(width=800, height=600),
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
