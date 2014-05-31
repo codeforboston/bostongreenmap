@@ -171,6 +171,7 @@ class Park(models.Model):
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField(blank=True, null=True)
     images = models.ManyToManyField(Parkimage, blank=True, null=True, related_name='parks')
+    featured = models.BooleanField(default=False)
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
