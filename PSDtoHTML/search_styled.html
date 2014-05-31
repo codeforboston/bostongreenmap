@@ -87,17 +87,17 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner" id="carousel-images-container">
         <div class="item active">
-          <img class="carousel-image" src="assets/img/4-JamaicaPondJP.JPG" alt="...">
+          <img src="assets/img/4-JamaicaPondJP.JPG" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
         <div class="item">
-          <img class="carousel-image" src="assets/img/13-OMalleyWaterfrontPark-Chelsea.JPG" alt="...">
+          <img src="assets/img/13-OMalleyWaterfrontPark-Chelsea.JPG" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
         <div class="item">
-          <img class="carousel-image" src="assets/img/Nkraft (Charles River Bike Path Sunset 1).jpg" alt="...">
+          <img src="assets/img/Nkraft (Charles River Bike Path Sunset 1).jpg" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
@@ -108,7 +108,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
-
       $.getJSON('fixtures/neighborhoods.json', function(d,i) {
         // populateCarousel(d);
       });
@@ -127,7 +126,7 @@
             active = "";
           }
 
-          var image = '<div class="item ' + active + '"><img class="carousel-image" src="' + d.src + '" /><div>';
+          var image = '<div class="item ' + active + '"><img src="http://bostongreenmap.org/' + d.src + '" /><div>';
           $('#carousel-images-container').append(image)
           count++;
         });

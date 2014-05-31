@@ -1,0 +1,472 @@
+{
+    "110": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by jennikonrad",
+                "src": "/media/cache/6a/9e/6a9ee81a2ce40e4ae08ea86facf30853.jpg"
+            },
+            {
+                "caption": "Photo by treycliff",
+                "src": "/media/cache/2c/9a/2c9ac66e62e15c3e16badc4bfbaf221b.jpg"
+            },
+            {
+                "caption": "Photo by wili_hybrid",
+                "src": "/media/cache/65/ec/65ecdf3ceb0b7fd675e93752beb955d1.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/87/32/873299ad5ad2da38e421f2782123e6fb.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/28/96/28964f8f202775315df3e8cf68012469.jpg"
+            },
+            {
+                "caption": "Photo by Soe Lin",
+                "src": "/media/cache/72/f6/72f6b11e008a63fdc02277da91d38de2.jpg"
+            },
+            {
+                "caption": "Photo by nkraft",
+                "src": "/media/cache/99/c1/99c101765da9c80a4a873d02778239ab.jpg"
+            },
+            {
+                "caption": "Photo by nkraft",
+                "src": "/media/cache/95/b2/95b2f96f5e53d06ffeb62ddc7cd12dd8.jpg"
+            },
+            {
+                "caption": "Photo by reneschwietzke",
+                "src": "/media/cache/9f/0b/9f0bcbb4158ec9a4cc53d9934e298bed.jpg"
+            }
+        ],
+        "description": "The oldest park in the United States, the Common has been shared land since 1634 and holds a unique place in the history of Boston and the nation. Though the landscape has changed from pastures and militia training grounds to a well-loved park with open lawns, shaded pathways, ballfields, tennis courts and a playground, the Common remains an active meeting ground in the heart of historic Boston. For over 350 years it has been a center and a mirror of civic life.\r\n\r\nToday, Boston Common is the anchor for the Emerald Necklace, a system designed by Fredrick Law Olmsted, parks that connect many of Boston's neighborhoods.",
+        "address": "148 Tremont Street, Boston",
+        "url": "/parks/boston-common/",
+        "owner": "City of Boston",
+        "name": "Boston Common"
+    },
+    "112": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by bogdanmigulski",
+                "src": "/media/cache/85/51/85518a74c46e37b580b4759eb68932a3.jpg"
+            },
+            {
+                "caption": "Photo by shoothead",
+                "src": "/media/cache/bd/3d/bd3dabd130d39fb21d46b600e147bbb6.jpg"
+            },
+            {
+                "caption": "Photo by jennikonrad",
+                "src": "/media/cache/90/9a/909ab833e731676674492678c270d5cb.jpg"
+            },
+            {
+                "caption": "Photo by wallygobetz",
+                "src": "/media/cache/20/0b/200b8aec1c2fa31bc42df1bc0e428d7f.jpg"
+            }
+        ],
+        "description": "The Boston Public Garden was established in 1837 by a group of Proprietors as the first public botanical garden in the United States. In 1852 it was returned to city control, and after passage of the Public Garden act of 1858, it was laid out essentially in its present form. The beauty of the Boston Public Garden lies in the Lagoon, Swan Boats, sculpture, fountains, elaborate flower beds, and its notable trees. All these features make the park a favorite spot for small weddings (by permit). ",
+        "address": "",
+        "url": "/parks/public-garden/",
+        "owner": "City of Boston",
+        "name": "Public Garden"
+    },
+    "113": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Brent Dey",
+                "src": "/media/cache/21/ce/21ce3df81f477738a424b40c68e7d2f1.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/granary-burying-ground/",
+        "owner": "City of Boston Parks Department",
+        "name": "Granary Burying Ground"
+    },
+    "117": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by the Office of Governor Patrick",
+                "src": "/media/cache/b7/08/b708500312b6afd4d33e964e8a90ee68.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/state-house-park/",
+        "owner": "Commonwealth of Massachusetts",
+        "name": "State House Park"
+    },
+    "118": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/4e/db/4edb0e1aabaeb3b23d402dc22cce0252.jpg"
+            }
+        ],
+        "description": "This grand allée of shade trees forms the central spine of the Back Bay neighborhood and a strong link in the Emerald Necklace park system. The Mall features memorial sculptures honoring outstanding people; from Revolutionary War heroes to fallen firefighters. The residential streets of Back Bay are some of the best preserved examples of late 19th-century urban architecture in the country.\r\n",
+        "address": "1 Commonwealth Ave, Boston MA 02116",
+        "url": "/parks/commonwealth-avenue-mall/",
+        "owner": "City of Boston Parks Department",
+        "name": "Commonwealth Avenue Mall"
+    },
+    "119": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Carlos Pacheco",
+                "src": "/media/cache/d9/28/d928e7226051e33680b815d1b5c07b4c.jpg"
+            },
+            {
+                "caption": "Photo by Wally Gobetz",
+                "src": "/media/cache/e9/29/e929533325debcd47ef8e98af405bc9b.jpg"
+            }
+        ],
+        "description": "Copley Square is one of Boston's most picturesque public parks. Framed by Boston's beautiful Public Library, the colonnades of Trinity Church, and the glassy spear of the John Hancock Tower, Copley Square is a welcome destination for local residents, employees of neighboring businesses, and for thousands of international visitors. The square hosts a farmer's market in the summer months. The area, originally known as Elysian Fields, was created by the filling of the Back Bay beginning in 1857. The space was the result of the collision of the existing South End street grid and the newly created street grid in Back Bay. Source: Friends of Copley Square",
+        "address": "",
+        "url": "/parks/copley-square/",
+        "owner": "City of Boston Parks Department",
+        "name": "Copley Square"
+    },
+    "129": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Jasperdo",
+                "src": "/media/cache/0c/11/0c119108d46b93876c9ec7aaff6ebd9d.jpg"
+            },
+            {
+                "caption": "Photo by Jasperdo",
+                "src": "/media/cache/9c/4c/9c4cebc2d961a54dca2f1cda8d76058b.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/paul-revere-mall/",
+        "owner": "City of Boston Parks Department",
+        "name": "Paul Revere Mall"
+    },
+    "133": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by biancabueno",
+                "src": "/media/cache/e1/14/e11451730c6afdaf9f7f820cc8988e61.jpg"
+            },
+            {
+                "caption": "Photo by billllott",
+                "src": "/media/cache/39/dd/39dd056e414cc28726d5ced24bbdf195.jpg"
+            },
+            {
+                "caption": "Photo by cliff1066",
+                "src": "/media/cache/91/52/91520486c23efb85841e4739fcf4baf5.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/christopher-columbus-park/",
+        "owner": "City of Boston",
+        "name": "Christopher Columbus Park"
+    },
+    "134": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Sean Marshall",
+                "src": "/media/cache/39/82/3982f31f05c907c15b03f629bb36bff4.jpg"
+            },
+            {
+                "caption": "Photo by Dave Levy",
+                "src": "/media/cache/bb/72/bb72b4cf419af9e4d528c75cf5c12fb6.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/city-hall-plaza/",
+        "owner": "Boston Redevelopment Authority",
+        "name": "City Hall Plaza"
+    },
+
+    "137": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by jpellgen",
+                "src": "/media/cache/69/af/69af8dc82c298c8f1d095364c7392d27.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/old-city-hall-grounds/",
+        "owner": "City of Boston Parks Department",
+        "name": "Old City Hall Grounds"
+    },
+    "138": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Jonathan Hinkle",
+                "src": "/media/cache/78/aa/78aa620082d0bc577a4e6b991c4ebd0b.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/post-office-square-park/",
+        "owner": "Private",
+        "name": "Post Office Square Park"
+    },
+    "145": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Massachusetts Office of Travel & Tourism",
+                "src": "/media/cache/4f/84/4f84299add33d692a01bf50c7d5dfafb.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/union-park/",
+        "owner": "Boston Redevelopment Authority",
+        "name": "Union Park"
+    },
+    "146": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Dion Hinchcliffe",
+                "src": "/media/cache/e0/b9/e0b9621c09c034f618ee16589d00dd94.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/curley-memorial-plaza/",
+        "owner": "Boston Redevelopment Authority",
+        "name": "Curley Memorial Plaza"
+    },
+    "158": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by April Killingsworth",
+                "src": "/media/cache/56/92/5692998daa6939a0fc26f728e8372ac1.jpg"
+            },
+            {
+                "caption": "Photo by Kate Haskell",
+                "src": "/media/cache/ed/4a/ed4a4149cf5a29bf0ce01c1bf3532196.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/quincy-market-square/",
+        "owner": "City of Boston Parks Department",
+        "name": "Quincy Market Square"
+    },
+    "222": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Massachusetts Department of Environmental Protection",
+                "src": "/media/cache/1e/3a/1e3a901307ecf4da7e64ae177068818b.jpg"
+            }
+        ],
+        "description": "The Boston Harbor Islands national recreation area includes 34 islands and peninsulas spread over fifty square miles of bays, harbors, and rivers within the greater Boston Harbor basin.\r\n\r\nSpectacle Island is ideal for hiking, swimming, boating, and learning. Stop in at a “green” visitor center with exhibits about the history and evolution of the island. Go swimming on a sandy beach (one of the few on the islands) supervised by trained lifeguards in the summer. Take in panoramic views of the harbor and city from the tallest hill on the Boston Harbor Islands. The marina makes it a popular destination for boaters. Spectacle Island opens upon arrival of the first ferry in April and closes on Columbus Day each year.\r\n\r\nSource: DCR, Boston Harbor Islands Partnership",
+        "address": "",
+        "url": "/parks/spectacle-island-i/",
+        "owner": "DCR - Division of Urban Parks and Recreation",
+        "name": "Spectacle Island I"
+    },
+    "322": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/ba/4b/ba4b08318d1b0124e7f1f6649e99f657.jpg"
+            }
+        ],
+        "description": "Predating most of the Emerald Necklace, Forest Hills Cemetery was designed by Henry A.S. Dearborn in 1848 as Boston's first rural cemetery. It immediately became popular as a picturesque park and arboretum as well as burial ground. With its winding roads and scenic overlooks, groves of pine forest, and ornamental lake, Forest Hills embodied the romantic concept that nature is essential to consoling the bereaved and to the spiritual and physical well-being of city dwellers. Its 250-acres are filled with treasures of sculpture and memorials to legendary Bostonians.",
+        "address": "95 Forest Hill Ave, Boston, MA 02130",
+        "url": "/parks/forest-hills-cemetery/",
+        "owner": "City of Boston Parks Department",
+        "name": "Forest Hills Cemetery"
+    },
+    "364": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by yachtboy",
+                "src": "/media/cache/4a/69/4a6931df0809a22c9d3a25349127099d.jpg"
+            },
+            {
+                "caption": "Photo by yactboy",
+                "src": "/media/cache/0f/05/0f05c6e890da408f9074df18ba58d97a.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/highland-park/",
+        "owner": "City of Boston",
+        "name": "Highland Park"
+    },
+    "476": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by ericksens",
+                "src": "/media/cache/99/36/993695ce8d74ea7cfc3193722cfe883d.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/harriet-tubman-square/",
+        "owner": "City of Boston Parks Department",
+        "name": "Harriet Tubman Square"
+    },
+    "552": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by chrisharnish",
+                "src": "/media/cache/78/bf/78bf46fb2ef04331679433133306136d.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/3b/a2/3ba2461a56bcab8c93c45ddcd26c45b9.jpg"
+            },
+            {
+                "caption": "Photo by joannesullivan",
+                "src": "/media/cache/e7/36/e7366d53571b43ba0d18980956cf6619.jpg"
+            }
+        ],
+        "description": "Frederick Law Olmsted's challenge in 1878 was to reclaim an area that was described as \"the foulest marsh and muddy flats to be found anywhere in Massachusetts…\" He succeeded by combining sanitary engineering and landscape art to create what today would be called an ecological restoration. Significantly filled and altered during the 20th century, the Back Bay Fens now provides a variety of recreational opportunities, from gardening, to concerts, to sports. The Fens is surrounded by some of Boston’s major cultural and educational institutions.",
+        "address": "100 Park Drive, Boston, MA",
+        "url": "/parks/back-bay-fens-emerald-necklace/",
+        "owner": "City of Boston Parks Department",
+        "name": "Back Bay Fens [Emerald Necklace]"
+    },
+    "562": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/9e/ff/9efff9d495ae275e6b7faa896bc43e55.jpg"
+            }
+        ],
+        "description": "The Storrow Memorial Embankment known as “The Esplanade” is the crown jewel of DCR’s Charles River Basin. Stretching three miles along the river, the Esplanade provides for a diversity of recreation including biking, boating, and playing ball. The Hatch Memorial Shell is located here, which attracts hundreds of thousands of people to special events including the Boston Pops July 4th concert. Water quality in the Basin has improved dramatically in recent years, creating better habitat for wildlife and attracting people back to the river.\r\n",
+        "address": "",
+        "url": "/parks/the-esplanade/",
+        "owner": "Commonwealth of Massachusetts",
+        "name": "The Esplanade"
+    },
+    "583": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/ee/23/ee23dc9479f04d0b18545dee97f0bd77.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/marine-park/",
+        "owner": "Commonwealth of Massachusetts",
+        "name": "Marine Park"
+    },
+    "617": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/3d/28/3d2887c8326d3ae0c7b71881ee20cc0d.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/40/1d/401d65a6a5337e3afef51c395bcab95e.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/0c/83/0c8305ee68025279f86a41e5b7d437a8.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/4b/06/4b0670877493ae8dd86f0bc5b1e53fb3.jpg"
+            },
+            {
+                "caption": "",
+                "src": "/media/cache/9a/f7/9af7ed4e4e72a8d3db05714f6aeac84d.jpg"
+            },
+            {
+                "caption": "Photo by Tina Knotweed",
+                "src": "/media/cache/29/c4/29c401467dcf81f2cb9f0da5c80a30ce.jpg"
+            }
+        ],
+        "description": "Park, the largest in the city at 527 acres, is renowned park designer, Frederick Law Olmsted's jewel of the Emerald Necklace and \"The Country Park.\" Named for Benjamin Franklin, the park was to provide \"complete escape from the town\" and brings together rural scenery, 220 acres of woodlands, and active recreation facilities. These include tennis and basketball courts, baseball fields, the region’s premier cross country track, and an 18-hole golf course. A 72-acre zoo is also part of what the park has to offer, along with miles of some of the best walking trails in the city, including a 2.5 mile paved loop around the golf course for pedestrians and bicyclists. Franklin Park's huge Roxbury Puddingstone boulders and cliffs and old stone ruins offer unique scenic landscape for park walkers. Built in the 1880s and located in the geographic heart of Boston, Franklin Park today carries on the tradition of a park for people from all walks of life and all backgrounds. ",
+        "address": "",
+        "url": "/parks/franklin-park-emerald-necklace/",
+        "owner": "City of Boston",
+        "name": "Franklin Park [Emerald Necklace] "
+    },
+    "718": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by Wally Gobetz",
+                "src": "/media/cache/20/2c/202cea5fbbdbf09cf86318566217f263.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/faneuil-square/",
+        "owner": "City of Boston Parks Department",
+        "name": "Faneuil Square"
+    },
+    "929": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "",
+                "src": "/media/cache/76/c8/76c8a62e325f337aa3ac711334649271.jpg"
+            }
+        ],
+        "description": "The city's flagship park, this cheery outdoor space boasts two basketball courts, an outdoor street hockey rink, two lush baseball fields also used for soccer and football, and an extra-large tot lot featuring the city's only super-high slide. But wait there's more. A water play area, plenty of picnic tables and shaded seating as well as a fascinating outdoor museum that serves up city facts and history on colorful, giant lollipop-shaped signs round out the fun. You'd never know the beautiful 4.5-acre site was a former brownfield that the city reclaimed after a smelting company spent 50 years polluting it.\r\n\r\nOther highlights include a park house with bathrooms, a state-run DCR indoor skating rink in the center of the property, and a free parking lot (on Bleachery Court). And no resident should miss out on the fun facts on the storytelling path. Did you know, for instance, that Mary of \"Mary Had a Little Lamb\" lived in Somerville?\r\n\r\n\r\n[Source: Patch.com]\r\n",
+        "address": "",
+        "url": "/parks/conway-playground/",
+        "owner": "City of Somerville",
+        "name": "Conway Playground"
+    },
+    "796": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by J Tammaro",
+                "src": "/media/cache/45/9a/459a2ca11bccee9b9bacfa97a2c967a1.jpg"
+            }
+        ],
+        "description": "The Rose Fitzgerald Kennedy Greenway encompasses gardens, plazas, and tree-lined promenades. The Greenway, opened in 2007 and 2008, is a series of five parks within a curvilinear corridor of land extending approximately one mile through downtown Boston. The Wharf District Parks connect Faneuil Hall and the Financial District with Boston Harbor. Here you will find two unique fountains, specialized lighting structures, and many places to sit in these parks. Three open lawn areas, surrounded with plantings, provide more informal space. Source: Rose Kennedy Greenway Conservancy",
+        "address": "",
+        "url": "/parks/wharf-district-park/",
+        "owner": "MassDOT",
+        "name": "Wharf District Park"
+    },
+    "800": {
+        "access": "Yes",
+        "images": [
+            {
+                "caption": "Photo by gconservancy",
+                "src": "/media/cache/08/cf/08cfc29be6f04fc7d880a6ca26385937.jpg"
+            },
+            {
+                "caption": "Photo by Daniel Lobo",
+                "src": "/media/cache/1c/e4/1ce4eba098fcbc6bc638451d4837f73f.jpg"
+            }
+        ],
+        "description": "",
+        "address": "",
+        "url": "/parks/chinatown-park/",
+        "owner": "MassDOT",
+        "name": "Chinatown Park"
+    }
+
+}
