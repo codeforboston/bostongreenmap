@@ -12,7 +12,6 @@ from sorl.thumbnail import get_thumbnail
 
 import json
 import logging
-import itertools
 
 from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype
 
@@ -34,37 +33,42 @@ def get_parks(request):
 
     querydict = request.GET
     kwargs = querydict.dict()
-    no_map = kwargs.pop('no_map', False)
     user = request.user
 
-    filters = kwargs
     try:
-        parks = Park.objects.filter(**filters).select_related('parkowner').prefetch_related('images')
-        if no_map:
-            parks_json = { p.pk: p.to_external_document(user, include_large=True) for p in parks }
-            carousel = []
-            if not filters:
-                # gets up to ten images if parks have images
-                carousel = list(itertools.islice([
-                    dict(p.get('images')[0].items() + {'url': p.get('url')}.items())
-                    for key, p in parks_json.iteritems()
-                    if any(p.get('images'))
-                ],
-                0, 10))
-            response_json = {
-                "parks": parks_json,
-                "carousel": carousel
-            }
-        else:
-            response_json = { p.pk: p.to_external_document(user) for p in parks }
+        parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
+        parks_json = dict()
+        for p in parks:
+            # embed all images
+            images = []
+            for i in p.images.all():
+                try: 
+                    tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
+                    image = dict(
+                        src=tn.url,
+                        caption=strip_tags(i.caption),
+                    )
+                    images.append(image)
+                except IOError, e:
+                    logger.error(e)
 
+            parks_json[p.pk] = dict(
+                url=p.get_absolute_url(),
+                name=p.name,
+                description=p.description,
+                images=images,
+                access=p.get_access_display(),
+                address=p.address,
+                owner=p.parkowner.name,
+            )
 
-        return HttpResponse(json.dumps(response_json), mimetype='application/json')
+            if user.has_perm('parks.change_park'):
+                parks_json[p.pk]['change_url'] = urlresolvers.reverse('admin:parks_park_change', args=(p.id,))
+        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
 
-    except Exception as e:
+    except:
         # no content
-        print e
-        return HttpResponse(str(e), status=204)
+        return HttpResponse(status=204)
 
 def get_facilities(request, park_id):
     """ Returns facilities as JSON for park id
