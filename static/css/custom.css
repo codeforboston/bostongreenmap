@@ -59,9 +59,7 @@ body {
   display: none;
 }
 
-.carousel-image {
-  max-height: 1000px;
-}
+
 
 .btn-group {
   margin: 3px;
@@ -85,6 +83,10 @@ body {
     height: 50px;
     top:0;
   }
+}
+
+.carousel-image {
+  width: 100%;
 }
 
 #bs-example-navbar-collapse-1 {

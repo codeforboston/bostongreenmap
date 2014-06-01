@@ -47,7 +47,7 @@
 
       <div class="template-all" id="template-results">
         <div class="finder">
-          Findme!
+          Finder!
         </div>
         <div class="tiles">
         </div>
@@ -66,7 +66,10 @@
       </div>
 
       <div class="template-all" id="template-results">
-        Results
+      </div>
+
+      <div class="template-all" id="template-detail">
+        Detail
       </div>
 
       <div id="template-index">
@@ -174,11 +177,13 @@
         },
         {
           name: "results"
+        },
+        {
+          name: "detail"
         }
       ];
 
       $('a').on('click', function(elem) {
-        console.log(elem.currentTarget.id);
         switchPage(elem.currentTarget.id)
       });
 
@@ -206,7 +211,6 @@
             // populateResults(results);
             addResults(results);
           }
-          console.log(results);
         });
       });
 
@@ -215,10 +219,10 @@
       });
 
 
-      function addImageToViewer(caption, src, url, name) {
+      function addImageToViewer(caption, src, key, name) {
         var container = $('<div class="tile">');
         var img = $('<img class="image-result-tile" src="' + src +'" title="' + caption +'">');
-        var link = $('<a href="' + url + '">');
+        var link = $('<a href="http://bostongreenmap.org/parks/' + key + '/facilities">');
         link.append(img);
         var nameEl = $('<div class="name">' + name + '</div>');
         container.append(link);
@@ -228,25 +232,24 @@
 
       function addResults(results) {
         for (var key in results) {
+
           if (results.hasOwnProperty(key)) {
             var jsonResult = results[key];
 
             if (jsonResult) {
 
               var images = jsonResult['images'];
-              console.log(images);
               if (images.length !== 0) {
+
                 images = images[0];
-                addImageToViewer(images['caption'], images['src'], jsonResult['url'], jsonResult['name']);
+                addImageToViewer(images['caption'], images['src'], key, jsonResult['name']);
               } else {
-                addImageToViewer("caption", "http://openclipart.org/image/800px/svg_to_png/166402/winter15-sunset-Jul-2011-royal-park.png", jsonResult['url'], jsonResult['name'])
+                addImageToViewer("caption", "http://openclipart.org/image/800px/svg_to_png/166402/winter15-sunset-Jul-2011-royal-park.png", key, jsonResult['name'])
               }
             }
           }
         }
       }
-
-
 
       function populateResults (results) {
          for (var prop in results) {
@@ -257,9 +260,9 @@
       function switchPage (resource) {
         LINKS.forEach(function(d) {
           if (resource == d.name) {
-            $("#template-" + d.name).css('display', 'block');
+            $("#template-" + d.name).show();
           } else {
-            $("#template-" + d.name).css('display', 'none');
+            $("#template-" + d.name).hide();
           }
         });
       }
@@ -267,7 +270,6 @@
       function populateCarousel (response) {
         var images = pullImages(response);
         images.splice(3);
-        console.log(images);
 
         var count = 0;
         images.forEach(function(d) {
