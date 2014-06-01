@@ -69,7 +69,29 @@
       </div>
 
       <div class="template-all" id="template-detail">
-        Detail!
+        <div class="park-info">
+          <img class="park-picture" src="">
+          <div class="park-name"></div>
+          <div class="description"></div>
+        </div>
+        <center style="margin-top: 20px">
+        <div class="icon-container">
+           <img class="icon" src="{{ STATIC_URL }}img/Soccer/icon.svg">
+        </div>
+        <div class="icon-container">
+           <img class="icon" src="{{ STATIC_URL }}img/Basketball/icon.svg">
+        </div>
+        <div class="icon-container">
+           <img class="icon" src="{{ STATIC_URL }}img/Monument/icon.svg">
+        </div>
+        <div class="icon-container">
+           <img class="icon" src="{{ STATIC_URL }}img/Grilling/icon.svg">
+        </div>
+        <center>
+                  <div class="owner"></div>
+        <div class="images"></div>
+        <div class="access"></div>
+
       </div>
 
       <div id="template-index">
@@ -177,37 +199,35 @@
         },
         {
           name: "results"
+        },
+        {
+          name: "detail"
         }
       ];
-
-      $('a').on('click', function(elem) {
-        switchPage(elem.currentTarget.id)
-      });
 
       $('#filter-select').on('click', function(d) {
         var neighborhood = $('#neighborhoods option:selected').val();
         var activity = $('#facility__activity option:selected').val();
 
-        var string = 'parks/search/?no_map=true';
+        var string = 'parks/search?';
 
         if (neighborhood) {
-          string += '&neighborhoods=' + neighborhood;
+          string = string + 'neighborhoods=' + neighborhood + '&';
         }
 
         if (activity) {
-          string += string + '&facility__activity=' + activity;
+          string = string + 'facility__activity=' + activity;
         }
 
         $.getJSON(string, function(d,i) {
-          var results = d;
-          if (jQuery.isEmptyObject(results)) {
+          window.searchResults = d;
+          if (jQuery.isEmptyObject(window.searchResults)) {
             $('#no-results').css('display','block');
           } else {
             $('#no-results').css('display','none');
             $('#template-results').empty();
             switchPage("results");
-            populateResults(results);
-            // addResults(results);
+            addResults(window.searchResults);
           }
         });
       });
@@ -217,14 +237,15 @@
       });
 
 
-      function addImageToViewer(caption, src, key, name) {
+      function addImageToViewer(caption, src, key, name, result_id) {
         var container = $('<div class="tile">');
         var img = $('<img class="image-result-tile" src="' + src +'" title="' + caption +'">');
-        var link = $('<a href="http://bostongreenmap.org/parks/' + key + '/facilities">');
+        var link = $('<a id="detail" href="#">');
         link.append(img);
         var nameEl = $('<div class="name">' + name + '</div>');
         container.append(link);
         container.append(nameEl);
+        link.attr('result_id', key);
         $('#template-results').append(container);
       }
 
@@ -247,6 +268,7 @@
             }
           }
         }
+        addClickListeners();
       }
 
       function populateResults (results) {
@@ -256,11 +278,35 @@
           }
         }
       }
+      function addClickListeners() {
+        $('a').on('click', function(event) {
+          switchPage(event.currentTarget.id, event.currentTarget.getAttribute('result_id'));
+        });
+      }
 
-      function switchPage (resource) {
+      function initializeDetails(result) {
+         var name = result['name'];
+         var description = result['description'];
+         var owner = result['owner'];
+         var images = result['images'];
+         var access = result['access'];
+         $('#template-detail .description').html(description);
+         $('#template-detail .park-name').html(name);
+         $('#template-detail .park-picture').attr('src', '{{ STATIC_URL }}/img/13-OMalleyWaterfrontPark-Chelsea.JPG');
+         $('#template-detail .owner').html(owner);
+         $('#template-detail .images').html(images);
+         $('#template-detail .access').html(access);
+      }
+
+      function switchPage (resource, resultID) {
+        window.currentResult = resultID;
         LINKS.forEach(function(d) {
           if (resource == d.name) {
             $("#template-" + d.name).show();
+            if (d.name == 'detail') {
+              initializeDetails(window.searchResults[window.currentResult]);
+            }
+            addClickListeners();
           } else {
             $("#template-" + d.name).hide();
           }
@@ -297,7 +343,7 @@
       }
 
 
-
+    addClickListeners();
     </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ STATIC_URL }}libs/jquery/jquery.url.js" type="text/javascript"></script>
