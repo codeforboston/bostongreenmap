@@ -188,14 +188,14 @@
         var neighborhood = $('#neighborhoods option:selected').val();
         var activity = $('#facility__activity option:selected').val();
 
-        var string = 'parks/search?';
+        var string = 'parks/search/?no_map=true';
 
         if (neighborhood) {
-          string = string + 'neighborhoods=' + neighborhood + '&';
+          string += '&neighborhoods=' + neighborhood;
         }
 
         if (activity) {
-          string = string + 'facility__activity=' + activity;
+          string += string + '&facility__activity=' + activity;
         }
 
         $.getJSON(string, function(d,i) {
