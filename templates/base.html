@@ -44,6 +44,15 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div id="viewport">
+
+      <div class="template-all" id="template-results">
+        <div class="finder">
+          Findme!
+        </div>
+        <div class="tiles">
+        </div>
+      </div>
+
       <div class="template-all" id="template-about">
         About
       </div>
@@ -54,6 +63,10 @@
 
       <div class="template-all" id="template-contact">
         Contact
+      </div>
+
+      <div class="template-all" id="template-results">
+        Results
       </div>
 
       <div id="template-index">
@@ -114,7 +127,34 @@
         </div>
       </div>
     </div>
+<div class="footer">
+  <div class="footer-text">What people are saying</div>
 
+<div class="twitter-container">
+<a class="twitter-timeline" width="500" height="300" 
+   href="https://twitter.com/twitterapi" data-widget-id="YOUR-WIDGET-ID-HERE">Tweets by @twitterapi</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
+<div class="footer-right">
+<div class="footer-text">Latest Park Pic</div> 
+<img src="http://www.bostongreenmap.org/media/cache/ee/23/ee23dc9479f04d0b18545dee97f0bd77.jpg">
+</div>
+
+<div class="footer-url footer-text"><b>BostonGreenMap.org</b></div>
+<div class="footer-address footer-text">1220 Washington Street | West Newton, Massachussetts 02465</div>
+<div class="footer-number footer-text">617.555.5555 | info@bostongreenmap.org</div> 
+
+<div class="footer-social">
+  <div class="footer-text">Get social with us</div>
+  <div>
+  <div class="white-circle"></div>
+  <div class="white-circle"></div>
+  <div class="white-circle"></div>
+  <div class="white-circle"></div>
+  </div>
+</div>
+</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
@@ -131,18 +171,15 @@
         },
         {
           name: "index"
+        },
+        {
+          name: "results"
         }
       ];
 
       $('a').on('click', function(elem) {
         console.log(elem.currentTarget.id);
-        LINKS.forEach(function(d) {
-          if (elem.currentTarget.id == d.name) {
-            $("#template-" + d.name).css('display', 'block');
-          } else {
-            $("#template-" + d.name).css('display', 'none');
-          }
-        });
+        switchPage(elem.currentTarget.id)
       });
 
       $('#filter-select').on('click', function(d) {
@@ -155,22 +192,77 @@
           string = string + 'neighborhoods=' + neighborhood + '&';
         }
 
-        if (neighborhood) {
-          string = string + 'facility__activity=' + neighborhood;
+        if (activity) {
+          string = string + 'facility__activity=' + activity;
         }
 
         $.getJSON(string, function(d,i) {
           var results = d;
-
+          if (jQuery.isEmptyObject(results)) {
+            $('#no-results').css('display','block');
+          } else {
+            $('#no-results').css('display','none');
+            switchPage("results");
+            // populateResults(results);
+            addResults(results);
+          }
           console.log(results);
         });
       });
 
-
-
       $.getJSON('', function(d,i) {
         // populateCarousel(d);
       });
+
+
+      function addImageToViewer(caption, src, url, name) {
+        var container = $('<div class="tile">');
+        var img = $('<img class="image-result-tile" src="' + src +'" title="' + caption +'">');
+        var link = $('<a href="' + url + '">');
+        link.append(img);
+        var nameEl = $('<div class="name">' + name + '</div>');
+        container.append(link);
+        container.append(nameEl);
+        $('#template-results').append(container);
+      }
+
+      function addResults(results) {
+        for (var key in results) {
+          if (results.hasOwnProperty(key)) {
+            var jsonResult = results[key];
+
+            if (jsonResult) {
+
+              var images = jsonResult['images'];
+              console.log(images);
+              if (images.length !== 0) {
+                images = images[0];
+                addImageToViewer(images['caption'], images['src'], jsonResult['url'], jsonResult['name']);
+              } else {
+                addImageToViewer("caption", "http://openclipart.org/image/800px/svg_to_png/166402/winter15-sunset-Jul-2011-royal-park.png", jsonResult['url'], jsonResult['name'])
+              }
+            }
+          }
+        }
+      }
+
+
+
+      function populateResults (results) {
+         for (var prop in results) {
+          $('#template-results').append("Name: " + (results[prop]).name + "<br />");
+        }
+      }
+
+      function switchPage (resource) {
+        LINKS.forEach(function(d) {
+          if (resource == d.name) {
+            $("#template-" + d.name).css('display', 'block');
+          } else {
+            $("#template-" + d.name).css('display', 'none');
+          }
+        });
+      }
 
       function populateCarousel (response) {
         var images = pullImages(response);

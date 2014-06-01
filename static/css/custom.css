@@ -7,6 +7,33 @@ body {
   font-family: "Istok Web";
 }
 
+.image-result-tile {
+  max-width: 250px;
+}
+
+.name {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 4px;
+  bottom: 10px;
+  font-family: Domine;
+  font-size: 12px;
+  left: 10px;
+  color: rgba(0,0,0,0.5);
+  position: absolute;
+  padding: 5px 3px;
+  text-shadow: 0px 1px #aaa;
+}
+
+
+.tile {
+  position: relative;
+  max-width: 300px;
+  display: inline-block;
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+
 .sitename {
   display:inline-block;
   font-size: 30px;
@@ -86,26 +113,13 @@ body {
 body {
  margin: 0px;
 }
-.viewer {
+.tiles {
   left: 10%;
   width: 80%;
   position: relative;
   margin-top: 25px;
 }
-.name {
-  background: white;
-  border: 1px solid rgba(0,0,0,0.5);
-  border-radius: 4px;
-  bottom: 10px;
-  font-family: Domine;
-  font-size: 12px;
-  left: 10px;
-  color: rgba(0,0,0,0.5);
-  position: absolute;
-  padding: 5px 3px;
-  text-shadow: 0px 1px #aaa;
-  height: 1.2em;
-}
+
 .container {
   float: left;
   margin: 2px;
@@ -143,3 +157,42 @@ body {
   text-decoration: none !important;
   color: rgb(47, 127, 84) !important;
 }
+.footer {
+  background-color: rgb(156,180,40);
+  padding-left: 10%;
+  padding-top: 30px;
+  position: relative;
+}
+.twitter-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid black;
+  display: inline-block;
+}
+.footer-text {
+  color: white;
+  font-family: "Domine";
+  font-size: 13px;
+}
+.footer-url {
+  margin-bottom: 10px;
+}
+.footer-right {
+  right: 10%;
+  border: 1px solid black;
+  display: inline-block;
+  position: absolute;
+}
+.white-circle {
+  height: 35px;
+  width: 35px;
+  border-radius: 35px;
+  background-color: white;
+  display: inline-block;
+  margin-right: 20px;
+}
+.footer-social {
+  display: inline-block;
+  right: 10%;
+  bottom: 5%;
+  position: absolute;  
