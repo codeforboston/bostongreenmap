@@ -12,6 +12,7 @@ from sorl.thumbnail import get_thumbnail
 
 import json
 import logging
+import itertools
 
 from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype
 
@@ -36,14 +37,29 @@ def get_parks(request):
     no_map = kwargs.pop('no_map', False)
     user = request.user
 
+    filters = kwargs
     try:
-        parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
+        parks = Park.objects.filter(**filters).select_related('parkowner').prefetch_related('images')
         if no_map:
-            parks_json = [ p.to_external_document(user) for p in parks ]
+            parks_json = { p.pk: p.to_external_document(user, include_large=True) for p in parks }
+            carousel = []
+            if not filters:
+                # gets up to ten images if parks have images
+                carousel = list(itertools.islice([
+                    dict(p.get('images')[0].items() + {'url': p.get('url')}.items())
+                    for key, p in parks_json.iteritems()
+                    if any(p.get('images'))
+                ],
+                0, 10))
+            response_json = {
+                "parks": parks_json,
+                "carousel": carousel
+            }
         else:
-            parks_json = { p.pk: p.to_external_document(user) for p in parks }
+            response_json = { p.pk: p.to_external_document(user) for p in parks }
 
-        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
+
+        return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
     except Exception as e:
         # no content

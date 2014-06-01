@@ -197,24 +197,33 @@ class Park(models.Model):
         self.geometry.transform(4326)
         return [self.geometry.centroid.y,self.geometry.centroid.x]
 
-    def get_image_thumbnails(self, width=250, height=250):
+    def get_image_thumbnails(self, include_large=False):
         # embed all images
         images = []
-        image_size = ''.join([str(width), 'x', str(height)])
+        tn_size = '250x250'
+        large_size = '800x600'
         for i in self.images.all():
             try: 
-                tn = get_thumbnail(i.image, image_size, crop='center', quality=80)
-                image = dict(
-                    src=tn.url,
-                    caption=strip_tags(i.caption),
-                )
+                tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
+                image = {
+                    'src': tn.url,
+                    'caption': strip_tags(i.caption),
+                }
+                if include_large:
+                    try:
+                        large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
+                        image['large_src'] = large_image.url
+                    except Exception, e:
+                        logge.error(e)
+
                 images.append(image)
             except IOError, e:
                 logger.error(e)
+
         return images
 
 
-    def to_external_document(self, user):
+    def to_external_document(self, user, include_large=False):
         change_url = None
         if user.has_perm('parks.change_park'):
             change_url = reverse('admin:parks_park_change', args=(self.id,))
@@ -223,8 +232,7 @@ class Park(models.Model):
             'url': self.get_absolute_url(),
             'name': self.name,
             'description': self.description,
-            'images': self.get_image_thumbnails(),
-            'large_images': self.get_image_thumbnails(width=800, height=600),
+            'images': self.get_image_thumbnails(include_large=include_large),
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
