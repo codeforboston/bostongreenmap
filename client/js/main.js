@@ -21,7 +21,7 @@ requirejs.config({
             exports: 'page'
         }
     },
-    baseUrl: '',
+    baseUrl: '/static',
     paths: {
         underscore: 'lib/underscore-1.5.2.min',
         jquery: 'lib/jquery-1.10.2.min',
