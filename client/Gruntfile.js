@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             },
             compile: {
                 src: ['templates/**/*.hbs'],
-                dest: "js/templates.js"
+                dest: "build/templates.js"
             }
         },
         compass: {
@@ -21,18 +21,18 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     sassDir: 'scss',
-                    cssDir: '<% project.buildPath %>',
+                    cssDir: 'build',
                     outputStyle: 'compressed'
                 }
             }
         },
         watch: {
-            options: {
-                livereload: {
-                    port: 9002,
-                    files: ['./**/*']
-                }
-            },
+            // options: {
+            //     livereload: {
+            //         port: 9002,
+            //         files: ['./**/*']
+            //     }
+            // },
             handlebars: {
                 files: ['templates/**/*'],
                 tasks: ['default']
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['js/**/*.js'],
-                tasks: []
+                tasks: ['compass:dev']
             }
         },
         connect: {
@@ -66,9 +66,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', [
-        'handlebars:compile'
-    ]);
+    grunt.registerTask('server', ['connect', 'watch']);
+    grunt.registerTask('default', []);
 
-    grunt.registerTask('dev', ['connect', 'watch']);
 };
