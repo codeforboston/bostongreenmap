@@ -111,6 +111,8 @@ class HomePageView(TemplateView):
 
         return context
 
+class BackboneHomePageView(TemplateView):
+    template_name = 'base_backbone.html'
 
 class NeighborhoodParkListView(ListView):
 

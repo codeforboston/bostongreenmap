@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from parks.views import HomePageView
+from parks.views import HomePageView, BackboneHomePageView
 
 admin.autodiscover()
 
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
 
     # Backbone App
-    url(r'^backbone/', BackboneHomePageView.as_view, name='backbone_home'),
+    url(r'^backbone$', BackboneHomePageView.as_view(), name='backbone_home'),
 
     # Parks
     url(r'^parks/', include('parks.urls')),
