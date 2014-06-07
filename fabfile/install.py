@@ -24,5 +24,5 @@ def all():
     with cd(env.code):
         npm_install()
         grunt_install()
-        handlebars_install()
+        # handlebars_install()
         compass_install()

@@ -11,6 +11,6 @@ from . import install
 @task
 def localhost():
 	env.user = 'bruce'
-	env.code = '/home/%s/repos/bruce-bostongreenmap' % env.user
+	env.code = '/home/%s/repos/bruce-bostongreenmap/client' % env.user
 	env.run = local
 	env.hosts = ['localhost']
