@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     # Home
     url(r'^$', HomePageView.as_view(), name='home'),
 
+    # Backbone App
+    url(r'^backbone/', BackboneHomePageView.as_view, name='backbone_home'),
+
     # Parks
     url(r'^parks/', include('parks.urls')),
 
