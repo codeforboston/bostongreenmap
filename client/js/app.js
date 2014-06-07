@@ -57,8 +57,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
                 var parkLayout = new ParkLayout();
                 parkLayout.render();
                 parkLayout.parkRegion.show(parkListView);
-                app.getRegion('mainRegion').show(parkLayout);
-                console.log(parkListView);
+                app.getRegion('mainRegion').show(parkListView);
             }
         });
     });
