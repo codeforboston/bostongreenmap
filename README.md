@@ -181,6 +181,17 @@ A backup of parks and MBTA resources as of 1 April 2014 is available in /fixture
 
 Access the site at [http://localhost:8000](http://localhost:8000).
 
+### Client Installation
+
+Set your localhost configurations for fabric. In fabfile/__init__.py, the function "localhost()"
+
+    env.user = {{YOUR OPERATING SYSTEM USERNAME}}
+    env.code = {{PATH TO YOUR 'client' FOLDER}}
+
+Install NPM, Node.js, Grunt.js, Ruby, and Compass using Fabric (Note: Node.js and and Ruby are dependencies of other programs and aren't actually used in any of our code)
+
+    fab localhost install.all    
+
 ## Project History
 
 The first iteration of this project was created during Boston's Hack Day Challenge in 2011. A team of 7 volunteers (Christian Spanring, David Norcott, David Rafkind, Holly St. Clair, Patrick Robertson, Peter Gett, Tom Morris) prototyped the application in 48 hours, which was among the [winners of the challenge](http://www.boston.com/business/technology/innoeco/2011/02/winners_of_the_first-ever_bost.html). The original code repository is still available and can be found here: [https://github.com/bostongreen/bostongreen](https://github.com/bostongreen/bostongreen).

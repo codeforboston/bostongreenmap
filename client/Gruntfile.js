@@ -45,26 +45,26 @@ module.exports = function(grunt) {
                 files: ['js/**/*.js'],
                 tasks: []
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 9008,
+                    base: '.',
+                    rules: {
+                        '^(.*[^/])$': '$1.html',
+                        '^(.*)/$': '$1/base.html'
+                    }
+                }
+            }
         }
-        // connect: {
-        //     server: {
-        //         options: {
-        //             hostname: '192.168.5.35',
-        //             port: 9008,
-        //             base: '.',
-        //             rules: {
-        //                 '^(.*[^/])$': '$1.html',
-        //                 '^(.*)/$': '$1/base.html'
-        //             }
-        //         }
-        //     }
-        // }
     });
 
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('default', [
         'handlebars:compile'

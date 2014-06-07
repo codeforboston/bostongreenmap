@@ -4,6 +4,10 @@ def npm_install():
     sudo('apt-get install npm')
     sudo('npm install')
 
+def node_install():
+    sudo('npm install n')
+    sudo('n stable')
+
 def grunt_install():
     sudo('npm install -g grunt-cli')
     sudo('npm install grunt')
@@ -23,6 +27,7 @@ def compass_install():
 def all():
     with cd(env.code):
         npm_install()
+        node_install()
         grunt_install()
         # handlebars_install()
         compass_install()
