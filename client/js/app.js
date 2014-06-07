@@ -1,4 +1,4 @@
-define(['backbone', 'marionette', 'js/templates'], function(Backbone, Marionette, templates) {
+define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marionette, templates) {
     var app = new Marionette.Application();
     app.addRegions({
         mainRegion: '#content-area'
@@ -27,9 +27,8 @@ define(['backbone', 'marionette', 'js/templates'], function(Backbone, Marionette
             var parks = _.map(response.parks, function(park) {
                 return new Park(park);
             });
-            response = parks;
             console.log('parks: ', parks);
-            return response;
+            return parks;
         }
     });
 
@@ -57,8 +56,9 @@ define(['backbone', 'marionette', 'js/templates'], function(Backbone, Marionette
 
                 var parkLayout = new ParkLayout();
                 parkLayout.render();
-                // parkLayout.parkRegion.show(parkListView);
+                parkLayout.parkRegion.show(parkListView);
                 app.getRegion('mainRegion').show(parkLayout);
+                console.log(parkListView);
             }
         });
     });

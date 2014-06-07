@@ -35,7 +35,7 @@ module.exports = function(grunt) {
             // },
             handlebars: {
                 files: ['templates/**/*'],
-                tasks: ['default']
+                tasks: ['handlebars:compile']
             },
             sass: {
                 files: ['scss/**/*'],
