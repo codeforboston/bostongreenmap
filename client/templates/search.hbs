@@ -1,0 +1,33 @@
+<div class="finder">
+  <div class="finder-title">Find your space.</div>
+    <ul>
+      <li>
+        <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
+          <option value=""></option>
+          <option value="">All Neighborhoods</option>
+          {{#each neighborhood}}
+            <option value="{{ id }}">{{ name }}</option>
+          {{/each}}
+        </select>
+      </li>
+      <li>
+        <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
+          <option value=""></option>
+          <option value="">All Activities</option>
+          {{#each activity}}
+            <option value="{{ id }}">{{ name }}</option>
+          {{/each}}
+        </select>
+      </li>
+    </ul>
+  <div class="gobutton">GO</div>
+</div>
+<div class="viewer">
+  {{#each results}}
+    <div class="container">
+        <img src="{{results_image}}">
+      </a>
+      <div class="name">{{name}}</div>
+    </div>
+  {{/each}}
+</div>
