@@ -4,59 +4,61 @@ define(['backbone', 'marionette', 'js/templates'], function(Backbone, Marionette
         mainRegion: '#content-area'
     });
 
-    var ArticleLayout = Marionette.Layout.extend({
+    var ParkLayout = Marionette.Layout.extend({
         template: templates['templates/ArticleLayout.hbs'],
         regions: {
-            'navRegion': '#app-nav',
-            'articleRegion': '#app-articles'
+            'navRegion': '#boston-green-navbar-container',
+            'parkRegion': '#park-region'
         }
     });
 
-    var Article = Backbone.Model.extend({
+    var Park = Backbone.Model.extend({
         defaults: {
             'title': ''
         }
     });
 
-    var ArticleCollection = Backbone.Collection.extend({
-        model: Article,
-        url: 'http://www.fullstackcoder.com/api/v1/articles.jsonp',
+    var ParksCollection = Backbone.Collection.extend({
+        model: Park,
+        url: function() {
+            return window.location.origin + '/parks/search?no_map=True&neighborhoods=25';
+        },
         parse: function(response) {
-            var articles = _.map(response.articles, function(article) {
-                return new Article(article);
+            var parks = _.map(response.parks, function(park) {
+                return new Park(park);
             });
-            console.log(response);
-            response = articles;
+            response = parks;
+            console.log('parks: ', parks);
             return response;
         }
     });
 
-    Article.Collection = ArticleCollection;
+    Park.Collection = ParksCollection;
 
-    var ArticleListItemView = Marionette.ItemView.extend({
+    var ParkListItemView = Marionette.ItemView.extend({
         template: templates['templates/ArticleListItem.hbs'],
         tagName: 'li',
         className: 'article'
     });
 
-    var ArticleListView = Marionette.CompositeView.extend({
+    var ParkListView = Marionette.CompositeView.extend({
         template: templates['templates/ArticleList.hbs'],
-        itemView: ArticleListItemView,
+        itemView: ParkListItemView,
         tagName: 'ul',
         className: 'article-list'
     });
 
     app.addInitializer(function(options) {
-        var articles = new ArticleCollection();
-        articles.fetch({
-            'dataType': 'jsonp',
+        var parks = new ParksCollection();
+        parks.fetch({
+            'dataType': 'json',
             'success': function(data) {
-                var articleView = new ArticleListView({'collection': articles});
+                var parkListView = new ParkListView({'collection': parks});
 
-                var articleLayout = new ArticleLayout();
-                articleLayout.render();
-                articleLayout.articleRegion.show(articleView);
-                app.getRegion('mainRegion').show(articleView);
+                var parkLayout = new ParkLayout();
+                parkLayout.render();
+                // parkLayout.parkRegion.show(parkListView);
+                app.getRegion('mainRegion').show(parkLayout);
             }
         });
     });
