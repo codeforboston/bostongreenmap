@@ -1,17 +1,11 @@
 define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marionette, templates) {
     var app = new Marionette.Application();
     app.addRegions({
+        navRegion: '#header',
         mainRegion: '#content-area'
     });
 
-    var ParkLayout = Marionette.Layout.extend({
-        template: templates['templates/ArticleLayout.hbs'],
-        regions: {
-            'navRegion': '#boston-green-navbar-container',
-            'parkRegion': '#park-region'
-        }
-    });
-
+    // Models
     var Park = Backbone.Model.extend({
         defaults: {
             'title': ''
@@ -31,32 +25,47 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             return parks;
         }
     });
-
     Park.Collection = ParksCollection;
+    
+    // Views
+    var HeaderView = Marionette.ItemView.extend({
+        template: templates['templates/headerView.hbs'],
+        tagName: 'div',
+        className: 'header'
+    });
 
     var ParkListItemView = Marionette.ItemView.extend({
-        template: templates['templates/ArticleListItem.hbs'],
+        template: templates['templates/parkListItem.hbs'],
         tagName: 'li',
         className: 'article'
     });
 
     var ParkListView = Marionette.CompositeView.extend({
-        template: templates['templates/ArticleList.hbs'],
+        template: templates['templates/parkList.hbs'],
         itemView: ParkListItemView,
         tagName: 'ul',
         className: 'article-list'
     });
 
+    var ParkLayout = Marionette.Layout.extend({
+        template: templates['templates/parkLayout.hbs'],
+        regions: {
+            'navRegion': '#boston-green-navbar-container',
+            'parkRegion': '#park-region'
+        }
+    });
+
     app.addInitializer(function(options) {
         var parks = new ParksCollection();
+        var parkLayout = new ParkLayout();
+        app.getRegion('navRegion').show(new HeaderView());
+
+        parkLayout.render();
         parks.fetch({
             'dataType': 'json',
             'success': function(data) {
                 var parkListView = new ParkListView({'collection': parks});
-
-                var parkLayout = new ParkLayout();
-                parkLayout.render();
-                parkLayout.parkRegion.show(parkListView);
+                // parkLayout.parkRegion.show(parkListView);
                 app.getRegion('mainRegion').show(parkListView);
             }
         });
