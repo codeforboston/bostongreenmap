@@ -1,0 +1,50 @@
+<div id="amenity-carousel" class="carousel slide"><!-- class of slide for animation -->
+  <div class="carousel-inner">
+  {{#sectionIntoFours response}}
+    <div class="item {{activeClass}}"><!-- class of active since it's the first item -->
+      {{#each icons}}
+        <img src="{{icon}}" alt="" />
+      {{/each}}
+      <div class="carousel-caption">
+      </div>
+    </div>
+  {{/sectionIntoFours}}
+  </div><!-- /.carousel-inner -->
+    <a class="carousel-control left" href="#amenity-carousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#amenity-carousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->
+
+Handlebars.registerHelper('sectionIntoFours', sectionIntoFours);
+
+function markActive(responses) {
+  var alreadyMarked = false
+  responses.forEach(function(response) {
+    if (!alreadyMarked) {
+      alreadyMarked = true;
+      response.activeClass = 'active';
+    } else {
+      response.activeClass = '';
+    }
+  });
+}
+
+function sectionIntoFours(responses) {
+  var countElements = 0;
+  var icons = [{icons: []}];
+  responses.forEach(function(response) {
+    if (countElements == 4) {
+      icons.push({icons: []});
+      countElements = 0;
+    }
+    if (response.icon) {
+      icons[icons.length - 1]['icons'].push(response);
+      countElements++;
+    }
+  });
+  icons[0].activeClass = 'active';
+  return icons;
+}
+
+$(document).ready(function(){
+  $('.carousel').carousel();
+});
