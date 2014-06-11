@@ -1,9 +1,21 @@
+<style>
+  .icon-container {
+    border-radius: 100px;
+    background: #e0e0e0;
+    display: inline-block;
+    padding: 20px;
+    margin-right: 15px;
+  }
+</style>
+
 <div id="amenity-carousel" class="carousel slide"><!-- class of slide for animation -->
   <div class="carousel-inner">
   {{#sectionIntoFours response}}
     <div class="item {{activeClass}}"><!-- class of active since it's the first item -->
       {{#each icons}}
-        <img src="{{icon}}" alt="" />
+        <div class="icon-container">
+          <img class="icon" src="{{icon}}" alt="" />
+        </div>
       {{/each}}
       <div class="carousel-caption">
       </div>
@@ -14,6 +26,7 @@
     <a class="carousel-control right" href="#amenity-carousel" data-slide="next">&rsaquo;</a>
 </div><!-- /.carousel -->
 
+<script>
 Handlebars.registerHelper('sectionIntoFours', sectionIntoFours);
 
 function markActive(responses) {
@@ -48,3 +61,4 @@ function sectionIntoFours(responses) {
 $(document).ready(function(){
   $('.carousel').carousel();
 });
+</script>
