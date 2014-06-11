@@ -6,7 +6,7 @@ module.exports = function(grunt) {
                 'amd': true
             },
             compile: {
-                src: ['templates/**/*.hbs'],
+                src: ['templates/*'],
                 dest: "build/templates.js"
             }
         },

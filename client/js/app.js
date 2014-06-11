@@ -30,9 +30,18 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     
     // Views
     var HeaderView = Marionette.ItemView.extend({
+        events: {
+            'click #nav-about': 'goToAbout'
+        },
         template: templates['templates/headerView.hbs'],
         tagName: 'div',
-        className: 'header'
+        className: 'header',
+        goToAbout: function(evt) {
+            if (evt) {
+                evt.preventDefault();
+            };
+            Backbone.history.navigate('about', {'trigger': true});
+        }
     });
 
     var SearchView = Marionette.ItemView.extend({
@@ -45,6 +54,12 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         template: templates['templates/footer.hbs'],
         tagName: 'div',
         className: 'footer'
+    });
+
+    var AboutView = Backbone.View.extend({
+        template: templates['templates/about.hbs'],
+        tagName: 'div',
+        idName: 'about'
     });
 
     // var ParkListItemView = Marionette.ItemView.extend({
@@ -68,7 +83,20 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     //     }
     // });
 
+    app.Router = Backbone.Router.extend({
+        routes: {
+            'about': 'about'
+        },
+        about: function() {
+            app.getRegion('mainRegion').show(new AboutView());
+        }
+    });
+
     app.addInitializer(function(options) {
+        app.execute('setRouter', new app.Router());
+        Backbone.history.start();
+
+
         var parks = new ParksCollection();
         // var parkLayout = new ParkLayout();
         app.getRegion('navRegion').show(new HeaderView());
