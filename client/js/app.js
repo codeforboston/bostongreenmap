@@ -82,7 +82,15 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
 
     app.Router = Backbone.Router.extend({
         routes: {
+            '': 'home',
             'about': 'about'
+        },
+        home: function() {
+            var parks = new ParksCollection();
+            // var parkLayout = new ParkLayout();
+            app.getRegion('navRegion').show(new HeaderView());
+            app.getRegion('mainRegion').show(new SearchView({'collection': parks}));
+            app.getRegion('footerRegion').show(new FooterView());
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
@@ -92,23 +100,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     app.addInitializer(function(options) {
         app.execute('setRouter', new app.Router());
         Backbone.history.start();
-
-
-        var parks = new ParksCollection();
-        // var parkLayout = new ParkLayout();
-        app.getRegion('navRegion').show(new HeaderView());
-        app.getRegion('mainRegion').show(new SearchView({'collection': parks}));
-        app.getRegion('footerRegion').show(new FooterView());
-
-        // parkLayout.render();
-        // parks.fetch({
-        //     'dataType': 'json',
-        //     'success': function(data) {
-        //         var parkListView = new ParkListView({'collection': parks});
-        //         // parkLayout.parkRegion.show(parkListView);
-        //         app.getRegion('mainRegion').show(parkListView);
-        //     }
-        // });
+        // Backbone.history.navigate('', {'trigger': true});
     });
 
     return {
