@@ -37,9 +37,6 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         tagName: 'div',
         className: 'header',
         goToAbout: function(evt) {
-            if (evt) {
-                evt.preventDefault();
-            };
             Backbone.history.navigate('about', {'trigger': true});
         }
     });
@@ -56,10 +53,10 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         className: 'footer'
     });
 
-    var AboutView = Backbone.View.extend({
+    var AboutView = Marionette.ItemView.extend({
         template: templates['templates/about.hbs'],
         tagName: 'div',
-        idName: 'about'
+        className: 'about'
     });
 
     // var ParkListItemView = Marionette.ItemView.extend({
