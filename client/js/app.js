@@ -26,13 +26,16 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             return parks;
         }
     });
+    
     Park.Collection = ParksCollection;
     
     // Views
     var HeaderView = Marionette.ItemView.extend({
         events: {
             'click #nav-about': 'goToAbout',
-            'click #nav-mission': 'goToMission'
+            'click #nav-mission': 'goToMission',
+            'click #nav-index': 'goToIndex',
+            'click #nav-contact': 'goToContact'
         },
         template: templates['templates/headerView.hbs'],
         tagName: 'div',
@@ -42,6 +45,12 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         },
         goToMission: function(evt){
             Backbone.history.navigate('mission', {'trigger': true});
+        },
+        goToContact: function(evt) {
+            Backbone.history.navigate('contact', {'trigger': true});
+        },
+        goToIndex: function(evt) {
+            Backbone.history.navigate('', {'trigger': true});
         }
     });
 
@@ -61,6 +70,18 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         template: templates['templates/about.hbs'],
         tagName: 'div',
         className: 'about'
+    });
+
+    var MissionView = Marionette.ItemView.extend({
+        template: templates['templates/mission.hbs'],
+        tagName: 'div',
+        className: 'mission'
+    });
+
+    var ContactView = Marionette.ItemView.extend({
+        template: templates['templates/contact.hbs'],
+        tagName: 'div',
+        className: 'contact'
     });
 
     // var ParkListItemView = Marionette.ItemView.extend({
@@ -87,7 +108,9 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     app.Router = Backbone.Router.extend({
         routes: {
             '': 'home',
-            'about': 'about'
+            'about': 'about',
+            'mission': 'mission',
+            'contact': 'contact'
         },
         home: function() {
             var parks = new ParksCollection();
@@ -95,6 +118,12 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
+        },
+        mission: function () {
+            app.getRegion('mainRegion').show(new MissionView());
+        },
+        contact: function () {
+            app.getRegion('mainRegion').show(new ContactView());
         }
     });
 
