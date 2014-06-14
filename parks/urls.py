@@ -7,6 +7,9 @@ urlpatterns = patterns('parks.views',
 
     # returns park list
     url(r'^search/$', 'get_parks', name='get_parks'),
+    
+    # returns list of all neighborhood names and ids and activity names and ids
+    url(r'^get_neighborhoods_and_activities_list/$', 'get_neighborhoods_and_activities_list', name='get_neighborhoods_and_activities_list'),
 
     # returns facilities
     url(r'^(?P<park_id>\d+)/facilities/$', 'get_facilities', name='get_facilities'),

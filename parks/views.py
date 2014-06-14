@@ -28,6 +28,15 @@ def get_topnav_data():
 
     return neighborhoods, activities
 
+def get_neighborhoods_and_activities_list(request):
+    neighborhoods = Neighborhood.objects.all()
+    activities = Activity.objects.all()
+    response = {
+        'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
+        'activities': [{'id': a.pk, 'name': a.name} for a in activities]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def get_parks(request):
     """ Returns parks as JSON based search parameters
     """
