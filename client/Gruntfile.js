@@ -27,12 +27,10 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            // options: {
-            //     livereload: {
-            //         port: 9002,
-            //         files: ['./**/*']
-            //     }
-            // },
+            options: {
+                configFiles
+                reload: true
+            },
             handlebars: {
                 files: ['templates/**/*'],
                 tasks: ['handlebars:compile']
