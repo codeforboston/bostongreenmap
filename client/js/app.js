@@ -87,10 +87,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         },
         home: function() {
             var parks = new ParksCollection();
-            // var parkLayout = new ParkLayout();
-            app.getRegion('navRegion').show(new HeaderView());
             app.getRegion('mainRegion').show(new SearchView({'collection': parks}));
-            app.getRegion('footerRegion').show(new FooterView());
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
@@ -98,6 +95,8 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     });
 
     app.addInitializer(function(options) {
+        app.getRegion('navRegion').show(new HeaderView());
+        app.getRegion('footerRegion').show(new FooterView());
         app.execute('setRouter', new app.Router());
         Backbone.history.start();
         // Backbone.history.navigate('', {'trigger': true});
