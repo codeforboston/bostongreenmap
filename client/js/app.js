@@ -31,13 +31,17 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     // Views
     var HeaderView = Marionette.ItemView.extend({
         events: {
-            'click #nav-about': 'goToAbout'
+            'click #nav-about': 'goToAbout',
+            'click #nav-mission': 'goToMission'
         },
         template: templates['templates/headerView.hbs'],
         tagName: 'div',
         className: 'header',
         goToAbout: function(evt) {
             Backbone.history.navigate('about', {'trigger': true});
+        },
+        goToMission: function(evt){
+            Backbone.history.navigate('mission', {'trigger': true});
         }
     });
 
