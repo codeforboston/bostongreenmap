@@ -59,7 +59,7 @@ The following steps outline basic steps to install and configure the databasse r
 
 1. Add UbuntuGIS packages
 
-        sudo add-apt-repository ppa:ppa:ubuntugis/ppa
+        sudo add-apt-repository ppa:ubuntugis/ppa
         sudo apt-get update
 
 2. Install PostGIS and all dependencies
@@ -76,6 +76,10 @@ To install the Python PostgreSQL driver you'll probably make sure to have `pytho
         Shall the new role be a superuser? (y/n) n
         Shall the new role be allowed to create databases? (y/n) y
         Shall the new role be allowed to create more new roles? (y/n) n
+
+If you see an error like $USERNAME does not exist, first do:
+        sudo su - postgres
+and then finish running the commands above
 
 2. Set the user password
 
