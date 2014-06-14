@@ -27,10 +27,6 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            options: {
-                configFiles
-                reload: true
-            },
             handlebars: {
                 files: ['templates/**/*'],
                 tasks: ['handlebars:compile']
