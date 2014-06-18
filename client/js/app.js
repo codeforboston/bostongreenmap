@@ -8,8 +8,26 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
 
     // Models
     var Park = Backbone.Model.extend({
+        initialize: function (params) {
+          this.park_slug = params.park_slug
+        },
         defaults: {
             'title': ''
+        },
+        url: function() {
+            return window.location.origin + '/parks/search/?slug=' + this.park_slug;
+        },
+        parse: function (response) {
+          var attributes = {};
+          _.each(response, function(attribute, key) {
+            _.each(attribute, function(attribute, key) {
+              attributes[key] = attribute;
+            })
+          });
+          return attributes;
+        },
+        render: function() {
+
         }
     });
 
@@ -26,7 +44,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             return parks;
         }
     });
-    
+
     Park.Collection = ParksCollection;
     
     // Views
@@ -77,44 +95,32 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         tagName: 'div',
         className: 'mission'
     });
-
+    
     var ContactView = Marionette.ItemView.extend({
         template: templates['templates/contact.hbs'],
         tagName: 'div',
         className: 'contact'
     });
 
-    // var ParkListItemView = Marionette.ItemView.extend({
-    //     template: templates['templates/parkListItem.hbs'],
-    //     tagName: 'li',
-    //     className: 'article'
-    // });
+    var ParkView = Marionette.ItemView.extend({
+        template: templates['templates/park.hbs'],
+        tagName: 'div',
+        className: 'detail'
+    });
 
-    // var ParkListView = Marionette.CompositeView.extend({
-    //     template: templates['templates/parkList.hbs'],
-    //     itemView: ParkListItemView,
-    //     tagName: 'ul',
-    //     className: 'article-list'
-    // });
-
-    // var ParkLayout = Marionette.Layout.extend({
-    //     template: templates['templates/parkLayout.hbs'],
-    //     regions: {
-    //         'navRegion': '#boston-green-navbar-container',
-    //         'parkRegion': '#park-region'
-    //     }
-    // });
 
     app.Router = Backbone.Router.extend({
         routes: {
             '': 'home',
             'about': 'about',
             'mission': 'mission',
-            'contact': 'contact'
+            'contact': 'contact',
+            'parks/:park_slug': 'park'
         },
         home: function() {
             var parks = new ParksCollection();
             app.getRegion('mainRegion').show(new SearchView({'collection': parks}));
+            Park.fetch();
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
@@ -124,6 +130,14 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         },
         contact: function () {
             app.getRegion('mainRegion').show(new ContactView());
+        },
+        park: function (park_slug) {
+            var park = new Park({'park_slug': park_slug});
+            park.fetch({'success': function() {
+                app.getRegion('mainRegion').show(new ParkView({'model': park }));
+            }});
+            park.fetch();
+
         }
     });
 
