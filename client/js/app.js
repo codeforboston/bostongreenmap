@@ -1,4 +1,4 @@
-define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marionette, templates) {
+define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], function(Backbone, Marionette, templates, helpers) {
     var app = new Marionette.Application();
     app.addRegions({
         navRegion: '#header',
