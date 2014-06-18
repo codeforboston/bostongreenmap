@@ -13,6 +13,23 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         }
     });
 
+    var SearchModel = Backbone.Model.extend({
+        url: function() {
+            return window.location.origin + '/parks/get_neighborhoods_and_activities_list/';
+        },
+        parse: function(response) {
+            var data = {'neighborhoods': [], 'activities': []};
+            _.each(response.neighbhorhoods, function(neighborhood) {
+                data.neighbhorhoods.push(neighborhood.name);
+            });
+            _.each(response.activities, function(activity) {
+                data.activities.push(activity.name);
+            });
+            console.log('data: ', data);
+            return data;
+        }
+    });
+
     var ParksCollection = Backbone.Collection.extend({
         model: Park,
         url: function() {
@@ -86,8 +103,9 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             'about': 'about'
         },
         home: function() {
-            var parks = new ParksCollection();
-            app.getRegion('mainRegion').show(new SearchView({'collection': parks}));
+            var searchModel = new SearchModel();
+            searchModel.fetch();
+            app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());

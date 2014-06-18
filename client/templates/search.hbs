@@ -4,7 +4,7 @@
         <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
           <option value=""></option>
           <option value="">All Neighborhoods</option>
-          {{#each neighborhood}}
+          {{#each neighborhoods}}
             <option value="{{ id }}">{{ name }}</option>
           {{/each}}
         </select>
@@ -13,8 +13,8 @@
         <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
           <option value=""></option>
           <option value="">All Activities</option>
-          {{#each activity}}
-            <option value="{{ id }}">{{ name }}</option>
+          {{#each activities}}
+            <option value="{{ id }}">{{ this }}</option>
           {{/each}}
         </select>
       </li>
