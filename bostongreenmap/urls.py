@@ -3,6 +3,8 @@ from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.contrib.staticfiles.views import serve
+from django.views.decorators.cache import never_cache
 admin.autodiscover()
 
 from parks.views import HomePageView, BackboneHomePageView, HackathonHomePageView
@@ -35,8 +37,10 @@ urlpatterns = patterns('',
 )
 
 if settings.DEBUG:
+    static_view = never_cache(serve)
     urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        url(r'^media/(?P<path>.*)$', static_view, {
             'document_root': settings.MEDIA_ROOT,
-        }),
+        })
    )
+    print "No Cache?"
