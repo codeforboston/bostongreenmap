@@ -1,0 +1,35 @@
+<div id="recommended-carousel" class="carousel slide"><!-- class of slide for animation -->
+  <div class="carousel-inner">
+  {{#sectionIntoThrees response}}
+    <div class="item {{activeClass}}"><!-- class of active since it's the first item -->
+      {{#each images}}
+        <div class="container">
+           <a href="{{link}}"><img src="{{src}}" title="{{caption}}"></a><div class="name">{{name}}</div>
+        </div>
+        <div class="carousel-caption">
+        </div>
+      {{/each}}
+    </div>
+  {{/sectionIntoThrees}}
+  </div><!-- /.carousel-inner -->
+    <a class="carousel-control left" href="#recommended-carousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#recommended-carousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->
+Handlebars.registerHelper('sectionIntoThrees', sectionIntoThrees);
+
+function sectionIntoThrees(responses) {
+  var countElements = 0;
+  var icons = [{images: []}];
+  responses.forEach(function(item) {
+    if (countElements == 3) {
+      icons.push({images: []});
+      countElements = 0;
+    }
+    if (item.images) {
+      icons[icons.length - 1]['images'].push({ src: images[0].src, caption: images[0].caption, name: item.name, link: item.url});
+      countElements++;
+    }
+  });
+  icons[0].activeClass = 'active';
+  return icons;
+}
