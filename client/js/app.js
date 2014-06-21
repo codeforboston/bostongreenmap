@@ -1,5 +1,8 @@
 define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], function(Backbone, Marionette, templates, helpers) {
     var app = new Marionette.Application();
+    _.extend(Marionette.ItemView, {'templateHelpers': helpers});
+    console.log('ItemView: ', Marionette.ItemView);
+
     app.addRegions({
         navRegion: '#header',
         mainRegion: '#content-area',
@@ -19,8 +22,8 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         },
         parse: function(response) {
             var data = {'neighborhoods': [], 'activities': []};
-            _.each(response.neighbhorhoods, function(neighborhood) {
-                data.neighbhorhoods.push(neighborhood.name);
+            _.each(response.neighborhoods, function(neighborhood) {
+                data.neighborhoods.push(neighborhood.name);
             });
             _.each(response.activities, function(activity) {
                 data.activities.push(activity.name);
@@ -61,7 +64,10 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
-        className: 'finder'
+        className: 'finder',
+        templateHelpers: {
+            'jsonify': helpers.jsonify
+        }
     });
 
     var FooterView = Marionette.ItemView.extend({
@@ -104,8 +110,11 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         },
         home: function() {
             var searchModel = new SearchModel();
+            var searchView = 
+            searchModel.once('sync', function() {
+                app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
+            });
             searchModel.fetch();
-            app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
