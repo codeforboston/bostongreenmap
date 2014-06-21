@@ -3,14 +3,14 @@
           <option value=""></option>
           <option value="">All Neighborhoods</option>
           {{#each neighborhoods}}
-            <option value="{{ id }}">{{ this }}</option>
+            <option value="{{ id }}">{{ name }}</option>
           {{/each}}
         </select>
         <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
           <option value=""></option>
           <option value="">All Activities</option>
           {{#each activities}}
-            <option value="{{ id }}">{{ this }}</option>
+            <option value="{{ id }}">{{ name }}</option>
           {{/each}}
         </select>
   <div class="gobutton">GO</div>

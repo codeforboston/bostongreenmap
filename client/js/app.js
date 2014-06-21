@@ -1,5 +1,6 @@
 define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], function(Backbone, Marionette, templates, helpers) {
-    var app = new Marionette.Application();
+    var app = new Marionette.Application(),
+        router;
     _.extend(Marionette.ItemView, {'templateHelpers': helpers});
     console.log('ItemView: ', Marionette.ItemView);
 
@@ -41,10 +42,10 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         parse: function(response) {
             var data = {'neighborhoods': [], 'activities': []};
             _.each(response.neighborhoods, function(neighborhood) {
-                data.neighborhoods.push(neighborhood.name);
+                data.neighborhoods.push({'id': neighborhood.id, 'name': neighborhood.name});
             });
             _.each(response.activities, function(activity) {
-                data.activities.push(activity.name);
+                data.activities.push({'id': activity.id, 'name': activity.name});
             });
             console.log('data: ', data);
             return data;
@@ -53,10 +54,16 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
 
     var ParksCollection = Backbone.Collection.extend({
         model: Park,
+        initialize: function(params) {
+            this.queryString = params.queryString
+        },
         url: function() {
-            return window.location.origin + '/parks/search?no_map=True&neighborhoods=25';
+            var search_url = 'parks/search?' + this.queryString;
+            console.log('fetch url: ', search_url);
+            return search_url;
         },
         parse: function(response) {
+            console.log('response: ', response);
             var parks = _.map(response.parks, function(park) {
                 return new Park(park);
             });
@@ -96,8 +103,23 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         template:templates['templates/search.hbs'],
         tagName: 'div',
         className: 'finder',
+        events: {
+            'click .gobutton': 'doSearch'
+        },
         templateHelpers: {
             'jsonify': helpers.jsonify
+        },
+        doSearch: function() {
+            var neighborhood_id = $('#facility__activity option:selected').val(),
+                activity_id = $('#neighborhoods option:selected').val(),
+                search_url = [
+                    'results/',
+                    'no_map',
+                    (neighborhood_id ? '&neighborhoods=' + neighborhood_id.toString() : ''),
+                    (activity_id ? '&activities=' + activity_id.toString() : '')
+                ].join('');
+            console.log('search_url: ', search_url);
+            Backbone.history.navigate(search_url, {'trigger': true});
         }
     });
 
@@ -138,6 +160,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
             'about': 'about',
             'mission': 'mission',
             'contact': 'contact',
+            'results/:queryString': 'results',
             'parks/:park_slug': 'park'
         },
         home: function() {
@@ -147,7 +170,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
                 app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
             });
             searchModel.fetch();
-            alert('Got Here!');
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());
@@ -158,20 +180,28 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         contact: function () {
             app.getRegion('mainRegion').show(new ContactView());
         },
+        results: function(queryString) {
+            console.log('queryString: ', queryString);
+            var results = new ParksCollection({'queryString': queryString});
+            results.fetch({'success': function() {
+                app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
+            }});
+        },
         park: function (park_slug) {
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
             }});
             park.fetch();
-
         }
     });
 
     app.addInitializer(function(options) {
         app.getRegion('navRegion').show(new HeaderView());
         app.getRegion('footerRegion').show(new FooterView());
-        app.execute('setRouter', new app.Router());
+
+        router = new app.Router();
+        app.execute('setRouter', router);
         Backbone.history.start();
         // Backbone.history.navigate('', {'trigger': true});
     });
