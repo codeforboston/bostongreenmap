@@ -4,6 +4,7 @@
     padding-top: 25px;
     padding-left: 10%;
 }
+
 .logo {
     display: inline-block;
     height: 35px;
@@ -11,7 +12,9 @@
     border-radius: 35px;
     border: 5px solid rgb(13, 103, 52);
     background-color: #9cb428;
+    box-sizing: content-box;
 }
+
 .sitename {
     display:inline-block;
     font-size: 30px;
@@ -27,6 +30,9 @@
 }
   
 .navlinks {
+    text-decoration: none !important;
+    color: rgb(47, 127, 84) !important;
+    box-sizing: content-box;
     display: inline-block;
     font-size: 12px;
     position: absolute;
@@ -45,6 +51,20 @@
 
 /*** Search ***/
 
+.name {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 4px;
+  bottom: 10px;
+  font-family: Domine;
+  font-size: 12px;
+  left: 10px;
+  color: rgba(0,0,0,0.5);
+  position: absolute;
+  padding: 5px 3px;
+  text-shadow: 0px 1px #aaa;
+  height: 1.2em;
+}
 
 /*** About ***/
 .about {
@@ -72,25 +92,30 @@
   padding-top: 30px;
   position: relative;
 }
+
 .twitter-container {
   width: 500px;
   height: 300px;
   display: inline-block;
 }
+
 .footer-text {
   color: white;
   font-family: "Domine";
   font-size: 13px;
 }
+
 .footer-url {
   margin-bottom: 10px;
 }
+
 .footer-right {
   right: 10%;
   border: 1px solid black;
   display: inline-block;
   position: absolute;
 }
+
 .white-circle {
   height: 35px;
   width: 35px;
@@ -99,14 +124,17 @@
   display: inline-block;
   margin-right: 20px;
 }
+
 .footer-social {
   display: inline-block;
   right: 10%;
   bottom: 5%;
   position: absolute;  
 }
+
 body {
   font-family: "Domine";
+  margin: 0px;
 }
 
 .navbar {
@@ -116,73 +144,6 @@ body {
 
 /*** CSS dump from redevelop ***/
 
-.sitename {
-  display:inline-block;
-  font-size: 30px;
-  color: rgb(12, 102, 49);
-  position: relative;
-  bottom: 11px;
-}
-.logo {
-  display: inline-block;
-  height: 35px;
-  width: 35px;
-  border-radius: 35px;body {
-  font-family: "Domine";
-}
-
-.navbar {
-  margin-bottom: 0;
-  font-family: "Istok Web";
-}
-
-
-
-.sitename {
-  display:inline-block;
-  font-size: 30px;
-  color: rgb(12, 102, 49);
-  position: relative;
-  bottom: 11px;
-}
-.logo {
-  display: inline-block;
-  height: 35px;
-  width: 35px;
-  border-radius: 35px;
-  border: 5px solid rgb(13, 103, 52);
-  background-color: #9cb428;
-  box-sizing: content-box;
-}
-
-
-.carousel-image {
-  max-height: 800px;
-}
-
-.btn-group {
-  margin: 3px;
-}
-
-.navbar-header {
-  height: 100px;
-  top: 40px;
-  position: relative;
-}
-
-@media (max-width: 600px) {
-  .sitename {
-    font-size: 16px;
-  }
-  .logo {
-    width: 25px;
-    height: 25px;
-  }
-  .navbar-header {
-    height: 50px;
-    top:0;
-  }
-}
 
 #bs-example-navbar-collapse-1 {
   height: 100px;
@@ -207,29 +168,14 @@ body {
   padding: 2%;
 }
 
-body {
- margin: 0px;
-}
 .viewer {
   left: 10%;
   width: 80%;
   position: relative;
   margin-top: 25px;
 }
-.name {
-  background: white;
-  border: 1px solid rgba(0,0,0,0.5);
-  border-radius: 4px;
-  bottom: 10px;
-  font-family: Domine;
-  font-size: 12px;
-  left: 10px;
-  color: rgba(0,0,0,0.5);
-  position: absolute;
-  padding: 5px 3px;
-  text-shadow: 0px 1px #aaa;
-  height: 1.2em;
-}
+
+
 .container {
   float: left;
   margin: 2px;
@@ -263,15 +209,6 @@ body {
   color: white;
   background-color: green;
 }
-.navlinks {
-  text-decoration: none !important;
-  color: rgb(47, 127, 84) !important;
-}
-  border: 5px solid rgb(13, 103, 52);
-  background-color: #9cb428;
-  box-sizing: content-box;
-}
-
 
 .carousel-image {
   max-height: 800px;
@@ -301,86 +238,3 @@ body {
   }
 }
 
-#bs-example-navbar-collapse-1 {
-  height: 100px;
-  top: 40px;
-  position: relative;
-}
-
-.navbar-brand {
-  display:inline-block;
-  font-size: 30px;
-  color: rgb(12, 102, 49);
-  position: relative;
-  bottom: 11px;
-}
-
-.floating-text {
-  background-color: rgba(0,160,0,0.8);
-  position: absolute;
-  z-index: 15;
-  color: white;
-  margin: 5%;
-  padding: 2%;
-}
-
-body {
- margin: 0px;
-}
-.viewer {
-  left: 10%;
-  width: 80%;
-  position: relative;
-  margin-top: 25px;
-}
-.name {
-  background: white;
-  border: 1px solid rgba(0,0,0,0.5);
-  border-radius: 4px;
-  bottom: 10px;
-  font-family: Domine;
-  font-size: 12px;
-  left: 10px;
-  color: rgba(0,0,0,0.5);
-  position: absolute;
-  padding: 5px 3px;
-  text-shadow: 0px 1px #aaa;
-  height: 1.2em;
-}
-.container {
-  float: left;
-  margin: 2px;
-  position: relative;  
-}
-
-.finder {
-  background-image: url('http://www.textureking.com/content/img/stock/big/DSC_1693.JPG');
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10%;
-}
-.finder-title {
-  font-family: Domine;
-  font-size: 30px;
-  color: white;
-  position: relative;
-  display: inline-block;
-}
-.header {
-  font-family: "Istok Web";
-  padding-top: 25px;
-  padding-left: 10%;
-}
-
-.gobutton {
-  cursor: pointer;
-  display: inline-block;
-  padding: 3px;
-  font-family: "Domine";
-  color: white;
-  background-color: green;
-}
-.navlinks {
-  text-decoration: none !important;
-  color: rgb(47, 127, 84) !important;
-}
