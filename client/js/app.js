@@ -1,8 +1,6 @@
-define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], function(Backbone, Marionette, templates, helpers) {
+define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marionette, templates) {
     var app = new Marionette.Application(),
         router;
-    _.extend(Marionette.ItemView, {'templateHelpers': helpers});
-    console.log('ItemView: ', Marionette.ItemView);
 
     app.addRegions({
         navRegion: '#header',
@@ -47,7 +45,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
             _.each(response.activities, function(activity) {
                 data.activities.push({'id': activity.id, 'name': activity.name});
             });
-            console.log('data: ', data);
             return data;
         }
     });
@@ -59,15 +56,12 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         },
         url: function() {
             var search_url = 'parks/search?' + this.queryString;
-            console.log('fetch url: ', search_url);
             return search_url;
         },
         parse: function(response) {
-            console.log('response: ', response);
             var parks = _.map(response.parks, function(park) {
                 return new Park(park);
             });
-            console.log('parks: ', parks);
             return parks;
         }
     });
@@ -106,9 +100,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
         events: {
             'click .gobutton': 'doSearch'
         },
-        templateHelpers: {
-            'jsonify': helpers.jsonify
-        },
         doSearch: function() {
             var neighborhood_id = $('#facility__activity option:selected').val(),
                 activity_id = $('#neighborhoods option:selected').val(),
@@ -118,7 +109,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
                     (neighborhood_id ? '&neighborhoods=' + neighborhood_id.toString() : ''),
                     (activity_id ? '&activities=' + activity_id.toString() : '')
                 ].join('');
-            console.log('search_url: ', search_url);
             Backbone.history.navigate(search_url, {'trigger': true});
         }
     });
@@ -181,7 +171,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/handlebarsHelpers'], fu
             app.getRegion('mainRegion').show(new ContactView());
         },
         results: function(queryString) {
-            console.log('queryString: ', queryString);
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
