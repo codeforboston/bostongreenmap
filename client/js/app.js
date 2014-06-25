@@ -59,7 +59,10 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             return search_url;
         },
         parse: function(response) {
-            var parks = _.map(response.parks, function(park) {
+            if (!response) {
+                alert('no data for that search!');
+            }
+            var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
             return parks;
@@ -101,13 +104,13 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             'click .gobutton': 'doSearch'
         },
         doSearch: function() {
-            var neighborhood_id = $('#facility__activity option:selected').val(),
-                activity_id = $('#neighborhoods option:selected').val(),
+            var neighborhood_id = $('#neighborhoods option:selected').val(),
+                activity_id = $('#facility__activity option:selected').val(),
                 search_url = [
                     'results/',
-                    'no_map',
+                    'no_map=true',
                     (neighborhood_id ? '&neighborhoods=' + neighborhood_id.toString() : ''),
-                    (activity_id ? '&activities=' + activity_id.toString() : '')
+                    (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
         }
@@ -141,6 +144,17 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
         template: templates['templates/park.hbs'],
         tagName: 'div',
         className: 'detail'
+    });
+
+    var ResultItemView = Marionette.ItemView.extend({
+        templates: templates['templates/resultItem.hbs'],
+    });
+
+    var ResultsView = Marionette.CompositeView.extend({
+        template: templates['templates/results.hbs'],
+        itemView: ResultItemView,
+        tagname: 'div',
+        className: 'results'
     });
 
 

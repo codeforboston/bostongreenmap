@@ -35,6 +35,5 @@ requirejs.config({
 
 require(['js/app', 'js/helpers'], function(app, helpers) {
     helpers.register();
-    console.log('helpers: ', helpers);
     app.startModule();
 });
