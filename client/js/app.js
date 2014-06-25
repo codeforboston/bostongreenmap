@@ -147,7 +147,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     });
 
     var ResultItemView = Marionette.ItemView.extend({
-        templates: templates['templates/resultItem.hbs'],
+        template: templates['templates/resultItem.hbs'],
     });
 
     var ResultsView = Marionette.CompositeView.extend({
