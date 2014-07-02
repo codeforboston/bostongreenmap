@@ -17,6 +17,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             'title': ''
         },
         url: function() {
+            console.log("SOS");
             return window.location.origin + '/parks/search/?slug=' + this.park_slug;
         },
         parse: function (response) {
@@ -147,7 +148,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
     });
 
     var ResultItemView = Marionette.ItemView.extend({
-        template: templates['templates/resultItem.hbs'],
+        template: templates['templates/resultItem.hbs']
     });
 
     var ResultsView = Marionette.CompositeView.extend({
@@ -165,7 +166,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             'mission': 'mission',
             'contact': 'contact',
             'results/:queryString': 'results',
-            'parks/:park_slug': 'park'
+            'parks/:park_slug/': 'park'
         },
         home: function() {
             var searchModel = new SearchModel();
@@ -191,6 +192,7 @@ define(['backbone', 'marionette', 'build/templates'], function(Backbone, Marione
             }});
         },
         park: function (park_slug) {
+            console.log("fired!");
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
