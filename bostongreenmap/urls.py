@@ -38,8 +38,11 @@ urlpatterns = patterns('',
 
 if settings.DEBUG:
     static_view = never_cache(serve)
+    
     urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', static_view, {
+        url(r'^static/(?P<path>.*)$', static_view, {
+            'document_root': settings.STATIC_ROOT,
+        }),url(r'^media/(?P<path>.*)$', static_view, {
             'document_root': settings.MEDIA_ROOT,
-        })
+        }),
    )
