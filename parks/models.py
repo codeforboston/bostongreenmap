@@ -188,7 +188,7 @@ class Park(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('park', [slugify(self.name)])
+        return ('park', ['%s-%d' % (slugify(self.name), self.id)])
 
     def area_acres(self):
         return self.area / 4047
