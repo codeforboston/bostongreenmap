@@ -1,25 +1,58 @@
-  <div class="finder-title">Find your space.</div>
-        <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
-          <option value=""></option>
-          <option value="">All Neighborhoods</option>
-          {{#each neighborhoods}}
-            <option value="{{ id }}">{{ name }}</option>
-          {{/each}}
-        </select>
-        <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
-          <option value=""></option>
-          <option value="">All Activities</option>
-          {{#each activities}}
-            <option value="{{ id }}">{{ name }}</option>
-          {{/each}}
-        </select>
-  <div class="gobutton">GO</div>
-</div>
-<div class="viewer">
-  {{#each results}}
-    <div class="container">
-        <img src="{{results_image}}">
-      </a>
-      <div class="name">{{name}}</div>
+
+<div id="carousel-example-generic" data-ride="carousel">
+  <div class="row">
+    <div class="floating-text col-md-6">
+      <h1>Find your space.</h1>
+      <div class="row">
+        <div class="btn-group col-md-12">
+          <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
+            <option value=""></option>
+            <option value="">All Neighborhoods</option>
+            {{#each neighborhoods}}
+              <option value="{{ id }}">{{ name }}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn-group col-md-12">
+          <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
+            <option value=""></option>
+            <option value="">All Activities</option>
+            {{#each activities}}
+              <option value="{{ id }}">{{ name }}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="gobutton" id="filter-select">GO</div>
+      <div id="no-results">No results!</div>
+    </div>  
+  </div>
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" id="carousel-images-container">
+    <div class="item active">
+      <img class="carousel-image" src="static/img/4-JamaicaPondJP.JPG" alt="...">
+      <div class="carousel-caption">
+      </div>
     </div>
-  {{/each}}
+    <div class="item">
+      <img class="carousel-image" src="static/img/13-OMalleyWaterfrontPark-Chelsea.JPG" alt="...">
+      <div class="carousel-caption">
+      </div>
+    </div>
+    <div class="item">
+      <img class="carousel-image" src="static/img/Nkraft (Charles River Bike Path Sunset 1).jpg" alt="...">
+      <div class="carousel-caption">
+      </div>
+    </div>
+  </div>
+</div>
