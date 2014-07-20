@@ -1,12 +1,11 @@
 
 <div id="carousel-example-generic" data-ride="carousel">
   <div class="row">
-    <div class="floating-text col-md-6">
+    <div class="floating-text">
       <h1>Find your space.</h1>
       <div class="row">
         <div class="btn-group col-md-12">
-          <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select" id="neighborhoods">
-            <option value=""></option>
+          <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
             <option value="">All Neighborhoods</option>
             {{#each neighborhoods}}
               <option value="{{ id }}">{{ name }}</option>
@@ -16,8 +15,7 @@
       </div>
       <div class="row">
         <div class="btn-group col-md-12">
-          <select data-placeholder="Select Your Activity" class="parkfilter chzn-select" id="facility__activity">
-            <option value=""></option>
+          <select data-placeholder="Select Your Activity" class="parkfilter chzn-select form-control" id="facility__activity">
             <option value="">All Activities</option>
             {{#each activities}}
               <option value="{{ id }}">{{ name }}</option>
@@ -25,8 +23,7 @@
           </select>
         </div>
       </div>
-      <div class="gobutton" id="filter-select">GO</div>
-      <div id="no-results">No results!</div>
+      <div class="gobutton pull-right" id="filter-select">GO</div>
     </div>  
   </div>
 

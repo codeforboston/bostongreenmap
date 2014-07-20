@@ -23,39 +23,37 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <div class="row">
-        <div class="floating-text col-md-6">
-          <h1>Find your space.</h1>
+      <div class="floating-text">
+        <h1>Find your space.</h1>
 
-          <div class="row">
-            <div class="btn-group col-md-12">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                By Neighborhood
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                {{#each neighborhood}}
-                  <li><a href="#/parks/{{ id }}">{{ name }}</a></li>
-                {{/each}}
-              </ul>
-            </div>
+        <div class="row">
+          <div class="btn-group col-md-12">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              By Neighborhood
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              {{#each neighborhood}}
+                <li><a href="#/parks/{{ id }}">{{ name }}</a></li>
+              {{/each}}
+            </ul>
           </div>
-          <div class="row">
-            <div class="btn-group col-md-12">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                By Activity
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                {{#each activity}}
-                  <li><a href="#/parks/{{ id }}">{{ name }}</a></li>
-                {{/each}}
-              </ul>
-            </div>
+        </div>
+        <div class="row">
+          <div class="btn-group col-md-12">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              By Activity
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              {{#each activity}}
+                <li><a href="#/parks/{{ id }}">{{ name }}</a></li>
+              {{/each}}
+            </ul>
           </div>
-          <div class="gobutton">GO</div>
-        </div>  
-      </div>
+        </div>
+        <div class="gobutton">GO</div>
+      </div>  
 
       <!-- Indicators -->
       <ol class="carousel-indicators">

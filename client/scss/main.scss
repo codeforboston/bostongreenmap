@@ -1,9 +1,9 @@
 /*** Header ***/
-.header {
-    font-family: "Istok Web";
-    padding-top: 25px;
-    padding-left: 10%;
-}
+// .header {
+//     font-family: "Istok Web";
+//     padding-top: 25px;
+//     padding-left: 10%;
+// }
 
 .logo {
     display: inline-block;
@@ -135,11 +135,11 @@ body {
 /*** CSS dump from redevelop ***/
 
 
-#bs-example-navbar-collapse-1 {
-  height: 100px;
-  top: 40px;
-  position: relative;
-}
+// #bs-example-navbar-collapse-1 {
+//   height: 100px;
+//   top: 40px;
+//   position: relative;
+// }
 
 .navbar-brand {
   display:inline-block;
@@ -156,6 +156,10 @@ body {
   color: white;
   margin: 5%;
   padding: 2%;
+  max-width: 300px;
+  select {
+    width: 100%;
+  }
 }
 
 .viewer {
@@ -165,6 +169,9 @@ body {
   margin-top: 25px;
 }
 
+h1 {
+  margin-top: 0px;
+}
 
 .container {
   float: left;
@@ -185,11 +192,11 @@ body {
   position: relative;
   display: inline-block;
 }
-.header {
-  font-family: "Istok Web";
-  padding-top: 25px;
-  padding-left: 10%;
-}
+// .header {
+//   font-family: "Istok Web";
+//   padding-top: 25px;
+//   padding-left: 10%;
+// }
 
 .gobutton {
   cursor: pointer;
@@ -199,6 +206,7 @@ body {
   color: white;
   background-color: green;
   user-select: none;
+  // float: right;
 }
 
 .carousel-image {
@@ -227,6 +235,11 @@ body {
     height: 50px;
     top:0;
   }
+}
+
+#content-area {
+  max-width: 950px;
+  margin: 0 auto;
 }
 
 /*****  Carousels ******/
