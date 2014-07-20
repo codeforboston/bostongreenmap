@@ -179,12 +179,6 @@ This command will import the Boston Common Park and a related facility and activ
 
 A backup of parks and MBTA resources as of 1 April 2014 is available in /fixtures/green.sql. You can load this in using psql (or possibly pg_restore).
 
-### Run a local development server
-
-    python manage.py runserver
-
-Access the site at [http://localhost:8000](http://localhost:8000).
-
 ### Client Installation
 
 Set your localhost configurations for fabric. In fabfile/__init__.py, the function "localhost()"
@@ -195,6 +189,12 @@ Set your localhost configurations for fabric. In fabfile/__init__.py, the functi
 Install NPM, Node.js, Grunt.js, Ruby, and Compass using Fabric (Note: Node.js and and Ruby are dependencies of other programs and aren't actually used in any of our code)
 
     fab localhost install.all    
+
+### Run a local development server
+
+    python manage.py runserver
+
+Access the site at [http://localhost:8000](http://localhost:8000).
 
 ## Project History
 
