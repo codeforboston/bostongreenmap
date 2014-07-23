@@ -6,6 +6,7 @@ from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
+from django.db.models import Count
 
 from sorl.thumbnail import get_thumbnail, default
 
@@ -185,6 +186,14 @@ class Park(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @classmethod
+    def featured_with_images(cls):
+        return (
+            cls.objects
+               .annotate(num_of_images=Count('images'))
+               .filter(featured=True, num_of_images__gt=0)
+        )
 
     @models.permalink
     def get_absolute_url(self):

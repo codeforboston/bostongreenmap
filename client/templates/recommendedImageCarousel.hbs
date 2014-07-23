@@ -1,17 +1,20 @@
+{{jsonify parksInThrees}}
 <div id="recommended-carousel" class="carousel slide"><!-- class of slide for animation -->
   <div class="carousel-inner">
-  {{#sectionIntoThrees response}}
+  {{#each parksInThrees}}
     <div class="item {{activeClass}}"><!-- class of active since it's the first item -->
       {{#each images}}
         <div class="container">
-           <a href="{{link}}"><img src="{{src}}" title="{{caption}}"></a><div class="name">{{name}}</div>
+           <a href="{{url}}"><img src="{{src}}" title="{{caption}}"></a><div class="name">{{url}}</div>
         </div>
         <div class="carousel-caption">
         </div>
       {{/each}}
     </div>
-  {{/sectionIntoThrees}}
+  {{/each}}
   </div><!-- /.carousel-inner -->
     <a class="carousel-control left" href="#recommended-carousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#recommended-carousel" data-slide="next">&rsaquo;</a>
 </div><!-- /.carousel -->
+
+

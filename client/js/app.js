@@ -1,14 +1,11 @@
-define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Backbone, Marionette, templates) {
+define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Backbone, Marionette, templates, carousel) {
     var app = new Marionette.Application(),
         router;
-
-    $('.carousel').carousel({
-        interval: 2000
-    });
 
     app.addRegions({
         navRegion: '#header',
         mainRegion: '#content-area',
+        carouselsRegion: '#carousels-region',
         footerRegion: '#footer'
     });
 
@@ -104,6 +101,7 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
+        className: 'finder',
         events: {
             'click .gobutton': 'doSearch'
         },
@@ -174,7 +172,8 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
         home: function() {
             var searchModel = new SearchModel();
             var searchView = 
-            searchModel.once('sync', function() {
+            searchModel.once('sync', function(something) {
+                console.log('something', something);
                 app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
             });
             searchModel.fetch();
@@ -192,10 +191,10 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
+                app.getRegion('carouselsRegion').show(new carousel.CarouselItemView(results));
             }});
         },
         park: function (park_slug) {
-            console.log("fired!");
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
@@ -220,4 +219,3 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
         }
     };
 });
-

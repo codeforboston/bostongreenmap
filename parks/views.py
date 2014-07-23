@@ -31,6 +31,7 @@ def get_topnav_data():
 def get_neighborhoods_and_activities_list(request):
     neighborhoods = Neighborhood.objects.all()
     activities = Activity.objects.all()
+    featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities]
