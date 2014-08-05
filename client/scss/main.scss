@@ -255,6 +255,15 @@ h1 {
     height: 50px;
     top:0;
   }
+
+}
+
+@media (max-width: 400px) {
+  .floating-text {
+    position: relative;
+    max-width: 100%;
+
+  }
 }
 
 #content-area {
