@@ -53,7 +53,6 @@ psql <<EOF2
  ALTER ROLE django WITH PASSWORD 'django'
 EOF2
 createdb -O django -T postgis_template bostongreenmap
-psql -f bostongreenmap/fixtures/green.sql bostongreenmap
 EOF
 
 if [ ! -d virtualenv ]; then
