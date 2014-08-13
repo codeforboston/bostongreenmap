@@ -1,17 +1,33 @@
-#!/bin/bash
+#!/bin/bash -x
 apt-get update -qq
 apt-get install -y python-software-properties
 apt-add-repository -y ppa:ubuntugis/ppa
+add-apt-repository ppa:chris-lea/node.js
 apt-get update -qq
 apt-get install -y \
-        postgresql-9.1-postgis \
+        python-pip \
+        postgresql-9.1-postgis-2.0 \
         python-psycopg2 \
         libpq-dev \
         postgresql-client \
         python-dev \
         python-virtualenv \
-        build-essential
+        build-essential \
+        ruby \
+        rubygems \
+        gem \
+        curl \
+        vim \
+        nodejs
 
+gem install --no-ri --no-rdoc sass -v 3.2.13
+gem install --no-ri --no-rdoc compass -v 0.12.2
+
+cd bostongreenmap/client
+npm install -g grunt-cli # grunt-cli is global so we can just type 'grunt'
+npm install # finally, install dependencies
+grunt handlebars:compile
+cd ../..
 
 su postgres <<EOF
 psql <<EOF2
@@ -64,5 +80,6 @@ DATABASES = {
 }
 EOF
 fi
+
 python manage.py syncdb --noinput
 python manage.py migrate --noinput
