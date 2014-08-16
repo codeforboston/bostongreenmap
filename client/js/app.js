@@ -18,7 +18,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'title': ''
         },
         url: function() {
-            console.log("SOS");
             return window.location.origin + '/parks/search/?slug=' + this.park_slug;
         },
         parse: function (response) {
@@ -170,6 +169,9 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'parks/:park_slug/': 'park'
         },
         home: function() {
+            $('.carousel').carousel({
+                interval: 300
+            });
             var searchModel = new SearchModel();
             var searchView = 
             searchModel.once('sync', function(something) {

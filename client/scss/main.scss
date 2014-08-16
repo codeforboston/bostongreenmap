@@ -80,6 +80,8 @@
   padding-top: 30px;
   padding-bottom: 100px;
   position: relative;
+  max-width: 950px;
+  margin: 0 auto;
 }
 
 .twitter-container {
@@ -153,8 +155,9 @@ body {
   position: absolute;
   z-index: 15;
   color: white;
-  margin: 5%;
-  padding: 2%;
+  padding: 15px;
+  top: 20px;
+  left: 20px;
   max-width: 300px;
   select {
     width: 100%;
@@ -195,11 +198,23 @@ h1 {
   position: relative;
   display: inline-block;
 }
-// .header {
-//   font-family: "Istok Web";
-//   padding-top: 25px;
-//   padding-left: 10%;
-// }
+
+.header {
+  font-family: "Istok Web";
+  max-width: 950px;
+  margin: 0 auto;
+  padding-top: 50px;
+  .navbar-default {
+    background-color: #ffffff;
+  }
+  .navbar {
+    border: 0px;
+  }
+}
+
+#carousel-example-generic {
+  position: relative;
+}
 
 .gobutton {
   cursor: pointer;
@@ -223,8 +238,8 @@ h1 {
 }
 
 .navbar-header {
-  height: 100px;
-  top: 40px;
+  // height: 100px;
+  // top: 40px;
   position: relative;
 }
 
@@ -239,6 +254,15 @@ h1 {
   .navbar-header {
     height: 50px;
     top:0;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .floating-text {
+    position: relative;
+    max-width: 100%;
+
   }
 }
 
