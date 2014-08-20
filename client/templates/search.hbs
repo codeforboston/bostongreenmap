@@ -1,28 +1,4 @@
-
 <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
-  <div class="row">
-    <div class="floating-text">
-      <h1>Find your space.</h1>
-        <div class="btn-group select-width">
-          <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
-            <option value="">All Neighborhoods</option>
-            {{#each neighborhoods}}
-              <option value="{{ id }}">{{ name }}</option>
-            {{/each}}
-          </select>
-        </div>
-
-        <div class="btn-group select-width">
-          <select data-placeholder="Select Your Activity" class="parkfilter chzn-select form-control" id="facility__activity">
-            <option value="">All Activities</option>
-            {{#each activities}}
-              <option value="{{ id }}">{{ name }}</option>
-            {{/each}}
-          </select>
-        </div>
-      <div class="gobutton pull-right" id="filter-select">GO</div>
-    </div>  
-  </div>
 
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -49,4 +25,27 @@
       </div>
     </div>
   </div>
+</div>
+<div class="center-content">
+  <div class="floating-text">
+    <h1>Find your space.</h1>
+      <div class="btn-group select-width">
+        <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
+          <option value="">All Neighborhoods</option>
+          {{#each neighborhoods}}
+            <option value="{{ id }}">{{ name }}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="btn-group select-width">
+        <select data-placeholder="Select Your Activity" class="parkfilter chzn-select form-control" id="facility__activity">
+          <option value="">All Activities</option>
+          {{#each activities}}
+            <option value="{{ id }}">{{ name }}</option>
+          {{/each}}
+        </select>
+      </div>
+    <div class="gobutton pull-right" id="filter-select">GO</div>
+  </div>  
 </div>

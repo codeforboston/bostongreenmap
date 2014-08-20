@@ -99,6 +99,7 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
+        className: 'search-page',
         events: {
             'click .gobutton': 'doSearch'
         },
