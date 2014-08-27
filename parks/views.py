@@ -38,10 +38,19 @@ def get_neighborhoods_and_activities_list(request):
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
+def get_nearby_parks(request,park_id):
+    """ Returns nearby parks as JSON
+    """
+    park = Park.objects.get(pk=park_id)
+    nearby_parks = park.nearest_parks_by_distance(0.25).all()
+    response = {
+        'parks':[{'id':p.pk, 'name': p.name} for p in nearby_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json') 
+
 def get_parks(request):
     """ Returns parks as JSON based search parameters
     """
-    print "got here"
     querydict = request.GET
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
@@ -79,7 +88,6 @@ def get_parks(request):
 def get_facilities(request, park_id):
     """ Returns facilities as JSON for park id
     """
-
     user = request.user
 
     try:

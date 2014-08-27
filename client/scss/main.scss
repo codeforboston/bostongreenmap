@@ -76,19 +76,20 @@
 /*** Footer ***/
 .footer {
   background-color: rgb(156,180,40);
-  padding-left: 10%;
-  padding-top: 30px;
-  padding-bottom: 100px;
+  // padding-left: 10%;
+  // padding-top: 30px;
+  // padding-bottom: 100px;
+  padding: 20px;
   position: relative;
   max-width: 950px;
   margin: 0 auto;
 }
 
-.twitter-container {
-  width: 500px;
-  height: 300px;
-  display: inline-block;
-}
+// .twitter-container {
+//   width: 500px;
+//   height: 300px;
+//   display: inline-block;
+// }
 
 .footer-text {
   color: white;
@@ -107,6 +108,35 @@
   position: absolute;
 }
 
+.center-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.park-splash {
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.park-content {
+  min-height: 713px;
+}
+
+.park-title {
+  left: 20px;
+  top: 20px;
+}
+
+.park-description { 
+
+}
+
+.results {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
 .white-circle {
   height: 35px;
   width: 35px;
@@ -116,17 +146,18 @@
   margin-right: 20px;
 }
 
-.footer-social {
-  display: inline-block;
-  right: 10%;
-  bottom: 5%;
-  position: absolute;  
+html {
+  max-width: 100%;
+  height: 100%;
 }
 
 body {
   font-family: "Domine";
   margin: 0px;
+  max-width: 100%;
+  height: 100%;
 }
+
 
 .navbar {
   margin-bottom: 0;
@@ -150,9 +181,10 @@ body {
   bottom: 11px;
 }
 
+  
 .floating-text {
   background-color: rgba(0,160,0,0.8);
-  position: absolute;
+  // position: absolute;
   z-index: 15;
   color: white;
   padding: 15px;
@@ -162,6 +194,10 @@ body {
   select {
     width: 100%;
   }
+}
+
+.park-information {
+  padding: 20px;
 }
 
 .select-width {
@@ -213,7 +249,16 @@ h1 {
 }
 
 #carousel-example-generic {
-  position: relative;
+  position: absolute;
+  z-index: -1;
+}
+
+.carousel-inner {
+  .item {
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .gobutton {
@@ -227,10 +272,6 @@ h1 {
   font-size: 1.5em;
   margin-top: 8px;
   // float: right;
-}
-
-.carousel-image {
-  max-height: 800px;
 }
 
 .btn-group {
@@ -267,7 +308,7 @@ h1 {
 }
 
 #content-area {
-  max-width: 950px;
+  min-height: 500px;
   margin: 0 auto;
 }
 

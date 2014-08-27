@@ -101,6 +101,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
         template:templates['templates/search.hbs'],
         tagName: 'div',
         className: 'finder',
+        // className: 'search-page',
         events: {
             'click .gobutton': 'doSearch'
         },
@@ -169,9 +170,9 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'parks/:park_slug/': 'park'
         },
         home: function() {
-            $('.carousel').carousel({
-                interval: 300
-            });
+            // $('.carousel').carousel({
+            //     interval: 300
+            // });
             var searchModel = new SearchModel();
             var searchView = 
             searchModel.once('sync', function(something) {
