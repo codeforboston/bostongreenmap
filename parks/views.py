@@ -46,7 +46,17 @@ def get_nearby_parks(request,park_id):
     response = {
         'parks':[{'id':p.pk, 'name': p.name} for p in nearby_parks]
     }
-    return HttpResponse(json.dumps(response), mimetype='application/json') 
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def get_recommended_parks(request,park_id):
+    """ Returns recommended parks as JSON
+    """
+    park = Park.objects.get(pk=park_id)
+    recommended_parks = park.recommended_parks()
+    response = {
+        'parks':[{'id':p.pk, 'name': p.name} for p in recommended_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def get_parks(request):
     """ Returns parks as JSON based search parameters
