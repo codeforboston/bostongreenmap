@@ -12,3 +12,9 @@ npm-debug.log
 
 # Excluding sass files
 .sass-cache
+
+# Exclude build files
+client/build/**
+
+# Exclude media, for now
+media/**
