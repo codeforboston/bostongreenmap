@@ -1,0 +1,14 @@
+# Exclude vagrant environment files
+.vagrant/**
+
+# Excluding Django/Python output files
+**.pyc
+**logfile.log*
+**local_settings.py*
+
+# Excluding node modules
+**node_modules*
+npm-debug.log
+
+# Excluding sass files
+.sass-cache
