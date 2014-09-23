@@ -3,12 +3,6 @@ import dbm
 import csv
 import os
 
-from fabric.contrib import django
-django.project('bostongreenmap')
-# from bostongreenmap.parks import models
-
-# from ..parks.models import Park
-
 CSV_FILE_PATH = os.path.join(
 	os.path.dirname(__file__),
 	"../media/curated_parkimages/park_photos_final.csv"
@@ -84,13 +78,33 @@ def write_photos_to_filesystem():
 			photo_path = db[url]
 			print url, photo_path
 
+def setup_django_env():
+	from django.conf import settings
+	settings.configure(
+	    DATABASE_ENGINE = 'postgresql_psycopg2',
+	    DATABASE_NAME = 'db_name',
+	    DATABASE_USER = 'db_user',
+	    DATABASE_PASSWORD = 'db_pass',
+	    DATABASE_HOST = 'localhost',
+	    DATABASE_PORT = '5432',
+	    TIME_ZONE = 'America/New_York',
+	)
 
 @task
 def add_photos_to_db():
-	print CURATE_PATH+"/has_been_downloaded"
+
 	db = dbm.open(CURATE_PATH+'/has_been_downloaded', 'r')
 	
-	with cd(env.code+'/..'):
-		for url, park_id in curated_park_info():
-			if url in db:
-				print url, park_id
+	### DJANGO CONFIGURATION SETUP ###
+	import sys
+	from fabric.contrib import django
+	sys.path.append(PROJECT_ROOT)
+	os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+	django.settings_module('bostongreenmap.settings')
+	from django.conf import settings
+
+	# with cd(env.code+'/..'):
+	for url, park_id in curated_park_info():
+		if url in db:
+			pass
+			# print url, park_id

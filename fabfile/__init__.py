@@ -5,6 +5,8 @@ from fabric.api import env, task
 from . import install
 from . import photo_scraper
 
+from fabric.contrib import django
+
 # env.user = 'bruce'
 # env.code = '/home/%s/Machines/fullstackcoder' % env.user
 # env.branch = 'master'
