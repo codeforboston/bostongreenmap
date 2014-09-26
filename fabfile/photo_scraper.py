@@ -9,6 +9,7 @@ CSV_FILE_PATH = os.path.join(
 )
 
 PROJECT_ROOT = "/home/bruce/repos/bruce-bostongreenmap"
+DJANGO_APP_PATH = PROJECT_ROOT+"/bostongreenmap"
 CURATE_PATH = PROJECT_ROOT+"/media/curated_parkimages"
 # @task
 # def write_curated_images_to_models():
@@ -90,21 +91,33 @@ def setup_django_env():
 	    TIME_ZONE = 'America/New_York',
 	)
 
+
 @task
 def add_photos_to_db():
-
-	db = dbm.open(CURATE_PATH+'/has_been_downloaded', 'r')
-	
 	### DJANGO CONFIGURATION SETUP ###
 	import sys
 	from fabric.contrib import django
 	sys.path.append(PROJECT_ROOT)
 	os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 	django.settings_module('bostongreenmap.settings')
-	from django.conf import settings
+	from parks.models import Park, Parkimage
+	### END DJANGO SETUP #############
 
-	# with cd(env.code+'/..'):
+	db = dbm.open(CURATE_PATH+'/has_been_downloaded', 'r')
 	for url, park_id in curated_park_info():
 		if url in db:
-			pass
-			# print url, park_id
+			try:
+				park = Park.objects.get(id=park_id)
+			except Exception as e:
+				print e
+				continue
+
+			### Create the image row and relate it to the Park
+			filename = db[url]
+			new_image_path = CURATE_PATH + '/' + filename
+
+			p_img, created = Parkimage.objects.get_or_create(image=new_image_path)
+			if created:
+				park.images.add(p_img)
+				# new_image = Parkimage.objects.get_or_create()
+				print new_image_path + " added to " + park.name + "with id " + str(park.id)
