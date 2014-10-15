@@ -202,7 +202,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
             }});
-            park.fetch();
         }
     });
 
