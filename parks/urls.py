@@ -15,6 +15,11 @@ urlpatterns = patterns('parks.views',
     url(r'^(?P<park_id>\d+)/facilities/$', 'get_facilities', name='get_facilities'),
 
     # park detail page
-    url(r'^(?P<park_slug>[-\w]+)/$', 'parks_page', name='park'),
- 
+    url(r'^(?P<park_slug>[-\w]+)/$', 'park_ajax', name='park'),
+
+    # nearby parks
+    url(r'^(?P<park_id>\d+)/nearby_parks/$', 'get_nearby_parks', name='get_nearby_parks'),
+
+    # recommended parks
+    url(r'^(?P<park_id>\d+)/recommended_parks/$', 'get_recommended_parks', name='get_recommended_parks'),
 )

@@ -1,5 +1,6 @@
 # Views for Parks
 from django.core import urlresolvers
+from django.core import serializers
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.utils.html import strip_tags
@@ -14,7 +15,7 @@ import json
 import logging
 import itertools
 
-from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype
+from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype, Story
 
 
 logger = logging.getLogger(__name__)
@@ -46,7 +47,17 @@ def get_nearby_parks(request,park_id):
     response = {
         'parks':[{'id':p.pk, 'name': p.name} for p in nearby_parks]
     }
-    return HttpResponse(json.dumps(response), mimetype='application/json') 
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def get_recommended_parks(request,park_id):
+    """ Returns recommended parks as JSON
+    """
+    park = Park.objects.get(pk=park_id)
+    recommended_parks = park.recommended_parks()
+    response = {
+        'parks':[{'id':p.pk, 'name': p.name} for p in recommended_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def get_parks(request):
     """ Returns parks as JSON based search parameters
@@ -185,4 +196,13 @@ def parks_page(request, park_slug):
         context_instance=RequestContext(request)
     )
 
+def park_ajax(request, park_slug):
+    park = get_object_or_404(Park, slug=park_slug)
+    stories = Story.objects.filter(park=park).order_by("-date")
+    recommended_parks = [ p.to_external_document(request.user) for p in park.recommended_parks() ]
+    park_as_json = {
+        'detail': park.to_external_document(request.user),
+        'recommended_parks': recommended_parks
+    }
+    return HttpResponse(json.dumps(park_as_json), mimetype='application/json')
 

@@ -82,3 +82,6 @@ fi
 
 python manage.py syncdb --noinput
 python manage.py migrate --noinput
+
+# Import data from fixtures
+./vagrant_db_setup.sh

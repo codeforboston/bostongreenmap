@@ -18,7 +18,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'title': ''
         },
         url: function() {
-            return window.location.origin + '/parks/search/?slug=' + this.park_slug;
+            return window.location.origin + '/parks/' + this.park_slug;
         },
         parse: function (response) {
           var attributes = {};
@@ -202,7 +202,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
             }});
-            park.fetch();
         }
     });
 
