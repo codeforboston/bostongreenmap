@@ -8,6 +8,11 @@ A map promoting green spaces in the Metro Boston Area.
 * Find green spaces for an activity
 * See how to get to green spaces by foot, bike or transit
 
+## Issue Tracking
+
+We use Trello as an issue tracker. Go there to choose tasks and see everyones' progress
+https://trello.com/b/VbjYYbtx/boston-green
+
 ## Data Schema Basics
 
 The map is based entirely on open space data in the public domain.
