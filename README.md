@@ -18,22 +18,6 @@ https://trello.com/b/VbjYYbtx/boston-green
 A mockup for our redesign contributed by Continuum (www.continuuminnovation.com):
 https://s3.amazonaws.com/wmgardner.co/pdfs/BostonGreenSpaceDesign.pdf
 
-## Data Schema Basics
-
-The map is based entirely on open space data in the public domain.
-
-The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
-
-A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
-
-This means, the 3 basic elements relate to each according to the following schema:
-
-    Park [1:m] Facility [m:n] Activity
-
-A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
-
-There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the data schema, but those 3 ones are essential to understand the philosophy of the application.
-
 ## Installation
 
 The Boston Green is a [Django](https://www.djangoproject.com/) project with spatial functionality, also called GeoDjango. Data storage and enabler for most spatial functionality is the [PostgreSQL](http://www.postgresql.org/) extension [PostGIS](http://postgis.net/). Minimum requirements for running this project are therefore Python and PostgreSQL/PostGIS.
@@ -214,6 +198,21 @@ After the challenge, the Metropolitan Area Planning Council (MAPC), the employer
 
 The code repository was moved to Code for Boston's GitHub account in Spring 2013. Code for Boston seems to be an excellent home for the project: it started as volunteer effort and should be owned by volunteers, it is a public service application built on top of open data and it is an open source project than can be replicated with local green space data in any other community.
 
+## Data Schema Basics
+
+The map is based entirely on open space data in the public domain.
+
+The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
+
+A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
+
+This means, the 3 basic elements relate to each according to the following schema:
+
+    Park [1:m] Facility [m:n] Activity
+
+A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
+
+There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the data schema, but those 3 ones are essential to understand the philosophy of the application.
 ---
 
 © Boston Green contributors
