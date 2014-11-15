@@ -13,6 +13,11 @@ A map promoting green spaces in the Metro Boston Area.
 We use Trello as an issue tracker. Go there to choose tasks and see everyones' progress
 https://trello.com/b/VbjYYbtx/boston-green
 
+## Redesign Mock-up
+
+A mockup for our redesign contributed by Continuum (www.continuuminnovation.com):
+https://s3.amazonaws.com/wmgardner.co/pdfs/BostonGreenSpaceDesign.pdf
+
 ## Data Schema Basics
 
 The map is based entirely on open space data in the public domain.
