@@ -1,0 +1,97 @@
+/*** Header ***/
+
+  .logo {
+      display: inline-block;
+      height: 35px;
+      width: 35px;
+      border-radius: 35px;
+      border: 5px solid rgb(13, 103, 52);
+      background-color: #9cb428;
+      box-sizing: content-box;
+  }
+
+  .sitename {
+      display:inline-block;
+      font-size: 30px;
+      color: rgb(12, 102, 49);
+      position: relative;
+      bottom: 11px;
+      a
+      {
+        color: #428bca;
+        text-decoration: none;
+        font-weight: 700;
+        cursor: pointer;
+      }
+  }
+        
+  .navlinks {
+      text-decoration: none !important;
+      color: rgb(47, 127, 84) !important;
+      box-sizing: content-box;
+      display: inline-block;
+      font-size: 12px;
+      position: absolute;
+      right: 20px;
+      top: 50px;
+      a {
+        text-decoration: none !important;
+        color: rgb(47, 127, 84) !important;
+      }
+  }
+
+  .navlink {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .navbar {
+    margin-bottom: 0;
+    font-family: "Istok Web";
+  }
+
+  .navbar-brand {
+    display:inline-block;
+    font-size: 30px;
+    color: rgb(12, 102, 49);
+    position: relative;
+    bottom: 11px;
+  }
+
+  .header {
+    font-family: "Istok Web";
+    max-width: 950px;
+    margin: 0 auto;
+    padding-top: 50px;
+    .navbar-default {
+      background-color: #ffffff;
+    }
+    .navbar {
+      border: 0px;
+    }
+  }
+
+  .navbar-header {
+    // height: 100px;
+    // top: 40px;
+    position: relative;
+  }
+
+
+  @media (max-width: 600px) {
+    .sitename {
+      font-size: 16px;
+    }
+    .logo {
+      width: 25px;
+      height: 25px;
+    }
+    .navbar-header {
+      height: 50px;
+      top:0;
+    }
+
+  }

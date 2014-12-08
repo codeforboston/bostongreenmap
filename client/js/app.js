@@ -1,14 +1,13 @@
-define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Backbone, Marionette, templates, carousel) {
+define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Backbone, Marionette, templates) {
     var app = new Marionette.Application(),
         router;
 
     app.addRegions({
         navRegion: '#header',
         mainRegion: '#content-area',
-        carouselsRegion: '#carousels-region',
         footerRegion: '#footer'
     });
-
+    
     // Models
     var Park = Backbone.Model.extend({
         initialize: function (params) {
@@ -18,7 +17,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'title': ''
         },
         url: function() {
-            return window.location.origin + '/parks/' + this.park_slug;
+            return window.location.origin + '/parks/search/?slug=' + this.park_slug;
         },
         parse: function (response) {
           var attributes = {};
@@ -80,7 +79,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'click #nav-index': 'goToIndex',
             'click #nav-contact': 'goToContact'
         },
-        template: templates['templates/headerView.hbs'],
+        template: templates['templates/header.hbs'],
         tagName: 'div',
         className: 'header',
         goToAbout: function(evt) {
@@ -100,8 +99,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
-        className: 'finder',
-        // className: 'search-page',
+        className: 'search-page',
         events: {
             'click .gobutton': 'doSearch'
         },
@@ -170,13 +168,12 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             'parks/:park_slug/': 'park'
         },
         home: function() {
-            // $('.carousel').carousel({
-            //     interval: 300
-            // });
+            $('.carousel').carousel({
+                interval: 300
+            });
             var searchModel = new SearchModel();
             var searchView = 
-            searchModel.once('sync', function(something) {
-                console.log('something', something);
+            searchModel.once('sync', function() {
                 app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
             });
             searchModel.fetch();
@@ -194,7 +191,6 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-                app.getRegion('carouselsRegion').show(new carousel.CarouselItemView(results));
             }});
         },
         park: function (park_slug) {
@@ -202,6 +198,7 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
             park.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ParkView({'model': park }));
             }});
+            park.fetch();
         }
     });
 
@@ -221,3 +218,4 @@ define(['backbone', 'marionette', 'build/templates', 'js/carousel'], function(Ba
         }
     };
 });
+

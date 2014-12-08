@@ -1,0 +1,28 @@
+.detail {
+  .park-splash {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .park-content {
+    min-height: 713px;
+  }
+
+  .park-title {
+    background-color: #fff;
+    float: left;
+    margin:10px;
+    max-width: 300px;
+  }
+
+  .park-description { 
+    background-color: #fff;
+    margin:10px;
+    max-width: 300px;
+  }
+
+  .park-information {
+    padding: 25px;
+  }
+}
