@@ -32,7 +32,7 @@ module.exports = function(grunt) {
                 tasks: ['handlebars:compile']
             },
             sass: {
-                files: ['scss/*'],
+                files: ['scss/**/*.scss'],
                 tasks: ['compass:dev']
             },
             js: {
