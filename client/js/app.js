@@ -68,8 +68,6 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
             return parks;
         }
     });
-
-    Park.Collection = ParksCollection;
     
     // Views
     var HeaderView = Marionette.ItemView.extend({

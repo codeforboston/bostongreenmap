@@ -43,6 +43,7 @@
   .item {
     img {
       width: 100%;
+      max-height:1500px;
     }
   }
 }
@@ -50,7 +51,6 @@
 .select-width {
   display: block;
 }
-
 
 .floating-text {
   background-color: rgba(0,160,0,0.8);
