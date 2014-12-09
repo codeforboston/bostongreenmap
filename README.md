@@ -8,21 +8,15 @@ A map promoting green spaces in the Metro Boston Area.
 * Find green spaces for an activity
 * See how to get to green spaces by foot, bike or transit
 
-## Data Schema Basics
+## Issue Tracking
 
-The map is based entirely on open space data in the public domain.
+We use Trello as an issue tracker. Go there to choose tasks and see everyones' progress
+https://trello.com/b/VbjYYbtx/boston-green
 
-The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
+## Redesign Mock-up
 
-A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
-
-This means, the 3 basic elements relate to each according to the following schema:
-
-    Park [1:m] Facility [m:n] Activity
-
-A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
-
-There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the data schema, but those 3 ones are essential to understand the philosophy of the application.
+A mockup for our redesign contributed by Continuum (www.continuuminnovation.com):
+https://s3.amazonaws.com/wmgardner.co/pdfs/BostonGreenSpaceDesign.pdf
 
 ## Installation
 
@@ -59,7 +53,7 @@ The following steps outline basic steps to install and configure the databasse r
 
 1. Add UbuntuGIS packages
 
-        sudo add-apt-repository ppa:ppa:ubuntugis/ppa
+        sudo add-apt-repository ppa:ubuntugis/ppa
         sudo apt-get update
 
 2. Install PostGIS and all dependencies
@@ -76,6 +70,10 @@ To install the Python PostgreSQL driver you'll probably make sure to have `pytho
         Shall the new role be a superuser? (y/n) n
         Shall the new role be allowed to create databases? (y/n) y
         Shall the new role be allowed to create more new roles? (y/n) n
+
+If you see an error like $USERNAME does not exist, first do:
+        sudo su - postgres
+and then finish running the commands above
 
 2. Set the user password
 
@@ -175,6 +173,17 @@ This command will import the Boston Common Park and a related facility and activ
 
 A backup of parks and MBTA resources as of 1 April 2014 is available in /fixtures/green.sql. You can load this in using psql (or possibly pg_restore).
 
+### Client Installation
+
+Set your localhost configurations for fabric. In fabfile/__init__.py, the function "localhost()"
+
+    env.user = {{YOUR OPERATING SYSTEM USERNAME}}
+    env.code = {{PATH TO YOUR 'client' FOLDER}}
+
+Install NPM, Node.js, Grunt.js, Ruby, and Compass using Fabric (Note: Node.js and and Ruby are dependencies of other programs and aren't actually used in any of our code)
+
+    fab localhost install.all    
+
 ### Run a local development server
 
     python manage.py runserver
@@ -189,6 +198,21 @@ After the challenge, the Metropolitan Area Planning Council (MAPC), the employer
 
 The code repository was moved to Code for Boston's GitHub account in Spring 2013. Code for Boston seems to be an excellent home for the project: it started as volunteer effort and should be owned by volunteers, it is a public service application built on top of open data and it is an open source project than can be replicated with local green space data in any other community.
 
+## Data Schema Basics
+
+The map is based entirely on open space data in the public domain.
+
+The core concept of the application is very simple and should be applicable for green spaces in any community or location. There are 3 basic elements that build the heart of the application: Park, Facility and Activity.
+
+A park visitor can perform *Activities*, such as playing Frisbee or Football, on a *Facility*, such as a Field, in a *Park*.
+
+This means, the 3 basic elements relate to each according to the following schema:
+
+    Park [1:m] Facility [m:n] Activity
+
+A *Facility* can only be located in one single *Park*, whereas a visitor potentially can perform multiple *Activities* on a single *Facility*.
+
+There are more elements, such as Neighborhoods, Parkowners, Types, etc., to the data schema, but those 3 ones are essential to understand the philosophy of the application.
 ---
 
 © Boston Green contributors

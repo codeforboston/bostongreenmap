@@ -86,6 +86,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     root('static'),
+    root('client')
 )
 
 # List of finder classes that know how to find static files in
@@ -126,6 +127,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     root('templates'),
+    root('client')
 )
 
 INSTALLED_APPS = (
@@ -134,7 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # 'django.contrib.staticfiles',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.markup',

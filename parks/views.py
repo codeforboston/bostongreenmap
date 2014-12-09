@@ -1,5 +1,6 @@
 # Views for Parks
 from django.core import urlresolvers
+from django.core import serializers
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.utils.html import strip_tags
@@ -12,8 +13,9 @@ from sorl.thumbnail import get_thumbnail
 
 import json
 import logging
+import itertools
 
-from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype
+from parks.models import Neighborhood, Park, Facility, Activity, Event, Parktype, Facilitytype, Story
 
 
 logger = logging.getLogger(__name__)
@@ -27,53 +29,76 @@ def get_topnav_data():
 
     return neighborhoods, activities
 
+def get_neighborhoods_and_activities_list(request):
+    neighborhoods = Neighborhood.objects.all()
+    activities = Activity.objects.all()
+    featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
+    response = {
+        'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
+        'activities': [{'id': a.pk, 'name': a.name} for a in activities]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def get_nearby_parks(request,park_id):
+    """ Returns nearby parks as JSON
+    """
+    park = Park.objects.get(pk=park_id)
+    nearby_parks = park.nearest_parks_by_distance(0.25).all()
+    response = {
+        'parks':[{'id':p.pk, 'name': p.name} for p in nearby_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def get_recommended_parks(request,park_id):
+    """ Returns recommended parks as JSON
+    """
+    park = Park.objects.get(pk=park_id)
+    recommended_parks = park.recommended_parks()
+    response = {
+        'parks':[{'id':p.pk, 'name': p.name} for p in recommended_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def get_parks(request):
     """ Returns parks as JSON based search parameters
     """
-
     querydict = request.GET
     kwargs = querydict.dict()
+    no_map = kwargs.pop('no_map', False)
     user = request.user
 
+    filters = kwargs
     try:
-        parks = Park.objects.filter(**kwargs).select_related('parkowner').prefetch_related('images')
-        parks_json = dict()
-        for p in parks:
-            # embed all images
-            images = []
-            for i in p.images.all():
-                try: 
-                    tn = get_thumbnail(i.image, '250x250', crop='center', quality=80)
-                    image = dict(
-                        src=tn.url,
-                        caption=strip_tags(i.caption),
-                    )
-                    images.append(image)
-                except IOError, e:
-                    logger.error(e)
+        parks = Park.objects.filter(**filters).select_related('parkowner').prefetch_related('images')
+        if no_map:
+            parks_json = { p.pk: p.to_external_document(user, include_large=True) for p in parks }
+            carousel = []
+            if not filters:
+                # gets up to ten images if parks have images
+                carousel = list(itertools.islice([
+                    dict(p.get('images')[0].items() + {'url': p.get('url')}.items())
+                    for key, p in parks_json.iteritems()
+                    if any(p.get('images'))
+                ],
+                0, 10))
+            response_json = {
+                "parks": parks_json,
+                "carousel": carousel
+            }
+        else:
+            response_json = { p.pk: p.to_external_document(user) for p in parks }
 
-            parks_json[p.pk] = dict(
-                url=p.get_absolute_url(),
-                name=p.name,
-                description=p.description,
-                images=images,
-                access=p.get_access_display(),
-                address=p.address,
-                owner=p.parkowner.name,
-            )
 
-            if user.has_perm('parks.change_park'):
-                parks_json[p.pk]['change_url'] = urlresolvers.reverse('admin:parks_park_change', args=(p.id,))
-        return HttpResponse(json.dumps(parks_json), mimetype='application/json')
+        return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
-    except:
+    except Exception as e:
         # no content
-        return HttpResponse(status=204)
+        print e
+        return HttpResponse(str(e), status=204)
 
 def get_facilities(request, park_id):
     """ Returns facilities as JSON for park id
     """
-
     user = request.user
 
     try:
@@ -115,6 +140,11 @@ class HomePageView(TemplateView):
 
         return context
 
+class BackboneHomePageView(TemplateView):
+    template_name = 'base_backbone.html'
+
+class HackathonHomePageView(TemplateView):
+    template_name = 'base_redevelop.html'
 
 class NeighborhoodParkListView(ListView):
 
@@ -140,7 +170,9 @@ def parks_page(request, park_slug):
     #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
     
     neighborhoods, activities = get_topnav_data()
-
+    print "park %s" % park
+    print "neighborhoods %s" % neighborhoods
+    print "activities %s" % activities
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
@@ -164,4 +196,13 @@ def parks_page(request, park_slug):
         context_instance=RequestContext(request)
     )
 
+def park_ajax(request, park_slug):
+    park = get_object_or_404(Park, slug=park_slug)
+    stories = Story.objects.filter(park=park).order_by("-date")
+    recommended_parks = [ p.to_external_document(request.user) for p in park.recommended_parks() ]
+    park_as_json = {
+        'detail': park.to_external_document(request.user),
+        'recommended_parks': recommended_parks
+    }
+    return HttpResponse(json.dumps(park_as_json), mimetype='application/json')
 

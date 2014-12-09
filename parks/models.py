@@ -1,15 +1,20 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.gis.db import models
+from django.contrib.gis.measure import D
 from django.db.utils import IntegrityError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
+from django.db.models import Count
 
 from sorl.thumbnail import get_thumbnail, default
 
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 # south introspection rules
 try:
@@ -171,6 +176,7 @@ class Park(models.Model):
     access = models.CharField(max_length=1, blank=True, null=True, choices=ACCESS_CHOICES)
     area = models.FloatField(blank=True, null=True)
     images = models.ManyToManyField(Parkimage, blank=True, null=True, related_name='parks')
+    featured = models.BooleanField(default=False)
 
     geometry = models.MultiPolygonField(srid=26986)
     objects = models.GeoManager()
@@ -182,9 +188,17 @@ class Park(models.Model):
     def __unicode__(self):
         return self.name
 
+    @classmethod
+    def featured_with_images(cls):
+        return (
+            cls.objects
+               .annotate(num_of_images=Count('images'))
+               .filter(featured=True, num_of_images__gt=0)
+        )
+
     @models.permalink
     def get_absolute_url(self):
-        return ('park', [slugify(self.name)])
+        return ('park', ['%s-%d' % (slugify(self.name), self.id)])
 
     def area_acres(self):
         return self.area / 4047
@@ -192,6 +206,54 @@ class Park(models.Model):
     def lat_long(self):
         self.geometry.transform(4326)
         return [self.geometry.centroid.y,self.geometry.centroid.x]
+
+    def get_image_thumbnails(self, include_large=False):
+        # embed all images
+        images = []
+        tn_size = '250x250'
+        large_size = '800x600'
+        for i in self.images.all():
+            try: 
+                tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
+                image = {
+                    'src': tn.url,
+                    'caption': strip_tags(i.caption),
+                }
+                if include_large:
+                    try:
+                        large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
+                        image['large_src'] = large_image.url
+                    except Exception, e:
+                        logge.error(e)
+
+                images.append(image)
+            except IOError, e:
+                logger.error(e)
+
+        return images
+
+
+    def to_external_document(self, user, include_large=False):
+        change_url = None
+        if user.has_perm('parks.change_park'):
+            change_url = reverse('admin:parks_park_change', args=(self.id,))
+
+        return {
+            'url': self.get_absolute_url(),
+            'name': self.name,
+            'description': self.description,
+            'images': self.get_image_thumbnails(include_large=include_large),
+            'access': self.get_access_display(),
+            'address': self.address,
+            'owner': self.parkowner.name,
+            'change_url': change_url
+        }
+
+    def nearest_parks_by_distance(self,distance_in_miles):
+        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles)));
+    
+    def recommended_parks(self):
+        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype);
 
     def save(self, *args, **kwargs):
 
