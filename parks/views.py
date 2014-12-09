@@ -59,6 +59,15 @@ def get_recommended_parks(request,park_id):
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
+def get_featured_parks(request):
+    """ Returns recommended parks as JSON
+    """
+    featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
+    response = {
+        'featured_parks': [{'id': n.pk, 'name': n.name, 'image': n.thumbnail} for n in featured_parks]
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def get_parks(request):
     """ Returns parks as JSON based search parameters
     """
