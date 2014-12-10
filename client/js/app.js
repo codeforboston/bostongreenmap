@@ -38,12 +38,15 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
             return window.location.origin + '/parks/get_neighborhoods_and_activities_list/';
         },
         parse: function(response) {
-            var data = {'neighborhoods': [], 'activities': []};
+            var data = {'neighborhoods': [], 'activities': [], 'featured_parks': []};
             _.each(response.neighborhoods, function(neighborhood) {
                 data.neighborhoods.push({'id': neighborhood.id, 'name': neighborhood.name});
             });
             _.each(response.activities, function(activity) {
                 data.activities.push({'id': activity.id, 'name': activity.name});
+            });
+            _.each(response.featured_parks, function(featured_park) {
+                data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name});
             });
             return data;
         }
@@ -155,6 +158,16 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
         className: 'results'
     });
 
+    var CarouselPhotoView = Marionette.ItemView.extend({
+        template: templates['templates/carouselPhoto.hbs']
+    });
+
+    var CarouselView = Marionette.CompositeView.extend({
+        template: templates['templates/carousel.hbs'],
+        itemView: CarouselPhotoView,
+        tagname: 'div',
+        className: 'carousel'
+    });
 
     app.Router = Backbone.Router.extend({
         routes: {
@@ -166,15 +179,16 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
             'parks/:park_slug/': 'park'
         },
         home: function() {
-            $('.carousel').carousel({
-                interval: 300
-            });
             var searchModel = new SearchModel();
             var searchView = 
             searchModel.once('sync', function() {
                 app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
+                 $('.carousel').carousel({
+                     interval: 3000
+                 });
             });
             searchModel.fetch();
+
         },
         about: function() {
             app.getRegion('mainRegion').show(new AboutView());

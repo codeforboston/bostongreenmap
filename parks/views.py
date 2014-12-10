@@ -35,8 +35,9 @@ def get_neighborhoods_and_activities_list(request):
     featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
-        'activities': [{'id': a.pk, 'name': a.name} for a in activities]
-    }
+        'activities': [{'id': a.pk, 'name': a.name} for a in activities],
+        'featured_parks': [{'id': a.pk, 'name': a.name} for a in featured_parks]
+    } 
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def get_nearby_parks(request,park_id):

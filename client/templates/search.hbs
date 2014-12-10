@@ -1,31 +1,3 @@
-<div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
-
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" id="carousel-images-container">
-    <div class="item active">
-      <img class="carousel-image" src="static/img/4-JamaicaPondJP.JPG" alt="...">
-      <div class="carousel-caption">
-      </div>
-    </div>
-    <div class="item">
-      <img class="carousel-image" src="static/img/13-OMalleyWaterfrontPark-Chelsea.JPG" alt="...">
-      <div class="carousel-caption">
-      </div>
-    </div>
-    <div class="item">
-      <img class="carousel-image" src="static/img/Nkraft (Charles River Bike Path Sunset 1).jpg" alt="...">
-      <div class="carousel-caption">
-      </div>
-    </div>
-  </div>
-</div>
 <div class="center-content">
   <div class="floating-text">
     <h1>Find your space.</h1>
@@ -49,3 +21,35 @@
     <div class="gobutton" id="filter-select">GO</div>
   </div>  
 </div>
+
+<div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" id="carousel-images-container">
+    <div class="item active">
+      <div class="carousel-image" style="background-image: url('../../../static/img/4-JamaicaPondJP.JPG');" alt="..."></div>
+      <div class="carousel-caption"></div>
+    </div>
+    <div class="item">
+      <div class="carousel-image" style="background-image: url('../../../static/img/Nkraft (Charles River Bike Path Sunset 1).jpg');" alt="..."></div>
+      <div class="carousel-caption"></div>
+    </div>
+    <div class="item">
+      <div class="carousel-image" style="background-image: url('../../../static/img/13-OMalleyWaterfrontPark-Chelsea.JPG');" alt="..."></div>
+      <div class="carousel-caption"></div>
+    </div>
+  </div>
+</div>  
+
+<div class="featured">
+  {{#each featured_parks }} 
+    TEST 
+  {{/each}}
+</div> 
