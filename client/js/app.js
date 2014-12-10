@@ -1,4 +1,4 @@
-define(['backbone', 'marionette', 'build/templates', 'bootstrap','owl'], function(Backbone, Marionette, templates) {
+define(['backbone', 'marionette', 'build/templates', 'bootstrap', 'owl', 'masonry'], function(Backbone, Marionette, templates, owl, Masonry) {
     var app = new Marionette.Application(),
         router;
 
@@ -124,9 +124,6 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap','owl'], functio
                     (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
-        },
-        onRender: function () {
-          console.log("Rendered");
         }
     });
 
@@ -195,29 +192,18 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap','owl'], functio
             var searchModel = new SearchModel();
             var searchView = 
             searchModel.once('sync', function() {
-                var showHomeView = app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
+              app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
 
-                // There are loops in the templates that generate HTML. 
-                // We need to select those elements after they are rendered.
-                // This callback function helps with that. There is probably a better way.
+              $('#featured').owlCarousel({
+                  navigation:true,
+                  items : 3,
+                  itemsDesktop : [1199,3],
+                  itemsDesktopSmall : [979,3]
+               });
 
-                var initCarousel = $('#featured').owlCarousel({
-                                        items : 3,
-                                        itemsDesktop : [1199,3],
-                                        itemsDesktopSmall : [979,3]
-                                     });
-
-                function renderOrder(showView, callback) {
-                  showView;
-                  callback;
-                }
-
-                renderOrder(showHomeView, initCarousel);
-
-                 $('.carousel').carousel({
-                     interval: 3000
-                 });
-
+               $('.carousel').carousel({
+                   interval: 3000
+               });
             });
             searchModel.fetch();
 
@@ -235,6 +221,15 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap','owl'], functio
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
+              
+                  // var container = document.querySelector('.results');
+                  // var msnry = new Masonry(container, {
+                  //   columnWidth: 200,
+                  //   itemSelector: '.result'
+                  // });
+
+              
+
             }});
         },
         park: function (park_slug) {

@@ -25,6 +25,10 @@ requirejs.config({
         },
         owl: {
             deps: ['jquery']
+        },
+        masonry: {
+            deps: ['jquery'],
+            exports: 'masonry'
         }
     },
     baseUrl: '/static',
@@ -37,7 +41,8 @@ requirejs.config({
         js: 'js',
         build: 'build',
         bootstrap: 'lib/bootstrap.min',
-        owl: 'lib/owl.carousel.min'
+        owl: 'lib/owl.carousel.min',
+        masonry: 'lib/masonry.pkgd.min'
     }
 });
 
