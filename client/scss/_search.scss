@@ -1,12 +1,5 @@
 /*** Search ***/
 .search-page {
-
-  .center-content {
-    max-width: 950px;
-    margin: 0 auto;
-    padding-top: 20px;
-  }
-
   .name {
     background: white;
     border: 1px solid rgba(0,0,0,0.5);
@@ -39,42 +32,12 @@
     margin: 3px;
   }
 
-
-  #carousel-example-generic {
-    position: absolute;
-    z-index: -1;
-    width:100%;
-    top: 110px;
-  }
-
-  .carousel-inner {
-    .item {
-      .carousel-image {
-        margin: 0 auto;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 100%;
-        min-width:800px;
-        min-height:600px;
-      }
-    }
-  }
-
-  .select-width {
-    display: block;
-  }
-
-  .floating-text {
+  .find-your-space {
     background-color: rgba(0,160,0,0.8);
-    // position: absolute;
-    z-index: 15;
     color: white;
     padding: 15px;
     max-width: 280px;
-    select {
-      width: 100%;
-    }
+    margin-bottom:200px;
   }
 
   .featured {
@@ -84,14 +47,29 @@
     margin-bottom: 0px;
   }
 
-  @media (max-width:600px) {
-    #carousel-example-generic {
-      position: relative;
-      top: auto;
+  #orbs .item{
+    margin: 3px;
+  }
+  #orbs .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .featured-parks {
+    background-color: lightgray;
+    .orbs {
+      margin: 0 auto;
+      max-width: 950px;
+      margin-bottom: 0px;
     }
-    .floating-text {
-      width: 100%;
+  }
+
+
+  @media (max-width:600px) {
+    .find-your-space {
       max-width: 100%;
+      margin-bottom: 0px;
     }
   }
 

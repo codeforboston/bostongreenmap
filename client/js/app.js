@@ -1,4 +1,4 @@
-define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Backbone, Marionette, templates) {
+define(['backbone', 'marionette', 'build/templates', 'bootstrap','owl'], function(Backbone, Marionette, templates) {
     var app = new Marionette.Application(),
         router;
 
@@ -98,6 +98,16 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
     });
 
     var SearchView = Marionette.ItemView.extend({
+        // initialize: function(options) {
+        //   _.bindAll(this, 'beforeRender', 'render', 'afterRender'); 
+        //   var _this = this; 
+        //   this.render = _.wrap(this.render, function(render) { 
+        //     _this.beforeRender(); 
+        //     render(); 
+        //     _this.afterRender(); 
+        //     return _this; 
+        //   }); 
+        // },
         template:templates['templates/search.hbs'],
         tagName: 'div',
         className: 'search-page',
@@ -114,6 +124,9 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
                     (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
+        },
+        onRender: function () {
+          console.log("Rendered");
         }
     });
 
@@ -182,10 +195,29 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
             var searchModel = new SearchModel();
             var searchView = 
             searchModel.once('sync', function() {
-                app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
+                var showHomeView = app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
+
+                // There are loops in the templates that generate HTML. 
+                // We need to select those elements after they are rendered.
+                // This callback function helps with that. There is probably a better way.
+
+                var initCarousel = $('#featured').owlCarousel({
+                                        items : 3,
+                                        itemsDesktop : [1199,3],
+                                        itemsDesktopSmall : [979,3]
+                                     });
+
+                function renderOrder(showView, callback) {
+                  showView;
+                  callback;
+                }
+
+                renderOrder(showHomeView, initCarousel);
+
                  $('.carousel').carousel({
                      interval: 3000
                  });
+
             });
             searchModel.fetch();
 
@@ -208,9 +240,35 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
         park: function (park_slug) {
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
-                app.getRegion('mainRegion').show(new ParkView({'model': park }));
+
+                var showParkView = app.getRegion('mainRegion').show(new ParkView({'model': park }));
+
+
+                 $('.carousel').carousel({
+                     interval: 3000
+                 });
+
+                 $('#orbs').owlCarousel({
+                    autoPlay: 3000, //Set AutoPlay to 3 seconds
+                    items : 4,
+                    itemsDesktop : [1199,3],
+                    itemsDesktopSmall : [979,3]
+                 });
+
+                 $('#nearby').owlCarousel({
+                    // autoPlay: 3000, //Set AutoPlay to 3 seconds
+                    items : 3,
+                    itemsDesktop : [1199,3],
+                    itemsDesktopSmall : [979,3]
+                 });
+
+                 $('#recommended').owlCarousel({
+                    // autoPlay: 3000, //Set AutoPlay to 3 seconds
+                    items : 3,
+                    itemsDesktop : [1199,3],
+                    itemsDesktopSmall : [979,3]
+                 });
             }});
-            park.fetch();
         }
     });
 
@@ -227,6 +285,7 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap'], function(Back
     return {
         startModule: function(done) {
             app.start({});
+            console.log($('#featured'));
         }
     };
 });

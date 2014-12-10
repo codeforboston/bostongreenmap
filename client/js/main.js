@@ -22,6 +22,9 @@ requirejs.config({
         },
         bootstrap: {
             deps: ['jquery']
+        },
+        owl: {
+            deps: ['jquery']
         }
     },
     baseUrl: '/static',
@@ -33,7 +36,8 @@ requirejs.config({
         handlebars: 'lib/handlebars-runtime.1.3.0.min',
         js: 'js',
         build: 'build',
-        bootstrap: 'lib/bootstrap.min'
+        bootstrap: 'lib/bootstrap.min',
+        owl: 'lib/owl.carousel.min'
     }
 });
 
