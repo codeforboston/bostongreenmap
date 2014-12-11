@@ -1,4 +1,17 @@
-define(['backbone', 'marionette', 'build/templates', 'bootstrap', 'owl', 'masonry'], function(Backbone, Marionette, templates, owl, Masonry) {
+define([
+    'backbone',
+    'marionette',
+    'build/templates',
+    'masonry',
+    'bootstrap',
+    'owl'
+], function(
+    Backbone,
+    Marionette,
+    templates,
+    Masonry,
+    owl
+) {
     var app = new Marionette.Application(),
         router;
 
@@ -7,7 +20,8 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap', 'owl', 'masonr
         mainRegion: '#content-area',
         footerRegion: '#footer'
     });
-    
+
+
     // Models
     var Park = Backbone.Model.extend({
         initialize: function (params) {
@@ -222,11 +236,11 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap', 'owl', 'masonr
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
               
-                  // var container = document.querySelector('.results');
-                  // var msnry = new Masonry(container, {
-                  //   columnWidth: 200,
-                  //   itemSelector: '.result'
-                  // });
+                  var container = document.querySelector('.results');
+                  var msnry = new Masonry(container, {
+                    columnWidth: 200,
+                    itemSelector: '.result'
+                  });
 
               
 
@@ -280,7 +294,6 @@ define(['backbone', 'marionette', 'build/templates', 'bootstrap', 'owl', 'masonr
     return {
         startModule: function(done) {
             app.start({});
-            console.log($('#featured'));
         }
     };
 });

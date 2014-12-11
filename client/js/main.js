@@ -27,8 +27,7 @@ requirejs.config({
             deps: ['jquery']
         },
         masonry: {
-            deps: ['jquery'],
-            exports: 'masonry'
+            exports: 'Masonry'
         }
     },
     baseUrl: '/static',
