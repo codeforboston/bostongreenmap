@@ -236,6 +236,10 @@ class Park(models.Model):
         if user.has_perm('parks.change_park'):
             change_url = reverse('admin:parks_park_change', args=(self.id,))
 
+        def image_format(park):
+            image = park.get_image_thumbnails(include_large=include_large)[:1]
+            return image[0] if image else {}
+
         return {
             'url': self.get_absolute_url(),
             'name': self.name,
@@ -244,8 +248,8 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'nearby_parks': [{'id': p.pk, 'name': p.name} for p in self.nearest_parks_by_distance(0.25)],
-            'recommended_parks': [{'id': p.pk, 'name': p.name} for p in self.recommended_parks()],
+            'nearby_parks': [{'id': p.pk, 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)],
+            'recommended_parks': [{'id': p.pk, 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()],
             'change_url': change_url
         }
 

@@ -97,7 +97,7 @@ def get_parks(request):
                 "carousel": carousel
             }
         else:
-            response_json = {p.pk: p.to_external_document(user) for p in parks}
+            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
 
         return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
