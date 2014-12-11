@@ -211,23 +211,23 @@ class Park(models.Model):
         images = []
         tn_size = '250x250'
         large_size = '800x600'
-        for i in self.images.all():
-            try:
-                tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
-                image = {
-                    'src': tn.url,
-                    'caption': strip_tags(i.caption),
-                }
-                if include_large:
-                    try:
-                        large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
-                        image['large_src'] = large_image.url
-                    except Exception, e:
-                        logger.error(e)
+        # for i in self.images.all():
+        #     try:
+        #         tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
+        #         image = {
+        #             'src': tn.url,
+        #             'caption': strip_tags(i.caption),
+        #         }
+        #         if include_large:
+        #             try:
+        #                 large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
+        #                 image['large_src'] = large_image.url
+        #             except Exception, e:
+        #                 logger.error(e)
 
-                images.append(image)
-            except IOError, e:
-                logger.error(e)
+        #         images.append(image)
+        #     except IOError, e:
+        #         logger.error(e)
 
         return images
 
@@ -240,9 +240,12 @@ class Park(models.Model):
             image = park.get_image_thumbnails(include_large=include_large)[:1]
             return image[0] if image else {}
 
+        facilities = Activity.objects.filter(activity__park=self.id).distinct()
+
         return {
             'url': self.get_absolute_url(),
             'name': self.name,
+            'area': self.area_acres(),
             'description': self.description,
             'images': self.get_image_thumbnails(include_large=include_large),
             'access': self.get_access_display(),
@@ -250,14 +253,34 @@ class Park(models.Model):
             'owner': self.parkowner.name,
             'nearby_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)],
             'recommended_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()],
-            'change_url': change_url
-        }
-
+            'activities': [{'name': p.name, 'slug': p.slug} for p in facilities], 
+            'change_url': change_url 
+        }   
+      
     def nearest_parks_by_distance(self, distance_in_miles):
-        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles)))
+        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct()
 
     def recommended_parks(self):
-        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype)
+        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype).distinct()
+
+    def get_facilities(self, park_id):
+        """ Returns facilities as JSON for park id
+        """
+        park = Park.objects.get(pk=park_id)
+        facilities = Facility.objects.transform(4326).filter(park=park).select_related('facilitytype').prefetch_related('activity')
+        features = []
+        for f in facilities:
+            activities = [a.name for a in f.activity.all()]
+            geojson_prop = dict(
+                name=f.name,
+                icon=f.facilitytype.icon.url,
+                activities=activities,
+                status=f.status,
+                access=f.access,
+                notes=f.notes,
+            )
+        response = dict(type='FeatureCollection')
+        return facilities
 
     def save(self, *args, **kwargs):
 

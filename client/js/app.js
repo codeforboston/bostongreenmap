@@ -212,7 +212,7 @@ define([
               app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
 
               $('#featured').owlCarousel({
-                  navigation:true,
+                  navigation: true,
                   items : 3,
                   itemsDesktop : [1199,3],
                   itemsDesktopSmall : [979,3]
@@ -262,6 +262,7 @@ define([
                  $('#orbs').owlCarousel({
                     autoPlay: 3000, //Set AutoPlay to 3 seconds
                     items : 4,
+                    navigation: true,
                     itemsDesktop : [1199,3],
                     itemsDesktopSmall : [979,3]
                  });
@@ -269,6 +270,7 @@ define([
                  $('#nearby').owlCarousel({
                     autoPlay: 3000, //Set AutoPlay to 3 seconds
                     items : 3,
+                    navigation: true,
                     itemsDesktop : [1199,3],
                     itemsDesktopSmall : [979,3]
                  });
@@ -276,6 +278,7 @@ define([
                  $('#recommended').owlCarousel({
                     autoPlay: 3000, //Set AutoPlay to 3 seconds
                     items : 3,
+                    navigation: true,
                     itemsDesktop : [1199,3],
                     itemsDesktopSmall : [979,3]
                  });

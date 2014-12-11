@@ -81,7 +81,7 @@ def get_parks(request):
 
     filters = kwargs
     try:
-        parks = Park.objects.filter(**filters).select_related('parkowner').prefetch_related('images')
+        parks = Park.objects.filter(**filters).select_related('parkowner')
         if no_map:
             parks_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
             carousel = []

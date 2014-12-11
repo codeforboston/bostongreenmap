@@ -6,10 +6,15 @@
           <h1>{{name}}</h2>
         </div>
         {{#if description}}
-        <div class="park-description row">
-          <p>{{description}}</p>
-        </div>  
+          <div class="park-description row">
+            <p>{{description}}</p>
+          </div>  
         {{/if}}
+        {{#each activities}}
+          <div class="park-title row" style="float:left;">
+            {{name}}
+          </div>
+        {{/each}}
       </div>
     </div>  
   </div>
@@ -45,12 +50,9 @@
     <h2>Quick Facts</h2>
   </div>
   <div id="orbs" class="owl-carousel orbs">
-      <div class="item circle"></div>
-      <div class="item circle"></div>
-      <div class="item circle"></div>
-      <div class="item circle"></div>
-      <div class="item circle"></div>
-      <div class="item circle"></div>
+    {{#each activities}}
+      <div class="item circle">{{name}}</div>
+    {{/each}}
   </div>
 </div> 
 <div class="nearby-parks">
