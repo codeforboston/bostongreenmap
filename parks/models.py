@@ -244,6 +244,8 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
+            'nearby_parks': [{'id': p.pk, 'name': p.name} for p in self.nearest_parks_by_distance(0.25)],
+            'recommended_parks': [{'id': p.pk, 'name': p.name} for p in self.recommended_parks()],
             'change_url': change_url
         }
 
