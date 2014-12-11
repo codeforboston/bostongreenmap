@@ -45,14 +45,12 @@
     <h2>Quick Facts</h2>
   </div>
   <div id="orbs" class="owl-carousel orbs">
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
-    <div class="item circle"></div>
+      <div class="item circle"></div>
+      <div class="item circle"></div>
+      <div class="item circle"></div>
+      <div class="item circle"></div>
+      <div class="item circle"></div>
+      <div class="item circle"></div>
   </div>
 </div> 
 <div class="nearby-parks">
@@ -60,14 +58,9 @@
     <h2>Recommended Parks</h2>
   </div>
   <div id="nearby" class="owl-carousel orbs">
-    <div class="item"><img src="../../../static/img/owl1.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl2.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl3.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl4.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl5.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl6.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl7.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl8.jpg" alt="Owl Image"></div>
+    {{#each recommended_parks}}
+      <div class="item"><img src="http://placekitten.com/g/300/200" alt="Owl Image">{{name}}</div>
+    {{/each}}
   </div>
 </div> 
 <div class="recommended-parks">
@@ -75,13 +68,8 @@
     <h2>Spaces Nearby</h2>
   </div>
   <div id="recommended" class="owl-carousel orbs">
-    <div class="item"><img src="../../../static/img/owl1.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl2.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl3.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl4.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl5.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl6.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl7.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="../../../static/img/owl8.jpg" alt="Owl Image"></div>
+    {{#each nearby_parks}}
+      <div class="item"><img src="http://placekitten.com/g/300/200" alt="Owl Image">{{name}}</div>
+    {{/each}}
   </div>
 </div> 
