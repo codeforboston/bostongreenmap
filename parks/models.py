@@ -3,13 +3,12 @@ from django.core.urlresolvers import reverse
 from django.contrib.gis.db import models
 from django.contrib.gis.measure import D
 from django.db.utils import IntegrityError
-from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from django.db.models import Count
 
-from sorl.thumbnail import get_thumbnail, default
+from sorl.thumbnail import get_thumbnail
 
 import re
 import logging
@@ -136,11 +135,11 @@ class Parkimage(models.Model):
         return '%i: %s' % (self.pk, strip_tags(caption))
 
     def thumbnail(self):
-         if self.image:
-             thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
-             return u'<img width="%s" height="%s" src="%s" alt="%s" />' % (thumb.width, thumb.height, thumb.url, self.caption)
-         else:
-             return None
+        if self.image:
+            thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
+            return u'<img width="%s" height="%s" src="%s" alt="%s" />' % (thumb.width, thumb.height, thumb.url, self.caption)
+        else:
+            return None
     thumbnail.short_description = 'Image'
     thumbnail.allow_tags = True
 
@@ -148,7 +147,7 @@ class Parkimage(models.Model):
         parks = [p.name for p in self.parks.all()]
         return ", ".join(parks)
     get_parks_string.short_description = 'Parks'
-    
+
 
 class Park(models.Model):
     """
@@ -205,7 +204,7 @@ class Park(models.Model):
 
     def lat_long(self):
         self.geometry.transform(4326)
-        return [self.geometry.centroid.y,self.geometry.centroid.x]
+        return [self.geometry.centroid.y, self.geometry.centroid.x]
 
     def get_image_thumbnails(self, include_large=False):
         # embed all images
@@ -213,7 +212,7 @@ class Park(models.Model):
         tn_size = '250x250'
         large_size = '800x600'
         for i in self.images.all():
-            try: 
+            try:
                 tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
                 image = {
                     'src': tn.url,
@@ -224,7 +223,7 @@ class Park(models.Model):
                         large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
                         image['large_src'] = large_image.url
                     except Exception, e:
-                        logge.error(e)
+                        logger.error(e)
 
                 images.append(image)
             except IOError, e:
@@ -232,11 +231,14 @@ class Park(models.Model):
 
         return images
 
-
     def to_external_document(self, user, include_large=False):
         change_url = None
         if user.has_perm('parks.change_park'):
             change_url = reverse('admin:parks_park_change', args=(self.id,))
+
+        def image_format(park):
+            image = park.get_image_thumbnails(include_large=include_large)[:1]
+            return image[0] if image else {}
 
         return {
             'url': self.get_absolute_url(),
@@ -246,14 +248,16 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
+            'nearby_parks': [{'id': p.pk, 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)],
+            'recommended_parks': [{'id': p.pk, 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()],
             'change_url': change_url
         }
 
-    def nearest_parks_by_distance(self,distance_in_miles):
-        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles)));
-    
+    def nearest_parks_by_distance(self, distance_in_miles):
+        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles)))
+
     def recommended_parks(self):
-        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype);
+        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype)
 
     def save(self, *args, **kwargs):
 
@@ -340,7 +344,6 @@ class Facility(models.Model):
             return '%s' % (self.facilitytype.icon.url,)
         return '%sparks/img/icons/%s.png' % (settings.STATIC_URL, slugify(self.facilitytype))
 
-
     def admin_url(self):
         return reverse('admin:parks_facility_change', args=(self.id,))
 
@@ -374,8 +377,7 @@ class Story(models.Model):
 
     class Meta:
         ordering = ('-date',)
-        
+
     @models.permalink
     def get_absolute_url(self):
         return ('parks.views.story', [str(self.id)])
-
