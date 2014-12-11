@@ -9,6 +9,7 @@ apt-get install -y \
         postgresql-9.1-postgis-2.0 \
         python-psycopg2 \
         libpq-dev \
+        libjpeg-dev \
         postgresql-client \
         python-dev \
         python-virtualenv \
