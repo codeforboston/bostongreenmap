@@ -4,13 +4,15 @@ define([
     'build/templates',
     'masonry',
     'bootstrap',
-    'owl'
+    'owl',
+    'imagesloaded'
 ], function(
     Backbone,
     Marionette,
     templates,
     Masonry,
-    owl
+    owl,
+    imagesloaded
 ) {
     var app = new Marionette.Application(),
         router;
@@ -172,7 +174,8 @@ define([
     });
 
     var ResultItemView = Marionette.ItemView.extend({
-        template: templates['templates/resultItem.hbs']
+        template: templates['templates/resultItem.hbs'],
+        className: 'result'
     });
 
     var ResultsView = Marionette.CompositeView.extend({
@@ -238,12 +241,11 @@ define([
               
                   var container = document.querySelector('.results');
                   var msnry = new Masonry(container, {
-                    columnWidth: 200,
+                    gutter: 10, 
+                    "isFitWidth": true,
+                    transitionDuration: '0.1s',
                     itemSelector: '.result'
                   });
-
-              
-
             }});
         },
         park: function (park_slug) {
@@ -265,14 +267,14 @@ define([
                  });
 
                  $('#nearby').owlCarousel({
-                    // autoPlay: 3000, //Set AutoPlay to 3 seconds
+                    autoPlay: 3000, //Set AutoPlay to 3 seconds
                     items : 3,
                     itemsDesktop : [1199,3],
                     itemsDesktopSmall : [979,3]
                  });
 
                  $('#recommended').owlCarousel({
-                    // autoPlay: 3000, //Set AutoPlay to 3 seconds
+                    autoPlay: 3000, //Set AutoPlay to 3 seconds
                     items : 3,
                     itemsDesktop : [1199,3],
                     itemsDesktopSmall : [979,3]

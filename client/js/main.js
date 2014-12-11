@@ -28,6 +28,9 @@ requirejs.config({
         },
         masonry: {
             exports: 'Masonry'
+        },
+        imagesloaded: {
+            exports: 'imagesloaded'
         }
     },
     baseUrl: '/static',
@@ -41,7 +44,8 @@ requirejs.config({
         build: 'build',
         bootstrap: 'lib/bootstrap.min',
         owl: 'lib/owl.carousel.min',
-        masonry: 'lib/masonry.pkgd.min'
+        masonry: 'lib/masonry.pkgd.min',
+        imagesloaded: 'lib/imagesloaded.pkgd.min'
     }
 });
 
