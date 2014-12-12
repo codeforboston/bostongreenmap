@@ -4,15 +4,13 @@ define([
     'build/templates',
     'masonry',
     'bootstrap',
-    'owl',
-    'imagesloaded'
+    'owl'
 ], function(
     Backbone,
     Marionette,
     templates,
     Masonry,
-    owl,
-    imagesloaded
+    owl
 ) {
     var app = new Marionette.Application(),
         router;
@@ -239,7 +237,7 @@ define([
                 var msnry = new Masonry(container, {
                   gutter: 10, 
                   "isFitWidth": true,
-                  transitionDuration: '0.1s',
+                  transitionDuration: '0s',
                   itemSelector: '.result'
                 });
             }});
@@ -292,7 +290,7 @@ define([
         app.getRegion('footerRegion').show(new FooterView());
 
         router = new app.Router();
-        router.on('route', function() { $('#loading').css("display", "block"); })
+        router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); })
         app.execute('setRouter', router);
         Backbone.history.start();
         // Backbone.history.navigate('', {'trigger': true});
