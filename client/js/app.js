@@ -114,16 +114,6 @@ define([
     });
 
     var SearchView = Marionette.ItemView.extend({
-        // initialize: function(options) {
-        //   _.bindAll(this, 'beforeRender', 'render', 'afterRender'); 
-        //   var _this = this; 
-        //   this.render = _.wrap(this.render, function(render) { 
-        //     _this.beforeRender(); 
-        //     render(); 
-        //     _this.afterRender(); 
-        //     return _this; 
-        //   }); 
-        // },
         template:templates['templates/search.hbs'],
         tagName: 'div',
         className: 'search-page',
@@ -235,17 +225,20 @@ define([
             app.getRegion('mainRegion').show(new ContactView());
         },
         results: function(queryString) {
+            $('#loading').css("display", "block");
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
+
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-              
-                  var container = document.querySelector('.results');
-                  var msnry = new Masonry(container, {
-                    gutter: 10, 
-                    "isFitWidth": true,
-                    transitionDuration: '0.1s',
-                    itemSelector: '.result'
-                  });
+
+                $('#loading').css("display", "none");
+                var container = document.querySelector('.results');
+                var msnry = new Masonry(container, {
+                  gutter: 10, 
+                  "isFitWidth": true,
+                  transitionDuration: '0.1s',
+                  itemSelector: '.result'
+                });
             }});
         },
         park: function (park_slug) {
