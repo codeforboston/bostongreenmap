@@ -200,7 +200,7 @@ class Park(models.Model):
         return ('park', ['%s-%d' % (slugify(self.name), self.id)])
 
     def area_acres(self):
-        return self.area / 4047
+        return round((self.area / 4047), 1)
 
     def lat_long(self):
         self.geometry.transform(4326)
@@ -253,7 +253,7 @@ class Park(models.Model):
             'owner': self.parkowner.name,
             'nearby_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)],
             'recommended_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()],
-            'activities': [{'name': p.name, 'slug': p.slug} for p in facilities], 
+            'activities': [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities], 
             'change_url': change_url 
         }   
       

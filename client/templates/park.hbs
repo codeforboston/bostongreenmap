@@ -10,11 +10,13 @@
             <p>{{description}}</p>
           </div>  
         {{/if}}
-        {{#each activities}}
-          <div class="park-title row" style="float:left;">
-            {{name}}
-          </div>
-        {{/each}}
+        <div class="park-activities row">
+          {{#each activities}}
+            <a href="#results/no_map=true&facility__activity={{id}}">
+              <div class="park-activity"></div>
+            </a>
+          {{/each}}
+        </div>
       </div>
     </div>  
   </div>
@@ -27,19 +29,19 @@
       <li data-target="#carousel-example-generic" data-slide-to="1"></li>
       <li data-target="#carousel-example-generic" data-slide-to="2"></li>
     </ol>
-
+ 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" id="carousel-images-container">
       <div class="item active">
-        <div class="carousel-image" style="background-image: url('../../../static/img/4-JamaicaPondJP.JPG');" alt="..."></div>
+        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/400/600');" alt="..."></div>
         <div class="carousel-caption"></div>
       </div>
       <div class="item">
-        <div class="carousel-image" style="background-image: url('../../../static/img/Nkraft (Charles River Bike Path Sunset 1).jpg');" alt="..."></div>
+        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/1000/700');" alt="..."></div>
         <div class="carousel-caption"></div>
       </div>
       <div class="item">
-        <div class="carousel-image" style="background-image: url('../../../static/img/13-OMalleyWaterfrontPark-Chelsea.JPG');" alt="..."></div>
+        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/600/1200');" alt="..."></div>
         <div class="carousel-caption"></div>
       </div>
     </div>
@@ -50,9 +52,12 @@
     <h2>Quick Facts</h2>
   </div>
   <div id="orbs" class="owl-carousel orbs">
-    {{#each activities}}
-      <div class="item circle">{{name}}</div>
-    {{/each}}
+    {{#if area}}
+      <div class="item circle">{{area}} Acres</div>
+    {{/if}}
+    {{#if access}}
+      <div class="item circle">P</div>
+    {{/if}}
   </div>
 </div> 
 <div class="nearby-parks">
