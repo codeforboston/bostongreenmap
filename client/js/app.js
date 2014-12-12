@@ -62,7 +62,7 @@ define([
                 data.activities.push({'id': activity.id, 'name': activity.name});
             });
             _.each(response.featured_parks, function(featured_park) {
-                data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name});
+                data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name, 'url': featured_park.url });
             });
             return data;
         }
@@ -200,12 +200,13 @@ define([
             var searchView = 
             searchModel.once('sync', function() {
               app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
-
+              $('#loading').css("display", "none"); 
               $('#featured').owlCarousel({
                   navigation: true,
                   items : 3,
                   itemsDesktop : [1199,3],
-                  itemsDesktopSmall : [979,3]
+                  itemsDesktopSmall : [979,3],
+                  stopOnHover: true
                });
 
                $('.carousel').carousel({
@@ -216,21 +217,23 @@ define([
 
         },
         about: function() {
+          $('#loading').css("display", "none"); 
             app.getRegion('mainRegion').show(new AboutView());
+            
         },
         mission: function () {
             app.getRegion('mainRegion').show(new MissionView());
+            $('#loading').css("display", "none"); 
         },
         contact: function () {
             app.getRegion('mainRegion').show(new ContactView());
+            $('#loading').css("display", "none");
         },
         results: function(queryString) {
-            $('#loading').css("display", "block");
+            
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
-
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-
                 $('#loading').css("display", "none");
                 var container = document.querySelector('.results');
                 var msnry = new Masonry(container, {
@@ -244,37 +247,42 @@ define([
         park: function (park_slug) {
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
-
+                $('#loading').css("display", "none"); 
                 var showParkView = app.getRegion('mainRegion').show(new ParkView({'model': park }));
 
+                $('.carousel').carousel({
+                   interval: 3000
+                });
 
-                 $('.carousel').carousel({
-                     interval: 3000
-                 });
+                $('#orbs').owlCarousel({
+                  autoPlay: 3000, //Set AutoPlay to 3 seconds
+                  items : 4,
+                  navigation: true,
+                  itemsDesktop : [1199,3],
+                  itemsDesktopSmall : [979,3],
+                  stopOnHover: true
+                });
 
-                 $('#orbs').owlCarousel({
-                    autoPlay: 3000, //Set AutoPlay to 3 seconds
-                    items : 4,
-                    navigation: true,
-                    itemsDesktop : [1199,3],
-                    itemsDesktopSmall : [979,3]
-                 });
+                $('#nearby').owlCarousel({
+                  autoPlay: 3000, //Set AutoPlay to 3 seconds
+                  items : 3,
+                  navigation: true,
+                  itemsDesktop : [1199,3],
+                  itemsDesktopSmall : [979,3],
+                  stopOnHover: true
+                });
 
-                 $('#nearby').owlCarousel({
-                    autoPlay: 3000, //Set AutoPlay to 3 seconds
-                    items : 3,
-                    navigation: true,
-                    itemsDesktop : [1199,3],
-                    itemsDesktopSmall : [979,3]
-                 });
+                $('#recommended').owlCarousel({
+                  autoPlay: 3000, //Set AutoPlay to 3 seconds
+                  items : 3,
+                  navigation: true,
+                  itemsDesktop : [1199,3],
+                  itemsDesktopSmall : [979,3],
+                  stopOnHover: true
+                });
 
-                 $('#recommended').owlCarousel({
-                    autoPlay: 3000, //Set AutoPlay to 3 seconds
-                    items : 3,
-                    navigation: true,
-                    itemsDesktop : [1199,3],
-                    itemsDesktopSmall : [979,3]
-                 });
+                $('[data-toggle="tooltip"]').tooltip()
+
             }});
         }
     });
@@ -284,6 +292,7 @@ define([
         app.getRegion('footerRegion').show(new FooterView());
 
         router = new app.Router();
+        router.on('route', function() { $('#loading').css("display", "block"); })
         app.execute('setRouter', router);
         Backbone.history.start();
         // Backbone.history.navigate('', {'trigger': true});

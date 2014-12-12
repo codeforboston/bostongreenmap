@@ -58,6 +58,22 @@ h1 {
   }
 }
 
+.park-title-wrapper {
+  background-color: white;
+  position: absolute; 
+  bottom: 20px; 
+  right: 20px;
+  -webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+  .park-title {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+
 @media (max-width:600px) {
   #carousel-example-generic {
     position: relative;
