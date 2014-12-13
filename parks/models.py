@@ -211,6 +211,8 @@ class Park(models.Model):
         images = []
         tn_size = '250x250'
         large_size = '800x600'
+        print "self.images.all %r" % self.images.all()
+
         for i in self.images.all():
             try:
                 tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
@@ -228,10 +230,12 @@ class Park(models.Model):
                 images.append(image)
             except IOError, e:
                 logger.error(e)
+            except Exception as e:
+                logger.error(e)
 
         return images
 
-    def to_external_document(self, user, include_large=False):
+    def to_external_document(self, user, include_large=False, include_extra_info=False):
         change_url = None
         if user.has_perm('parks.change_park'):
             change_url = reverse('admin:parks_park_change', args=(self.id,))
@@ -242,7 +246,7 @@ class Park(models.Model):
 
         facilities = Activity.objects.filter(activity__park=self.id).distinct()
 
-        return {
+        doc = {
             'url': self.get_absolute_url(),
             'name': self.name,
             'area': self.area_acres(),
@@ -251,12 +255,15 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'nearby_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)],
-            'recommended_parks': [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()],
-            'activities': [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities], 
-            'change_url': change_url 
-        }   
-      
+            'activities': [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities],
+            'change_url': change_url
+        }
+        if include_extra_info:
+            doc['nearby_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)]
+            doc['recommended_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()]
+
+        return doc
+
     def nearest_parks_by_distance(self, distance_in_miles):
         return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct()
 

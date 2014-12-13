@@ -31,11 +31,11 @@ define([
             'title': ''
         },
         url: function() {
-            return window.location.origin + '/parks/search/?slug=' + this.park_slug;
+            return window.location.origin + '/parks/search/?no_map=true&slug=' + this.park_slug;
         },
         parse: function (response) {
           var attributes = {};
-          _.each(response, function(attribute, key) {
+          _.each(response.parks, function(attribute, key) {
             _.each(attribute, function(attribute, key) {
               attributes[key] = attribute;
             })
@@ -85,7 +85,7 @@ define([
             return parks;
         }
     });
-    
+
     // Views
     var HeaderView = Marionette.ItemView.extend({
         events: {
@@ -110,7 +110,7 @@ define([
             Backbone.history.navigate('', {'trigger': true});
         }
     });
-    
+
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
@@ -148,7 +148,7 @@ define([
         tagName: 'div',
         className: 'mission'
     });
-    
+
     var ContactView = Marionette.ItemView.extend({
         template: templates['templates/contact.hbs'],
         tagName: 'div',
@@ -195,10 +195,10 @@ define([
         },
         home: function() {
             var searchModel = new SearchModel();
-            var searchView = 
+            var searchView =
             searchModel.once('sync', function() {
               app.getRegion('mainRegion').show(new SearchView({'model': searchModel}));
-              $('#loading').css("display", "none"); 
+              $('#loading').css("display", "none");
               $('#featured').owlCarousel({
                   navigation: true,
                   items : 3,
@@ -215,27 +215,27 @@ define([
 
         },
         about: function() {
-          $('#loading').css("display", "none"); 
+          $('#loading').css("display", "none");
             app.getRegion('mainRegion').show(new AboutView());
-            
+
         },
         mission: function () {
             app.getRegion('mainRegion').show(new MissionView());
-            $('#loading').css("display", "none"); 
+            $('#loading').css("display", "none");
         },
         contact: function () {
             app.getRegion('mainRegion').show(new ContactView());
             $('#loading').css("display", "none");
         },
         results: function(queryString) {
-            
+
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
                 app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
                 $('#loading').css("display", "none");
                 var container = document.querySelector('.results');
                 var msnry = new Masonry(container, {
-                  gutter: 10, 
+                  gutter: 10,
                   "isFitWidth": true,
                   transitionDuration: '0s',
                   itemSelector: '.result'
@@ -245,7 +245,7 @@ define([
         park: function (park_slug) {
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
-                $('#loading').css("display", "none"); 
+                $('#loading').css("display", "none");
                 var showParkView = app.getRegion('mainRegion').show(new ParkView({'model': park }));
 
                 $('.carousel').carousel({

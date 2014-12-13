@@ -78,12 +78,13 @@ def get_parks(request):
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
     user = request.user
+    slug = kwargs.get('slug', False)
 
     filters = kwargs
     try:
         parks = Park.objects.filter(**filters).select_related('parkowner')
         if no_map:
-            parks_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
+            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks}
             carousel = []
             if not filters:
                 # gets up to ten images if parks have images
