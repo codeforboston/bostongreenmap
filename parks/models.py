@@ -211,23 +211,23 @@ class Park(models.Model):
         images = []
         tn_size = '250x250'
         large_size = '800x600'
-        # for i in self.images.all():
-        #     try:
-        #         tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
-        #         image = {
-        #             'src': tn.url,
-        #             'caption': strip_tags(i.caption),
-        #         }
-        #         if include_large:
-        #             try:
-        #                 large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
-        #                 image['large_src'] = large_image.url
-        #             except Exception, e:
-        #                 logger.error(e)
+        for i in self.images.all():
+            try:
+                tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
+                image = {
+                    'src': tn.url,
+                    'caption': strip_tags(i.caption),
+                }
+                if include_large:
+                    try:
+                        large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
+                        image['large_src'] = large_image.url
+                    except Exception, e:
+                        logger.error(e)
 
-        #         images.append(image)
-        #     except IOError, e:
-        #         logger.error(e)
+                images.append(image)
+            except IOError, e:
+                logger.error(e)
 
         return images
 
