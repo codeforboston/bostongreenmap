@@ -35,10 +35,10 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
 
 )
+print "settings.MEDIA_ROOT: "+settings.MEDIA_ROOT
 
 if settings.DEBUG:
     static_view = never_cache(serve)
-    
     urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', static_view, {
             'document_root': settings.STATIC_ROOT,

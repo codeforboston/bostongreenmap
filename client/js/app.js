@@ -110,7 +110,7 @@ define([
             Backbone.history.navigate('', {'trigger': true});
         }
     });
-
+    
     var SearchView = Marionette.ItemView.extend({
         template:templates['templates/search.hbs'],
         tagName: 'div',
