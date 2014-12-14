@@ -255,12 +255,12 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'activities': [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities],
             'change_url': change_url
         }
         if include_extra_info:
             doc['nearby_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)]
             doc['recommended_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()]
+            doc['activities'] = [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities]
 
         return doc
 

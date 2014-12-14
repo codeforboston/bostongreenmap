@@ -184,9 +184,6 @@ def parks_page(request, park_slug):
     #stops = MBTAStop.objects.filter(lat_long__distance_lte=(park.geometry.centroid,D(mi=settings.MBTA_DISTANCE))) # this distance doesn't overload the page with a million stops.
 
     neighborhoods, activities = get_topnav_data()
-    print "park %s" % park
-    print "neighborhoods %s" % neighborhoods
-    print "activities %s" % activities
     if request.method == 'POST':
         story = Story()
         f = StoryForm(request.POST, instance=story)
