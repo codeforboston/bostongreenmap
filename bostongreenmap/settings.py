@@ -2,7 +2,7 @@
 
 from os.path import join, abspath, dirname
 
-# Defines the parent directory that contains the settings file as 
+# Defines the parent directory that contains the settings file as
 # the PROJECT_ROOT. It is used for relative settings elsewhere.
 here = lambda *x: join(abspath(dirname(__file__)), *x)
 PROJECT_ROOT = here('..')

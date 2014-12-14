@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -35,14 +36,13 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
 
 )
-print "settings.MEDIA_ROOT: "+settings.MEDIA_ROOT
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
+    # Never cache static files in development!
     static_view = never_cache(serve)
     urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', static_view, {
             'document_root': settings.STATIC_ROOT,
-        }),url(r'^media/(?P<path>.*)$', static_view, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
+        })
    )
