@@ -211,7 +211,7 @@ class Park(models.Model):
         images = []
         tn_size = '250x250'
         large_size = '800x600'
-        print "self.images.all %r" % self.images.all()
+        # print "self.images.all %r" % self.images.all()
 
         for i in self.images.all():
             try:

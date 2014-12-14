@@ -13,14 +13,14 @@
         <div class="park-activities row">
           {{#each activities}}
             <a href="#results/no_map=true&facility__activity={{id}}">
-              <div class="park-activity" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
+              <div class="park-activity {{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
             </a>
           {{/each}}
         </div>
       </div>
     </div>  
   </div>
-
+ 
   <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
 
     <!-- Indicators -->
