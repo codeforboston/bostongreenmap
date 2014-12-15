@@ -1,7 +1,6 @@
 USER = "vagrant"
-CLIENT_PATH = "/home/vagrant/bostongreenmap/client"
+PROJECT_ROOT = "/home/%s/bostongreenmap" % USER
 
-
-PROJECT_ROOT = "/home/vagrant/bostongreenmap"
+CLIENT_PATH = PROJECT_ROOT + "/client"
 DJANGO_APP_PATH = PROJECT_ROOT+"/bostongreenmap"
 CURATE_PATH = PROJECT_ROOT+"/media/curated_parkimages"
