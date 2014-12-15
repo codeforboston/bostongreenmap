@@ -19,3 +19,5 @@ client/build/**
 # Exclude media, for now
 media/**fabfile/settings.py
 fabfile/settings.py
+media/parkimages/
+media/cache/

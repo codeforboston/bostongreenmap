@@ -226,7 +226,6 @@ class Park(models.Model):
                         image['large_src'] = large_image.url
                     except Exception, e:
                         logger.error(e)
-
                 images.append(image)
             except IOError, e:
                 logger.error(e)

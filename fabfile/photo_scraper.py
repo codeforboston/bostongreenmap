@@ -101,7 +101,7 @@ def add_photos_to_db():
 	from parks.models import Park, Parkimage
 	### END DJANGO SETUP #############
 
-	db = dbm.open(CURATE_PATH+'/has_been_downloaded', 'r')
+	db = dbm.open('has_been_downloaded', 'r')
 	for url, park_id in curated_park_info():
 		if url in db:
 			try:
