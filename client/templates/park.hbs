@@ -22,28 +22,14 @@
   </div>
  
   <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
-
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    </ol>
- 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" id="carousel-images-container">
-      <div class="item active">
-        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/400/600');" alt="..."></div>
-        <div class="carousel-caption"></div>
-      </div>
-      <div class="item">
-        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/1000/700');" alt="..."></div>
-        <div class="carousel-caption"></div>
-      </div>
-      <div class="item">
-        <div class="carousel-image" style="background-image: url('http://placekitten.com/g/600/1200');" alt="..."></div>
-        <div class="carousel-caption"></div>
-      </div>
+      {{#each images}}
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+      {{/each}}
     </div>
   </div>  
 </div>
