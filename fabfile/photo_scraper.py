@@ -1,4 +1,5 @@
 from fabric.api import cd, run, put, env, task
+from settings import PROJECT_ROOT, DJANGO_APP_PATH, CURATE_PATH
 import dbm
 import csv
 import os
@@ -8,9 +9,6 @@ CSV_FILE_PATH = os.path.join(
 	"../media/curated_parkimages/park_photos_final.csv"
 )
 
-PROJECT_ROOT = "/home/bruce/repos/bruce-bostongreenmap"
-DJANGO_APP_PATH = PROJECT_ROOT+"/bostongreenmap"
-CURATE_PATH = PROJECT_ROOT+"/media/curated_parkimages"
 # @task
 # def write_curated_images_to_models():
 # 	park_info = curated_park_info()
@@ -43,7 +41,7 @@ def curated_park_info():
 			row = tuple(raw)
 			url, park_id, is_curated = row[21], int(float(row[23])), bool(row[36])
 
-			if is_curated: 
+			if is_curated:
 				park_info.append( (url, park_id ) )
 			count += 1
 	return park_info

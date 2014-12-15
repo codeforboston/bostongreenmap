@@ -1,0 +1,7 @@
+USER = "vagrant"
+CLIENT_PATH = "/home/vagrant/bostongreenmap/client"
+
+
+PROJECT_ROOT = "/home/vagrant/bostongreenmap"
+DJANGO_APP_PATH = PROJECT_ROOT+"/bostongreenmap"
+CURATE_PATH = PROJECT_ROOT+"/media/curated_parkimages"
