@@ -248,8 +248,11 @@ define([
                 $('#loading').css("display", "none");
                 var showParkView = app.getRegion('mainRegion').show(new ParkView({'model': park }));
 
-                $('.carousel').carousel({
-                   interval: 3000
+                $('#carousel-images-container').owlCarousel({
+                   autoPlay: true, //Set AutoPlay to 3 seconds
+                   items: 1,
+                   stopOnHover: true,
+                   singleItem: true
                 });
 
                 $('#orbs').owlCarousel({
