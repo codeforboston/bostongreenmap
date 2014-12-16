@@ -21,3 +21,4 @@ media/**fabfile/settings.py
 fabfile/settings.py
 media/parkimages/
 media/cache/
+media/curated_parkimages/

@@ -1,6 +1,6 @@
 from fabric.api import cd, run, put, env, task
 from settings import PROJECT_ROOT, DJANGO_APP_PATH, CURATE_PATH
-import dbm
+import anydbm
 import csv
 import os
 
@@ -39,7 +39,7 @@ def curated_park_info():
 				continue
 
 			row = tuple(raw)
-			url, park_id, is_curated = row[21], int(float(row[23])), bool(row[36])
+			url, park_id, is_curated = row[0], int(float(row[1])), bool("true")
 
 			if is_curated:
 				park_info.append( (url, park_id ) )
@@ -49,7 +49,7 @@ def curated_park_info():
 
 @task
 def download_photos():
-	db = dbm.open('has_been_downloaded', 'c')
+	db = anydbm.open('has_been_downloaded_2', 'c')
 	with cd(env.code+'/../media/curated_parkimages'):
 		download_count = 0
 		skipped_count = 0
@@ -71,7 +71,7 @@ def download_photos():
 @task
 def write_photos_to_filesystem():
 	park_info = curated_park_info()
-	db = dbm.open('has_been_downloaded', 'r')
+	db = anydbm.open('has_been_downloaded_2', 'r')
 	for url, park_id in park_info:
 		if url in db[url]:
 			photo_path = db[url]
@@ -101,7 +101,7 @@ def add_photos_to_db():
 	from parks.models import Park, Parkimage
 	### END DJANGO SETUP #############
 
-	db = dbm.open('has_been_downloaded', 'r')
+	db = anydbm.open('has_been_downloaded_2', 'r')
 	for url, park_id in curated_park_info():
 		if url in db:
 			try:
