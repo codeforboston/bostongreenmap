@@ -62,7 +62,7 @@ define([
                 data.activities.push({'id': activity.id, 'name': activity.name});
             });
             _.each(response.featured_parks, function(featured_park) {
-                data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name, 'url': featured_park.url });
+                data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name, 'url': featured_park.url, 'images': featured_park.images });
             });
             return data;
         }
