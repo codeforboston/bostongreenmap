@@ -23,14 +23,6 @@ define([
         footerRegion: '#footer'
     });
 
-    // var map = L.map('map').setView([51.505, -0.09], 13);
-
-    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-    //     subdomains: 'abcd',
-    //     minZoom: 0,
-    //     maxZoom: 18
-    // }).addTo(map);
 
     // Models
     var Park = Backbone.Model.extend({
@@ -166,9 +158,41 @@ define([
     });
 
     var ParkView = Marionette.ItemView.extend({
+        events: {
+          'click #toggle': 'toggleContent'
+        },
+        showMapState: false,
+        toggleContent: function (evnt) {
+          if (this.showMapState === false) {
+            this.showMap();
+          } else {
+            this.hideMap();
+          }
+        },
+        showMap: function () {
+          this.$el.find('#map').show();
+          this.showMapState = true;
+          L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container); 
+        },
+        hideMap: function () {
+          this.$el.find('#map').hide();
+          this.showMapState = false;
+        },
         template: templates['templates/park.hbs'],
         tagName: 'div',
         className: 'detail'
+    });
+
+    var MapView = Marionette.ItemView.extend({
+        events: {
+          'click #photos-toggle': 'switchToPhotos'
+        },
+        switchToPhotos: function (evnt) {
+          console.log("This should go back to the park view...");
+        },
+        tagname: 'div',
+        className: 'mapView',
+        template: templates['templates/map.hbs']
     });
 
     var ResultItemView = Marionette.ItemView.extend({
@@ -292,9 +316,21 @@ define([
                   stopOnHover: true
                 });
 
-                $('[data-toggle="tooltip"]').tooltip()
+                $('[data-toggle="tooltip"]').tooltip();
+
+
+              app.map = L.map('map').setView([51.505, -0.09], 13);
+
+              L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                  subdomains: 'abcd',
+                  minZoom: 0,
+                  maxZoom: 18
+              }).addTo(app.map);
 
             }});
+
+
         }
     });
 
