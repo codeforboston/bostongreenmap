@@ -34,7 +34,7 @@ def get_neighborhoods_and_activities_list(request):
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities],
-        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name} for a in featured_parks]
+        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks]
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
 

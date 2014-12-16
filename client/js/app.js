@@ -4,13 +4,15 @@ define([
     'build/templates',
     'masonry',
     'bootstrap',
-    'owl'
+    'owl',
+    'leaflet'
 ], function(
     Backbone,
     Marionette,
     templates,
     Masonry,
-    owl
+    owl,
+    Leaflet
 ) {
     var app = new Marionette.Application(),
         router;
@@ -21,6 +23,14 @@ define([
         footerRegion: '#footer'
     });
 
+    // var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+    //     subdomains: 'abcd',
+    //     minZoom: 0,
+    //     maxZoom: 18
+    // }).addTo(map);
 
     // Models
     var Park = Backbone.Model.extend({

@@ -210,7 +210,7 @@ class Park(models.Model):
         # embed all images
         images = []
         tn_size = '300x200'
-        large_size = '800x600'
+        large_size = '1200x1000'
         # print "self.images.all %r" % self.images.all()
 
         for i in self.images.all():

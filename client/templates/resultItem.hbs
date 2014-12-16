@@ -1,4 +1,8 @@
-<img src="{{images.1.src}}" alt={{owner}}>
+{{#if images.1.src}}
+  <img src="{{images.1.src}}" alt={{owner}}>
+{{else}}
+  <img src="http://placehold.it/300x200" alt={{owner}}>
+{{/if}}
 <div class="park-title-wrapper">
   <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
 </div>
