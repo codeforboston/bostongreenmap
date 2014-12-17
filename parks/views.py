@@ -1,5 +1,6 @@
 # Views for Parks
 from django.core import urlresolvers
+from django.core.paginator import Paginator
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.shortcuts import render_to_response, get_object_or_404
@@ -77,6 +78,8 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
+    page = int(kwargs.pop('page', 1))
+    page_size = int(kwargs.pop('page_size', 16))
     user = request.user
     slug = kwargs.get('slug', False)
 
@@ -84,7 +87,9 @@ def get_parks(request):
     try:
         parks = Park.objects.filter(**filters).select_related('parkowner')
         if no_map:
-            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks}
+            parks_pages = Paginator(parks, page_size)
+            parks_page = parks_pages.page(page)
+            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
             carousel = []
             if not filters:
                 # gets up to ten images if parks have images
@@ -95,7 +100,8 @@ def get_parks(request):
                 ], 0, 10))
             response_json = {
                 "parks": parks_json,
-                "carousel": carousel
+                "carousel": carousel,
+                "pages": parks_pages.num_pages
             }
         else:
             response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
