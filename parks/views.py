@@ -1,5 +1,6 @@
 # Views for Parks
 from django.core import urlresolvers
+from django.core.paginator import Paginator
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.shortcuts import render_to_response, get_object_or_404
@@ -77,14 +78,22 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
+    # FIXME: int() will throw if this arg isn't parseable. That should be handled
+    page = int(kwargs.pop('page', 1))
+    # FIXME: int() will throw if this arg isn't parseable. That should be handled
+    # FIXME: We should figure out what a reasonable default is here.
+    # *perhaps* we shouldn't do paging if `page` above is not specified?
+    page_size = int(kwargs.pop('page_size', 5))
     user = request.user
     slug = kwargs.get('slug', False)
 
     filters = kwargs
     try:
         parks = Park.objects.filter(**filters).select_related('parkowner')
+        parks_pages = Paginator(parks, page_size)
+        parks_page = parks_pages.page(page)
         if no_map:
-            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks}
+            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
             carousel = []
             if not filters:
                 # gets up to ten images if parks have images
@@ -95,10 +104,12 @@ def get_parks(request):
                 ], 0, 10))
             response_json = {
                 "parks": parks_json,
-                "carousel": carousel
+                "carousel": carousel,
+                "pages": parks_pages.num_pages
             }
         else:
-            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
+            # FIXME: should this even be paged? There's nowhere to put the total # of pages...
+            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks_page}
 
         return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
