@@ -81,9 +81,7 @@ def get_parks(request):
     # FIXME: int() will throw if this arg isn't parseable. That should be handled
     page = int(kwargs.pop('page', 1))
     # FIXME: int() will throw if this arg isn't parseable. That should be handled
-    # FIXME: We should figure out what a reasonable default is here.
-    # *perhaps* we shouldn't do paging if `page` above is not specified?
-    page_size = int(kwargs.pop('page_size', 5))
+    page_size = int(kwargs.pop('page_size', 16))
     user = request.user
     slug = kwargs.get('slug', False)
 
