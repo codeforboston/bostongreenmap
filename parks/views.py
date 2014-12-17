@@ -86,9 +86,9 @@ def get_parks(request):
     filters = kwargs
     try:
         parks = Park.objects.filter(**filters).select_related('parkowner')
-        parks_pages = Paginator(parks, page_size)
-        parks_page = parks_pages.page(page)
         if no_map:
+            parks_pages = Paginator(parks, page_size)
+            parks_page = parks_pages.page(page)
             parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
             carousel = []
             if not filters:
@@ -105,7 +105,7 @@ def get_parks(request):
             }
         else:
             # FIXME: should this even be paged? There's nowhere to put the total # of pages...
-            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks_page}
+            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
 
         return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
