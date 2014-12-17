@@ -1,20 +1,20 @@
 define([
     'backbone',
     'marionette',
+    'paginator',
     'build/templates',
     'masonry',
     'bootstrap',
     'owl',
-    'leaflet',
-    'topojson'
+    'leaflet'
 ], function(
     Backbone,
     Marionette,
+    paginator,
     templates,
     Masonry,
     owl,
-    Leaflet,
-    topojson
+    Leaflet
 ) {
     var app = new Marionette.Application(),
         router;
@@ -24,7 +24,6 @@ define([
         mainRegion: '#content-area',
         footerRegion: '#footer'
     });
-    console.log(topojson);
 
     // Models
     var Park = Backbone.Model.extend({
@@ -74,7 +73,7 @@ define([
         }
     });
 
-    var ParksCollection = Backbone.Collection.extend({
+    var ParksCollection = Backbone.PageableCollection.extend({
         model: Park,
         initialize: function(params) {
             this.queryString = params.queryString
@@ -91,6 +90,9 @@ define([
                 return new Park(park);
             });
             return parks;
+        },
+        queryParams: {
+          pageSize: null
         }
     });
 
@@ -242,10 +244,33 @@ define([
     });
 
     var ResultsView = Marionette.CompositeView.extend({
+        events: {
+          'click #previous-button': 'getLastPage',
+          'click #next-button': 'getNextPage'
+        },
+        model: ParksCollection,
+        getNextPage: function(evnt) {
+          console.log("clicked");
+          console.log(this.model);
+          this.collection.getNextPage();
+        },
+        getLastPage: function(evnt) {
+          this.model.getLastPage();
+        },
         template: templates['templates/results.hbs'],
         itemView: ResultItemView,
         tagname: 'div',
-        className: 'results'
+        className: 'results',
+        serializeData: function(){
+          if (this.model){
+            data = this.model;
+          } else {
+            // we want to render the paginator_ui in our templates
+            data = this.collection.paginator_ui;
+          }
+
+          return data;
+        }
     });
 
     var CarouselPhotoView = Marionette.ItemView.extend({

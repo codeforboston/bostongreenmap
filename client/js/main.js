@@ -32,8 +32,9 @@ requirejs.config({
         leaflet: {
             exports: 'Leaflet'
         },
-        topojson: {
-            exports: 'topojson'
+        paginator: {
+            exports: 'paginator',
+            deps: ['backbone']
         }
     },
     baseUrl: '/static',
@@ -49,7 +50,7 @@ requirejs.config({
         owl: 'lib/owl.carousel.min',
         masonry: 'lib/masonry.pkgd.min',
         leaflet: 'lib/leaflet',
-        topojson: 'lib/topojson'
+        paginator: 'lib/backbone.paginator.min'
     }
 });
 
