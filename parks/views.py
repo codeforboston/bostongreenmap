@@ -104,7 +104,6 @@ def get_parks(request):
                 "pages": parks_pages.num_pages
             }
         else:
-            # FIXME: should this even be paged? There's nowhere to put the total # of pages...
             response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
 
         return HttpResponse(json.dumps(response_json), mimetype='application/json')
