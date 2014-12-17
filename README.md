@@ -35,6 +35,9 @@ Be sure to compile the Javascript and SCSS:
 
     grunt handlebars:compile
     grunt compass:dev
+    grunt watch
+
+Go to http://localhost:8000/backbone
 
 ### PostgreSQL/PostGIS setup
 
