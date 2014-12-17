@@ -26,7 +26,7 @@ The Boston Green is a [Django](https://www.djangoproject.com/) project with spat
 
 The easiest way to run Boston Green locally is with [Vagrant](http://www.vagrantup.com) and VirtualBox.  
     [VirtualBox](http://download.virtualbox.org/virtualbox/4.3.20/VirtualBox-4.3.20-96996-OSX.dmg) (Mac)
-    [Vagrant](http://download.virtualbox.org/virtualbox/4.3.20/VirtualBox-4.3.20-96996-OSX.dmg) (Mac)
+    [Vagrant](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.1.dmg) (Mac)
 
 Once you have that installed, running Boston Green is as easy as:
 
