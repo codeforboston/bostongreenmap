@@ -32,8 +32,12 @@ The easiest way to run Boston Green locally is with [Vagrant](vagrantup.com).  O
 If you're having issues, make sure you're using recent versions of Vagrant (we've tested with 1.5 and 1.6) and VirtualBox (~4.3).
 
 Be sure to compile the Javascript and SCSS:
+
     grunt handlebars:compile
     grunt compass:dev
+    grunt watch
+
+Go to http://localhost:8000/backbone
 
 ### PostgreSQL/PostGIS setup
 
