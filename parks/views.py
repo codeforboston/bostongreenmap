@@ -78,9 +78,7 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
-    # FIXME: int() will throw if this arg isn't parseable. That should be handled
     page = int(kwargs.pop('page', 1))
-    # FIXME: int() will throw if this arg isn't parseable. That should be handled
     page_size = int(kwargs.pop('page_size', 16))
     user = request.user
     slug = kwargs.get('slug', False)
