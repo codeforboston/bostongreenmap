@@ -31,6 +31,9 @@ requirejs.config({
         },
         leaflet: {
             exports: 'Leaflet'
+        },
+        topojson: {
+            exports: 'topojson'
         }
     },
     baseUrl: '/static',
@@ -45,7 +48,8 @@ requirejs.config({
         bootstrap: 'lib/bootstrap.min',
         owl: 'lib/owl.carousel.min',
         masonry: 'lib/masonry.pkgd.min',
-        leaflet: 'lib/leaflet'
+        leaflet: 'lib/leaflet',
+        topojson: 'lib/topojson'
     }
 });
 

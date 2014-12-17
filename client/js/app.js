@@ -5,14 +5,16 @@ define([
     'masonry',
     'bootstrap',
     'owl',
-    'leaflet'
+    'leaflet',
+    'topojson'
 ], function(
     Backbone,
     Marionette,
     templates,
     Masonry,
     owl,
-    Leaflet
+    Leaflet,
+    topojson
 ) {
     var app = new Marionette.Application(),
         router;
@@ -22,7 +24,7 @@ define([
         mainRegion: '#content-area',
         footerRegion: '#footer'
     });
-
+    console.log(topojson);
 
     // Models
     var Park = Backbone.Model.extend({
@@ -48,6 +50,10 @@ define([
 
         }
     });
+
+    // var Map = Backbone.Model.extend({
+    //   initialize: function(params) {}
+    // })
 
     var SearchModel = Backbone.Model.extend({
         url: function() {
@@ -218,19 +224,16 @@ define([
             });
 
             self.$('[data-toggle="tooltip"]').tooltip()
-        }
-    });
 
-    var MapView = Marionette.ItemView.extend({
-        events: {
-          'click #photos-toggle': 'switchToPhotos'
-        },
-        switchToPhotos: function (evnt) {
-          console.log("This should go back to the park view...");
-        },
-        tagname: 'div',
-        className: 'mapView',
-        template: templates['templates/map.hbs']
+            app.map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                subdomains: 'abcd',
+                minZoom: 0,
+                maxZoom: 18
+            }).addTo(app.map);
+        }
     });
 
     var ResultItemView = Marionette.ItemView.extend({
@@ -321,14 +324,6 @@ define([
                 var parkView = new ParkView({'model': park });
                 app.getRegion('mainRegion').show(parkView);
 
-                app.map = L.map('map').setView([51.505, -0.09], 13);
-
-                L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                    subdomains: 'abcd',
-                    minZoom: 0,
-                    maxZoom: 18
-                }).addTo(app.map);
             }});
 
 
