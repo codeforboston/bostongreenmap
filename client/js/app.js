@@ -172,7 +172,7 @@ define([
         showMap: function () {
           this.$el.find('#map').show();
           this.showMapState = true;
-          L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container); 
+          L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container);
         },
         hideMap: function () {
           this.$el.find('#map').hide();
@@ -180,7 +180,45 @@ define([
         },
         template: templates['templates/park.hbs'],
         tagName: 'div',
-        className: 'detail'
+        className: 'detail',
+        onShow: function() {
+            var self = this;
+            self.$('#carousel-images-container').owlCarousel({
+                autoPlay: true, //Set AutoPlay to 3 seconds
+               items: 1,
+               stopOnHover: true,
+               singleItem: true
+            });
+
+            self.$('#orbs').owlCarousel({
+              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              items : 4,
+              navigation: true,
+              itemsDesktop : [1199,3],
+              itemsDesktopSmall : [979,3],
+              stopOnHover: true
+            });
+
+            self.$('#nearby').owlCarousel({
+              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              items : 3,
+              navigation: true,
+              itemsDesktop : [1199,3],
+              itemsDesktopSmall : [979,3],
+              stopOnHover: true
+            });
+
+            self.$('#recommended').owlCarousel({
+              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              items : 3,
+              navigation: true,
+              itemsDesktop : [1199,3],
+              itemsDesktopSmall : [979,3],
+              stopOnHover: true
+            });
+
+            self.$('[data-toggle="tooltip"]').tooltip()
+        }
     });
 
     var MapView = Marionette.ItemView.extend({
@@ -280,54 +318,17 @@ define([
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
                 $('#loading').css("display", "none");
-                var showParkView = app.getRegion('mainRegion').show(new ParkView({'model': park }));
+                var parkView = new ParkView({'model': park });
+                app.getRegion('mainRegion').show(parkView);
 
-                $('#carousel-images-container').owlCarousel({
-                   autoPlay: true, //Set AutoPlay to 3 seconds
-                   items: 1,
-                   stopOnHover: true,
-                   singleItem: true
-                });
+                app.map = L.map('map').setView([51.505, -0.09], 13);
 
-                $('#orbs').owlCarousel({
-                  autoPlay: 3000, //Set AutoPlay to 3 seconds
-                  items : 4,
-                  navigation: true,
-                  itemsDesktop : [1199,3],
-                  itemsDesktopSmall : [979,3],
-                  stopOnHover: true
-                });
-
-                $('#nearby').owlCarousel({
-                  autoPlay: 3000, //Set AutoPlay to 3 seconds
-                  items : 3,
-                  navigation: true,
-                  itemsDesktop : [1199,3],
-                  itemsDesktopSmall : [979,3],
-                  stopOnHover: true
-                });
-
-                $('#recommended').owlCarousel({
-                  autoPlay: 3000, //Set AutoPlay to 3 seconds
-                  items : 3,
-                  navigation: true,
-                  itemsDesktop : [1199,3],
-                  itemsDesktopSmall : [979,3],
-                  stopOnHover: true
-                });
-
-                $('[data-toggle="tooltip"]').tooltip();
-
-
-              app.map = L.map('map').setView([51.505, -0.09], 13);
-
-              L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-                  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-                  subdomains: 'abcd',
-                  minZoom: 0,
-                  maxZoom: 18
-              }).addTo(app.map);
-
+                L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                    subdomains: 'abcd',
+                    minZoom: 0,
+                    maxZoom: 18
+                }).addTo(app.map);
             }});
 
 
