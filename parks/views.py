@@ -83,13 +83,13 @@ def get_parks(request):
     # FIXME: int() will throw if this arg isn't parseable. That should be handled
     # FIXME: We should figure out what a reasonable default is here.
     # *perhaps* we shouldn't do paging if `page` above is not specified?
-    page_size = int(kwargs.pop('page_size', 5))
+    page_size = int(kwargs.pop('page_size', 15))
     user = request.user
     slug = kwargs.get('slug', False)
 
     filters = kwargs
     try:
-        parks = Park.objects.filter(**filters).select_related('parkowner')
+        parks = Park.objects.filter(**filters).select_related('parkowner').distinct('name')
         parks_pages = Paginator(parks, page_size)
         parks_page = parks_pages.page(page)
         if no_map:

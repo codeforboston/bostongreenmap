@@ -92,7 +92,8 @@ define([
             return parks;
         },
         queryParams: {
-          pageSize: null
+          pageSize: null,
+          totalPages: "pages"
         }
     });
 
@@ -240,7 +241,10 @@ define([
 
     var ResultItemView = Marionette.ItemView.extend({
         template: templates['templates/resultItem.hbs'],
-        className: 'result'
+        className: 'result',
+        onRender: function() {
+          console.log(this);
+        }
     });
 
     var ResultsView = Marionette.CompositeView.extend({
@@ -250,9 +254,8 @@ define([
         },
         model: ParksCollection,
         getNextPage: function(evnt) {
-          console.log("clicked");
-          console.log(this.model);
-          this.collection.getNextPage();
+          var that = this;
+          this.collection.getNextPage({remove:false, success: function() { console.log("More added."); }});
         },
         getLastPage: function(evnt) {
           this.model.getLastPage();
@@ -270,6 +273,18 @@ define([
           }
 
           return data;
+        },
+        onShow: function () {
+          var self = this;
+          self.collection.on("add", function() { console.log("1 added.", this); });
+          $('#loading').css("display", "none");
+          self.$container = $('.results')[0];
+          self.msnry = new Masonry(self.$container, {
+            gutter: 10,
+            "isFitWidth": true,
+            transitionDuration: '0s',
+            itemSelector: '.result'
+          });
         }
     });
 
@@ -331,15 +346,8 @@ define([
 
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
-                app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-                $('#loading').css("display", "none");
-                var container = document.querySelector('.results');
-                var msnry = new Masonry(container, {
-                  gutter: 10,
-                  "isFitWidth": true,
-                  transitionDuration: '0s',
-                  itemSelector: '.result'
-                });
+              app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
+              
             }});
         },
         park: function (park_slug) {
