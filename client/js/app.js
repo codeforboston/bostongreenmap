@@ -241,11 +241,8 @@ define([
 
     var ResultItemView = Marionette.ItemView.extend({
         template: templates['templates/resultItem.hbs'],
-        className: 'result',
-        onRender: function() {
-          // console.log(this);
-        }
-    });
+        className: 'result'
+    }); 
 
     var ResultsView = Marionette.CompositeView.extend({
         events: {
@@ -253,15 +250,18 @@ define([
           'click #next-button': 'getNextPage'
         },
         collection: ParksCollection,
+        initialized: false,
         getNextPage: function(evnt) {
           var that = this;
           this.collection.getNextPage({remove:false, success: function() { }});
+          this.initialized = true;
+          console.log(this.msnry);
         },
         getLastPage: function(evnt) {
           this.collection.getLastPage();
         },
         template: templates['templates/results.hbs'],
-        itemView: ResultItemView,
+        childView: ResultItemView,
         tagname: 'div',
         className: 'results',
         serializeData: function(){
@@ -274,20 +274,27 @@ define([
 
           return data;
         },
-        onBeforeRenderCollection: function () {
-            console.log('onBeforeRenderCollection');
+        onBeforeAddChild: function () { 
+            console.log("shell is rendered", this.el); 
         },
         onShow: function () {
           var self = this;
           // self.collection.on("add", function() { console.log("1 added.", this); });
           $('#loading').css("display", "none");
-          self.$container = $('.results')[0];
-          self.msnry = new Masonry(self.$container, {
+          // console.log($('.results'));
+          // self.$container = $('.results')[0];
+          self.msnry = new Masonry(self.el, {
             gutter: 10,
             "isFitWidth": true,
             transitionDuration: '0s',
             itemSelector: '.result'
-          });
+          }); 
+        }, 
+        onAddChild: function (childView) {
+          console.log('child added', childView.el); 
+          if(this.initialized) {
+            this.msnry.appended(childView.el, { isAnimatedFromBottom: true });  
+          }
         }
     });
 
