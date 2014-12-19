@@ -243,7 +243,7 @@ define([
         template: templates['templates/resultItem.hbs'],
         className: 'result',
         onRender: function() {
-          console.log(this);
+          // console.log(this);
         }
     });
 
@@ -252,13 +252,13 @@ define([
           'click #previous-button': 'getLastPage',
           'click #next-button': 'getNextPage'
         },
-        model: ParksCollection,
+        collection: ParksCollection,
         getNextPage: function(evnt) {
           var that = this;
-          this.collection.getNextPage({remove:false, success: function() { console.log("More added."); }});
+          this.collection.getNextPage({remove:false, success: function() { }});
         },
         getLastPage: function(evnt) {
-          this.model.getLastPage();
+          this.collection.getLastPage();
         },
         template: templates['templates/results.hbs'],
         itemView: ResultItemView,
@@ -274,9 +274,12 @@ define([
 
           return data;
         },
+        onBeforeRenderCollection: function () {
+            console.log('onBeforeRenderCollection');
+        },
         onShow: function () {
           var self = this;
-          self.collection.on("add", function() { console.log("1 added.", this); });
+          // self.collection.on("add", function() { console.log("1 added.", this); });
           $('#loading').css("display", "none");
           self.$container = $('.results')[0];
           self.msnry = new Masonry(self.$container, {
@@ -356,10 +359,7 @@ define([
                 $('#loading').css("display", "none");
                 var parkView = new ParkView({'model': park });
                 app.getRegion('mainRegion').show(parkView);
-
             }});
-
-
         }
     });
 
