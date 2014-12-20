@@ -12,7 +12,7 @@ import json
 import logging
 import itertools
 
-from parks.models import Neighborhood, Park, Facility, Activity, Story
+from parks.models import Neighborhood, Park, Parkimage, Facility, Activity, Story
 
 
 logger = logging.getLogger(__name__)
@@ -32,10 +32,12 @@ def get_neighborhoods_and_activities_list(request):
     neighborhoods = Neighborhood.objects.all()
     activities = Activity.objects.all()
     featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
+    hero_images = Parkimage.objects.filter(id__in=(1,2,3))
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities],
-        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks]
+        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks],
+        'hero_images': [{ 'image': 'test' } for a in hero_images ]
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
