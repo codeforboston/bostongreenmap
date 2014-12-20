@@ -1,20 +1,20 @@
 define([
     'backbone',
     'marionette',
+    'paginator',
     'build/templates',
     'masonry',
     'bootstrap',
     'owl',
-    'leaflet',
-    'topojson'
+    'leaflet'
 ], function(
     Backbone,
     Marionette,
+    paginator,
     templates,
     Masonry,
     owl,
-    Leaflet,
-    topojson
+    Leaflet
 ) {
     var app = new Marionette.Application(),
         router;
@@ -24,7 +24,6 @@ define([
         mainRegion: '#content-area',
         footerRegion: '#footer'
     });
-    console.log(topojson);
 
     // Models
     var Park = Backbone.Model.extend({
@@ -74,7 +73,7 @@ define([
         }
     });
 
-    var ParksCollection = Backbone.Collection.extend({
+    var ParksCollection = Backbone.PageableCollection.extend({
         model: Park,
         initialize: function(params) {
             this.queryString = params.queryString
@@ -91,6 +90,10 @@ define([
                 return new Park(park);
             });
             return parks;
+        },
+        queryParams: {
+          pageSize: null,
+          totalPages: "pages"
         }
     });
 
@@ -239,13 +242,60 @@ define([
     var ResultItemView = Marionette.ItemView.extend({
         template: templates['templates/resultItem.hbs'],
         className: 'result'
-    });
+    }); 
 
     var ResultsView = Marionette.CompositeView.extend({
+        events: {
+          'click #previous-button': 'getLastPage',
+          'click #next-button': 'getNextPage'
+        },
+        collection: ParksCollection,
+        initialized: false,
+        getNextPage: function(evnt) {
+          var that = this;
+          this.collection.getNextPage({remove:false, success: function() { }});
+          this.initialized = true;
+          console.log(this.msnry);
+        },
+        getLastPage: function(evnt) {
+          this.collection.getLastPage();
+        },
         template: templates['templates/results.hbs'],
-        itemView: ResultItemView,
+        childView: ResultItemView,
         tagname: 'div',
-        className: 'results'
+        className: 'results',
+        serializeData: function(){
+          if (this.model){
+            data = this.model;
+          } else {
+            // we want to render the paginator_ui in our templates
+            data = this.collection.paginator_ui;
+          }
+
+          return data;
+        },
+        onBeforeAddChild: function () { 
+            console.log("shell is rendered", this.el); 
+        },
+        onShow: function () {
+          var self = this;
+          // self.collection.on("add", function() { console.log("1 added.", this); });
+          $('#loading').css("display", "none");
+          // console.log($('.results'));
+          // self.$container = $('.results')[0];
+          self.msnry = new Masonry(self.el, {
+            gutter: 10,
+            "isFitWidth": true,
+            transitionDuration: '0s',
+            itemSelector: '.result'
+          }); 
+        }, 
+        onAddChild: function (childView) {
+          console.log('child added', childView.el); 
+          if(this.initialized) {
+            this.msnry.appended(childView.el, { isAnimatedFromBottom: true });  
+          }
+        }
     });
 
     var CarouselPhotoView = Marionette.ItemView.extend({
@@ -306,15 +356,8 @@ define([
 
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
-                app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-                $('#loading').css("display", "none");
-                var container = document.querySelector('.results');
-                var msnry = new Masonry(container, {
-                  gutter: 10,
-                  "isFitWidth": true,
-                  transitionDuration: '0s',
-                  itemSelector: '.result'
-                });
+              app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
+              
             }});
         },
         park: function (park_slug) {
@@ -323,10 +366,7 @@ define([
                 $('#loading').css("display", "none");
                 var parkView = new ParkView({'model': park });
                 app.getRegion('mainRegion').show(parkView);
-
             }});
-
-
         }
     });
 

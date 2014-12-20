@@ -1,5 +1,6 @@
 # Views for Parks
 from django.core import urlresolvers
+from django.core.paginator import Paginator
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.shortcuts import render_to_response, get_object_or_404
@@ -11,7 +12,7 @@ import json
 import logging
 import itertools
 
-from parks.models import Neighborhood, Park, Facility, Activity, Story
+from parks.models import Neighborhood, Park, Parkimage, Facility, Activity, Story
 
 
 logger = logging.getLogger(__name__)
@@ -31,13 +32,21 @@ def get_neighborhoods_and_activities_list(request):
     neighborhoods = Neighborhood.objects.all()
     activities = Activity.objects.all()
     featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
+    hero_images = Parkimage.objects.filter(hero_image=True)
+    
+    hero_image_docs = []
+    for i in hero_images:
+        image_doc = i.get_thumbnail(include_large=True)
+        if image_doc:
+            hero_image_docs.append(image_doc)
+    
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities],
-        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks]
+        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks],
+        'hero_images': hero_image_docs
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
-
 
 def get_nearby_parks(request, park_id):
     """ Returns nearby parks as JSON
@@ -77,14 +86,22 @@ def get_parks(request):
     querydict = request.GET
     kwargs = querydict.dict()
     no_map = kwargs.pop('no_map', False)
+    # FIXME: int() will throw if this arg isn't parseable. That should be handled
+    page = int(kwargs.pop('page', 1))
+    # FIXME: int() will throw if this arg isn't parseable. That should be handled
+    # FIXME: We should figure out what a reasonable default is here.
+    # *perhaps* we shouldn't do paging if `page` above is not specified?
+    page_size = int(kwargs.pop('page_size', 15))
     user = request.user
     slug = kwargs.get('slug', False)
 
     filters = kwargs
     try:
-        parks = Park.objects.filter(**filters).select_related('parkowner')
+        parks = Park.objects.filter(**filters).select_related('parkowner').distinct('name')
+        parks_pages = Paginator(parks, page_size)
+        parks_page = parks_pages.page(page)
         if no_map:
-            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks}
+            parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
             carousel = []
             if not filters:
                 # gets up to ten images if parks have images
@@ -95,10 +112,12 @@ def get_parks(request):
                 ], 0, 10))
             response_json = {
                 "parks": parks_json,
-                "carousel": carousel
+                "carousel": carousel,
+                "pages": parks_pages.num_pages
             }
         else:
-            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks}
+            # FIXME: should this even be paged? There's nowhere to put the total # of pages...
+            response_json = {p.pk: p.to_external_document(user, include_large=True) for p in parks_page}
 
         return HttpResponse(json.dumps(response_json), mimetype='application/json')
 
