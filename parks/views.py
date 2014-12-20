@@ -32,15 +32,21 @@ def get_neighborhoods_and_activities_list(request):
     neighborhoods = Neighborhood.objects.all()
     activities = Activity.objects.all()
     featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
-    hero_images = Parkimage.objects.filter(id__in=(1,2,3))
+    hero_images = Parkimage.objects.filter(hero_image=True)
+    
+    hero_image_docs = []
+    for i in hero_images:
+        image_doc = i.get_thumbnail(include_large=True)
+        if image_doc:
+            hero_image_docs.append(image_doc)
+    
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities],
         'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks],
-        'hero_images': [{ 'image': 'test' } for a in hero_images ]
+        'hero_images': hero_image_docs
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')
-
 
 def get_nearby_parks(request, park_id):
     """ Returns nearby parks as JSON

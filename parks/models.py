@@ -135,6 +135,25 @@ class Parkimage(models.Model):
         caption = getattr(self, 'caption', '')
         return '%i: %s' % (self.pk, strip_tags(caption))
 
+    def get_thumbnail(self, include_large=False):
+        tn_size = '300x200'
+        large_size = '1200x1000'
+        try:
+            tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
+            image = {
+                'src': tn.url,
+                'caption': strip_tags(self.caption),
+            }
+            if include_large:
+                try:
+                    large_image = get_thumbnail(self.image, large_size, crop='center', quality=90)
+                    image['large_src'] = large_image.url
+                except Exception, e:
+                    logger.error(e)
+        except Exception as e:
+            return None
+        return image
+
     def thumbnail(self):
         if self.image:
             thumb = get_thumbnail(self.image.file, settings.ADMIN_THUMBS_SIZE, crop='center', quality=80)
@@ -208,31 +227,14 @@ class Park(models.Model):
         return [self.geometry.centroid.y, self.geometry.centroid.x]
 
     def get_image_thumbnails(self, include_large=False):
-        # embed all images
         images = []
-        tn_size = '300x200'
-        large_size = '1200x1000'
-        # print "self.images.all %r" % self.images.all()
-
         for i in self.images.all():
             try:
-                tn = get_thumbnail(i.image, tn_size, crop='center', quality=80)
-                image = {
-                    'src': tn.url,
-                    'caption': strip_tags(i.caption),
-                }
-                if include_large:
-                    try:
-                        large_image = get_thumbnail(i.image, large_size, crop='center', quality=90)
-                        image['large_src'] = large_image.url
-                    except Exception, e:
-                        logger.error(e)
-                images.append(image)
+                images.append(i.get_thumbnail(include_large=include_large))
             except IOError, e:
                 logger.error(e)
             except Exception as e:
                 logger.error(e)
-
         return images
 
     def to_external_document(self, user, include_large=False, include_extra_info=False):
