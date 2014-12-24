@@ -183,11 +183,13 @@ define([
         },
         showMap: function () {
           this.$el.find('#map').show();
+          this.$el.find('#carousel-images-container').hide();
           this.showMapState = true;
           L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container);
         },
         hideMap: function () {
           this.$el.find('#map').hide();
+          this.$el.find('#carousel-images-container').show();
           this.showMapState = false;
         },
         template: templates['templates/park.hbs'],
@@ -231,7 +233,7 @@ define([
 
             self.$('[data-toggle="tooltip"]').tooltip()
 
-            app.map = L.map('map').setView([51.505, -0.09], 13);
+            app.map = L.map('map', {scrollWheelZoom: false}).setView([51.505, -0.09], 13);
 
             L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
