@@ -137,7 +137,7 @@ class Parkimage(models.Model):
 
     def get_thumbnail(self, include_large=False):
         tn_size = '300x200'
-        large_size = '1200x1000'
+        large_size = '1000x800'
         try:
             tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
             image = {

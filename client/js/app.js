@@ -59,7 +59,7 @@ define([
             return window.location.origin + '/parks/get_neighborhoods_and_activities_list/';
         },
         parse: function(response) {
-            var data = {'neighborhoods': [], 'activities': [], 'featured_parks': []};
+            var data = {'neighborhoods': [], 'activities': [], 'featured_parks': [], 'hero_images': []};
             _.each(response.neighborhoods, function(neighborhood) {
                 data.neighborhoods.push({'id': neighborhood.id, 'name': neighborhood.name});
             });
@@ -69,8 +69,11 @@ define([
             _.each(response.featured_parks, function(featured_park) {
                 data.featured_parks.push({'id': featured_park.id, 'name': featured_park.name, 'url': featured_park.url, 'images': featured_park.images });
             });
+            _.each(response.hero_images, function(hero_image) {
+                data.hero_images.push({'src': hero_image.src, 'large_src': hero_image.large_src });
+            });
             return data;
-        }
+        } 
     });
 
     var ParksCollection = Backbone.PageableCollection.extend({
@@ -279,10 +282,9 @@ define([
         },
         onShow: function () {
           var self = this;
-          // self.collection.on("add", function() { console.log("1 added.", this); });
+
           $('#loading').css("display", "none");
-          // console.log($('.results'));
-          // self.$container = $('.results')[0];
+
           self.msnry = new Masonry(self.el, {
             gutter: 10,
             "isFitWidth": true,
@@ -330,10 +332,15 @@ define([
                   itemsDesktop : [1199,3],
                   itemsDesktopSmall : [979,3],
                   stopOnHover: true
-               });
+               }); 
 
-               $('.carousel').carousel({
-                   interval: 3000
+               $('#carousel-images-container').owlCarousel({
+                  autoPlay : true, // Show next and prev buttons
+                  slideSpeed : 300,
+                  paginationSpeed : 400,
+                  singleItem: true
+                  // items : 2 //10 items above 1000px browser width
+                  // itemsDesktop : [1000,1] //5 items between 1000px and 901px
                });
             });
             searchModel.fetch();

@@ -1,43 +1,41 @@
-<div id="map">
-  TEST
+<div style="position:absolute; right:0; top:120px; background-color: white;">
+  <a id="toggle">Map</a>
 </div>
-<div>
-  <div class="center-content">
-    <div class="floating-text">
-      <div class="park-information">
-        <div class="park-title row">
-          <h1>{{name}}</h2>
+<div id="carousel-example-generic">
+  <!-- Wrapper for slides -->
+  <div class="center-content" style="position: relative">
+    <div style="position:absolute; z-index:1000">
+      <div class="floating-text">
+        <div class="park-information">
+          <div class="park-title row">
+            <h1>{{name}}</h2> 
+          </div>
+          {{#if description}}
+            <div class="park-description row">
+              <p>{{description}}</p>
+            </div>  
+          {{/if}}
+          <div class="park-activities row">
+            {{#each activities}}
+              <a> 
+                <div class="park-activity {{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
+              </a>
+            {{/each}}
+          </div>
         </div>
-        {{#if description}}
-          <div class="park-description row">
-            <p>{{description}}</p>
-          </div>  
-        {{/if}}
-        <div class="park-activities row">
-          {{#each activities}}
-            <a> 
-              <div class="park-activity {{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
-            </a>
-          {{/each}}
-        </div>
-      </div>
-    </div>  
-  </div>
- <div style="position:absolute; right:0; top:120px; background-color: white;">
-    <a id="toggle">Map</a>
- </div>
-  <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" id="carousel-images-container">
-      {{#each images}}
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
-      {{/each}}
+      </div>  
     </div>
-  </div>  
-</div>
+  </div>
+  <div class="carousel-inner" id="carousel-images-container">
+    {{#each images}}
+      <div class="item">
+        <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+        <div class="carousel-caption"></div>
+      </div>
+    {{/each}}
+  </div>
+</div>  
+
 <div class="quick-facts">
   <div class="center-content">
     <h2>Quick Facts</h2>

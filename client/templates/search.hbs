@@ -1,50 +1,42 @@
-<div class="center-content">
+{{!-- <div class="center-content">
   <div class="floating-text find-your-space">
-    <h1>Find your space.</h1>
-      <div class="btn-group select-width">
-        <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
-          <option value="">All Neighborhoods</option>
-          {{#each neighborhoods}}
-            <option value="{{ id }}">{{ name }}</option>
-          {{/each}}
-        </select>
-      </div>
 
-      <div class="btn-group select-width">
-        <select data-placeholder="Select Your Activity" class="parkfilter chzn-select form-control" id="facility__activity">
-          <option value="">All Activities</option>
-          {{#each activities}}
-            <option value="{{ id }}">{{ name }}</option>
-          {{/each}}
-        </select>
-      </div>
-    <div class="gobutton" id="filter-select">GO</div>
   </div>  
 </div>
+  --}}
+<div id="carousel-example-generic">
+  <div class="center-content" style="position: relative">
+    <div style="position:absolute; z-index:1000">
+      <div class="floating-text find-your-space">
+        <h1>Find your space.</h1>
+          <div class="btn-group select-width">
+            <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
+              <option value="">All Neighborhoods</option>
+              {{#each neighborhoods}}
+                <option value="{{ id }}">{{ name }}</option>
+              {{/each}}
+            </select>
+          </div>
 
-<div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
-
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
-
-  <!-- Wrapper for slides -->
+          <div class="btn-group select-width">
+            <select data-placeholder="Select Your Activity" class="parkfilter chzn-select form-control" id="facility__activity">
+              <option value="">All Activities</option>
+              {{#each activities}}
+                <option value="{{ id }}">{{ name }}</option>
+              {{/each}}
+            </select>
+          </div>
+        <div class="gobutton" id="filter-select">GO</div>
+      </div>  
+    </div>
+  </div>
   <div class="carousel-inner" id="carousel-images-container">
-    <div class="item active">
-      <div class="carousel-image" style="background-image: url('http://placekitten.com/g/400/600');" alt="..."></div>
-      <div class="carousel-caption"></div>
-    </div>
-    <div class="item">
-      <div class="carousel-image" style="background-image: url('http://placekitten.com/g/1000/800');" alt="..."></div>
-      <div class="carousel-caption"></div>
-    </div>
-    <div class="item">
-      <div class="carousel-image" style="background-image: url('http://placekitten.com/g/600/1200');" alt="..."></div>
-      <div class="carousel-caption"></div>
-    </div>
+    {{#each hero_images}}
+      <div class="item">
+        <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+        <div class="carousel-caption"></div>
+      </div>
+    {{/each}}
   </div>
 </div>  
 

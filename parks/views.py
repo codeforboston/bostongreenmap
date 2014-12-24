@@ -102,17 +102,8 @@ def get_parks(request):
         parks_page = parks_pages.page(page)
         if no_map:
             parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
-            carousel = []
-            if not filters:
-                # gets up to ten images if parks have images
-                carousel = list(itertools.islice([
-                    dict(p.get('images')[0].items() + {'url': p.get('url')}.items())
-                    for key, p in parks_json.iteritems()
-                    if any(p.get('images'))
-                ], 0, 10))
             response_json = {
                 "parks": parks_json,
-                "carousel": carousel,
                 "pages": parks_pages.num_pages
             }
         else:
