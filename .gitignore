@@ -16,6 +16,9 @@ npm-debug.log
 # Exclude build files
 client/build/**
 
+#tilestache
+tilestache/*
+
 # Exclude media, for now
 media/**fabfile/settings.py
 fabfile/settings.py

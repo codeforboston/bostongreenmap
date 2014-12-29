@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from django.db.models import Count
+from django.contrib.gis.db.models import Extent, Union
 
 from sorl.thumbnail import get_thumbnail
 
@@ -146,7 +147,7 @@ class Parkimage(models.Model):
             }
             if include_large:
                 try:
-                    large_image = get_thumbnail(self.image, large_size, crop='center', quality=90)
+                    large_image = get_thumbnail(self.image, large_size, crop='bottom', quality=100)
                     image['large_src'] = large_image.url
                 except Exception, e:
                     logger.error(e)
@@ -259,10 +260,13 @@ class Park(models.Model):
             'owner': self.parkowner.name,
             'change_url': change_url
         }
+
         if include_extra_info:
+            # geojson = Park.objects.transform(4326).filter(name=self.name).aggregate(area=Union('geometry'))['area'] # doesn't yet transform correctly after aggregated
             doc['nearby_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)]
             doc['recommended_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()]
             doc['activities'] = [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities]
+            # doc['geojson'] = geojson.geojson
 
         return doc
 
