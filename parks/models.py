@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 from django.db.models import Count
 from django.contrib.gis.db.models import Extent, Union
+from django.contrib.gis.geos import fromstr
 
 from sorl.thumbnail import get_thumbnail
 
@@ -262,13 +263,26 @@ class Park(models.Model):
         }
 
         if include_extra_info:
-            # geojson = Park.objects.transform(4326).filter(name=self.name).aggregate(area=Union('geometry'))['area'] # doesn't yet transform correctly after aggregated
+            filtered_queryset = Park.objects.filter(name=self.name) # doesn't yet transform correctly after aggregated
+            extent = self.get_extent_for_openlayers(filtered_queryset, 26986)
             doc['nearby_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)]
             doc['recommended_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()]
             doc['activities'] = [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities]
-            # doc['geojson'] = geojson.geojson
+            doc['bbox'] = list(extent.coords)
+ 
+        return doc 
 
-        return doc
+    def get_extent_for_openlayers(self,geoqueryset, srid): 
+        """
+        Accepts a GeoQuerySet and SRID. 
+        
+        Returns the extent as a GEOS object in the Google Maps projection system favored by OpenLayers.
+        
+        The result can be directly passed out for direct use in a JavaScript map.
+        """
+        extent = fromstr('MULTIPOINT (%s %s, %s %s)' % geoqueryset.extent(), srid=srid)
+        extent.transform(4326)
+        return extent
 
     def nearest_parks_by_distance(self, distance_in_miles):
         return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct()

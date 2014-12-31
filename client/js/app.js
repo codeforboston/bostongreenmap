@@ -6,7 +6,8 @@ define([
     'masonry',
     'bootstrap',
     'owl',
-    'leaflet'
+    'leaflet',
+    'tileLayer'
 ], function(
     Backbone,
     Marionette,
@@ -14,7 +15,8 @@ define([
     templates,
     Masonry,
     owl,
-    Leaflet
+    Leaflet,
+    TileLayer
 ) {
     var app = new Marionette.Application(),
         router;
@@ -53,7 +55,7 @@ define([
     // var Map = Backbone.Model.extend({
     //   initialize: function(params) {}
     // })
-
+    
     var SearchModel = Backbone.Model.extend({
         url: function() {
             return window.location.origin + '/parks/get_neighborhoods_and_activities_list/';
@@ -186,6 +188,11 @@ define([
           this.$el.find('#carousel-images-container').hide();
           this.showMapState = true;
           L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container);
+          app.map.fitBounds([
+                  [this.model.attributes.bbox[0][1], this.model.attributes.bbox[0][0]],
+                            [this.model.attributes.bbox[1][1], this.model.attributes.bbox[1][0]]
+                          ]);
+
         },
         hideMap: function () {
           this.$el.find('#map').hide();
@@ -233,7 +240,7 @@ define([
 
             self.$('[data-toggle="tooltip"]').tooltip()
 
-            app.map = L.map('map', {scrollWheelZoom: false}).setView([51.505, -0.09], 13);
+            app.map = L.map('map', {scrollWheelZoom: false});
 
             L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -241,6 +248,49 @@ define([
                 minZoom: 0,
                 maxZoom: 18
             }).addTo(app.map);
+            console.log(self.model.attributes.bbox);
+
+            var style = {
+                "clickable": true,
+                color: "#00c800",
+                weight: 0,
+                opacity: 1,
+                fillColor: "#00DC00",
+                fillOpacity: 0.6
+              };
+            var hoverStyle = {
+                "fillOpacity": 0.9
+            };
+            var geojsonURL = 'http://104.131.99.131:8080/osm-processed_p1/{z}/{x}/{y}.json';
+            var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
+                    clipTiles: true,
+                    unique: function (feature) { 
+                        return feature.id;
+                    }
+                }, {
+                    style: style,
+                    onEachFeature: function (feature, layer) {
+                        if (feature.properties) {
+                            var popupString = '<div class="popup">';
+                            for (var k in feature.properties) {
+                                var v = feature.properties[k];
+                                popupString += k + ': ' + v + '<br />';
+                            }
+                            popupString += '</div>';
+                            layer.bindPopup(popupString);
+                        }
+                        if (!(layer instanceof L.Point)) {
+                            layer.on('mouseover', function () {
+                                layer.setStyle(hoverStyle);
+                            });
+                            layer.on('mouseout', function () {
+                                layer.setStyle(style);
+                            });
+                        }
+                    }
+                }
+            );
+            app.map.addLayer(geojsonTileLayer);
         }
     });
 
@@ -260,7 +310,7 @@ define([
           var that = this;
           this.collection.getNextPage({remove:false, success: function() { }});
           this.initialized = true;
-          console.log(this.msnry);
+          
         },
         getLastPage: function(evnt) {
           this.collection.getLastPage();
@@ -279,9 +329,7 @@ define([
 
           return data;
         },
-        onBeforeAddChild: function () { 
-            console.log("shell is rendered", this.el); 
-        },
+        
         onShow: function () {
           var self = this;
 
@@ -295,7 +343,7 @@ define([
           }); 
         }, 
         onAddChild: function (childView) {
-          console.log('child added', childView.el); 
+          
           if(this.initialized) {
             this.msnry.appended(childView.el, { isAnimatedFromBottom: true });  
           }

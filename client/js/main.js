@@ -35,6 +35,10 @@ requirejs.config({
         paginator: {
             exports: 'paginator',
             deps: ['backbone']
+        },
+        tileLayer: {
+            exports: 'TileLayer',
+            deps: ['leaflet'] 
         }
     },
     baseUrl: '/static',
@@ -50,7 +54,8 @@ requirejs.config({
         owl: 'lib/owl.carousel.min',
         masonry: 'lib/masonry.pkgd.min',
         leaflet: 'lib/leaflet',
-        paginator: 'lib/backbone.paginator.min'
+        paginator: 'lib/backbone.paginator.min',
+        tileLayer: 'lib/TileLayer.GeoJSON'
     }
 });
 
