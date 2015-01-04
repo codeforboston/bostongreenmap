@@ -46,15 +46,8 @@ define([
             })
           });
           return attributes;
-        },
-        render: function() {
-
         }
     });
-
-    // var Map = Backbone.Model.extend({
-    //   initialize: function(params) {}
-    // })
     
     var SearchModel = Backbone.Model.extend({
         url: function() {
@@ -187,7 +180,10 @@ define([
           this.$el.find('#map').show();
           this.$el.find('#carousel-images-container').hide();
           this.showMapState = true;
-          L.Util.requestAnimFrame(app.map.invalidateSize,app.map,!1,app.map._container);
+
+          app.map.invalidateSize();
+
+          // the way GEOS returns #coords, we have to reorder the lat/lngs. 
           app.map.fitBounds([
                   [this.model.attributes.bbox[0][1], this.model.attributes.bbox[0][0]],
                             [this.model.attributes.bbox[1][1], this.model.attributes.bbox[1][0]]
@@ -248,10 +244,9 @@ define([
                 minZoom: 0,
                 maxZoom: 18
             }).addTo(app.map);
-            console.log(self.model.attributes.bbox);
 
             var style = {
-                "clickable": true,
+                clickable: true,
                 color: "#00c800",
                 weight: 0,
                 opacity: 1,
@@ -268,7 +263,10 @@ define([
                         return feature.id;
                     }
                 }, {
-                    style: style,
+                    style: function(feature, layer) {
+                        return style;
+                    },
+                    reuseTiles: true,
                     onEachFeature: function (feature, layer) {
                         if (feature.properties) {
                             var popupString = '<div class="popup">';
@@ -290,7 +288,26 @@ define([
                     }
                 }
             );
+ 
             app.map.addLayer(geojsonTileLayer);
+
+            // I don't know the best design approach to lazy-loading relational 1:m models
+            var url = window.location.origin + '/parks/' + self.model.attributes.id + '/facilities';
+
+            $.get(url, function(response) {
+              var myStyle = {
+                  "color": "#ff7800",
+                  "weight": 5,
+                  "opacity": 0.65
+              };
+
+              L.geoJson(response, {
+                  style: myStyle,
+                  pointToLayer: function(feature, latlng) {
+                    return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+                  }
+              }).addTo(app.map);
+            });
         }
     });
 

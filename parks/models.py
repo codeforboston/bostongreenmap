@@ -251,6 +251,7 @@ class Park(models.Model):
         facilities = Activity.objects.filter(activity__park=self.id).distinct()
 
         doc = {
+            'id': self.id,  
             'url': self.get_absolute_url(),
             'name': self.name,
             'area': self.area_acres(),
@@ -285,10 +286,10 @@ class Park(models.Model):
         return extent
 
     def nearest_parks_by_distance(self, distance_in_miles):
-        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct()
+        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct('name')
 
     def recommended_parks(self):
-        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype).distinct()
+        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype).distinct('name')
 
     def get_facilities(self, park_id):
         """ Returns facilities as JSON for park id
