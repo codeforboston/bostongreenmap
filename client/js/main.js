@@ -39,6 +39,9 @@ requirejs.config({
         tileLayer: {
             exports: 'TileLayer',
             deps: ['leaflet'] 
+        },
+        chosen: {
+            deps: ['jquery'] 
         }
     },
     baseUrl: '/static',
@@ -55,7 +58,8 @@ requirejs.config({
         masonry: 'lib/masonry.pkgd.min',
         leaflet: 'lib/leaflet',
         paginator: 'lib/backbone.paginator.min',
-        tileLayer: 'lib/TileLayer.GeoJSON'
+        tileLayer: 'lib/TileLayer.GeoJSON',
+        chosen: 'lib/chosen.jquery.min'
     }
 });
 

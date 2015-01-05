@@ -7,7 +7,8 @@ define([
     'bootstrap',
     'owl',
     'leaflet',
-    'tileLayer'
+    'tileLayer',
+    'chosen'
 ], function(
     Backbone,
     Marionette,
@@ -137,6 +138,9 @@ define([
                     (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
+        },
+        onShow: function() {
+          $(".parkfilter").chosen()
         }
     });
 
