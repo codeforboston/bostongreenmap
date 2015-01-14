@@ -33,6 +33,7 @@ def get_neighborhoods_and_activities_list(request):
     activities = Activity.objects.all()
     featured_parks = Park.objects.filter(featured=True).prefetch_related('images')
     hero_images = Parkimage.objects.filter(hero_image=True)
+    parks = Park.objects.distinct('name')
     
     hero_image_docs = []
     for i in hero_images:
@@ -43,7 +44,7 @@ def get_neighborhoods_and_activities_list(request):
     response = {
         'neighborhoods': [{'id': n.pk, 'name': n.name} for n in neighborhoods],
         'activities': [{'id': a.pk, 'name': a.name} for a in activities],
-        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks],
+        'featured_parks': [{'id': a.pk, 'url': a.get_absolute_url(), 'name': a.name, 'description': a.description, 'images': a.get_image_thumbnails(include_large=False) } for a in featured_parks],
         'hero_images': hero_image_docs
     }
     return HttpResponse(json.dumps(response), mimetype='application/json')

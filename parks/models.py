@@ -139,7 +139,8 @@ class Parkimage(models.Model):
 
     def get_thumbnail(self, include_large=False):
         tn_size = '300x200'
-        large_size = '1000x800'
+        large_size = '950x600'
+        tn_med_size = '600x400'
         try:
             tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
             image = {
@@ -148,8 +149,10 @@ class Parkimage(models.Model):
             }
             if include_large:
                 try:
-                    large_image = get_thumbnail(self.image, large_size, crop='bottom', quality=100)
+                    large_image = get_thumbnail(self.image, large_size, crop='center', quality=100)
+                    medium_image = get_thumbnail(self.image, tn_med_size, crop='center', quality=100)
                     image['large_src'] = large_image.url
+                    image['med_src']=medium_image.url
                 except Exception, e:
                     logger.error(e)
         except Exception as e:
@@ -260,7 +263,8 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'change_url': change_url
+            'change_url': change_url,
+            'is_large': True if self.area > 30000 else False
         }
 
         if include_extra_info:

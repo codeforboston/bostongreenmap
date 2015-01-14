@@ -1,11 +1,21 @@
 .results {
   margin: 0 auto;
-
+  width: 1250px;
   .result {
-    height: 200px;
-    width: 300px;
-    float: left;
-    margin-bottom: 10px;
+    // border: 2px solid;
+    // border-color: white;
+    .small {
+      height: 200px; 
+      width: 300px;
+      // float: left;
+      // margin-bottom: 10px;
+    }
+    .medium {
+      height: 400px; 
+      width: 600px;
+      // float: left;
+      // margin-bottom: 10px;
+    }
+
   }
 }
-

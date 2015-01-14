@@ -79,6 +79,28 @@ h1 {
   }
 }
 
+#next { 
+  width: 950px;
+  height: 120px;
+  text-align: center;
+  margin-left: auto ;
+  margin-right: auto ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #9cb428;
+  cursor: pointer;
+  h1 {
+    color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+#next:hover {
+  opacity: 0.5;
+}
+
 @media (max-width:600px) {
   #carousel-example-generic {
     position: relative;

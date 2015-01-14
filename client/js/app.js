@@ -78,7 +78,7 @@ define([
             this.queryString = params.queryString
         },
         url: function() {
-            var search_url = 'parks/search?' + this.queryString;
+            var search_url = 'parks/search/?' + this.queryString;
             return search_url;
         },
         parse: function(response) {
@@ -172,7 +172,12 @@ define([
         events: {
           'click #toggle': 'toggleContent'
         },
-        showMapState: false,
+        initialize: function() {
+          if (this.showMapState === undefined) {
+            this.showMapState = false;
+          }
+          return this;
+        },
         toggleContent: function (evnt) {
           if (this.showMapState === false) {
             this.showMap();
@@ -203,6 +208,7 @@ define([
         tagName: 'div',
         className: 'detail',
         onShow: function() {
+          
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
                 autoPlay: true, //Set AutoPlay to 3 seconds
@@ -295,8 +301,8 @@ define([
  
             app.map.addLayer(geojsonTileLayer);
 
-            // I don't know the best design approach to lazy-loading relational 1:m models
-            var url = window.location.origin + '/parks/' + self.model.attributes.id + '/facilities';
+            //FIXME: I don't know the best design approach to lazy-loading relational 1:m models
+            var url = window.location.origin + '/parks/' + self.model.attributes.id + '/facilities/';
 
             $.get(url, function(response) {
               var myStyle = {
@@ -323,7 +329,7 @@ define([
     var ResultsView = Marionette.CompositeView.extend({
         events: {
           'click #previous-button': 'getLastPage',
-          'click #next-button': 'getNextPage'
+          'click #next': 'getNextPage'
         },
         collection: ParksCollection,
         initialized: false,
@@ -339,47 +345,57 @@ define([
         template: templates['templates/results.hbs'],
         childView: ResultItemView,
         tagname: 'div',
-        className: 'results',
-        serializeData: function(){
-          if (this.model){
-            data = this.model;
-          } else {
-            // we want to render the paginator_ui in our templates
-            data = this.collection.paginator_ui;
-          }
-
-          return data;
-        },
-        
+        className: 'results',        
         onShow: function () {
           var self = this;
 
           $('#loading').css("display", "none");
 
           self.msnry = new Masonry(self.el, {
-            gutter: 10,
-            "isFitWidth": true,
-            transitionDuration: '0s',
+            // transform: 'scale(15)',
+            // gutter: 10,
+            // columnWidth: 300,
+            // "isFitWidth": true,
+            // transitionDuration: '0s',
             itemSelector: '.result'
           }); 
         }, 
+        collectionEvents: {
+          "add": "modelAdded"
+        },
+        modelAdded: function(model) {
+          console.log(model);
+        },
+        onRenderCollection: function(collection) {
+          console.log(collection);
+        },
         onAddChild: function (childView) {
-          
           if(this.initialized) {
-            this.msnry.appended(childView.el, { isAnimatedFromBottom: true });  
+            this.msnry.appended(childView.el);  
           }
         }
     });
 
-    var CarouselPhotoView = Marionette.ItemView.extend({
-        template: templates['templates/carouselPhoto.hbs']
-    });
+    var ResultsLayout = Backbone.Marionette.LayoutView.extend({
+      onShow: function() {
+        this.getRegion('results').show(new ResultsView({'collection': this.collection}))
+      },
+      events: {
+        "click #next": "getNext"
+      },
+      getNext: function () {
+        var that = this;
+        this.results.currentView.collection.getNextPage({remove:false, success: function() { }});
+        this.results.currentView.initialized = true;
 
-    var CarouselView = Marionette.CompositeView.extend({
-        template: templates['templates/carousel.hbs'],
-        itemView: CarouselPhotoView,
-        tagname: 'div',
-        className: 'carousel'
+      },
+      className: "resultsSection",
+      collection: ParksCollection,
+      template: templates['templates/all_results.hbs'],
+      regions: {
+        results: "#results",
+        next: "#next"
+      }
     });
 
     app.Router = Backbone.Router.extend({
@@ -389,7 +405,9 @@ define([
             'mission': 'mission',
             'contact': 'contact',
             'results/:queryString': 'results',
-            'parks/:park_slug/': 'park'
+            'parks/:park_slug/': 'park',
+            'parks/:park_slug/:map': 'park'
+
         },
         home: function() {
             var searchModel = new SearchModel();
@@ -434,15 +452,21 @@ define([
 
             var results = new ParksCollection({'queryString': queryString});
             results.fetch({'success': function() {
-              app.getRegion('mainRegion').show(new ResultsView({'collection': results}));
-              
+              app.getRegion('mainRegion').show(new ResultsLayout({'collection': results}));
             }});
         },
-        park: function (park_slug) {
+        park: function (park_slug, map) {
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
+                if(map) {
+                  map = true;
+                } else {
+                  map = false;
+                }
+
                 $('#loading').css("display", "none");
-                var parkView = new ParkView({'model': park });
+                var parkView = new ParkView({'model': park, 'showMapState': map });
+                parkView.showMapState=map;
                 app.getRegion('mainRegion').show(parkView);
             }});
         }
@@ -456,7 +480,6 @@ define([
         router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); })
         app.execute('setRouter', router);
         Backbone.history.start();
-        // Backbone.history.navigate('', {'trigger': true});
     });
 
     return {
