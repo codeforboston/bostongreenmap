@@ -5,6 +5,27 @@
   //   z-index: -1;
   // }
 
+  .toggle-box {
+     position:absolute;
+     right:0;
+     top:0px;
+     background-image: url('/static/img/map-image.png');
+     z-index:1200;
+     width: 0;
+     height:0;
+     border-top: 100px solid transparent;
+     border-left: 100px solid #00a000;
+  }
+  .toggle-text {
+    position: absolute;
+    right:15;
+    top:-83px;
+    font-size: 1.3em;
+  a {
+    color: darkblue;
+    cursor: pointer;
+   }
+  }
   .park-content {
     min-height: 713px;
     margin: 5px;
@@ -14,39 +35,45 @@
     border-radius: 50%;
     width: 150px;
     height: 150px;
-    background-color: lightgray;
+   background-color: lightgray;
   }
 
   .park-title {
     background-color: #fff;
+    opacity: 0.93;
     margin-bottom: 20px;
-    
     color: orange;
     padding: 10px;
     display: inline-block;
-    -webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    //-webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    //-moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    //box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    h1{
+      //font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
   }
 
   .park-description { 
     background-color: #fff;
+    opacity: 0.93;
     max-width: 350px;
     // max-height: 200px;
     margin-bottom: 20px;
     padding: 10px;
+    font-size: 1.2em;
     // overflow-y: scroll;
-    -webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+   //-webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    //-moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+    //box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
   }
 
   .park-activities {
     max-width: 350px;
 
     .park-activity {
-      width: 25px;
-      height: 25px;
+      width: 35px;
+      height: 35px;
       display: inline-block;
       background-color: #fff;
     }
@@ -54,6 +81,7 @@
 
   .park-information {
     padding: 15px;
+    margin-left: 15px;
     // margin-bottom: 180px;
   }
 
@@ -64,10 +92,15 @@
       max-width: 950px;
       margin-bottom: 0px;
     }
+    .item.circle {
+      text-align: center;
+      font-size: 1.5em;
+      padding-top: 25%;
+    }
   }
 
   .recommended-parks {
-    background-color: lightgray;
+    //background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;
@@ -76,7 +109,7 @@
   }
 
   .nearby-parks {
-    background-color: lightgray;
+   // background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;

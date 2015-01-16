@@ -1,23 +1,30 @@
 
 /*** Footer ***/
 .footer {
-  background-color: rgb(156,180,40);
+  background-color: rgba(0,120,0,0.8);
   // padding-left: 10%;
   // padding-top: 30px;
   // padding-bottom: 100px;
   padding: 20px;
   position: relative;
+//  top: -930px;
   margin: 0 auto;
 
-  .footer-content { 
+  .footer-content {
     max-width: 950px;
     margin: 0 auto;
   }
 
   .footer-text {
     color: white;
-    font-family: "Domine";
-    font-size: 13px;
+    font-size: 1.3em;
+    font-weight: 400;
+   }
+
+  .twitter-container {
+    //font-size: 1.1em;
+    font-weight: 400;
+    a {color: #006699;}
   }
 
   .footer-url {
@@ -31,6 +38,13 @@
     position: absolute;
   }
 
+  .footer-address.footer-text {
+    font-size: 1em;
+  }
+  .footer-number.footer-text {
+    font-size: 1em;
+  }
+
   .white-circle {
     height: 35px;
     width: 35px;
@@ -39,7 +53,6 @@
     display: inline-block;
     margin-right: 20px;
   }
-  
 }
 
 // .twitter-container {

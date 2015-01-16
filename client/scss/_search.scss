@@ -1,11 +1,12 @@
 /*** Search ***/
+
 .search-page {
+  position:relative;
   .name {
     background: white;
     border: 1px solid rgba(0,0,0,0.5);
     border-radius: 4px;
     bottom: 10px;
-    font-family: Domine;
     font-size: 12px;
     left: 10px;
     color: rgba(0,0,0,0.5);
@@ -15,33 +16,121 @@
     height: 1.2em;
   }
 
-  .gobutton {
-    cursor: pointer;
-    display: inline-block;
-    padding: 8px 14px;
-    font-family: "Domine";
-    color: white;
-    background-color: green;
-    user-select: none;
-    font-size: 1.5em;
-    margin-top: 8px;
-    // float: right;
+  #menu {
+    position: absolute;
+    top: 347;
+    width: 100%;
   }
 
-  .btn-group {
-    margin: 3px;
+  .carousel-image-overlay {
+    position: absolute;
+    //z-index: 500;
+    background-color: rgba(0,160,0,0.8);
+}
+
+  .logo-grass {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    // box-sizing: content-box;
+    z-index: 1000;
+    margin: 0px auto;
+    margin-bottom: -20px;
+    opacity: 0.9;
   }
 
   .find-your-space {
-    background-color: rgba(0,160,0,0.8);
+    display: block;
+    position: relative;
+    z-index: 1000;
+    background-color: rgba(0,160,0,0.9);
     color: white;
-    padding: 15px;
-    max-width: 280px;
-    margin-top:50px;
+    padding: 0 1% 1% 1%;
+    margin: 0 auto;
+    max-width: 100%;
+    //100: 600px;
+    h1{
+         text-align: center;
+         font-family: 'Montserrat', sans-serif;
+         font-size: 3em;
+         font-weight: 700;
+         //text-transform: uppercase;
+    }
   }
 
-  .featured {
-    top: 350px;
+  .search-buttons {
+    position: relative;
+    display: block;
+    max-width: 444px;
+    margin: 0px auto;
+  }
+  .gobutton {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    border-radius: 2px;
+    padding: 8px 14px;
+    color: white;
+    background-color: green;
+    user-select: none;
+    font-size: 1.4em;
+    margin-left: 3%;
+    margin-top: 3px;
+    float: right;
+  }
+
+  .btn-group.select-width {
+    display: inline-block;
+    margin: 3px auto;
+    //padding-right: 1%;
+    //float: left;
+  }
+
+  .chosen-single {
+  position:relative;
+  display: block !important;
+  margin: 0 auto !important;
+  overflow: hidden;
+  padding:10px 0 0 8px !important;
+  height:49px !important;
+  width: 175px !important;
+  border:0px solid #aaa !important;
+  border-radius:2px !important;
+  background:-webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#fff),color-stop(50%,#fff),color-stop(52%,blue),color-stop(100%,blue)) !important;
+  background:-webkit-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+  background:-moz-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+  background:-o-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+  background:linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+  background-clip:padding-box;
+  box-shadow:0 0 0px #fff inset,0 0px 0px rgba(0,0,0,.1) !important;
+  color:#444;
+  font-size: 1.4em;
+  text-decoration:none;
+  //text-transform: capitalize;
+  white-space:nowrap;
+  line-height:100% !important;
+}
+  .chosen-container {
+    padding: 0 10px;
+  }
+  .chosen-container-single {
+    .chosen-single {
+  div {
+    top: 10px;
+    }
+  span {
+    overflow: visible;
+    }
+  }
+    .chosen-drop {
+   // text-transform: capitalize;
+    font-size: 1.1em;
+    }
+}
+
+.featured {
     margin: 0 auto;
     max-width: 950px;
     margin-bottom: 0px;
@@ -56,14 +145,12 @@
     height: auto;
   }
 
-  // #carousel-images-container .item{
-  //   margin: auto;
-  //   width: 1000px;
-  // }
-
   .featured-parks {
+    display: block;
+    position: relative;
     padding-top: 5px;
-    background-color: lightgray;
+    text-align: center;
+    //background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;

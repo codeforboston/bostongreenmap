@@ -1,11 +1,14 @@
-    <div id="map" class="item" style="height:500px;">
-    </div>
-<div style="position:absolute; right:0; top:120px; background-color: white; z-index:1200">
-  <a id="toggle">Map</a>
-</div>
+
+<div id="map" style="height: 600px; width:100%">
+       </div>
 <div id="carousel-example-generic">
   <!-- Wrapper for slides -->
   <div class="center-content" style="position: relative">
+        <div class="toggle-box">
+         <div class="toggle-text">
+          <a id="toggle">Map</a>
+         </div>
+        </div>
     <div style="position:absolute; z-index:1000">
       <div class="floating-text">
         <div class="park-information">
@@ -29,13 +32,27 @@
     </div>
   </div>
   <div class="carousel-inner" id="carousel-images-container">
-    {{#each images}}
-      <div class="item">
-        <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
-        <div class="carousel-caption"></div>
-      </div>
-    {{/each}}
-
+    {{#if images}}
+      {{#each images}}
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+      {{/each}}
+    {{else}}
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+    {{/if}}
   </div>
 </div>  
 

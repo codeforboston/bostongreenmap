@@ -1,14 +1,43 @@
 {{!-- <div class="center-content">
   <div class="floating-text find-your-space">
 
-  </div>  
+  </div>
 </div>
   --}}
-<div id="carousel-example-generic">
-  <div class="center-content" style="position: relative">
-    <div style="position:absolute; z-index:1000">
+
+  <div class="carousel-inner" id="carousel-images-container">
+    {{#if hero_images}}
+      {{#each hero_images}}
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+          <div class="carousel-image-overlay"></div>
+          <div class="carousel-caption"></div>
+        </div>
+      {{/each}}
+    {{else}}
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
+          <div class="carousel-caption"></div>
+        </div>
+    {{/if}}
+  </div>
+</div>
+
+<div id="menu">
+  <div class="center-content">
+        <img class="logo-grass" src="static/img/BostonGreenLogoGrass.png" alt="Boston Green logo"/>
       <div class="floating-text find-your-space">
-        <h1>Find your space.</h1>
+        <h1>Find your space</h1>
+          <div class="search-buttons">
+            <div>
           <div class="btn-group select-width">
             <select data-placeholder="Select Your Neighborhood" class="parkfilter chzn-select form-control" id="neighborhoods">
               <option value="">All Neighborhoods</option>
@@ -27,36 +56,51 @@
             </select>
           </div>
         <div class="gobutton" id="filter-select">GO</div>
-      </div>  
-    </div>
-  </div>
-  <div class="carousel-inner" id="carousel-images-container">
-    {{#each hero_images}}
-      <div class="item">
-        <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
-        <div class="carousel-caption"></div>
       </div>
-    {{/each}}
-  </div>
-</div>  
 
- 
+      </div>
+
+    </div>
+    </div>
+  </div> 
+
 <div class="featured-parks">
   <div class="orbs">
     <h2>Featured Spaces</h2>
   </div>
   <div id="featured" class="owl-carousel orbs">
-    {{#each featured_parks }} 
-      <div class="item">
-        {{#if images.0.src}}
-          <img src="{{images.0.src}}" alt={{owner}}>
-        {{else}}
-          <img src="http://placehold.it/300x200" alt={{owner}}>
-        {{/if}}
-        <div class="park-title-wrapper">
-          <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+    {{#if featured_parks}}
+      {{#each featured_parks }} 
+        <div class="item">
+          {{#if images.0.src}}
+            <img src="{{images.0.src}}" alt={{owner}}>
+          {{else}}
+            <img src="http://placehold.it/300x200" alt={{owner}}>
+          {{/if}}
+          <div class="park-title-wrapper">
+            <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+          </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    {{else}}
+        <div class="item">
+          <img src="http://placehold.it/300x200" alt={{owner}}>
+          <div class="park-title-wrapper">
+            <p class="park-title"><a href="#parks/boston-common-110">Boston Common</a></p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/300x200" alt={{owner}}>
+          <div class="park-title-wrapper">
+            <p class="park-title"><a href="#parks/boston-common-110">Boston Common</a></p>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/300x200" alt={{owner}}>
+          <div class="park-title-wrapper">
+            <p class="park-title"><a href="#parks/boston-common-110">Boston Common</a></p>
+          </div>
+        </div>
+    {{/if}}
   </div>
 </div> 
