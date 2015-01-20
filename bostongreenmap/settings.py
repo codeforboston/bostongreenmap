@@ -1,7 +1,7 @@
 # Django settings for bostongreenmap project.
 
 from os.path import join, abspath, dirname
-
+import os
 # Defines the parent directory that contains the settings file as
 # the PROJECT_ROOT. It is used for relative settings elsewhere.
 here = lambda *x: join(abspath(dirname(__file__)), *x)
@@ -221,6 +221,9 @@ ADMIN_THUMBS_SIZE = '160x120'
 GA_TRACKING_ID = ''
 USERVOICE_FORUM_ID = ''
 
+# heroku/dokku settings
+if os.environ.get('IS_OKU'):
+    load_settings('oku_settings.py')
 
 # import local settings
 try:
