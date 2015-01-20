@@ -1,0 +1,1 @@
+web: gunicorn bostongreenmap.wsgi:application --log-level=critical --log-file error_logs.log --bind allthesignals.net:8001 &
