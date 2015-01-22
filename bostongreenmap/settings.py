@@ -8,7 +8,7 @@ import sys
 here = lambda *x: join(abspath(dirname(__file__)), *x)
 PROJECT_ROOT = here('..')
 root = lambda *x: join(abspath(PROJECT_ROOT), *x)
-
+SETTINGS_DIR = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
