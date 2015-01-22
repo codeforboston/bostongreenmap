@@ -222,6 +222,11 @@ ADMIN_THUMBS_SIZE = '160x120'
 GA_TRACKING_ID = ''
 USERVOICE_FORUM_ID = ''
 
+def load_settings(settings_filename):
+    settings_filename = os.path.join(SETTINGS_DIR, settings_filename)
+    with open(settings_filename, 'r') as settings_file:
+        exec(settings_file.read(), globals())
+
 # heroku/dokku settings
 if os.environ.get('IS_OKU'):
     load_settings('oku_settings.py')
