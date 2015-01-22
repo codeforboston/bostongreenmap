@@ -2,6 +2,7 @@
 
 from os.path import join, abspath, dirname
 import os
+import sys
 # Defines the parent directory that contains the settings file as
 # the PROJECT_ROOT. It is used for relative settings elsewhere.
 here = lambda *x: join(abspath(dirname(__file__)), *x)
@@ -171,7 +172,7 @@ ACCOUNT_ACTIVATION_DAYS = 5
 # more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'standard': {
             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
@@ -194,7 +195,7 @@ LOGGING = {
         'console':{
             'level':'INFO',
             'class':'logging.StreamHandler',
-            'formatter': 'standard'
+            'strm': sys.stdout
         },
     },
     'loggers': {
