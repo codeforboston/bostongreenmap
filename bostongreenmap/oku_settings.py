@@ -3,6 +3,7 @@ from os import environ
 
 GEOS_LIBRARY_PATH = environ.get('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = environ.get('GDAL_LIBRARY_PATH')
+PROJ4_LIBRARY_PATH = environ.get('PROJ4_LIBRARY_PATH')
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
