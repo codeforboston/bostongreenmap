@@ -17,9 +17,14 @@
     "underscore.string": "~2.3.3",
     "grunt-cli": "0.1.13"
   },
-  "dependencies": {},
+  "dependencies": {
+    "grunt-contrib-compass": "~0.7",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-handlebars": "^0.8.0",
+    "grunt-contrib-requirejs": "~0.3.0"
+  },
   "scripts": {
-    "preinstall": "npm install | npm i -g grunt-cli | npm install grunt --save-dev",
+    "preinstall": "npm i -g grunt-cli | npm install grunt --save-dev",
     "postinstall": "grunt handlebars:compile"
   }
 }
