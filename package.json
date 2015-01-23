@@ -14,7 +14,11 @@
     "grunt-contrib-watch": "~0.6.1",
     "handlebars": "~1.3.0",
     "underscore": "~1.6.0",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "grunt-cli"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "postinstall": "cd client | grunt handlebars:compile"
+  }
 }
