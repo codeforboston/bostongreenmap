@@ -13,30 +13,30 @@ module.exports = function(grunt) {
         compass: {
             dev: {
                 options: {
-                    sassDir: 'scss',
-                    cssDir: 'build/css',
+                    sassDir: 'client/scss',
+                    cssDir: 'client/build/css',
                     outputStyle: 'compressed'
                 }
             },
             dist: {
                 options: {
-                    sassDir: 'scss',
-                    cssDir: 'build',
+                    sassDir: 'client/scss',
+                    cssDir: 'client/build',
                     outputStyle: 'compressed'
                 }
             }
         },
         watch: {
             handlebars: {
-                files: ['templates/**/*'],
+                files: ['client/templates/**/*'],
                 tasks: ['handlebars:compile']
             },
             sass: {
-                files: ['scss/**/*.scss'],
+                files: ['client/scss/**/*.scss'],
                 tasks: ['compass:dev']
             },
             js: {
-                files: ['js/**/*.js'],
+                files: ['client/js/**/*.js'],
                 tasks: ['compass:dev']
             }
         },
