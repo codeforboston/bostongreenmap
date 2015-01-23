@@ -22,9 +22,5 @@
     "grunt-contrib-connect": "~0.3.0",
     "grunt-contrib-handlebars": "^0.8.0",
     "grunt-contrib-requirejs": "~0.3.0"
-  },
-  "scripts": {
-    "preinstall": "npm i -g grunt-cli | npm install grunt --save-dev",
-    "postinstall": "grunt handlebars:compile"
   }
 }
