@@ -19,6 +19,6 @@
   },
   "dependencies": {},
   "scripts": {
-    "postinstall": "cd client | grunt handlebars:compile"
+    "postinstall": "cd client"
   }
 }
