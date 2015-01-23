@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "scripts": {
-    "preinstall": "npm i -g grunt-cli",
-    "postinstall": "cd client | ./tmp/build/vendor/node/lib/node_modules/grunt-cli/bin/grunt handlebars:compile"
+    "preinstall": "npm i -g grunt-cli | npm install grunt --save-dev",
+    "postinstall": "cd client | grunt handlebars:compile"
   }
 }
