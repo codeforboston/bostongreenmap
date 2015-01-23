@@ -5,7 +5,7 @@
   "copyright": "2014",
   "version": "0.1.0",
   "private": "true",
-  "devDependencies": {
+  "dependencies": {
     "grunt": "~0.4.0",
     "grunt-contrib-compass": "~0.7",
     "grunt-contrib-connect": "~0.3.0",
@@ -17,10 +17,7 @@
     "underscore.string": "~2.3.3",
     "grunt-cli": "0.1.13"
   },
-  "dependencies": {
-    "grunt-contrib-compass": "~0.7",
-    "grunt-contrib-connect": "~0.3.0",
-    "grunt-contrib-handlebars": "^0.8.0",
-    "grunt-contrib-requirejs": "~0.3.0"
+  "scripts": {
+    "postinstall": "grunt handlebars:compile"
   }
 }
