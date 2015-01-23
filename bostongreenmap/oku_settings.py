@@ -6,6 +6,9 @@ GDAL_LIBRARY_PATH = environ.get('GDAL_LIBRARY_PATH')
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
+DATABASES['default']['OPTIONS'] = {
+      'options': '-c search_path=bostongreenmap'
+    }
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
