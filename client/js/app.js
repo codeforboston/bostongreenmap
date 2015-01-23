@@ -104,7 +104,7 @@ define([
             'click #nav-index': 'goToIndex',
             'click #nav-contact': 'goToContact'
         },
-        template: templates['templates/header.hbs'],
+        template: templates['client/templates/header.hbs'],
         tagName: 'div',
         className: 'header',
         goToAbout: function(evt) {
@@ -122,7 +122,7 @@ define([
     });
 
     var SearchView = Marionette.ItemView.extend({
-        template:templates['templates/search.hbs'],
+        template:templates['client/templates/search.hbs'],
         tagName: 'div',
         className: 'search-page',
         events: {
@@ -145,25 +145,25 @@ define([
     });
 
     var FooterView = Marionette.ItemView.extend({
-        template: templates['templates/footer.hbs'],
+        template: templates['client/templates/footer.hbs'],
         tagName: 'div',
         className: 'footer'
     });
 
     var AboutView = Marionette.ItemView.extend({
-        template: templates['templates/about.hbs'],
+        template: templates['client/templates/about.hbs'],
         tagName: 'div',
         className: 'about'
     });
 
     var MissionView = Marionette.ItemView.extend({
-        template: templates['templates/mission.hbs'],
+        template: templates['client/templates/mission.hbs'],
         tagName: 'div',
         className: 'mission'
     });
 
     var ContactView = Marionette.ItemView.extend({
-        template: templates['templates/contact.hbs'],
+        template: templates['client/templates/contact.hbs'],
         tagName: 'div',
         className: 'contact'
     });
@@ -204,7 +204,7 @@ define([
           this.$el.find('#carousel-images-container').show();
           this.showMapState = false;
         },
-        template: templates['templates/park.hbs'],
+        template: templates['client/templates/park.hbs'],
         tagName: 'div',
         className: 'detail',
         onShow: function() {
@@ -322,7 +322,7 @@ define([
     });
 
     var ResultItemView = Marionette.ItemView.extend({
-        template: templates['templates/resultItem.hbs'],
+        template: templates['client/templates/resultItem.hbs'],
         className: 'result'
     }); 
 
@@ -342,7 +342,7 @@ define([
         getLastPage: function(evnt) {
           this.collection.getLastPage();
         },
-        template: templates['templates/results.hbs'],
+        template: templates['client/templates/results.hbs'],
         childView: ResultItemView,
         tagname: 'div',
         className: 'results',        
@@ -391,7 +391,7 @@ define([
       },
       className: "resultsSection",
       collection: ParksCollection,
-      template: templates['templates/all_results.hbs'],
+      template: templates['client/templates/all_results.hbs'],
       regions: {
         results: "#results",
         next: "#next"
