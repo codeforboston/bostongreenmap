@@ -11,6 +11,10 @@ admin.GeoModelAdmin.default_zoom = 11
 
 
 class ParkAdmin(admin.OSMGeoAdmin):
+    default_lon = -7912100
+    default_lat = 5210000
+    default_zoom = 11
+
     list_display = ['name', 'parkowner' ]
     list_filter = ('neighborhoods', )
     search_fields = ['name']
@@ -30,6 +34,10 @@ class ParkAdmin(admin.OSMGeoAdmin):
 
 
 class FacilityAdmin(admin.OSMGeoAdmin):
+    default_lon = -7912100
+    default_lat = 5210000
+    default_zoom = 11
+
     search_fields = ['name', 'park__name']
     exclude = ('park',)
     list_display = ['pk', 'name', 'activity_string', 'facilitytype', ]
