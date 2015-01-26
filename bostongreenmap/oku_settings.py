@@ -4,6 +4,10 @@ from os import environ
 GEOS_LIBRARY_PATH = environ.get('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = environ.get('GDAL_LIBRARY_PATH')
 
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
+
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 DATABASES['default']['OPTIONS'] = {

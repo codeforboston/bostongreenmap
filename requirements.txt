@@ -17,3 +17,5 @@ six==1.4.1
 sorl-thumbnail==11.12
 wsgiref==0.1.2
 gunicorn==19.1.1
+django-storages==1.1.8
+boto==2.35.2
