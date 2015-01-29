@@ -14,6 +14,22 @@ DATABASES['default']['OPTIONS'] = {
       'options': '-c search_path=bostongreenmap,public'
     }
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '//dev.files.bostongreenmap.org/'
+
+AWS_S3_SECURE_URLS = False
+
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
+
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '/'
+
+
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
