@@ -15,14 +15,20 @@ DATABASES['default']['OPTIONS'] = {
     }
 
 
+AWS_QUERYSTRING_AUTH = False
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '//dev.files.bostongreenmap.org/'
 
 AWS_S3_SECURE_URLS = False
 
+AWS_HEADERS = {
+    "Cache-Control": "public, max-age=86400",
+}
+
 AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
+AWS_PRELOAD_METADATA = True
 
 STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '/'
 

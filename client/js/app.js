@@ -261,12 +261,22 @@ define([
                 weight: 0,
                 opacity: 1,
                 fillColor: "#00DC00",
-                fillOpacity: 0.6
+                fillOpacity: 0.1
               };
+
+            var highlightStyle = {
+                clickable: true,
+                color: "#00c800",
+                weight: 0,
+                opacity: 1,
+                fillColor: "#00DC00",
+                fillOpacity: 0.9
+              };
+
             var hoverStyle = {
-                "fillOpacity": 0.9
+                "fillOpacity": 1
             };
-            var geojsonURL = 'http://104.131.99.131:8080/osm-processed_p1/{z}/{x}/{y}.json';
+            var geojsonURL = 'http://104.131.99.131:8080/parks/{z}/{x}/{y}.json';
             var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
                     clipTiles: true,
                     unique: function (feature) { 
@@ -274,19 +284,11 @@ define([
                     }
                 }, {
                     style: function(feature, layer) {
-                        return style;
+
+                      return style;  
                     },
                     reuseTiles: true,
                     onEachFeature: function (feature, layer) {
-                        if (feature.properties) {
-                            var popupString = '<div class="popup">';
-                            for (var k in feature.properties) {
-                                var v = feature.properties[k];
-                                popupString += k + ': ' + v + '<br />';
-                            }
-                            popupString += '</div>';
-                            layer.bindPopup(popupString);
-                        }
                         if (!(layer instanceof L.Point)) {
                             layer.on('mouseover', function () {
                                 layer.setStyle(hoverStyle);
@@ -295,6 +297,26 @@ define([
                                 layer.setStyle(style);
                             });
                         }
+
+                        if (feature.properties) {
+                            var popupString = '<div class="popup">';
+                            // for (var k in feature.properties) {
+                            //     var v = feature.properties[k];
+                            //     popupString += k + ': ' + v + '<br />';
+                            // }
+                            popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
+                            popupString += '</div>';
+                            layer.bindPopup(popupString);
+
+                            if(feature.properties.id == self.model.attributes.id) {
+                              layer.setStyle(highlightStyle);
+                              layer.on('mouseout', function () {
+                                  layer.setStyle(highlightStyle);
+                              });
+                            }
+                            
+                        }
+
                     }
                 }
             );
