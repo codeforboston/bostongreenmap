@@ -33,6 +33,7 @@ define([
     var Park = Backbone.Model.extend({
         initialize: function (params) {
           this.park_slug = params.park_slug
+
         },
         defaults: {
             'title': ''
@@ -100,6 +101,7 @@ define([
     var MapView = Marionette.ItemView.extend({
       initialize: function() {
         this.listenTo(app, 'map:show', this.showMap)
+        this.listenTo(app, 'park:changed', this.set_bbox);
         return this;
       },
       id: 'map',
@@ -277,10 +279,12 @@ define([
         initialize: function() {
           if (this.showMapState === undefined) {
             this.showMapState = false;
-          }
-          this.model.on("change", function() {
-            console.log("Model Changed!");
-          })
+          };
+
+          this.on("show", function() {
+            app.trigger("park:changed", this);
+          });
+
           return this;
         },
         toggleContent: function (evnt) {
@@ -443,6 +447,23 @@ define([
         next: "#next"
       }
     });
+
+    // var MainContentLayout = Backbone.Marionette.LayoutView.extend({
+    //   // I think this is handled in the Router
+    //   // onShow: function() {
+    //   //   this.getRegion('content').show(new ParkView({'model': this.model}));
+    //   //   this.getRegion('map').show(new MapView());
+    //   // },
+    //   id: "main-content-section",
+    //   // model: Park,
+    //   // el: '#main-content-section'
+    //   // el: '#main-content-section',
+    //   template: templates['client/templates/main_content_layout.hbs'],
+    //   regions: {
+    //     content: "#content",
+    //     map: "#map"
+    //   }
+    // })
 
     app.Router = Backbone.Router.extend({
         routes: {
