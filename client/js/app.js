@@ -99,9 +99,8 @@ define([
 
     var MapView = Marionette.ItemView.extend({
       initialize: function() {
-
-        // console.log(app.getRegion('mainRegion').currentView);
-        // this.listenTo(ParkView.model, "", this.set_style());
+        this.listenTo(app, 'map:show', this.showMap)
+        return this;
       },
       id: 'map',
       render: function() {
@@ -158,10 +157,7 @@ define([
 
                     if (feature.properties) {
                         var popupString = '<div class="popup">';
-                        // for (var k in feature.properties) {
-                        //     var v = feature.properties[k];
-                        //     popupString += k + ': ' + v + '<br />';
-                        // }
+
                         popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
                         popupString += '</div>';
                         layer.bindPopup(popupString);
@@ -180,14 +176,25 @@ define([
         );
         
         this.map.addLayer(geojsonTileLayer);
-        console.log(this.map);
+        
         return this;
       },
       set_style: function(highlightID) {
-        console.log("test");
+        console.log("test!");
       },
       set_bbox: function(geos_obj) {
-
+        var data = app.getRegion('mainRegion').currentView.model.attributes || geos_obj;
+        this.map.fitBounds([
+                [data.bbox[0][1], data.bbox[0][0]],
+                          [data.bbox[1][1], data.bbox[1][0]]
+                        ]);
+      },
+      showMap: function() {
+          var self = this;
+          this.$el.hide().slideDown(function() {
+            self.map.invalidateSize();
+            self.set_bbox();
+          });
       }
     });
 
@@ -271,6 +278,9 @@ define([
           if (this.showMapState === undefined) {
             this.showMapState = false;
           }
+          this.model.on("change", function() {
+            console.log("Model Changed!");
+          })
           return this;
         },
         toggleContent: function (evnt) {
@@ -281,24 +291,13 @@ define([
           }
         },
         showMap: function () {
-          // this.$el.find('#map').show();
-          // app.getRegion('mapRegion').currentView.$el.show();
           var self = this;
-          app.getRegion('mapRegion').currentView.$el.hide().slideDown(function() {
-            app.getRegion('mapRegion').currentView.map.invalidateSize();
-            app.getRegion('mapRegion').currentView.map.fitBounds([
-                    [self.model.attributes.bbox[0][1], self.model.attributes.bbox[0][0]],
-                              [self.model.attributes.bbox[1][1], self.model.attributes.bbox[1][0]]
-                            ]);
-          });
-          // .find('#map').show();
-          // this.$el.find('#carousel-images-container').hide();
+          app.trigger('map:show');
+
           this.showMapState = true;
-          
-
-
 
         },
+        model: Park,
         hideMap: function () {
           app.getRegion('mapRegion').currentView.$el.slideUp();
           // this.$el.find('#carousel-images-container').show();
@@ -374,6 +373,11 @@ define([
             //       }
             //   }).addTo(app.map);
             // });
+        },
+        modelEvents: {
+          "change": function () {
+            console.log("Trigger!");
+          } 
         }
     });
 
@@ -411,15 +415,6 @@ define([
             itemSelector: '.result'
           }); 
         }, 
-        collectionEvents: {
-          "add": "modelAdded"
-        },
-        modelAdded: function(model) {
-          console.log(model);
-        },
-        onRenderCollection: function(collection) {
-          console.log(collection);
-        },
         onAddChild: function (childView) {
           if(this.initialized) {
             this.msnry.appended(childView.el);  
@@ -448,19 +443,6 @@ define([
         next: "#next"
       }
     });
-
-    var ParkLayout = Backbone.Marionette.LayoutView.extend({
-      onShow: function() {
-        this.getRegion('park').show(new ParkView({'model': this.model}));
-      },
-      className: "parkSection",
-      model: Park,
-      template: templates['client/templates/park_layout.hbs'],
-      regions: {
-        park: "#park",
-        map: "#map"
-      }
-    })
 
     app.Router = Backbone.Router.extend({
         routes: {
@@ -530,7 +512,6 @@ define([
 
               $('#loading').css("display", "none");
               var parkView = new ParkView({'model': park, 'showMapState': map });
-              // var parkLayout = new ParkLayout({'model': park });
               parkView.showMapState=map;
               app.getRegion('mainRegion').show(parkView);
             }});
