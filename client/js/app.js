@@ -213,18 +213,27 @@ define([
         var url = window.location.origin + '/parks/' + id + '/facilities/';
 
         $.get(url, function(response) {
-          var myStyle = {
-              "color": "#ff7800",
-              "weight": 5,
-              "opacity": 0.65
-          };
+            var myStyle = {
+                "color": "#ff7800",
+                "weight": 5,
+                "opacity": 0.65
+            };
 
           self.activity_markers = L.geoJson(response, {
               style: myStyle,
               pointToLayer: function(feature, latlng) {
-                return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+                return new L.marker(latlng, {
+                                      icon: L.divIcon({
+                                          // Specify a class name we can refer to in CSS.
+                                          className: 'custom',
+                                          // Define what HTML goes in each marker.
+                                          html: 1,
+                                          // Set a markers width and height.
+                                          iconSize: [40, 40]
+                                      })
+                                  }).addTo(self.map);
               }
-          }).addTo(self.map);
+            });
         });
       },
       set_bbox: function(geos_obj) {
