@@ -38,7 +38,7 @@ If you're having issues, make sure you're using recent versions of Vagrant (we'v
 Be sure to compile the Javascript and SCSS:
 
     vagrant ssh
-    cd bostongreenmap/client/
+    cd bostongreenmap
     grunt handlebars:compile
     grunt compass:dev
     grunt watch
