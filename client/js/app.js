@@ -100,11 +100,12 @@ define([
 
     var MapView = Marionette.ItemView.extend({
       initialize: function() {
-        this.listenTo(app, 'map:show', this.showMap)
+        this.listenTo(app, 'map:toggle', this.toggle)
         this.listenTo(app, 'park:changed', this.set_bbox);
         return this;
       },
       id: 'map',
+      visible: false,
       render: function() {
         this.map = L.map(this.el, {scrollWheelZoom: false});
         L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
@@ -191,12 +192,18 @@ define([
                           [data.bbox[1][1], data.bbox[1][0]]
                         ]);
       },
-      showMap: function() {
+      toggle: function() {
           var self = this;
-          this.$el.hide().slideDown(function() {
-            self.map.invalidateSize();
-            self.set_bbox();
-          });
+          if (self.visible) {
+            app.getRegion('mapRegion').currentView.$el.slideUp();
+            self.visible = false;
+          } else {
+            this.$el.hide().slideDown(function() {
+              self.map.invalidateSize();
+              self.set_bbox();
+            });
+            self.visible = true;
+          }
       }
     });
 
@@ -274,7 +281,9 @@ define([
 
     var ParkView = Marionette.ItemView.extend({
         events: {
-          'click #toggle': 'toggleContent'
+          'click #toggle': function() {
+            app.trigger('map:toggle');
+          }
         },
         initialize: function() {
           if (this.showMapState === undefined) {
@@ -287,26 +296,7 @@ define([
 
           return this;
         },
-        toggleContent: function (evnt) {
-          if (this.showMapState === false) {
-            this.showMap();
-          } else {
-            this.hideMap();
-          }
-        },
-        showMap: function () {
-          var self = this;
-          app.trigger('map:show');
-
-          this.showMapState = true;
-
-        },
         model: Park,
-        hideMap: function () {
-          app.getRegion('mapRegion').currentView.$el.slideUp();
-          // this.$el.find('#carousel-images-container').show();
-          this.showMapState = false;
-        },
         template: templates['client/templates/park.hbs'],
         tagName: 'div',
         className: 'detail',
