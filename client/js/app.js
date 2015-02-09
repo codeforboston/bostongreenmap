@@ -107,6 +107,7 @@ define([
       id: 'map',
       visible: false,
       render: function() {
+        var self = this;
         this.map = L.map(this.el, {scrollWheelZoom: false});
         L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
@@ -114,7 +115,7 @@ define([
             minZoom: 0,
             maxZoom: 18
         }).addTo(this.map);
-
+        
         var style = {
             clickable: true,
             color: "#00c800",
@@ -124,20 +125,13 @@ define([
             fillOpacity: 0.1
           };
 
-        var highlightStyle = {
-            clickable: true,
-            color: "#00c800",
-            weight: 0,
-            opacity: 1,
-            fillColor: "#00DC00",
-            fillOpacity: 0.9
-          };
+
 
         var hoverStyle = {
             "fillOpacity": 1
         };
         var geojsonURL = 'http://104.131.99.131:8080/parks/{z}/{x}/{y}.json';
-        var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
+        self.geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
                 clipTiles: true,
                 unique: function (feature) { 
                     return feature.id;
@@ -164,33 +158,81 @@ define([
                         popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
                         popupString += '</div>';
                         layer.bindPopup(popupString);
-
-                        if(feature.properties.id == app.getRegion('mainRegion').currentView.model.attributes.id) {
-                          layer.setStyle(highlightStyle);
-                          layer.on('mouseout', function () {
-                              layer.setStyle(highlightStyle);
-                          });
-                        }
-                        
                     }
 
                 }
             }
-        );
-        
-        this.map.addLayer(geojsonTileLayer);
-        
+          );
+
+        self.map.addLayer(self.geojsonTileLayer);
+
         return this;
       },
       set_style: function(highlightID) {
-        console.log("test!");
+        var highlightStyle = {
+            clickable: true,
+            color: "#00c800",
+            weight: 0,
+            opacity: 1,
+            fillColor: "#00DC00",
+            fillOpacity: 0.9
+          };
+        var self = this;
+        window.geojsonLayer = self.geojsonTileLayer;
+        self.geojsonTileLayer.geojsonLayer.eachLayer(function (layer) {
+          self.geojsonTileLayer.geojsonLayer.resetStyle(layer);
+          if(layer.feature.properties.id == highlightID) {    
+              layer.setStyle(highlightStyle) 
+              layer.on('mouseout', function () {
+                layer.setStyle(highlightStyle);
+              });
+            }
+        });
+        // self.geojsonTileLayer.eachLayer(function (layer) {  
+        //   console.log(layer);
+        // });
+      },
+      add_points: function(id) {
+        var self = this;
+
+
+        // clear out existing markers.
+        if (self.activity_markers) {
+          self.map.removeLayer(self.activity_markers);
+        }
+
+        //FIXME: I don't know the best design approach to lazy-loading relational 1:m models
+        var url = window.location.origin + '/parks/' + id + '/facilities/';
+
+        $.get(url, function(response) {
+          var myStyle = {
+              "color": "#ff7800",
+              "weight": 5,
+              "opacity": 0.65
+          };
+
+          self.activity_markers = L.geoJson(response, {
+              style: myStyle,
+              pointToLayer: function(feature, latlng) {
+                return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+              }
+          }).addTo(self.map);
+        });
       },
       set_bbox: function(geos_obj) {
+        var self = this;
         var data = app.getRegion('mainRegion').currentView.model.attributes || geos_obj;
-        this.map.fitBounds([
+        self.map.fitBounds([
                 [data.bbox[0][1], data.bbox[0][0]],
                           [data.bbox[1][1], data.bbox[1][0]]
                         ]);
+
+        self.add_points(data.id);
+        // self.set_style(data.id);
+
+        self.geojsonTileLayer.on('load', function() {
+          self.set_style(data.id);
+        });
       },
       toggle: function() {
           var self = this;
@@ -350,23 +392,7 @@ define([
             
             // map.addLayer(geojsonTileLayer);
 
-            // //FIXME: I don't know the best design approach to lazy-loading relational 1:m models
-            // var url = window.location.origin + '/parks/' + self.model.attributes.id + '/facilities/';
 
-            // $.get(url, function(response) {
-            //   var myStyle = {
-            //       "color": "#ff7800",
-            //       "weight": 5,
-            //       "opacity": 0.65
-            //   };
-
-            //   L.geoJson(response, {
-            //       style: myStyle,
-            //       pointToLayer: function(feature, latlng) {
-            //         return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
-            //       }
-            //   }).addTo(app.map);
-            // });
         },
         modelEvents: {
           "change": function () {
