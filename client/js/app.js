@@ -116,7 +116,7 @@ define([
             maxZoom: 18
         }).addTo(this.map);
         
-        var style = {
+        self.style = {
             clickable: true,
             color: "#00c800",
             weight: 0,
@@ -127,7 +127,7 @@ define([
 
 
 
-        var hoverStyle = {
+        self.hoverStyle = {
             "fillOpacity": 1
         };
         var geojsonURL = 'http://104.131.99.131:8080/parks/{z}/{x}/{y}.json';
@@ -139,16 +139,16 @@ define([
             }, {
                 style: function(feature, layer) {
 
-                  return style;  
+                  return self.style;  
                 },
                 reuseTiles: true,
                 onEachFeature: function (feature, layer) {
                     if (!(layer instanceof L.Point)) {
                         layer.on('mouseover', function () {
-                            layer.setStyle(hoverStyle);
+                            layer.setStyle(self.hoverStyle);
                         });
                         layer.on('mouseout', function () {
-                            layer.setStyle(style);
+                            layer.setStyle(self.style);
                         });
                     }
 
@@ -159,7 +159,6 @@ define([
                         popupString += '</div>';
                         layer.bindPopup(popupString);
                     }
-
                 }
             }
           );
@@ -169,6 +168,7 @@ define([
         return this;
       },
       set_style: function(highlightID) {
+        var self = this;
         var highlightStyle = {
             clickable: true,
             color: "#00c800",
@@ -177,24 +177,32 @@ define([
             fillColor: "#00DC00",
             fillOpacity: 0.9
           };
-        var self = this;
-        window.geojsonLayer = self.geojsonTileLayer;
-        self.geojsonTileLayer.geojsonLayer.eachLayer(function (layer) {
-          self.geojsonTileLayer.geojsonLayer.resetStyle(layer);
-          if(layer.feature.properties.id == highlightID) {    
-              layer.setStyle(highlightStyle) 
-              layer.on('mouseout', function () {
-                layer.setStyle(highlightStyle);
-              });
-            }
+
+        var restyle = function(callback) {
+          self.geojsonTileLayer.geojsonLayer.eachLayer(function (layer) {
+            self.geojsonTileLayer.geojsonLayer.resetStyle(layer);
+            layer.on('mouseover', function () {
+                layer.setStyle(self.hoverStyle);
+            });
+            layer.on('mouseout', function () {
+                layer.setStyle(self.style);
+            });
+            if(layer.feature.properties.id == highlightID) {
+                layer.setStyle(highlightStyle) 
+                layer.on('mouseout', function () {
+                  layer.setStyle(highlightStyle);
+                });
+              }
+          });
+          callback();
+        };
+
+        restyle(function() {
+          // self.geojsonTileLayer.bringToBack();
         });
-        // self.geojsonTileLayer.eachLayer(function (layer) {  
-        //   console.log(layer);
-        // });
       },
       add_points: function(id) {
         var self = this;
-
 
         // clear out existing markers.
         if (self.activity_markers) {
@@ -228,24 +236,26 @@ define([
                         ]);
 
         self.add_points(data.id);
-        // self.set_style(data.id);
-
         self.geojsonTileLayer.on('load', function() {
           self.set_style(data.id);
+          self.activity_markers.bringToFront();
         });
+        // self.map.on('move', function() {
+        //   self.set_style(data.id);
+        // });
       },
-      toggle: function() {
-          var self = this;
-          if (self.visible) {
-            app.getRegion('mapRegion').currentView.$el.slideUp();
-            self.visible = false;
-          } else {
-            this.$el.hide().slideDown(function() {
-              self.map.invalidateSize();
-              self.set_bbox();
-            });
-            self.visible = true;
-          }
+      toggle: function(chosenState) {
+        var self = this;
+        if (self.visible) {
+          app.getRegion('mapRegion').currentView.$el.slideUp();
+          self.visible = false;
+        } else {
+          this.$el.hide().slideDown(function() {
+            self.map.invalidateSize();
+            self.set_bbox();
+          });
+          self.visible = true;
+        }
       }
     });
 
