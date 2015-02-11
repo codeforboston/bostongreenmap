@@ -3,12 +3,8 @@
        </div> --}}
 <div id="carousel-example-generic">
   <!-- Wrapper for slides -->
-  <div class="center-content" style="position: relative">
-        <div class="toggle-box">
-         <div class="toggle-text">
-          <a id="toggle">Map</a>
-         </div>
-        </div>
+    <div class="center-content" style="position: relative">
+        <!--this is where the toggle code was before moving it to header.hbs -->
     <div style="position:absolute; z-index:1000">
       <div class="floating-text">
         <div class="park-information">
@@ -60,10 +56,10 @@
   </div>
   <div id="orbs" class="owl-carousel orbs">
     {{#if area}}
-      <div class="item circle">{{area}} Acres</div>
+      <div class="item circle"><span id="area">{{area}}</span> Acres</div>
     {{/if}}
     {{#if access}}
-      <div class="item circle">P</div>
+      <div class="item circle"><span id="acess">PUBLIC</span></div>
     {{/if}}
   </div>
 </div> 

@@ -5,27 +5,29 @@
   //   z-index: -1;
   // }
 
-  .toggle-box {
-     position:absolute;
-     right:0;
-     top:0px;
-     background-image: url('/static/img/map-image.png');
-     z-index:1200;
-     width: 0;
-     height:0;
-     border-top: 100px solid transparent;
-     border-left: 100px solid #00a000;
-  }
-  .toggle-text {
-    position: absolute;
-    right:15;
-    top:-83px;
-    font-size: 1.3em;
-  a {
-    color: darkblue;
-    cursor: pointer;
-   }
-  }
+ // .toggle-box {
+ //    position: fixed;
+     //margin-right: 100px;
+ //    right: 15%;
+ //    top:130px;
+ //   background-color: rgba(0,120,0,0.8);
+     //background-image: url('/static/img/map-image.png');
+//     z-index:1200;
+  //   width: 100px;
+  //   height:25px;
+    // border-top: 100px solid transparent;
+     //border-left: 100px solid #00a000;
+ // }
+ // .toggle-text {
+ //   position: relative;
+ //   font-size: 1em;
+ //   padding: 5px;
+ // a {
+ //   color: white;
+ //   cursor: pointer;
+ //  }
+ // }
+
   .park-content {
     min-height: 713px;
     margin: 5px;
@@ -41,7 +43,7 @@
 
   .park-title {
     background-color: #fff;
-    opacity: 0.93;
+    opacity: 0.85;
     margin-bottom: 20px;
     color: orange;
     padding: 10px;
@@ -52,12 +54,13 @@
     h1{
       //font-family: 'Montserrat', sans-serif;
       font-weight: 400;
+      color: #556C98;
     }
   }
 
-  .park-description { 
+  .park-description {
     background-color: #fff;
-    opacity: 0.93;
+    opacity: 0.85;
     max-width: 350px;
     // max-height: 200px;
     margin-bottom: 20px;
@@ -86,15 +89,28 @@
 
   .quick-facts {
     background-color: white;
+    font-weight: 400;
     .orbs {
       margin: 0 auto;
       max-width: 950px;
       margin-bottom: 0px;
-    }
+      }
     .item.circle {
+      height: 150px;
+      line-height: 150px;
+      font-size: 2em;
       text-align: center;
-      font-size: 1.5em;
-      padding-top: 25%;
+      //padding-top: 15%;
+      font-weight: 700;
+      background-color: rgba(0,120,0,0.8);
+      color: white;
+    }
+    #area {
+      //font-size: 3em;
+      display: inline-block;
+      
+      vertical-align: middle;
+      line-height: normal;
     }
   }
 
