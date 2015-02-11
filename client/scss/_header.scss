@@ -24,6 +24,10 @@
       }
   }
 
+  #nav-index-beta {
+    text-transform: lowercase;
+    font-size: 0.7em;
+  }
   .navlinks {
       text-decoration: none !important;
       color: rgb(47, 127, 84) !important;
@@ -70,6 +74,28 @@
     }
     .navbar {
       border: 0px;
+    }
+    .toggle-box {
+     position: relative;
+     float: right;
+     margin-bottom: 10px;
+     background-color: rgba(0,120,0,0.8);
+     width: 75px;
+     height:25px;
+     //background-image: url('/static/img/map-image.png');
+     //z-index:1200;
+     //border-top: 100px solid transparent;
+     //border-left: 100px solid #00a000;
+    }
+    .toggle-text {
+    //position: relative;
+    font-size: 1em;
+    padding: 3px 7px 0 0;
+    text-align: right;
+    a {
+    color: white;
+    cursor: pointer;
+     }
     }
   }
 
