@@ -100,8 +100,15 @@ define([
 
     var MapView = Marionette.ItemView.extend({
       initialize: function() {
+        var self = this;
         this.listenTo(app, 'map:toggle', this.toggle)
         this.listenTo(app, 'park:changed', this.set_bbox);
+        this.listenTo(app, 'park:destroyed', function() { 
+          console.log("closing...");
+          self.visible=true;   
+          self.toggle();
+          return this; 
+        });
         return this;
       },
       id: 'map',
@@ -225,7 +232,7 @@ define([
                 return new L.marker(latlng, {
                                       icon: L.divIcon({
                                           // Specify a class name we can refer to in CSS.
-                                          className: 'custom',
+                                          className: 'count-icon',
                                           // Define what HTML goes in each marker.
                                           html: 1,
                                           // Set a markers width and height.
@@ -234,6 +241,11 @@ define([
                                   }).addTo(self.map);
               }
             });
+
+          self.geojsonTileLayer.on('load', function() {
+            self.activity_markers.bringToFront();
+          });
+
         });
       },
       set_bbox: function(geos_obj) {
@@ -247,14 +259,18 @@ define([
         self.add_points(data.id);
         self.geojsonTileLayer.on('load', function() {
           self.set_style(data.id);
-          self.activity_markers.bringToFront();
         });
         // self.map.on('move', function() {
         //   self.set_style(data.id);
         // });
       },
       toggle: function(chosenState) {
+        // console.log(chosenState);
         var self = this;
+        // var switchTo = self.visible
+        // if (chosenState !== undefined) {
+        //   switchTo = chosenState;
+        // }
         if (self.visible) {
           app.getRegion('mapRegion').currentView.$el.slideUp();
           self.visible = false;
@@ -365,34 +381,42 @@ define([
           
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
-                autoPlay: true, //Set AutoPlay to 3 seconds
-               items: 1,
-               stopOnHover: true,
-               singleItem: true
+              autoPlay: 10000, //Set AutoPlay to 3 seconds
+              items: 1,
+              paginationSpeed: 5000,
+              slideSpeed: 2000,
+              stopOnHover: true,
+              singleItem: true
             });
 
             self.$('#orbs').owlCarousel({
-              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              autoPlay: 10000, //Set AutoPlay to 3 seconds
               items : 4,
               navigation: true,
+              slideSpeed: 2000,
+              paginationSpeed: 5000,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
             });
 
             self.$('#nearby').owlCarousel({
-              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              autoPlay: 10000, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
+              paginationSpeed: 5000,
+              slideSpeed: 2000,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
             });
 
             self.$('#recommended').owlCarousel({
-              autoPlay: 3000, //Set AutoPlay to 3 seconds
+              autoPlay: 10000, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
+              paginationSpeed: 5000,
+              slideSpeed: 2000,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
@@ -412,11 +436,6 @@ define([
             // map.addLayer(geojsonTileLayer);
 
 
-        },
-        modelEvents: {
-          "change": function () {
-            console.log("Trigger!");
-          } 
         }
     });
 
@@ -574,13 +593,18 @@ define([
         }
     });
 
+
     app.addInitializer(function(options) {
         app.getRegion('navRegion').show(new HeaderView());
         app.getRegion('footerRegion').show(new FooterView());
         app.getRegion('mapRegion').show(new MapView());
 
         router = new app.Router();
-        router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); })
+        router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); });
+        router.on('route:home route:about route:mission route:contact route:results', function() {
+          console.log("route:home fired");
+          app.trigger("park:destroyed")
+        });
         app.execute('setRouter', router);
         Backbone.history.start();
     });
