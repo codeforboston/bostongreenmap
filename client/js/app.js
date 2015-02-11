@@ -99,6 +99,9 @@ define([
     });
 
     var MapView = Marionette.ItemView.extend({
+      // events: {
+      //   'click #toggle': this.toggle
+      // },
       initialize: function() {
         var self = this;
         this.listenTo(app, 'map:toggle', this.toggle)
@@ -296,7 +299,10 @@ define([
             'click #nav-about': 'goToAbout',
             'click #nav-mission': 'goToMission',
             'click #nav-index': 'goToIndex',
-            'click #nav-contact': 'goToContact'
+            'click #nav-contact': 'goToContact',
+            'click #toggle': function() {
+              app.trigger('map:toggle');
+            },
         },
         template: templates['client/templates/header.hbs'],
         tagName: 'div',
