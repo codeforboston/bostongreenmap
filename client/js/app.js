@@ -210,10 +210,11 @@ define([
       },
       add_points: function(id) {
         var self = this;
-
+        window.map = self.activity_markers;
         // clear out existing markers.
         if (self.activity_markers) {
           self.map.removeLayer(self.activity_markers);
+          self.activity_markers.clearLayers();
         }
 
         //FIXME: I don't know the best design approach to lazy-loading relational 1:m models
@@ -229,7 +230,7 @@ define([
           self.activity_markers = L.geoJson(response, {
               style: myStyle,
               pointToLayer: function(feature, latlng) {
-                return new L.marker(latlng, {
+                return L.marker(latlng, {
                                       icon: L.divIcon({
                                           // Specify a class name we can refer to in CSS.
                                           className: 'count-icon',
@@ -238,9 +239,9 @@ define([
                                           // Set a markers width and height.
                                           iconSize: [40, 40]
                                       })
-                                  }).addTo(self.map);
+                                  });
               }
-            });
+            }).addTo(self.map);
 
           self.geojsonTileLayer.on('load', function() {
             self.activity_markers.bringToFront();
