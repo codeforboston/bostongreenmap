@@ -3,6 +3,10 @@
 from os.path import join, abspath, dirname
 import os
 import sys
+
+from os import environ
+
+
 # Defines the parent directory that contains the settings file as
 # the PROJECT_ROOT. It is used for relative settings elsewhere.
 here = lambda *x: join(abspath(dirname(__file__)), *x)
@@ -11,6 +15,7 @@ root = lambda *x: join(abspath(PROJECT_ROOT), *x)
 SETTINGS_DIR = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
 LOGIN_REDIRECT_URL = '/login_redirect'
 
@@ -81,22 +86,27 @@ STATIC_ROOT = root('collected_static')
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+
+###############################################
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    # MEDIA_ROOT,
     root('static'),
     root('client')
 )
 
 # List of finder classes that know how to find static files in
 # various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+# #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+# )
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '2nq6(xmm9pp^%$k9=$qq28$kj$w!g^7na_0@e%(658#+7qj1ho'
@@ -137,13 +147,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    # 'django.contrib.staticfiles',
+    # 's3_folder_storage',
+    'storages',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.markup',
     'django.contrib.humanize',
     'django.contrib.gis',
-    # 'registration',
+    'django.contrib.staticfiles',
     'south',
     'parks',
     'sorl.thumbnail',

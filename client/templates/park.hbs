@@ -1,6 +1,6 @@
-
+{{!-- 
 <div id="map" style="height: 600px; width:100%">
-       </div>
+       </div> --}}
 <div id="carousel-example-generic">
   <!-- Wrapper for slides -->
   <div class="center-content" style="position: relative">
@@ -22,9 +22,7 @@
           {{/if}}
           <div class="park-activities row">
             {{#each activities}}
-              <a> 
-                <div class="park-activity {{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
-              </a>
+              <div class="park-activity icon icon-{{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
             {{/each}}
           </div>
         </div>

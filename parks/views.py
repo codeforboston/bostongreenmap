@@ -129,7 +129,7 @@ def get_facilities(request, park_id):
         facilities = Facility.objects.transform(4326).filter(park=park).select_related('facilitytype').prefetch_related('activity')
         features = []
         for f in facilities:
-            activities = [a.name for a in f.activity.all()]
+            activities = [{'name': a.name, 'slug': a.slug} for a in f.activity.all()]
             geojson_prop = dict(
                 name=f.name,
                 icon=f.facilitytype.icon.url,
