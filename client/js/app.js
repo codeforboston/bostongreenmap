@@ -214,7 +214,6 @@ define([
         // clear out existing markers.
         if (self.activity_markers) {
           self.map.removeLayer(self.activity_markers);
-          self.activity_markers.clearLayers();
         }
 
         //FIXME: I don't know the best design approach to lazy-loading relational 1:m models
@@ -232,14 +231,20 @@ define([
               pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                                       icon: L.divIcon({
-                                          // Specify a class name we can refer to in CSS.
-                                          className: 'count-icon',
-                                          // Define what HTML goes in each marker.
-                                          html: 1,
-                                          // Set a markers width and height.
-                                          iconSize: [40, 40]
+                                          className: 'icon icon-' + feature.properties.activities[0].slug,
+                                          // html: '<div class="icon icon-' + feature.properties.activities[0].slug + '"></div>',
+                                          // iconSize: [100, 100]
                                       })
                                   });
+              },
+              onEachFeature: function(feature, layer) {
+                var activities = '<ul>';
+
+                for (var i = 0, len = feature.properties.activities.length; i <len; i++) {
+                  activities += '<li>' +feature.properties.activities[i].name + '</li>';
+                }
+                activities += '</ul';
+                layer.bindPopup(activities)
               }
             }).addTo(self.map);
 
