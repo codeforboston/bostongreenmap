@@ -231,8 +231,8 @@ define([
               pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                                       icon: L.divIcon({
-                                          className: 'icon icon-' + feature.properties.activities[0].slug,
-                                          // html: '<div class="icon icon-' + feature.properties.activities[0].slug + '"></div>',
+                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug,
+                                          // html: '<div class="park-activity icon icon-' + feature.properties.activities[0].slug + '"></div>',
                                           // iconSize: [100, 100]
                                       })
                                   });
