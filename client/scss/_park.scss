@@ -12,21 +12,17 @@
    background-color: lightgray;
   }
 
-
   .park-title {
     background-color: #fff;
     opacity: 0.85;
     margin-bottom: 20px;
     color: orange;
-    padding: 10px;
+    padding: 0px 10px;
     display: inline-block;
-    //-webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    //-moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    //box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
     h1{
-      //font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       color: #556C98;
+      margin: 5px 0;
     }
   }
 
@@ -38,10 +34,6 @@
     margin-bottom: 20px;
     padding: 10px;
     font-size: 1.2em;
-    // overflow-y: scroll;
-   //-webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    //-moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
-    //box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
   }
 
   .park-activities {
@@ -50,6 +42,16 @@
     .park-activity {
       font-size: 24px;
       display: inline-block;
+      background-color: white;
+      color: #556C98;
+      opacity: 0.85;
+      height: 35px;
+      width: 35px;
+      border-radius: 35px;
+      text-align:center;
+    }
+    .icon {
+      padding-top:4px;
     }
   }
 
@@ -72,22 +74,18 @@
       line-height: 150px;
       font-size: 2em;
       text-align: center;
-      //padding-top: 15%;
       font-weight: 700;
       background-color: rgba(0,120,0,0.8);
       color: white;
     }
     #area {
-      //font-size: 3em;
       display: inline-block;
-      
       vertical-align: middle;
       line-height: normal;
     }
   }
 
   .recommended-parks {
-    //background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;
@@ -96,7 +94,6 @@
   }
 
   .nearby-parks {
-   // background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;
@@ -112,6 +109,20 @@
     width: 100%;
     height: auto;
   }
+  .owl-buttons {
+    margin-bottom: 20px;
+  }
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #fff;
+  opacity: 0.9;
+  }
+.tooltip-inner {
+  color: #556C98;
+  background: #fff;
+  border: solid 1px #fff;
+  opacity: 0.9;
+}
 
   @media (max-width:600px) {
     .park-information {
