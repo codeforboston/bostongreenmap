@@ -29,7 +29,9 @@
     {{#if images}}
       {{#each images}}
         <div class="item">
-          <div class="carousel-image" style="background-image: url('{{large_src}}');" alt="..."></div>
+          <div class="carousel-image" alt="...">
+            <img class="lazyOwl" data-src="{{large_src}}"></img>
+          </div>
           <div class="carousel-caption"></div>
         </div>
       {{/each}}

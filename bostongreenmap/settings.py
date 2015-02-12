@@ -238,14 +238,14 @@ def load_settings(settings_filename):
     with open(settings_filename, 'r') as settings_file:
         exec(settings_file.read(), globals())
 
-# heroku/dokku settings
-if os.environ.get('IS_OKU'):
-    load_settings('oku_settings.py')
-
 # import local settings
 try:
     from local_settings import *
 except ImportError:
     pass
+
+# heroku/dokku settings
+if os.environ.get('IS_OKU'):
+    load_settings('oku_settings.py')
 
 MBTA_DISTANCE = 0.5 # Distance to search for MBTA stops on Park Page and Trips.

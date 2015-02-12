@@ -15,10 +15,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     # Home
-    url(r'^$', HomePageView.as_view(), name='home'),
+    # url(r'^$', HomePageView.as_view(), name='home'),
 
     # Backbone App
-    url(r'^backbone', BackboneHomePageView.as_view(), name='backbone_home'),
+    url(r'^$', BackboneHomePageView.as_view(), name='backbone_home'),
 
     # Hackathon App
     url(r'^hackathon', HackathonHomePageView.as_view(), name='hackathon_home'),

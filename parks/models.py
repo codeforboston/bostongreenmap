@@ -127,6 +127,7 @@ class Parkimage(models.Model):
     image = models.ImageField(upload_to='parkimages')
     caption = models.TextField(default='', blank=True)
     hero_image = models.BooleanField(default=False)
+    default = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('Parkimage')
