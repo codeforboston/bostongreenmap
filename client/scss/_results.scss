@@ -1,6 +1,6 @@
 .results {
   margin: 0 auto;
-  width: 1250px;
+  max-width: 1200px;
   .result {
     border: 4px solid;
     border-color: white;
@@ -16,6 +16,25 @@
       // float: left;
       // margin-bottom: 10px;
     }
+    .park-title-wrapper {
+      //position: relative;
+      bottom: 30px;
+      padding: 0 0 0 10px;
+      opacity: 0.9;
+      a{
+        font-weight: bold;
+      }
+    }
 
   }
+
+  @media (min-width: 900px) and (max-width: 1200px) {
+  max-width: 900px;
+   }
+  @media (min-width: 600px) and (max-width: 900px) {
+  max-width: 600px;
+   }
+  @media (min-width: 300px) and (max-width: 600px) {
+  max-width: 300px;
+   }
 }

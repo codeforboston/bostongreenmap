@@ -33,9 +33,10 @@ a {
 }
 
 #map {
-  height: 500px;
+  height: 70%;
   width:100%;
   display: none;
+  margin-bottom: 20px;
 }
 
 #content-area {
@@ -116,13 +117,13 @@ a {
 }
 
 #next { 
-  width: 950px;
+  max-width: 1200px;
   height: 60px;
   text-align: center;
-  margin-left: auto ;
-  margin-right: auto ;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  border-left: 4px solid;
+  border-right: 4px solid;
+  border-color: white;
+  margin: 15px auto;
   background-color: #339333;
   cursor: pointer;
   h1 {
@@ -131,6 +132,15 @@ a {
     top: 50%;
     transform: translateY(-50%);
   }
+  @media (min-width: 900px) and (max-width: 1200px) {
+  max-width: 900px;
+   }
+  @media (min-width: 600px) and (max-width: 900px) {
+  max-width: 600px;
+   }
+  @media (min-width: 300px) and (max-width: 600px) {
+  max-width: 300px;
+   }
 }
 
 #next:hover {
