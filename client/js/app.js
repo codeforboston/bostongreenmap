@@ -99,15 +99,11 @@ define([
     });
 
     var MapView = Marionette.ItemView.extend({
-      // events: {
-      //   'click #toggle': this.toggle
-      // },
       initialize: function() {
         var self = this;
         this.listenTo(app, 'map:toggle', this.toggle)
         this.listenTo(app, 'park:changed', this.set_bbox);
         this.listenTo(app, 'park:destroyed', function() { 
-          console.log("closing...");
           self.visible=true;   
           self.toggle();
           return this; 
@@ -118,7 +114,8 @@ define([
       visible: false,
       render: function() {
         var self = this;
-        this.map = L.map(this.el, {scrollWheelZoom: false});
+        var boston = new L.LatLng(42.357778, -71.061667);
+        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 13});
         L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
             subdomains: 'abcd',
@@ -260,21 +257,23 @@ define([
       set_bbox: function(geos_obj) {
         var self = this;
         var data = app.getRegion('mainRegion').currentView.model.attributes || geos_obj;
-        self.map.fitBounds([
-                [data.bbox[0][1], data.bbox[0][0]],
-                          [data.bbox[1][1], data.bbox[1][0]]
-                        ]);
+        
+        if (data.bbox) {
+          self.map.fitBounds([
+                  [data.bbox[0][1], data.bbox[0][0]],
+                            [data.bbox[1][1], data.bbox[1][0]]
+                          ]);
+          self.add_points(data.id);
+          self.geojsonTileLayer.on('load', function() {
+            self.set_style(data.id);
+          });
+        }
 
-        self.add_points(data.id);
-        self.geojsonTileLayer.on('load', function() {
-          self.set_style(data.id);
-        });
         // self.map.on('move', function() {
         //   self.set_style(data.id);
         // });
       },
       toggle: function(chosenState) {
-        // console.log(chosenState);
         var self = this;
         // var switchTo = self.visible
         // if (chosenState !== undefined) {
@@ -393,42 +392,43 @@ define([
           
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
-              autoPlay: 10000, //Set AutoPlay to 3 seconds
+              autoPlay: 5000, //Set AutoPlay to 3 seconds
               items: 1,
-              paginationSpeed: 5000,
-              slideSpeed: 2000,
+              lazyLoad: true,
+              paginationSpeed: 1500,
+              slideSpeed: 1500,
               stopOnHover: true,
               singleItem: true
             });
 
             self.$('#orbs').owlCarousel({
-              autoPlay: 10000, //Set AutoPlay to 3 seconds
+              autoPlay: 5000, //Set AutoPlay to 3 seconds
               items : 4,
               navigation: true,
-              slideSpeed: 2000,
-              paginationSpeed: 5000,
+              slideSpeed: 1500,
+              paginationSpeed: 1500,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
             });
 
             self.$('#nearby').owlCarousel({
-              autoPlay: 10000, //Set AutoPlay to 3 seconds
+              autoPlay: 2000, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
-              paginationSpeed: 5000,
-              slideSpeed: 2000,
+              paginationSpeed: 1500,
+              slideSpeed: 1500,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
             });
 
             self.$('#recommended').owlCarousel({
-              autoPlay: 10000, //Set AutoPlay to 3 seconds
+              autoPlay: 5000, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
-              paginationSpeed: 5000,
-              slideSpeed: 2000,
+              paginationSpeed: 1500,
+              slideSpeed: 1500,
               itemsDesktop : [1199,3],
               itemsDesktopSmall : [979,3],
               stopOnHover: true
@@ -539,7 +539,7 @@ define([
             'contact': 'contact',
             'results/:queryString': 'results',
             'parks/:park_slug/': 'park',
-            'parks/:park_slug/:map': 'park'
+            'parks/:park_slug': 'park'
 
         },
         home: function() {
@@ -592,14 +592,14 @@ define([
             var park = new Park({'park_slug': park_slug});
             park.fetch({'success': function() {
               if(map) {
+                app.trigger("map:toggle")
                 map = true;
               } else {
                 map = false;
               }
-
+              console.log(map);
               $('#loading').css("display", "none");
-              var parkView = new ParkView({'model': park, 'showMapState': map });
-              parkView.showMapState=map;
+              var parkView = new ParkView({'model': park });
               app.getRegion('mainRegion').show(parkView);
             }});
         }
@@ -614,7 +614,6 @@ define([
         router = new app.Router();
         router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); });
         router.on('route:home route:about route:mission route:contact route:results', function() {
-          console.log("route:home fired");
           app.trigger("park:destroyed")
         });
         app.execute('setRouter', router);
