@@ -231,9 +231,7 @@ define([
               pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                                       icon: L.divIcon({
-                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug,
-                                          // html: '<div class="park-activity icon icon-' + feature.properties.activities[0].slug + '"></div>',
-                                          // iconSize: [100, 100]
+                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug
                                       })
                                   });
               },
@@ -434,18 +432,7 @@ define([
               stopOnHover: true
             });
 
-            self.$('[data-toggle="tooltip"]').tooltip()
-
-            // app.map = L.map('map', {scrollWheelZoom: false});
-
-            // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-            //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-            //     subdomains: 'abcd',
-            //     minZoom: 0,
-            //     maxZoom: 18
-            // }).addTo(app.map);
-            
-            // map.addLayer(geojsonTileLayer);
+            self.$('[data-toggle="tooltip"]').tooltip();
 
 
         }
@@ -612,7 +599,6 @@ define([
         app.getRegion('mapRegion').show(new MapView());
 
         router = new app.Router();
-        router.on('route', function() { $('#loading').css("display", "block").on('click', function() { $(this).css('display', 'none') }); });
         router.on('route:home route:about route:mission route:contact route:results', function() {
           app.trigger("park:destroyed")
         });
