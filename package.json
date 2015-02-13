@@ -18,6 +18,6 @@
     "grunt-cli": "0.1.13"
   },
   "scripts": {
-    "postinstall": "grunt handlebars:compile"
+    "postinstall": "grunt handlebars:compile && grunt compass:dev"
   }
 }

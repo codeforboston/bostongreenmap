@@ -14,6 +14,10 @@ DATABASES['default']['OPTIONS'] = {
       'options': '-c search_path=bostongreenmap,public'
     }
 
+# DATABASES['default']['ENGINE'] = {
+#       'ENGINE': 'django.contrib.gis.db.backends.postgis'
+# }
+
 ########### S3 config ############
 # AWS_QUERYSTRING_AUTH = False
 # MEDIA_URL = '/media/'
