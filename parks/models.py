@@ -234,13 +234,21 @@ class Park(models.Model):
 
     def get_image_thumbnails(self, include_large=False):
         images = []
-        for i in self.images.all():
+        for i in self.images.filter(default=False):
             try:
                 images.append(i.get_thumbnail(include_large=include_large))
             except IOError, e:
                 logger.error(e)
             except Exception as e:
                 logger.error(e)
+        if not images:
+            for i in self.images.filter(default=True):
+                try:
+                    images.append(i.get_thumbnail(include_large=include_large))
+                except IOError, e:
+                    logger.error(e)
+                except Exception as e:
+                    logger.error(e)
         return images
 
     def to_external_document(self, user, include_large=False, include_extra_info=False):
