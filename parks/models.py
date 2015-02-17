@@ -147,6 +147,7 @@ class Parkimage(models.Model):
             image = {
                 'src': tn.url,
                 'caption': strip_tags(self.caption),
+                'default': self.default
             }
             if include_large:
                 try:

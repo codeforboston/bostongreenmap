@@ -26,7 +26,11 @@
     </div>
   </div>
   <div class="carousel-inner" id="carousel-images-container">
-    {{#if images}}
+    {{#if images.0.default}}
+
+
+
+    {{else}}
       {{#each images}}
         <div class="item">
           <div class="carousel-image" alt="...">
@@ -35,19 +39,6 @@
           <div class="carousel-caption"></div>
         </div>
       {{/each}}
-    {{else}}
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
     {{/if}}
   </div>
 </div>  

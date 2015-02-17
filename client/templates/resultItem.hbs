@@ -1,10 +1,20 @@
-{{#if images.0.src}}
-  <div class="medium">
-    <img src="{{images.0.med_src}}" alt={{owner}}>
-    <div class="park-title-wrapper">
-      <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+{{#if images}}
+  {{#if images.0.default}}
+    <div class="small">
+      <img src="{{images.0.src}}" alt={{owner}}>
+      <div class="park-title-wrapper">
+        <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+      </div>
     </div>
-  </div>
+  {{else}}
+    <div class="medium">
+      <img src="{{images.0.med_src}}" alt={{owner}}>
+      <div class="park-title-wrapper">
+        <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+      </div>
+    </div>
+  {{/if}}
+
 {{else}}
   <div class="small">
     <img src="http://placehold.it/300x200" alt={{owner}}>
