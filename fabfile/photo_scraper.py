@@ -6,7 +6,7 @@ import os
 
 CSV_FILE_PATH = os.path.join(
 	os.path.dirname(__file__),
-	"../media/curated_parkimages/park_photos_final.csv"
+	"../media/parkmasterimages1.0.csv"
 )
 
 # @task
@@ -28,7 +28,7 @@ def get(url):
 	return picture_name
 
 def curated_park_info():
-	file_path = PROJECT_ROOT+ '/media/curated_parkimages/park_photos_final.csv'
+	file_path = PROJECT_ROOT+ '/media/parkmasterimages1.0.csv'
 	park_info = []
 	count = 0
 	with open(file_path) as park_csv:
@@ -39,10 +39,10 @@ def curated_park_info():
 				continue
 
 			row = tuple(raw)
-			url, park_id, is_curated = row[0], int(float(row[1])), bool("true")
+			img_url, os_id, is_curated = row[15], row[1], bool("true")
 
 			if is_curated:
-				park_info.append( (url, park_id ) )
+				park_info.append( (img_url, os_id ) )
 			count += 1
 	return park_info
 
@@ -50,14 +50,14 @@ def curated_park_info():
 @task
 def download_photos():
 	db = anydbm.open('has_been_downloaded_2', 'c')
-	with cd(env.code+'/../media/curated_parkimages'):
+	with cd(env.code+'/../media/default_images'):
 		download_count = 0
 		skipped_count = 0
-		for url, park_id in curated_park_info():
+		for img_url, os_id in curated_park_info():
 			try:
-				if not url in db:
-					picture_name = get(url)
-					db[url] = picture_name
+				if not img_url in db:
+					picture_name = get(img_url)
+					db[img_url] = picture_name
 					download_count += 1
 				else:
 					skipped_count += 1
@@ -72,10 +72,10 @@ def download_photos():
 def write_photos_to_filesystem():
 	park_info = curated_park_info()
 	db = anydbm.open('has_been_downloaded_2', 'r')
-	for url, park_id in park_info:
-		if url in db[url]:
-			photo_path = db[url]
-			print url, photo_path
+	for img_url, os_id in park_info:
+		if img_url in db[img_url]:
+			photo_path = db[img_url]
+			print img_url, photo_path
 
 def setup_django_env():
 	from django.conf import settings
@@ -102,19 +102,19 @@ def add_photos_to_db():
 	### END DJANGO SETUP #############
 
 	db = anydbm.open('has_been_downloaded_2', 'r')
-	for url, park_id in curated_park_info():
-		if url in db:
+	for img_url, os_id in curated_park_info():
+		if img_url in db:
 			try:
-				park = Park.objects.get(id=park_id)
+				park = Park.objects.get(os_id=os_id)
 			except Exception as e:
 				print e
 				continue
 
 			### Create the image row and relate it to the Park
-			filename = db[url]
+			filename = db[img_url]
 			new_image_path = CURATE_PATH + '/' + filename
 
-			p_img, created = Parkimage.objects.get_or_create(image=new_image_path)
+			p_img, created = Parkimage.objects.get_or_create(image=new_image_path, default=True)
 			if created:
 				park.images.add(p_img)
 				# new_image = Parkimage.objects.get_or_create()
