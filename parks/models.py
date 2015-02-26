@@ -146,7 +146,7 @@ class Parkimage(models.Model):
             tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
             image = {
                 'src': tn.url,
-                'caption': strip_tags(self.caption),
+                'caption': self.caption,
                 'default': self.default
             }
             if include_large:
@@ -169,6 +169,7 @@ class Parkimage(models.Model):
             return None
     thumbnail.short_description = 'Image'
     thumbnail.allow_tags = True
+    get_thumbnail.allow_tags = True
 
     def get_parks_string(self):
         parks = [p.name for p in self.parks.all()]
