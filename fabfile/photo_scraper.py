@@ -1,13 +1,80 @@
+## direction: hit database to find all parks with less than 3 photos. We need a postgis grid of bounding boxes. 
+## We need to select out bounding boxes that intersect with the park queryset. 
+## Then, iterate over each bounding box, making a call to the Flickr.photos.search endpoint. 
+## the results should be loaded into a dbm, with coordinates. 
+## the dbm should somehow be queried spatially against the filtered tables? This is because flickr returns only bounding boxes..
+## Finally, join images spatially. ST_Intersect where each coord intersect with a park. Get that park's id because Parkimage is related to Park id. 
+# http://gis.stackexchange.com/a/16390
+
+
+
 from fabric.api import cd, run, put, env, task
 from settings import PROJECT_ROOT, DJANGO_APP_PATH, CURATE_PATH
 import anydbm
 import csv
 import os
+import flickrapi
+import sys
+from fabric.contrib import django
+sys.path.append(PROJECT_ROOT)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+django.settings_module('bostongreenmap.settings')
+from parks.models import Park, Parkimage, get_extent_for_openlayers
+from django.db import connection
+from parks.models import Park, Parkimage
+from django.db.models import Count
+from django.contrib.gis.geos import Point, Polygon
 
-CSV_FILE_PATH = os.path.join(
-	os.path.dirname(__file__),
-	"../media/parkmasterimages1.0.csv"
-)
+
+MIN_PICTURE_COUNT=3
+
+
+def get_parks():
+	cursor = connection.cursor()
+	parks_needing_images = Park.objects.annotate(num_photos=Count('images')).filter(num_photos__lt=MIN_PICTURE_COUNT)
+	query_extent = get_extent_for_openlayers(parks_needing_images, 26986)
+	print query_extent
+	nrow = int((abs(query_extent[1][1]) - abs(query_extent.coords[0][1]))/0.0025)
+	ncol = int((abs(query_extent[0][0]) - abs(query_extent.coords[1][0]))/0.0025)
+	### fishnet function
+	query = """CREATE OR REPLACE FUNCTION ST_CreateFishnet(
+        nrow integer, ncol integer,
+        xsize float8, ysize float8,
+        x0 float8 DEFAULT 0, y0 float8 DEFAULT 0,
+        OUT "row" integer, OUT col integer,
+        OUT geom geometry)
+    RETURNS SETOF record AS
+		$$
+		SELECT i + 1 AS row, j + 1 AS col, ST_Translate(cell, j * $3 + $5, i * $4 + $6) AS geom
+		FROM generate_series(0, $1 - 1) AS i,
+		     generate_series(0, $2 - 1) AS j,
+		(
+		SELECT ('POLYGON((0 0, 0 '||$4||', '||$3||' '||$4||', '||$3||' 0,0 0))')::geometry AS cell
+		) AS foo;
+		$$ LANGUAGE sql IMMUTABLE STRICT;
+		SELECT ST_AsText(ST_Envelope(ST_Transform(ST_SetSRID(cells.geom,4326),4326))) AS bbox
+		FROM ST_CreateFishnet({0}, {1}, 0.0025,0.0025, {2},{3}) AS cells;
+	""".format(nrow,ncol,query_extent.coords[0][0],query_extent.coords[0][1])
+	print query
+	cursor.execute(query);
+	print len(cursor.fetchall())
+		
+
+@task
+def flickr_connect():
+	flickr_key = os.environ.get('FLICKR_KEY')
+	flickr_secret = os.environ.get('FLICKR_SECRET')
+	bbox = "-71.1454299600001, 42.3716373610001, -71.1429299600001, 42.3741373610001"
+	flickr = flickrapi.FlickrAPI(flickr_key, flickr_secret, format='parsed-json')
+	# photos = flickr.photos.search(bbox= bbox, extras="license, geo, date_upload, owner_name")
+	get_parks()
+	# print(photos['photos']['total'])
+
+# SELECT ST_AsText(ST_Envelope(cells.geom)) AS bbox
+# FROM ST_CreateFishnet(4, 6, 10, 10) AS cells;
+
+# SELECT ST_AsText(ST_Envelope(ST_Transform(ST_SetSRID(cells.geom,4326),26986))) AS bbox
+# FROM ST_CreateFishnet(4, 6, 0.0025,0.0025, -71,42) AS cells;
 
 # @task
 # def write_curated_images_to_models():
