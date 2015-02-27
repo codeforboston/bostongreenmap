@@ -27,15 +27,16 @@ from django.contrib.gis.geos import Point, Polygon
 
 
 MIN_PICTURE_COUNT=3
-
+BBOX_W = 0.0045
+BBOW_H = 0.0045
 
 def get_parks():
 	cursor = connection.cursor()
 	parks_needing_images = Park.objects.annotate(num_photos=Count('images')).filter(num_photos__lt=MIN_PICTURE_COUNT)
 	query_extent = get_extent_for_openlayers(parks_needing_images, 26986)
 	print query_extent
-	nrow = int((abs(query_extent[1][1]) - abs(query_extent.coords[0][1]))/0.0025)
-	ncol = int((abs(query_extent[0][0]) - abs(query_extent.coords[1][0]))/0.0025)
+	nrow = int((abs(query_extent[1][1]) - abs(query_extent.coords[0][1]))/BBOW_H)
+	ncol = int((abs(query_extent[0][0]) - abs(query_extent.coords[1][0]))/BBOX_W)
 	### fishnet function
 	query = """CREATE OR REPLACE FUNCTION ST_CreateFishnet(
         nrow integer, ncol integer,
@@ -52,14 +53,25 @@ def get_parks():
 		SELECT ('POLYGON((0 0, 0 '||$4||', '||$3||' '||$4||', '||$3||' 0,0 0))')::geometry AS cell
 		) AS foo;
 		$$ LANGUAGE sql IMMUTABLE STRICT;
-		SELECT ST_AsText(ST_Envelope(ST_Transform(ST_SetSRID(cells.geom,4326),4326))) AS bbox
-		FROM ST_CreateFishnet({0}, {1}, 0.0025,0.0025, {2},{3}) AS cells;
-	""".format(nrow,ncol,query_extent.coords[0][0],query_extent.coords[0][1])
-	print query
-	cursor.execute(query);
-	print len(cursor.fetchall())
+
+		SELECT bbox FROM
+		(SELECT ST_Transform(ST_SetSRID(cells.geom,4326),26986) AS bbox
+				FROM ST_CreateFishnet({0}, {1}, {2},{3}, {4}, {5}) AS cells) AS results,
+		parks_park
 		
 
+
+	""".format(nrow,ncol,BBOX_W, BBOW_H, query_extent.coords[0][0],query_extent.coords[0][1])
+	print query
+	cursor.execute(query);
+	for row in cursor.fetchall():
+		print row
+		
+		# SELECT ST_Transform(bbox,4326) FROM 
+		# ( SELECT ST_Envelope(ST_Transform(ST_SetSRID(cells.geom,4326),26986)) AS bbox
+		# FROM ST_CreateFishnet({0}, {1}, {2},{3}, {4}, {5}) AS cells ) AS results,
+		# parks_park		
+		# WHERE ST_Intersects(results.bbox, parks_park.geometry);
 @task
 def flickr_connect():
 	flickr_key = os.environ.get('FLICKR_KEY')
