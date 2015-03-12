@@ -1,21 +1,47 @@
+#results {
+  max-width: 100%;
+}
 .results {
-  margin: 0 auto;
-  max-width: 1200px;
+  // margin: 0 auto;
+  width: 100%;
+  .grid-sizer {
+    height: 60px;
+    width: 20%;
+    float: left;
+  }
+
+  .h2 { height: 100px; }
+  .h3 { height: 400px; }
+  .h4 { height: 180px; }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  .small {
+    // height: 20%; 
+    // width: 10%;
+    // float: left;
+    // margin-bottom: 10px;
+  }
+
+  .medium {
+    height: 30%; 
+    width: 20%;
+    img {
+      width: 100%;
+    }
+    // float: left;
+    // margin-bottom: 10px;
+  }
+
   .result {
-    border: 4px solid;
-    border-color: white;
-    .small {
-      height: 192px; 
-      width: 292px;
-      // float: left;
-      // margin-bottom: 10px;
+    width: 20%;
+    // border: 4px solid;
+    // border-color: white;
+    img {
+      width: 100%;
     }
-    .medium {
-      height: 392px; 
-      width: 592px;
-      // float: left;
-      // margin-bottom: 10px;
-    }
+
     .park-title-wrapper {
       //position: relative;
       bottom: 30px;
@@ -27,14 +53,16 @@
     }
 
   }
+  .w2 { width:  40%;  }
 
-  @media (min-width: 900px) and (max-width: 1200px) {
-  max-width: 900px;
-   }
-  @media (min-width: 600px) and (max-width: 900px) {
-  max-width: 600px;
-   }
-  @media (min-width: 300px) and (max-width: 600px) {
-  max-width: 300px;
-   }
+
+  // @media (min-width: 900px) and (max-width: 1200px) {
+  //   max-width: 900px;
+  // }
+  // @media (min-width: 600px) and (max-width: 900px) {
+  //   max-width: 600px;
+  // }
+  // @media (min-width: 300px) and (max-width: 600px) {
+  //   max-width: 300px;
+  // }
 }

@@ -77,7 +77,8 @@ define([
     var ParksCollection = Backbone.PageableCollection.extend({
         model: Park,
         initialize: function(params) {
-            this.queryString = params.queryString
+            this.queryString = params.queryString;
+
         },
         url: function() {
             var search_url = 'parks/search/?' + this.queryString;
@@ -372,11 +373,7 @@ define([
           }
         },
         initialize: function() {
-          if (this.showMapState === undefined) {
-            this.showMapState = false;
-          };
-
-          this.on("show", function() {
+          this.listenTo(this,"show", function() {
             app.trigger("park:changed", this);
           });
 
@@ -440,10 +437,28 @@ define([
 
     var ResultItemView = Marionette.ItemView.extend({
         template: templates['client/templates/resultItem.hbs'],
-        className: 'result'
+        className: 'result',
+        onRender: function() {
+          var self = this;
+          console.log(self.model.get("images"));
+          if(self.model.get("images")[0]) { //does this property exist
+            if(self.model.get("images")[0].default) {
+              $(this.el).addClass('h2');
+            } else {
+              $(this.el).addClass('w2').addClass('h3'); 
+            }
+          }
+          
+        }
     }); 
 
     var ResultsView = Marionette.CompositeView.extend({
+        // initialize: function () {
+        //   console.log(this);
+        //   this.listenTo(this.collection, 'change', function (name) {
+        //     console.log("model changed");
+        //   });
+        // },
         events: {
           'click #previous-button': 'getLastPage',
           'click #next': 'getNextPage'
@@ -469,7 +484,8 @@ define([
           $('#loading').css("display", "none");
 
           self.msnry = new Masonry(self.el, {
-            itemSelector: '.result'
+            itemSelector: '.result',
+            columnWidth: '.grid-sizer'
           }); 
         }, 
         onAddChild: function (childView) {
@@ -492,7 +508,7 @@ define([
         this.results.currentView.initialized = true;
 
       },
-      className: "resultsSection",
+      className: "results-layout",
       collection: ParksCollection,
       template: templates['client/templates/all_results.hbs'],
       regions: {
@@ -500,23 +516,6 @@ define([
         next: "#next"
       }
     });
-
-    // var MainContentLayout = Backbone.Marionette.LayoutView.extend({
-    //   // I think this is handled in the Router
-    //   // onShow: function() {
-    //   //   this.getRegion('content').show(new ParkView({'model': this.model}));
-    //   //   this.getRegion('map').show(new MapView());
-    //   // },
-    //   id: "main-content-section",
-    //   // model: Park,
-    //   // el: '#main-content-section'
-    //   // el: '#main-content-section',
-    //   template: templates['client/templates/main_content_layout.hbs'],
-    //   regions: {
-    //     content: "#content",
-    //     map: "#map"
-    //   }
-    // })
 
     app.Router = Backbone.Router.extend({
         routes: {
@@ -584,7 +583,6 @@ define([
               } else {
                 map = false;
               }
-              console.log(map);
               $('#loading').css("display", "none");
               var parkView = new ParkView({'model': park });
               app.getRegion('mainRegion').show(parkView);

@@ -27,7 +27,7 @@
     //z-index: 500;
     background-color: rgba(0,160,0,0.8);
 }
-
+  
   .logo-grass {
     position: relative;
     display: inline-block;
@@ -38,7 +38,7 @@
     margin: 0px auto;
     margin-bottom: -20px;
     opacity: 0.9;
-  }
+  }  
 
   .find-your-space {
     display: block;
@@ -46,7 +46,7 @@
     z-index: 1000;
     background-color: rgba(0,160,0,0.9);
     color: white;
-    padding: 0 1% 1% 1%;
+    padding: 0 0 5px 0;
     margin: 0 auto;
     max-width: 100%;
     //100: 600px;
@@ -89,29 +89,29 @@
   }
 
   .chosen-single {
-  position:relative;
-  display: block !important;
-  margin: 0 auto !important;
-  overflow: hidden;
-  padding:10px 0 0 8px !important;
-  height:49px !important;
-  width: 175px !important;
-  border:0px solid #aaa !important;
-  border-radius:2px !important;
-  background:-webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#fff),color-stop(50%,#fff),color-stop(52%,blue),color-stop(100%,blue)) !important;
-  background:-webkit-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
-  background:-moz-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
-  background:-o-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
-  background:linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
-  background-clip:padding-box;
-  box-shadow:0 0 0px #fff inset,0 0px 0px rgba(0,0,0,.1) !important;
-  color:#444;
-  font-size: 1.4em;
-  text-decoration:none;
-  //text-transform: capitalize;
-  white-space:nowrap;
-  line-height:100% !important;
-}
+    position:relative;
+    display: block !important;
+    margin: 0 auto !important;
+    overflow: hidden;
+    padding:10px 0 0 8px !important;
+    height:49px !important;
+    width: 175px !important;
+    border:0px solid #aaa !important;
+    border-radius:2px !important;
+    background:-webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,#fff),color-stop(50%,#fff),color-stop(52%,blue),color-stop(100%,blue)) !important;
+    background:-webkit-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+    background:-moz-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+    background:-o-linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+    background:linear-gradient(top,#fff 20%,#fff 50%,#fff 52%,#fff 100%) !important;
+    background-clip:padding-box;
+    box-shadow:0 0 0px #fff inset,0 0px 0px rgba(0,0,0,.1) !important;
+    color:#444;
+    font-size: 1.4em;
+    text-decoration:none;
+    //text-transform: capitalize;
+    white-space:nowrap;
+    line-height:100% !important;
+  }
   .chosen-container {
     padding: 0 10px;
   }

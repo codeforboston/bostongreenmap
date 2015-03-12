@@ -60,7 +60,8 @@ requirejs.config({
         paginator: 'lib/backbone.paginator.min',
         tileLayer: 'lib/TileLayer.GeoJSON',
         chosen: 'lib/chosen.jquery.min'
-    }
+    },
+    urlArgs: "bust=" + (new Date()).getTime()
 });
 
 require(['js/app', 'js/helpers'], function(app, helpers) {
