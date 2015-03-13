@@ -154,7 +154,7 @@ class Parkimage(models.Model):
         tn_size = '300x200'
         large_size = '950x600'
         tn_med_landscape = '600x400'
-        tn_med_portrait = '400x600'
+        tn_med_portrait = '300x400'
         try:
             tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
             image = {
@@ -175,7 +175,7 @@ class Parkimage(models.Model):
                         medium_image_landscape = get_thumbnail(self.image, tn_med_landscape, crop='center', quality=100)
                         image['med_src'] = medium_image_landscape.url
 
-                    
+
                 except Exception, e:
                     logger.error(e)
         except Exception as e:
