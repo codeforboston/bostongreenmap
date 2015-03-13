@@ -151,35 +151,58 @@ class Parkimage(models.Model):
         return '%i: %s' % (self.pk, caption)
 
     def get_thumbnail(self, include_large=False):
-        tn_size = '300x200'
-        large_size = '950x600'
-        tn_med_landscape = '600x400'
-        tn_med_portrait = '300x400'
-        try:
-            tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
-            image = {
-                'src': tn.url,
-                'caption': self.caption,
-                'default': self.default
-            }
-            if include_large:
-                try:
-                    image['ratio']=self.image.width/self.image.height
-                    large_image = get_thumbnail(self.image, large_size, crop='center', quality=100)
-                    image['large_src'] = large_image.url
-
-                    if image['ratio'] == 0:
-                        medium_image_portrait = get_thumbnail(self.image, tn_med_portrait, crop='center', quality=100)
-                        image['med_src'] = medium_image_portrait.url
-                    else:
-                        medium_image_landscape = get_thumbnail(self.image, tn_med_landscape, crop='center', quality=100)
-                        image['med_src'] = medium_image_landscape.url
+        TN_DEFAULT_SIZE  = '300x200'
+        LARGE_SIZE       = '950x600'
+        TN_MED_LANDSCAPE = '600x400'
+        TN_MED_PORTRAIT  = '300x400'
+        PLACEHOLDER      = 'http://placehold.it/300x200'
 
 
-                except Exception, e:
-                    logger.error(e)
-        except Exception as e:
-            return None
+        # begin cloyd
+        # try:
+        #     tn = get_thumbnail(self.image, TN_DEFAULT_SIZE, crop='center', quality=80)
+        # except Exception as e:
+        #     image ={ src: "placehold.it/" }
+
+
+        # try:
+
+        # end cloyd
+
+
+        # try:
+        image = {
+            'src': PLACEHOLDER,
+            'caption': self.caption,
+            'default': self.default,
+            'width': self.image.width,
+            'height': self.images.height,
+            'ratio': self.image.width / self.image.height,
+            'large_src': get_thumbnail(self.image, LARGE_SIZE, crop='center', quality=100)
+        }
+        # if include_large:
+            # try:
+
+        tn = get_thumbnail(self.image, TN_DEFAULT_SIZE, crop='center', quality=80)
+        if self.default:
+            image['src'] = tn.url
+                
+        # large_image = get_thumbnail(self.image, LARGE_SIZE, crop='center', quality=100)
+        # image['large_src'] = large_image.url
+
+        # If the image is a portrait (aspect ratio < 1)
+        if image['ratio'] == 1:
+            medium_image_portrait = get_thumbnail(self.image, TN_MED_PORTRAIT, crop='center', quality=100)
+            image['src'] = medium_image_portrait.url
+        # If the image is a landscape (aspect ratio > 1)
+        else:
+            medium_image_landscape = get_thumbnail(self.image, TN_MED_LANDSCAPE, crop='center', quality=100)
+            image['src'] = medium_image_landscape.url
+
+            # except Exception, e:
+            #     logger.error(e)
+        # except Exception as e:
+        #     return None
         return image
 
     def thumbnail(self):
@@ -262,15 +285,11 @@ class Park(models.Model):
                 images.append(i.get_thumbnail(include_large=include_large))
             except IOError, e:
                 logger.error(e)
-            except Exception as e:
-                logger.error(e)
         if not images:
             for i in self.images.filter(default=True):
                 try:
                     images.append(i.get_thumbnail(include_large=include_large))
                 except IOError, e:
-                    logger.error(e)
-                except Exception as e:
                     logger.error(e)
         return images
 
