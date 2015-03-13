@@ -153,7 +153,8 @@ class Parkimage(models.Model):
     def get_thumbnail(self, include_large=False):
         tn_size = '300x200'
         large_size = '950x600'
-        tn_med_size = '600x400'
+        tn_med_landscape = '600x400'
+        tn_med_portrait = '400x600'
         try:
             tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
             image = {
@@ -163,10 +164,18 @@ class Parkimage(models.Model):
             }
             if include_large:
                 try:
+                    image['ratio']=self.image.width/self.image.height
                     large_image = get_thumbnail(self.image, large_size, crop='center', quality=100)
-                    medium_image = get_thumbnail(self.image, tn_med_size, crop='center', quality=100)
                     image['large_src'] = large_image.url
-                    image['med_src']=medium_image.url
+
+                    if image['ratio'] == 0:
+                        medium_image_portrait = get_thumbnail(self.image, tn_med_portrait, crop='center', quality=100)
+                        image['med_src'] = medium_image_portrait.url
+                    else:
+                        medium_image_landscape = get_thumbnail(self.image, tn_med_landscape, crop='center', quality=100)
+                        image['med_src'] = medium_image_landscape.url
+
+                    
                 except Exception, e:
                     logger.error(e)
         except Exception as e:

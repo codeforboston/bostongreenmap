@@ -440,25 +440,24 @@ define([
         className: 'result',
         onRender: function() {
           var self = this;
-          console.log(self.model.get("images"));
-          if(self.model.get("images")[0]) { //does this property exist
-            if(self.model.get("images")[0].default) {
-              $(this.el).addClass('h2');
-            } else {
-              $(this.el).addClass('w2').addClass('h3'); 
-            }
+          var thumbnail_data = self.model.get("images");
+
+          if(thumbnail_data[0]) { //does this property exist
+            if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
+              if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
+                if(thumbnail_data[0].ratio == 1) {
+                  $(this.el).addClass('width2').addClass('height2'); 
+                }
+                if(thumbnail_data[0].ratio == 0) {
+                  $(this.el).addClass('width3').addClass('height3'); 
+                }
+              }
+            } 
           }
-          
         }
     }); 
 
     var ResultsView = Marionette.CompositeView.extend({
-        // initialize: function () {
-        //   console.log(this);
-        //   this.listenTo(this.collection, 'change', function (name) {
-        //     console.log("model changed");
-        //   });
-        // },
         events: {
           'click #previous-button': 'getLastPage',
           'click #next': 'getNextPage'
