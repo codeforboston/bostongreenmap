@@ -36,30 +36,6 @@ define([
           this.park_slug = params.park_slug   
           var thumbnail_data = self.get("images");
           console.log(self.get("images"));
-          // if(thumbnail_data && thumbnail_data[0]) { //does this property exist and does it have one array element
-          //   if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
-          //     if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
-          //       if(thumbnail_data[0].ratio == 1) {
-          //         self.set({ orientation: "landscape_medium" });
-          //         self.set({ appropriate_image: thumbnail_data[0].med_src });
-          //       }
-          //       if(thumbnail_data[0].ratio == 0) {
-          //         self.set({ orientation: "portrait_medium" });
-          //         self.set({ appropriate_image: thumbnail_data[0].med_src });
-          //       }
-          //     } else {
-          //       self.set({ orientation: "landscape_small" });
-          //       self.set({ appropriate_image: thumbnail_data[0].src });
-          //     }
-          //   } else {
-          //     self.set({ orientation: "landscape_small" });
-          //     self.set({ appropriate_image: thumbnail_data[0].src });
-          //   }
-          // } else {
-          //   self.set({ orientation: "landscape_small" });
-          //   self.set({ appropriate_image: "http://placehold.it/300x200" });
-          // }
-
         },
         defaults: {
             'title': ''
@@ -294,16 +270,9 @@ define([
           });
         }
 
-        // self.map.on('move', function() {
-        //   self.set_style(data.id);
-        // });
       },
       toggle: function(chosenState) {
         var self = this;
-        // var switchTo = self.visible
-        // if (chosenState !== undefined) {
-        //   switchTo = chosenState;
-        // }
         if (self.visible) {
           app.getRegion('mapRegion').currentView.$el.slideUp();
           self.visible = false;
@@ -473,21 +442,6 @@ define([
         className: 'result',
         onRender: function() {
           var self = this;
-          var thumbnail_data = self.model.get("images");
-
-          // if(thumbnail_data[0]) { //does this property exist
-          //   if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
-          //     if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
-          //       if(thumbnail_data[0].ratio == 1) {
-          //         $(this.el).addClass('width2').addClass('height2'); 
-          //       }
-          //       if(thumbnail_data[0].ratio == 0) {
-          //         $(this.el).addClass('width3').addClass('height3'); 
-
-          //       }
-          //     }
-          //   } 
-          // }
         }
     }); 
 
