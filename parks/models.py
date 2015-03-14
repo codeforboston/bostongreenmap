@@ -9,6 +9,7 @@ from django.utils.html import strip_tags
 from django.db.models import Count
 from django.contrib.gis.db.models import Extent, Union
 from django.contrib.gis.geos import fromstr
+import random
 
 from sorl.thumbnail import get_thumbnail
 
@@ -25,6 +26,17 @@ try:
 except ImportError:
     pass
 
+def get_extent_for_openlayers(geoqueryset, srid): 
+    """
+    Accepts a GeoQuerySet and SRID. 
+    
+    Returns the extent as a GEOS object in the Google Maps projection system favored by OpenLayers.
+    
+    The result can be directly passed out for direct use in a JavaScript map.
+    """
+    extent = fromstr('MULTIPOINT (%s %s, %s %s)' % geoqueryset.extent(), srid=srid)
+    extent.transform(4326)
+    return extent
 
 class Event(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -128,6 +140,7 @@ class Parkimage(models.Model):
     caption = models.TextField(default='', blank=True)
     hero_image = models.BooleanField(default=False)
     default = models.BooleanField(default=False)
+    hide = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('Parkimage')
@@ -136,27 +149,47 @@ class Parkimage(models.Model):
 
     def __unicode__(self):
         caption = getattr(self, 'caption', '')
-        return '%i: %s' % (self.pk, strip_tags(caption))
+        return '%i: %s' % (self.pk, caption)
 
     def get_thumbnail(self, include_large=False):
-        tn_size = '300x200'
-        large_size = '950x600'
-        tn_med_size = '600x400'
+        TN_DEFAULT_WIDTH  = 300
+        TN_DEFAULT_HEIGHT = 200
+        TN_DEFAULT_SIZE   = '300x200'
+        LARGE_SIZE        = '950x600'
+        TN_MED_LANDSCAPE  = '600x400'
+        TN_MED_PORTRAIT   = '300x400'
+        PLACEHOLDER       = 'http://placehold.it/300x200'
+
+        image = {
+            'src': PLACEHOLDER,
+            'masonry_src': PLACEHOLDER,
+            'caption': self.caption,
+            'default': self.default,
+            'width': TN_DEFAULT_WIDTH,
+            'height': TN_DEFAULT_HEIGHT
+        }
+
         try:
-            tn = get_thumbnail(self.image, tn_size, crop='center', quality=80)
-            image = {
-                'src': tn.url,
-                'caption': self.caption,
-                'default': self.default
-            }
-            if include_large:
-                try:
-                    large_image = get_thumbnail(self.image, large_size, crop='center', quality=100)
-                    medium_image = get_thumbnail(self.image, tn_med_size, crop='center', quality=100)
-                    image['large_src'] = large_image.url
-                    image['med_src']=medium_image.url
-                except Exception, e:
-                    logger.error(e)
+            image['large_src'] = get_thumbnail(self.image, LARGE_SIZE, crop='center', quality=100).url
+            tn = get_thumbnail(self.image, TN_DEFAULT_SIZE, crop='center', quality=80)
+            image['src'], image['masonry_src'] = tn.url, tn.url
+            #if 
+            if self.default:
+                image['width'], image['height'] = tn.width, tn.height
+
+            else:
+                if random.random() < 0.75:
+                    image['ratio'] = self.image.width / self.image.height
+                    if image['ratio'] == 0:
+                        medium_image_portrait = get_thumbnail(self.image, TN_MED_PORTRAIT, crop='center', quality=100)
+                        image['src'], image['masonry_src'] = tn.url, medium_image_portrait.url
+                        image['width'], image['height'] = medium_image_portrait.width, medium_image_portrait.height
+
+                    else:
+                        medium_image_landscape = get_thumbnail(self.image, TN_MED_LANDSCAPE, crop='center', quality=100)
+                        image['src'], image['masonry_src'] = tn.url, medium_image_landscape.url
+                        image['width'], image['height'] = medium_image_landscape.width, medium_image_landscape.height
+
         except Exception as e:
             return None
         return image
@@ -274,31 +307,18 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'change_url': change_url,
-            'is_large': True if self.area > 30000 else False
+            'change_url': change_url
         }
 
         if include_extra_info:
             filtered_queryset = Park.objects.filter(name=self.name) # doesn't yet transform correctly after aggregated
-            extent = self.get_extent_for_openlayers(filtered_queryset, 26986)
+            extent = get_extent_for_openlayers(filtered_queryset, 26986)
             doc['nearby_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.nearest_parks_by_distance(0.25)]
             doc['recommended_parks'] = [{'id': p.pk, 'url': p.get_absolute_url(), 'name': p.name, 'image': image_format(p)} for p in self.recommended_parks()]
             doc['activities'] = [{'name': p.name, 'slug': p.slug, 'id': p.id } for p in facilities]
             doc['bbox'] = list(extent.coords)
  
         return doc 
-
-    def get_extent_for_openlayers(self,geoqueryset, srid): 
-        """
-        Accepts a GeoQuerySet and SRID. 
-        
-        Returns the extent as a GEOS object in the Google Maps projection system favored by OpenLayers.
-        
-        The result can be directly passed out for direct use in a JavaScript map.
-        """
-        extent = fromstr('MULTIPOINT (%s %s, %s %s)' % geoqueryset.extent(), srid=srid)
-        extent.transform(4326)
-        return extent
 
     def nearest_parks_by_distance(self, distance_in_miles):
         return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct('name')

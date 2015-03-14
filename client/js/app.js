@@ -32,8 +32,10 @@ define([
     // Models
     var Park = Backbone.Model.extend({
         initialize: function (params) {
-          this.park_slug = params.park_slug
-
+          var self = this;
+          this.park_slug = params.park_slug   
+          var thumbnail_data = self.get("images");
+          console.log(self.get("images"));
         },
         defaults: {
             'title': ''
@@ -77,7 +79,7 @@ define([
     var ParksCollection = Backbone.PageableCollection.extend({
         model: Park,
         initialize: function(params) {
-            this.queryString = params.queryString
+            this.queryString = params.queryString;
         },
         url: function() {
             var search_url = 'parks/search/?' + this.queryString;
@@ -87,6 +89,7 @@ define([
             if (!response) {
                 alert('no data for that search!');
             }
+
             var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
@@ -267,16 +270,9 @@ define([
           });
         }
 
-        // self.map.on('move', function() {
-        //   self.set_style(data.id);
-        // });
       },
       toggle: function(chosenState) {
         var self = this;
-        // var switchTo = self.visible
-        // if (chosenState !== undefined) {
-        //   switchTo = chosenState;
-        // }
         if (self.visible) {
           app.getRegion('mapRegion').currentView.$el.slideUp();
           self.visible = false;
@@ -372,11 +368,7 @@ define([
           }
         },
         initialize: function() {
-          if (this.showMapState === undefined) {
-            this.showMapState = false;
-          };
-
-          this.on("show", function() {
+          this.listenTo(this,"show", function() {
             app.trigger("park:changed", this);
           });
 
@@ -439,8 +431,18 @@ define([
     });
 
     var ResultItemView = Marionette.ItemView.extend({
+        initialize: function() {
+          var images = this.model.get("images");
+          console.log(this.model.attributes);
+          if (images[0]) {
+            $(this.el).css("width", images[0].width).css("height", images[0].height);
+          }
+        },
         template: templates['client/templates/resultItem.hbs'],
-        className: 'result'
+        className: 'result',
+        onRender: function() {
+          var self = this;
+        }
     }); 
 
     var ResultsView = Marionette.CompositeView.extend({
@@ -469,7 +471,8 @@ define([
           $('#loading').css("display", "none");
 
           self.msnry = new Masonry(self.el, {
-            itemSelector: '.result'
+            itemSelector: '.result',
+            columnWidth: '.grid-sizer'
           }); 
         }, 
         onAddChild: function (childView) {
@@ -492,7 +495,7 @@ define([
         this.results.currentView.initialized = true;
 
       },
-      className: "resultsSection",
+      className: "results-layout",
       collection: ParksCollection,
       template: templates['client/templates/all_results.hbs'],
       regions: {
@@ -500,23 +503,6 @@ define([
         next: "#next"
       }
     });
-
-    // var MainContentLayout = Backbone.Marionette.LayoutView.extend({
-    //   // I think this is handled in the Router
-    //   // onShow: function() {
-    //   //   this.getRegion('content').show(new ParkView({'model': this.model}));
-    //   //   this.getRegion('map').show(new MapView());
-    //   // },
-    //   id: "main-content-section",
-    //   // model: Park,
-    //   // el: '#main-content-section'
-    //   // el: '#main-content-section',
-    //   template: templates['client/templates/main_content_layout.hbs'],
-    //   regions: {
-    //     content: "#content",
-    //     map: "#map"
-    //   }
-    // })
 
     app.Router = Backbone.Router.extend({
         routes: {
@@ -584,7 +570,6 @@ define([
               } else {
                 map = false;
               }
-              console.log(map);
               $('#loading').css("display", "none");
               var parkView = new ParkView({'model': park });
               app.getRegion('mainRegion').show(parkView);
