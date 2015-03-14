@@ -32,7 +32,33 @@ define([
     // Models
     var Park = Backbone.Model.extend({
         initialize: function (params) {
-          this.park_slug = params.park_slug
+          var self = this;
+          this.park_slug = params.park_slug   
+          var thumbnail_data = self.get("images");
+          console.log(self.get("images"));
+          // if(thumbnail_data && thumbnail_data[0]) { //does this property exist and does it have one array element
+          //   if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
+          //     if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
+          //       if(thumbnail_data[0].ratio == 1) {
+          //         self.set({ orientation: "landscape_medium" });
+          //         self.set({ appropriate_image: thumbnail_data[0].med_src });
+          //       }
+          //       if(thumbnail_data[0].ratio == 0) {
+          //         self.set({ orientation: "portrait_medium" });
+          //         self.set({ appropriate_image: thumbnail_data[0].med_src });
+          //       }
+          //     } else {
+          //       self.set({ orientation: "landscape_small" });
+          //       self.set({ appropriate_image: thumbnail_data[0].src });
+          //     }
+          //   } else {
+          //     self.set({ orientation: "landscape_small" });
+          //     self.set({ appropriate_image: thumbnail_data[0].src });
+          //   }
+          // } else {
+          //   self.set({ orientation: "landscape_small" });
+          //   self.set({ appropriate_image: "http://placehold.it/300x200" });
+          // }
 
         },
         defaults: {
@@ -78,7 +104,6 @@ define([
         model: Park,
         initialize: function(params) {
             this.queryString = params.queryString;
-
         },
         url: function() {
             var search_url = 'parks/search/?' + this.queryString;
@@ -88,6 +113,7 @@ define([
             if (!response) {
                 alert('no data for that search!');
             }
+
             var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
@@ -436,24 +462,32 @@ define([
     });
 
     var ResultItemView = Marionette.ItemView.extend({
+        initialize: function() {
+          var images = this.model.get("images");
+          console.log(this.model.attributes);
+          if (images[0]) {
+            $(this.el).css("width", images[0].width).css("height", images[0].height);
+          }
+        },
         template: templates['client/templates/resultItem.hbs'],
         className: 'result',
         onRender: function() {
           var self = this;
           var thumbnail_data = self.model.get("images");
 
-          if(thumbnail_data[0]) { //does this property exist
-            if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
-              if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
-                if(thumbnail_data[0].ratio == 1) {
-                  $(this.el).addClass('width2').addClass('height2'); 
-                }
-                if(thumbnail_data[0].ratio == 0) {
-                  $(this.el).addClass('width3').addClass('height3'); 
-                }
-              }
-            } 
-          }
+          // if(thumbnail_data[0]) { //does this property exist
+          //   if(!thumbnail_data[0].default) { //if it's not using the default thumbnail, override defaults
+          //     if (Math.random() < 0.75) { //most of the time, large images will show. otherwise, use the defaults.
+          //       if(thumbnail_data[0].ratio == 1) {
+          //         $(this.el).addClass('width2').addClass('height2'); 
+          //       }
+          //       if(thumbnail_data[0].ratio == 0) {
+          //         $(this.el).addClass('width3').addClass('height3'); 
+
+          //       }
+          //     }
+          //   } 
+          // }
         }
     }); 
 
