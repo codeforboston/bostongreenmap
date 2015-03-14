@@ -9,6 +9,7 @@ from django.utils.html import strip_tags
 from django.db.models import Count
 from django.contrib.gis.db.models import Extent, Union
 from django.contrib.gis.geos import fromstr
+import random
 
 from sorl.thumbnail import get_thumbnail
 
@@ -159,15 +160,6 @@ class Parkimage(models.Model):
         TN_MED_PORTRAIT   = '300x400'
         PLACEHOLDER       = 'http://placehold.it/300x200'
 
-        # begin cloyd
-        # try:
-        #     tn = get_thumbnail(self.image, TN_DEFAULT_SIZE, crop='center', quality=80)
-        # except Exception as e:
-        #     tn = "placehold.it/"
-
-
-
-        # end cloyd
         image = {
             'src': PLACEHOLDER,
             'masonry_src': PLACEHOLDER,
@@ -178,29 +170,25 @@ class Parkimage(models.Model):
         }
 
         try:
-            
-
-
             image['large_src'] = get_thumbnail(self.image, LARGE_SIZE, crop='center', quality=100).url
             tn = get_thumbnail(self.image, TN_DEFAULT_SIZE, crop='center', quality=80)
-            # try:
+            image['src'], image['masonry_src'] = tn.url, tn.url
+            #if 
             if self.default:
-                image['src'], image['masonry_src'] = tn.url, tn.url
-            image['ratio'] = self.image.width / self.image.height
-            # large_image = get_thumbnail(self.image, LARGE_SIZE, crop='center', quality=100)
-            # image['large_src'] = large_image.url
+                image['width'], image['height'] = tn.width, tn.height
 
-            # If the image is a portrait (aspect ratio < 1)
-            if image['ratio'] == 0:
-                medium_image_portrait = get_thumbnail(self.image, TN_MED_PORTRAIT, crop='center', quality=100)
-                image['med_src'] = medium_image_portrait.url
-            # If the image is a landscape (aspect ratio > 1)
             else:
-                medium_image_landscape = get_thumbnail(self.image, TN_MED_LANDSCAPE, crop='center', quality=100)
-                image['med_src'] = medium_image_landscape.url
+                if random.random() < 0.75:
+                    image['ratio'] = self.image.width / self.image.height
+                    if image['ratio'] == 0:
+                        medium_image_portrait = get_thumbnail(self.image, TN_MED_PORTRAIT, crop='center', quality=100)
+                        image['src'], image['masonry_src'] = tn.url, medium_image_portrait.url
+                        image['width'], image['height'] = medium_image_portrait.width, medium_image_portrait.height
 
-            # except Exception, e:
-            #     logger.error(e)
+                    else:
+                        medium_image_landscape = get_thumbnail(self.image, TN_MED_LANDSCAPE, crop='center', quality=100)
+                        image['src'], image['masonry_src'] = tn.url, medium_image_landscape.url
+                        image['width'], image['height'] = medium_image_landscape.width, medium_image_landscape.height
 
         except Exception as e:
             return None
@@ -296,9 +284,6 @@ class Park(models.Model):
                     logger.error(e)
                 except Exception as e:
                     logger.error(e)
-        if not images:
-            test = Parkimage
-            images.append(test.get_thumbnail(include_large=include_large))
         return images
 
     def to_external_document(self, user, include_large=False, include_extra_info=False):
