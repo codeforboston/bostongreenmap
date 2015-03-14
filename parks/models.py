@@ -295,8 +295,7 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
-            'change_url': change_url,
-            'is_large': True if self.area > 30000 else False
+            'change_url': change_url
         }
 
         if include_extra_info:
