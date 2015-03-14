@@ -52,12 +52,12 @@
 }
 @media (min-width: 300px) and (max-width: 600px) {
   #results {  
-    max-width: 301px;
+    max-width: 301px; 
   }
   .results {
     .result {
-      width: 300px;
-      height: 200px;
+      width: 300px !important; 
+      height: 200px !important; 
     }
   }
 }
