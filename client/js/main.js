@@ -40,6 +40,10 @@ requirejs.config({
             exports: 'TileLayer',
             deps: ['leaflet'] 
         },
+        leafletLabel: {
+            exports: 'leafletLabel',
+            deps: ['leaflet']
+        },
         chosen: {
             deps: ['jquery'] 
         }
@@ -59,7 +63,8 @@ requirejs.config({
         leaflet: 'lib/leaflet',
         paginator: 'lib/backbone.paginator.min',
         tileLayer: 'lib/TileLayer.GeoJSON',
-        chosen: 'lib/chosen.jquery.min'
+        chosen: 'lib/chosen.jquery.min',
+        leafletLabel: 'lib/leaflet.label'
     },
     urlArgs: "bust=" + (new Date()).getTime()
 });

@@ -8,7 +8,8 @@ define([
     'owl',
     'leaflet',
     'tileLayer',
-    'chosen'
+    'chosen',
+    'leafletLabel'
 ], function(
     Backbone,
     Marionette,
@@ -17,7 +18,8 @@ define([
     Masonry,
     owl,
     Leaflet,
-    TileLayer
+    TileLayer,
+    leafletLabel
 ) {
     var app = new Marionette.Application(),
         router;
@@ -35,7 +37,6 @@ define([
           var self = this;
           this.park_slug = params.park_slug   
           var thumbnail_data = self.get("images");
-          console.log(self.get("images"));
         },
         defaults: {
             'title': ''
@@ -113,6 +114,13 @@ define([
         });
         return this;
       },
+      // events: {
+      //   'click .parkgeom': 'navigate'
+      // },
+      // navigate: function(e) {
+      //   console.log('backbone event: ', e);
+      //   app.router.navigate("#/parks/" + e.target.feature.properties.slug + "/");
+      // },
       id: 'map',
       visible: false,
       render: function() {
@@ -132,7 +140,8 @@ define([
             weight: 0,
             opacity: 1,
             fillColor: "#00DC00",
-            fillOpacity: 0.1
+            fillOpacity: 0.1,
+            className: 'parkgeom'
           };
 
 
@@ -144,6 +153,7 @@ define([
         self.geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
                 clipTiles: true,
                 unique: function (feature) { 
+                    this.slug = feature.properties.slug;
                     return feature.id;
                 }
             }, {
@@ -153,6 +163,8 @@ define([
                 },
                 reuseTiles: true,
                 onEachFeature: function (feature, layer) {
+                    this.slug = feature.properties.slug;
+                    layer.slug = feature.properties.slug;
                     if (!(layer instanceof L.Point)) {
                         layer.on('mouseover', function () {
                             layer.setStyle(self.hoverStyle);
@@ -161,20 +173,27 @@ define([
                             layer.setStyle(self.style);
                         });
                     }
+ 
+                    layer.bindLabel(feature.properties.name);
 
+ 
                     if (feature.properties) {
-                        var popupString = '<div class="popup">';
+                      layer.on("click", function(e) {
+                        console.log("leaflet listener: ", e);
+                        app.router.navigate("#/parks/" + e.target.slug + "/");
+                      });
+                    //     var popupString = '<div class="popup">';
 
-                        popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
-                        popupString += '</div>';
-                        layer.bindPopup(popupString);
+                    //     popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
+                    //     popupString += '</div>';
+                    //     layer.bindPopup(popupString);
                     }
                 }
             }
           );
 
         self.map.addLayer(self.geojsonTileLayer);
-
+      
         return this;
       },
       set_style: function(highlightID) {
@@ -204,6 +223,7 @@ define([
                 });
               }
           });
+        
           callback();
         };
 
@@ -228,7 +248,7 @@ define([
                 "weight": 5,
                 "opacity": 0.65
             };
-
+          
           self.activity_markers = L.geoJson(response, {
               style: myStyle,
               pointToLayer: function(feature, latlng) {
@@ -267,6 +287,7 @@ define([
           self.add_points(data.id);
           self.geojsonTileLayer.on('load', function() {
             self.set_style(data.id);
+          
           });
         }
 
@@ -433,7 +454,6 @@ define([
     var ResultItemView = Marionette.ItemView.extend({
         initialize: function() {
           var images = this.model.get("images");
-          console.log(this.model.attributes);
           if (images[0]) {
             $(this.el).css("width", images[0].width).css("height", images[0].height);
           }
@@ -583,11 +603,11 @@ define([
         app.getRegion('footerRegion').show(new FooterView());
         app.getRegion('mapRegion').show(new MapView());
 
-        router = new app.Router();
-        router.on('route:home route:about route:mission route:contact route:results', function() {
+        app.router = new app.Router();
+        app.router.on('route:home route:about route:mission route:contact route:results', function() {
           app.trigger("park:destroyed")
         });
-        app.execute('setRouter', router);
+        app.execute('setRouter', app.router);
         Backbone.history.start();
     });
 
