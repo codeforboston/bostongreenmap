@@ -144,8 +144,6 @@ define([
             className: 'parkgeom'
           };
 
-
-
         self.hoverStyle = {
             "fillOpacity": 1
         };
@@ -182,11 +180,6 @@ define([
                         console.log("leaflet listener: ", e);
                         app.router.navigate("#/parks/" + e.target.slug + "/");
                       });
-                    //     var popupString = '<div class="popup">';
-
-                    //     popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
-                    //     popupString += '</div>';
-                    //     layer.bindPopup(popupString);
                     }
                 }
             }
@@ -233,7 +226,6 @@ define([
       },
       add_points: function(id) {
         var self = this;
-        window.map = self.activity_markers;
         // clear out existing markers.
         if (self.activity_markers) {
           self.map.removeLayer(self.activity_markers);
@@ -254,7 +246,8 @@ define([
               pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                                       icon: L.divIcon({
-                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug
+                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug,
+                                          iconAnchor: [12,12]
                                       })
                                   });
               },
