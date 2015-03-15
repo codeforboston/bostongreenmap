@@ -41,7 +41,7 @@
 .icon-amphitheatre:before {
   content: "a";
 }
-.icon-chess:before {
+.icon-chess-tables:before {
   content: "m";
 }
 .icon-cricket:before {
@@ -110,7 +110,7 @@
 .icon-hockey:before {
   content: "J";
 }
-.icon-iceskating:before {
+.icon-ice-skating:before {
   content: "K";
 }
 .icon-lacrosse:before {
@@ -122,10 +122,13 @@
 .icon-tennis:before {
   content: "N";
 }
-.icon-track:before {
+.icon-track-field:before {
   content: "O";
 }
-.icon-walking:before {
+.icon-walkinghiking:before {
+  content: "P";
+}
+.icon-walking-hiking:before {
   content: "P";
 }
 .icon-workout:before {
