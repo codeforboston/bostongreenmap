@@ -47,7 +47,7 @@
 .icon-cricket:before {
   content: "n";
 }
-.icon-dogplay:before {
+.icon-dog-play:before {
   content: "p";
 }
 .icon-football:before {
@@ -62,7 +62,7 @@
 .icon-garden:before {
   content: "t";
 }
-.icon-monument:before {
+.icon-artworkmonument:before {
   content: "u";
 }
 .icon-parking:before {
@@ -133,4 +133,31 @@
 }
 .icon-camping:before {
   content: "R";
+}
+.icon-cultural:before {
+  content: "b";
+}
+.icon-entrance:before {
+  content: "c";
+}
+.icon-field:before {
+  content: "d";
+}
+.icon-handball:before {
+  content: "e";
+}
+.icon-historic:before {
+  content: "f";
+}
+.icon-picnic-area:before {
+  content: "g";
+}
+.icon-pier:before {
+  content: "h";
+}
+.icon-volleyball:before {
+  content: "i";
+}
+.icon-waterspray:before {
+  content: "j";
 }
