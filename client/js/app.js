@@ -147,7 +147,7 @@ define([
         self.hoverStyle = {
             "fillOpacity": 1
         };
-        var geojsonURL = 'http://104.131.99.131:8080/parks/{z}/{x}/{y}.json';
+        var geojsonURL = 'http://beta.bostongreenspace.org:8080/parks/{z}/{x}/{y}.json';
         self.geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
                 clipTiles: true,
                 unique: function (feature) { 
