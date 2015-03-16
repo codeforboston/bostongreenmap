@@ -88,9 +88,9 @@ define([
         },
         parse: function(response) {
             if (!response) {
-                alert('no data for that search!');
+                alert('No parks meet this criteria. Try search by a single neighborhood or activity.');
             }
-
+            app.trigger('map:getbbox', response.bbox);
             var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
@@ -112,15 +112,14 @@ define([
           self.toggle();
           return this; 
         });
+        this.listenTo(app, 'map:highlightpark', this.set_style)
+        this.listenTo(app, 'map:getbbox', this.get_bbox);
+        this.listenTo(app, 'map:addpoints', this.add_points)
         return this;
       },
-      // events: {
-      //   'click .parkgeom': 'navigate'
-      // },
-      // navigate: function(e) {
-      //   console.log('backbone event: ', e);
-      //   app.router.navigate("#/parks/" + e.target.feature.properties.slug + "/");
-      // },
+      get_bbox: function(context) {
+        this.current_bbox = context
+      },
       id: 'map',
       visible: false,
       render: function() {
@@ -177,7 +176,7 @@ define([
  
                     if (feature.properties) {
                       layer.on("click", function(e) {
-                        console.log("leaflet listener: ", e);
+                        
                         app.router.navigate("#/parks/" + e.target.slug + "/");
                       });
                     }
@@ -190,7 +189,12 @@ define([
         return this;
       },
       set_style: function(highlightID) {
+
         var self = this;
+
+        console.log(highlightID);
+        self.current_park_id = highlightID;
+
         var highlightStyle = {
             clickable: true,
             color: "#00c800",
@@ -209,7 +213,7 @@ define([
             layer.on('mouseout', function () {
                 layer.setStyle(self.style);
             });
-            if(layer.feature.properties.id == highlightID) {
+            if(layer.feature.properties.id == self.current_park_id) {
                 layer.setStyle(highlightStyle) 
                 layer.on('mouseout', function () {
                   layer.setStyle(highlightStyle);
@@ -268,19 +272,16 @@ define([
 
         });
       },
-      set_bbox: function(geos_obj) {
+      set_bbox: function() {
         var self = this;
-        var data = app.getRegion('mainRegion').currentView.model.attributes || geos_obj;
-        
-        if (data.bbox) {
+        var bbox = self.current_bbox;
+        if (bbox) {
           self.map.fitBounds([
-                  [data.bbox[0][1], data.bbox[0][0]],
-                            [data.bbox[1][1], data.bbox[1][0]]
+                  [bbox[0][1], bbox[0][0]],
+                            [bbox[1][1], bbox[1][0]]
                           ]);
-          self.add_points(data.id);
           self.geojsonTileLayer.on('load', function() {
-            self.set_style(data.id);
-          
+            self.set_style(self.current_park_id);
           });
         }
 
@@ -376,16 +377,10 @@ define([
     });
 
     var ParkView = Marionette.ItemView.extend({
-        events: {
-          'click #toggle': function() {
-            app.trigger('map:toggle');
-          }
-        },
         initialize: function() {
           this.listenTo(this,"show", function() {
             app.trigger("park:changed", this);
           });
-
           return this;
         },
         model: Park,
@@ -393,7 +388,9 @@ define([
         tagName: 'div',
         className: 'detail',
         onShow: function() {
-          
+            app.trigger('map:highlightpark', this.model.get("id"));
+            app.trigger('map:getbbox', this.model.get("bbox"));
+            app.trigger('map:addpoints', this.model.get("id"))
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
               autoPlay: 5000, //Set AutoPlay to 3 seconds
@@ -497,7 +494,7 @@ define([
 
     var ResultsLayout = Backbone.Marionette.LayoutView.extend({
       onShow: function() {
-        this.getRegion('results').show(new ResultsView({'collection': this.collection}))
+        this.getRegion('results').show(new ResultsView({'collection': this.collection}));
       },
       events: {
         "click #next": "getNext"

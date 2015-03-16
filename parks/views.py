@@ -12,7 +12,7 @@ import json
 import logging
 import itertools
 
-from parks.models import Neighborhood, Park, Parkimage, Facility, Activity, Story
+from parks.models import Neighborhood, Park, Parkimage, Facility, Activity, Story, get_extent_for_openlayers
 
 
 logger = logging.getLogger(__name__)
@@ -98,14 +98,17 @@ def get_parks(request):
 
     filters = kwargs
     try:
-        parks = Park.objects.filter(**filters).select_related('parkowner').distinct('name')
+        parks_filter = Park.objects.filter(**filters)
+        parks = parks_filter.select_related('parkowner').distinct('name')
         parks_pages = Paginator(parks, page_size)
         parks_page = parks_pages.page(page)
+        extent = get_extent_for_openlayers(parks_filter, 26986)
         if no_map:
             parks_json = {p.pk: p.to_external_document(user, include_large=True, include_extra_info=bool(slug)) for p in parks_page}
             response_json = {
                 "parks": parks_json,
-                "pages": parks_pages.num_pages
+                "pages": parks_pages.num_pages,
+                "bbox": list(extent.coords)
             }
         else:
             # FIXME: should this even be paged? There's nowhere to put the total # of pages...
