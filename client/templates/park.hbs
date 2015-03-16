@@ -11,11 +11,12 @@
           <div class="park-title row">
             <h1>{{name}}</h2> 
           </div>
-          {{#if description}}
             <div class="park-description row">
               <p>{{description}}</p>
+              <a href="https://www.google.com/maps/place/{{point_on_surface.[1]}}, {{point_on_surface.[0]}}" target="_blank">
+                <img src="static/img/location2.png" data-toggle="tooltip" data-placement="bottom" title="Google maps" />
+              </a>
             </div>  
-          {{/if}}
           <div class="park-activities row">
             {{#each activities}}
               <div class="park-activity icon icon-{{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>

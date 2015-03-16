@@ -267,6 +267,10 @@ class Park(models.Model):
         self.geometry.transform(4326)
         return [self.geometry.centroid.y, self.geometry.centroid.x]
 
+    def point_on_surface(self):
+        self.geometry.transform(4326)
+        return list(self.geometry.point_on_surface)
+
     def get_image_thumbnails(self, include_large=False):
         images = []
         for i in self.images.filter(default=False):
@@ -307,6 +311,7 @@ class Park(models.Model):
             'access': self.get_access_display(),
             'address': self.address,
             'owner': self.parkowner.name,
+            'point_on_surface': self.point_on_surface(),
             'change_url': change_url
         }
 
