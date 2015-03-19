@@ -175,6 +175,34 @@ a {
   opacity: 0.5;
 }
 
+#next-no-results {
+  max-width: 1200px;
+  height: 60px;
+  text-align: center;
+  border-left: 4px solid;
+  border-right: 4px solid;
+  border-color: white;
+  margin: 15px auto;
+  background-color: #339333;
+  cursor: default;
+  opacity: 0.5;
+  h1 {
+    color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media (min-width: 900px) and (max-width: 1200px) {
+  max-width: 900px;
+   }
+  @media (min-width: 600px) and (max-width: 900px) {
+  max-width: 600px;
+   }
+  @media (min-width: 300px) and (max-width: 600px) {
+  max-width: 300px;
+   }
+}
+
 @media (max-width:600px) {
   #carousel-example-generic {
     position: relative;

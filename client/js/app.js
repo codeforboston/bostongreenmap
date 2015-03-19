@@ -89,8 +89,10 @@ define([
         parse: function(response) {
             if (!response) {
                 alert('No parks meet this criteria. Try searching for single neighborhood or activity.');
+            } else {
+              app.trigger('map:getbbox', response.bbox);
             }
-            app.trigger('map:getbbox', response.bbox);
+            this.num_pages = response.pages;
             var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
@@ -309,7 +311,7 @@ define([
                 layer.bindPopup(innerHTML)
               }
             }).addTo(self.map);
-          console.log(self.activity_markers);
+
           self.geojsonTileLayer.on('load', function() {
             self.activity_markers.bringToFront();
           });
@@ -437,6 +439,7 @@ define([
         tagName: 'div',
         className: 'detail',
         onShow: function() {
+
             app.trigger('map:highlightpark', this.model.get("id"));
             app.trigger('map:getbbox', this.model.get("bbox"));
             app.trigger('map:addpoints', this.model.get("id"));
@@ -444,6 +447,7 @@ define([
             if (this.model.attributes.images[0].default) {
               app.trigger('map:open');
             }
+
 
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
@@ -517,6 +521,7 @@ define([
         collection: ParksCollection,
         initialized: false,
         getNextPage: function(evnt) {
+          
           var that = this;
           this.collection.getNextPage({remove:false, success: function() { }});
           this.initialized = true;
@@ -555,9 +560,13 @@ define([
       },
       getNext: function () {
         var that = this;
-        this.results.currentView.collection.getNextPage({remove:false, success: function() { }});
-        this.results.currentView.initialized = true;
-
+        if (this.results.currentView.collection.state.currentPage < this.results.currentView.options.collection.num_pages) {
+          this.results.currentView.collection.getNextPage({remove:false, success: function() { }});
+          this.results.currentView.initialized = true;
+        } 
+        if (this.results.currentView.collection.state.currentPage == this.results.currentView.options.collection.num_pages) {
+          $(that.next.el).attr("id", "next-no-results");
+        }
       },
       className: "results-layout",
       collection: ParksCollection,
@@ -651,6 +660,13 @@ define([
         app.router.on('route:home route:about route:mission route:contact route:results', function() {
           app.trigger("park:destroyed")
         });
+
+        app.router.on('route', function() {
+          $("html, body").animate({
+              scrollTop: 0
+            }, 0);
+        });
+
         app.execute('setRouter', app.router);
         Backbone.history.start();
     });
