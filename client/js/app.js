@@ -88,7 +88,7 @@ define([
         },
         parse: function(response) {
             if (!response) {
-                alert('No parks meet this criteria. Try search by a single neighborhood or activity.');
+                alert('No parks meet this criteria. Try searching for single neighborhood or activity.');
             }
             app.trigger('map:getbbox', response.bbox);
             var parks = _.map(_.values(response.parks), function(park) {
@@ -114,7 +114,13 @@ define([
         });
         this.listenTo(app, 'map:highlightpark', this.set_style)
         this.listenTo(app, 'map:getbbox', this.get_bbox);
-        this.listenTo(app, 'map:addpoints', this.add_points)
+        this.listenTo(app, 'map:addpoints', this.add_points);
+        this.listenTo(app, 'map:open', function() {
+          if(!self.visible) {
+            self.toggle();
+            return this;
+          }
+        });
         return this;
       },
       get_bbox: function(context) {
@@ -391,6 +397,9 @@ define([
             app.trigger('map:highlightpark', this.model.get("id"));
             app.trigger('map:getbbox', this.model.get("bbox"));
             app.trigger('map:addpoints', this.model.get("id"))
+            if (!this.model.attributes.images[1]) {
+              app.trigger('map:open');
+            }
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
               autoPlay: 5000, //Set AutoPlay to 3 seconds
