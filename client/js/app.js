@@ -153,7 +153,7 @@ define([
           "MAPC Trailmap": self.trailmap
         }
 
-        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 13, layers: [self.basemap]});
+        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 15, layers: [self.basemap]});
 
         L.control.layers(self.basemaps).addTo(self.map);
 
@@ -299,16 +299,17 @@ define([
                                   });
               },
               onEachFeature: function(feature, layer) {
-                var activities = '<ul>';
+                var innerHTML = '<h3>' + feature.properties.name + '</h3>';
+                innerHTML += '<ul>';
 
                 for (var i = 0, len = feature.properties.activities.length; i <len; i++) {
-                  activities += '<li>' +feature.properties.activities[i].name + '</li>';
+                  innerHTML += '<li>' +feature.properties.activities[i].name + '</li>';
                 }
-                activities += '</ul';
-                layer.bindPopup(activities)
+                innerHTML += '</ul';
+                layer.bindPopup(innerHTML)
               }
             }).addTo(self.map);
-
+          console.log(self.activity_markers);
           self.geojsonTileLayer.on('load', function() {
             self.activity_markers.bringToFront();
           });
