@@ -396,8 +396,9 @@ define([
         onShow: function() {
             app.trigger('map:highlightpark', this.model.get("id"));
             app.trigger('map:getbbox', this.model.get("bbox"));
-            app.trigger('map:addpoints', this.model.get("id"))
-            if (!this.model.attributes.images[1]) {
+            app.trigger('map:addpoints', this.model.get("id"));
+
+            if (this.model.attributes.images[0].default) {
               app.trigger('map:open');
             }
             var self = this;
