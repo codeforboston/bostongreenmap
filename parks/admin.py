@@ -16,7 +16,7 @@ class ParkAdmin(admin.OSMGeoAdmin):
     default_zoom = 11
 
     list_display = ['name', 'parkowner' ]
-    list_filter = ('neighborhoods', )
+    list_filter = ('neighborhoods', 'featured' )
     search_fields = ['name']
     exclude = ('slug', )
 
@@ -63,6 +63,7 @@ class LookupAdmin(admin.ModelAdmin):
 
 class ParkimageAdmin(admin.ModelAdmin):
     list_display = ['pk', 'thumbnail', 'caption', 'get_parks_string' ]
+    list_filter = ('hero_image', 'default' )
     list_editable = ['caption', ]
     search_fields = ['caption', ]
     readonly_fields = ('thumbnail',)
