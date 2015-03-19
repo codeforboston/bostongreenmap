@@ -186,6 +186,14 @@ a {
   }
 }
 
+
+.leaflet-control-geoloc {
+  background-image: url("/static/img/location.png");
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+
 /* template-specific styles */
 
 @import 'header';

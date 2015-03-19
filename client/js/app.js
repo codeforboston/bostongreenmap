@@ -121,6 +121,9 @@ define([
             return this;
           }
         });
+        this.listenTo(app, "map:locate", function() {
+          self.map.locate({setView: true, maxZoom: 16});
+        })
         return this;
       },
       get_bbox: function(context) {
@@ -131,14 +134,29 @@ define([
       render: function() {
         var self = this;
         var boston = new L.LatLng(42.357778, -71.061667);
-        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 13});
-        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-            subdomains: 'abcd',
-            minZoom: 0,
-            maxZoom: 18
-        }).addTo(this.map);
         
+
+        self.basemap = L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png', {
+            attribution: '&copy; Map tiles by MAPC',
+            minZoom: 0,
+            maxZoom: 17
+        });
+        
+        self.trailmap = L.tileLayer('http://tiles.mapc.org/trailmap/{z}/{x}/{y}.png', {
+            attribution: '&copy; Map tiles by MAPC',
+            minZoom: 0,
+            maxZoom: 17
+        });
+
+        self.basemaps = {
+          "MAPC Basemap": self.basemap,
+          "MAPC Trailmap": self.trailmap
+        }
+
+        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 13, layers: [self.basemap]});
+
+        L.control.layers(self.basemaps).addTo(self.map);
+
         self.style = {
             clickable: true,
             color: "#00c800",
@@ -148,6 +166,26 @@ define([
             fillOpacity: 0.1,
             className: 'parkgeom'
           };
+
+        var locateMeControl = new L.control({
+          position: "topleft"
+        });
+
+        locateMeControl.onAdd = function (map) {
+          // Leaflet control container DOM element
+          var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
+          var $link = $( "<a/>", {
+            class: "leaflet-control-geoloc",
+            title: "Locate Me"
+          }).appendTo( $(div) );
+          $link.on( "click", function( event ) {
+            event.preventDefault();
+            // geolocate
+            map.locate({setView: true, maxZoom: 17});
+          });
+          return div;
+        };
+        self.map.addControl(locateMeControl);
 
         self.hoverStyle = {
             "fillOpacity": 1
@@ -198,7 +236,6 @@ define([
 
         var self = this;
 
-        console.log(highlightID);
         self.current_park_id = highlightID;
 
         var highlightStyle = {
@@ -285,7 +322,7 @@ define([
           self.map.fitBounds([
                   [bbox[0][1], bbox[0][0]],
                             [bbox[1][1], bbox[1][0]]
-                          ]);
+                          ], { maxZoom: 17 });
           self.geojsonTileLayer.on('load', function() {
             self.set_style(self.current_park_id);
           });
@@ -340,7 +377,8 @@ define([
         tagName: 'div',
         className: 'search-page',
         events: {
-            'click .gobutton': 'doSearch'
+            'click .gobutton': 'doSearch',
+            'click .locateme': 'locateMe'
         },
         doSearch: function() {
             var neighborhood_id = $('#neighborhoods option:selected').val(),
@@ -352,6 +390,10 @@ define([
                     (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
+        },
+        locateMe: function() {
+          app.trigger("map:open");
+          app.trigger("map:locate");
         },
         onShow: function() {
           $(".parkfilter").chosen()
@@ -401,6 +443,7 @@ define([
             if (this.model.attributes.images[0].default) {
               app.trigger('map:open');
             }
+
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
               autoPlay: 5000, //Set AutoPlay to 3 seconds
