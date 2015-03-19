@@ -62,7 +62,7 @@
   .search-buttons {
     position: relative;
     display: block;
-    max-width: 540px;
+    max-width: 600px;
     margin: 0px auto;
   }
 
@@ -96,6 +96,10 @@
     margin-left: 3%;
     margin-top: 3px;
     float: right;
+    max-width: 60px;
+    img {
+      height:100%
+    }
   }
 
   .separator {
