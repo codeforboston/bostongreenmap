@@ -9,6 +9,7 @@ from django.utils.html import strip_tags
 from django.db.models import Count
 from django.contrib.gis.db.models import Extent, Union
 from django.contrib.gis.geos import fromstr
+from django.db.models import Q
 import random
 
 from sorl.thumbnail import get_thumbnail
@@ -220,7 +221,6 @@ class Park(models.Model):
         ('n', 'No'),
         ('u', 'Unknown'),
     )
-
     os_id = models.CharField('OS ID', max_length=9, null=True, blank=True, help_text='Refers to MassGIS OS_ID')
     name = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=100, blank=True, null=True, unique=True)
@@ -326,10 +326,15 @@ class Park(models.Model):
         return doc 
 
     def nearest_parks_by_distance(self, distance_in_miles):
-        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).distinct('name')
+        return Park.objects.filter(geometry__distance_lt=(self.geometry, D(mi=distance_in_miles))).filter(~Q(name=self.name)).distinct('name')
 
     def recommended_parks(self):
-        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype).distinct('name')
+        return self.nearest_parks_by_distance(0.25).filter(parktype=self.parktype).filter(~Q(name=self.name)).distinct('name')
+        # all_facilities = []
+        # for id in facilities: 
+        #     all_facilities.push(id)
+        # return Parks.objects.filter(pk__in=self.id).distinct()
+
 
     def get_facilities(self, park_id):
         """ Returns facilities as JSON for park id

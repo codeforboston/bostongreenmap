@@ -432,6 +432,7 @@ define([
           this.listenTo(this,"show", function() {
             app.trigger("park:changed", this);
           });
+          // this.model.attributes.
           return this;
         },
         model: Park,

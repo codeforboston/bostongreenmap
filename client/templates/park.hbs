@@ -57,6 +57,7 @@
     {{/if}}
   </div>
 </div> 
+{{#if recommended_parks.[0]}}
 <div class="nearby-parks">
   <div class="center-content">
     <h2>Similar Parks</h2>
@@ -74,6 +75,9 @@
     {{/each}}
   </div>
 </div> 
+{{/if}}
+
+{{#if nearby_parks.[0]}}
 <div class="recommended-parks">
   <div class="center-content">
     <h2>Nearby Spaces</h2>
@@ -91,3 +95,4 @@
     {{/each}}
   </div>
 </div> 
+{{/if}}
