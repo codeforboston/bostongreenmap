@@ -108,15 +108,30 @@
 
   @media (max-width: 600px) {
     .sitename {
-      font-size: 16px;
-    }
+      a{
+        display: none;
+      }
+     }
     .logo {
-      width: 25px;
-      height: 25px;
+      margin-left: 10px;
     }
     .navbar-header {
       height: 50px;
+      width: 100%;
       top:0;
+    }
+    .navbar-toggle {
+      margin-right: 20px;
+    }
+    .header .toggle-box {
+      margin-right: 20px;
+      margin-left: 20px;
+      margin-top: 27px;
+      width: 88%;
+      float:left;
+    }
+    .header .toggle-text {
+      text-align: center;
     }
 
   }

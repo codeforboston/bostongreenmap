@@ -33,7 +33,6 @@
     display: inline-block;
     max-width: 100%;
     height: auto;
-    // box-sizing: content-box;
     z-index: 1000;
     margin: 0px auto;
     margin-bottom: -20px;
@@ -150,7 +149,6 @@
     position: relative;
     padding-top: 5px;
     text-align: center;
-    //background-color: lightgray;
     .orbs {
       margin: 0 auto;
       max-width: 950px;
@@ -162,8 +160,28 @@
   @media (max-width:600px) {
     .find-your-space {
       max-width: 100%;
-      margin-bottom: 0px;
+      margin-bottFom: 0px;
     }
+  }
+
+  @media (max-width:360px) {
+
+     .logo-grass {
+      display:none;
+    }
+    .find-your-space h1 {
+      padding-top: 15px;
+    }
+    .find-your-space {
+      margin-top: 230px;
+    }
+    .search-buttons {
+      padding-bottom: 60px;
+    }
+    .featured-parks {
+      margin-top: -200px;
+
+      }
   }
 
 }
