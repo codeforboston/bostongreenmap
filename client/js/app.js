@@ -8,7 +8,8 @@ define([
     'owl',
     'leaflet',
     'tileLayer',
-    'chosen'
+    'chosen',
+    'leafletLabel'
 ], function(
     Backbone,
     Marionette,
@@ -17,7 +18,8 @@ define([
     Masonry,
     owl,
     Leaflet,
-    TileLayer
+    TileLayer,
+    leafletLabel
 ) {
     var app = new Marionette.Application(),
         router;
@@ -32,8 +34,9 @@ define([
     // Models
     var Park = Backbone.Model.extend({
         initialize: function (params) {
-          this.park_slug = params.park_slug
-
+          var self = this;
+          this.park_slug = params.park_slug   
+          var thumbnail_data = self.get("images");
         },
         defaults: {
             'title': ''
@@ -77,7 +80,7 @@ define([
     var ParksCollection = Backbone.PageableCollection.extend({
         model: Park,
         initialize: function(params) {
-            this.queryString = params.queryString
+            this.queryString = params.queryString;
         },
         url: function() {
             var search_url = 'parks/search/?' + this.queryString;
@@ -85,8 +88,11 @@ define([
         },
         parse: function(response) {
             if (!response) {
-                alert('no data for that search!');
+                alert('No parks meet this criteria. Try searching for single neighborhood or activity.');
+            } else {
+              app.trigger('map:getbbox', response.bbox);
             }
+            this.num_pages = response.pages;
             var parks = _.map(_.values(response.parks), function(park) {
                 return new Park(park);
             });
@@ -108,39 +114,89 @@ define([
           self.toggle();
           return this; 
         });
+        this.listenTo(app, 'map:highlightpark', this.set_style)
+        this.listenTo(app, 'map:getbbox', this.get_bbox);
+        this.listenTo(app, 'map:addpoints', this.add_points);
+        this.listenTo(app, 'map:open', function() {
+          if(!self.visible) {
+            self.toggle();
+            return this;
+          }
+        });
+        this.listenTo(app, "map:locate", function() {
+          self.map.locate({setView: true, maxZoom: 16});
+        })
         return this;
+      },
+      get_bbox: function(context) {
+        this.current_bbox = context
       },
       id: 'map',
       visible: false,
       render: function() {
         var self = this;
         var boston = new L.LatLng(42.357778, -71.061667);
-        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 13});
-        L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-            subdomains: 'abcd',
-            minZoom: 0,
-            maxZoom: 18
-        }).addTo(this.map);
         
+
+        self.basemap = L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png', {
+            attribution: '&copy; Map tiles by MAPC',
+            minZoom: 0,
+            maxZoom: 17
+        });
+        
+        self.trailmap = L.tileLayer('http://tiles.mapc.org/trailmap/{z}/{x}/{y}.png', {
+            attribution: '&copy; Map tiles by MAPC',
+            minZoom: 0,
+            maxZoom: 17
+        });
+
+        self.basemaps = {
+          "MAPC Basemap": self.basemap,
+          "MAPC Trailmap": self.trailmap
+        }
+
+        this.map = L.map(this.el, {scrollWheelZoom: false, center: boston, zoom: 15, layers: [self.basemap]});
+
+        L.control.layers(self.basemaps).addTo(self.map);
+
         self.style = {
             clickable: true,
             color: "#00c800",
             weight: 0,
             opacity: 1,
             fillColor: "#00DC00",
-            fillOpacity: 0.1
+            fillOpacity: 0.1,
+            className: 'parkgeom'
           };
 
+        var locateMeControl = new L.control({
+          position: "topleft"
+        });
 
+        locateMeControl.onAdd = function (map) {
+          // Leaflet control container DOM element
+          var div = L.DomUtil.create('div', 'leaflet-control-zoom leaflet-bar leaflet-control');
+          var $link = $( "<a/>", {
+            class: "leaflet-control-geoloc",
+            title: "Locate Me"
+          }).appendTo( $(div) );
+          $link.on( "click", function( event ) {
+            event.preventDefault();
+            // geolocate
+            map.locate({setView: true, maxZoom: 17});
+          });
+          return div;
+        };
+        self.map.addControl(locateMeControl);
 
         self.hoverStyle = {
             "fillOpacity": 1
         };
-        var geojsonURL = 'http://104.131.99.131:8080/parks/{z}/{x}/{y}.json';
+        var geojsonURL = 'http://beta.bostongreenspace.org:8080/parks/{z}/{x}/{y}.json';
         self.geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
                 clipTiles: true,
                 unique: function (feature) { 
+                    this.slug = feature.properties.slug;
                     return feature.id;
                 }
             }, {
@@ -150,6 +206,8 @@ define([
                 },
                 reuseTiles: true,
                 onEachFeature: function (feature, layer) {
+                    this.slug = feature.properties.slug;
+                    layer.slug = feature.properties.slug;
                     if (!(layer instanceof L.Point)) {
                         layer.on('mouseover', function () {
                             layer.setStyle(self.hoverStyle);
@@ -158,24 +216,30 @@ define([
                             layer.setStyle(self.style);
                         });
                     }
+ 
+                    layer.bindLabel(feature.properties.name);
 
+ 
                     if (feature.properties) {
-                        var popupString = '<div class="popup">';
-
-                        popupString += '<h3><a href="#/parks/' + feature.properties.slug + '/">' + feature.properties.name + '</a></h3>';
-                        popupString += '</div>';
-                        layer.bindPopup(popupString);
+                      layer.on("click", function(e) {
+                        
+                        app.router.navigate("#/parks/" + e.target.slug + "/");
+                      });
                     }
                 }
             }
           );
 
         self.map.addLayer(self.geojsonTileLayer);
-
+      
         return this;
       },
       set_style: function(highlightID) {
+
         var self = this;
+
+        self.current_park_id = highlightID;
+
         var highlightStyle = {
             clickable: true,
             color: "#00c800",
@@ -194,13 +258,14 @@ define([
             layer.on('mouseout', function () {
                 layer.setStyle(self.style);
             });
-            if(layer.feature.properties.id == highlightID) {
+            if(layer.feature.properties.id == self.current_park_id) {
                 layer.setStyle(highlightStyle) 
                 layer.on('mouseout', function () {
                   layer.setStyle(highlightStyle);
                 });
               }
           });
+        
           callback();
         };
 
@@ -210,7 +275,6 @@ define([
       },
       add_points: function(id) {
         var self = this;
-        window.map = self.activity_markers;
         // clear out existing markers.
         if (self.activity_markers) {
           self.map.removeLayer(self.activity_markers);
@@ -225,24 +289,26 @@ define([
                 "weight": 5,
                 "opacity": 0.65
             };
-
+          
           self.activity_markers = L.geoJson(response, {
               style: myStyle,
               pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                                       icon: L.divIcon({
-                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug
+                                          className: 'map-park-activity icon icon-' + feature.properties.activities[0].slug,
+                                          iconAnchor: [12,12]
                                       })
                                   });
               },
               onEachFeature: function(feature, layer) {
-                var activities = '<ul>';
+                var innerHTML = '<h3>' + feature.properties.name + '</h3>';
+                innerHTML += '<ul>';
 
                 for (var i = 0, len = feature.properties.activities.length; i <len; i++) {
-                  activities += '<li>' +feature.properties.activities[i].name + '</li>';
+                  innerHTML += '<li>' +feature.properties.activities[i].name + '</li>';
                 }
-                activities += '</ul';
-                layer.bindPopup(activities)
+                innerHTML += '</ul';
+                layer.bindPopup(innerHTML)
               }
             }).addTo(self.map);
 
@@ -252,31 +318,22 @@ define([
 
         });
       },
-      set_bbox: function(geos_obj) {
+      set_bbox: function() {
         var self = this;
-        var data = app.getRegion('mainRegion').currentView.model.attributes || geos_obj;
-        
-        if (data.bbox) {
+        var bbox = self.current_bbox;
+        if (bbox) {
           self.map.fitBounds([
-                  [data.bbox[0][1], data.bbox[0][0]],
-                            [data.bbox[1][1], data.bbox[1][0]]
-                          ]);
-          self.add_points(data.id);
+                  [bbox[0][1], bbox[0][0]],
+                            [bbox[1][1], bbox[1][0]]
+                          ], { maxZoom: 17 });
           self.geojsonTileLayer.on('load', function() {
-            self.set_style(data.id);
+            self.set_style(self.current_park_id);
           });
         }
 
-        // self.map.on('move', function() {
-        //   self.set_style(data.id);
-        // });
       },
       toggle: function(chosenState) {
         var self = this;
-        // var switchTo = self.visible
-        // if (chosenState !== undefined) {
-        //   switchTo = chosenState;
-        // }
         if (self.visible) {
           app.getRegion('mapRegion').currentView.$el.slideUp();
           self.visible = false;
@@ -323,7 +380,8 @@ define([
         tagName: 'div',
         className: 'search-page',
         events: {
-            'click .gobutton': 'doSearch'
+            'click .gobutton': 'doSearch',
+            'click .locateme': 'locateMe'
         },
         doSearch: function() {
             var neighborhood_id = $('#neighborhoods option:selected').val(),
@@ -335,6 +393,10 @@ define([
                     (activity_id ? '&facility__activity=' + activity_id.toString() : '')
                 ].join('');
             Backbone.history.navigate(search_url, {'trigger': true});
+        },
+        locateMe: function() {
+          app.trigger("map:open");
+          app.trigger("map:locate");
         },
         onShow: function() {
           $(".parkfilter").chosen()
@@ -366,20 +428,11 @@ define([
     });
 
     var ParkView = Marionette.ItemView.extend({
-        events: {
-          'click #toggle': function() {
-            app.trigger('map:toggle');
-          }
-        },
         initialize: function() {
-          if (this.showMapState === undefined) {
-            this.showMapState = false;
-          };
-
-          this.on("show", function() {
+          this.listenTo(this,"show", function() {
             app.trigger("park:changed", this);
           });
-
+          // this.model.attributes.
           return this;
         },
         model: Park,
@@ -387,7 +440,16 @@ define([
         tagName: 'div',
         className: 'detail',
         onShow: function() {
-          
+
+            app.trigger('map:highlightpark', this.model.get("id"));
+            app.trigger('map:getbbox', this.model.get("bbox"));
+            app.trigger('map:addpoints', this.model.get("id"));
+
+            if (this.model.attributes.images[0].default) {
+              app.trigger('map:open');
+            }
+
+
             var self = this;
             self.$('#carousel-images-container').owlCarousel({
               autoPlay: 5000, //Set AutoPlay to 3 seconds
@@ -439,8 +501,17 @@ define([
     });
 
     var ResultItemView = Marionette.ItemView.extend({
+        initialize: function() {
+          var images = this.model.get("images");
+          if (images[0]) {
+            $(this.el).css("width", images[0].width).css("height", images[0].height);
+          }
+        },
         template: templates['client/templates/resultItem.hbs'],
-        className: 'result'
+        className: 'result',
+        onRender: function() {
+          var self = this;
+        }
     }); 
 
     var ResultsView = Marionette.CompositeView.extend({
@@ -451,6 +522,7 @@ define([
         collection: ParksCollection,
         initialized: false,
         getNextPage: function(evnt) {
+          
           var that = this;
           this.collection.getNextPage({remove:false, success: function() { }});
           this.initialized = true;
@@ -469,7 +541,8 @@ define([
           $('#loading').css("display", "none");
 
           self.msnry = new Masonry(self.el, {
-            itemSelector: '.result'
+            itemSelector: '.result',
+            columnWidth: '.grid-sizer'
           }); 
         }, 
         onAddChild: function (childView) {
@@ -481,18 +554,22 @@ define([
 
     var ResultsLayout = Backbone.Marionette.LayoutView.extend({
       onShow: function() {
-        this.getRegion('results').show(new ResultsView({'collection': this.collection}))
+        this.getRegion('results').show(new ResultsView({'collection': this.collection}));
       },
       events: {
         "click #next": "getNext"
       },
       getNext: function () {
         var that = this;
-        this.results.currentView.collection.getNextPage({remove:false, success: function() { }});
-        this.results.currentView.initialized = true;
-
+        if (this.results.currentView.collection.state.currentPage < this.results.currentView.options.collection.num_pages) {
+          this.results.currentView.collection.getNextPage({remove:false, success: function() { }});
+          this.results.currentView.initialized = true;
+        } 
+        if (this.results.currentView.collection.state.currentPage == this.results.currentView.options.collection.num_pages) {
+          $(that.next.el).attr("id", "next-no-results");
+        }
       },
-      className: "resultsSection",
+      className: "results-layout",
       collection: ParksCollection,
       template: templates['client/templates/all_results.hbs'],
       regions: {
@@ -500,23 +577,6 @@ define([
         next: "#next"
       }
     });
-
-    // var MainContentLayout = Backbone.Marionette.LayoutView.extend({
-    //   // I think this is handled in the Router
-    //   // onShow: function() {
-    //   //   this.getRegion('content').show(new ParkView({'model': this.model}));
-    //   //   this.getRegion('map').show(new MapView());
-    //   // },
-    //   id: "main-content-section",
-    //   // model: Park,
-    //   // el: '#main-content-section'
-    //   // el: '#main-content-section',
-    //   template: templates['client/templates/main_content_layout.hbs'],
-    //   regions: {
-    //     content: "#content",
-    //     map: "#map"
-    //   }
-    // })
 
     app.Router = Backbone.Router.extend({
         routes: {
@@ -584,7 +644,6 @@ define([
               } else {
                 map = false;
               }
-              console.log(map);
               $('#loading').css("display", "none");
               var parkView = new ParkView({'model': park });
               app.getRegion('mainRegion').show(parkView);
@@ -598,11 +657,18 @@ define([
         app.getRegion('footerRegion').show(new FooterView());
         app.getRegion('mapRegion').show(new MapView());
 
-        router = new app.Router();
-        router.on('route:home route:about route:mission route:contact route:results', function() {
+        app.router = new app.Router();
+        app.router.on('route:home route:about route:mission route:contact route:results', function() {
           app.trigger("park:destroyed")
         });
-        app.execute('setRouter', router);
+
+        app.router.on('route', function() {
+          $("html, body").animate({
+              scrollTop: 0
+            }, 0);
+        });
+
+        app.execute('setRouter', app.router);
         Backbone.history.start();
     });
 

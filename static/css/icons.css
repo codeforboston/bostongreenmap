@@ -41,13 +41,13 @@
 .icon-amphitheatre:before {
   content: "a";
 }
-.icon-chess:before {
+.icon-chess-tables:before {
   content: "m";
 }
 .icon-cricket:before {
   content: "n";
 }
-.icon-dogplay:before {
+.icon-dog-play:before {
   content: "p";
 }
 .icon-football:before {
@@ -62,7 +62,7 @@
 .icon-garden:before {
   content: "t";
 }
-.icon-monument:before {
+.icon-artworkmonument:before {
   content: "u";
 }
 .icon-parking:before {
@@ -110,7 +110,7 @@
 .icon-hockey:before {
   content: "J";
 }
-.icon-iceskating:before {
+.icon-ice-skating:before {
   content: "K";
 }
 .icon-lacrosse:before {
@@ -122,10 +122,13 @@
 .icon-tennis:before {
   content: "N";
 }
-.icon-track:before {
+.icon-track-field:before {
   content: "O";
 }
-.icon-walking:before {
+.icon-walkinghiking:before {
+  content: "P";
+}
+.icon-walking-hiking:before {
   content: "P";
 }
 .icon-workout:before {
@@ -133,4 +136,31 @@
 }
 .icon-camping:before {
   content: "R";
+}
+.icon-cultural:before {
+  content: "b";
+}
+.icon-entrance:before {
+  content: "c";
+}
+.icon-field:before {
+  content: "d";
+}
+.icon-handball:before {
+  content: "e";
+}
+.icon-historic:before {
+  content: "f";
+}
+.icon-picnic-area:before {
+  content: "g";
+}
+.icon-pier:before {
+  content: "h";
+}
+.icon-volleyball:before {
+  content: "i";
+}
+.icon-waterspray:before {
+  content: "j";
 }

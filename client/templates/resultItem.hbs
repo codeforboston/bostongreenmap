@@ -1,15 +1,15 @@
-{{#if images.0.src}}
-  <div class="medium">
-    <img src="{{images.0.med_src}}" alt={{owner}}>
+{{#if images}}
+  <a href="#{{url}}">
+    <img src="{{images.0.masonry_src}}">
     <div class="park-title-wrapper">
-      <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+      <p class="park-title">{{name}}</p>
     </div>
-  </div>
+  </a>  
 {{else}}
-  <div class="small">
-    <img src="http://placehold.it/300x200" alt={{owner}}>
+  <a href="#{{url}}">
+    <img src="http://placehold.it/300x200">
     <div class="park-title-wrapper">
-      <p class="park-title"><a href="#{{url}}">{{name}}</a></p>
+      <p class="park-title">{{name}}</p>
     </div>
-  </div>
+  </a>  
 {{/if}}

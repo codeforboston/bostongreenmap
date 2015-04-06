@@ -147,7 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    # 's3_folder_storage',
+    's3_folder_storage',
     'storages',
     'grappelli',
     'django.contrib.admin',

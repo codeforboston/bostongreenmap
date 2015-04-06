@@ -11,11 +11,12 @@
           <div class="park-title row">
             <h1>{{name}}</h2> 
           </div>
-          {{#if description}}
             <div class="park-description row">
               <p>{{description}}</p>
+              <a href="https://www.google.com/maps/dir//{{point_on_surface.[1]}}, {{point_on_surface.[0]}}" target="_blank">
+                <img src="static/img/location2.png" data-toggle="tooltip" data-placement="bottom" title="Google maps" />
+              </a>
             </div>  
-          {{/if}}
           <div class="park-activities row">
             {{#each activities}}
               <div class="park-activity icon icon-{{slug}}" data-toggle="tooltip" data-placement="bottom" title="{{name}}"></div>
@@ -26,28 +27,19 @@
     </div>
   </div>
   <div class="carousel-inner" id="carousel-images-container">
-    {{#if images}}
+    {{#if images.0.default}}
+
+
+
+    {{else}}
       {{#each images}}
         <div class="item">
           <div class="carousel-image" alt="...">
             <img class="lazyOwl" data-src="{{large_src}}"></img>
           </div>
-          <div class="carousel-caption"></div>
+          <div class="carousel-caption">{{stripScript caption}}</div>
         </div>
       {{/each}}
-    {{else}}
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-          <div class="carousel-image" style="background-image: url('http://sunshinerunning.files.wordpress.com/2011/03/boston_common.jpg');" alt="..."></div>
-          <div class="carousel-caption"></div>
-        </div>
     {{/if}}
   </div>
 </div>  
@@ -65,6 +57,7 @@
     {{/if}}
   </div>
 </div> 
+{{#if recommended_parks.[0]}}
 <div class="nearby-parks">
   <div class="center-content">
     <h2>Similar Parks</h2>
@@ -82,6 +75,9 @@
     {{/each}}
   </div>
 </div> 
+{{/if}}
+
+{{#if nearby_parks.[0]}}
 <div class="recommended-parks">
   <div class="center-content">
     <h2>Nearby Spaces</h2>
@@ -99,3 +95,4 @@
     {{/each}}
   </div>
 </div> 
+{{/if}}

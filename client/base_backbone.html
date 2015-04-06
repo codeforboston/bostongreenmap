@@ -4,14 +4,15 @@
 
         <meta name="viewport" content="width=device-width">
         <link href="/static/lib/bootstrap.css" rel="stylesheet">
-        <link href="/static/build/css/main.css" rel="stylesheet">
-        <link href="/static/libs/leaflet/leaflet.css" rel="stylesheet">
+        <!-- <link href="/static/build/css/main.css" rel="stylesheet"> -->
+        <link href="{{ STATIC_URL }}/build/css/main.css" rel="stylesheet">
         <link href="/static/libs/leaflet/leaflet.css" rel="stylesheet">
         <link href="/static/css/icons.css" rel="stylesheet">
         <link href="/static/css/chosen.min.css" rel="stylesheet">
+        <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
             <link href='http://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Istok+Web:400,700' rel='stylesheet' type='text/css'>
-        <script src="/static/lib/require.js" data-main="/static/js/main.js"></script>
+        <script src="/static/lib/require.js" data-main="{{ STATIC_URL }}/js/main.js"></script>
 	</head>
 
 	<body>
@@ -20,4 +21,23 @@
         <div id="content-area"></div>
         <footer id="footer"></footer>
 	</body>
+    <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+    <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/eFmGzQ5wBmsJp71uTIQ5tg.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+
+    <!-- A tab to launch the Classic Widget -->
+    <script>
+    UserVoice = window.UserVoice || [];
+    UserVoice.push(['showTab', 'classic_widget', {
+      mode: 'feedback',
+      primary_color: '#333333',
+      link_color: '#00dc00',
+      
+      feedback_tab_name: 'Your Feedback',
+      tab_label: 'Feedback',
+      tab_color: '#00dc00',
+      forum_id: 165368,
+      tab_position: 'middle-right',
+      tab_inverted: true
+    }]);
+    </script>
 </html>

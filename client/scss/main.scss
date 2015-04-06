@@ -59,10 +59,23 @@ a {
   //position: relative;
   z-index: -1;
   width:100%;
-  // width: 2000px;
+  min-height: 600px;
   overflow-x: hidden;
   margin: 0 auto;
   // top: 110px;
+}
+
+.carousel-caption a {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 }
 
 .carousel-inner {
@@ -90,6 +103,21 @@ a {
   select {
     width: 100%;
   }
+}
+
+
+.map-park-activity {
+  top: 12px;
+  font-size: 24px;
+  display: inline-block;
+  background-color: white;
+  color: #556C98;
+  opacity: 0.85;
+  height: 35px !important;
+  width: 35px !important;
+  border-radius: 35px;
+  text-align:center;
+  padding-top: 5px;
 }
 
 .park-title-wrapper {
@@ -137,6 +165,43 @@ a {
   opacity: 0.5;
 }
 
+
+#next-no-results {
+  max-width: 1200px;
+  height: 60px;
+  text-align: center;
+  border-left: 4px solid;
+  border-right: 4px solid;
+  border-color: white;
+  margin: 15px auto;
+  background-color: #339333;
+  cursor: default;
+  opacity: 0.5;
+  h1 {
+    color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media (min-width: 900px) and (max-width: 1200px) {
+  max-width: 900px;
+   }
+  @media (min-width: 600px) and (max-width: 900px) {
+  max-width: 600px;
+   }
+  @media (min-width: 300px) and (max-width: 600px) {
+  max-width: 300px;
+   }
+}
+
+
+.leaflet-control-geoloc {
+  background-image: url("/static/img/location.png");
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+
 /* template-specific styles */
 
 @import 'header';
@@ -146,8 +211,6 @@ a {
 @import 'park';
 @import 'results';
 @import 'carousel';
-
-
 
 @media (max-width:600px) {
  .carousel-inner .item .carousel-image {
@@ -168,3 +231,4 @@ a {
     top: -210;
   }
 }
+

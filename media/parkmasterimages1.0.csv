@@ -1,0 +1,1216 @@
+FID,os_id,name,slug,alt_name,address,phone,parktype_i,parkowner_,friendsgro,access,area,psid,ps_name,imgur_id,img_url
+0,35-1,St Elizabeth's Hospital Campus,st-elizabeths-hospital-campus,,,,3,15,0,u,"19,680.19",1,St. Elizabeth's Hospital Campus,1,http://imgur.com/v6mNVoZ.jpg
+1,35-2,Brighton HS Hillside,brighton-hs-hillside,,,,3,6,0,y,"5,779.14",2,Brighton HS Hillside,2,http://imgur.com/UxrCr0Z.jpg
+2,35-3,North Beacon Allee,north-beacon-allee,Mount St. Joseph's Athletic Fields,,,7,15,0,u,"3,403.02",3,North Beacon Allee,3,http://imgur.com/Tuc42pZ.jpg
+3,35-4,St John Chrysostom Tract,st-john-chrysostom-tract,,,,11,15,0,u,"17,420.51",4,St. John Chrysostom Tract,4,http://imgur.com/5a6hWE6.jpg
+4,35-5,Brian Honan Park,brian-honan-park,,,,5,15,0,y,"1,903.21",5,Brian Honan Park,5,http://imgur.com/ib5Zawf.jpg
+5,35-6,Sprague Pond Lakeside Access,sprague-pond-lakeside-access,,,,11,15,0,u,"4,325.29",6,Sprague Pond Lakeside Access,6,http://imgur.com/czPngXB.jpg
+6,35-7,Allandale Woods II,allandale-woods-ii,,,,11,6,0,y,"42,854.38",472,Allandale Woods,7,http://imgur.com/N5fQxtX.jpg
+7,35-9,Blake Estates Urban Wild,blake-estates-urban-wild,,,,11,6,0,y,"1,016.50",8,Blake Estates Urban Wild,8,http://imgur.com/ZF5B8si.jpg
+8,35-10,Canterbury Brookside II,canterbury-brookside-ii,,,,3,15,0,u,"1,998.63",9,Canterbury Brookside II,9,http://imgur.com/HCdNBPA.jpg
+9,35-11,Hennigan Schoolyard,hennigan-schoolyard,,,,10,6,0,y,"7,528.00",10,Hennigan Schoolyard,10,http://imgur.com/OtzGklq.jpg
+10,35-12,Kennebec/Alabamba/Colorado Buffer,kennebecalabambacolorado-buffer,,,,11,15,0,u,"4,119.04",11,Mattahunt Woods Buffer,11,http://imgur.com/w9H3yzh.jpg
+11,35-31,Boston Latin Academy Play Area,boston-latin-academy-play-area,,,,7,6,0,y,"1,914.29",12,Boston Latin Academy Play Area,12,http://imgur.com/4l1qqt4.jpg
+12,35-32,Franklin Field BHA Green,franklin-field-bha-green,,,,3,6,0,y,"2,845.31",13,Franklin Field BHA Green,13,http://imgur.com/sJbiP3y.jpg
+13,35-618,Blue Hill Avenue,blue-hill-avenue,,,,5,7,0,y,"10,225.11",14,Blue Hill Avenue,14,http://imgur.com/nKfSh4g.jpg
+14,35-13,Kennebec/Alabama/Colorado Marsh,kennebecalabamacolorado-marsh,,,,11,6,0,y,"52,727.18",15,Kennebec/Alabama/Colorado Marsh,15,http://imgur.com/VjrP5g1.jpg
+15,35-14,Mattahunt Schoolyard,mattahunt-schoolyard,,,,10,6,0,y,"13,413.98",16,Mattahunt Schoolyard,16,http://imgur.com/xkTHohL.jpg
+16,35-17,State Public Health Campus,state-public-health-campus,,,,3,8,0,y,"82,729.01",18,State Public Health Campus,17,http://imgur.com/EiMKjju.jpg
+17,35-18,Mattahunt School Entrance Plaza,mattahunt-school-entrance-plaza,,,,9,6,0,y,"1,487.22",19,Mattahunt School Entrance Plaza,18,http://imgur.com/B8XvECT.jpg
+18,35-19,Mattahunt Woods III,mattahunt-woods-iii,,,,11,15,0,u,"2,256.25",20,Currier Woods II,19,http://imgur.com/EZtnn4e.jpg
+19,35-20,Mattahunt Woods II,mattahunt-woods-ii,,,,11,6,0,y,"5,804.57",21,Currier Wood I,20,http://imgur.com/Lm6tVoX.jpg
+20,35-21,Matthunt Woods IV,matthunt-woods-iv,,,,11,6,0,y,"12,926.35",22,Savannah Woods I,21,http://imgur.com/RZLIbXY.jpg
+21,35-22,Mattahunt Woods V,mattahunt-woods-v,,,,11,15,0,u,"2,958.89",23,Savannah Woods II,22,http://imgur.com/AT7yvkD.jpg
+22,35-25,Canterbury Brookside I,canterbury-brookside-i,,,,5,8,0,y,"14,473.98",24,Canterbury Brookside I,23,http://imgur.com/6rTPyhG.jpg
+23,35-27,Allan Crite Garden II,allan-crite-garden-ii,,,,1,4,0,y,147.4661037,25,Allan Crite Garden II,24,http://imgur.com/hoQg2Ag.jpg
+24,35-30,Franklin Field BHA Playground,franklin-field-bha-playground,,,,7,6,0,y,"1,582.05",26,Franklin Field BHA Playground,25,http://imgur.com/Z2dnpeH.jpg
+25,243-83,Whiton Ave & Dee Rd,whiton-ave-dee-rd,,,,0,0,0,,"2,281.11",27,Whiton Ave & Dee Rd,26,http://imgur.com/5znU37b.jpg
+26,35-33,Carter School Grounds,carter-school-grounds,,,,10,6,0,y,"1,955.63",28,Carter School Grounds,27,http://imgur.com/Zftlsid.jpg
+27,35-34,Frederick Douglas Peace Garden,frederick-douglas-peace-garden,,,,1,4,0,y,459.2916112,29,Frederick Douglas Peace Garden,28,http://imgur.com/zRWwai8.jpg
+28,35-35,Bessie Barnes Park,bessie-barnes-park,,,,5,9,0,u,407.9788009,30,Bessie Barnes Park,29,http://imgur.com/Qk810Tv.jpg
+29,35-36,Prudential Center Plaza II,prudential-center-plaza-ii,,,,3,15,0,u,"4,424.33",31,Prudential Center Plaza II,30,http://imgur.com/PGFMXQi.jpg
+30,35-38,ELC Playlot,elc-playlot,,,,7,6,0,y,"1,832.77",32,ELC Playlot,31,http://imgur.com/JzlyqVs.jpg
+31,35-39,Rutlands's Haven Community Garden,rutlandss-haven-community-garden,,,,1,4,0,y,456.0152071,33,Rutlands's Haven Community Garden,32,http://imgur.com/YjkuQJP.jpg
+32,35-40,Salvation Army Field,salvation-army-field,,,,3,15,0,u,"4,095.18",34,Salvation Army Field,33,http://imgur.com/KRuJtcn.jpg
+33,35-41,Harrison Urban Garden,harrison-urban-garden,,,,1,15,0,u,812.5518106,35,Harrison Urban Garden,34,http://imgur.com/WGAzsyD.jpg
+34,35-42,Thoreau Path,thoreau-path,,,,3,15,0,u,"15,603.45",36,Thoreau Path,35,http://imgur.com/LMpG50K.jpg
+35,35-43,Bay Village Garden,bay-village-garden,,,,1,6,0,y,74.75356245,37,Bay Village Garden,36,http://imgur.com/LMBeXro.jpg
+36,35-44,Union Park Street Playground,union-park-street-playground,,,,7,6,0,y,"2,154.30",38,Union Park Street Playground,37,http://imgur.com/PN4WOwg.jpg
+37,35-45,West End Recreation Complex,west-end-recreation-complex,,,,3,15,0,u,"13,849.98",39,West End Recreation Complex,38,http://imgur.com/wrhpx40.jpg
+38,35-46,Austin & Main Plaza,austin-main-plaza,,,,9,4,0,y,483.7177172,40,Austin & Main Plaza,39,http://imgur.com/cOgZPFX.jpg
+39,35-48,O'Reilly Way Court,oreilly-way-court,,,,3,6,0,y,"2,140.21",41,O'Reilly Way Court,40,http://imgur.com/5CTEz9g.jpg
+40,35-49,Oxford Place Playground,oxford-place-playground,,,,7,15,0,u,203.8391566,42,Oxford Place Playground,41,http://imgur.com/Hkswv9j.jpg
+41,35-53,South Shore Plaza Park,south-shore-plaza-park,,,,5,15,0,u,"2,020.79",43,South Shore Plaza Park,42,http://imgur.com/Ml8Qnmh.jpg
+42,35-54,Calf Pasture II,calf-pasture-ii,,,,3,6,0,y,"49,960.44",44,Calf Pasture II,43,http://imgur.com/dXfAR7O.jpg
+43,35-55,UMass Boston Campus Ctr Oval,umass-boston-campus-ctr-oval,,,,3,8,0,y,"6,743.31",45,UMass Boston Campus Ctr Oval,44,http://imgur.com/AIPVMO8.jpg
+44,35-56,East Boston Social Centers Playlot,east-boston-social-centers-playlot,,,,7,15,0,u,"1,334.94",46,East Boston Social Centers Playlot,45,http://imgur.com/rkTY03B.jpg
+45,35-175,Bunker Hill Burying Ground,bunker-hill-burying-ground,,,,5,7,0,y,"4,541.09",47,Bunker Hill Burying Ground,46,http://imgur.com/uC7H0CO.jpg
+46,35-57,Wilson Park,wilson-park,,,,5,6,0,y,392.90422,48,Wilson Park,47,http://imgur.com/216sF2D.jpg
+47,35-58,Nickerson Field,nickerson-field,,,,6,15,0,u,"25,678.24",49,Nickerson Field,48,http://imgur.com/P81YICT.jpg
+48,35-59,Hooker-Sorrento Street Playground,hooker-sorrento-street-playground,,,,7,6,0,y,"4,068.65",50,Hooker-Sorrento Street Playground,49,http://imgur.com/Y8H14Ue.jpg
+49,35-60,Smith Playground,smith-playground,,,,7,6,0,y,"59,875.34",51,Smith Playground,50,http://imgur.com/EDfMuNx.jpg
+50,35-61,Fern Square,fern-square,,,,5,6,0,y,164.036953,52,Fern Square,51,http://imgur.com/zObe35i.jpg
+51,35-62,Penniman Road Garden,penniman-road-garden,,,,1,6,0,y,670.2189292,53,Penniman Road Garden,52,http://imgur.com/LcXH1mz.jpg
+52,35-63,Ringer Playground,ringer-playground,,,,11,6,4,y,"41,502.49",54,Ringer Playground,53,http://imgur.com/7Sz0asa.jpg
+53,35-64,Portsmouth Street Playground,portsmouth-street-playground,,,,7,6,0,y,"17,327.43",55,Portsmouth Street Playground,54,http://imgur.com/NuJFksn.jpg
+54,35-65,Kennedy Rock,kennedy-rock,,,,3,15,0,u,"8,946.75",56,Kennedy Rock,55,http://imgur.com/SlXoio9.jpg
+55,35-66,Fidelis Way Park,fidelis-way-park,,,,5,6,0,y,"20,657.65",57,Fidelis Way Park,56,http://imgur.com/roKSMcj.jpg
+56,35-67,Cunningham Park,cunningham-park,,,,5,6,0,y,710.3389774,58,Cunningham Park,57,http://imgur.com/nYVSnex.jpg
+57,35-68,Public Grounds,public-grounds,,,,3,6,0,y,"2,029.15",59,Public Grounds,58,http://imgur.com/9Ye0PNs.jpg
+58,35-69,McKinney Playground,mckinney-playground,,,,7,6,0,y,"23,842.10",60,McKinney Playground,59,http://imgur.com/XyWsU9Q.jpg
+59,35-70,Hobart Park,hobart-park,,,,5,6,0,y,"3,274.74",61,Hobart Park,60,http://imgur.com/DVQUgYe.jpg
+60,35-71,Market Street Burying Ground,market-street-burying-ground,,,,5,7,0,y,"1,597.59",62,Market Street Burying Ground,61,http://imgur.com/9ohIm8F.jpg
+61,35-107,Coppens Square,coppens-square,,,,5,7,0,y,"1,445.74",63,Coppens Square,62,http://imgur.com/kchTkkI.jpg
+62,35-236,Rainsford Island,rainsford-island,,,,3,7,0,y,"87,626.41",64,Rainsford Island,63,http://imgur.com/jedN433.jpg
+63,35-72,Brighton Square,brighton-square,,,,6,6,0,y,"2,067.22",65,Brighton Square,64,http://imgur.com/Kf7yd0a.jpg
+64,35-73,Jackson Square,jackson-square,,,,5,6,0,y,487.4183643,66,Jackson Square,65,http://imgur.com/6yAo8Zf.jpg
+65,35-74,Joyce Playground,joyce-playground,,,,7,6,0,y,"5,311.01",67,Joyce Playground,66,http://imgur.com/wlsRD9s.jpg
+66,35-75,Cassidy Playground,cassidy-playground,,,,7,6,0,y,"37,777.76",68,Cassidy Playground,67,http://imgur.com/JNVouvg.jpg
+67,35-86,Foster Street Rock,foster-street-rock,,,,3,15,0,u,"18,725.85",69,Foster Street Rock,68,http://imgur.com/N8CJ7Cn.jpg
+68,35-87,Boston College Athletic Fields,boston-college-athletic-fields,,,,6,15,0,u,"39,356.59",70,Boston College Athletic Fields,69,http://imgur.com/SF44vzW.jpg
+69,243-84,Christ Church Cemetery,christ-church-cemetery,,,,0,0,0,,856.233277,71,Christ Church Cemetery,70,http://imgur.com/qyD7ImS.jpg
+70,35-76,Reilly Playground,reilly-playground,,,,7,8,0,y,"37,530.05",72,Reilly Playground,71,http://imgur.com/QPDc8cZ.jpg
+71,35-385,Orchard Park,orchard-park,,,,5,6,0,y,"9,162.30",73,Orchard Park,72,http://imgur.com/U42sPBw.jpg
+72,35-755,St. Helena's Park,st-helenas-park,,,,5,6,0,y,700.9044,74,St. Helena's Park,73,http://imgur.com/2jUwwpx.jpg
+73,35-77,Boyden Park,boyden-park,,,,5,8,0,y,"1,946.91",75,Boyden Park,74,http://imgur.com/0u41iHL.jpg
+74,35-78,Evergreen Cemetery,evergreen-cemetery,,,,3,6,0,y,"84,078.91",76,Evergreen Cemetery,75,http://imgur.com/GGG3dLg.jpg
+75,35-79,Hardiman Playground,hardiman-playground,,,,7,6,0,y,"5,962.73",77,Hardiman Playground,76,http://imgur.com/YZhFm4k.jpg
+76,35-116,Louisburg Square,louisburg-square,,,,5,15,0,u,"1,313.69",78,Louisburg Square,77,http://imgur.com/Qr4DeZP.jpg
+77,35-117,State House Park,state-house-park,,,,5,8,0,y,"5,014.04",79,State House Park,78,http://imgur.com/tslOaeL.jpg
+78,35-176,Bunker Hill Monument,bunker-hill-monument,,,,3,18,0,y,"15,182.26",80,Bunker Hill Monument,79,http://imgur.com/GmMTjO7.jpg
+79,35-80,St. John's Seminary,st-johns-seminary,,,,3,15,0,u,"242,688.65",81,St. John's Seminary,80,http://imgur.com/hKrUwlq.jpg
+80,35-81,The Cenacles,the-cenacles,,,,3,15,0,u,"62,085.01",82,The Cenacles,81,http://imgur.com/51haOMj.jpg
+81,35-109,McConnell Park,mcconnell-park,,,,5,6,0,y,"25,100.98",83,McConnell Park,82,http://imgur.com/FvDkuVg.jpg
+82,35-777,Shore Plaza East Garden,shore-plaza-east-garden,,,,1,15,0,u,"1,301.31",84,Shore Plaza East Garden,83,http://imgur.com/wARxLSE.jpg
+83,35-82,Rogers Park,rogers-park,,,,5,6,0,y,"33,072.03",85,Rogers Park,84,http://imgur.com/pQMekSO.jpg
+84,35-84,Turnpike Overlook,turnpike-overlook,,,,3,11,0,y,"11,853.53",86,Turnpike Overlook,85,http://imgur.com/tiK0YCb.jpg
+85,35-85,Foster Street Hill,foster-street-hill,,,,3,15,0,u,"16,767.03",87,Foster Street Hill,86,http://imgur.com/aS0ehHZ.jpg
+86,35-527,Harvard Medical School Quadrangle,harvard-medical-school-quadrangle,,,,3,16,0,u,"6,931.23",88,Harvard Medical School Quadrangle,87,http://imgur.com/eWPkZN5.jpg
+87,35-88,Soldier's Field,soldiers-field,,,,6,16,0,u,"250,782.91",89,Soldier's Field,88,http://imgur.com/eJm7hax.jpg
+88,35-89,Chandler Pond,chandler-pond,,,,5,6,0,y,"76,522.85",90,Chandler Pond,89,http://imgur.com/iEJMPLM.jpg
+89,35-90,Charles River Community Garden,charles-river-community-garden,,,,1,6,0,y,"1,631.37",91,Charles River Community Garden,90,http://imgur.com/X1ZTsI8.jpg
+90,35-91,Christian Herter Garden,christian-herter-garden,,,,1,8,0,y,"1,417.94",92,Christian Herter Garden,91,http://imgur.com/6i985oN.jpg
+91,35-92,Meany Park,meany-park,,,,5,8,0,y,904.2416273,93,Meany Park,92,http://imgur.com/0AypLeW.jpg
+92,35-93,Richardson Park,richardson-park,,,,5,8,0,y,"4,537.90",94,Richardson Park,93,http://imgur.com/iICtpzA.jpg
+93,35-94,Nonquit Green,nonquit-green,,,,5,9,0,u,"1,719.73",95,Nonquit Green,94,http://imgur.com/KZbEUN8.jpg
+94,243-85,Blue Hills Reservation,blue-hills-reservation,,,,0,0,0,,"10,628,664.39",96,Blue Hills Reservation,95,http://imgur.com/L4WdiPu.jpg
+95,35-95,Mullen Square,mullen-square,,,,5,6,0,y,916.2986624,97,Mullen Square,96,http://imgur.com/fxwo5k7.jpg
+96,35-96,Ryan Play Area,ryan-play-area,,,,5,7,0,y,"2,541.80",98,Ryan Play Area,97,http://imgur.com/t0Rnrtg.jpg
+97,35-97,Dorchester North Burying Ground,dorchester-north-burying-ground,,,,5,7,0,y,"13,369.49",99,Dorchester North Burying Ground,98,http://imgur.com/EJwJctl.jpg
+98,35-98,Calf Pasture I,calf-pasture-i,,,,3,6,0,y,"23,661.05",100,Calf Pasture I,99,http://imgur.com/xDgH7df.jpg
+99,35-144,Angell Memorial Square,angell-memorial-square,,,,5,7,0,y,715.1231996,101,Angell Memorial Square,100,http://imgur.com/CuseT24.jpg
+100,35-114,Phillips Street Park,phillips-street-park,,,,5,6,0,y,466.1521917,102,Phillips Street Park,101,http://imgur.com/xeVyn9s.jpg
+101,35-115,Myrtle Street Playground,myrtle-street-playground,,,,7,6,0,y,596.4385135,103,Myrtle Street Playground,102,http://imgur.com/jCxJY1V.jpg
+102,35-478,Concord Square,concord-square,,,,5,7,0,y,605.8716356,104,Concord Square,103,http://imgur.com/ASMlLmN.jpg
+103,35-99,Savin Hill Park,savin-hill-park,,,,5,6,0,y,"33,570.58",105,Savin Hill Park,104,http://imgur.com/DHVJR96.jpg
+104,35-101,Allen Park,allen-park,,,,5,6,0,y,"5,443.50",106,Allen Park,105,http://imgur.com/LRxHdLz.jpg
+105,35-102,Downer Avenue Playground,downer-avenue-playground,,,,7,7,0,y,"3,274.33",107,Downer Avenue Playground,106,http://imgur.com/c1gi6XV.jpg
+106,35-104,Quincy/Stanley Play Area,quincystanley-play-area,,,,5,7,0,y,"1,505.02",108,Quincy/Stanley Play Area,107,http://imgur.com/6yglmOz.jpg
+107,35-105,Deer Street Park,deer-street-park,,,,5,6,0,y,988.8619684,109,Deer Street Park,108,http://imgur.com/5KuI5z8.jpg
+108,35-106,Savin Hill Beach,savin-hill-beach,,,,5,7,0,y,"12,100.94",110,Savin Hill Beach,109,http://imgur.com/1D6q9zc.jpg
+109,35-111,Central Burying Ground,central-burying-ground,,,,5,7,0,y,"6,679.40",111,Central Burying Ground,110,http://imgur.com/9UVo3vY.jpg
+110,35-113,Granary Burying Ground,granary-burying-ground,,,,5,7,0,y,"7,472.03",112,Granary Burying Ground,111,http://imgur.com/Vptil9l.jpg
+111,35-162,City Square,city-square,,,,3,8,0,y,"4,893.62",113,City Square,112,http://imgur.com/1eXGWCR.jpg
+112,35-778,South Street BHA Community Garden,south-street-bha-community-garden,,,,1,6,0,y,622.212505,114,South Street BHA Community Garden,113,http://imgur.com/2KmkmcX.jpg
+113,35-118,Commonwealth Avenue Mall,commonwealth-avenue-mall,,"1 Commonwealth Ave, Boston MA 02116",,5,7,0,y,"52,468.36",115,Commonwealth Avenue Mall,114,http://imgur.com/P32v3ea.jpg
+114,35-119,Copley Square,copley-square,,,,5,7,0,y,"7,499.67",116,Copley Square,115,http://imgur.com/8RL3TVM.jpg
+115,35-120,Prudential Center Plaza,prudential-center-plaza,,,,9,15,0,u,"4,294.77",117,Prudential Center Plaza,116,http://imgur.com/xN269Si.jpg
+116,35-121,Clarendon Street Totlot,clarendon-street-totlot,,,,7,6,0,y,"1,348.24",118,Clarendon Street Totlot,117,http://imgur.com/AzdxnFu.jpg
+117,35-122,Somerset Street Plaza,somerset-street-plaza,,,,9,8,0,y,"3,767.33",119,Somerset Street Plaza,118,http://imgur.com/LD6eLkK.jpg
+118,35-123,Temple Street Mall,temple-street-mall,,,,6,15,0,u,"1,698.15",120,Temple Street Mall,119,http://imgur.com/3uUu0Es.jpg
+119,35-124,DeFilippo Playground,defilippo-playground,,,,7,6,0,y,"4,511.93",121,DeFilippo Playground,120,http://imgur.com/CVZW24T.jpg
+120,35-125,Copp's Hill Burying Ground,copps-hill-burying-ground,,,,5,7,0,y,"8,012.62",122,Copp's Hill Burying Ground,121,http://imgur.com/du39FYM.jpg
+121,35-126,Copp's Hill Terrace,copps-hill-terrace,,,,5,7,0,y,"2,476.81",123,Copp's Hill Terrace,122,http://imgur.com/d8TgNgg.jpg
+122,35-127,Foster Street Play Area,foster-street-play-area,,,,5,7,0,y,425.4376093,124,Foster Street Play Area,123,http://imgur.com/C1aDqW4.jpg
+123,35-128,Charter Street Park,charter-street-park,,,,5,6,0,y,952.361769,125,Charter Street Park,124,http://imgur.com/p92Rr7l.jpg
+124,35-157,Pine Street Park,pine-street-park,,,,5,4,0,y,"1,099.82",126,Pine Street Park,125,http://imgur.com/m1nB6jt.jpg
+125,35-129,Paul Revere Mall,paul-revere-mall,,,,5,7,0,y,"3,179.05",127,Paul Revere Mall,126,http://imgur.com/TASc6OA.jpg
+126,35-130,Polcari Park,polcari-park,,,,5,6,0,y,"1,164.18",128,Polcari Park,127,http://imgur.com/pFXROVn.jpg
+127,35-132,Cutillo Park,cutillo-park,,,,5,6,0,y,"1,154.34",129,Cutillo Park,128,http://imgur.com/YL8VuUO.jpg
+128,35-134,City Hall Plaza,city-hall-plaza,,,,9,4,0,y,"24,341.96",130,City Hall Plaza,129,http://imgur.com/eRO0jay.jpg
+129,35-135,Cardinal Cushing Park,cardinal-cushing-park,,,,5,4,0,y,"1,655.76",131,Cardinal Cushing Park,130,http://imgur.com/aH2icpp.jpg
+130,35-136,King's Chapel Burying Ground,kings-chapel-burying-ground,,,,3,7,0,y,"1,739.94",132,King's Chapel Burying Ground,131,http://imgur.com/IHOkXHU.jpg
+131,35-137,Old City Hall Grounds,old-city-hall-grounds,,,,3,7,0,y,917.096783,133,Old City Hall Grounds,132,http://imgur.com/JdhBCwn.jpg
+132,35-138,Post Office Square Park,post-office-square-park,,,,5,15,0,y,"6,247.27",134,Post Office Square Park,133,http://imgur.com/bt0wBG3.jpg
+133,35-139,Eliot Norton Park I,eliot-norton-park-i,,,,5,7,0,y,"3,769.37",135,Eliot Norton Park I,134,http://imgur.com/omtrEKf.jpg
+134,35-141,Statler Park,statler-park,,,,5,6,0,y,916.5763154,136,Statler Park,135,http://imgur.com/o4GO264.jpg
+135,35-142,Aquarium Plaza,aquarium-plaza,,,,9,15,0,u,"2,125.09",137,Aquarium Plaza,136,http://imgur.com/sFRnQ5L.jpg
+136,35-143,Pemberton Square,pemberton-square,,,,3,6,0,y,"5,050.34",138,Pemberton Square,137,http://imgur.com/3LdcWCK.jpg
+137,35-145,Union Park,union-park,,,,5,4,0,y,"1,709.50",139,Union Park,138,http://imgur.com/ZhYTz4e.jpg
+138,35-146,Curley Memorial Plaza,curley-memorial-plaza,,,,9,4,0,y,434.2860827,140,Curley Memorial Plaza,139,http://imgur.com/U2tOCMr.jpg
+139,35-148,Langone Park,langone-park,,,,5,6,0,y,"9,482.95",141,Langone Park,140,http://imgur.com/tC43LlQ.jpg
+140,35-149,Puopolo Playground,puopolo-playground,,,,7,6,0,y,"8,452.14",142,Puopolo Playground,141,http://imgur.com/HWS8a6c.jpg
+141,35-150,School Street Park,school-street-park,,,,9,7,0,y,327.4210546,143,School Street Park,142,http://imgur.com/olcylXH.jpg
+142,35-152,Long Wharf,long-wharf,,,,3,4,0,y,"13,526.96",144,Long Wharf,143,http://imgur.com/kZfab5w.jpg
+143,35-153,Prince Street Park,prince-street-park,,,,5,8,0,y,"5,220.50",145,Prince Street Park,144,http://imgur.com/6BeHlMo.jpg
+144,35-154,Ausonia Plaza,ausonia-plaza,,,,9,4,0,y,792.7007985,146,Ausonia Plaza,145,http://imgur.com/8QUPo7Q.jpg
+145,35-156,Tai Tung Tot Lot,tai-tung-tot-lot,,,,7,6,0,y,134.678058,147,Tai Tung Tot Lot,146,http://imgur.com/SiPP6Ts.jpg
+146,35-158,Quincy Market Square,quincy-market-square,,,,5,7,0,y,"8,769.13",148,Quincy Market Square,147,http://imgur.com/QMteBcr.jpg
+147,35-159,Bay Village Neighborhood Park,bay-village-neighborhood-park,,,,5,6,0,y,322.8715921,149,Bay Village Neighborhood Park,148,http://imgur.com/53Uj9q5.jpg
+148,35-161,Edwards Playground,edwards-playground,,,,7,6,0,y,"5,401.72",150,Edwards Playground,149,http://imgur.com/5tjRIdj.jpg
+149,35-163,John Harvard Mall,john-harvard-mall,,,,5,7,0,y,"3,359.24",151,John Harvard Mall,150,http://imgur.com/URQ8Pvv.jpg
+150,35-164,Paul Revere Park,paul-revere-park,,,,5,8,0,y,"25,907.19",152,Paul Revere Park,151,http://imgur.com/HU7GIKw.jpg
+151,35-165,Charlestown H.S. Athletic Fields,charlestown-hs-athletic-fields,,,,6,6,0,y,"38,968.84",153,Charlestown H.S. Athletic Fields,152,http://imgur.com/dF0NWFX.jpg
+152,35-166,Bunker Hill CC Athletic Fields,bunker-hill-cc-athletic-fields,,,,6,8,0,y,"85,248.12",154,Bunker Hill CC Athletic Fields,153,http://imgur.com/uYxO4VW.jpg
+153,35-167,Ryan Playground,ryan-playground,,,,7,6,0,y,"36,298.12",155,Ryan Playground,154,http://imgur.com/CD2u66D.jpg
+154,35-168,Gardens for Charlestown,gardens-for-charlestown,,,,1,15,0,y,"1,468.21",156,Gardens for Charlestown,155,http://imgur.com/SV8malt.jpg
+155,35-169,Rutherford Union Playground,rutherford-union-playground,,,,7,4,0,y,"1,085.27",157,Rutherford Union Playground,156,http://imgur.com/6qOpKOt.jpg
+156,35-170,Charlestown Naval Shipyard Park,charlestown-naval-shipyard-park,,,,5,4,0,y,"44,834.02",158,Charlestown Naval Shipyard Park,157,http://imgur.com/ljjmG0C.jpg
+157,35-171,Barry Playground,barry-playground,,,,7,6,0,y,"14,801.72",159,Barry Playground,158,http://imgur.com/t7emUXk.jpg
+158,35-172,Doherty Playground,doherty-playground,,,,7,6,0,y,"12,233.40",160,Doherty Playground,159,http://imgur.com/Oplw0YB.jpg
+159,35-173,Cook Street Play Area,cook-street-play-area,,,,7,6,0,y,396.0028587,161,Cook Street Play Area,160,http://imgur.com/jsVDVbx.jpg
+160,35-174,St. Francis De Sales Cemetery,st-francis-de-sales-cemetery,,,,3,15,0,y,"7,269.66",162,St. Francis De Sales Cemetery,161,http://imgur.com/QghcVmX.jpg
+161,35-177,Phipp's Street Burying Ground,phipps-street-burying-ground,,,,5,7,0,y,"7,074.19",163,Phipp's Street Burying Ground,162,http://imgur.com/uHmmxfK.jpg
+162,35-230,Middle Brewster Island,middle-brewster-island,,,,3,8,0,y,"55,248.52",164,Middle Brewster Island,163,http://imgur.com/XeCiNiZ.jpg
+163,35-802,North Street Park,north-street-park,,,,5,11,0,y,988.8394275,165,North Street Park,164,http://imgur.com/8A9KTOx.jpg
+164,35-178,Winthrop Square,winthrop-square,,,,5,7,0,y,"3,595.64",166,Winthrop Square,165,http://imgur.com/gbFJGpP.jpg
+165,35-180,Long Island,long-island,,,,0,6,0,y,"911,307.11",167,Long Island,166,http://imgur.com/cFvuxIj.jpg
+166,35-183,East Boston Memorial Park,east-boston-memorial-park,,,,5,6,0,y,"80,353.93",168,East Boston Memorial Park,167,http://imgur.com/UuUKLHo.jpg
+167,35-184,Noyes Playground,noyes-playground,,,,7,6,0,y,"33,293.40",169,Noyes Playground,168,http://imgur.com/QMnIAOn.jpg
+168,35-201,Condor Street Urban Wild,condor-street-beach,,,,11,6,0,y,"15,166.47",170,Condor Street Urban Wild,169,http://imgur.com/b2XhxVZ.jpg
+169,35-202,Umana School Park,umana-school-park,,,,5,6,0,y,"11,095.15",171,Umana School Park,170,http://imgur.com/BEt2bN7.jpg
+170,35-204,Al Festa Little League Field,festa-field,,,,6,12,0,y,"5,171.06",172,Al Festa Little League Field,171,http://imgur.com/jjBoyt8.jpg
+171,35-531,Boys & Girls Club of Roxbury,boys-club-park,,,,5,15,0,u,"3,299.17",173,Boys & Girls Club of Roxbury,172,http://imgur.com/X0QDnOc.jpg
+172,35-185,Constitution Beach,constitution-beach,,,,6,8,0,y,"102,790.69",174,Constitution Beach,173,http://imgur.com/2obRfRh.jpg
+173,35-231,Great Brewster Island,great-brewster-island,,,,3,8,0,y,"96,860.30",175,Great Brewster Island,174,http://imgur.com/hvZvHAI.jpg
+174,35-186,Bayswater Street Urban Wild,bayswater-street,,,,11,12,0,y,"6,892.47",176,Bayswater Street Urban Wild,175,http://imgur.com/rp6tO6v.jpg
+175,35-187,Temple Ohabei Shalom Cemetery,temple-ohabei-shalom-cemetery,,,,3,15,0,y,"9,466.50",177,Temple Ohabei Shalom Cemetery,176,http://imgur.com/hbGCl1Y.jpg
+176,35-188,McLean Playground,mclean-playground,,,,7,6,0,y,"1,739.12",178,McLean Playground,177,http://imgur.com/qZruEep.jpg
+177,35-189,Cuneo Park,cuneo-park,,,,5,6,0,y,932.6863157,179,Cuneo Park,178,http://imgur.com/vrA4grO.jpg
+178,35-190,Bennington Street Cemetery,bennington-street-cemetery,,,,3,7,0,y,"14,526.84",180,Bennington Street Cemetery,179,http://imgur.com/nw2S8zC.jpg
+179,35-191,American Legion Playground,american-legion-playground,,,,7,6,0,y,"13,684.62",181,American Legion Playground,180,http://imgur.com/HvIBs5C.jpg
+180,35-192,Prescott Square,prescott-square,,,,5,7,0,y,"1,126.01",182,Prescott Square,181,http://imgur.com/BT6InOL.jpg
+181,35-205,Eagle Hill Memorial Park Garden,eagle-hill-memorial-park-garden,,,,1,3,0,u,621.0198433,183,Eagle Hill Memorial Park Garden,182,http://imgur.com/UDuoZUf.jpg
+182,35-228,Calf Island,calf-island,,,,3,8,0,y,"90,744.38",184,Calf Island,183,http://imgur.com/Xewvca1.jpg
+183,35-193,Putnam Square,putnam-square,,,,5,7,0,y,"1,068.29",185,Putnam Square,184,http://imgur.com/RvQzsAX.jpg
+184,35-264,Allegheny Street,allegheny-street,,,,3,15,0,u,"6,129.12",186,Allegheny Street,185,http://imgur.com/qTj78ty.jpg
+185,35-194,Central Square,central-square,,,,5,7,0,y,"3,662.89",187,Central Square,186,http://imgur.com/btOZ5R4.jpg
+186,35-195,Paris Street Playground,paris-street-playground,,,,7,6,0,y,"3,215.14",188,Paris Street Playground,187,http://imgur.com/efmG3mY.jpg
+187,35-196,Wood Island Bay Edge,wood-island-bay-edge,,,,3,12,0,y,"13,643.17",189,Wood Island Bay Edge,188,http://imgur.com/Z3rXUOQ.jpg
+188,35-197,Brophy Park,brophy-park,,,,5,6,0,y,"3,132.10",190,Brophy Park,189,http://imgur.com/DaeMVQ0.jpg
+189,35-198,Sumner & Lamson Street Playground,sumner-lamson-street-playground,,,,7,6,0,y,"1,955.54",191,Sumner & Lamson Street Playground,190,http://imgur.com/PrMBI1P.jpg
+190,35-199,Joe Ciampa Garden,joe-ciampa-garden,,,,1,3,0,u,908.4844241,192,Joe Ciampa Garden,191,http://imgur.com/uQLAval.jpg
+191,35-200,Porzio Park,porzio-park-i,,,,6,6,0,y,"9,576.32",193,Porzio Park,192,http://imgur.com/ao9XKm4.jpg
+192,35-246,Euclid Street,euclid-street,,,,3,15,0,u,"15,575.48",194,Euclid Street,193,http://imgur.com/vzuqfEf.jpg
+193,35-206,East Boston Greenway,east-boston-greenway,,,,4,6,0,y,"14,090.66",195,East Boston Greenway,194,http://imgur.com/5kLZjlS.jpg
+194,35-207,Dom Savio Athletic Field,dom-savio-athletic-field,,,,6,15,0,y,"12,590.00",196,Dom Savio Athletic Field,195,http://imgur.com/tuf6Sza.jpg
+195,35-209,Symphony Community Park,symphony-community-park,,,,5,6,0,y,"2,011.51",197,Symphony Community Park,196,http://imgur.com/YeGDbbo.jpg
+196,35-210,Edgerly Road Playground,edgerly-road-playground,,,,7,6,0,y,437.9382097,198,Edgerly Road Playground,197,http://imgur.com/HQ8k5p5.jpg
+197,35-211,Symphony Road Garden,symphony-road-garden,,,,1,3,0,u,"1,204.95",199,Symphony Road Garden,198,http://imgur.com/fPA1hQM.jpg
+198,35-213,Joslin Park,joslin-park,,,,5,6,0,y,"1,231.92",200,Joslin Park,199,http://imgur.com/t7ZwZ6F.jpg
+199,35-214,Wentworth Field,wentworth-field,,,,6,15,0,u,"12,063.95",201,Wentworth Field,200,http://imgur.com/fVU3LE2.jpg
+200,35-215,Joseph Lee Playground,joseph-lee-playground,Clemente Field,,,7,6,0,y,"26,817.26",202,Joseph Lee Playground,201,http://imgur.com/Ztr58n6.jpg
+201,35-217,Windsor School Athletic Field,windsor-school-athletic-field,,,,6,15,0,u,"17,660.60",203,Windsor School Athletic Field,202,http://imgur.com/d1kHiwG.jpg
+202,35-235,Thompson Island,thompson-island,,,,3,20,0,u,"687,490.53",204,Thompson Island,203,http://imgur.com/8ikZADB.jpg
+203,35-222,Spectacle Island I,spectacle-island-i,,,,3,20,0,y,"292,596.15",205,Spectacle Island,204,http://imgur.com/X31VRtf.jpg
+204,35-223,Gallups Island,gallups-island,,,,3,20,0,y,"101,564.96",206,Gallups Island,205,http://imgur.com/XluDdvG.jpg
+205,35-224,Lovell's Island,lovells-island,,,,3,8,0,y,"246,678.25",207,Lovell's Island,206,http://imgur.com/KNU39YS.jpg
+206,35-225,Georges Island,georges-island,,,,3,20,0,y,"163,708.30",208,Georges Island,207,http://imgur.com/jxV9w39.jpg
+207,35-226,Green Island,green-island,,,,3,8,0,y,"7,074.23",209,Green Island,208,http://imgur.com/DH3NfLM.jpg
+208,35-227,Little Calf Island,little-calf-island,,,,3,8,0,y,"3,282.02",210,Little Calf Island,209,http://imgur.com/8p197Qo.jpg
+209,35-229,Outer Brewster Island,outer-brewster-island,,,,3,8,0,y,"81,394.76",211,Outer Brewster Island,210,http://imgur.com/lpTPCM9.jpg
+210,49-6509,Cooper Park,cooper-park,,,,7,24,0,y,934.08905,212,Cooper Park,211,http://imgur.com/raRzFt5.jpg
+211,35-237,Deer Island,deer-island,,,,3,14,0,u,"369,594.80",213,Deer Island,212,http://imgur.com/ieH5o69.jpg
+212,35-238,Moon Island,moon-island,,,,3,6,0,y,"218,852.51",214,Moon Island,213,http://imgur.com/EW0aBkx.jpg
+213,35-239,Smith Pond Playground II,smith-pond-playground-ii,,,,6,8,0,y,"68,200.69",215,Connell Fields/Hickey Courts,214,http://imgur.com/l2hGesb.jpg
+214,35-240,Weider Park,weider-park,,,,5,8,0,y,"28,005.42",216,Weider Park,215,http://imgur.com/yFqmSc4.jpg
+215,35-247,Railroad Avenue,railroad-avenue,,,,3,8,0,y,"3,529.37",217,Railroad Avenue,216,http://imgur.com/QDAgaKH.jpg
+216,35-283,Chapman,chapman,,,,3,15,0,u,"23,684.48",218,Chapman,217,http://imgur.com/1r5ZwDZ.jpg
+217,35-248,West Street,west-street,,,,3,6,0,y,"10,252.29",219,West Street,218,http://imgur.com/mUDnb5I.jpg
+218,35-265,Gibbons Playground,gibbons-playground,,,,7,6,0,y,437.5377689,220,Gibbons Playground,219,http://imgur.com/CCczUIl.jpg
+219,35-266,Mission Hill Community Garden,mission-hill-community-garden,,,,1,3,0,u,"2,006.00",221,Mission Hill Community Garden,220,http://imgur.com/UQCw9Qq.jpg
+220,35-241,Monterey Hilltop,monterey-hilltop,,,,3,6,0,y,"17,114.59",222,Monterey Hilltop,221,http://imgur.com/7f6Em0s.jpg
+221,35-242,Sherrin Woods,sherrin-woods,,,,11,6,0,y,"96,372.62",223,Sherrin Woods,222,http://imgur.com/McmQsdJ.jpg
+222,35-243,Ross Playground,ross-playground,,,,7,6,0,y,"52,767.30",224,Ross Playground,223,http://imgur.com/ogbIM5A.jpg
+223,35-244,Oak Lawn Cemetery,oak-lawn-cemetery,,,,3,15,0,u,"42,112.79",225,Oak Lawn Cemetery,224,http://imgur.com/Eypdt9p.jpg
+224,35-245,Doyle Playground,doyle-playground,,,,7,8,0,y,"3,826.90",226,Doyle Playground,225,http://imgur.com/KcnaTuf.jpg
+225,35-249,Dell Rock,dell-rock,,,,3,6,0,y,"5,302.99",227,Dell Rock,226,http://imgur.com/CiYALB7.jpg
+226,35-250,Amatucci Playground,amatucci-playground,,,,7,6,0,y,"1,812.39",228,Amatucci Playground,227,http://imgur.com/43Qs2yK.jpg
+227,35-251,Moynihan Playground,moynihan-playground,,,,7,8,0,y,"29,078.82",229,Moynihan Playground,228,http://imgur.com/M60QslD.jpg
+228,35-252,Iacono/Readville Playground,iaconoreadville-playground,,,,7,7,0,y,"19,879.20",230,Iacono/Readville Playground,229,http://imgur.com/IWQkfTa.jpg
+229,35-253,Camp Meigs,camp-meigs,,,,6,8,0,y,"11,594.90",231,Camp Meigs,230,http://imgur.com/cq9ifNN.jpg
+230,35-254,Jeremiah Hurley Memorial Park,jeremiah-hurley-memorial-park,,,,5,6,0,y,639.54255,232,Jeremiah Hurley Memorial Park,231,http://imgur.com/rTzuwFh.jpg
+231,35-255,Factory Hill Playground,factory-hill-playground,,,,7,8,0,y,"2,777.47",233,Factory Hill Playground,232,http://imgur.com/mjZxHQB.jpg
+232,35-261,Oak Lawn Golf Range,oak-lawn-golf-range,,,,3,15,0,u,"49,213.23",234,Oak Lawn Golf Range,233,http://imgur.com/w6mwnld.jpg
+233,35-262,Mission Hill Playground,mission-hill-playground,,,,7,6,0,y,"10,874.60",235,Mission Hill Playground,234,http://imgur.com/6GfDPlK.jpg
+234,35-256,Fairview Cemetery,fairview-cemetery,,,,3,7,0,y,"231,672.74",236,Fairview Cemetery,235,http://imgur.com/t10Mso4.jpg
+235,35-257,Williams Square,williams-square,,,,5,7,0,y,153.9596123,237,Williams Square,236,http://imgur.com/4eh0YW2.jpg
+236,35-310,Gladeside I,gladeside-i,,,,3,6,0,y,"41,715.50",238,Gladeside I,237,http://imgur.com/9a6ys5A.jpg
+237,35-564,Harcourt/West Canton Garden,harcourtwest-canton-garden,,,,1,13,0,y,206.045666,239,Harcourt/West Canton Garden,238,http://imgur.com/WnE1c9p.jpg
+238,35-258,Dana Avenue,dana-avenue,,,,3,8,0,y,"3,315.02",240,Dana Avenue,239,http://imgur.com/c2ZlYbO.jpg
+239,35-259,Pleasant View,pleasant-view,,,,3,15,0,u,"4,879.08",241,Pleasant View,240,http://imgur.com/rzqNKlD.jpg
+240,35-260,Mill Pond Reservation,mill-pond-reservation,,,,5,7,0,y,"122,997.15",242,Mill Pond Reservation,241,http://imgur.com/ySx7f6x.jpg
+241,35-268,McLaughlin Playground,mclaughlin-playground,,,,7,6,0,y,"47,455.38",243,McLaughlin Playground,242,http://imgur.com/0GWsj8t.jpg
+242,35-269,Heath Square,heath-square,,,,5,7,0,y,293.2656147,244,Heath Square,243,http://imgur.com/ranoWZc.jpg
+243,35-270,Parker Hilltop,parker-hilltop,,,,5,7,0,y,"6,389.37",245,Parker Hilltop,244,http://imgur.com/FtKqBvT.jpg
+244,35-271,Jefferson Playground,jefferson-playground,,,,7,6,0,y,"13,343.59",246,Jefferson Playground,245,http://imgur.com/kitikn3.jpg
+245,35-272,Nira Rock,nira-rock,,,,3,6,0,y,"5,485.81",247,Nira Rock,246,http://imgur.com/aRH4Slv.jpg
+246,35-273,Mozart Street Playground,mozart-street-playground,,,,7,6,0,y,"3,264.82",248,Mozart Street Playground,247,http://imgur.com/XQk3192.jpg
+247,35-274,Paul Gore Street Playground,paul-gore-street-playground,,,,7,6,0,y,"1,345.94",249,Paul Gore Street Playground,248,http://imgur.com/AHFwOoj.jpg
+248,35-275,60 Paul Gore Street Garden,60-paul-gore-street-garden,,,,1,6,0,y,"1,697.18",250,60 Paul Gore Street Garden,249,http://imgur.com/sv3F3Hp.jpg
+249,35-276,Paul Gore/Beecher Street Garden,paul-gorebeecher-street-garden,,,,1,3,0,u,"2,055.47",251,Paul Gore/Beecher Street Garden,250,http://imgur.com/5q2MMOC.jpg
+250,35-277,Beecher Street Play Area,beecher-street-play-area,,,,5,7,0,y,705.4971314,252,Beecher Street Play Area,251,http://imgur.com/cYKplb2.jpg
+251,35-278,Brewer/Burroughs Tot Lot,brewerburroughs-tot-lot,,,,5,7,0,y,751.6902805,253,Brewer/Burroughs Tot Lot,252,http://imgur.com/auWuZYV.jpg
+252,35-279,South Street Courts,south-street-courts,,,,6,6,0,y,"1,368.59",254,South Street Courts,253,http://imgur.com/8VAjhVh.jpg
+253,35-280,Murphy Playground,murphy-playground,,,,7,6,0,y,"10,513.02",255,Murphy Playground,254,http://imgur.com/wRHb5kw.jpg
+254,35-282,Rossmore/Stedman Park,rossmorestedman-park,,,,5,6,0,y,297.233919,256,Rossmore/Stedman Park,255,http://imgur.com/6Psbasm.jpg
+255,35-738,McCormack School Ball Field,mccormack-school-ball-field,,,,3,6,0,y,"5,816.12",257,McCormack School Ball Field,256,http://imgur.com/rPOoLWw.jpg
+256,35-284,Showa,showa,,,,6,15,0,u,"79,739.44",258,Showa,257,http://imgur.com/KxDYn4y.jpg
+257,35-296,Hanlon Square,hanlon-square,,,,5,7,0,y,199.4640067,259,Hanlon Square,258,http://imgur.com/ZyW8x2D.jpg
+258,35-387,St. Monica's,st-monicas,,,,3,15,0,u,"2,503.79",260,St. Monica's,259,http://imgur.com/mjWEd0A.jpg
+259,35-285,Allendale Farm,allendale-farm,,,,2,15,0,u,"168,786.61",261,Allendale Farm,260,http://imgur.com/IidyS8D.jpg
+260,35-288,Soldier's Monument,soldiers-monument,,,,5,7,0,y,539.1630151,262,Soldier's Monument,261,http://imgur.com/VkF4KlV.jpg
+261,35-289,Lawn Street Garden,lawn-street-garden,,,,1,15,0,u,533.4001274,263,Lawn Street Garden,262,http://imgur.com/ybeZfiW.jpg
+262,35-290,Round Hill Street Garden,round-hill-street-garden,,,,1,3,0,u,279.8136432,264,Round Hill Street Garden,263,http://imgur.com/zONUAgS.jpg
+263,35-291,Nira Avenue Garden,nira-avenue-garden,,,,1,3,0,u,684.505917,265,Nira Avenue Garden,264,http://imgur.com/DfhwcGK.jpg
+264,35-292,Forbes Street Garden,forbes-street-garden,,,,1,3,0,u,"1,500.35",266,Forbes Street Garden,265,http://imgur.com/fQYcPZS.jpg
+265,35-293,Tobin Community Center Garden,tobin-community-center-garden,,,,1,6,0,y,"1,197.18",267,Tobin Community Center Garden,266,http://imgur.com/2pkGXjF.jpg
+266,35-294,English H.S. Athletic Fields,english-hs-athletic-fields,,,,6,6,0,y,"30,899.62",268,English H.S. Athletic Fields,267,http://imgur.com/iIJ1PXd.jpg
+267,35-311,Willowwood Rock,willowwood-rock,,,,3,6,0,y,"2,153.77",269,Willowwood Rock,268,http://imgur.com/tCFi6YM.jpg
+268,35-295,Johnson Park I,johnson-park-i,,,,6,8,0,y,"11,216.98",270,Johnson Park I,269,http://imgur.com/vK3CaoK.jpg
+269,35-298,Kevin Fitzgerald Park,kevin-fitzgerald-park,,,,5,9,0,y,"27,720.50",271,Kevin Fitzgerald Park,270,http://imgur.com/qcrD0SM.jpg
+270,35-299,Hellenic College Athletic Field,hellenic-college-athletic-field,,,,6,15,0,u,"13,788.87",272,Hellenic College Athletic Field,271,http://imgur.com/LoO6q9w.jpg
+271,35-301,Back of the Hill,back-of-the-hill,,,,3,6,0,y,"15,033.81",273,Back of the Hill,272,http://imgur.com/3F72xLg.jpg
+272,35-302,Hall/Boynton Street Garden,hallboynton-street-garden,,,,1,8,0,y,555.9042148,274,Hall/Boynton Street Garden,273,http://imgur.com/ljEFZPD.jpg
+273,35-303,Anson Street Garden,anson-street-garden,,,,1,13,0,y,686.8724575,275,Anson Street Garden,274,http://imgur.com/QXXBoKC.jpg
+274,35-312,Gladeside II,gladeside-ii,,,,3,15,0,u,"3,636.17",276,Gladeside II,275,http://imgur.com/Z1527B6.jpg
+275,35-357,Horatio Harris Park,horatio-harris-park,,,,5,6,0,y,"10,204.38",277,Horatio Harris Park,276,http://imgur.com/TFiwrB0.jpg
+276,35-304,Harambee Park,harambee-park,,,,5,6,0,y,"184,381.19",278,Harambee Park,277,http://imgur.com/lUvdJt5.jpg
+277,35-449,Geneva Cliffs,geneva-cliffs,,,,3,6,0,y,"7,403.25",279,Geneva Cliffs,278,http://imgur.com/IJMKT6W.jpg
+278,35-305,Thetford/Evans Playground,thetfordevans-playground,,,,7,6,0,y,"2,842.27",280,Thetford/Evans Playground,279,http://imgur.com/So4NS1Z.jpg
+279,35-306,Ernst Chery Jr. Playground,ernst-chery-jr-playground,,,,7,6,0,y,"71,938.23",281,Ernst Chery Jr. Playground,280,http://imgur.com/4OK7u0Y.jpg
+280,35-307,New Calvary Cemetery,new-calvary-cemetery,,,,3,15,0,y,"240,590.02",282,New Calvary Cemetery,281,http://imgur.com/YqVQOGw.jpg
+281,35-308,Pendergast Preventorium,pendergast-preventorium,,,,3,15,0,u,"27,573.39",283,Pendergast Preventorium,282,http://imgur.com/eN80EhK.jpg
+282,35-309,Woodhaven,woodhaven,,,,3,6,0,y,"4,783.28",284,Woodhaven,283,http://imgur.com/XO6fCox.jpg
+283,35-393,Dacia/Woodcliff Community Garden,daciawoodcliff-community-garden,,,,1,3,0,u,"1,192.75",285,Dacia/Woodcliff Community Garden,284,http://imgur.com/pvFvltG.jpg
+284,35-314,Msgr. Francis A. Ryan Park,msgr-francis-a-ryan-park,,,,5,8,0,y,"24,848.84",286,Msgr. Francis A. Ryan Park,285,http://imgur.com/cqUjKSD.jpg
+285,35-315,Franklin Hill Green,franklin-hill-green,,,,3,2,0,u,"3,024.91",287,Franklin Hill Green,286,http://imgur.com/AIerrah.jpg
+286,35-316,Franklin Field BHA Garden,franklin-field-bha-garden,,,,1,6,0,y,390.9348397,288,Franklin Field BHA Garden,287,http://imgur.com/z3ZPqOZ.jpg
+287,35-318,Lucerne/Balsam Street Garden,lucernebalsam-street-garden,,,,1,3,0,u,911.6759735,289,Lucerne/Balsam Street Garden,288,http://imgur.com/Kohkp5T.jpg
+288,35-319,Canterbury II,canterbury-ii,,,,6,8,0,y,"85,322.44",290,Canterbury II,289,http://imgur.com/8NAvVlF.jpg
+289,35-320,Walker Playground,walker-playground,,,,7,7,0,y,"24,094.12",291,Walker Playground,290,http://imgur.com/JiUFfrc.jpg
+290,35-321,Kennedy Playground,kennedy-playground,,,,7,8,0,y,"1,054.50",292,Kennedy Playground,291,http://imgur.com/r1MqIje.jpg
+291,35-331,Adams Park,adams-park,,,,5,6,0,y,"3,036.45",293,Adams Park,292,http://imgur.com/Ldnx9fU.jpg
+292,35-325,Roslindale Wetlands Urban Wild,roslindale-wetlands-urban-wild,,,,11,6,0,y,"41,252.72",294,Roslindale Wetlands Urban Wild,293,http://imgur.com/zNsBWkW.jpg
+293,35-326,Pagel Playground,pagel-playground,,,,7,6,0,y,"11,023.96",295,Pagel Playground,294,http://imgur.com/8ibmI3p.jpg
+294,35-327,Parkman Playground,parkman-playground,,,,7,6,0,y,"8,362.80",296,Parkman Playground,295,http://imgur.com/p6RFeD3.jpg
+295,35-328,Leland Street Herb Garden,leland-street-herb-garden,,,,1,3,0,y,"1,047.19",297,Leland Street Herb Garden,296,http://imgur.com/4nTzoRI.jpg
+296,35-440,Ripley Playground,ripley-playground,,,,7,6,0,y,"3,346.48",298,Ripley Playground,297,http://imgur.com/PQ0xPzX.jpg
+297,35-344,Dudley Town Common,dudley-town-common,,,,5,7,0,y,"2,508.27",299,Dudley Town Common,298,http://imgur.com/yJP5aqp.jpg
+298,35-345,Hannon Playground,hannon-playground,,,,7,6,0,y,"7,983.57",300,Hannon Playground,299,http://imgur.com/hU1KKw5.jpg
+299,35-346,King Street Play Area,king-street-play-area,,,,5,7,0,y,528.1386135,301,King Street Play Area,300,http://imgur.com/XG9igee.jpg
+300,35-347,Jeep Jones Park,jeep-jones-park,,,,5,6,0,y,"6,811.97",302,Jeep Jones Park,301,http://imgur.com/XwY4qct.jpg
+301,35-450,YMCA Community Park,ymca-community-park,,,,5,15,0,u,"4,153.73",303,YMCA Community Park,302,http://imgur.com/V2nSaAu.jpg
+302,35-360,Crawford Street Playground,crawford-street-playground,,,,7,6,0,y,"6,968.71",304,Crawford Street Playground,303,http://imgur.com/QxwaMEB.jpg
+303,35-322,Forest Hills Cemetery,forest-hills-cemetery,,"95 Forest Hill Ave, Boston, MA 02130",617-524-3150,3,7,0,y,"986,406.33",305,Forest Hills Cemetery,304,http://imgur.com/LxyAWBS.jpg
+304,35-323,Walter Street Cemetery,walter-street-cemetery,,,,3,7,0,y,"3,502.59",306,Walter Street Cemetery,305,http://imgur.com/rC3UKzM.jpg
+305,35-332,Mt. Hope Cemetery,mt-hope-cemetery,,,,3,7,0,y,"525,252.08",307,Mt. Hope Cemetery,306,http://imgur.com/F1zd6hf.jpg
+306,35-333,Calvary Cemetery,calvary-cemetery,,,,3,7,0,y,"172,015.24",308,Calvary Cemetery,307,http://imgur.com/mlwIJjA.jpg
+307,35-348,Dudley Cliffs,dudley-cliffs,,,,3,8,0,y,"2,199.01",309,Dudley Cliffs,308,http://imgur.com/TnkrYu3.jpg
+308,35-356,Malcolm X Park,malcolm-x-park,,,,5,6,0,y,"48,030.29",310,Malcolm X Park,309,http://imgur.com/3v9GJ4F.jpg
+309,35-334,George Wright Golf Course,george-wright-golf-course,,,,6,6,0,y,"636,061.85",311,George Wright Golf Course,310,http://imgur.com/qr2D6BT.jpg
+310,35-335,Poplar Street Play Area,poplar-street-play-area,,,,5,7,0,y,"1,788.30",312,Poplar Street Play Area,311,http://imgur.com/2HcjzGM.jpg
+311,35-336,Canterbury I,canterbury-i,,,,3,6,0,y,"4,973.10",313,Canterbury I,312,http://imgur.com/xDQswGG.jpg
+312,35-337,Southwest Boston Garden Club,southwest-boston-garden-club,,,,3,13,0,y,"6,153.48",314,Southwest Boston Garden Club,313,http://imgur.com/bY2wrtA.jpg
+313,35-338,Delano Park,delano-park,,,,5,6,0,y,824.3956921,315,Delano Park,314,http://imgur.com/OQ8qXYz.jpg
+314,35-339,Toll Gate Cemetery,toll-gate-cemetery,,,,3,15,0,u,"3,655.26",316,Toll Gate Cemetery,315,http://imgur.com/RLkHUVs.jpg
+315,35-373,Quincy Street Play Area,quincy-street-play-area,,,,6,6,0,y,"2,149.96",317,Quincy Street Play Area,316,http://imgur.com/lZ8uBxm.jpg
+316,35-374,Savin/Maywood Street Garden,savinmaywood-street-garden,,,,1,3,0,u,"1,874.41",318,Savin/Maywood Street Garden,317,http://imgur.com/aXlvRsR.jpg
+317,35-375,Winthrop Playground,winthrop-playground,,,,7,6,0,y,"6,316.41",319,Winthrop Playground,318,http://imgur.com/SL8uvuC.jpg
+318,35-340,Forest Hills Rotary,forest-hills-rotary,,,,3,8,0,y,"2,795.26",320,Forest Hills Rotary,319,http://imgur.com/7l2vE3H.jpg
+319,35-341,Whittier Playground,whittier-playground,,,,7,6,0,y,"1,115.77",321,Whittier Playground,320,http://imgur.com/de6R2xJ.jpg
+320,35-342,Eliot Burying Ground,eliot-burying-ground,,,,14,7,0,y,"3,238.72",322,Eliot Burying Ground,321,http://imgur.com/ItEHZsE.jpg
+321,35-343,Clifford Playground,clifford-playground,,,,7,6,0,y,"30,986.87",323,Clifford Playground,322,http://imgur.com/Vn1lihb.jpg
+322,35-349,Linwood Circle,linwood-park,,,,5,6,0,y,298.6799455,324,Linwood Circle,323,http://imgur.com/ecL19ye.jpg
+323,35-351,Lambert Avenue Playground,lambert-avenue-playground,,,,7,6,0,y,"2,698.14",325,Lambert Avenue Playground,324,http://imgur.com/qJuBIVw.jpg
+324,35-352,Rockledge Street,rockledge-street,,,,3,6,0,y,"2,151.25",326,Rockledge Street,325,http://imgur.com/hGPy82j.jpg
+325,35-353,Juniper Terrace,juniper-terrace,,,,3,15,0,u,"6,411.13",327,Juniper Terrace,326,http://imgur.com/OMvwuJM.jpg
+326,35-354,St. James Street Park,st-james-street-park,,,,5,6,0,y,"1,559.27",328,St. James Street Park,327,http://imgur.com/WovXssR.jpg
+327,35-355,Alpine Street,alpine-street,,,,3,15,0,u,"11,466.67",329,Alpine Street,328,http://imgur.com/68IUWDi.jpg
+328,35-358,Laviscount Park,laviscount-park,,,,5,6,0,y,"2,835.69",330,Laviscount Park,329,http://imgur.com/jncmNmv.jpg
+329,35-451,Torrey Street Park Garden,torrey-street-park-garden,,,,1,9,0,u,275.5424386,331,Torrey Street Park Garden,330,http://imgur.com/cjLwwG1.jpg
+330,35-359,Trotter School Playground,trotter-school-playground,,,,7,6,0,y,"5,035.82",332,Trotter School Playground,331,http://imgur.com/eTmDMBY.jpg
+331,35-361,Msgr. Roussin Play Area,msgr-roussin-play-area,,,,5,7,0,y,"1,282.27",333,Msgr. Roussin Play Area,332,http://imgur.com/8AIOPdX.jpg
+332,35-362,Flaherty Playground,flaherty-playground,,,,7,7,0,y,"5,303.28",334,Flaherty Playground,333,http://imgur.com/CsK5Jr0.jpg
+333,35-363,Marcella Playground,marcella-playground,,,,7,6,0,y,"20,597.96",335,Marcella Playground,334,http://imgur.com/DeKOc7R.jpg
+334,35-365,Cedar Square,cedar-square,,,,5,7,0,y,"2,519.33",336,Cedar Square,335,http://imgur.com/JcyOpjR.jpg
+335,35-366,Cedar Street Garden II,cedar-street-garden-ii,,,,3,4,0,y,"2,091.11",337,Cedar Street Garden II,336,http://imgur.com/HaELYFG.jpg
+336,35-367,Margaret Wright Memorial Garden,margaret-wright-memorial-garden,,,,1,15,0,u,540.2005117,338,Margaret Wright Memorial Garden,337,http://imgur.com/QlM9bOX.jpg
+337,35-368,Beauford Play Area,beauford-play-area,,,,5,7,0,y,973.2158341,339,Beauford Play Area,338,http://imgur.com/70PObsM.jpg
+338,35-369,Ceylon Park I,ceylon-park-i,,,,6,6,0,y,"18,919.36",340,Ceylon Park I,339,http://imgur.com/MEeHjCG.jpg
+339,35-370,King School Park,king-school-park,,,,5,4,0,y,"2,884.65",341,King School Park,340,http://imgur.com/iOpSFLa.jpg
+340,35-371,Children's Park,childrens-park,,,,5,6,0,y,946.0161109,342,Children's Park,341,http://imgur.com/qA7wmhs.jpg
+341,35-372,Elm Hill Park,elm-hill-park,,,,5,6,0,y,473.539704,343,Elm Hill Park,342,http://imgur.com/ostIvYy.jpg
+342,35-394,Julian,julian,,,,1,15,0,u,771.6653972,344,Julian,343,http://imgur.com/4vZe7AN.jpg
+343,35-376,The Food Project Lot#2,the-food-project-lot2,,,,3,6,0,y,"3,112.88",345,The Food Project Lot#2,344,http://imgur.com/bEE3l20.jpg
+344,35-377,Leyland Street Garden,leyland-street-garden,,,,1,3,0,u,"1,592.08",346,Leyland Street Garden,345,http://imgur.com/lSz4rd7.jpg
+345,35-378,Magnolia & Woodford Streets Garden,magnolia-woodford-streets-garden,,,,1,6,0,y,594.1229264,347,Magnolia & Woodford Streets Garden,346,http://imgur.com/4bfTx0k.jpg
+346,35-379,Mt. Pleasant Play Area,mt-pleasant-play-area,,,,6,6,0,y,"1,267.94","1,090",Mt. Pleasant Play Area,347,http://imgur.com/42fUnfh.jpg
+347,35-380,Howes Playground,howes-playground,,,,7,6,0,y,"7,566.23",349,Howes Playground,348,http://imgur.com/QxExMDV.jpg
+348,35-381,Little Scobie Playground,little-scobie-playground,,,,7,6,0,y,"3,215.14",350,Little Scobie Playground,349,http://imgur.com/u5SZf4D.jpg
+349,35-383,Erie/Ellington Playground,erieellington-playground,,,,7,6,0,y,"1,514.76",351,Erie/Ellington Playground,350,http://imgur.com/A6jxZ73.jpg
+350,35-384,Puddingstone Park,puddingstone-park,,,,5,6,0,y,"2,289.20",352,Puddingstone Park,351,http://imgur.com/1dSigsY.jpg
+351,35-388,Warren Gardens/Gendrot Trust,warren-gardensgendrot-trust,,,,3,6,0,y,"5,446.41",353,Warren Gardens/Gendrot Trust,352,http://imgur.com/QG5baED.jpg
+352,35-389,St. Joseph's Garden,st-josephs-garden,,,,1,15,0,u,818.418166,354,St. Joseph's Garden,353,http://imgur.com/MQMJ4Fd.jpg
+353,35-390,Granada Park Garden,granada-park-garden,,,,1,3,0,u,"1,212.23",355,Granada Park Garden,354,http://imgur.com/zTl3BlN.jpg
+354,35-391,Egleston Community Garden,egleston-community-garden,,,,1,15,0,u,973.8653973,356,Egleston Community Garden,355,http://imgur.com/e1KMIMb.jpg
+355,35-392,Waldren Road Garden,waldren-road-garden,,,,1,6,0,y,372.140308,357,Waldren Road Garden,356,http://imgur.com/uMgSo7A.jpg
+356,35-395,The Food Project Lot #1,the-food-project-lot-1,,,,3,6,0,y,"2,252.59",358,The Food Project Lot #1,357,http://imgur.com/JRN5CXe.jpg
+357,35-396,Magazine Street Garden,magazine-street-garden,,,,1,6,0,y,776.7909558,359,Magazine Street Garden,358,http://imgur.com/9rsQVLU.jpg
+358,35-397,Winthrop Street Garden,winthrop-street-garden,,,,1,3,0,u,450.3208875,360,Winthrop Street Garden,359,http://imgur.com/eXmeImN.jpg
+359,35-398,Madison Park H.S. Athletic Fields,madison-park-hs-athletic-fields,,,,6,6,0,y,"38,871.48",361,Madison Park H.S. Athletic Fields,360,http://imgur.com/PV5F04n.jpg
+360,35-399,Nuestra Community Garden & Playground,nuestra-playground,,,,8,3,0,u,944.4599468,362,Nuestra Community Garden & Playground,361,http://imgur.com/Dbb75Qu.jpg
+361,35-400,Dennis Street Park,dennis-street-park,,,,5,6,0,y,"2,871.42",363,Dennis Street Park,362,http://imgur.com/xs44jpb.jpg
+362,35-401,Holborn Street Playlot,holborn-street-playlot,,,,5,7,0,y,467.2223553,364,Holborn Street Playlot,363,http://imgur.com/K3Tu6TG.jpg
+363,35-402,YMCA Athletic Field,ymca-athletic-field,,,,6,15,0,u,"7,828.86",365,YMCA Athletic Field,364,http://imgur.com/B8qSkX3.jpg
+364,35-441,Garvey Playground,garvey-playground,,,,7,6,0,y,"21,338.96",366,Garvey Playground,365,http://imgur.com/5uC3VDR.jpg
+365,35-403,Gourdin Park,peace-park,,,,5,4,0,y,"1,205.13",367,Gourdin Park,366,http://imgur.com/QplN5Rt.jpg
+366,35-406,Columbia Road Mall,columbia-road-mall,,,,3,6,0,y,"8,627.96",368,Columbia Road Mall,367,http://imgur.com/O1HWKfO.jpg
+367,35-407,Medal of Honor Park,medal-of-honor-park,,,,5,6,0,y,"25,029.51",369,Medal of Honor Park,368,http://imgur.com/UUi50zk.jpg
+368,35-408,Christopher Lee Playground,christopher-lee-playground,,,,7,6,0,y,"21,996.69",370,Christopher Lee Playground,369,http://imgur.com/o25CuwO.jpg
+369,35-409,Lincoln Square,lincoln-square,,,,5,7,0,y,821.3240093,371,Lincoln Square,370,http://imgur.com/EObAYJJ.jpg
+370,35-410,Hawes Burying Ground,hawes-burying-ground,,,,5,7,0,y,"1,013.01",372,Hawes Burying Ground,371,http://imgur.com/3NIOlO7.jpg
+371,35-411,Union Burying Ground,union-burying-ground,,,,5,7,0,y,489.4996757,373,Union Burying Ground,372,http://imgur.com/qHzn4jO.jpg
+372,35-412,Thomas Park/Telegraph Hill,thomas-parktelegraph-hill,,,,5,18,0,y,"17,826.21",374,Thomas Park/Telegraph Hill,373,http://imgur.com/ZJHmxYk.jpg
+373,35-413,Flaherty Park,flaherty-park,,,,5,6,0,y,"1,020.60",375,Flaherty Park,374,http://imgur.com/QXIcuyw.jpg
+374,35-414,Buckley Playground,buckley-playground,,,,7,6,0,y,"2,649.74",376,Buckley Playground,375,http://imgur.com/fqds44j.jpg
+375,35-415,Sweeney Playground,sweeney-playground,,,,7,6,0,y,"1,941.93",377,Sweeney Playground,376,http://imgur.com/6l9qxHQ.jpg
+376,35-416,Sterling Square,sterling-square,,,,3,2,0,u,"4,203.53",378,Sterling Square,377,http://imgur.com/ebIBl4Q.jpg
+377,35-417,Veterans Memorial Park,veterans-memorial-park,,,,5,2,0,u,"2,742.02",379,Veterans Memorial Park,378,http://imgur.com/W5Yl588.jpg
+378,35-418,Orton Field,orton-field,,,,6,6,0,y,"6,026.43",380,Orton Field,379,http://imgur.com/2wL8dEs.jpg
+379,35-420,Mt. Bowdoin Green,mt-bowdoin-green,,,,5,7,0,y,"2,178.37",381,Mt. Bowdoin Green,380,http://imgur.com/3Zn2of5.jpg
+380,35-421,Byrne Playground,byrne-playground,,,,7,6,0,y,"5,113.86",382,Byrne Playground,381,http://imgur.com/WoLtzR6.jpg
+381,35-427,Codman Burying Ground,codman-burying-ground,,,,3,15,0,y,"10,623.81",383,Codman Burying Ground,382,http://imgur.com/3QRhUfW.jpg
+382,35-479,Rutland Washington Community Garden,rutland-washington-community-garden,,,,1,15,0,u,"1,141.30",384,Rutland Washington Community Garden,383,http://imgur.com/N5hczsX.jpg
+383,35-480,Saranac/New Castle Garden,saranacnew-castle-garden,,,,1,13,0,y,618.2995221,385,Saranac/New Castle Garden,384,http://imgur.com/6UdkG8M.jpg
+384,35-481,Kendall & Lenox Streets Garden,kendall-lenox-streets-garden,,,,1,15,0,u,"1,757.40",386,Kendall & Lenox Streets Garden,385,http://imgur.com/J72OMGp.jpg
+385,35-422,Doherty/Gibson Playground,dohertygibson-playground,,,,7,6,0,y,"23,180.70",387,Doherty/Gibson Playground,386,http://imgur.com/SkDsAAi.jpg
+386,35-442,Centervale Park,centervale-park,,,,5,6,0,y,792.6972269,388,Centervale Park,387,http://imgur.com/PGB9mYA.jpg
+387,35-443,Ventura Playground,ventura-playground,,,,7,8,0,y,"5,301.79",389,Ventura Playground,388,http://imgur.com/d7eSbo2.jpg
+388,35-444,Conley & Tenean Streets Park,conley-tenean-streets-park,,,,5,8,0,y,"2,055.76",390,Conley & Tenean Streets Park,389,http://imgur.com/MjelVnS.jpg
+389,35-423,Wellesley Park,wellesley-park,,,,5,6,0,y,"2,886.78",391,Wellesley Park,390,http://imgur.com/yqp5TAI.jpg
+390,35-424,McMorrow Playground,mcmorrow-playground,,,,7,8,0,y,"21,169.27",392,McMorrow Playground,391,http://imgur.com/P6bFZTA.jpg
+391,35-425,Hemenway Playground,hemenway-playground,,,,7,6,0,y,"17,786.60",393,Hemenway Playground,392,http://imgur.com/mThDXLb.jpg
+392,35-426,Cronin/Wainwright Park,croninwainwright-park,,,,5,6,0,y,"9,115.02",394,Cronin/Wainwright Park,393,http://imgur.com/ZOpXR4E.jpg
+393,35-428,Roberts Playground,roberts-playground,,,,7,6,0,y,"41,239.13",395,Roberts Playground,394,http://imgur.com/bFwYYi9.jpg
+394,35-445,Norton Street Playground,norton-street-playground,,,,7,4,0,y,266.7933013,396,Norton Street Playground,395,http://imgur.com/o34fFIA.jpg
+395,35-446,Boston Gas Company Easement,boston-gas-company-easement,,,,3,15,0,u,"20,828.56",397,Boston Gas Company Easement,396,http://imgur.com/OlG684Y.jpg
+396,35-447,Keystone Shoreline,keystone-shoreline,,,,3,15,0,u,"2,122.17",398,Keystone Shoreline,397,http://imgur.com/roMAeuw.jpg
+397,35-429,Walsh Playground,walsh-playground,,,,7,6,0,y,"28,109.41",399,Walsh Playground,398,http://imgur.com/LA2hdLh.jpg
+398,35-430,Dorchester South Burying Ground,dorchester-south-burying-ground,,,,5,7,0,y,"7,861.87",400,Dorchester South Burying Ground,399,http://imgur.com/wdS7C3R.jpg
+399,35-431,Dorchester Park,dorchester-park,,,,5,6,0,y,"110,458.81",401,Dorchester Park,400,http://imgur.com/9QlsjXw.jpg
+400,35-462,Adams/King Playground,adamsking-playground,,,,7,6,0,y,"2,727.87",402,Adams/King Playground,401,http://imgur.com/9QeQzDF.jpg
+401,35-464,Hayes Park,hayes-park,,,,5,6,0,y,"1,145.95",403,Hayes Park,402,http://imgur.com/rlrg5AZ.jpg
+402,35-433,Toohig Playground,toohig-playground,,,,7,8,0,y,"8,594.42",404,Toohig Playground,403,http://imgur.com/HAatf6Z.jpg
+403,35-434,Martin/Hilltop Playground,martinhilltop-playground,,,,7,6,0,y,"5,314.39",405,Martin/Hilltop Playground,404,http://imgur.com/FPFD2VS.jpg
+404,35-435,Nightingale Garden,nightingale-garden,,,,1,3,0,u,"5,550.73",406,Nightingale Garden,405,http://imgur.com/7YYLaHM.jpg
+405,35-437,10 Josephine Street Garden,10-josephine-street-garden,,,,1,8,0,y,280.6755511,407,10 Josephine Street Garden,406,http://imgur.com/jllsz2V.jpg
+406,35-438,29 Josephine Street Garden,29-josephine-street-garden,,,,1,8,0,y,457.9151548,408,29 Josephine Street Garden,407,http://imgur.com/HfjAK0w.jpg
+407,35-439,Mother's Rest at Four Corners,mothers-rest-at-four-corners,,,,5,7,0,y,"4,549.58",409,Mother's Rest at Four Corners,408,http://imgur.com/bCFKHDi.jpg
+408,35-452,Wheatland Avenue Victory Garden,wheatland-avenue-victory-garden,,,,1,3,0,u,626.0078753,410,Wheatland Avenue Victory Garden,409,http://imgur.com/n7u4r2j.jpg
+409,35-453,Spencer Street Garden,spencer-street-garden,,,,1,3,0,u,416.0977911,411,Spencer Street Garden,410,http://imgur.com/L6cIgAy.jpg
+410,35-454,Clayborne Street Garden,clayborne-street-garden,,,,1,15,0,u,307.1145945,412,Clayborne Street Garden,411,http://imgur.com/xPs4QxH.jpg
+411,35-455,Fannie Lou Hamer Community Garden,fannie-lou-hamer-community-garden,,,,1,15,0,u,418.3110381,413,Fannie Lou Hamer Community Garden,412,http://imgur.com/ljmI9D8.jpg
+412,35-456,Audrey Jacobs Memorial CG,audrey-jacobs-memorial-cg,,,,1,3,0,u,420.0469793,414,Audrey Jacobs Memorial CG,413,http://imgur.com/yE9t6Yg.jpg
+413,35-457,Bullard Street Garden,bullard-street-garden,,,,1,9,0,u,371.9983453,415,Bullard Street Garden,414,http://imgur.com/qr8YCLU.jpg
+414,35-458,Norton/Stonehurst Garden,nortonstonehurst-garden,,,,1,6,0,y,342.510565,416,Norton/Stonehurst Garden,415,http://imgur.com/7hXKLBm.jpg
+415,35-459,Quincy/Coleman Garden,quincycoleman-garden,,,,1,15,0,u,"1,223.34",417,Quincy/Coleman Garden,416,http://imgur.com/K0Q3gbU.jpg
+416,35-460,Barry Street Garden,barry-street-garden,,,,1,9,0,u,373.947298,418,Barry Street Garden,417,http://imgur.com/WCfJhps.jpg
+417,35-461,Lydon Way Garden,lydon-way-garden,,,,1,6,0,y,750.6221194,419,Lydon Way Garden,418,http://imgur.com/1BjqFYs.jpg
+418,35-482,Ramsay Park,ramsay-park,,,,5,6,0,y,"22,224.65",420,Ramsay Park,419,http://imgur.com/00k1VeY.jpg
+419,35-483,Worcester Street Garden,worcester-street-garden,,,,1,9,0,u,"2,355.13",421,Worcester Street Garden,420,http://imgur.com/62a56pT.jpg
+420,35-529,Higginson Schoolyard,higginson-schoolyard,,,,10,6,0,y,"1,552.86",422,Higginson Schoolyard,421,http://imgur.com/0qHBJTG.jpg
+421,49-6519,Franklin Street Park,franklin-street-park,,,,5,24,0,y,429.7828999,423,Franklin Street Park,422,http://imgur.com/j17ZUml.jpg
+422,35-465,Union Park Square,union-park-square,,,,5,7,0,y,"1,516.02",424,Union Park Square,423,http://imgur.com/B8bjlip.jpg
+423,35-466,Peters Park I,peters-park-i,,,,6,6,0,y,"15,447.14",425,Peters Park I,424,http://imgur.com/Lo0qYuW.jpg
+424,35-467,Rotch Playground,rotch-playground,,,,7,6,0,y,"11,112.70",426,Rotch Playground,425,http://imgur.com/RkBb8vY.jpg
+425,35-468,Ringgold Park,ringgold-park,,,,5,6,0,y,"1,845.09",427,Ringgold Park,426,http://imgur.com/Ph5UyF9.jpg
+426,35-469,Blackstone Square,blackstone-square,,,,5,7,0,y,"9,888.49",428,Blackstone Square,427,http://imgur.com/j3kmF09.jpg
+427,35-470,Franklin Square,franklin-square,,,,5,7,0,y,"10,048.37",429,Franklin Square,428,http://imgur.com/bIEEn9d.jpg
+428,35-471,South End South Burying Ground,south-end-south-burying-ground,,,,5,7,0,y,"5,979.62",430,South End South Burying Ground,429,http://imgur.com/lbapBQi.jpg
+429,35-472,Worcester Square,worcester-square,,,,5,7,0,y,"1,394.07",431,Worcester Square,430,http://imgur.com/MvwQDSd.jpg
+430,35-473,Carter Playground,carter-playground,,,,7,6,0,y,"19,885.59",432,Carter Playground,431,http://imgur.com/SBCYT3o.jpg
+431,35-477,South End Library Park,south-end-library-park,,,,5,6,0,y,680.3243506,433,South End Library Park,432,http://imgur.com/rjx57GT.jpg
+432,35-499,Hiscock Park,hiscock-park,,,,5,6,0,y,428.3889177,434,Hiscock Park,433,http://imgur.com/sazgmt4.jpg
+433,35-485,Castle Square Parks,castle-square-parks,,,,6,4,0,y,"3,154.92",435,Castle Square Parks,434,http://imgur.com/l5qGib9.jpg
+434,35-486,Berkeley Street Garden,berkeley-street-garden,,,,1,9,0,u,"4,456.98",436,Berkeley Street Garden,435,http://imgur.com/ipoMwWj.jpg
+435,35-487,Watson Park I,watson-park-i,,,,5,4,0,y,313.3406664,437,Watson Park I,436,http://imgur.com/XYYJgP4.jpg
+436,35-488,Warren & Clarendon Streets Garden,warren-clarendon-streets-garden,,,,1,15,0,u,211.8963378,438,Warren & Clarendon Streets Garden,437,http://imgur.com/BacPLnZ.jpg
+437,35-489,Unity Towers Garden,unity-towers-garden,,,,1,15,0,u,271.3395612,439,Unity Towers Garden,438,http://imgur.com/nNQVo04.jpg
+438,35-490,Bessie Barnes Garden,bessie-barnes-garden,,,,1,9,0,u,539.5223564,440,Bessie Barnes Garden,439,http://imgur.com/GN2AZvO.jpg
+439,35-491,Dartmouth Garden,dartmouth-garden,,,,1,9,0,u,289.5333609,441,Dartmouth Garden,440,http://imgur.com/jDig5c3.jpg
+440,35-492,Wellington Green,wellington-green,,,,5,9,0,u,188.5774319,442,Wellington Green,441,http://imgur.com/Y1JJsl5.jpg
+441,35-493,Blackwood/Claremont Garden,blackwoodclaremont-garden,,,,1,13,0,y,382.6236982,443,Blackwood/Claremont Garden,442,http://imgur.com/Wg9b3Ci.jpg
+442,35-494,Greenwich/Cumberland Garden,greenwichcumberland-garden,,,,1,13,0,y,358.227772,444,Greenwich/Cumberland Garden,443,http://imgur.com/pdqeCYh.jpg
+443,35-495,Braddock Park Garden,braddock-park-garden,,,,1,13,0,y,372.1432861,445,Braddock Park Garden,444,http://imgur.com/ssnngOG.jpg
+444,35-496,Chester Park,chester-park,,,,5,6,0,y,"3,610.16",446,Chester Park,445,http://imgur.com/ari97Nm.jpg
+445,35-497,Msgr. Reynolds Playground,msgr-reynolds-playground,,,,7,6,0,y,"1,237.60",447,Msgr. Reynolds Playground,446,http://imgur.com/66s9i0K.jpg
+446,35-498,West Rutland Square,west-rutland-square,,,,5,7,0,y,629.3999576,448,West Rutland Square,447,http://imgur.com/744dxF1.jpg
+447,35-500,Hynes Playground,hynes-playground,,,,7,6,0,y,"25,753.32",449,Hynes Playground,448,http://imgur.com/LnbdbnF.jpg
+448,35-501,Billings Field,billings-field,,,,6,6,0,y,"43,607.82",450,Billings Field,449,http://imgur.com/ArC54vv.jpg
+449,35-502,Leatherbee Woods,leatherbee-woods,,,,11,3,0,y,"31,310.51",451,Leatherbee Woods,450,http://imgur.com/fVPlosg.jpg
+450,35-503,Mount Benedict Cemetery,mount-benedict-cemetery,,,,3,15,0,y,"322,250.01",452,Mount Benedict Cemetery,451,http://imgur.com/gB250fP.jpg
+451,35-504,Mount Lebanon Cemetery,mount-lebanon-cemetery,,,,3,15,0,y,"196,667.46",453,Mount Lebanon Cemetery,452,http://imgur.com/AFMZBEl.jpg
+452,35-505,Gethsemane Cemetery,gethsemane-cemetery,,,,3,15,0,y,"84,223.21",454,Gethsemane Cemetery,453,http://imgur.com/XsqvfM6.jpg
+453,35-506,Hancock Woods,hancock-woods,,,,11,8,0,y,"194,106.06",455,Hancock Woods,454,http://imgur.com/JZk095J.jpg
+454,35-507,Roxbury Latin School Woods,roxbury-latin-school-woods,,,,11,15,0,u,"91,918.96",456,Roxbury Latin School Woods,455,http://imgur.com/HaAxMao.jpg
+455,35-526,Catholic Memorial H.S. Athltc Fld,catholic-memorial-hs-athltc-fld,,,,6,6,0,n,"29,378.46",457,Catholic Memorial H.S. Athltc Fld,456,http://imgur.com/qT0rWVp.jpg
+456,35-508,West Roxbury Quarry,west-roxbury-quarry,,,,3,15,0,u,"393,286.50",458,West Roxbury Quarry,457,http://imgur.com/aY9bmG8.jpg
+457,35-509,Dana Road I,dana-road-i,,,,3,6,0,y,"11,843.10",459,Dana Road I,458,http://imgur.com/CLrgNzA.jpg
+458,35-511,New Haven Street,new-haven-street,,,,3,13,0,y,"45,589.50",460,New Haven Street,459,http://imgur.com/whe7By4.jpg
+459,35-530,Mason Schoolyard,mason-schoolyard,,,,10,6,0,y,"1,537.71",461,Mason Schoolyard,460,http://imgur.com/O4N3pKt.jpg
+460,35-512,Sawmill Brook/Brook Farm,sawmill-brookbrook-farm,,,,5,7,0,y,"593,404.01",462,Sawmill Brook/Brook Farm,461,http://imgur.com/45UGRCe.jpg
+461,35-513,Grove Street Cemetery,grove-street-cemetery,,,,3,15,0,y,"100,636.47",463,Grove Street Cemetery,462,http://imgur.com/MzewozW.jpg
+462,35-514,Congregation Mishkan Tefia Cemetery,congregation-mishkan-tefia-cemetery,,,,3,15,0,u,"38,805.29",464,Congregation Mishkan Tefia Cemetery,463,http://imgur.com/Mg9IA7L.jpg
+463,35-515,Carroll Pond Playground,carroll-pond-playground,,,,7,6,0,y,"1,907.50",465,Carroll Pond Playground,464,http://imgur.com/iQUXZuS.jpg
+464,35-516,Draper Playground,draper-playground,,,,7,6,0,y,"23,434.27",466,Draper Playground,465,http://imgur.com/qROryq4.jpg
+465,35-517,Westerly Burying Ground,westerly-burying-ground,,,,5,7,0,y,"3,655.91",467,Westerly Burying Ground,466,http://imgur.com/GcbEaUq.jpg
+466,35-518,Piemonte Park,piemonte-park,,,,5,6,0,y,362.2024249,468,Piemonte Park,467,http://imgur.com/BXwA6np.jpg
+467,35-528,Wentworth Grounds,wentworth-grounds,,,,6,15,0,u,"13,299.78",469,Wentworth Grounds,468,http://imgur.com/A1Feqia.jpg
+468,35-520,Centre Marsh,centre-marsh,,,,3,15,0,u,"15,051.70",470,Centre Marsh,469,http://imgur.com/ekJLy7c.jpg
+469,35-521,St. Joseph's Cemetery,st-josephs-cemetery,,,,3,15,0,y,"519,152.85",471,St. Joseph's Cemetery,470,http://imgur.com/sYs0QH7.jpg
+470,35-522,Allandale Woods I,allandale-woods-i,,,,11,7,0,y,"327,534.28",472,Allandale Woods,471,http://imgur.com/n397j26.jpg
+471,35-523,Bellevue Hill Reservation,bellevue-hill-reservation,,,,3,8,0,y,"108,379.05",473,Bellevue Hill Reservation,472,http://imgur.com/CazTurf.jpg
+472,35-524,Praught/Bunker Fields,praughtbunker-fields,,,,6,15,0,n,"19,899.66",474,Praught/Bunker Fields,473,http://imgur.com/QTYzOb3.jpg
+473,35-525,West Roxbury H.S. Athletic Fields,west-roxbury-hs-athletic-fields,,,,6,6,0,y,"54,276.63",475,West Roxbury H.S. Athletic Fields,474,http://imgur.com/YLJAKbG.jpg
+474,35-532,UMass Boston Athletic Fields,umass-boston-athletic-fields,,,,6,8,0,y,"39,894.25",476,UMass Boston Athletic Fields,475,http://imgur.com/ZOJ2Huw.jpg
+475,35-534,Claymont Terrace,claymont-terrace,,,,6,15,0,u,"2,448.75",477,Claymont Terrace,476,http://imgur.com/r4RJFVJ.jpg
+476,35-535,Lucy Stone Schoolyard,lucy-stone-schoolyard,,,,3,6,0,y,"3,170.09",478,Lucy Stone Schoolyard,477,http://imgur.com/Ha24b2O.jpg
+477,35-536,St. Mary's Cemetery,st-marys-cemetery,,,,3,15,0,y,"42,988.73",479,St. Mary's Cemetery,478,http://imgur.com/v1otHgB.jpg
+478,35-537,Franklin Hill BHA Court,franklin-hill-bha-court,,,,6,2,0,u,"1,252.63",480,Franklin Hill BHA Court,479,http://imgur.com/4eLEsRW.jpg
+479,35-539,Westland Avenue Gates,westland-avenue-gates,,,,3,6,0,y,"8,112.51",481,Westland Avenue Gates,480,http://imgur.com/ZUXEULr.jpg
+480,35-540,Dartmouth Street Mall,dartmouth-street-mall,,,,5,7,0,y,"4,049.72",482,Dartmouth Street Mall,481,http://imgur.com/xZEqPZx.jpg
+481,35-541,Ramler Park,ramler-park,,,,5,6,0,y,"2,158.52",483,Ramler Park,482,http://imgur.com/NXyEWq2.jpg
+482,35-542,Belle Isle Coastal Preserve,belle-isle-coastal-preserve,,,,3,6,0,y,"6,583.95",484,Belle Isle Coastal Preserve,483,http://imgur.com/h511d69.jpg
+483,35-545,Richmond & North Streets Park,richmond-north-streets-park,,,,5,11,0,y,410.3782124,485,Richmond & North Streets Park,484,http://imgur.com/60FaMR9.jpg
+484,35-546,Nashua Street Park,nashua-street-park,,,,5,8,0,y,"8,232.23",486,Nashua Street Park,485,http://imgur.com/Aph5A2q.jpg
+485,35-626,Esparanza Garden,esparanza-garden,,,,1,15,0,u,454.2199918,487,Esparanza Garden,486,http://imgur.com/otVZEYF.jpg
+486,35-547,Crittenton Hospital,crittenton-hospital,,,,3,15,0,u,"11,840.85",488,Crittenton Hospital,487,http://imgur.com/2nQT8hK.jpg
+487,35-548,Chestnut Hill Reservoir,chestnut-hill-reservoir,,,,5,20,0,y,"468,636.92",489,Chestnut Hill Reservoir,488,http://imgur.com/djenrWX.jpg
+488,35-549,Commonwealth Avenue Outbound,commonwealth-avenue-outbound,,,,5,7,0,y,"22,358.71",490,Commonwealth Avenue Outbound,489,http://imgur.com/tvtcmMJ.jpg
+489,35-576,Sullivan Square,sullivan-square,,,,3,6,0,y,"6,556.71",491,Sullivan Square,490,http://imgur.com/aCjYZOh.jpg
+490,35-550,Mount St. Joseph's Athletic Fields,mount-st-josephs-athletic-fields,,,,6,6,0,y,"14,545.03",492,Mount St. Joseph's Athletic Fields,491,http://imgur.com/svKBGSc.jpg
+491,35-551,Penniman Road Play Area,penniman-road-play-area,,,,6,6,0,y,"3,026.10",493,Penniman Road Play Area,492,http://imgur.com/vA0kQhL.jpg
+492,35-553,Forsyth Park,forsyth-park,,,,5,6,0,y,"6,804.91",494,Forsyth Park,493,http://imgur.com/TZQS0K1.jpg
+493,35-554,Iroquois Street Woods,iroquois-street-woods,,,,11,15,0,u,"4,228.87",495,Iroquois Street Woods,494,http://imgur.com/GihUkzU.jpg
+494,35-555,O'Day Playground,oday-playground,,,,7,6,0,y,"2,905.54",496,O'Day Playground,495,http://imgur.com/M7r8C9T.jpg
+495,35-556,Fan Pier Plaza,fan-pier-plaza,,,,9,18,0,y,"9,594.71",497,Fan Pier Plaza,496,http://imgur.com/Y7HyrR1.jpg
+496,35-558,Children's Wharf Park,childrens-wharf-park,,,,5,4,0,y,"3,786.61",498,Children's Wharf Park,497,http://imgur.com/Jm6UdUw.jpg
+497,35-559,Charles River Reservation,charles-river-reservation,Charles River Reservation,,,6,8,0,y,"376,321.46",499,Charles River Reservation,498,http://imgur.com/aoJKVOf.jpg
+498,35-627,Arcola Park Garden,arcola-park-garden,,,,1,3,0,y,294.112126,500,Arcola Park Garden,499,http://imgur.com/8g01enN.jpg
+499,35-561,Charlesgate,charlesgate-2,,,,3,8,0,y,"22,675.03",620,Charlesgate,500,http://imgur.com/GX8a5jU.jpg
+500,35-562,The Esplanade,charles-river-reservation-2,Charles River Reservation,,,6,8,1,y,"268,355.96",502,The Esplanade,501,http://imgur.com/6W5DArP.jpg
+501,35-568,Pagoda Park,pagoda-park,,,,5,11,0,y,"1,600.53",503,Pagoda Park,502,http://imgur.com/CiWHjg2.jpg
+502,35-570,United Neighborhood of Lower Roxbury Community Garden,united-nbhd-of-lower-roxbury-cg,,,,1,6,0,y,"1,119.44",504,United Neighborhood of Lower Roxbury Community Ga*,503,http://imgur.com/y3lHIcA.jpg
+503,35-628,Bowditch Garden,bowditch-garden,,,,1,15,0,u,549.015927,505,Bowditch Garden,504,http://imgur.com/nHKP5wt.jpg
+504,35-629,Minton Stable Garden,minton-stable-garden,,,,1,3,0,u,"5,069.09",506,Minton Stable Garden,505,http://imgur.com/iHQscYl.jpg
+505,35-630,McBride Garden,mcbride-garden,,,,1,13,0,y,250.2295348,507,McBride Garden,506,http://imgur.com/lwPIIyY.jpg
+506,35-565,Braddock Park,braddock-park,,,,5,6,0,y,373.6578192,508,Braddock Park,507,http://imgur.com/ATm1xOW.jpg
+507,35-566,Jenney Plaza,jenney-plaza,,,,9,15,0,y,509.5763553,509,Jenney Plaza,508,http://imgur.com/qgPD2K2.jpg
+508,35-567,Grain Exchange Plaza,grain-exchange-plaza,,,,9,15,0,y,209.3536666,510,Grain Exchange Plaza,509,http://imgur.com/QHFUlll.jpg
+509,35-571,Lewis Mall,lewis-mall,,,,3,2,0,y,"6,977.56",511,Lewis Mall,510,http://imgur.com/9yVxn3l.jpg
+510,35-577,Caldwell Street Play Area,caldwell-street-play-area,,,,5,7,0,y,456.4636523,512,Caldwell Street Play Area,511,http://imgur.com/t2UF4fQ.jpg
+511,35-619,Clark/Cooper Community Garden,clarkcooper-community-garden,,,,1,10,0,y,"22,889.04",513,Clark/Cooper Community Garden,512,http://imgur.com/orBf9pJ.jpg
+512,35-620,Rutland Green,rutland-green,,,,1,4,0,y,370.8121743,514,Rutland Green,513,http://imgur.com/mSEvGtJ.jpg
+513,49-6528,Hoyt Field,hoyt-field,,,,7,24,0,y,"12,852.37",515,Hoyt Field,514,http://imgur.com/KZfvhqG.jpg
+514,35-572,LoPresti Park,lopresti-park,,,,6,6,0,y,"14,288.80",516,LoPresti Park,515,http://imgur.com/KM0PYgk.jpg
+515,35-573,Vietnam Veterans Memorial Park,veterans-park-ii,,,,5,7,0,y,"2,574.08",517,Vietnam Veterans Memorial Park,516,http://imgur.com/d1eZV5D.jpg
+516,35-574,Decatur & Meridien Streets Park,decatur-meridien-streets-park,,,,5,11,0,y,"1,013.87",518,Decatur & Meridien Streets Park,517,http://imgur.com/T7KDQtY.jpg
+517,35-631,Kennedy Garden,kennedy-garden,,,,1,8,0,y,644.9569162,519,Kennedy Garden,518,http://imgur.com/SQvCRhC.jpg
+518,35-680,Boston Medical Center Campus,boston-medical-center-campus,,,,3,15,0,u,"5,321.75",520,Boston Medical Center Campus,519,http://imgur.com/PqToDBF.jpg
+519,35-575,East Boston Piers Park,east-boston-piers-park,,,,5,12,0,y,"27,472.06",521,East Boston Piers Park,520,http://imgur.com/o6Fndn9.jpg
+520,35-580,M Street Beach,m-street-beach,,,,3,8,0,y,"17,810.15",522,M Street Beach,521,http://imgur.com/gGf9IqU.jpg
+521,35-581,Stonehill Park,stonehill-park,,,,5,6,0,y,"1,285.82",523,Stonehill Park,522,http://imgur.com/fVDzQrB.jpg
+522,35-632,White Stadium,white-stadium,,,,6,6,0,y,"50,890.99",524,White Stadium,523,http://imgur.com/uL6apie.jpg
+523,35-633,Beth Israel/Deaconess Plaza,beth-israeldeaconess-plaza,,,,9,15,0,u,"2,031.47",525,Beth Israel/Deaconess Plaza,524,http://imgur.com/p5iAPV9.jpg
+524,35-589,Olmsted Park - Ward's Pond [Emerald Necklace],olmsted-park-wards-pond-emerald-necklace,Emerald Necklace parks,,,5,6,0,y,"54,726.20",709,Olmsted Park [Emerald Necklace],525,http://imgur.com/8duGXxE.jpg
+525,35-590,Arborway [Emerald Necklace],arborway-emerald-necklace,Emerald Necklace parks,,,5,7,0,y,"39,341.52",527,Arborway [Emerald Necklace],526,http://imgur.com/tmRserl.jpg
+526,35-656,Highland Avenue Community Garden,highland-avenue-community-garden,,,,1,3,0,u,408.1146788,528,Highland Avenue Community Garden,527,http://imgur.com/vCS4uyc.jpg
+527,35-681,Lawndale Terrace Garden,lawndale-terrace-garden,,,,1,13,0,y,362.9418518,529,Lawndale Terrace Garden,528,http://imgur.com/t865Zfg.jpg
+528,35-578,Carson Beach,carson-beach,,,,3,8,0,y,"100,085.05",530,Carson Beach,529,http://imgur.com/8mKEIcD.jpg
+529,35-579,L Street Beach,l-street-beach,,,,6,6,0,y,"22,547.17",531,L Street Beach,530,http://imgur.com/3j3q7Cd.jpg
+530,35-651,St Rose Street Garden,st-rose-street-garden,,,,1,3,0,u,316.2020433,532,St. Rose Street Garden,531,http://imgur.com/KQO5t8W.jpg
+531,35-652,Commonwealth Plaza,commonwealth-plaza,,,,9,11,0,y,635.062375,533,Commonwealth Plaza,532,http://imgur.com/75PORjJ.jpg
+532,35-655,Centre Place Garden,centre-place-garden,,,,1,6,0,y,551.8800645,534,Centre Place Garden,533,http://imgur.com/OIrzLOj.jpg
+533,35-584,UMass Harborwalk,umass-harborwalk,,,,3,8,0,y,"52,959.29",535,UMass Harborwalk,534,http://imgur.com/5xPA10U.jpg
+534,35-585,Malibu Beach,malibu-beach,,,,5,7,0,y,"105,698.13",536,Malibu Beach,535,http://imgur.com/ug8iIHI.jpg
+535,35-586,Victory Road Park,victory-road-park,,,,5,8,0,y,"24,909.58",537,Victory Road Park,536,http://imgur.com/wKw8CBG.jpg
+536,35-587,BU Grounds,bu-grounds,,,,3,15,0,u,"10,279.83",538,BU Grounds,537,http://imgur.com/AD1vl0t.jpg
+537,35-607,Mother Brook III,mother-brook-iii,,,,5,7,0,y,"15,452.60",539,Mother Brook III,538,http://imgur.com/uC1zHHz.jpg
+538,35-608,Reservation Road Park,reservation-road-park,,,,5,6,0,y,"22,255.51",540,Reservation Road Park,539,http://imgur.com/EyQOXpD.jpg
+539,35-609,Colella Playground,colella-playground,,,,7,8,0,y,"2,783.75",541,Colella Playground,540,http://imgur.com/YbHg7S7.jpg
+540,35-588,Riverway [Emerald Necklace],riverway-emerald-necklace,,,,5,7,0,y,"82,839.56",542,Riverway [Emerald Necklace],541,http://imgur.com/YFuJuFh.jpg
+541,35-614,Patrick J. Kelly Park,patrick-j-kelly-park,,,,5,15,0,u,"1,018.56",543,Patrick J. Kelly Park,542,http://imgur.com/Yyc0ZVr.jpg
+542,35-615,Mt. Vernon Street Plaza,mt-vernon-street-plaza,,,,9,12,0,y,590.9251677,544,Mt. Vernon Street Plaza,543,http://imgur.com/iiy38Dw.jpg
+543,35-621,Follen Garden,follen-garden,,,,1,13,0,y,352.6497336,545,Follen Garden,544,http://imgur.com/lKE2jg0.jpg
+544,35-592,Parkman Memorial [Emerald Necklace],parkman-memorial-emerald-necklace,Emerald Necklace parks,,,5,7,0,y,"27,157.35",546,Parkman Memorial [Emerald Necklace],545,http://imgur.com/mznyP1j.jpg
+545,35-593,VFW Parkway,vfw-parkway,,,,5,7,0,y,"53,284.06",547,VFW Parkway,546,http://imgur.com/SAqj2Nq.jpg
+546,35-594,West Roxbury High School Marsh,west-roxbury-high-school-marsh,,,,3,6,0,y,"85,799.26",548,West Roxbury High School Marsh,547,http://imgur.com/zTgfMw4.jpg
+547,35-595,Mass Art Park,mass-art-park,,,,5,6,0,y,615.9176298,549,Mass Art Park,548,http://imgur.com/o4IAp7A.jpg
+548,35-596,West Roxbury Parkway,west-roxbury-parkway,,,,5,7,0,y,"130,514.69",550,West Roxbury Parkway,549,http://imgur.com/y6zzzsS.jpg
+549,35-598,Stony Brook Reservation II,stony-brook-reservation-ii,,,,3,8,0,y,"574,162.98","1,164",Stony Brook Reservation,550,http://imgur.com/iA4L6e5.jpg
+550,35-622,Wellington Common,wellington-common,Southwest Corridor Park,,,5,13,0,y,440.88,552,Wellington Common,551,http://imgur.com/dSZHnxw.jpg
+551,35-623,West Springfield Garden,west-springfield-garden,,,,1,9,0,u,666.5088319,553,West Springfield Garden,552,http://imgur.com/OKeEexF.jpg
+552,35-624,Greenwood Community Garden,greenwood-community-garden,,,,1,3,0,u,824.5604924,554,Greenwood Community Garden,553,http://imgur.com/qos0W1w.jpg
+553,35-625,Highland Park 400 Garden,highland-park-400-garden,,,,1,9,0,u,"2,692.05",555,Highland Park 400 Garden,554,http://imgur.com/1AyHTx3.jpg
+554,35-657,Allan Crite Garden I,allan-crite-garden-i,,,,1,6,0,y,"1,578.49",556,Allan Crite Garden I,555,http://imgur.com/NXMVgLN.jpg
+555,35-599,Florida Street Reservation,florida-street-reservation,,,,5,7,0,y,278.8219215,557,Florida Street Reservation,556,http://imgur.com/QE588XT.jpg
+556,35-600,Tenean Beach,tenean-beach,,,,6,8,0,y,"35,220.71",558,Tenean Beach,557,http://imgur.com/i2cztEQ.jpg
+557,35-601,Pope John Paul II Park,pope-john-paul-ii-park,,,,5,8,0,y,"663,080.72",559,Pope John Paul II Park,558,http://imgur.com/X7u9Qvk.jpg
+558,35-658,Chestnut Hill Reservoir Garden,chestnut-hill-reservoir-garden,,,,1,3,0,y,459.3142974,560,Chestnut Hill Reservoir Garden,559,http://imgur.com/OJuLVLw.jpg
+559,35-683,New Chardon Square,new-chardon-square,,,,3,8,0,y,"7,737.77",561,New Chardon Square,560,http://imgur.com/IAJmQru.jpg
+560,35-602,Cedar Grove Cemetery,cedar-grove-cemetery,,,,3,15,0,y,"219,398.95",562,Cedar Grove Cemetery,561,http://imgur.com/FPDS2du.jpg
+561,35-603,Neponset River Reservation,neponset-river-reservation-2,,,,3,8,0,y,"87,430.93",563,Neponset River Reservation,562,http://imgur.com/MnICSZb.jpg
+562,35-604,Neponset River Reservation,neponset-river-reservation,,,,3,8,0,y,"300,568.65",563,Neponset River Reservation,563,http://imgur.com/4vDL2ks.jpg
+563,35-605,Martini Playground,martini-playground,,,,7,8,0,y,"23,390.22",565,Martini Playground,564,http://imgur.com/l6XwzdJ.jpg
+564,35-610,Neponset Valley Parkway,neponset-valley-parkway,,,,3,8,0,y,"22,249.16",566,Neponset Valley Parkway,565,http://imgur.com/AhIrmQO.jpg
+565,35-611,Kelly Playground,kelly-playground,,,,7,8,0,y,"79,927.43",567,Kelly Playground,566,http://imgur.com/TK7uU5A.jpg
+566,35-612,Dooley Playground,dooley-playground,,,,7,8,0,y,"1,798.78",568,Dooley Playground,567,http://imgur.com/ZdhdOM9.jpg
+567,35-634,Rivermoor I,rivermoor-i,,,,5,18,0,u,"31,213.12",569,Rivermoor,568,http://imgur.com/4wsir31.jpg
+568,35-635,Havey Beach,havey-beach,,,,3,8,0,y,"62,025.52",570,Havey Beach,569,http://imgur.com/bidQNWg.jpg
+569,35-659,Harborwalk,massport-harborwalk,,,,5,7,0,y,"14,768.96",571,Harborwalk,570,http://imgur.com/gPA9Ae8.jpg
+570,35-636,Millennium Park I,millennium-park-i,,,,6,6,0,y,"417,873.22",572,Millennium Park I,571,http://imgur.com/nB77bet.jpg
+571,35-637,South Street Mall,south-street-mall,,,,5,7,0,y,329.7388527,573,South Street Mall,572,http://imgur.com/DxqE6Ia.jpg
+572,35-638,First Church Cemetery,first-church-cemetery,,,,3,15,0,u,"2,542.40",574,First Church Cemetery,573,http://imgur.com/P5YHPKl.jpg
+573,35-640,Golden Stairs Terrace Park,golden-stairs-terrace-park,,,,5,6,0,y,938.0454257,575,Golden Stairs Terrace Park,574,http://imgur.com/4bSoGjG.jpg
+574,35-641,The Rockies Urban Wild,the-rockies,,,,11,6,0,y,"2,880.62",576,The Rockies Urban Wild,575,http://imgur.com/w2DPSNM.jpg
+575,35-642,Childe Hassam Park,childe-hassam-park,,,,5,6,0,y,244.1502184,577,Childe Hassam Park,576,http://imgur.com/Cam8zHU.jpg
+576,35-643,Roxbury Heritage State Park,roxbury-heritage-state-park-ii,,,,5,7,0,y,"8,739.27",578,Roxbury Heritage State Park,577,http://imgur.com/CtSYJTQ.jpg
+577,35-644,Kittredge Park,kittredge-park,,,,5,3,0,y,663.989814,579,Kittredge Park,578,http://imgur.com/3mWVZWZ.jpg
+578,35-645,Nellie Miranda Memorial Park,nellie-miranda-memorial-park,,,,5,6,0,y,334.6503975,580,Nellie Miranda Memorial Park,579,http://imgur.com/dTLHg74.jpg
+579,35-646,Grove Hall Plaza,grove-hall-plaza,,,,9,6,0,y,372.8514976,581,Grove Hall Plaza,580,http://imgur.com/IdRgZnf.jpg
+580,35-647,Old Harbor Easement,old-harbor-easement,,,,3,8,0,y,"7,565.72",582,Old Harbor Easement,581,http://imgur.com/TTWfbZR.jpg
+581,35-649,Roxbury Latin School Athletic Field,roxbury-latin-school-athletic-field,,,,6,15,0,u,"128,174.29",583,Roxbury Latin School Athletic Field,582,http://imgur.com/92gYAAV.jpg
+582,35-650,Forbes Street Playground,forbes-street-playground,,,,7,6,0,y,345.0193587,584,Forbes Street Playground,583,http://imgur.com/voInCA9.jpg
+583,35-660,Ohrenberger Recreation Complex,ohrenberger-recreation-complex,,,,6,6,0,y,"15,369.38",585,Ohrenberger Recreation Complex,584,http://imgur.com/xyWwYeR.jpg
+584,35-661,Boston University Ball Diamond,boston-university-ball-diamond,,,,6,5,0,n,"6,788.33",586,Boston University Ball Diamond,585,http://imgur.com/A09z39r.jpg
+585,35-662,Oak Square,oak-square,,,,5,7,0,y,"1,098.31",587,Oak Square,586,http://imgur.com/uDhi1Ga.jpg
+586,35-663,Jackson-Dunboy Square,jackson-dunboy-square,,,,5,7,0,y,235.3143554,588,Jackson-Dunboy Square,587,http://imgur.com/FD0xsTg.jpg
+587,35-664,Copley Place Plaza,copley-place-plaza,,,,9,11,0,y,"1,170.05",589,Copley Place Plaza,588,http://imgur.com/RFhY3Wh.jpg
+588,35-666,Marketplace Plaza I,marketplace-plaza-i,,,,9,4,0,y,"1,753.36",590,Marketplace Plaza I,589,http://imgur.com/rGcneBd.jpg
+589,35-668,Little Mystic Access Area,little-mystic-access-area,,,,3,4,0,y,"7,596.67",591,Little Mystic Access Area,590,http://imgur.com/W7mMOyv.jpg
+590,35-669,Hunter Playground,hunter-playground,,,,7,4,0,y,"4,691.66",592,Hunter Playground,591,http://imgur.com/S1SG53F.jpg
+591,35-670,Corey Street Court,corey-street-court,,,,6,6,0,y,712.8216011,593,Corey Street Court,592,http://imgur.com/4SlK1RU.jpg
+592,35-671,Columbia Road/Day Boulevard,columbia-roadday-boulevard,,,,5,7,0,y,"69,583.13",594,Columbia Road/Day Boulevard,593,http://imgur.com/hk09j1z.jpg
+593,35-679,Kennedy Library Harborwalk,kennedy-library-harborwalk,,,,5,18,0,u,"13,441.90",595,Kennedy Library Harborwalk,594,http://imgur.com/msKICZF.jpg
+594,35-672,Joe Moakley Park,joe-moakley-park,,,,5,6,0,y,"237,853.00",596,Joe Moakley Park,595,http://imgur.com/CHTprT6.jpg
+595,35-673,Children's Museum Plaza,childrens-museum-plaza,,,,9,15,0,y,557.8150503,597,Children's Museum Plaza,596,http://imgur.com/tcZ9j1g.jpg
+596,35-674,Boston Design Center Plaza,boston-design-center-plaza,,,,9,4,0,y,"2,486.90",598,Boston Design Center Plaza,597,http://imgur.com/dCeGWay.jpg
+597,35-675,Dry Dock Plaza,dry-dock-plaza,,,,9,4,0,y,962.2626689,599,Dry Dock Plaza,598,http://imgur.com/jnH8voZ.jpg
+598,35-676,Marine Industrial Park Entrance I,marine-industrial-park-entrance-i,,,,3,6,0,y,"5,069.89",600,Marine Industrial Park Entrance I,599,http://imgur.com/AvVJ06W.jpg
+599,35-677,Southwest Corridor Community Farm,southwest-corridor-community-farm,,,,3,3,0,u,"2,495.99",601,Southwest Corridor Community Farm,600,http://imgur.com/W65XJEe.jpg
+600,35-678,Lamartine/Hubbard Streets Garden,lamartinehubbard-streets-garden,,,,1,13,0,y,253.6598662,602,Lamartine/Hubbard Streets Garden,601,http://imgur.com/nQFxrPZ.jpg
+601,35-682,Frederick Douglass Green,frederick-douglass-green,,,,3,15,0,u,"3,732.02",603,Frederick Douglass Green,602,http://imgur.com/GvxnQvN.jpg
+602,35-684,Chandler/Tremont Plaza,chandlertremont-plaza,,,,9,6,0,y,935.6162151,604,Chandler/Tremont Plaza,603,http://imgur.com/ymipHtO.jpg
+603,35-685,Nonquit Street Garden,nonquit-street-garden,,,,1,6,0,y,618.2968635,605,Nonquit Street Garden,604,http://imgur.com/joE3jbS.jpg
+604,35-688,Savin Hill Cove,savin-hill-cove,,,,3,8,0,y,"7,183.91",606,Savin Hill Cove,605,http://imgur.com/W1HLhRT.jpg
+605,35-690,First Church in Roxbury Common,first-church-yard,,,,3,15,0,u,"8,414.03",607,First Church in Roxbury Common,606,http://imgur.com/rzMKV5M.jpg
+606,35-691,Boundary I,boundary-i,,,,5,7,0,y,"28,028.87",608,Boundary I,607,http://imgur.com/GRFH1jT.jpg
+607,35-693,Boston Nature Center,boston-nature-center,,"500 Walk Hill St, Mattapan, MA 02126",617-938-8500,5,15,0,u,"230,282.28",609,Boston Nature Center,608,http://imgur.com/cIhD7L0.jpg
+608,35-694,Williams Street I,williams-street-i,,,,3,15,0,u,"7,161.20",610,Williams Street I,609,http://imgur.com/DmoQcE8.jpg
+609,35-695,Oakview Terrace,oakview-terrace,,,,5,7,0,y,404.2823823,611,Oakview Terrace,610,http://imgur.com/3rr7JRK.jpg
+610,35-696,BNAF Parcel,bnaf-parcel,,,,5,7,0,y,"1,072.48",612,BNAF Parcel,611,http://imgur.com/tRfbuxm.jpg
+611,35-708,Olmsted Park-Wildflower Meadow [Emerald Necklace],olmsted-park-wildflower-meadow-emerald-necklace,Emerald Necklace,,,5,7,0,y,"25,472.95",709,Olmsted Park [Emerald Necklace],612,http://imgur.com/vSSiQJz.jpg
+612,35-709,Jamaica Way [Emerald Necklace],jamaica-way-emerald-necklace,,,,5,7,0,y,"19,108.45",614,Jamaica Way [Emerald Necklace],613,http://imgur.com/xGbUX79.jpg
+613,35-718,Faneuil Square,faneuil-square,,,,5,7,0,y,"4,205.57",615,Faneuil Square,614,http://imgur.com/cexgAgC.jpg
+614,35-697,Belle Isle Marsh Reservation,belle-isle-marsh-reservation,,,,11,8,0,y,"581,759.47",616,Belle Isle Marsh Reservation,615,http://imgur.com/pvtDEha.jpg
+615,35-699,Allandale Field,allandale-field,,,,5,7,0,y,"10,619.65",617,Allandale Field,616,http://imgur.com/w3yAfUm.jpg
+616,35-704,Harbor Point Boulevard,harbor-point-boulevard,,,,3,15,0,u,"9,346.66",618,Harbor Point Boulevard,617,http://imgur.com/D3apZrU.jpg
+617,35-705,Olmsted Green,olmsted-green,,,,5,8,0,y,"241,435.94",619,Olmsted Green,618,http://imgur.com/lzsLzNM.jpg
+618,35-706,Charlesgate,charlesgate,,,,5,7,0,y,"8,258.04",620,Charlesgate,619,http://imgur.com/C4KkSQg.jpg
+619,35-707,Reserved Channel,reserved-channel,,,,3,8,0,y,"59,334.87",621,Reserved Channel,620,http://imgur.com/8SYBgT8.jpg
+620,35-713,Dana Greenhouses,dana-greenhouses,,,,3,15,0,u,"20,531.12",622,Dana Greenhouses,621,http://imgur.com/ZXx3Q24.jpg
+621,35-714,Centre Street Tract,centre-street-tract,,,,3,15,0,y,"5,884.81",623,Centre Street Tract,622,http://imgur.com/59FgLYF.jpg
+622,35-719,Temple Street Park,temple-street-park,,,,5,6,0,y,238.8403263,624,Temple Street Park,623,http://imgur.com/SmmoLgH.jpg
+623,35-720,Wood Island Bay Marsh,wood-island-bay-marsh,,,,3,12,0,y,"356,675.46",625,Wood Island Bay Marsh,624,http://imgur.com/RxT27xj.jpg
+624,35-726,Melnea Cass Boulevard,melnea-cass-boulevard,,,,3,8,0,y,"15,596.91",626,Melnea Cass Boulevard,625,http://imgur.com/rTd8UZ7.jpg
+625,35-727,Ohrenberger Woodland,ohrenberger-woodland,,,,3,6,0,y,"15,457.93",627,Ohrenberger Woodland,626,http://imgur.com/4ZDHZc1.jpg
+626,35-754,Allandale Woods ROW,allandale-woods-row,,,,11,7,0,y,665.9720856,472,Allandale Woods,627,http://imgur.com/R5XDMF3.jpg
+627,35-723,Morton Street,morton-street,,,,3,8,0,y,"3,079.82",629,Morton Street,628,http://imgur.com/RtAveIp.jpg
+628,35-728,Navy Yard Grounds,navy-yard-grounds,,,,3,18,0,y,"98,378.31",630,Navy Yard Grounds,629,http://imgur.com/9ps6ceA.jpg
+629,35-729,Savin Hill Marsh,savin-hill-marsh,,,,3,8,0,y,"38,773.95",631,Savin Hill Marsh,630,http://imgur.com/AZORp6n.jpg
+630,35-783,Washington Manor Community Garden,washington-manor-community-garden,,,,1,2,0,u,89.28039469,632,Washington Manor Community Garden,631,http://imgur.com/DN7P6wZ.jpg
+631,49-6521,Gannett/Warren Pals Park,gannett-warren-pals-park,,,,7,24,0,y,"1,093.92",633,Gannett/Warren Pals Park,632,http://imgur.com/7unJvdy.jpg
+632,35-740,Neponset River Corridor,neponset-river-corridor,,,,3,15,0,u,"8,640.83",634,Neponset River Corridor,633,http://imgur.com/wRlwKQa.jpg
+633,35-724,St. Michael's Cemetery,st-michaels-cemetery,,,,3,15,0,y,"188,208.00",635,St. Michael's Cemetery,634,http://imgur.com/tGC0hwJ.jpg
+634,35-725,Monadnock Street Garden,monadnock-street-garden,,,,1,3,0,u,877.3095829,636,Monadnock Street Garden,635,http://imgur.com/WF5uZVq.jpg
+635,35-737,Harvard-Livermore Tract,harvard-livermore-tract,,,,3,15,0,u,"22,866.95",637,Harvard-Livermore Tract,636,http://imgur.com/67MTIuZ.jpg
+636,35-739,Boston College HS Athletic Fields,boston-college-hs-athletic-fields,,,,6,1,0,u,"76,038.94",638,Boston College HS Athletic Fields,637,http://imgur.com/FPBMtbb.jpg
+637,35-753,Stanley-Bellevue Park,stanley-bellevue-park,,,,5,6,0,y,"1,422.59",639,Stanley-Bellevue Park,638,http://imgur.com/J1Cluuq.jpg
+638,35-730,Leo M. Birmingham Parkway,leo-m-birmingham-parkway,,,,3,8,0,y,"28,222.64",640,Leo M. Birmingham Parkway,639,http://imgur.com/Swj1ZiM.jpg
+639,35-731,Rivermoor II,rivermoor-ii,,,,3,4,0,y,"4,150.70",569,Rivermoor,640,http://imgur.com/ORvf2Pz.jpg
+640,35-732,Rivermoor III,rivermoor-iii,,,,3,6,0,y,"2,043.34",569,Rivermoor,641,http://imgur.com/HxyFLel.jpg
+641,35-733,Parley Vale Preserve,parley-vale-preserve,,,,3,15,0,u,"2,834.22",643,Parley Vale Preserve,642,http://imgur.com/zzDLJrl.jpg
+642,35-734,Meetinghouse Hill Churchyard,meetinghouse-hill-churchyard,,,,3,15,0,u,"3,263.62",644,Meetinghouse Hill Churchyard,643,http://imgur.com/ZSUfXBv.jpg
+643,35-735,Shubow Park,shubow-park,,,,3,6,0,y,"3,007.89",645,Shubow Park,644,http://imgur.com/RbCBbEA.jpg
+644,35-744,Arborway Overpass Path [Emerald Necklace],arborway-overpass-path-emerald-necklace,,,,3,8,0,y,"4,732.02",646,Arborway Overpass Path [Emerald Necklace],645,http://imgur.com/IcLvVLr.jpg
+645,35-746,Newland Street Park,newland-street-park,,,,5,6,0,y,560.8537635,647,Newland Street Park,646,http://imgur.com/6qxryko.jpg
+646,35-747,Northhampton St Community Garden,northhampton-st-community-garden,,,,1,15,0,u,891.3298669,648,Northhampton St Community Garden,647,http://imgur.com/m0WJXIM.jpg
+647,35-748,Zero Quinn Way,zero-quinn-way,,,,5,7,0,y,129.4255258,649,Zero Quinn Way,648,http://imgur.com/6m7Bn6s.jpg
+648,35-749,Harvard Business School Athltc Flds,harvard-business-school-athltc-flds,,,,6,16,0,u,"2,285.66",650,Harvard Business School Athltc Flds,649,http://imgur.com/AhEoJmx.jpg
+649,35-750,Bromley Heath Play Area,bromley-heath-play-area,,,,6,6,0,y,"3,322.14",651,Bromley Heath Play Area,650,http://imgur.com/4FWM1a8.jpg
+650,35-751,Fenelon Street Playground,fenelon-street-playground,,,,7,6,0,y,731.3885291,652,Fenelon Street Playground,651,http://imgur.com/KJjsBWX.jpg
+651,35-756,Theresa Hynes Park,theresa-hynes-park,,,,5,15,0,u,"1,806.03",653,Theresa Hynes Park,652,http://imgur.com/xF77wYV.jpg
+652,35-757,DeForest Urban Wild,deforest-urban-wild,,,,11,6,0,y,"3,284.09",654,DeForest Urban Wild,653,http://imgur.com/qvYQjFe.jpg
+653,35-758,Dunbarton Woods,dunbarton-woods,,,,11,15,0,u,"2,970.64",655,Dunbarton Woods,654,http://imgur.com/OX04MMq.jpg
+654,35-759,Museum of the National Center of Afro American Artists,ncaaa-museum-grounds,,"300 Walnut Avenue, Roxbury, MA 02119",617-442-8614,5,15,0,y,"18,865.81",656,Museum of the National Center of Afro American Art,655,http://imgur.com/wMA0Z6U.jpg
+655,35-760,Fan Pier Harborwalk,fan-pier-harborwalk,,,,3,15,0,u,"6,053.58",657,Fan Pier Harborwalk,656,http://imgur.com/yjeQ27V.jpg
+656,35-761,Eastport Park,eastport-park,,,,5,12,0,y,"4,362.44",658,Eastport Park,657,http://imgur.com/Z9pLe1m.jpg
+657,35-762,South Boston Maritime Park,south-boston-maritime-park,,,,5,12,0,y,"3,567.98",659,South Boston Maritime Park,658,http://imgur.com/aJyZpt0.jpg
+658,35-763,Evans Way Park,evans-way-park,,,,5,6,0,y,"9,444.39",660,Evans Way Park,659,http://imgur.com/ybYMmhj.jpg
+659,35-765,North Point Park,north-point-park,,,,5,8,0,y,"7,172.40",661,North Point Park,660,http://imgur.com/6cY1dOc.jpg
+660,35-766,Bremen Street Park,bremen-street-park,,,,5,12,0,y,"41,874.41",662,Bremen Street Park,661,http://imgur.com/0OV1jKd.jpg
+661,35-767,Revere Plaza,revere-plaza,,,,9,11,0,y,"5,633.76",663,Revere Plaza,662,http://imgur.com/7leirHX.jpg
+662,35-769,Oakdale Street Community Garden,oakdale-street-community-garden,,,,1,13,0,y,631.1000968,664,Oakdale Street Community Garden,663,http://imgur.com/xBU1FFO.jpg
+663,35-770,Our Garden,our-garden,,,,1,6,0,y,"1,382.25",665,Our Garden,664,http://imgur.com/CUtsqzQ.jpg
+664,35-771,Paul Sullivan House Community Garden,paul-sullivan-house-community-garden,,,,1,15,0,u,217.9657252,666,Paul Sullivan House Community Garden,665,http://imgur.com/l1wOXIu.jpg
+665,35-772,Philbrick School Garden,philbrick-school-garden,,,,1,6,0,y,170.3826093,667,Philbrick School Garden,666,http://imgur.com/2dP6yrh.jpg
+666,35-773,Boston Evening Academy Garden,boston-evening-academy-garden,,,,1,6,0,y,845.0353725,668,Boston Evening Academy Garden,667,http://imgur.com/nmTXcbN.jpg
+667,35-776,Sargent Street Park,sargent-street-park,,,,5,9,0,u,"1,254.53",669,Sargent Street Park,668,http://imgur.com/RMjAy2v.jpg
+668,35-779,South Street Community Garden,south-street-community-garden,,,,1,6,0,y,"1,905.39",670,South Street Community Garden,669,http://imgur.com/lBR9XYq.jpg
+669,35-780,Starr Lane Park,starr-lane-park,,,,5,6,0,y,249.8223477,671,Starr Lane Park,670,http://imgur.com/zFb6ZEs.jpg
+670,35-781,Wakullah St. CG,wakullah-st-cg,,,,1,4,0,y,879.8902828,672,Wakullah St. CG,671,http://imgur.com/eLy9fXN.jpg
+671,35-782,Warren Garden Greenspace,warren-garden-greenspace,,,,3,15,0,u,"1,048.54",673,Warren Garden Greenspace,672,http://imgur.com/zkdFjpG.jpg
+672,35-784,13th Street Circle Garden,13th-street-circle-garden,,,,1,6,0,y,237.3482165,674,13th Street Circle Garden,673,http://imgur.com/ZT6M4MQ.jpg
+673,35-785,8th Street Circle Garden,8th-street-circle-garden,,,,3,6,0,y,374.7421012,675,8th Street Circle Garden,674,http://imgur.com/j7ob6Is.jpg
+674,35-786,Agassiz Community & School Garden,agassiz-community-school-garden,,,,1,6,0,y,756.4736447,676,Agassiz Community & School Garden,675,http://imgur.com/PBIxquL.jpg
+675,35-787,Brookside Community Garden,brookside-community-garden,,,,1,3,0,u,465.8392885,677,Brookside Community Garden,676,http://imgur.com/TC62cAK.jpg
+676,35-788,Commonwealth Tenants Association CG,commonwealth-tenants-association-cg,,,,1,15,0,u,"1,416.41",678,Commonwealth Tenants Association CG,677,http://imgur.com/ZgU1xt6.jpg
+677,35-789,Clementine Park,clementine-park,,,,5,6,0,y,101.6773584,679,Clementine Park,678,http://imgur.com/lFUpEj8.jpg
+678,35-790,Columbia Point Community Garden,columbia-point-community-garden,,,,1,15,0,u,"1,378.30",680,Columbia Point Community Garden,679,http://imgur.com/Tui9Yss.jpg
+679,35-791,Conley School Garden,conley-school-garden,,,,1,6,0,y,294.6267429,681,Conley School Garden,680,http://imgur.com/1SdkQ0F.jpg
+680,35-792,Lombardi Memorial Park,lombardi-memorial-park,,,,5,2,0,u,"2,524.87",682,Lombardi Memorial Park,681,http://imgur.com/o9bbFkj.jpg
+681,35-793,Daniel Francis Crowley Square,charlestown-parcel-6,,,,5,7,0,y,469.3828435,683,Daniel Francis Crowley Square,682,http://imgur.com/cMxYF6Q.jpg
+682,35-794,West End Park,west-end-park,,,,5,11,0,y,959.3918467,684,West End Park,683,http://imgur.com/q90RFU4.jpg
+683,35-795,Portal Park,portal-park,,,,5,11,0,y,"1,277.43",685,Portal Park,684,http://imgur.com/UiSYrMb.jpg
+684,35-804,China Gate Park,china-gate-park,,,,5,11,0,y,647.7832488,686,China Gate Park,685,http://imgur.com/PAiSiKa.jpg
+685,35-805,RFK Greenway II,rfk-greenway-ii,,,,4,11,0,y,"3,393.57",687,RFK Greenway,686,http://imgur.com/DdB1cpJ.jpg
+686,35-808,Dewey Square Plaza,dewey-square-plaza,,,,9,11,0,y,"2,232.50",688,Dewey Square Plaza,687,http://imgur.com/fWspYIg.jpg
+687,35-809,Wormwood Park,wormwood-park,,,,5,18,0,u,526.7103754,689,Wormwood Park,688,http://imgur.com/X3pQHwf.jpg
+688,274-16,Paul Revere Park,paul-revere-park-2,,,,5,19,0,y,131.5017759,690,Paul Revere Park,689,http://imgur.com/K0mvRIe.jpg
+689,35-796,Wharf District Park,wharf-district-park,,,,5,11,0,y,"19,064.90",691,Wharf District Park,690,http://imgur.com/vbI8HrZ.jpg
+690,35-806,RFK Greenway III,rfk-greenway-iii,,,,4,11,0,y,"7,045.34",687,RFK Greenway,691,http://imgur.com/A675lt8.jpg
+691,35-813,Atlantic Avenue Plantings,atlantic-avenue-plantings,,,,3,13,0,y,"2,363.72",693,Atlantic Avenue Plantings,692,http://imgur.com/6h5f152.jpg
+692,35-814,Binford Street Park,binford-street-park,,,,3,15,0,u,"1,842.11",694,Binford Street Park,693,http://imgur.com/EnC6Wb4.jpg
+693,35-815,CANA Portal,cana-portal,,,,3,11,0,y,"4,691.29",695,CANA Portal,694,http://imgur.com/74121A6.jpg
+694,35-797,New Center for Arts and Culture,new-center-for-arts-and-culture,Rose Kennedy Greenway,,,4,17,0,y,"7,876.54",696,New Center for Arts and Culture,695,http://imgur.com/ojWP9cf.jpg
+695,35-798,Summer Street Park,summer-street-park,,,,5,11,0,y,"2,088.10",697,Summer Street Park,696,http://imgur.com/3mVI93m.jpg
+696,35-799,Leather District Park,leather-district-park,,,,5,11,0,y,"1,364.60",698,Leather District Park,697,http://imgur.com/dsHMajG.jpg
+697,35-800,Chinatown Park,chinatown-park,,,,5,11,0,y,"3,089.62",699,Chinatown Park,698,http://imgur.com/aSrqEFd.jpg
+698,35-801,Armenian Heritage Park,armenian-heritage-park,,,,5,11,0,y,"1,655.40",700,Armenian Heritage Park,699,http://imgur.com/WKbaXin.jpg
+699,35-807,RFK Greenway IV,rfk-greenway-iv,,,,4,11,0,y,"5,414.45",687,RFK Greenway,700,http://imgur.com/y57SyzX.jpg
+700,35-816,Fort Point Channel Harborwalk,fort-point-channel-harborwalk,,,,3,15,0,u,"9,911.84",702,Fort Point Channel Harborwalk,701,http://imgur.com/g2aaq5l.jpg
+701,35-817,Galvin Memorial Park,galvin-green,,,,1,8,0,y,"20,772.68",703,Galvin Memorial Park,702,http://imgur.com/jdd0NUG.jpg
+702,35-819,Rolling Bridge Park,rolling-bridge-park,,,,5,11,0,y,"8,292.81",704,Rolling Bridge Park,703,http://imgur.com/lyjgclM.jpg
+703,274-641,Community Path,community-path,,,,5,13,0,y,"10,533.35",705,Community Path,704,http://imgur.com/cNwDNQk.jpg
+704,35-820,North End Park,north-end-park,,,,5,11,0,y,"11,446.69",706,North End Park,705,http://imgur.com/s9cW0m3.jpg
+705,274-601,Lexington Park,lexington-park,,,,5,19,0,y,"1,262.79",707,Lexington Park,706,http://imgur.com/iPe4Zq3.jpg
+706,243-3281,Bishop Playground,bishop-playground,,,,0,0,0,,"24,210.44",708,Bishop Playground,707,http://imgur.com/CL2ZvGN.jpg
+707,35-822,Olmsted Park-Daisy Field [Emerald Necklace],olmsted-park-daisy-field-emerald-necklace,Emerald Necklace,,,5,6,0,y,"159,217.32",709,Olmsted Park [Emerald Necklace],708,http://imgur.com/5ecj9fQ.jpg
+708,274-612,Palmacci Playground,palmacci-playground,,,,5,19,0,y,335.6265868,710,Palmacci Playground,709,http://imgur.com/t68Novs.jpg
+709,274-622,Seven Hills Park,seven-hills-park,,,,5,19,0,y,"2,345.40",711,Seven Hills Park,710,http://imgur.com/7nX0KYU.jpg
+710,274-609,Perkins Park,perkins-park,,,,5,19,0,y,631.1766259,712,Perkins Park,711,http://imgur.com/51jPdtQ.jpg
+711,274-604,Woodstock Playground,woodstock-playground,,,,5,19,0,y,909.6198064,713,Woodstock Playground,712,http://imgur.com/3hG8aAB.jpg
+712,274-21,Somerville Junction Park,somerville-junction-park,,,,5,19,0,y,"2,623.35",714,Somerville Junction Park,713,http://imgur.com/0FSlVjG.jpg
+713,274-13,Quincy Street Park,quincy-street-park,,,,5,19,0,y,473.5844611,715,Quincy Street Park,714,http://imgur.com/0GrY4ow.jpg
+714,274-594,Perry Park,perry-park,,,,5,19,0,y,"5,123.97",716,Perry Park,715,http://imgur.com/BQABcZS.jpg
+715,274-634,Central Hill Park/ Som. High School,central-hill-park-som-high-school-3,,,,5,19,0,y,"1,036.80",734,Central Hill Park/ Som. High School,716,http://imgur.com/y0zsQHY.jpg
+716,49-6551,Garden Street Glen/Roethlisberger Memorial Park,garden-street-glenroethlisberger-memorial-park,,,,5,24,0,y,"8,495.14",718,Garden Street Glen/Roethlisberger Memorial Park,717,http://imgur.com/2LcOSdV.jpg
+717,10-261,Alewife Brook Reservation,alewife-brook-reservation,,,,5,20,0,y,"69,843.56",719,Alewife Brook Reservation,718,http://imgur.com/wWfgfbd.jpg
+718,10/15/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-5,,,,14,21,0,y,"1,505.82",720,Mt. Pleasant Cemetery,719,http://imgur.com/rbJ9PSz.jpg
+719,274-615,Bailey Park,bailey-park,,,,5,19,0,y,"1,573.00",721,Bailey Park,720,http://imgur.com/KBfNwaM.jpg
+720,274-590,Trum Field,trum-field,,,,5,19,0,y,"19,090.20",722,Trum Field,721,http://imgur.com/jKxrlL0.jpg
+721,176-5,Mystic River Reservation,mystic-river-reservation,,,,5,20,0,y,905.37845,723,Mystic River Reservation,722,http://imgur.com/H3IrC3Z.jpg
+722,176-24,Mystic River Reservation,mystic-river-reservation-2,,,,5,20,0,y,"28,093.35",723,Mystic River Reservation,723,http://imgur.com/53GDPxD.jpg
+723,49-6530,"King School, Amigos School",king-school-amigos-school,,,,7,24,0,y,"2,716.88",725,"King School, Amigos School",724,http://imgur.com/xGo4nZE.jpg
+724,176-275,Mystic River Reservation,mystic-river-reservation-3,,,,5,20,0,y,"181,415.70",723,Mystic River Reservation,725,http://imgur.com/WkZM0jG.jpg
+725,274-608,Harris Playground,harris-playground,,,,5,19,0,y,"1,362.30",727,Harris Playground,726,http://imgur.com/JZa35cg.jpg
+726,274-619,Otis Playground,otis-playground,,,,5,19,0,y,704.7570189,728,Otis Playground,727,http://imgur.com/FPLgjIL.jpg
+727,274-617,Dickerman Playground,dickerman-playground,,,,5,19,0,y,"1,665.28",729,Dickerman Playground,728,http://imgur.com/zYYRImY.jpg
+728,176-15,Mystic River Reservation,mystic-river-reservation-4,,,,5,20,0,y,"19,925.15",723,Mystic River Reservation,729,http://imgur.com/jXKznBt.jpg
+729,176-18,Mystic River Reservation,mystic-river-reservation-12,,,,5,20,0,y,"2,725.45",723,Mystic River Reservation,730,http://imgur.com/yYywBHO.jpg
+730,274-627,Tufts Playing Fields,tufts-playing-fields,,,,5,15,0,y,"57,451.65",732,Tufts Playing Fields,731,http://imgur.com/76EV0oT.jpg
+731,274-599,Conway Playground,conway-playground,,,,5,19,0,y,"21,428.83",733,Conway Playground,732,http://imgur.com/F7xy2l3.jpg
+732,274-640,Central Hill Park/ Som. High School,central-hill-park-som-high-school,,,,5,19,0,y,"6,694.64",734,Central Hill Park/ Som. High School,733,http://imgur.com/1sSF5gk.jpg
+733,274-6,Mystic River Reservation,mystic-river-reservation-6,,,,5,20,0,y,957.17105,723,Mystic River Reservation,734,http://imgur.com/9wxmIGd.jpg
+734,57-145,Bellingham Hill Park,bellingham-hill-park,,,,5,23,0,y,"1,560.99",736,Bellingham Hill Park,735,http://imgur.com/kDrN3Dl.jpg
+735,274-632,Bikeway Community Garden,bikeway-community-garden,,,,5,19,0,y,812.6577487,737,Bikeway Community Garden,736,http://imgur.com/OZJuygT.jpg
+736,274-589,Foss Park,foss-park,,,,5,20,0,y,"59,146.61",738,Foss Park,737,http://imgur.com/ea6OeBC.jpg
+737,274-610,Florence Playground,florence-playground,,,,5,19,0,y,"1,056.17",739,Florence Playground,738,http://imgur.com/YhBiVCk.jpg
+738,49-6497,Alden Park,alden-park,,,,5,24,0,y,"1,164.40",740,Alden Park,739,http://imgur.com/fmSheiT.jpg
+739,274-597,Prospect Hill Park,prospect-hill-park,,,,5,19,0,y,"6,796.35",741,Prospect Hill Park,740,http://imgur.com/2eRUn4q.jpg
+740,274-629,W. Somerville Neighborhood School Playground,w-somerville-neighborhood-school-playground,,,,5,19,0,y,"1,288.97",742,W. Somerville Neighborhood School Playground,741,http://imgur.com/Eh3weYW.jpg
+741,176-260,Mystic River Reservation,mystic-river-reservation-7,,,,5,20,0,y,"69,921.79",723,Mystic River Reservation,742,http://imgur.com/xNjvFV4.jpg
+742,274-275,Mystic River Reservation,mystic-river-reservation-5,,,,5,20,0,y,"29,155.69",723,Mystic River Reservation,743,http://imgur.com/7IEMo4k.jpg
+743,57-147,Fifth Street Park,fifth-street-park,ADAMSKI PARK,,,5,23,0,y,459.272274,745,Fifth Street Park,744,http://imgur.com/JypWy81.jpg
+744,-,Henry Hansen Park,henry-hansen-park,,,,5,19,0,y,256.2206277,746,Henry Hansen Park,745,http://imgur.com/rZzM942.jpg
+745,49-6498,Ahern Field,ahern-field,,,,6,24,0,y,"11,420.01",747,Ahern Field,746,http://imgur.com/4MR89xG.jpg
+746,274-593,Lincoln Park/Argenziano School Playground,lincoln-parkargenziano-school-playground,,,,5,19,0,y,"20,377.09",748,Lincoln Park/Argenziano School Playground,747,http://imgur.com/wfz6zrs.jpg
+747,274-603,Hodgkins-Curtin Park,hodgkins-curtin-park,,,,5,19,0,y,"5,823.76",749,Hodgkins-Curtin Park,748,http://imgur.com/dOExbFc.jpg
+748,274-598,Osgood Park,osgood-park-2,,,,5,19,0,y,"1,331.77",750,Osgood Park,749,http://imgur.com/nyhZcA5.jpg
+749,10-994,Florence Avenue Park,florence-avenue-park,,,,6,21,0,y,"12,966.86",751,Florence Avenue Park,750,http://imgur.com/iiMc43H.jpg
+750,274-621,Community Path,community-path-2,,,,5,13,0,y,"7,968.59",705,Community Path,751,http://imgur.com/tAGBuBo.jpg
+751,274-3,Alewife Brook Reservation,alewife-brook-reservation-2,,,,5,20,0,y,"26,790.09",719,Alewife Brook Reservation,752,http://imgur.com/pCOhvuK.jpg
+752,274-2,Alewife Brook Reservation,alewife-brook-reservation-3,,,,5,20,0,y,"9,705.88",719,Alewife Brook Reservation,753,http://imgur.com/TtUMi6x.jpg
+753,176-16,Mystic River Reservation,mystic-river-reservation-8,,,,5,20,0,y,"153,080.80",723,Mystic River Reservation,754,http://imgur.com/Thdqxrz.jpg
+754,274-620,Trum Playground,trum-playground,,,,5,19,0,y,"1,889.99",756,Trum Playground,755,http://imgur.com/uSPxI6T.jpg
+755,274-635,Central Hill Park/ Som. High School,central-hill-park-som-high-school-2,,,,5,19,0,y,"3,061.56",734,Central Hill Park/ Som. High School,756,http://imgur.com/p5PBDOl.jpg
+756,274-624,Marshall Street Playground,marshall-street-playground,,,,5,19,0,y,984.55725,758,Marshall Street Playground,757,http://imgur.com/fI09gXH.jpg
+757,176-17,Mystic River Reservation,mystic-river-reservation-10,,,,5,20,0,y,"4,496.45",723,Mystic River Reservation,758,http://imgur.com/4R2qMNX.jpg
+758,10-260,Mystic River Reservation,mystic-river-reservation-9,,,,5,20,0,y,"92,845.36",723,Mystic River Reservation,759,http://imgur.com/2Bgm7Gl.jpg
+759,274-591,Nathan Tufts/Powderhouse Park,nathan-tufts-powderhouse-park,,,,5,19,0,y,"17,487.67",761,Nathan Tufts/Powderhouse Park,760,http://imgur.com/vBYRVS0.jpg
+760,274-614,Durell Community Garden,durrell-community-garden,,,,5,19,0,y,488.3788035,762,Durell Community Garden,761,http://imgur.com/U6ky3Tr.jpg
+761,274-611,Stone Place Park,stone-place-park,,,,5,19,0,y,408.0793592,763,Stone Place Park,762,http://imgur.com/bMPvRUP.jpg
+762,-,111 South Street,111-south-street-2,,,,5,19,0,y,202.7054172,764,111 South Street,763,http://imgur.com/bCjAngD.jpg
+763,274-596,Corbett-Mckenna Park,corbett-mckenna-park,,,,5,19,0,y,"2,509.76",765,Corbett-Mckenna Park,764,http://imgur.com/lKxKWLb.jpg
+764,10-958,Hardy,hardy,,,,7,21,0,y,"3,745.40",766,Hardy,765,http://imgur.com/w3UP9tk.jpg
+765,176-14,Mystic River Reservation,mystic-river-reservation-11,,,,5,20,0,y,"30,687.75",723,Mystic River Reservation,766,http://imgur.com/nsiShBa.jpg
+766,274-602,Kenney Park,kenney-park,,,,5,19,0,y,"2,106.80",768,Kenney Park,767,http://imgur.com/KUiSzw8.jpg
+767,274-595,Walnut Street Park,walnut-street-park,,,,5,19,0,y,"1,207.69",769,Walnut Street Park,768,http://imgur.com/KNE9R66.jpg
+768,274-613,Grimmons Park,grimmons-park,,,,5,19,0,y,"1,737.97",770,Grimmons Park,769,http://imgur.com/7hh04Ku.jpg
+769,274-623,Alewife Linear Park,alewife-linear-park,,,,5,19,0,y,"5,127.59",771,Alewife Linear Park,770,http://imgur.com/PACokGC.jpg
+770,274-639,Allen St. Community Garden,allen-st-community-garden,,,,5,19,0,y,503.8734107,772,Allen St. Community Garden,771,http://imgur.com/69aaq8O.jpg
+771,274-616,Morse-Kelley Playground,morse-kelley-playground,,,,5,19,0,y,"2,717.84",773,Morse-Kelley Playground,772,http://imgur.com/jnQ7Cki.jpg
+772,10-935,Bishop Field,bishop-field,,,,6,21,0,y,"5,989.26",774,Bishop Field,773,http://imgur.com/mC4x54G.jpg
+773,314-7,Charles River Reservation,charles-river-reservation-61,,,,3,20,0,n,"1,142.51",499,Charles River Reservation,774,http://imgur.com/z7uokze.jpg
+774,274-592,Glen Park/James Mccarthy Field,glen-parkjames-mccarthy-field,,,,5,19,0,y,"11,984.07",776,Glen Park/James Mccarthy Field,775,http://imgur.com/qVAh9oQ.jpg
+775,274-637,Powderhouse Comm School Playground,powderhouse-comm-school-playground,,,,5,19,0,y,"3,116.41",777,Powderhouse Comm School Playground,776,http://imgur.com/2P6uqRk.jpg
+776,274-618,Central Hill Park/ Som. High School,central-hill-park-som-high-school-4,,,,5,19,0,y,"3,026.40",734,Central Hill Park/ Som. High School,777,http://imgur.com/5tsubtN.jpg
+777,274-607,Hoyt-Sullivan Playground,hoyt-sullivan-playground,,,,5,19,0,y,"2,074.41",779,Hoyt-Sullivan Playground,778,http://imgur.com/1d1qmCy.jpg
+778,274-600,Albion Playground,albion-playground,,"101 Albion St, Somerville, MA 02144",,7,19,0,y,"3,184.25",780,Albion Playground,779,http://imgur.com/LVQhqvP.jpg
+779,274-260,Mystic River Reservation,mystic-river-reservation-13,,,,5,20,0,y,"7,320.31",723,Mystic River Reservation,780,http://imgur.com/sGRLova.jpg
+780,274-17,Winter Hill School Community Playground,winter-hill-school-community-playground,,,,5,19,0,y,"3,653.83",782,Winter Hill School Community Playground,781,http://imgur.com/fmyRybe.jpg
+781,-,Growing Center,growing-center,,,,5,19,0,y,"1,528.83",783,Growing Center,782,http://imgur.com/7uJT2Wa.jpg
+782,-,Nunziato Field,nunziato-field,,,,5,19,0,y,"4,438.31",784,Nunziato Field,783,http://imgur.com/5OttB6G.jpg
+783,274-605,North Street/Veterans Playground,north-street-veterans-playground,,,,5,19,0,y,"4,188.12",785,North Street/Veterans Playground,784,http://imgur.com/EnhGSG2.jpg
+784,-,Edgerly Education Center,edgerly-education-center,,,,5,19,0,y,"2,457.60",786,Edgerly Education Center,785,http://imgur.com/9T6KXhd.jpg
+785,-,Edward Leathers Community Park,edward-leathers-community-park,,,,5,19,0,y,"2,725.09",787,Edward Leathers Community Park,786,http://imgur.com/dUMvtW7.jpg
+786,-,Healey School Commumity Plgd,healey-school-commumity-plgd,,,,5,19,0,y,"5,347.26",788,Healey School Commumity Plgd,787,http://imgur.com/TIpKfpS.jpg
+787,-,Brown School Community Plgd,brown-school-community-plgd,,,,5,19,0,y,"2,478.83",789,Brown School Community Plgd,788,http://imgur.com/lvPS1FZ.jpg
+788,-,Cummings School Community Plgd,cummings-school-community-plgd,,,,5,19,0,y,"2,653.31",790,Cummings School Community Plgd,789,http://imgur.com/FVEDYjQ.jpg
+789,-,Zero New Washington,zero-new-washington,,,,5,19,0,y,"3,451.93",791,Zero New Washington,790,http://imgur.com/85Kg6Pa.jpg
+790,-,Dilboy Field,dilboy-field,,,,5,20,0,y,"100,954.11",792,Dilboy Field,791,http://imgur.com/IpZCyya.jpg
+791,-,Assembly Square Park,assembly-square-park,,,,5,19,0,y,"24,573.29",793,Assembly Square Park,792,http://imgur.com/YBVi67J.jpg
+792,-,Draw 7 Park,draw-7-park,,,,5,20,0,y,"36,464.17",794,Draw 7 Park,793,http://imgur.com/T6Lq2R4.jpg
+793,10-961,Thorndike,thorndike,,,,6,21,0,y,"38,256.92",795,Thorndike,794,http://imgur.com/q074EtP.jpg
+794,57-128,Washington Park,washington-park,,,,6,23,0,y,"6,008.90",796,Washington Park,795,http://imgur.com/lPbMZle.jpg
+795,-,Kennedy School Community Plgd,kennedy-school-community-plgd,,,,5,19,0,y,"9,797.18",797,Kennedy School Community Plgd,796,http://imgur.com/TOcO5My.jpg
+796,-,East Sommerville School Community Plgd,east-sommerville-school-community-plgd,,,,5,19,0,y,"18,774.21",798,East Sommerville School Community Plgd,797,http://imgur.com/bowomMZ.jpg
+797,-,Avon Community Garden,avon-community-garden,,,,5,19,0,y,383.2164925,799,Avon Community Garden,798,http://imgur.com/PRWB1Ze.jpg
+798,-,111 South Street,111-south-street,,,,5,19,0,y,465.6834741,764,111 South Street,799,http://imgur.com/FJPJM5R.jpg
+799,10-947,Spy Pond Field,spy-pond-field,,,,6,21,0,y,"32,697.39",801,Spy Pond Field,800,http://imgur.com/w4hJ6vO.jpg
+800,10-952,Lussiano Fields and Playground,lussiano-fields-and-playground,,,,6,21,0,y,"25,692.01",802,Lussiano Fields and Playground,801,http://imgur.com/YAa2SUo.jpg
+801,10-966,Robbins Farm,robbins-farm,,,,6,21,0,y,"46,050.13",803,Robbins Farm,802,http://imgur.com/hhUWOFE.jpg
+802,10-990,Peirce School,peirce-school-2,,,,7,21,0,y,"1,844.55",804,Peirce School,803,http://imgur.com/v2a6y5h.jpg
+803,57-148,Eden Street Garden,eden-street-garden,,,,13,23,0,y,821.1466001,805,Eden Street Garden,804,http://imgur.com/KWJbjk2.jpg
+804,10-963,Menotomy Rocks Playground,menotomy-rocks-playground,,,,6,21,0,y,"144,551.93",806,Menotomy Rocks Playground,805,http://imgur.com/A12wGMc.jpg
+805,10-950,Gibbs Gym,gibbs-gym,,,,6,21,0,y,"9,922.89",807,Gibbs Gym,806,http://imgur.com/Y7T2eBh.jpg
+806,10-980,Stratton School,stratton-school,,,,7,21,0,y,"10,007.44",808,Stratton School,807,http://imgur.com/SufG3nC.jpg
+807,10-992,Hurd Field,hurd-field,,,,6,21,0,y,"25,000.15",809,Hurd Field,808,http://imgur.com/XT1E6Sr.jpg
+808,10-946,Parmenter,parmenter,,,,7,21,0,y,"3,539.96",810,Parmenter,809,http://imgur.com/a2dlEky.jpg
+809,10/11/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-1,,,,14,21,0,y,"1,398.84",720,Mt. Pleasant Cemetery,810,http://imgur.com/3k5CcIi.jpg
+810,49-704,Charles Park,charles-park,,,,7,24,0,y,"4,364.35",812,Charles Park,811,http://imgur.com/2loCrZ9.jpg
+811,155-6364,Rindge Ave Play Area,rindge-ave-play-area,,,,3,22,0,y,"78,265.85",813,Rindge Ave Play Area,812,http://imgur.com/sHkHiJm.jpg
+812,10-993,Locke School Playground,locke-school-playground,,,,7,21,0,y,"3,133.67",814,Locke School Playground,813,http://imgur.com/wq918Fs.jpg
+813,10-955,Crosby School/Tennis Courts,crosby-school-tennis-courts,,,,6,21,0,y,"1,532.46",815,Crosby School/Tennis Courts,814,http://imgur.com/DqH7c5s.jpg
+814,10-967,Brackett School,brackett-school,,,,6,21,0,y,"5,665.39",816,Brackett School,815,http://imgur.com/ZVacPAe.jpg
+815,10-944,Robbins Library,robbins-library,,,,5,21,0,y,"11,774.04",817,Robbins Library,816,http://imgur.com/ztaFh6d.jpg
+816,10-989,Peirce School,peirce-school,,,,7,21,0,y,"7,237.45",804,Peirce School,817,http://imgur.com/rVY72EW.jpg
+817,10-975,Ottoson,ottoson,,,,6,21,0,y,"23,473.52",819,Ottoson,818,http://imgur.com/aQzw7Oy.jpg
+818,10-971,W. A. Peirce,w-a-peirce,,,,6,21,0,y,"52,336.85",820,W. A. Peirce,819,http://imgur.com/rMS89jN.jpg
+819,10-954,Crosby School/Tennis Courts,crosby-schooltennis-courts,,,,6,21,0,y,"8,971.43",815,Crosby School/Tennis Courts,820,http://imgur.com/o8ARfJL.jpg
+820,10-973,Cutter School,cutter-school,,,,7,21,0,y,"3,896.30",822,Cutter School,821,http://imgur.com/zyI4CYq.jpg
+821,155-6366,Jerry Cataldo Reservation,jerry-cataldo-reservation,,,,3,22,0,y,"21,833.90",823,Jerry Cataldo Reservation,822,http://imgur.com/bu16oMs.jpg
+822,10-959,Magnolia Park,magnolia-park,,,,13,21,0,y,"15,526.94",824,Magnolia Park,823,http://imgur.com/l8UrBtU.jpg
+823,10-999,Poets Corner,poets-corner,,,,6,21,0,y,"15,679.30",825,Poets Corner,824,http://imgur.com/5ctgc7n.jpg
+824,10-986,McClennen Park,mcclennen-park,,,,6,21,0,y,"91,930.54",826,McClennen Park,825,http://imgur.com/GoYoQzM.jpg
+825,49-6534,Longfellow Park,longfellow-park,,,,5,24,0,y,"9,086.81",827,Longfellow Park,826,http://imgur.com/uvXIBGJ.jpg
+826,49-705,Front Park,front-park,,,,5,24,0,y,"3,888.28",828,Front Park,827,http://imgur.com/aWk0zpF.jpg
+827,10-942,Buzzell Field,buzzell-field,,,,6,21,0,y,"10,161.53",829,Buzzell Field,828,http://imgur.com/yuIGIXR.jpg
+828,10/10/2015,Buzzell Field,buzzell-field-1,,,,6,21,0,y,"5,408.43",830,Buzzell Field,829,http://imgur.com/zrewKII.jpg
+829,10-998,Hibbert Playground,hibbert-playground,,,,7,21,0,y,421.2332124,831,Hibbert Playground,830,http://imgur.com/bCyw4Tp.jpg
+830,10/9/2015,Hibbert Playground,hibbert-playground-1,,,,7,21,0,y,422.7039516,831,Hibbert Playground,831,http://imgur.com/9ns7ohK.jpg
+831,10/4/2015,Mystic Valley Parkway,mystic-valley-parkway,,,,3,20,0,y,"20,861.76",833,Mystic Valley Parkway,832,http://imgur.com/ILolxHW.jpg
+832,57-133,Bosson Playground,bosson-playground,,,,7,23,0,y,"2,813.56",834,Bosson Playground,833,http://imgur.com/qcRPpyr.jpg
+833,10-260,Mystic River Reservation,mystic-river-reservation-14,,,,3,20,0,y,"92,845.36",723,Mystic River Reservation,834,http://imgur.com/XY4YmOq.jpg
+834,49-707,Tobin School,tobin-school,,,,7,24,0,y,"2,769.14",836,Tobin School,835,http://imgur.com/Gfi2h1e.jpg
+835,49-1,Alewife Brook Reservation,alewife-brook-reservation-4,,,,3,20,0,y,"258,208.58",719,Alewife Brook Reservation,836,http://imgur.com/0CsHusZ.jpg
+836,10/12/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-2,,,,14,21,0,y,"7,279.63",720,Mt. Pleasant Cemetery,837,http://imgur.com/TiMiv7u.jpg
+837,57-137,Chelsea Square,chelsea-square,,,,5,23,0,y,"1,650.52",839,Chelsea Square,838,http://imgur.com/1uSO7SG.jpg
+838,10-937,Mt. Pleasant Cemetery,mt-pleasant-cemetery-6,,,,14,21,0,y,"129,678.80",720,Mt. Pleasant Cemetery,839,http://imgur.com/a0YIP1g.jpg
+839,49-6536,Lopez Street Park,lopez-street-park,,,,7,24,0,y,729.1562501,841,Lopez Street Park,840,http://imgur.com/xRT8axx.jpg
+840,10-261,Alewife Brook Reservation,alewife-brook-reservation-5,,,,3,20,0,y,"69,843.56",719,Alewife Brook Reservation,841,http://imgur.com/jSIm0ZR.jpg
+841,10-262,Alewife Brook Reservation,alewife-brook-reservation-6,,,,3,20,0,y,"7,182.02",719,Alewife Brook Reservation,842,http://imgur.com/VjX3FaZ.jpg
+842,274-4,Alewife Brook Reservation,alewife-brook-reservation-7,,,,3,20,0,y,"119,848.81",719,Alewife Brook Reservation,843,http://imgur.com/ykJmZ4x.jpg
+843,10/13/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-3,,,,14,21,0,y,445.3707635,720,Mt. Pleasant Cemetery,844,http://imgur.com/emFZftS.jpg
+844,10/14/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-4,,,,14,21,0,y,"7,901.52",720,Mt. Pleasant Cemetery,845,http://imgur.com/2KNTaM3.jpg
+845,26-100,Alewife Brook Reservation,alewife-brook-reservation-8,,,,3,20,0,y,"81,707.36",719,Alewife Brook Reservation,846,http://imgur.com/j6t2YIF.jpg
+846,10-263,Alewife Brook Reservation,alewife-brook-reservation-9,,,,3,20,0,y,"15,093.28",719,Alewife Brook Reservation,847,http://imgur.com/IEMcp7E.jpg
+847,10/2/2015,Mystic Valley Parkway,mystic-valley-parkway-2,,,,3,20,0,y,"12,323.41",833,Mystic Valley Parkway,848,http://imgur.com/jOasSK9.jpg
+848,10-953,Prince Hall Mystic Cemetery,prince-hall-mystic-cemetery,,,,14,21,0,y,886.2324079,850,Prince Hall Mystic Cemetery,849,http://imgur.com/xybJjm1.jpg
+849,10-936,Mt. Pleasant Cemetery,mt-pleasant-cemetery-7,,,,14,21,0,y,"7,994.55",720,Mt. Pleasant Cemetery,850,http://imgur.com/I6878RQ.jpg
+850,10/16/2015,Mt. Pleasant Cemetery,mt-pleasant-cemetery-8,,,,14,21,0,y,"9,865.05",720,Mt. Pleasant Cemetery,851,http://imgur.com/AxzdvYT.jpg
+851,10-1000,Buck Field,buck-field-2,,,,6,21,0,y,"17,495.83",853,Buck Field,852,http://imgur.com/vmrif4I.jpg
+852,10-1001,Veterans' Memorial Skating Rink,veterans'-memorial-skating-rink,,,,5,21,0,y,"8,508.58",854,Veterans' Memorial Skating Rink,853,http://imgur.com/Z61dDxz.jpg
+853,10-1002,Summer Street Field,buck-field,,,,6,21,0,y,"26,828.24",855,Summer Street Field,854,http://imgur.com/82CVoii.jpg
+854,57-138,Palonia Park,palonia-park,,,,5,23,0,y,"1,537.01",856,Palonia Park,855,http://imgur.com/jrbXN0l.jpg
+855,57-11,Scrivano park,scrivano-park,,,,7,23,0,y,"1,052.65",857,Scrivano park,856,http://imgur.com/1BocIio.jpg
+856,155-6458,The Great Meadows,the-great-meadows,,,,5,21,0,y,"11,713.49",863,The Great Meadows,857,http://imgur.com/sJjdV3I.jpg
+857,57-132,Garden Cemetary,garden-cemetary,,,,14,23,0,y,"12,694.52",859,Garden Cemetary,858,http://imgur.com/07Tk4Nf.jpg
+858,57-131,Highland Park,highland-park-2,,,,7,23,0,y,"13,418.27",860,Highland Park,859,http://imgur.com/sRUzYJC.jpg
+859,57-134,Quigley Park,quigley-park,,,,7,23,0,y,"2,140.32",861,Quigley Park,860,http://imgur.com/f9pSojf.jpg
+860,49-6508,Comeau Field,comeau-field,,,,6,24,0,y,"47,340.39",862,Comeau Field,861,http://imgur.com/SO6In8P.jpg
+861,155-6362,The Great Meadows,the-great-meadows-2,,,,5,21,0,y,"705,997.10",863,The Great Meadows,862,http://imgur.com/YxbcqDx.jpg
+862,10-1003,Scannell Field,scannell-field,,,,6,21,0,y,"12,495.99",864,Scannell Field,863,http://imgur.com/d9v4Art.jpg
+863,10-1004,Spy Pond Park,spy-pond-park,,,,7,21,0,y,"6,930.74",865,Spy Pond Park,864,http://imgur.com/4L8sklg.jpg
+864,10-1005,Whittemore Robbins House,whittemore-robbins-house,,,,6,21,0,y,"2,165.02",866,Whittemore Robbins House,865,http://imgur.com/ORpM5o8.jpg
+865,57-136,Chelsea Square,chelsea-square-2,,,,5,23,0,y,203.4225,839,Chelsea Square,866,http://imgur.com/KpBQtxJ.jpg
+866,57-130,Dever Park,dever-park,,,,7,23,0,y,"1,074.70",868,Dever Park,867,http://imgur.com/DmL7wgA.jpg
+867,57-127,Volke Parke,volke-parke,,,,6,23,0,y,"13,430.69",869,Volke Parke,868,http://imgur.com/vA0MiVO.jpg
+868,57-142,Mary C. Burke Complex,mary-c-burke-complex,,,,5,23,0,y,"27,514.49",870,Mary C. Burke Complex,869,http://imgur.com/j1fSg8R.jpg
+869,57-12,Carter Park,carter-park,,,,6,23,0,y,"33,081.79",871,Carter Park,870,http://imgur.com/S6qB2Un.jpg
+870,57-14,Repici-Brenes Tot Lot,repici-brenes-tot-lot,,,,7,23,0,y,674.1336585,872,Repici-Brenes Tot Lot,871,http://imgur.com/bUhtqJV.jpg
+871,314-6573,Browne School Playground,browne-school-playground,,,,7,25,0,y,"14,103.35",873,Browne School Playground,872,http://imgur.com/h5yneVq.jpg
+872,314-6586,Moxley Park,moxley-playground,,"31 Westminster Ave. Watertown, MA 02472",,7,25,0,y,"19,681.81",874,Moxley Park,873,http://imgur.com/PTCJkMw.jpg
+873,176-11,Mystic Lakes,mystic-lakes,,,,3,20,0,y,"229,366.29",875,Mystic Lakes,874,http://imgur.com/oY8RWvY.jpg
+874,176-281,Dugger Park,dugger-park,,,,6,20,0,y,"18,863.83",876,Dugger Park,875,http://imgur.com/R9rt19o.jpg
+875,57-135,ONeal Tot Lot,oneal-tot-lot,,,,7,23,0,y,336.057,877,O'Neal Tot Lot,876,http://imgur.com/6k2V0ly.jpg
+876,57-129,Malone Park,malone-park,,,,6,8,0,y,"14,694.95",878,Malone Park,877,http://imgur.com/ddUY3n5.jpg
+877,57-10,Mace Tot Lot,mace-tot-lot,,,,7,23,0,y,564.4039096,879,Mace Tot Lot,878,http://imgur.com/d7AhlLq.jpg
+878,57-149,Carter park,carter-park-2,,,,5,23,0,y,"3,699.12",880,Carter park,879,http://imgur.com/VK5UQCA.jpg
+879,57-150,Mace Housing Park,mace-housing-park,,,,7,23,0,y,883.226924,881,Mace Housing Park,880,http://imgur.com/SYokgUc.jpg
+880,57-151,Mace Housing Park,mace-housing-park-2,,,,7,23,0,y,619.6878141,881,Mace Housing Park,881,http://imgur.com/2beSS1d.jpg
+881,57-152,Prattville-Fitzpatrick Development Park,prattville-fitzpatrick-development-park,,,,5,23,0,y,980.4654812,883,Prattville-Fitzpatrick Development Park,882,http://imgur.com/v5nDxHU.jpg
+882,314-6576,Watertown Skating Rink,watertown-skating-rink,,,,5,25,0,y,"4,173.11",884,Watertown Skating Rink,883,http://imgur.com/8f8RYt5.jpg
+883,314-6578,Casey Playground,casey-playground,,,,7,25,0,y,"14,863.27",885,Casey Playground,884,http://imgur.com/GyHRfcv.jpg
+884,314-6579,Howe Park,howe-park,,,,5,25,0,y,"7,604.74",886,Howe Park,885,http://imgur.com/ZQFEp5N.jpg
+885,314-6595,Phillips School Playground,phillips-school-playground,,,,7,25,0,y,"2,642.81",887,Phillips School Playground,886,http://imgur.com/Gy1xkmJ.jpg
+886,314-6584,Whitney Hill Park,whitney-hill-park,,,,6,25,0,y,"42,947.70",888,Whitney Hill Park,887,http://imgur.com/TY8f6Z2.jpg
+887,314-6571,Gore Place,gore-place-2,,,,5,28,0,u,"112,228.30",889,Gore Place,888,http://imgur.com/cpXQNb0.jpg
+888,308-6376,Gore Place,gore-place-3,,,,5,28,0,u,"74,388.78",889,Gore Place,889,http://imgur.com/uWdFxNi.jpg
+889,314-6585,W. Housing Project Playground,w-housing-project-playground,,,,7,25,0,y,"1,264.33",891,W. Housing Project Playground,890,http://imgur.com/8CFQtEo.jpg
+890,314-6589,O'Connell Park,oconnell-park,,"341 Mt. Auburn Street Watertown, MA 02472",,6,25,0,y,"19,369.56",892,O'Connell Park,891,http://imgur.com/pmKfTnJ.jpg
+891,314-6583,Victory Field,victory-field,,"40 Orchard St. Watertown, MA 02472",,5,25,0,y,"36,620.77","1,138",Victory Field,892,http://imgur.com/hEw2ek8.jpg
+892,314-6604,Gore Place,gore-place-4,,,,5,28,0,u,"38,200.11",889,Gore Place,893,http://imgur.com/zoTUPSO.jpg
+893,207-101,Charles River Reservation,charles-river-reservation-1,,,,3,20,0,y,"45,879.27",499,Charles River Reservation,894,http://imgur.com/h21gf6g.jpg
+894,207-104,Charles River Reservation,charles-river-reservation-21,,,,3,20,0,y,"33,381.81",499,Charles River Reservation,895,http://imgur.com/Z9pNLpn.jpg
+895,49-6499,Alberico Park,alberico-park,,,,6,24,0,y,"2,207.13",897,Alberico Park,896,http://imgur.com/d4KUsxr.jpg
+896,49-6561,Wilder-Lee Park,wilder-lee-park,,,,7,24,0,y,"1,145.87",898,Wilder-Lee Park,897,http://imgur.com/i0e2po5.jpg
+897,314-6587,Linear Park,linear-park,,,,3,25,0,y,"6,342.94",899,Linear Park,898,http://imgur.com/W2tdmkL.jpg
+898,314-6572,Cunniff School Playground,cunniff-school-playground,,,,7,25,0,y,"6,940.30",900,Cunniff School Playground,899,http://imgur.com/Fve1C7E.jpg
+899,314-6574,Bemis Playground,bemis-playground,,,,7,25,0,y,"7,936.10",901,Bemis Playground,900,http://imgur.com/CydZzw3.jpg
+900,314-6594,Columbus Delta,columbus-delta,,,,5,29,0,y,"2,690.13",902,Columbus Delta,901,http://imgur.com/tWoKymK.jpg
+901,308-6375,Gore Place,gore-place,,,,5,28,0,u,"7,586.95",889,Gore Place,902,http://imgur.com/MaPLJuO.jpg
+902,314-6577,Saltonstall Park,saltonstall-park,,,,5,25,0,y,"21,859.99",904,Saltonstall Park,903,http://imgur.com/4dE6z6W.jpg
+903,314-6597,E. Housing Project Playground,e-housing-project-playground,,,,7,25,0,y,"1,003.30",905,E. Housing Project Playground,904,http://imgur.com/lDQcDmI.jpg
+904,49-6545,Paine Park,paine-park,,,,6,24,0,y,"1,188.71",906,Paine Park,905,http://imgur.com/kzK48lP.jpg
+905,207-100,Charles River Reservation,charles-river-reservation-31,,,,3,20,0,y,"9,981.09",499,Charles River Reservation,906,http://imgur.com/pKluVY0.jpg
+906,314-4,Charles River Reservation,charles-river-reservation-41,,,,3,20,0,y,"15,041.46",499,Charles River Reservation,907,http://imgur.com/JOILkos.jpg
+907,314-3,Charles River Reservation,charles-river-reservation-51,,,,3,20,0,y,"240,181.93",499,Charles River Reservation,908,http://imgur.com/zJSmBUB.jpg
+908,314-6593,Filippello Park,filippello-park,,"109 Arlington St. Watertown, MA 02472",,6,25,0,y,"58,185.53",910,Filippello Park,909,http://imgur.com/57CLJ05.jpg
+909,314-6606,Charles River Reservation,charles-river-reservation-71,,,,3,20,0,y,"28,007.51",499,Charles River Reservation,910,http://imgur.com/OmmjKZA.jpg
+910,314-6607,Charles River Reservation,charles-river-reservation-81,,,,3,20,0,y,"1,254.43",499,Charles River Reservation,911,http://imgur.com/S9XdKFZ.jpg
+911,49-6547,Pine Street Park,pine-street-park-1,,,,7,24,0,y,923.0678001,913,Pine Street Park,912,http://imgur.com/xmr5G15.jpg
+912,49-6537,Lowell School Park,lowell-school-park,,,,6,24,0,y,"2,614.71",914,Lowell School Park,913,http://imgur.com/V37CkuL.jpg
+913,49-6510,Raymond Park/Corcoran Field,raymond-park-corcoran-field,,,,6,24,0,y,"11,280.45",915,Raymond Park/Corcoran Field,914,http://imgur.com/A82TpB1.jpg
+914,314-5,Charles River Reservation,charles-river-reservation-91,,,,3,20,0,y,"11,922.95",499,Charles River Reservation,915,http://imgur.com/Y1RGasq.jpg
+915,314-103,Charles River Reservation,charles-river-reservation-101,,,,3,20,0,y,392.0746,499,Charles River Reservation,916,http://imgur.com/GbAYiiZ.jpg
+916,314-6605,Charles River Reservation,charles-river-reservation-111,,,,3,20,0,y,"14,003.78",499,Charles River Reservation,917,http://imgur.com/X3MHPWp.jpg
+917,314-6569,St. Patricks Cemetery,st.-patricks-cemetery,,,,14,32,0,y,"58,521.52",919,St. Patricks Cemetery,918,http://imgur.com/z3uDhRo.jpg
+918,49-6542,Mount Auburn Cemetery,mount-auburn-cemetery,,,,14,31,0,y,"46,264.12",920,Mt. Auburn Cemetery,919,http://imgur.com/iamz6Sh.jpg
+919,314-6610,Charles River Reservation,charles-river-reservation-121,,,,3,27,0,y,"1,123.51",499,Charles River Reservation,920,http://imgur.com/jyP7F4N.jpg
+920,314-6570,Ridgelawn Cemetery,ridgelawn-cemetery,,,,14,25,0,y,"77,434.41",922,Ridgelawn Cemetery,921,http://imgur.com/6UTbkdm.jpg
+921,314-2,Charles River Reservation,charles-river-reservation-16,,,,3,20,0,y,694.20655,499,Charles River Reservation,922,http://imgur.com/QnUebma.jpg
+922,49-6617,Joan Lorentz Park,joan-lorentz-park,,,,7,24,0,y,"11,272.63",924,Joan Lorentz Park,923,http://imgur.com/d2HCI4z.jpg
+923,49-6539,Maple Avenue Park,maple-avenue-park,,,,7,24,0,y,409.64895,925,Maple Avenue Park,924,http://imgur.com/d9dSBlu.jpg
+924,49-6552,Russell/Swamp Field,russell-swamp-field,,,,6,24,0,y,"41,633.57",926,Russell/Swamp Field,925,http://imgur.com/DIZlnCQ.jpg
+925,49-6541,Morse School & Lindstrom Field,morse-school-lindstrom-field,,,,6,24,0,y,"5,996.93",927,Morse School & Lindstrom Field,926,http://imgur.com/Vokfqhj.jpg
+926,49-6563,Hurley Park,hurley-park,,,,5,24,0,y,999.8826,928,Hurley Park,927,http://imgur.com/0txX6YZ.jpg
+927,314-1,Charles River Reservation,charles-river-reservation-131,,,,3,20,0,y,"38,808.37",499,Charles River Reservation,928,http://imgur.com/oFwPZMv.jpg
+928,314-6609,Charles River Reservation,charles-river-reservation-141,,,,3,30,0,y,878.1893499,499,Charles River Reservation,929,http://imgur.com/ZMrfppN.jpg
+929,314-6608,Charles River Reservation,charles-river-reservation-151,,,,3,26,0,y,"2,694.24",499,Charles River Reservation,930,http://imgur.com/uPBbG7P.jpg
+930,49-6495,Cambridge Cemetery,cambridge-cemetery,,,,14,24,0,y,"207,210.46",932,Cambridge Cemetery,931,http://imgur.com/swlEwBD.jpg
+931,314-6592,Mt Auburn Cemetery,mt-auburn-cemetery,,,,14,31,0,y,"670,486.46",920,Mt. Auburn Cemetery,932,http://imgur.com/KUdFvbL.jpg
+932,49-6517,Fort Washington Park,fort-washington-park,,,,5,24,0,y,"9,667.06",934,Fort Washington Park,933,http://imgur.com/JoqEqcC.jpg
+933,49-6624,Flagstaff Park,flagstaff-park,,,,5,24,0,y,"4,722.95",935,Flagstaff Park,934,http://imgur.com/tuV25Lk.jpg
+934,308-60,Charles River Reservation,charles-river-reservation-17,,,,3,20,0,y,"1,244.49",499,Charles River Reservation,935,http://imgur.com/D8xRSnB.jpg
+935,314-6611,Charles River Reservation,charles-river-reservation-18,,,,3,20,0,y,311.75335,499,Charles River Reservation,936,http://imgur.com/86G6DUG.jpg
+936,49-9,Charles River Reservation,charles-river-reservation-19,,,,3,20,0,y,"500,806.31",499,Charles River Reservation,937,http://imgur.com/Getv6f6.jpg
+937,314-6603,Common Street Cemetery,common-street-cemetery,,,,14,25,0,y,"9,449.10",939,Common Street Cemetery,938,http://imgur.com/bH8tKLu.jpg
+938,314-6601,Clarence W. Dealtry Memorial Swimming Pool,clarence-w.-dealtry-memorial-swimming-pool,,,,5,20,0,y,"3,605.96",940,Clarence W. Dealtry Memorial Swimming Pool,939,http://imgur.com/X8N78DP.jpg
+939,314-6,Charles River Reservation,charles-river-reservation-20,,,,3,20,0,y,"14,346.88",499,Charles River Reservation,940,http://imgur.com/sRDL4i2.jpg
+940,49-6496,Danehy Park,danehy-park,,,,6,24,0,y,"178,410.54",942,Danehy Park,941,http://imgur.com/SUMXgIS.jpg
+941,49-6513,Dana Park,dana-park,,,,6,24,0,y,"5,770.28",943,Dana Park,942,http://imgur.com/lgxZmAM.jpg
+942,49-6558,St. Peters Field,st-peters-field,,,,6,24,0,y,"25,348.21",944,St. Peters Field,943,http://imgur.com/vYG18sS.jpg
+943,49-6511,Corporal Burns Park,corporal-burns-park,,,,6,24,0,y,"5,003.99",945,Corporal Burns Park,944,http://imgur.com/dt61JD8.jpg
+944,49-6515,Donnelly Field,donnelly-field,,,,6,24,0,y,"27,178.48",946,Donnelly Field,945,http://imgur.com/dfYN4jf.jpg
+945,49-6514,"Thomas P. ONeill, Jr. Municipal Golf Course",thomas-p.-oneill-jr-municipal-golf-course,,,,5,24,0,y,"350,373.71",947,"Thomas P. ONeill, Jr. Municipal Golf Course",946,http://imgur.com/yjmz0yl.jpg
+946,49-6531,Kingsley Prak,kingsley-prak,,,,5,24,0,y,"120,718.22",948,Kingsley Prak,947,http://imgur.com/vIc3qsI.jpg
+947,49-6527,Hastings Square,hastings-square,,,,6,24,0,y,"3,640.78",949,Hastings Square,948,http://imgur.com/D0C65v4.jpg
+948,49-6553,Sacramento Field,sacramento-field,,,,13,24,0,y,"7,567.36",950,Sacramento Field,949,http://imgur.com/Zk3MR30.jpg
+949,49-6505,Centanni Way,centanni-way,,,,5,24,0,y,"2,164.41",951,Centanni Way,950,http://imgur.com/qV4aVEf.jpg
+950,49-6618,Cambridge Rindge & Latin School and War Memorial,cambridge-rindge-latin-school-and-war-memorial,,,,7,24,0,y,"6,531.24",952,Cambridge Rindge & Latin School and War Memorial,951,http://imgur.com/FCC72nq.jpg
+951,49-6516,Elm/Hampshire Plaza,elm-hampshire-plaza,,,,5,24,0,y,"1,091.39",953,Elm/Hampshire Plaza,952,http://imgur.com/2KNtcd4.jpg
+952,49-315,Charles River Basin,charles-river-basin,,,,3,24,0,y,"3,249.96",954,Charles River Basin,953,http://imgur.com/uAWWbuM.jpg
+953,49-6628,Fresh Pond Reservation,fresh-pond-reservation,,,,13,24,0,y,"114,449.18",955,Fresh Pond Reservation,954,http://imgur.com/azOWr72.jpg
+954,49-6540,Market Street Park,market-street-park,,,,7,24,0,y,"1,018.65",956,Market Street Park,955,http://imgur.com/4Fp9FIR.jpg
+955,49-6621,New Riverside Neighborhood Park,new-riverside-neighborhood-park,,,,7,16,0,y,"2,602.94",957,New Riverside Neighborhood Park,956,http://imgur.com/qUGZRF8.jpg
+956,49-6533,Longfellow National Historic Site,longfellow-national-historic-site,,,,5,24,0,y,"6,035.45",958,Longfellow National Historic Site,957,http://imgur.com/VrZuk3D.jpg
+957,49-6549,David Nunes Park,david-nunes-park,,,,6,24,0,y,"3,435.37",959,David Nunes Park,958,http://imgur.com/WjXM2EK.jpg
+958,49-324,Riverside Press Park,riverside-press-park,,,,6,24,0,y,"15,035.69",960,Riverside Press Park,959,http://imgur.com/1KWPJkz.jpg
+959,49-6522,Glacken Field,glacken-field,,,,6,24,0,y,"37,892.56",961,Glacken Field,960,http://imgur.com/oFxweRf.jpg
+960,49-6554,Rafferty Park,rafferty-park,,,,6,24,0,y,"4,740.84",962,Rafferty Park,961,http://imgur.com/JvSM8QE.jpg
+961,49-323,Clement G. Morgan Park,clement-g.-morgan-park,,,,6,24,0,y,"3,807.33",963,Clement G. Morgan Park,962,http://imgur.com/wZmscIC.jpg
+962,49-6502,Tobin Field,tobin-field,,,,6,24,0,y,"14,098.09",964,Tobin Field,963,http://imgur.com/rfLjpNj.jpg
+963,49-6622,Lechmere Canal Park,lechmere-canal-park,,,,7,24,0,y,"17,776.08",965,Lechmere Canal Park,964,http://imgur.com/Y3oDkOs.jpg
+964,49-6532,Larch Road Park,larch-road-park,,,,6,24,0,y,"1,563.41",966,Larch Road Park,965,http://imgur.com/XuGeYiZ.jpg
+965,49-715,Blair Pond,blair-pond,,,,5,24,0,y,"45,561.14",967,Blair Pond,966,http://imgur.com/TqDZ6Ik.jpg
+966,49-716,Magazine Beach,magazine-beach,,,,6,24,0,y,"24,618.74",968,Magazine Beach,967,http://imgur.com/iD04lzi.jpg
+967,49-717,Fulmore Park,fulmore-park,,,,7,24,0,y,"1,653.39",969,Fulmore Park,968,http://imgur.com/CGvaOcM.jpg
+968,49-6503,Cambridge Common,cambridge-common,,,,6,24,0,y,"33,234.92",970,Cambridge Common,969,http://imgur.com/iCYxSWS.jpg
+969,49-8,Lowell Park,lowell-park,,,,6,20,0,y,"31,922.70",971,Lowell Park,970,http://imgur.com/KrlYHGp.jpg
+970,49-10,Simoni Memorial Park,simoni-memorial-park,,,,5,20,0,y,"4,956.87",972,Simoni Memorial Park,971,http://imgur.com/jdjZ4KW.jpg
+971,49-9,Charles River Basin,charles-river-basin-3,,,,3,20,0,y,"450,224.04",973,Charles River Basin,972,http://imgur.com/58oTJ9H.jpg
+972,49-706,Father Callanan Playground,father-cllanan-playground,,,,6,24,0,y,"3,970.92",974,Father Callanan Playground,973,http://imgur.com/Qo71ETt.jpg
+973,49-1,Alewife Brook Reservation,alewife-brook-reservation-11,,,,3,20,0,y,"256,011.91",719,Alewife Brook Reservation,974,http://imgur.com/pMb0yRj.jpg
+974,49-17,Charles River Basin,charles-river-basin-20,,,,3,20,0,y,"4,067.75",973,Charles River Basin,975,http://imgur.com/RBraWCj.jpg
+975,49-720,Memorial Drive Tot Lot,memorial-drive-tot-lot,,,,7,24,0,y,"3,528.06",977,Memorial Drive Tot Lot,976,http://imgur.com/J5BYMFo.jpg
+976,49-721,North Point Park,north-point-park-2,,,,7,24,0,y,"37,374.97",661,North Point Park,977,http://imgur.com/Yinkd7g.jpg
+977,49-12,John F. Kennedy Memorial park,john-f-kennedy-memorial-park,,,,5,20,0,y,"20,679.63",979,John F. Kennedy Memorial park,978,http://imgur.com/Emqxj8t.jpg
+978,49-6640,Charles River Basin,charles-river-basin-4,,,,3,20,0,y,"5,099.86",973,Charles River Basin,979,http://imgur.com/3btUImf.jpg
+979,49-2,McCrehan Memorial Pool,mccrehan-memorial-pool,,,,5,20,0,y,"7,237.71",981,McCrehan Memorial Pool,980,http://imgur.com/hp6Fvkk.jpg
+980,49-700,Rindge Field,rindge-field,,,,6,24,0,y,"12,703.75",982,Rindge Field,981,http://imgur.com/wAg9QZI.jpg
+981,49-701,Bergin Park,bergin-park,,,,7,24,0,y,"4,646.81",983,Bergin Park,982,http://imgur.com/7lcshs9.jpg
+982,49-702,Anderson Courts,anderson-courts,,,,6,24,0,y,"5,444.96",984,Anderson Courts,983,http://imgur.com/vbrW05e.jpg
+983,49-703,McMath Park,mcmath-park,,,,1,24,0,y,"2,518.87",985,McMath Park,984,http://imgur.com/TROBtWc.jpg
+984,10-261,Alewife Brook Reservation,alewife-brook-reservation-12,,,,3,20,0,y,"69,843.56",719,Alewife Brook Reservation,985,http://imgur.com/sCNkvLk.jpg
+985,49-13,Charles River Basin,charles-river-basin-21,,,,3,20,0,y,"17,088.65",973,Charles River Basin,986,http://imgur.com/E1rOy4t.jpg
+986,274-4,Alewife Brook Reservation,alewife-brook-reservation-13,,,,3,20,0,y,"119,848.81",719,Alewife Brook Reservation,987,http://imgur.com/n0IWqsp.jpg
+987,49-722,Riverbend Park,riverbend-park,,,,5,24,0,y,"9,324.51",990,Riverbend Park,988,http://imgur.com/vof9pvx.jpg
+988,49-708,Gold Star Mothers Pool,gold-star-mothers-pool,,,,6,24,0,y,"1,339.05","1,010",Gold Star Mothers Park,989,http://imgur.com/ZOoVwFf.jpg
+989,49-709,Greene/ Rose Hertiage Park,greene-rose-hertiage-park,,,,8,24,0,y,"5,021.29",992,Greene/ Rose Hertiage Park,990,http://imgur.com/yXAzrjl.jpg
+990,49-710,Linear Park,linear-park-2,,,,3,24,0,y,"6,724.29",993,Linear Park,991,http://imgur.com/bFGM4zu.jpg
+991,49-711,Pacific Street Open Space,pacific-street-open-space,,,,6,24,0,y,"5,341.87",994,Pacific Street Open Space,992,http://imgur.com/IfnAUDm.jpg
+992,49-712,Reverend Williams Park,reverend-williams-park,,,,6,24,0,y,"3,251.72",995,Reverend Williams Park,993,http://imgur.com/z8UCFk0.jpg
+993,49-713,Squirrel Brand Park,squirrel-brand-park,,,,13,24,0,y,949.0330679,996,Squirrel Brand Park,994,http://imgur.com/xzFAaCT.jpg
+994,49-714,Fletcher/Maynard Academy,fletcher-maynard-academy,,,,7,24,0,y,779.4664445,997,Fletcher/Maynard Academy,995,http://imgur.com/18jlxSt.jpg
+995,49-723,Veterans Memorial Pool,veterans-memorial-pool,,,,5,24,0,y,"2,791.33",998,Veterans Memorial Pool,996,http://imgur.com/uabWXyl.jpg
+996,49-724,Baldwin School,baldwin-school,,,,7,24,0,y,"2,453.63",999,Baldwin School,997,http://imgur.com/yjaVXvT.jpg
+997,49-725,Cambridge Port School,cambridge-port-school,,,,7,24,0,y,693.4185847,"1,000",Cambridge Port School,998,http://imgur.com/oZUQyIG.jpg
+998,49-726,Graham and Parks School,graham-and-parks-school,,,,7,24,0,y,"2,154.62","1,001",Graham and Parks School,999,http://imgur.com/80SX4VD.jpg
+999,49-727,Kennedy/Longfellow School,kennedy-longfellow-school,,,,7,24,0,y,458.5257805,"1,002",Kennedy/Longfellow School,"1,000",http://imgur.com/0N0a7rO.jpg
+"1,000",49-728,King Open School,king-open-school,,,,7,24,0,y,"12,284.28","1,003",King Open School,"1,001",http://imgur.com/YfNqgAY.jpg
+"1,001",49-729,Peabody School,peabody-school,,,,7,24,0,y,"1,261.13","1,004",Peabody School,"1,002",http://imgur.com/URYChVL.jpg
+"1,002",49-730,Clarendon Avenue Playground,clarendon-avenue-playground,,,,7,24,0,y,"1,697.91","1,005",Clarendon Avenue Playground,"1,003",http://imgur.com/DkEdlNt.jpg
+"1,003",49-731,Costa Lopez Taylor Park,costa-lopez-taylor-park,,,,8,24,0,y,"2,996.65","1,006",Costa Lopez Taylor Park,"1,004",http://imgur.com/ew3UQfI.jpg
+"1,004",49-732,Costa Lopez Taylor Park,costa-lopez-taylor-park-2,,,,8,24,0,y,471.6802692,"1,006",Costa Lopez Taylor Park,"1,005",http://imgur.com/QrpdMiw.jpg
+"1,005",49-733,William G. Maher Park,william-g-maher-park,,,,13,24,0,y,"39,893.50","1,008",William G. Maher Park,"1,006",http://imgur.com/hw8kP2O.jpg
+"1,006",49-6535,Old Longfellow School,old-longfellow-school,,,,7,24,0,y,"3,581.72","1,009",Old Longfellow School,"1,007",http://imgur.com/BPJbqin.jpg
+"1,007",49-6523,Gold Star Mothers Park,gold-star-mothers-park,,,,6,24,0,y,"14,666.16","1,010",Gold Star Mothers Park,"1,008",http://imgur.com/rnak9YL.jpg
+"1,008",49-6555,Sennott Park,sennott-park,,,,6,24,0,y,"10,261.98","1,011",Sennott Park,"1,009",http://imgur.com/n8XRMZg.jpg
+"1,009",49-6562,Winthrop Square,winthrop-square-2,,,,5,24,0,y,992.1190499,"1,012",Winthrop Square,"1,010",http://imgur.com/MasHj21.jpg
+"1,010",49-6620,Haggerty School,haggerty-school,,,,7,24,0,y,"4,036.66","1,013",Haggerty School,"1,011",http://imgur.com/WTp3jau.jpg
+"1,011",49-6556,Silva Park,silva-park,,,,7,24,0,y,"1,083.40","1,014",Silva Park,"1,012",http://imgur.com/XW8PBjp.jpg
+"1,012",49-734,Gibbons Park,gibbons-park,,,,7,24,0,y,"1,752.23","1,015",Gibbons Park,"1,013",http://imgur.com/ghzCaGN.jpg
+"1,013",46-122,Lawton Playground,lawton-playground-2,,,,5,36,0,y,"2,199.92","1,016",Lawton Playground,"1,014",http://imgur.com/rHG00fC.jpg
+"1,014",46-158,Dane Park,dane-park,,,,5,36,0,y,"28,299.53","1,043",Dane Park,"1,015",http://imgur.com/JYz9Tay.jpg
+"1,015",46-144,William H. Lincoln School Playground (New),william-h-lincoln-school-playground-new,,,,5,36,0,y,"3,792.66","1,054",William H. Lincoln School Playground,"1,016",http://imgur.com/Hm02OPs.jpg
+"1,016",46-381,Daniel F. Ford Playground at Emerson Garden,daniel-f-ford-playground-at-emerson-garden,,,,6,36,0,y,"8,313.23","1,019",Daniel F. Ford Playground at Emerson Garden,"1,017",http://imgur.com/uXLXOPL.jpg
+"1,017",46-403,Monmouth Street park,monmouth-street-park,,,,5,36,0,y,633.5536231,"1,020",Monmouth Street park,"1,018",http://imgur.com/V5z6FWA.jpg
+"1,018",46-394,Lawton Playground,lawton-playground,,,,5,36,0,y,"1,871.06","1,016",Lawton Playground,"1,019",http://imgur.com/F1URR1d.jpg
+"1,019",46-104,William H. Lincoln School Playground (Old),william-h-lincoln-school-playground-old,,,,5,36,0,y,"6,091.17","1,022",William H. Lincoln School Playground (Old),"1,020",http://imgur.com/NgOk6H3.jpg
+"1,020",46-99,Baker School Playground,baker-school-playground,,,,6,36,0,y,"45,613.03","1,023",Baker School Playground,"1,021",http://imgur.com/HCIGBbq.jpg
+"1,021",46-108,Little Field Park,little-field-park,,,,6,36,0,y,"3,412.24","1,024",Little Field Park,"1,022",http://imgur.com/giWdeNe.jpg
+"1,022",46-5,John E. Murphy Playground,john-e-murphy-playground,,,,5,36,0,y,"2,044.39","1,025",John E. Murphy Playground,"1,023",http://imgur.com/bqA6Egh.jpg
+"1,023",46-404,Billy Ward Playground,billy-ward-playground,,,,7,36,0,y,"2,185.43","1,026",Billy Ward Playground,"1,024",http://imgur.com/gcFcfJX.jpg
+"1,024",46-401,Amory Playground,armory-playground,,,,6,36,0,y,"33,502.98","1,027",Amory Playground,"1,025",http://imgur.com/hHDgKgB.jpg
+"1,025",46-376,Margaret E. Robinson Playground,margaret-e-robinson-playground,,,,6,36,0,y,"9,616.93","1,028",Margaret E. Robinson Playground,"1,026",http://imgur.com/kWZzLpx.jpg
+"1,026",46-395,Devotion School Playground,devotion-school-playground,,,,5,36,0,y,"27,204.79","1,029",Devotion School Playground,"1,027",http://imgur.com/SprJyTV.jpg
+"1,027",46-363,Lost Pond Conservation Area and Lost Pond Reservation,lost-pond-conservation-area-and-lost-pond-reservation,,,,12,36,0,y,"103,008.68","1,061",Lost Pond Conservation and Reservation Area,"1,028",http://imgur.com/ziyVkkG.jpg
+"1,028",46-364,D. Blakely Hoar Sanctuary,d.-blakely-hoar-sanctuary,,,,12,36,0,y,"97,297.55","1,031",D. Blakely Hoar Sanctuary,"1,029",http://imgur.com/YNRTEwF.jpg
+"1,029",46-157,Baldwin School Playground,baldwin-school-playground,,,,5,36,0,y,"5,074.85","1,032",Baldwin School Playground,"1,030",http://imgur.com/W4jSsFh.jpg
+"1,030",46-366,Soule Recreation Center,soule-recreation-center,,,,5,36,0,y,"38,398.83","1,033",Soule Recreation Center,"1,031",http://imgur.com/gIap63S.jpg
+"1,031",46-390,Linden Square,linden-square,,,,5,36,0,y,756.1770499,"1,034",Linden Square,"1,032",http://imgur.com/GGNefwu.jpg
+"1,032",46-389,Linden Park,linden-park,,,,5,36,0,y,"1,130.98","1,035",Linden Park,"1,033",http://imgur.com/2ZsxZIP.jpg
+"1,033",46-392,Judge Henry Crowley Park at Saint Marks Square,judge-henry-crowley-park-at-saint-marks-square,,,,5,36,0,y,"1,626.98","1,036",Judge Henry Crowley Park at Saint Marks Square,"1,034",http://imgur.com/Rdrhb85.jpg
+"1,034",46-105,Brookline Avenue Playground,brookline-avenue-playground,,,,6,36,0,y,"16,367.96","1,037",Brookline Avenue Playground,"1,035",http://imgur.com/eIr9aCL.jpg
+"1,035",46-6,Boylston Street Playground,boylston-street-playground,,,,7,36,0,y,"4,678.43","1,038",Boylston Street Playground,"1,036",http://imgur.com/11VqhEp.jpg
+"1,036",46-400,Longwood Mall,longwood-mall,,,,5,36,0,y,"10,320.58","1,039",Longwood Mall,"1,037",http://imgur.com/oscjFBZ.jpg
+"1,037",46-375,Clark Playground,clark-playground,,,,7,36,0,y,"4,357.32","1,040",Clark Playground,"1,038",http://imgur.com/PkkVUvv.jpg
+"1,038",46-380,Cypress Street Playground,cypress-street-playground,,,,6,36,0,y,"21,117.35","1,041",Cypress Street Playground,"1,039",http://imgur.com/6UNheaR.jpg
+"1,039",46-378,Driscoll School Playground,driscoll-school-playground,,,,7,36,0,y,"16,315.26","1,042",Driscoll School Playground,"1,040",http://imgur.com/EovYDdd.jpg
+"1,040",46-97,Dane Park,dane-park-2,,,,5,36,0,y,"41,437.10","1,043",Dane Park,"1,041",http://imgur.com/snVWzDn.jpg
+"1,041",46-370,Heath School Playground,heath-school-playground,,,,7,36,0,y,"26,328.53","1,044",Heath School Playground,"1,042",http://imgur.com/v34iNZ4.jpg
+"1,042",46-139,Town Hall Lot,town-hall-lot,,,,7,36,0,y,"8,063.75","1,045",Town Hall Lot,"1,043",http://imgur.com/ZBVhtiw.jpg
+"1,043",46-4,Pierce School Playground,pierce-school-playground,,,,6,36,0,y,"9,577.82","1,046",Pierce School Playground,"1,044",http://imgur.com/4tWt29t.jpg
+"1,044",46-367,Robert T. Lynch Municipal Golf courses at Putterham Meadows,robert-t.-lynch-municipal-golf-courses-at-putterham-meadows,,,,6,36,0,y,"497,841.53","1,047",Robert T. Lynch Municipal Golf courses at Putterh*,"1,045",http://imgur.com/w7jPQ33.jpg
+"1,045",46-3,Longwood Playground,longwood-playground,,,,7,36,0,y,"17,192.38","1,048",Longwood Playground,"1,046",http://imgur.com/JfLeJ9G.jpg
+"1,046",46-383,Juniper Street Playground,juniper-street-playground,,,,7,36,0,y,"1,665.70","1,049",Juniper Street Playground,"1,047",http://imgur.com/NKCaVo2.jpg
+"1,047",46-373,Runkle School Playground,runkle-school-playground,,,,7,36,0,y,"12,359.20","1,050",Runkle School Playground,"1,048",http://imgur.com/XUJdwZ5.jpg
+"1,048",46-382,Philbrick Square,philbrick-square,,,,5,36,0,y,"1,127.60","1,051",Philbrick Square,"1,049",http://imgur.com/Bvn41y2.jpg
+"1,049",46-398,Winthrop Square (Minot Tose Garden),winthrop-square-minot-tose-garden,,,,8,36,0,y,"7,803.38","1,052",Winthrop Square (Minot Tose Garden),"1,050",http://imgur.com/WJCr2uH.jpg
+"1,050",46-188,Skyline Park,skyline-park,,,,6,36,0,y,"66,742.44","1,053",Skyline Park,"1,051",http://imgur.com/wEy0Dun.jpg
+"1,051",46-374,William H. Lincoln School Playground (New),william-h-lincoln-school-playground-new-2,,,,7,36,0,y,"11,992.84","1,054",William H. Lincoln School Playground,"1,052",http://imgur.com/junJs7l.jpg
+"1,052",46-385,Griggs Park,griggs-park,,,,5,36,0,y,"13,519.67","1,055",Griggs Park,"1,053",http://imgur.com/slKnsui.jpg
+"1,053",46-402,Mason Square,mason-square,,,,5,36,0,y,"4,620.95","1,056",Mason Square,"1,054",http://imgur.com/y3lq94d.jpg
+"1,054",46-101,Walnut Hills Cemetery,walnut-hills-cemetery,,,,5,36,0,y,"183,543.03","1,057",Walnut Hills Cemetery,"1,055",http://imgur.com/CkGIIEk.jpg
+"1,055",46-399,Knyvet Square,knyvet-square,,,,5,36,0,y,"11,347.03","1,058",Knyvet Square,"1,056",http://imgur.com/Py9pNXu.jpg
+"1,056",46-384,Corey Hill Park,corey-hill-park,,,,5,36,0,y,"8,441.63","1,059",Corey Hill Park,"1,057",http://imgur.com/HZFF2gd.jpg
+"1,057",26-1049,Royal Road,royal-road,,,,5,33,0,n,"7,248.43","1,060",Royal Road,"1,058",http://imgur.com/xMZcAoU.jpg
+"1,058",46-8,Lost Pond Conservation Area and Lost Pond Reservation,lost-pond-conservation-area-and-lost-pond-reservation-2,,,,12,20,0,y,"129,632.96","1,061",Lost Pond Conservation and Reservation Area,"1,059",http://imgur.com/OX501FV.jpg
+"1,059",46-379,Lotta Bradburn Schick Park,lotta-bradburn-schick-park,,,,5,36,0,y,"4,434.01","1,062",Lotta Bradburn Schick Park,"1,060",http://imgur.com/BnPMSPz.jpg
+"1,060",46-7,Harry Downes Field,harry-downes-field,,,,6,36,0,y,"35,323.27","1,063",Harry Downes Field,"1,061",http://imgur.com/LjkaBWs.jpg
+"1,061",46-391,Coolidge Playground,coolidge-playground,,,,7,36,0,y,"6,815.25","1,064",Coolidge Playground,"1,062",http://imgur.com/Vkzd9gG.jpg
+"1,062",46-372,Jean B. Waldstein (Dean) Playground,jean-b-waldstein-dean-playground,,,,6,36,0,y,"22,772.45","1,065",Jean B. Waldstein (Dean) Playground,"1,063",http://imgur.com/35BO2Ev.jpg
+"1,063",46-137,Corey Hill Park,corey-hill-park-2,,,,5,36,0,y,"8,401.79","1,059",Corey Hill Park,"1,064",http://imgur.com/Z3xh9iv.jpg
+"1,064",243-53,Merrymount Park,merrymount-park,,,,0,0,0,,"4,288.54","1,067",Merrymount Park,"1,065",http://imgur.com/oO2bStY.jpg
+"1,065",26-1048,Cambridge Reservoir Park,cambridge-reservoir-park,,,,3,24,0,n,"19,541.88","1,068",Cambridge Reservoir Park,"1,066",http://imgur.com/i8mgQuX.jpg
+"1,066",26-1030,Clay Pit Pond Park,clay-pit-pond-park,,,,7,33,0,y,"42,549.12","1,069",Clay Pit Pond Park,"1,067",http://imgur.com/cUkkech.jpg
+"1,067",26-1034,Underwood Playground,underwood-playground,,,,7,33,0,y,"17,723.10","1,070",Underwood Playground,"1,068",http://imgur.com/jbKwPAG.jpg
+"1,068",26-1046,Pleasant Street,pleasant-street,,,,6,33,0,y,"23,054.05","1,071",Pleasant Street,"1,069",http://imgur.com/Ce6U42y.jpg
+"1,069",26-1008,Butler School,butler-school,,,,7,33,0,y,"16,863.52","1,072",Butler School,"1,070",http://imgur.com/7mCm1kB.jpg
+"1,070",26-1014,Wellington School,wellington-school,,,,7,33,0,y,"16,070.04","1,073",Wellington School,"1,071",http://imgur.com/EBjFLw9.jpg
+"1,071",26-1019,Burbank School,burbank-school,,,,7,33,0,y,"17,691.58","1,074",Burbank School,"1,072",http://imgur.com/Ood42lc.jpg
+"1,072",26-1004,Rock Meadow Conservation Area,rock-meadow-conservation-area,,,,3,33,0,y,"272,673.83","1,075",Rock Meadow Conservation Area,"1,073",http://imgur.com/HowXNXY.jpg
+"1,073",26-1013,Winn Brook Playground,winn-brook-playground,,,,7,33,0,y,"34,504.50","1,076",Winn Brook Playground,"1,074",http://imgur.com/eIJAizU.jpg
+"1,074",26-1010,Town Field,town-field,,,,6,33,0,y,"28,153.99","1,077",Town Field,"1,075",http://imgur.com/x06BL3c.jpg
+"1,075",26-1020,Washington Street School Playground,washington-street-school-playground,,,,7,33,0,y,"36,854.94","1,078",Washington Street School Playground,"1,076",http://imgur.com/L5kjm9f.jpg
+"1,076",26-1023,Grove Street Playground,grove-street-playground,,,,7,33,0,y,"43,078.95","1,079",Grove Street Playground,"1,077",http://imgur.com/pwt3pOM.jpg
+"1,077",26-1012,Town Hall Lawn,town-hall-lawn,,,,5,33,0,y,"2,816.63","1,080",Town Hall Lawn,"1,078",http://imgur.com/jLWIt5q.jpg
+"1,078",26-1009,Pequosette Playground,pequosette-playground,,,,7,33,0,y,"34,412.17","1,081",Pequosette Playground,"1,079",http://imgur.com/GOsuytj.jpg
+"1,079",26-1021,Payson Park Playground,payson-park-playground,,,,7,33,0,y,"8,541.85","1,082",Payson Park Playground,"1,080",http://imgur.com/hOUbtAZ.jpg
+"1,080",26-1,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary,,,,12,35,0,u,385.3761999,"1,091",Habitat Education Center and Wildlife Sanctuary,"1,081",http://imgur.com/Yst0ONm.jpg
+"1,081",26-2,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-2,,,,12,35,0,u,"3,103.08","1,091",Habitat Education Center and Wildlife Sanctuary,"1,082",http://imgur.com/2nQo7i1.jpg
+"1,082",243-51,Freedom Park,freedom-park,,,,0,0,0,,"4,070.15","1,085",Freedom Park,"1,083",http://imgur.com/haTunUW.jpg
+"1,083",26-3,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-3,,,,12,35,0,u,"43,223.96","1,091",Habitat Education Center and Wildlife Sanctuary,"1,084",http://imgur.com/ztruxZR.jpg
+"1,084",26-1003,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-4,,,,12,35,0,u,"86,287.17","1,091",Habitat Education Center and Wildlife Sanctuary,"1,085",http://imgur.com/b68ZeFV.jpg
+"1,085",26-5,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-5,,,,12,35,0,u,"13,426.27","1,091",Habitat Education Center and Wildlife Sanctuary,"1,086",http://imgur.com/MZjix9o.jpg
+"1,086",26-6,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-6,,,,12,35,0,u,"9,297.14","1,091",Habitat Education Center and Wildlife Sanctuary,"1,087",http://imgur.com/67md8Qo.jpg
+"1,087",26-7,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-7,,,,12,35,0,u,"1,052.01","1,091",Habitat Education Center and Wildlife Sanctuary,"1,088",http://imgur.com/RyGkUTn.jpg
+"1,088",26-284,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-8,,,,12,35,0,u,"162,709.04","1,091",Habitat Education Center and Wildlife Sanctuary,"1,089",http://imgur.com/p3pVZTE.jpg
+"1,089",26-9,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-9,,,,12,35,0,u,"14,569.00","1,091",Habitat Education Center and Wildlife Sanctuary,"1,090",http://imgur.com/mbHhsu5.jpg
+"1,090",26-1057,McLean Hospital Open Space,mclean-hospital-open-space,McLean Cemetery,,,3,34,0,u,"39,890.54","1,095",McLean Hospital Open Space,"1,091",http://imgur.com/7aagOs1.jpg
+"1,091",26-8,Habitat Education Center and Wildlife Sanctuary,habitat-education-center-and-wildlife-sanctuary-10,,,,12,35,0,u,"5,432.33","1,091",Habitat Education Center and Wildlife Sanctuary,"1,092",http://imgur.com/YfuL3HZ.jpg
+"1,092",26-1006,McLean Hospital Open Space,mclean-hospital-open-space-2,MCLEAN HOSPITAL OPEN SPACE,,,3,34,0,u,"418,334.01","1,095",McLean Hospital Open Space,"1,093",http://imgur.com/vw5GiBz.jpg
+"1,093",26-1032,High School Athletic Fields,high-school-athletic-fields,,,,6,33,0,u,"137,318.09","1,096",High School Athletic Fields,"1,094",http://imgur.com/6FuV3r7.jpg
+"1,094",26-1005,McLean Hospital Open Space,mclean-hospital-open-space-3,MCLEAN HOSPITAL FARM,,,3,34,0,u,"18,540.31","1,095",McLean Hospital Open Space,"1,095",http://imgur.com/NEGX5wK.jpg
+"1,095",35-281,Arnold Arboretum [Emerald Necklace],arnold-arboretum-emerald-necklace,,"125 Arborway Boston, MA 02130",(617) 524-1718,3,6,0,y,"1,085,392.75","1,098",Arnold Arboretum [Emerald Necklace],"1,096",http://imgur.com/FxkkXcD.jpg
+"1,096",26-1052,Beaver Brook Reservation,beaver-brook-reservation,,,,3,20,0,y,"22,099.65","1,099",Beaver Brook Reservation,"1,097",http://imgur.com/mx3mP5C.jpg
+"1,097",26-16,Met State Lot 1,met-state-lot-1,Met State Lot 1,,,5,20,0,y,"137,894.94","1,100",Met State Lot 1,"1,098",http://imgur.com/j6euraj.jpg
+"1,098",46-368,Larz Anderson Park,larz-anderson-park,,,,6,36,0,y,"247,460.67","1,101",Larz Anderson Park,"1,099",http://imgur.com/6M2SSZG.jpg
+"1,099",35-112,Public Garden,public-garden,,,(617) 227-8955,1,6,0,y,"95,002.00","1,102",Public Garden,"1,100",http://imgur.com/3C0Uioc.jpg
+"1,100",35-474,Titus Sparrow Park,titus-sparrow-park,,,,5,6,0,y,"7,080.17","1,103",Titus Sparrow Park,"1,101",http://imgur.com/vbWc0Lu.jpg
+"1,101",243-3316,Monroe Playground,monroe-playground,,,,0,0,0,,"17,669.92","1,104",Monroe Playground,"1,102",http://imgur.com/V5EveyY.jpg
+"1,102",243-43,Monroe Playground II,monroe-playground-ii,,,,0,0,0,,"4,215.56","1,104",Monroe Playground,"1,103",http://imgur.com/G4KR5bD.jpg
+"1,103",26-100,Alewife Brook Reservation,alewife-brook-reservation-30,,,,3,20,0,y,"81,707.36",719,Alewife Brook Reservation,"1,104",http://imgur.com/cs6vpQX.jpg
+"1,104",26-1024,Belmont Cemetery,belmont-cemetery,,,,14,33,0,y,"50,207.46","1,107",Belmont Cemetery,"1,105",http://imgur.com/iOu7JVJ.jpg
+"1,105",46-117,Larz Anderson Park 2,larz-anderson-park-2,,,,6,36,0,n,"12,970.99","1,101",Larz Anderson Park,"1,106",http://imgur.com/k8uslGr.jpg
+"1,106",243-3287,Stony Brae Playground,stony-brae-playground,,,,0,0,0,,"2,772.62","1,109",Stony Brae Playground,"1,107",http://imgur.com/FubMihf.jpg
+"1,107",243-3357,Teel Field,teel-field,,,,0,0,0,,"10,022.06","1,110",Teel Field,"1,108",http://imgur.com/nk0SfjF.jpg
+"1,108",35-698,Southwest Corridor Park,southwest-corridor-park,,,,5,13,3,y,"198,443.96","1,111",Southwest Corridor Park,"1,109",http://imgur.com/g2m1xgP.jpg
+"1,109",243-3273,Welcome Young Playground,welcome-young-playground,,,,0,0,0,,"11,806.51","1,112",Welcome Young Playground,"1,110",http://imgur.com/tRjBv24.jpg
+"1,110",243-3277,Cavanagh Stadium,cavanagh-stadium,,,,0,0,0,,"17,279.60","1,113",Cavanagh Stadium,"1,111",http://imgur.com/wbbgH1R.jpg
+"1,111",35-419,Ronan Park,ronan-park,,,,5,6,0,y,"45,622.37","1,114",Ronan Park,"1,112",http://imgur.com/fBkBXm7.jpg
+"1,112",314-6591,Arsenal Park,arsenal-park,,"485 Arsenal St. Watertown, MA 02472",,6,25,0,y,"67,807.73","1,115",Arsenal Park,"1,113",http://imgur.com/SsxTmIx.jpg
+"1,113",243-57,Merrymount Park: Adams Field,merrymount-park-adams-field,,,,0,0,0,,"18,208.12","1,067",Merrymount Park,"1,114",http://imgur.com/edYeTIH.jpg
+"1,114",243-55,Merrymount Park: Veteran's Memorial Stadium,merrymount-park-veterans-memorial-stadium,,,,0,0,0,,"24,569.20","1,067",Merrymount Park,"1,115",http://imgur.com/JzL8vL7.jpg
+"1,115",243-54,Merrymount Park: Adams Walk,merrymount-park-adams-walk,,,,0,0,0,,"12,151.44","1,067",Merrymount Park,"1,116",http://imgur.com/3w1h0XM.jpg
+"1,116",243-59,Merrymount Park: Mitchell/McCoy Field,merrymount-park-mitchellmccoy-field,,,,0,0,0,,"8,773.94","1,067",Merrymount Park,"1,117",http://imgur.com/tNjtjrj.jpg
+"1,117",243-58,Merrymount Park: Coletta Field,merrymount-park-coletta-field,,,,0,0,0,,"11,113.99","1,067",Merrymount Park,"1,118",http://imgur.com/EaOlCFq.jpg
+"1,118",243-70,Merrymount Park: Collins Rest-a-While,merrymount-park-collins-rest-a-while,,,,0,0,0,,"2,844.39","1,067",Merrymount Park,"1,119",http://imgur.com/xIVNbPg.jpg
+"1,119",243-73,Merrymount Park: Pageant Field,merrymount-park-pageant-field,,,,0,0,0,,"28,838.37","1,067",Merrymount Park,"1,120",http://imgur.com/nx12cnq.jpg
+"1,120",243-74,Merrymount Park: Ryan Boathouse,merrymount-park-ryan-boathouse,,,,0,0,0,,"5,485.04","1,067",Merrymount Park,"1,121",http://imgur.com/uGIfdVb.jpg
+"1,121",243-75,Merrymount Park: Richard J. Koch Park & Rec Complex,merrymount-park-richard-j-koch-park-rec-complex,,,,0,0,0,,"15,589.62","1,067",Merrymount Park,"1,122",http://imgur.com/8vWNHtN.jpg
+"1,122",243-41,Curry Field,curry-field,,,,0,0,0,,"4,553.87","1,125",Curry Field,"1,123",http://imgur.com/jBp3EHS.jpg
+"1,123",243-42,Flaherty Park (Quincy),flaherty-park-quincy,,,,0,0,0,,"2,270.82","1,126",Flaherty Park (Quincy),"1,124",http://imgur.com/k5b1OWP.jpg
+"1,124",243-33,Forbes Hill Playground,forbes-hill-playground,,,,0,0,0,,"11,649.81","1,127",Forbes Hill Playground,"1,125",http://imgur.com/p3y8j2g.jpg
+"1,125",35-563,Christian Science Plaza,christian-science-plaza,,,,9,15,0,y,"40,159.66","1,128",Christian Science Plaza,"1,126",http://imgur.com/wOXnEHr.jpg
+"1,126",35-133,Christopher Columbus Park,christopher-columbus-park,,,,5,6,0,y,"19,205.15","1,129",Christopher Columbus Park,"1,127",http://imgur.com/TDoWbuI.jpg
+"1,127",35-745,Franklin Park Zoo,franklin-park-zoo,,,,3,7,0,y,"275,058.72","1,130",Franklin Park Zoo,"1,128",http://imgur.com/JUdWosV.jpg
+"1,128",314-6581,Lowell School Hill,lowell-school-hill,,,,6,25,0,y,"12,842.11","1,131",Lowell School Hill,"1,129",http://imgur.com/H7omxo4.jpg
+"1,129",243-11,Taffrail Road Playground,taffrail-road-playground,,,,0,0,0,,"2,003.21","1,132",Taffrail Road Playground,"1,130",http://imgur.com/4SXysxe.jpg
+"1,130",35-364,Highland Park,highland-park,,,,5,6,0,y,"14,699.81","1,133",Highland Park,"1,131",http://imgur.com/1SNtizn.jpg
+"1,131",314-6580,Lowell School Playground,lowell-school-playground,,"175 Orchard St. Watertown, MA 02472",,7,25,0,y,"9,459.36","1,134",Lowell School Playground,"1,132",http://imgur.com/ZkDlrJs.jpg
+"1,132",46-134,Brookline Reservior Park,brookline-reservior-park,,,,5,36,0,y,"130,334.26","1,135",Brookline Reservior Park,"1,133",http://imgur.com/46m1cE8.jpg
+"1,133",243-2,Arthur Boyson Park,arthur-boyson-park,,,,0,0,0,,"1,664.49","1,136",Arthur Boyson Park,"1,134",http://imgur.com/fjdFwM2.jpg
+"1,134",274-14,Osgood Park and Community Gardens,osgood-park-and-community-gardens,,,,8,19,0,y,313.8477426,"1,137",Osgood Park and Community Gardens,"1,135",http://imgur.com/qhQJhKo.jpg
+"1,135",314-6582,Victory Field 2,victory-field-2,,"40 Orchard St. Watertown, MA 02472",,6,25,0,y,"25,195.64","1,138",Victory Field,"1,136",http://imgur.com/8oARjcx.jpg
+"1,136",35-110,Boston Common,boston-common,,"148 Tremont Street, Boston",(607) 357-8300,6,6,0,y,"188,288.52","1,139",Boston Common,"1,137",http://imgur.com/FSeIMhT.jpg
+"1,137",314-6602,Sullivan Playground,sullivan-playground,,Mt. Auburn Street and Arlington Street.,,7,25,0,y,"5,322.28","1,140",Sullivan Playground,"1,138",http://imgur.com/xSVOmLa.jpg
+"1,138",243-3324,Kincaide Park,kincaide-park,,,,0,0,0,,"20,228.84","1,141",Kincaide Park,"1,139",http://imgur.com/dXKC8cu.jpg
+"1,139",243-3314,Flynn Playground,flynn-playground,,,,0,0,0,,"2,610.87","1,142",Flynn Playground,"1,140",http://imgur.com/m8cJRZ1.jpg
+"1,140",243-3288,O'Rourke Playground,orourke-playground,,,,0,0,0,,"39,473.59","1,143",O'Rourke Playground,"1,141",http://imgur.com/dwSUGJV.jpg
+"1,141",243-3301,Allerton Street Playground,allerton-street-playground,,,,0,0,0,,"6,776.76","1,144",Allerton Street Playground,"1,142",http://imgur.com/okdhWRM.jpg
+"1,142",243-3270,Wendall Moses Playground,wendall-moses-playground,,,,0,0,0,,"13,298.06","1,145",Wendall Moses Playground,"1,143",http://imgur.com/Ix5RTd0.jpg
+"1,143",243-3318,Fore River Field,fore-river-field,,,,0,0,0,,"25,366.71","1,146",Fore River Field,"1,144",http://imgur.com/JEO4UXt.jpg
+"1,144",243-3282,Mass Fields Playground,mass-fields-playground,,,,0,0,0,,"4,377.02","1,147",Mass Fields Playground,"1,145",http://imgur.com/ic7teXX.jpg
+"1,145",35-552,Back Bay Fens [Emerald Necklace],back-bay-fens-emerald-necklace,,"100 Park Drive, Boston, MA",,5,7,0,y,"263,241.50","1,148",Back Bay Fens [Emerald Necklace],"1,146",http://imgur.com/qpViqOu.jpg
+"1,146",35-617,Franklin Park [Emerald Necklace],franklin-park-emerald-necklace,,,,6,6,2,y,"1,655,205.42","1,149",Franklin Park [Emerald Necklace],"1,147",http://imgur.com/2ppcDc0.jpg
+"1,147",243-3310,Grenham Street Park,grenham-street-park,,,,0,0,0,,"1,114.15","1,150",Grenham Street Park,"1,148",http://imgur.com/iMogUJL.jpg
+"1,148",243-3321,Bradford Street Playground,bradford-street-playground,,,,0,0,0,,"8,172.95","1,151",Bradford Street Playground,"1,149",http://imgur.com/nc1FiWS.jpg
+"1,149",243-87,Squantom Point Park,squantom-point-park,,,,0,0,0,,"184,838.70","1,152",Squantom Point Park,"1,150",http://imgur.com/NphdyDZ.jpg
+"1,150",35-583,Marine Park,marine-park,,,,5,8,0,y,"69,607.95","1,153",Marine Park,"1,151",http://imgur.com/yjJoBOW.jpg
+"1,151",35-582,Strandway/Castle Island,strandwaycastle-island,,,,3,8,0,y,"193,047.21","1,154",Strandway/Castle Island,"1,152",http://imgur.com/lQMtGxN.jpg
+"1,152",35-476,Harriet Tubman Square,harriet-tubman-square,,,,5,7,0,y,815.4515249,"1,155",Harriet Tubman Square,"1,153",http://imgur.com/nUWtUkJ.jpg
+"1,153",46-2,Halls Pond Sanctuary and Amory Woods,halls-pond-sanctuary-and-amory-woods,,,,12,36,0,y,"14,181.69","1,156",Halls Pond Sanctuary and Amory Woods,"1,154",http://imgur.com/CUjWd6d.jpg
+"1,154",35-330,Fallon Field,fallon-field,,,,6,6,0,y,"30,399.02","1,157",Fallon Field,"1,155",http://imgur.com/zBysV8E.jpg
+"1,155",243-446,Faxon Park,faxon-park,,,,0,0,0,,"268,684.70","1,158",Faxon Park,"1,156",http://imgur.com/eZFOV4g.jpg
+"1,156",243-56,Merrymount Park: Varsity Soccer Field,merrymount-park-varsity-soccer-field,,,,0,0,0,,"8,150.48","1,067",Merrymount Park,"1,157",http://imgur.com/yAlziHa.jpg
+"1,157",243-71,Merrymount Park: Fenno Street Courts,merrymount-park-fenno-street-courts,,,,0,0,0,,"5,685.32","1,067",Merrymount Park,"1,158",http://imgur.com/qpph5Mi.jpg
+"1,158",57-9,Mary OMalley Waterfront Park,mary-omalley-waterfront-park,,,,5,20,0,y,"80,507.80","1,161",Mary OMalley Waterfront Park,"1,159",http://imgur.com/NBdPfU5.jpg
+"1,159",46-1,Halls Pond Sanctuary and Armory Woods 2,halls-pond-sanctuary-and-armory-woods-2,,,,12,36,0,y,"6,309.71","1,156",Halls Pond Sanctuary and Armory Woods,"1,160",http://imgur.com/nJt3Wg8.jpg
+"1,160",35-329,Healy Playground,healy-playground,,,,7,6,0,y,"38,612.87","1,163",Healy Playground,"1,161",http://imgur.com/N38jmc8.jpg
+"1,161",35-613,Stony Brook Reservation I,stony-brook-reservation-i,,,,5,7,0,y,"1,182,735.30","1,164",Stony Brook Reservation,"1,162",http://imgur.com/MxuBWd3.jpg
+"1,162",35-538,Stony Brook Reservation III,stony-brook-reservation-iii,,,,5,7,0,y,"265,740.66","1,164",Stony Brook Reservation,"1,163",http://imgur.com/edzen8c.jpg
+"1,163",243-357,Broad Meadows,broad-meadows,,,,0,0,0,,"496,076.88","1,166",Broad Meadows,"1,164",http://imgur.com/FYDhsrP.jpg
+"1,164",243-3275,O'Neil Field,oneil-field,,,,0,0,0,,"18,704.88","1,167",O'Neil Field,"1,165",http://imgur.com/4dr3y4D.jpg
+"1,165",243-3327,Grasso Playground,grasso-playground,,,,0,0,0,,"1,713.64","1,168",Grasso Playground,"1,166",http://imgur.com/WgEuZy9.jpg
+"1,166",243-3302,LaBrecque Field,labrecque-field,,,,0,0,0,,"33,322.33","1,169",LaBrecque Field,"1,167",http://imgur.com/Jpm6V0n.jpg
+"1,167",35-591,Jamaica Pond Park [Emerald Necklace],jamaica-pond-park-emerald-necklace,,,,5,6,0,y,"395,408.03","1,170",Jamaica Pond Park [Emerald Necklace],"1,168",http://imgur.com/ClGxFcJ.jpg
+"1,168",243-3328,Smith & Quarry Street Playground,smith-quarry-street-playground,,,,0,0,0,,"3,789.68","1,171",Smith & Quarry Street Playground,"1,169",http://imgur.com/fS9xO0V.jpg
+"1,169",243-3307,McKinnon Playground,mckinnon-playground,,,,0,0,0,,"1,389.56","1,172",McKinnon Playground,"1,170",http://imgur.com/95MNbY7.jpg
+"1,170",243-3283,Wollaston School Playground,wollaston-school-playground,,,,0,0,0,,"10,914.44","1,173",Wollaston School Playground,"1,171",http://imgur.com/RrMZ21r.jpg
+"1,171",243-3294,Perkins Playground,perkins-playground,,,,0,0,0,,"12,814.46","1,174",Perkins Playground,"1,172",http://imgur.com/PJpT350.jpg
+"1,172",243-3286,Beechwood Knoll Playground,beechwood-knoll-playground,,,,0,0,0,,"5,754.89","1,175",Beechwood Knoll Playground,"1,173",http://imgur.com/3gSOWyy.jpg
+"1,173",243-3299,Snug Harbor Playground,snug-harbor-playground,,,,0,0,0,,"62,709.59","1,176",Snug Harbor Playground,"1,174",http://imgur.com/Z62Vzyl.jpg
+"1,174",243-3325,Sterling Middle School Park,sterling-middle-school-park,,,,0,0,0,,"16,868.90","1,177",Sterling Middle School Park,"1,175",http://imgur.com/YTwX8U4.jpg
+"1,175",243-3308,Brill Field,brill-field,,,,0,0,0,,"17,474.43","1,178",Brill Field,"1,176",http://imgur.com/echEqWA.jpg
+"1,176",243-3290,Whitwell Street Playground,whitwell-street-playground,,,,0,0,0,,"7,967.25","1,179",Whitwell Street Playground,"1,177",http://imgur.com/FP9LiUM.jpg
+"1,177",243-3311,Faxon Field/Russell Park,faxon-fieldrussell-park,,,,0,0,0,,"73,811.33","1,180",Faxon Field/Russell Park,"1,178",http://imgur.com/qy4ejsk.jpg
+"1,178",243-79,Mount Wollaston Cemetery,mount-wollaston-cemetery,,,,0,0,0,,"210,566.73","1,181",Mount Wollaston Cemetery,"1,179",http://imgur.com/cDC9bZK.jpg
+"1,179",243-80,Bicknell St & Oceanview Dr.,bicknell-st-oceanview-dr,,,,0,0,0,,"34,018.65","1,182",Bicknell St & Oceanview Dr.,"1,180",http://imgur.com/N4Vwwhm.jpg
+"1,180",243-81,Avalon Ave & Baker Ave,avalon-ave-baker-ave,,,,0,0,0,,"8,573.80","1,183",Avalon Ave & Baker Ave,"1,181",http://imgur.com/INeUTZp.jpg
+"1,181",243-82,St. Mary's Cemetery I (Quincy),st-marys-cemetery-i-quincy,,,,0,0,0,,"28,160.70","1,184",St. Mary's Cemetery (Quincy),"1,182",http://imgur.com/hadhlkh.jpg
+"1,182",243-76,Nickerson Beach,nickerson-beach,,,,0,0,0,,"68,295.79","1,185",Nickerson Beach,"1,183",http://imgur.com/luN8HkK.jpg
+"1,183",243-77,Quincy Shore Dr & E Elm Ave,quincy-shore-dr-e-elm-ave,,,,0,0,0,,"1,035.29","1,186",Quincy Shore Dr & E Elm Ave,"1,184",http://imgur.com/BzvYEkM.jpg
+"1,184",243-78,Quincy Shore Dr & Sachem St,quincy-shore-dr-sachem-st,,,,0,0,0,,"1,853.51","1,187",Quincy Shore Dr & Sachem St,"1,185",http://imgur.com/sgqV6gV.jpg
+"1,185",243-82,St. Mary's Cemetery II (Quincy),st-marys-cemetery-ii-quincy,,,,0,0,0,,"27,401.88","1,184",St. Mary's Cemetery (Quincy),"1,186",http://imgur.com/wr5GmQD.jpg
+"1,186",243-86,Pinehill Cemetery,pinehill-cemetery,,,,0,0,0,,"107,842.50","1,189",Pinehill Cemetery,"1,187",http://imgur.com/yR4vG1n.jpg
+"1,187",,The Park at Fan Pier,,Marina Park,,,0,0,0,y,"5,110.48","1,190",The Park at Fan Pier,"1,188",http://imgur.com/lN5m9JM.jpg
+"1,188",,ICA Pier Walk,,,,,0,0,0,y,"1,184.23","1,191",ICA Pier Walk,"1,189",http://imgur.com/ci9bDvT.jpg
+"1,189",,Liberty Tree Park,,,,,0,0,0,y,350.257976,"1,192",Liberty Tree Park,"1,190",http://imgur.com/icKsCpy.jpg
+"1,190",,Seybolt Park,,,,,0,0,0,y,"1,012.52","1,193",Seybolt Park,"1,191",http://imgur.com/56GygQm.jpg
+"1,191",,Boston Public Library Courtyard,,,,,0,0,0,y,755.507402,"1,211",Boston Public Library Courtyard,"1,192",http://imgur.com/nH7zLBB.jpg
+"1,192",,Tent City Courtyard,,,,,0,0,0,y,"2,131.87","1,194",Tent City Courtyards,"1,193",http://imgur.com/2ZwuHoA.jpg
+"1,193",,Fosters Nook Community Garden,,,,,0,0,0,y,460.377709,"1,196",Fosters Nook Community Garden,"1,194",http://imgur.com/FVu63nK.jpg
+"1,194",,Aquarium Harborwalk,,Central Wharf Harborwalk,,,0,0,0,y,"2,319.51","1,197",Aquarium Harborwalk,"1,195",http://imgur.com/gywReIR.jpg
+"1,195",,India Wharf Park,,,,,0,0,0,,"1,683.04","1,198",India Wharf Park,"1,196",http://imgur.com/syY9EdI.jpg
+"1,196",,Rowe's Wharf Harborwalk,,,,,0,0,0,y,0,"1,199",Rowe's Wharf Harborwalk,"1,197",http://imgur.com/YUJyEgc.jpg
+"1,197",,400R Atlantic Avenue Harborwalk,,,,,0,0,0,y,0,"1,200",400R Atlantic Avenue Harborwalk,"1,198",http://imgur.com/junpwnH.jpg
+"1,198",,Tufts Wharf Harborwalk,,,,,0,0,0,y,0,"1,202",Tufts Wharf Harborwalk,"1,199",http://imgur.com/RSCD0bG.jpg
+"1,199",,408 Atlantic Avenue,,,,,0,0,0,y,0,"1,201",408 Atlantic Avenue,"1,200",http://imgur.com/3fUdxyi.jpg
+"1,200",,Russia Wharf Harbor Walk,,,,,0,0,0,y,0,"1,203",Russia Wharf Harborwalk,"1,201",http://imgur.com/zmijrPs.jpg
+"1,201",,Federal Reserve Bank Harborwalk,,,,,0,0,0,y,0,"1,204",Federal Reserve Bank Harborwalk,"1,202",http://imgur.com/pyI8ru6.jpg
+"1,202",,Frieda Garcia Park,,,,,0,0,0,y,0,"1,205",Frieda Garcia Park,"1,203",http://imgur.com/sV9gTzk.jpg
+"1,203",,North Square Park,,,,,0,0,0,y,0,"1,206",North Square Park,"1,204",http://imgur.com/rmqYA9p.jpg
+"1,204",,Commercial Wharf Harborwalk,,,,,0,0,0,y,0,"1,206",Commercial Wharf Harborwalk,"1,205",http://imgur.com/NvF4Dlz.jpg
+"1,205",,Menino Park,,"Parcel 5 Park, Spaulding Park",,,0,0,0,y,0,"1,207",Menino Park,"1,206",http://imgur.com/TJWGus1.jpg
+"1,206",,Schraffts Centre Harborwalk,,,,,0,0,0,y,0,"1,208",Schraffts Centre Harborwalk,"1,207",http://imgur.com/A0JVdiF.jpg
+"1,207",,Watertown Greenway,,,,,0,0,0,y,0,"1,210",Watertown Greenway,"1,208",http://imgur.com/p9GGup0.jpg
+"1,208",,The Lawn on D Street,,,,,0,0,0,y,0,"1,209",The Lawn on D,"1,209",http://imgur.com/NSgKDGl.jpg
+"1,209",,The Humps,,,,,0,0,0,,0,"1,213",The Humps Urban Wild,"1,210",http://imgur.com/tiHVWjm.jpg
+"1,210",,Orchard Beach,,,,,0,0,0,,0,"1,214",Orchard Beach,"1,211",http://imgur.com/kdOVclg.jpg
+"1,211",,Squantum Marshes,,,,,0,0,0,,0,"1,215",Squantum Marshes,"1,212",http://imgur.com/W87W5Qy.jpg
+"1,212",,Marina Bay Conservation Area,,,,,0,0,0,,0,"1,216",Marina Bay Conservation Area,"1,213",http://imgur.com/m34ZoTr.jpg
+"1,213",,Dickinson Waterfront,,,,,0,0,0,y,0,"1,217",Dickinson Waterfront,"1,214",http://imgur.com/YQDxWzP.jpg
+"1,214",,Reserved Channel Harborwalk,,Reserved Channel Harborwalk,,,0,0,0,y,0,"1,212",Reserved Channel Harborwalk,"1,215",http://imgur.com/L7FY6qb.jpg

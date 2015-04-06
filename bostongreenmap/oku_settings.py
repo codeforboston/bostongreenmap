@@ -4,9 +4,9 @@ from os import environ
 GEOS_LIBRARY_PATH = environ.get('GEOS_LIBRARY_PATH')
 GDAL_LIBRARY_PATH = environ.get('GDAL_LIBRARY_PATH')
 
-# AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
@@ -14,31 +14,35 @@ DATABASES['default']['OPTIONS'] = {
       'options': '-c search_path=bostongreenmap,public'
     }
 
-########### S3 config ############
-# AWS_QUERYSTRING_AUTH = False
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = '//dev.files.bostongreenmap.org/'
-
-# AWS_S3_SECURE_URLS = False
-
-# AWS_HEADERS = {
-#     "Cache-Control": "public, max-age=86400",
+# DATABASES['default']['ENGINE'] = {
+#       'ENGINE': 'django.contrib.gis.db.backends.postgis'
 # }
 
-# AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
-# AWS_PRELOAD_METADATA = False
+########## S3 config ############
+AWS_QUERYSTRING_AUTH = False
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '//dev.files.bostongreenmap.org/'
+
+AWS_S3_SECURE_URLS = False
+
+AWS_HEADERS = {
+    "Cache-Control": "public, max-age=86400",
+}
+
+AWS_ACCESS_KEY_ID = environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'dev.files.bostongreenmap.org'
+AWS_PRELOAD_METADATA = False
 
 # STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '/'
 
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-# MEDIA_ROOT = '/'
-# MEDIA_URL = 'http://dev.files.bostongreenmap.org/'
-#########################################
+MEDIA_ROOT = '/'
+MEDIA_URL = 'http://dev.files.bostongreenmap.org/'
+########################################
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
