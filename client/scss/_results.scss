@@ -35,13 +35,14 @@
     }
 
     .park-title-wrapper {
-      bottom: 65px;
+      bottom: 75px;
       padding: 0 0 0 10px;
       opacity: 0.85;
       a{
         font-weight: bold;
       }
-      p {padding: 7px 0px 7px;}
+      p {padding: 7px 0px 7px;
+        text-transform: capitalize;}
     }
 
   }
