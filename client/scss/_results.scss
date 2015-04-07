@@ -17,24 +17,32 @@
   }
 
   .result {
-    width: 300px;
-    height: 200px; 
-    float: left;
-    padding: 5px;
-    img {
-      width: 100%;
-      height: 100%;
+
+    border: 4px solid;
+    border-color: white;
+    .small {
+      height: 192px;
+      width: 292px;
+      // float: left;
+      // margin-bottom: 10px;
+    }
+    .medium {
+      height: 392px;
+      width: 592px;
+      // float: left;
+      // margin-bottom: 10px;
 
     }
 
     .park-title-wrapper {
-      //position: relative;
-      bottom: 30px;
+      bottom: 75px;
       padding: 0 0 0 10px;
-      opacity: 0.9;
+      opacity: 0.85;
       a{
         font-weight: bold;
       }
+      p {padding: 7px 0px 7px;
+        text-transform: capitalize;}
     }
 
   }

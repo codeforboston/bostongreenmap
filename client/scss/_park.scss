@@ -16,9 +16,9 @@
     background-color: #fff;
     opacity: 0.85;
     margin-bottom: 20px;
-    color: orange;
     padding: 0px 10px;
     display: inline-block;
+    min-width: 350px;
     h1{
       font-weight: 400;
       color: #556C98;
@@ -30,7 +30,8 @@
     background-color: #fff;
     opacity: 0.85;
     max-width: 350px;
-    // max-height: 200px;
+    max-height: 425px;
+    overflow-y: auto;
     margin-bottom: 20px;
     padding: 10px;
     font-size: 1.2em;
@@ -127,17 +128,34 @@
   @media (max-width:600px) {
     .park-information {
       margin-bottom: 0px;
+      margin-right: 5px;
+      margin-left: 5px;
     }
     .park-title {
-      -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-      box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-    }
+      min-width: 100%;
+      margin-right: 0;
+      h1{
+      font-size: 1.3em;
+      //margin: 5px 0;
+      }
+     }
     .park-description {
-      -webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-      -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-      box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
-      overflow-y: inherit;
+      overflow-y: auto;
+      max-height: 200px;
+      font-size: 1em;
     }
+    .row {
+      margin-right:0px;
+      margin-left: 0px;
+    }
+  }
+.quick-facts {
+    margin: 0 15px;
+  }
+.recommended-parks {
+    margin: 0 15px;
+  }
+.nearby-parks{
+    margin: 0 15px;
   }
 }

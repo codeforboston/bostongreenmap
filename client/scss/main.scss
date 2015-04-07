@@ -84,7 +84,6 @@ a {
       margin: 0 auto;
       background-size: 100%;
       background-repeat: no-repeat;
-      background-position: center;
       width: 950px;
       min-width:800px;
       min-height:600px;
@@ -125,19 +124,10 @@ a {
   background-color: white;
   position: relative;
   margin: 0 8px;
-  // bottom: 20px;
- // right: 20px;
- // -webkit-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
- // -moz-box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
- // box-shadow: 10px 10px 10px -5px rgba(0,0,0,0.75);
+
   .park-title {
-    //font-weight: 400;
     font-size: 1.3em;
     text-transform: uppercase;
-   // margin-bottom: 0px;
-  //  margin-top: 0px;
-   //margin-left: 2px;
-   //margin-right: 2px;
    a{
       text-transform: capitalize;
     }
@@ -175,6 +165,7 @@ a {
   opacity: 0.5;
 }
 
+
 #next-no-results {
   max-width: 1200px;
   height: 60px;
@@ -203,17 +194,6 @@ a {
    }
 }
 
-@media (max-width:600px) {
-  #carousel-example-generic {
-    position: relative;
-    top: auto;
-  }
-  .floating-text {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
 
 .leaflet-control-geoloc {
   background-image: url("/static/img/location.png");
@@ -231,3 +211,24 @@ a {
 @import 'park';
 @import 'results';
 @import 'carousel';
+
+@media (max-width:600px) {
+ .carousel-inner .item .carousel-image {
+  width: 100%;
+  min-width: 100%;
+  min-height: 220px;
+  }
+  #carousel-example-generic {
+    position: relative;
+    top: auto;
+  }
+  .floating-text {
+    width: 100%;
+    max-width: 100%;
+  }
+  .search-page #menu {
+    position: relative;
+    top: -210;
+  }
+}
+
