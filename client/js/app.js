@@ -505,6 +505,8 @@ define([
           var images = this.model.get("images");
           if (images[0]) {
             $(this.el).css("width", images[0].width).css("height", images[0].height);
+          } else {
+            $(this.el).css("width", 300).css("height", 200);
           }
         },
         template: templates['client/templates/resultItem.hbs'],
