@@ -11,6 +11,9 @@ urlpatterns = patterns('parks.views',
     # returns list of all neighborhood names and ids and activity names and ids
     url(r'^get_neighborhoods_and_activities_list/$', 'get_neighborhoods_and_activities_list', name='get_neighborhoods_and_activities_list'),
 
+    #latest image
+    url(r'^get_latest_picture/$', 'get_latest_picture', name='get_latest_picture'),
+
     # featured parks
     url(r'^get_featured_parks/$', 'get_featured_parks', name='get_featured_parks'),
 

@@ -81,6 +81,18 @@ def get_featured_parks(request):
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
 
+def get_latest_picture(request):
+    """ Returns recommended parks as JSON
+    """
+    latest_image = Parkimage.objects.order_by('-pk')[0]
+    thumbnail = latest_image.get_thumbnail()
+    related_park = latest_image.parks.all()[0]
+
+    response = {
+        'latest_image': {'name': related_park.name, 'slug': related_park.slug, 'image': thumbnail}
+    }
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def get_parks(request):
     """ Returns parks as JSON based search parameters
     """
