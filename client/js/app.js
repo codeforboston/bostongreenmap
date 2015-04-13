@@ -477,7 +477,7 @@ define([
             });
 
             self.$('#nearby').owlCarousel({
-              autoPlay: 2000, //Set AutoPlay to 3 seconds
+              autoPlay: false, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
               paginationSpeed: 1500,
@@ -488,7 +488,7 @@ define([
             });
 
             self.$('#recommended').owlCarousel({
-              autoPlay: 5000, //Set AutoPlay to 3 seconds
+              autoPlay: false, //Set AutoPlay to 3 seconds
               items : 3,
               navigation: true,
               paginationSpeed: 1500,
