@@ -425,12 +425,6 @@ define([
         className: 'about'
     });
 
-    var MissionView = Marionette.ItemView.extend({
-        template: templates['client/templates/mission.hbs'],
-        tagName: 'div',
-        className: 'mission'
-    });
-
     var ContactView = Marionette.ItemView.extend({
         template: templates['client/templates/contact.hbs'],
         tagName: 'div',
@@ -631,10 +625,6 @@ define([
           $('#loading').css("display", "none");
             app.getRegion('mainRegion').show(new AboutView());
 
-        },
-        mission: function () {
-            app.getRegion('mainRegion').show(new MissionView());
-            $('#loading').css("display", "none");
         },
         contact: function () {
             app.getRegion('mainRegion').show(new ContactView());
