@@ -2,24 +2,15 @@
   <div class="col-md-6">
     <div class="footer-text">What people are saying</div>
 
-    <div class="twitter-container">
-      <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23BostonParks"  data-widget-id="475297891636887553">Tweets about "#BostonParks"</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="twitter-container" id="twitter-container">
+       <a class="twitter-timeline" href="https://twitter.com/hashtag/boston" data-widget-id="587367896613007360">#bostonparks Tweets</a> 
     </div>
   </div>
   <div class="col-md-6">
-    <div class="footer-text">Latest Park Pic</div> 
-    <img src="http://www.bostongreenmap.org/media/cache/ee/23/ee23dc9479f04d0b18545dee97f0bd77.jpg">
-    <div class="footer-social">
-      <div class="footer-text">Get social with us</div>
-      <div>
-      <div class="white-circle"></div>
-      <div class="white-circle"></div>
-      <div class="white-circle"></div>
-      <div class="white-circle"></div>
-      </div>
-    </div>
-
+    <div class="footer-text">Latest Park Pic: {{latest_image.name}}</div> 
+    <a href="#parks/{{latest_image.slug}}">
+      <img src="{{latest_image.image.src}}">
+    </a>
     <div class="footer-url footer-text"><b>BostonGreenSpace.org</b></div>
     <div class="footer-address footer-text">60 Temple Place | Boston, Massachussetts 02111</div>
     <div class="footer-number footer-text">617.933.0700 | info@bostongreenspace.org</div> 

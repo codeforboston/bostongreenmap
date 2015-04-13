@@ -84,7 +84,7 @@ def get_featured_parks(request):
 def get_latest_picture(request):
     """ Returns recommended parks as JSON
     """
-    latest_image = Parkimage.objects.order_by('-pk')[0]
+    latest_image = Parkimage.objects.filter(default=False).order_by('-pk')[0]
     thumbnail = latest_image.get_thumbnail()
     related_park = latest_image.parks.all()[0]
 

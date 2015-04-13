@@ -55,6 +55,12 @@ define([
         }
     });
     
+    var Picture = Backbone.Model.extend({
+      url: function() {
+        return window.location.origin + '/parks/get_latest_picture/';
+      }
+    })
+
     var SearchModel = Backbone.Model.extend({
         url: function() {
             return window.location.origin + '/parks/get_neighborhoods_and_activities_list/';
@@ -406,7 +412,11 @@ define([
     var FooterView = Marionette.ItemView.extend({
         template: templates['client/templates/footer.hbs'],
         tagName: 'div',
-        className: 'footer'
+        className: 'footer',
+        onShow: function() {
+           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+        }
     });
 
     var AboutView = Marionette.ItemView.extend({
@@ -656,7 +666,13 @@ define([
 
     app.addInitializer(function(options) {
         app.getRegion('navRegion').show(new HeaderView());
-        app.getRegion('footerRegion').show(new FooterView());
+        var latest_picture = new Picture();
+
+        latest_picture.fetch({'success': function() {
+          console.log(latest_picture);
+          app.getRegion('footerRegion').show(new FooterView({'model': latest_picture }));
+        }});
+
         app.getRegion('mapRegion').show(new MapView());
 
         app.router = new app.Router();
