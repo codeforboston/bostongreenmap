@@ -12,5 +12,6 @@ class Command(BaseCommand):
         parks = Park.objects.all()
         for park in parks:
             neighborhoods = Neighborhood.objects.filter(geometry__intersects=park.geometry)
+            park.neighborhoods.clear()
             park.neighborhoods.add(*neighborhoods)
             self.stdout.write('Updated "%s"\n' % park.name)
